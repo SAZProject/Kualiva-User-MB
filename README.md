@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.1+01
-- setting up workspace
+Ver 0.0.1+02
+- setting up main.dart
 ```
 
 ## Getting Started

@@ -5,7 +5,7 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.1
+Ver 0.0.1+01
 - setting up workspace
 ```
 

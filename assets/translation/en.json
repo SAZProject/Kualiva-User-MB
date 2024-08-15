@@ -1,0 +1,53 @@
+{
+    "splash": {
+        "app_title": "Like It"
+    },
+    "onboard": {
+        "onboard_1_title": "Start your\nJourney",
+        "onboard_1_content": "Take a break, let\u0027s go on vacation with\nyour friends and family",
+        "onboard_2_title": "Discover\nNew Places",
+        "onboard_2_content": "Tired of getting lost and wasting time?\nDon\u0027t worry! We will guide you through\nyour journey",
+        "onboard_3_title": "Share your\nMoments",
+        "onboard_3_content": "Let the world know about your journey!\nLeave a review everytime you finish your\njourney!",
+
+        "onboard_next_btn": "Next"
+    },
+    "sign_in": {
+        "sign_in_with": "Sign In with",
+        "sign_in_with_saz": "Sign In with SAZ",
+        "phone_number": "Phone Number",
+        "tos_statement": "By registering, you agree to our {}",
+        "tos": "Terms & Conditions",
+        "policy_statement": "and that you have read our {}",
+        "policy": "Privacy Policy",
+
+        "sign_in_btn": "Sign In"
+    },
+    "sign_up": {
+        "username": "Username",
+        "username_hint_1": "6-10 Characters",
+        "username_hint_2": "Letters, numbers, dots, underscore. No space or special characters.",
+        "username_hint_3": "Username can\u0027t be changed in the future",
+        "phone_number": "Phone Number",
+        "password": "password",
+        "password_hint_1": "6-10 Characters",
+        "password_hint_2": "Letters, numbers, dots, underscore. No space or special characters.",
+        "password_hint_3": "You can change your password anytime later",
+        "re_enter_password": "Re-enter Password",
+        "already_had_acc": "Already have account? {} here",
+        "sign_in_link": "Sign In",
+
+        "sign_up_btn": "Sign Up"
+    },
+    "otp": {
+        "otp_verif": "OTP Verification",
+        "otp_check_sms": "We send 6-digit verification code to your phone number",
+        "no_code_recieve": "Didn\u0027t recieve any code? {}",
+        "resend": "resend Code"
+    },
+    "permission": {
+        "permission_title": "Better Experience\nFor You",
+        "permission_content": "Allow some permissions on your device\nto have the best experience in LikeIt",
+        "allow_btn": "Allow"
+    }
+}

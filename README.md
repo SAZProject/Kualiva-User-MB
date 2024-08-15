@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.1+02
-- setting up main.dart
+Ver 0.0.2
+- setting up localization
+- add Splash screen
 ```
 
 ## Getting Started

@@ -1,16 +1,32 @@
-# like_it
+# LIKE IT APP
 
-A new Flutter project.
+This is a LIKE IT App for Hoeis corporation.
+
+## Changelog
+
+```text
+Ver 0.0.1
+- setting up workspace
+```
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+First put these into locale.properties at folder android
 
-A few resources to get you started if this is your first Flutter project:
+```text
+# put this below the line "flutter.sdk=..."
+flutter.buildMode=debug
+flutter.versionName=1.0.0
+flutter.versionCode=1
+flutter.compileSdkVersion = 34
+flutter.minSdkVersion = 21
+flutter.targetSdkVersion = 34
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Don't forget to do pub get packages on terminal
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```shell
+flutter pub get
+```
+
+Then you can run the app.

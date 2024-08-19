@@ -1,6 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 String _appTheme = "lightCode";
 GlobalCodeColors get appTheme => ThemeHelper().themeColor();
@@ -44,7 +43,8 @@ class ThemeHelper {
         visualDensity: VisualDensity.standard,
         colorScheme: colorScheme,
         brightness: colorScheme.brightness,
-        textTheme: GoogleFonts.k2dTextTheme(TextThemes.textTheme(colorScheme)),
+        fontFamily: "K2D",
+        textTheme: TextThemes.textTheme(colorScheme),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(

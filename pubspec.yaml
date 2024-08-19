@@ -18,10 +18,10 @@ dependencies:
     easy_localization: ^3.0.7
     page_transition: ^2.1.0
     flutter_launcher_icons: ^0.13.1
-    google_fonts: ^6.2.1
     adaptive_theme: ^3.6.0
     country_code_picker: ^3.0.0
     outline_gradient_button: ^2.0.1+1
+    pin_code_fields: ^8.0.1
 
 dev_dependencies:
     flutter_test:
@@ -38,3 +38,11 @@ flutter:
     assets:
         - assets/images/
         - assets/translation/
+    fonts:
+        - family: K2D
+          fonts:
+              - asset: fonts/K2D-Regular.ttf
+              - asset: fonts/K2D-Bold.ttf
+                weight: 700
+              - asset: fonts/K2D-Italic.ttf
+                style: italic

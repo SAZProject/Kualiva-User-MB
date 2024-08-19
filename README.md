@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.4
-- Setting up app, text, button theme
-- Fix onBoarding Screen
+Ver 0.0.4+01
+- Add font asset
 ```
 
 ## Getting Started

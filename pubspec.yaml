@@ -41,8 +41,9 @@ flutter:
     fonts:
         - family: K2D
           fonts:
-              - asset: fonts/K2D-Regular.ttf
-              - asset: fonts/K2D-Bold.ttf
+              - asset: assets/fonts/K2D-Regular.ttf
+                weight: 400
+              - asset: assets/fonts/K2D-Bold.ttf
                 weight: 700
-              - asset: fonts/K2D-Italic.ttf
+              - asset: assets/fonts/K2D-Italic.ttf
                 style: italic

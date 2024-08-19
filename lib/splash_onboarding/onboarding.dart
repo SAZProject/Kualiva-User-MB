@@ -192,7 +192,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   Widget _buildNext(BuildContext context) {
     return CustomElevatedButton(
-      text: context.tr("onboard.onboard_next_btn"),
+      initialText: context.tr("onboard.onboard_next_btn"),
+      secondText:
+          _activePage == 2 ? context.tr("onboard.onboard_start_btn") : null,
       margin: const EdgeInsets.all(10.0),
       buttonStyle: CustomButtonStyles.none,
       decoration: CustomButtonStyles.gradientYellowAToPrimaryDecoration,

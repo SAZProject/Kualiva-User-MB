@@ -10,7 +10,8 @@
         "onboard_3_title": "Share your\nMoments",
         "onboard_3_content": "Let the world know about your journey!\nLeave a review everytime you finish your\njourney!",
 
-        "onboard_next_btn": "Next"
+        "onboard_next_btn": "Next",
+        "onboard_start_btn": "Let\u0027s Start"
     },
     "sign_in": {
         "sign_in_with": "Sign In with",

@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.4+01
-- Add font asset
+Ver 0.0.4+02
+- Fix text animation on onboarding
+- Fix font assets
 ```
 
 ## Getting Started

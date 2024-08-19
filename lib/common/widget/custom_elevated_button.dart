@@ -4,7 +4,8 @@ import 'package:like_it/common/style/custom_btn_style.dart';
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
     super.key,
-    required this.text,
+    required this.initialText,
+    this.secondText,
     this.onPressed,
     this.buttonStyle,
     this.buttonTextStyle,
@@ -18,7 +19,8 @@ class CustomElevatedButton extends StatelessWidget {
     this.rightIcon,
   });
 
-  final String text;
+  final String initialText;
+  final String? secondText;
   final VoidCallback? onPressed;
   final ButtonStyle? buttonStyle;
   final TextStyle? buttonTextStyle;
@@ -55,10 +57,24 @@ class CustomElevatedButton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               leftIcon ?? const SizedBox.shrink(),
-              Text(
-                text,
-                style: buttonTextStyle,
-              ),
+              secondText != null
+                  ? AnimatedCrossFade(
+                      firstChild: Text(
+                        initialText,
+                        style: buttonTextStyle,
+                      ),
+                      secondChild: Text(
+                        secondText ?? "-",
+                        style: buttonTextStyle,
+                      ),
+                      crossFadeState: secondText == null
+                          ? CrossFadeState.showFirst
+                          : CrossFadeState.showSecond,
+                      duration: const Duration(seconds: 2))
+                  : Text(
+                      initialText,
+                      style: buttonTextStyle,
+                    ),
               rightIcon ?? const SizedBox.shrink()
             ],
           ),

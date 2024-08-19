@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:like_it/common/style/custom_btn_style.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
@@ -44,20 +45,23 @@ class CustomElevatedButton extends StatelessWidget {
         height: height ?? 50,
         width: width ?? double.maxFinite,
         margin: margin,
-        decoration: decoration,
+        decoration:
+            decoration ?? CustomButtonStyles.gradientYellowAToPrimaryDecoration,
         child: ElevatedButton(
-            onPressed: isDisabled ?? false ? null : onPressed ?? () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                leftIcon ?? const SizedBox.shrink(),
-                Text(
-                  text,
-                  style: buttonTextStyle,
-                ),
-                rightIcon ?? const SizedBox.shrink()
-              ],
-            )),
+          style: buttonStyle,
+          onPressed: isDisabled ?? false ? null : onPressed ?? () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              leftIcon ?? const SizedBox.shrink(),
+              Text(
+                text,
+                style: buttonTextStyle,
+              ),
+              rightIcon ?? const SizedBox.shrink()
+            ],
+          ),
+        ),
       );
 }

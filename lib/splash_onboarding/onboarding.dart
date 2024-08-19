@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:like_it/common/style/custom_btn_style.dart';
+import 'package:like_it/common/style/theme_helper.dart';
 import 'package:like_it/common/utility/image_constant.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/common/widget/sizd_spacer.dart';
@@ -50,7 +52,25 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       child: Scaffold(
         extendBody: true,
         extendBodyBehindAppBar: true,
-        body: _body(),
+        body: Container(
+          width: double.maxFinite,
+          height: double.maxFinite,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: const Alignment(0.5, 0),
+              end: const Alignment(1, 1),
+              colors: [
+                _activePage == 0
+                    ? _pages[0].pageColor
+                    : _activePage == 1
+                        ? _pages[1].pageColor
+                        : _pages[2].pageColor,
+                theme.colorScheme.onPrimaryContainer.withOpacity(1),
+              ],
+            ),
+          ),
+          child: _body(),
+        ),
       ),
     );
   }
@@ -117,10 +137,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             context.tr(onboardingModel.title),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontSize: 34,
-                  fontWeight: FontWeight.w700,
-                ),
+            style: Theme.of(context).textTheme.displaySmall,
           ),
           sizedSpacer(context: context, height: 5.0),
           Opacity(
@@ -129,10 +146,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               context.tr(onboardingModel.content),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
           sizedSpacer(context: context, height: 5.0),
@@ -180,7 +194,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return CustomElevatedButton(
       text: context.tr("onboard.onboard_next_btn"),
       margin: const EdgeInsets.all(10.0),
-      // buttonTextStyle: CustomTextyle.kBtn,
+      buttonStyle: CustomButtonStyles.none,
+      decoration: CustomButtonStyles.gradientYellowAToPrimaryDecoration,
+      buttonTextStyle: Theme.of(context).textTheme.titleLarge,
       onPressed: () {
         if (_activePage == 2) {
         } else {

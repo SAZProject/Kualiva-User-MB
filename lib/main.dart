@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        title: 'LPK GO',
+        title: 'LIKE IT',
         theme: light,
         darkTheme: dark,
         initialRoute: AppRoutes.splashScreen,

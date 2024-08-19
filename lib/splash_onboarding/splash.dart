@@ -47,8 +47,11 @@ class _SplashScreenState extends State<SplashScreen> {
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text(
-              context.tr("splash.app_title".tr()),
-              style: Theme.of(context).textTheme.displayMedium,
+              context.tr("splash.app_title"),
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
           )
         ],

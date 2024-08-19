@@ -21,6 +21,7 @@ dependencies:
     google_fonts: ^6.2.1
     adaptive_theme: ^3.6.0
     country_code_picker: ^3.0.0
+    outline_gradient_button: ^2.0.1+1
 
 dev_dependencies:
     flutter_test:

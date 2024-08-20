@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.5+01
-- Setting country pickers
-- add custom phone number
+Ver 0.0.5+02
+- add custom custom button style
 ```
 
 ## Getting Started

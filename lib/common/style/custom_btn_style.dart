@@ -30,6 +30,30 @@ class CustomButtonStyles {
         ),
       );
 
+  // Outline Button Style
+  static ButtonStyle get outline => OutlinedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      );
+
+  static ButtonStyle get outlineBlackTL10 => OutlinedButton.styleFrom(
+        backgroundColor: appTheme.black900.withOpacity(0.6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        shadowColor: appTheme.black900.withOpacity(0.25),
+        elevation: 4,
+      );
+
+  static ButtonStyle get outlineTL10 => OutlinedButton.styleFrom(
+        backgroundColor: appTheme.black900.withOpacity(0.6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      );
+
   //text button style
   static ButtonStyle get none => const ButtonStyle(
       backgroundColor: WidgetStatePropertyAll(Colors.transparent),

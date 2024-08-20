@@ -110,29 +110,16 @@ class CustomTextFormField extends StatelessWidget {
             ),
         fillColor: fillColor ?? theme.colorScheme.onPrimaryContainer,
         filled: filled,
-        border: inputBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(
-                color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-                width: 1,
-              ),
-            ),
-        enabledBorder: inputBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(
-                color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-                width: 1,
-              ),
-            ),
-        focusedBorder: inputBorder ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(
-                color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-                width: 1,
-              ),
-            ),
+        border: inputBorder ?? _defaultOutlinedInputBorder(),
+        enabledBorder: inputBorder ?? _defaultOutlinedInputBorder(),
+        focusedBorder: inputBorder ?? _defaultOutlinedInputBorder(),
+      );
+
+  OutlineInputBorder _defaultOutlinedInputBorder() => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(
+          color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
+          width: 1,
+        ),
       );
 }

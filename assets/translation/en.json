@@ -1,4 +1,10 @@
 {
+    "common": {},
+    "custom_phone_number": {
+        "search": "Search...",
+        "select_phone_code": "Select your phone code",
+        "phone_number": "Phone Number"
+    },
     "splash": {
         "app_title": "Like It"
     },

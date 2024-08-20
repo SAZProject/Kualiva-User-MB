@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.5
-- c
-- add custom textFormField & outlinedButton
+Ver 0.0.5+01
+- Setting country pickers
+- add custom phone number
 ```
 
 ## Getting Started

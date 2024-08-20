@@ -195,7 +195,7 @@ class GlobalCodeColors {
   //Blue
   Color get blue500 => const Color(0XFF2A94F4);
   //Bluegray
-  Color get blueGray180 => const Color(0XFFCCCCCC);
+  Color get blueGray100 => const Color(0XFFCCCCCC);
   //Cyan
   Color get cyan900 => const Color(0XFF0B4870);
   Color get cyanA200 => const Color(0XFF00FFFF);

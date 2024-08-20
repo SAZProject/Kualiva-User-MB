@@ -4,7 +4,7 @@ import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/style/theme_helper.dart';
 import 'package:like_it/common/utility/image_constant.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/common/widget/sizd_spacer.dart';
+import 'package:like_it/common/widget/sized_spacer.dart';
 import 'package:like_it/data/model/onboarding_model.dart';
 
 class OnBoardingScreen extends StatefulWidget {

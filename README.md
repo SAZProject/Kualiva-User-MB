@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.5+02
-- add custom custom button style
+Ver 0.0.5+03
+- add custom custom decoration
+- fix typo on files
 ```
 
 ## Getting Started

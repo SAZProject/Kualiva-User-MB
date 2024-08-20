@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/utility/image_constant.dart';
-import 'package:like_it/common/widget/sizd_spacer.dart';
+import 'package:like_it/common/widget/sized_spacer.dart';
 import 'package:like_it/router.dart';
 
 class SplashScreen extends StatefulWidget {

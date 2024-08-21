@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
 
 String _appTheme = "lightCode";
 GlobalCodeColors get appTheme => ThemeHelper().themeColor();
@@ -96,62 +97,62 @@ class TextThemes {
     return TextTheme(
       bodyLarge: TextStyle(
         color: color,
-        fontSize: 16,
+        fontSize: 16.fontSize,
         fontWeight: FontWeight.w400,
       ),
       bodyMedium: TextStyle(
         color: color,
-        fontSize: 14,
+        fontSize: 14.fontSize,
         fontWeight: FontWeight.w400,
       ),
       bodySmall: TextStyle(
         color: color,
-        fontSize: 12,
+        fontSize: 12.fontSize,
         fontWeight: FontWeight.w400,
       ),
       displaySmall: TextStyle(
         color: color,
-        fontSize: 34,
+        fontSize: 34.fontSize,
         fontWeight: FontWeight.w700,
       ),
       headlineLarge: TextStyle(
         color: appTheme.yellowA700,
-        fontSize: 32,
+        fontSize: 32.fontSize,
         fontWeight: FontWeight.w700,
       ),
       headlineMedium: TextStyle(
         color: appTheme.black900,
-        fontSize: 28,
+        fontSize: 28.fontSize,
         fontWeight: FontWeight.w400,
       ),
       headlineSmall: TextStyle(
         color: color,
-        fontSize: 24,
+        fontSize: 24.fontSize,
         fontWeight: FontWeight.w700,
       ),
       labelLarge: TextStyle(
         color: color,
-        fontSize: 13,
+        fontSize: 13.fontSize,
         fontWeight: FontWeight.w700,
       ),
       labelMedium: TextStyle(
         color: color,
-        fontSize: 11,
+        fontSize: 11.fontSize,
         fontWeight: FontWeight.w700,
       ),
       titleLarge: TextStyle(
         color: color,
-        fontSize: 20,
+        fontSize: 20.fontSize,
         fontWeight: FontWeight.w700,
       ),
       titleMedium: TextStyle(
         color: color,
-        fontSize: 16,
+        fontSize: 16.fontSize,
         fontWeight: FontWeight.w700,
       ),
       titleSmall: TextStyle(
         color: color,
-        fontSize: 14,
+        fontSize: 14.fontSize,
         fontWeight: FontWeight.w700,
       ),
     );
@@ -167,7 +168,7 @@ class ColorSchemes {
     onError: Color(0XFF5BC0F8),
     onErrorContainer: Color(0XFF000D3C),
     onPrimary: Color(0XFF000FFF),
-    onPrimaryContainer: Color(0X19FFFFFF),
+    onPrimaryContainer: Color(0X99FFFFFF),
     onSecondaryContainer: Color(0XFF222222),
   );
 
@@ -179,7 +180,7 @@ class ColorSchemes {
     onError: Color(0XFF5BC0F8),
     onErrorContainer: Color(0XFF000D3C),
     onPrimary: Color(0XFF000FFF),
-    onPrimaryContainer: Color(0X19FFFFFF),
+    onPrimaryContainer: Color(0X99FFFFFF),
     onSecondaryContainer: Color(0XFF222222),
   );
 }
@@ -205,6 +206,7 @@ class GlobalCodeColors {
   //Gray
   Color get gray200 => const Color(0XFFEEEEEE);
   Color get gray300 => const Color(0XFFE6E6E6);
+  Color get gray500 => const Color(0XFF999999);
   Color get gray600 => const Color(0XFF6B6B6B);
   Color get gray60001 => const Color(0XFF8A8282);
   Color get gray800 => const Color(0XFF444444);

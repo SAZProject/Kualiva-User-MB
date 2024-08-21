@@ -23,11 +23,12 @@
         "sign_in_with": "Sign In with",
         "sign_in_with_saz": "Sign In with SAZ",
         "phone_number": "Phone Number",
-        "tos_statement": "By registering, you agree to our {}",
+        "tos_statement": "By registering, you agree to our ",
         "tos": "Terms & Conditions",
-        "policy_statement": "and that you have read our {}",
+        "policy_statement": "and that you have read our ",
         "policy": "Privacy Policy",
 
+        "or": "or",
         "sign_in_btn": "Sign In"
     },
     "sign_up": {

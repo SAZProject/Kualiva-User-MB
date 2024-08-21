@@ -28,7 +28,7 @@ class CustomImageView extends StatelessWidget {
       this.width,
       this.color,
       this.boxFit,
-      required this.placeHolder,
+      this.placeHolder = Icons.image_not_supported_outlined,
       this.alignment,
       this.onPressed,
       this.margin,
@@ -40,7 +40,7 @@ class CustomImageView extends StatelessWidget {
   final double? width;
   final Color? color;
   final BoxFit? boxFit;
-  final String placeHolder;
+  final IconData placeHolder;
   final Alignment? alignment;
   final VoidCallback? onPressed;
   final EdgeInsetsGeometry? margin;
@@ -127,18 +127,20 @@ class CustomImageView extends StatelessWidget {
           imageUrl: imagePath,
           color: color,
           placeholder: (context, url) => SizedBox(
-            height: 30,
-            width: 30,
+            height: 30.0,
+            width: 30.0,
             child: LinearProgressIndicator(
               color: Colors.grey.shade200,
               backgroundColor: Colors.grey.shade100,
             ),
           ),
-          errorWidget: (context, url, error) => Image.asset(
-            placeHolder,
+          errorWidget: (context, url, error) => SizedBox(
             height: height,
             width: width,
-            fit: boxFit ?? BoxFit.cover,
+            child: FittedBox(
+              fit: boxFit ?? BoxFit.cover,
+              child: Icon(placeHolder),
+            ),
           ),
         );
       case ImageType.png:

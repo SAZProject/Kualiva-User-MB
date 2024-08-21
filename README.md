@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.5+04
-- add custom image view
-- add new package
+Ver 0.0.5+05
+- add Sized utils & change all size to dynamic
+- fix several theme and custom style
 ```
 
 ## Getting Started

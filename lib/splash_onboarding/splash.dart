@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/utility/image_constant.dart';
-import 'package:like_it/common/widget/sized_spacer.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
 import 'package:like_it/router.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -37,15 +37,15 @@ class _SplashScreenState extends State<SplashScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 250.0,
-            height: 200.0,
+            width: 250.h,
+            height: 200.h,
             child: Image.asset(
               ImageConstant.appLogo,
             ),
           ),
-          sizedSpacer(context: context, height: 5.0),
+          SizedBox(height: 5.h),
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: EdgeInsets.all(5.h),
             child: Text(
               context.tr("splash.app_title"),
               style: Theme.of(context)

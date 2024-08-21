@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/style/custom_text_style.dart';
 import 'package:like_it/common/style/theme_helper.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
 
 class CustomPhoneNumber extends StatelessWidget {
   const CustomPhoneNumber(
@@ -34,8 +35,8 @@ class CustomPhoneNumber extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-            width: 230,
-            margin: const EdgeInsets.only(left: 14.0),
+            width: 230.h,
+            margin: EdgeInsets.only(left: 14.h),
             child: TextFormField(
               focusNode: FocusNode(),
               autofocus: true,
@@ -60,7 +61,7 @@ class CustomPhoneNumber extends StatelessWidget {
   }
 
   OutlineInputBorder _defaultOutlinedInputBorder() => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(10.h),
         borderSide: BorderSide(
           color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
           width: 1,
@@ -71,18 +72,18 @@ class CustomPhoneNumber extends StatelessWidget {
         children: <Widget>[
           CountryPickerUtils.getDefaultFlagImage(country),
           Container(
-            margin: const EdgeInsets.only(left: 10),
-            width: 60.0,
+            margin: EdgeInsets.only(left: 10.h),
+            width: 60.h,
             child: Text(
               "+${country.phoneCode}",
-              style: const TextStyle(fontSize: 14.0),
+              style: TextStyle(fontSize: 14.fontSize),
             ),
           ),
           const SizedBox(width: 8.0),
           Flexible(
             child: Text(
               country.name,
-              style: const TextStyle(fontSize: 14.0),
+              style: TextStyle(fontSize: 14.h),
             ),
           ),
         ],
@@ -93,12 +94,12 @@ class CustomPhoneNumber extends StatelessWidget {
         builder: (context) => CountryPickerDialog(
           searchInputDecoration: InputDecoration(
             hintText: context.tr("custom_phone_number.search"),
-            hintStyle: const TextStyle(fontSize: 14),
+            hintStyle: TextStyle(fontSize: 14.fontSize),
           ),
           isSearchable: true,
           title: Text(
             context.tr("custom_phone_number.select_phone_code"),
-            style: const TextStyle(fontSize: 14.0),
+            style: TextStyle(fontSize: 14.fontSize),
           ),
           onValuePicked: (value) => onPressed(value),
           itemBuilder: _countryPickerDialog,

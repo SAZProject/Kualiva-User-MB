@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:like_it/common/style/custom_text_style.dart';
 import 'package:like_it/common/style/theme_helper.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
+
+extension TextFormFieldStyleHelper on CustomTextFormField {
+  static OutlineInputBorder get outlineBlackTL14 => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14.h),
+        borderSide: BorderSide(
+          color: appTheme.black900.withOpacity(0.6),
+          width: 1,
+        ),
+      );
+}
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
@@ -11,13 +22,13 @@ class CustomTextFormField extends StatelessWidget {
       this.scrollPadding,
       this.controller,
       this.focusNode,
-      this.autoFocus,
+      this.autoFocus = false,
       this.textStyle,
-      this.obscureText,
-      this.readOnly,
+      this.obscureText = false,
+      this.readOnly = false,
       this.onPressed,
-      this.textInputAction,
-      this.textInputType,
+      this.textInputAction = TextInputAction.next,
+      this.textInputType = TextInputType.text,
       this.maxLines,
       this.hintText,
       this.hintStyle,
@@ -28,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
       this.contentPadding,
       this.inputBorder,
       this.fillColor,
-      this.filled,
+      this.filled = true,
       this.validator});
 
   final Alignment? alignment;
@@ -104,9 +115,9 @@ class CustomTextFormField extends StatelessWidget {
         suffixIconConstraints: suffixConstraints,
         isDense: true,
         contentPadding: contentPadding ??
-            const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 16.0,
+            EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.h,
             ),
         fillColor: fillColor ?? theme.colorScheme.onPrimaryContainer,
         filled: filled,
@@ -116,7 +127,7 @@ class CustomTextFormField extends StatelessWidget {
       );
 
   OutlineInputBorder _defaultOutlinedInputBorder() => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(10.h),
         borderSide: BorderSide(
           color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
           width: 1,

@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:like_it/common/style/theme_helper.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
 
 class CustomDecoration {
+  // background Decoration
+  static BoxDecoration get backgroundBlur => BoxDecoration(
+        color: theme.colorScheme.onPrimaryContainer.withOpacity(0.3),
+        border: Border.all(
+          color: appTheme.black900.withOpacity(0.6),
+          width: 1.h,
+        ),
+      );
   // Blue Decoration
   static BoxDecoration get blueColor => BoxDecoration(
         gradient: LinearGradient(
@@ -14,7 +23,6 @@ class CustomDecoration {
           ],
         ),
       );
-
   // Fill Decorations
   static BoxDecoration get fillBlack900_06 => BoxDecoration(
         color: appTheme.black900.withOpacity(0.6),
@@ -34,7 +42,6 @@ class CustomDecoration {
   static BoxDecoration get fillOnSecondaryContainer => BoxDecoration(
         color: theme.colorScheme.onSecondaryContainer,
       );
-
   // Gradient Decorations
   static BoxDecoration get gradientCyanAToOnPrimaryContainer => BoxDecoration(
         gradient: LinearGradient(
@@ -112,12 +119,10 @@ class CustomDecoration {
           ],
         ),
       );
-
   // Green Decorations
   static BoxDecoration get greenColor => BoxDecoration(
         color: appTheme.black900.withOpacity(0.3),
       );
-
   // Orange Decorations
   static BoxDecoration get orange60Color => BoxDecoration(
         gradient: LinearGradient(
@@ -139,7 +144,6 @@ class CustomDecoration {
           ],
         ),
       );
-
   // Outline Decorations
   static BoxDecoration get outline => BoxDecoration(
         color: appTheme.black900.withOpacity(0.3),
@@ -160,21 +164,21 @@ class CustomDecoration {
         color: appTheme.black900.withOpacity(0.6),
         border: Border.all(
           color: appTheme.black900.withOpacity(0.6),
-          width: 1.0,
+          width: 1.h,
         ),
       );
   static BoxDecoration get outlineBlack9002 => BoxDecoration(
         color: appTheme.black900.withOpacity(0.3),
         border: Border.all(
           color: appTheme.black900.withOpacity(0.6),
-          width: 1.0,
+          width: 1.h,
         ),
       );
   static BoxDecoration get outlineBlack9003 => BoxDecoration(
         color: appTheme.black900.withOpacity(0.6),
         border: Border.all(
           color: appTheme.blueGray100,
-          width: 1.0,
+          width: 1.h,
         ),
       );
 }
@@ -182,16 +186,16 @@ class CustomDecoration {
 class BorderRadiusStyle {
   // Custom Borders
   static BorderRadius get customBorderBL5 =>
-      const BorderRadius.vertical(bottom: Radius.circular(5.0));
+      BorderRadius.vertical(bottom: Radius.circular(5.h));
   static BorderRadius get customBorderTR6 =>
-      const BorderRadius.only(topRight: Radius.circular(6.0));
+      BorderRadius.only(topRight: Radius.circular(6.h));
   static BorderRadius get customBorderTL6 =>
-      const BorderRadius.only(topLeft: Radius.circular(5.0));
+      BorderRadius.only(topLeft: Radius.circular(5.h));
   // Rounded Borders
-  static BorderRadius get roundedBorder1 => BorderRadius.circular(1.0);
-  static BorderRadius get roundedBorder5 => BorderRadius.circular(5.0);
-  static BorderRadius get roundedBorder10 => BorderRadius.circular(10.0);
-  static BorderRadius get roundedBorder14 => BorderRadius.circular(14.0);
-  static BorderRadius get roundedBorder20 => BorderRadius.circular(20.0);
-  static BorderRadius get roundedBorder44 => BorderRadius.circular(44.0);
+  static BorderRadius get roundedBorder1 => BorderRadius.circular(1.h);
+  static BorderRadius get roundedBorder5 => BorderRadius.circular(5.h);
+  static BorderRadius get roundedBorder10 => BorderRadius.circular(10.h);
+  static BorderRadius get roundedBorder14 => BorderRadius.circular(14.h);
+  static BorderRadius get roundedBorder20 => BorderRadius.circular(20.h);
+  static BorderRadius get roundedBorder44 => BorderRadius.circular(44.h);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
@@ -44,7 +45,7 @@ class CustomElevatedButton extends StatelessWidget {
   }
 
   Widget get buildBtnWidget => Container(
-        height: height ?? 50,
+        height: height ?? 50.h,
         width: width ?? double.maxFinite,
         margin: margin,
         decoration:

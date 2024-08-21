@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:like_it/common/style/custom_text_style.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
   const CustomOutlinedButton(
@@ -38,7 +39,7 @@ class CustomOutlinedButton extends StatelessWidget {
   }
 
   Widget get buildOutlinedButton => Container(
-        height: height ?? 50,
+        height: height ?? 50.h,
         width: width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/style/theme_helper.dart';
 import 'package:like_it/common/utility/image_constant.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/common/widget/sized_spacer.dart';
 import 'package:like_it/data/model/onboarding_model.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -113,7 +113,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               _buildNext(context)
             ],
           ),
-          sizedSpacer(context: context, height: 25.0),
+          SizedBox(height: 25.h),
         ],
       ),
     );
@@ -121,25 +121,25 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   Widget onBoardingPage(OnboardingModel onboardingModel) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4.0),
+      padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 4.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          sizedSpacer(context: context, height: 20.0),
+          SizedBox(height: 20.h),
           Image.asset(
             onboardingModel.imageUri,
-            height: 300.0,
-            width: 300.0,
+            height: 300.h,
+            width: double.maxFinite,
             fit: BoxFit.cover,
           ),
-          sizedSpacer(context: context, height: 5.0),
+          SizedBox(height: 20.h),
           Text(
             context.tr(onboardingModel.title),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.displaySmall,
           ),
-          sizedSpacer(context: context, height: 5.0),
+          SizedBox(height: 20.h),
           Opacity(
             opacity: 0.6,
             child: Text(
@@ -149,7 +149,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
-          sizedSpacer(context: context, height: 5.0),
+          SizedBox(height: 20.h),
         ],
       ),
     );
@@ -173,11 +173,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
     return AnimatedContainer(
       duration: const Duration(microseconds: 300),
-      height: 4,
-      width: 50,
-      margin: const EdgeInsets.only(right: 8),
+      height: 4.h,
+      width: 50.h,
+      margin: EdgeInsets.only(right: 8.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.h),
         color: _activePage == index ? null : color,
         gradient: _activePage == index
             ? const LinearGradient(
@@ -195,7 +195,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       initialText: context.tr("onboard.onboard_next_btn"),
       secondText:
           _activePage == 2 ? context.tr("onboard.onboard_start_btn") : null,
-      margin: const EdgeInsets.all(10.0),
+      margin: EdgeInsets.all(10.h),
       buttonStyle: CustomButtonStyles.none,
       decoration: CustomButtonStyles.gradientYellowAToPrimaryDecoration,
       buttonTextStyle: Theme.of(context).textTheme.titleLarge,

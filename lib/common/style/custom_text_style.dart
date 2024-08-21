@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:like_it/common/style/theme_helper.dart';
+import 'package:like_it/common/utility/sized_utils.dart';
 
 class CustomTextStyles {
+  static get onPrimaryContainer => TextStyle(
+        color: theme.colorScheme.onPrimaryContainer.withOpacity(1.0),
+      );
   static get onSecondaryContainer => TextStyle(
         color: theme.colorScheme.onSecondaryContainer,
       );
@@ -22,10 +26,10 @@ class CustomTextStyles {
       );
   // Body Medium
   static get bodyMedium_15 => theme.textTheme.bodyMedium!.copyWith(
-        fontSize: 15,
+        fontSize: 15.fontSize,
       );
   static get bodyMedium_13 => theme.textTheme.bodyMedium!.copyWith(
-        fontSize: 13,
+        fontSize: 13.fontSize,
       );
   static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(
         color: appTheme.black900,
@@ -36,12 +40,12 @@ class CustomTextStyles {
   static get bodyMediumOnPrimaryContainer_03 =>
       theme.textTheme.bodyMedium!.copyWith(
         color: theme.colorScheme.onPrimaryContainer.withOpacity(0.3),
-        fontSize: 13,
+        fontSize: 13.fontSize,
       );
   static get bodyMediumOnPrimaryContainer_06 =>
       theme.textTheme.bodyMedium!.copyWith(
         color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-        fontSize: 13,
+        fontSize: 13.fontSize,
       );
   static get bodyMediumGray200 => theme.textTheme.bodyMedium!.copyWith(
         color: appTheme.gray200,
@@ -51,33 +55,36 @@ class CustomTextStyles {
       );
   // Body Small
   static get bodySmall10 => theme.textTheme.bodySmall!.copyWith(
-        fontSize: 10,
+        fontSize: 10.fontSize,
       );
   static get bodySmall9 => theme.textTheme.bodySmall!.copyWith(
-        fontSize: 9,
+        fontSize: 9.fontSize,
       );
   static get bodySmall12 => theme.textTheme.bodySmall!.copyWith(
-        fontSize: 12,
+        fontSize: 12.fontSize,
       );
   static get bodySmallBlack900 => theme.textTheme.bodySmall!.copyWith(
         color: appTheme.black900,
       );
   static get bodySmallBlack900_10 => theme.textTheme.bodySmall!.copyWith(
         color: appTheme.black900,
-        fontSize: 10,
+        fontSize: 10.fontSize,
       );
   static get bodySmallBlueGray100_10 => theme.textTheme.bodySmall!.copyWith(
         color: appTheme.blueGray100,
-        fontSize: 10,
+        fontSize: 10.fontSize,
       );
   static get bodySmallGray200_10 => theme.textTheme.bodySmall!.copyWith(
         color: appTheme.gray200,
-        fontSize: 10,
+        fontSize: 10.fontSize,
+      );
+  static get bodySmallOnPrimaryContainer => theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.onPrimaryContainer,
       );
   static get bodySmallOnPrimaryContainer06 =>
       theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-        fontSize: 10,
+        fontSize: 10.fontSize,
       );
   // Display Small
   static get displaySmallBlack900 => theme.textTheme.displaySmall!.copyWith(
@@ -101,7 +108,7 @@ class CustomTextStyles {
       );
   // Label large
   static get labelLarge_12 => theme.textTheme.labelLarge!.copyWith(
-        fontSize: 12,
+        fontSize: 12.fontSize,
       );
   static get labelLargeBlack900 => theme.textTheme.labelLarge!.copyWith(
         color: appTheme.black900,
@@ -112,15 +119,15 @@ class CustomTextStyles {
       );
   static get labelLargeYellowA700 => theme.textTheme.labelLarge!.copyWith(
         color: appTheme.yellowA700,
-        fontSize: 12,
+        fontSize: 12.fontSize,
       );
   // Label Medium
   static get labelMedium_10 => theme.textTheme.labelMedium!.copyWith(
-        fontSize: 10,
+        fontSize: 10.fontSize,
       );
   // Title Large
   static get titleLarge_22 => theme.textTheme.titleLarge!.copyWith(
-        fontSize: 22,
+        fontSize: 22.fontSize,
       );
   static get titleLargeBlack900W400 => theme.textTheme.titleLarge!.copyWith(
         color: appTheme.black900,
@@ -128,7 +135,7 @@ class CustomTextStyles {
       );
   static get titleLargeBlack900W400_22 => theme.textTheme.titleLarge!.copyWith(
         color: appTheme.black900,
-        fontSize: 22,
+        fontSize: 22.fontSize,
         fontWeight: FontWeight.w400,
       );
   static get titleLargeW400 => theme.textTheme.titleLarge!.copyWith(
@@ -140,10 +147,10 @@ class CustomTextStyles {
       );
   // Title Medium
   static get titleMedium_17 => theme.textTheme.titleMedium!.copyWith(
-        fontSize: 17,
+        fontSize: 17.fontSize,
       );
   static get titleMedium_18 => theme.textTheme.titleMedium!.copyWith(
-        fontSize: 18,
+        fontSize: 18.fontSize,
       );
   static get titleMediumBlack900 => theme.textTheme.titleMedium!.copyWith(
         color: appTheme.black900,
@@ -160,7 +167,7 @@ class CustomTextStyles {
       );
   // Title Small
   static get titlesmall_15 => theme.textTheme.titleSmall!.copyWith(
-        fontSize: 15,
+        fontSize: 15.fontSize,
       );
   static get titlesmallBlack900 => theme.textTheme.titleSmall!.copyWith(
         color: appTheme.black900,

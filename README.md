@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.7+01
-- Login screen add onPressed
-- add field validator
+Ver 0.0.7+02
+- Login screen to SignInScreen
 ```
 
 ## Getting Started

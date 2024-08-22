@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/auth/login_screen.dart';
+import 'package:like_it/auth/sign_in_screen.dart';
 import 'package:like_it/splash_onboarding/onboarding.dart';
 import 'package:like_it/splash_onboarding/splash.dart';
 import 'package:page_transition/page_transition.dart';
@@ -27,7 +27,7 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
     case AppRoutes.loginScreen:
       return PageTransition(
-          child: const LoginScreen(),
+          child: const SignInScreen(),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 300));
     default:

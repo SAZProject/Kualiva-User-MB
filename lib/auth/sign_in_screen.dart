@@ -13,14 +13,14 @@ import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignInScreen> createState() => SignInScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class SignInScreenState extends State<SignInScreen> {
   bool passObscure = true;
 
   TextEditingController phoneNumberOrUserNameCtl = TextEditingController();

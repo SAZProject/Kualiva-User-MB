@@ -34,6 +34,10 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  onPressedSignIn(BuildContext context) {}
+
+  onPressedSignUp(BuildContext context) {}
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

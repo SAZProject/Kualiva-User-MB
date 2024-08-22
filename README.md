@@ -5,10 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.7
-- Fix login screen
-- Fix theme
-- Fix custom widget
+Ver 0.0.7+01
+- Login screen add onPressed
+- add field validator
 ```
 
 ## Getting Started

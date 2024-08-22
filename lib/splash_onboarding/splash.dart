@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/utility/image_constant.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
-import 'package:like_it/router.dart';
+import 'package:like_it/common/app_export.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

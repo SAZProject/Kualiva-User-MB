@@ -1,40 +1,24 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/utility/sized_utils.dart';
 
-String _appTheme = "lightCode";
+String _appTheme = "light";
 GlobalCodeColors get appTheme => ThemeHelper().themeColor();
-ThemeData get theme {
-  AdaptiveTheme.getThemeMode().then(
-    (value) {
-      if (value == null)
-        // ignore: curly_braces_in_flow_control_structures
-        return ThemeHelper().themeData(ColorSchemes.lightModeScheme);
-      if (value.isDark) {
-        return ThemeHelper().themeData(ColorSchemes.darkModeScheme);
-      }
-    },
-  );
-  return ThemeHelper().themeData(ColorSchemes.lightModeScheme);
+ThemeData theme(BuildContext context) {
+  var brightness = Theme.of(context).brightness;
+  if (brightness == Brightness.dark) {
+    return ThemeHelper().themeData(ColorSchemes.darkModeScheme);
+  } else {
+    return ThemeHelper().themeData(ColorSchemes.lightModeScheme);
+  }
 }
 
 class ThemeHelper {
   final Map<String, GlobalCodeColors> _supportedCustomColor = {
-    "lightCode": GlobalCodeColors(),
-    "darkCode": GlobalCodeColors(),
+    "light": GlobalCodeColors(),
+    "dark": GlobalCodeColors(),
   };
 
   GlobalCodeColors _getThemeColors() {
-    AdaptiveTheme.getThemeMode().then(
-      (value) {
-        if (value == null)
-          // ignore: curly_braces_in_flow_control_structures
-          return GlobalCodeColors();
-        if (value.isDark) {
-          return _supportedCustomColor["darkCode"];
-        }
-      },
-    );
     return _supportedCustomColor[_appTheme] ?? GlobalCodeColors();
   }
 
@@ -168,8 +152,8 @@ class ColorSchemes {
     onError: Color(0XFF5BC0F8),
     onErrorContainer: Color(0XFF000D3C),
     onPrimary: Color(0XFF000FFF),
-    onPrimaryContainer: Color(0X99FFFFFF),
-    onSecondaryContainer: Color(0XFF222222),
+    onPrimaryContainer: Color.fromRGBO(0, 0, 0, 1),
+    onSecondaryContainer: Color.fromRGBO(255, 255, 255, 1),
   );
 
   static const darkModeScheme = ColorScheme.dark(
@@ -180,8 +164,8 @@ class ColorSchemes {
     onError: Color(0XFF5BC0F8),
     onErrorContainer: Color(0XFF000D3C),
     onPrimary: Color(0XFF000FFF),
-    onPrimaryContainer: Color(0X99FFFFFF),
-    onSecondaryContainer: Color(0XFF222222),
+    onPrimaryContainer: Color.fromRGBO(255, 255, 255, 1),
+    onSecondaryContainer: Color.fromRGBO(0, 0, 0, 1),
   );
 }
 

@@ -12,17 +12,19 @@
         "onboard_1_title": "Start your\nJourney",
         "onboard_1_content": "Take a break, let\u0027s go on vacation with\nyour friends and family",
         "onboard_2_title": "Discover\nNew Places",
-        "onboard_2_content": "Tired of getting lost and wasting time?\nDon\u0027t worry! We will guide you through\nyour journey",
+        "onboard_2_content": "Tired of getting lost and wasting time?\nDon\u0027t worry! We will guide you through your journey",
         "onboard_3_title": "Share your\nMoments",
-        "onboard_3_content": "Let the world know about your journey!\nLeave a review everytime you finish your\njourney!",
+        "onboard_3_content": "Let the world know about your journey!\nLeave a review everytime you finish your journey!",
 
         "onboard_next_btn": "Next",
         "onboard_start_btn": "Let\u0027s Start"
     },
     "sign_in": {
         "sign_in_with": "Sign In with",
+        "like_it_acc": "LikeIt Account",
         "sign_in_with_saz": "Sign In with SAZ",
-        "phone_number": "Phone Number",
+        "phone_number_or_user_name": "Phone Number or UserName",
+        "password": "password",
         "tos_statement": "By registering, you agree to our ",
         "tos": "Terms & Conditions",
         "policy_statement": "and that you have read our ",

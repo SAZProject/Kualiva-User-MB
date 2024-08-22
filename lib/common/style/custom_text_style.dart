@@ -3,176 +3,187 @@ import 'package:like_it/common/style/theme_helper.dart';
 import 'package:like_it/common/utility/sized_utils.dart';
 
 class CustomTextStyles {
-  static get onPrimaryContainer => TextStyle(
-        color: theme.colorScheme.onPrimaryContainer.withOpacity(1.0),
+  final BuildContext context;
+
+  CustomTextStyles(this.context);
+  get onPrimaryContainer => TextStyle(
+        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(1.0),
       );
-  static get onSecondaryContainer => TextStyle(
-        color: theme.colorScheme.onSecondaryContainer,
+  get onSecondaryContainer => TextStyle(
+        color: theme(context).colorScheme.onSecondaryContainer,
       );
   // Body Large
-  static get bodyLargeBlueGray100 => theme.textTheme.bodyLarge!.copyWith(
+  get bodyLargeBlueGray100 => theme(context).textTheme.bodyLarge!.copyWith(
         color: appTheme.blueGray100,
       );
-  static get bodyLargeOnPrimaryContainer_06 =>
-      theme.textTheme.bodyLarge!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-      );
-  static get bodyLargeOnPrimaryContainer_03 =>
-      theme.textTheme.bodyLarge!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer.withOpacity(0.3),
-      );
-  static get bodyLargeBlack900 => theme.textTheme.bodyLarge!.copyWith(
+  get bodyLargeOnPrimaryContainer_06 =>
+      theme(context).textTheme.bodyLarge!.copyWith(
+            color:
+                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+          );
+  get bodyLargeOnPrimaryContainer_03 =>
+      theme(context).textTheme.bodyLarge!.copyWith(
+            color:
+                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+          );
+  get bodyLargeBlack900 => theme(context).textTheme.bodyLarge!.copyWith(
         color: appTheme.black900,
       );
   // Body Medium
-  static get bodyMedium_15 => theme.textTheme.bodyMedium!.copyWith(
+  get bodyMedium_15 => theme(context).textTheme.bodyMedium!.copyWith(
         fontSize: 15.fontSize,
       );
-  static get bodyMedium_13 => theme.textTheme.bodyMedium!.copyWith(
+  get bodyMedium_13 => theme(context).textTheme.bodyMedium!.copyWith(
         fontSize: 13.fontSize,
       );
-  static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(
+  get bodyMediumBlack900 => theme(context).textTheme.bodyMedium!.copyWith(
         color: appTheme.black900,
       );
-  static get bodyMediumBlack900_13 => theme.textTheme.bodyMedium!.copyWith(
+  get bodyMediumBlack900_13 => theme(context).textTheme.bodyMedium!.copyWith(
         color: appTheme.black900,
       );
-  static get bodyMediumOnPrimaryContainer_03 =>
-      theme.textTheme.bodyMedium!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer.withOpacity(0.3),
-        fontSize: 13.fontSize,
-      );
-  static get bodyMediumOnPrimaryContainer_06 =>
-      theme.textTheme.bodyMedium!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-        fontSize: 13.fontSize,
-      );
-  static get bodyMediumGray200 => theme.textTheme.bodyMedium!.copyWith(
+  get bodyMediumOnPrimaryContainer_03 =>
+      theme(context).textTheme.bodyMedium!.copyWith(
+            color:
+                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+            fontSize: 13.fontSize,
+          );
+  get bodyMediumOnPrimaryContainer_06 =>
+      theme(context).textTheme.bodyMedium!.copyWith(
+            color:
+                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+            fontSize: 13.fontSize,
+          );
+  get bodyMediumGray200 => theme(context).textTheme.bodyMedium!.copyWith(
         color: appTheme.gray200,
       );
-  static get bodyMediumRedA70001 => theme.textTheme.bodyMedium!.copyWith(
+  get bodyMediumRedA70001 => theme(context).textTheme.bodyMedium!.copyWith(
         color: appTheme.redA70001,
       );
   // Body Small
-  static get bodySmall10 => theme.textTheme.bodySmall!.copyWith(
+  get bodySmall10 => theme(context).textTheme.bodySmall!.copyWith(
         fontSize: 10.fontSize,
       );
-  static get bodySmall9 => theme.textTheme.bodySmall!.copyWith(
+  get bodySmall9 => theme(context).textTheme.bodySmall!.copyWith(
         fontSize: 9.fontSize,
       );
-  static get bodySmall12 => theme.textTheme.bodySmall!.copyWith(
+  get bodySmall12 => theme(context).textTheme.bodySmall!.copyWith(
         fontSize: 12.fontSize,
       );
-  static get bodySmallBlack900 => theme.textTheme.bodySmall!.copyWith(
+  get bodySmallBlack900 => theme(context).textTheme.bodySmall!.copyWith(
         color: appTheme.black900,
       );
-  static get bodySmallBlack900_10 => theme.textTheme.bodySmall!.copyWith(
+  get bodySmallBlack900_10 => theme(context).textTheme.bodySmall!.copyWith(
         color: appTheme.black900,
         fontSize: 10.fontSize,
       );
-  static get bodySmallBlueGray100_10 => theme.textTheme.bodySmall!.copyWith(
+  get bodySmallBlueGray100_10 => theme(context).textTheme.bodySmall!.copyWith(
         color: appTheme.blueGray100,
         fontSize: 10.fontSize,
       );
-  static get bodySmallGray200_10 => theme.textTheme.bodySmall!.copyWith(
+  get bodySmallGray200_10 => theme(context).textTheme.bodySmall!.copyWith(
         color: appTheme.gray200,
         fontSize: 10.fontSize,
       );
-  static get bodySmallOnPrimaryContainer => theme.textTheme.bodySmall!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer,
-      );
-  static get bodySmallOnPrimaryContainer06 =>
-      theme.textTheme.bodySmall!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-        fontSize: 10.fontSize,
-      );
+  get bodySmallOnPrimaryContainer =>
+      theme(context).textTheme.bodySmall!.copyWith(
+            color: theme(context).colorScheme.onPrimaryContainer,
+          );
+  get bodySmallOnPrimaryContainer06 =>
+      theme(context).textTheme.bodySmall!.copyWith(
+            color:
+                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+            fontSize: 10.fontSize,
+          );
   // Display Small
-  static get displaySmallBlack900 => theme.textTheme.displaySmall!.copyWith(
+  get displaySmallBlack900 => theme(context).textTheme.displaySmall!.copyWith(
         color: appTheme.black900,
         fontWeight: FontWeight.w400,
       );
   // Headline Medium
-  static get headlineMediumOnPrimaryContainer =>
-      theme.textTheme.headlineMedium!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer.withOpacity(1),
-        fontWeight: FontWeight.w700,
-      );
+  get headlineMediumOnPrimaryContainer =>
+      theme(context).textTheme.headlineMedium!.copyWith(
+            color: theme(context).colorScheme.onPrimaryContainer.withOpacity(1),
+            fontWeight: FontWeight.w700,
+          );
   // Headline Small
-  static get headlineSmallBlack900w400 =>
-      theme.textTheme.headlineSmall!.copyWith(
-        color: appTheme.black900,
-        fontWeight: FontWeight.w400,
-      );
-  static get headlineSmallBlack900 => theme.textTheme.headlineSmall!.copyWith(
+  get headlineSmallBlack900w400 =>
+      theme(context).textTheme.headlineSmall!.copyWith(
+            color: appTheme.black900,
+            fontWeight: FontWeight.w400,
+          );
+  get headlineSmallBlack900 => theme(context).textTheme.headlineSmall!.copyWith(
         color: appTheme.black900,
       );
   // Label large
-  static get labelLarge_12 => theme.textTheme.labelLarge!.copyWith(
+  get labelLarge_12 => theme(context).textTheme.labelLarge!.copyWith(
         fontSize: 12.fontSize,
       );
-  static get labelLargeBlack900 => theme.textTheme.labelLarge!.copyWith(
+  get labelLargeBlack900 => theme(context).textTheme.labelLarge!.copyWith(
         color: appTheme.black900,
       );
-  static get labelLargeOnPrimaryContainer_06 =>
-      theme.textTheme.labelLarge!.copyWith(
-        color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
-      );
-  static get labelLargeYellowA700 => theme.textTheme.labelLarge!.copyWith(
+  get labelLargeOnPrimaryContainer_06 =>
+      theme(context).textTheme.labelLarge!.copyWith(
+            color:
+                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+          );
+  get labelLargeYellowA700 => theme(context).textTheme.labelLarge!.copyWith(
         color: appTheme.yellowA700,
         fontSize: 12.fontSize,
       );
   // Label Medium
-  static get labelMedium_10 => theme.textTheme.labelMedium!.copyWith(
+  get labelMedium_10 => theme(context).textTheme.labelMedium!.copyWith(
         fontSize: 10.fontSize,
       );
   // Title Large
-  static get titleLarge_22 => theme.textTheme.titleLarge!.copyWith(
+  get titleLarge_22 => theme(context).textTheme.titleLarge!.copyWith(
         fontSize: 22.fontSize,
       );
-  static get titleLargeBlack900W400 => theme.textTheme.titleLarge!.copyWith(
+  get titleLargeBlack900W400 => theme(context).textTheme.titleLarge!.copyWith(
         color: appTheme.black900,
         fontWeight: FontWeight.w400,
       );
-  static get titleLargeBlack900W400_22 => theme.textTheme.titleLarge!.copyWith(
-        color: appTheme.black900,
-        fontSize: 22.fontSize,
+  get titleLargeBlack900W400_22 =>
+      theme(context).textTheme.titleLarge!.copyWith(
+            color: appTheme.black900,
+            fontSize: 22.fontSize,
+            fontWeight: FontWeight.w400,
+          );
+  get titleLargeW400 => theme(context).textTheme.titleLarge!.copyWith(
         fontWeight: FontWeight.w400,
       );
-  static get titleLargeW400 => theme.textTheme.titleLarge!.copyWith(
-        fontWeight: FontWeight.w400,
-      );
-  static get titleLargeOnSecondaryContainer =>
-      theme.textTheme.titleLarge!.copyWith(
-        color: theme.colorScheme.onSecondaryContainer,
-      );
+  get titleLargeOnSecondaryContainer =>
+      theme(context).textTheme.titleLarge!.copyWith(
+            color: theme(context).colorScheme.onSecondaryContainer,
+          );
   // Title Medium
-  static get titleMedium_17 => theme.textTheme.titleMedium!.copyWith(
+  get titleMedium_17 => theme(context).textTheme.titleMedium!.copyWith(
         fontSize: 17.fontSize,
       );
-  static get titleMedium_18 => theme.textTheme.titleMedium!.copyWith(
+  get titleMedium_18 => theme(context).textTheme.titleMedium!.copyWith(
         fontSize: 18.fontSize,
       );
-  static get titleMediumBlack900 => theme.textTheme.titleMedium!.copyWith(
+  get titleMediumBlack900 => theme(context).textTheme.titleMedium!.copyWith(
         color: appTheme.black900,
       );
-  static get titleMediumCyanA200 => theme.textTheme.titleMedium!.copyWith(
+  get titleMediumCyanA200 => theme(context).textTheme.titleMedium!.copyWith(
         color: appTheme.cyanA200,
       );
-  static get titleMediumYellowA700 => theme.textTheme.titleMedium!.copyWith(
+  get titleMediumYellowA700 => theme(context).textTheme.titleMedium!.copyWith(
         color: appTheme.yellowA700,
       );
-  static get titleMediumOnSecondaryContainer =>
-      theme.textTheme.titleMedium!.copyWith(
-        color: theme.colorScheme.onSecondaryContainer,
-      );
+  get titleMediumOnSecondaryContainer =>
+      theme(context).textTheme.titleMedium!.copyWith(
+            color: theme(context).colorScheme.onSecondaryContainer,
+          );
   // Title Small
-  static get titlesmall_15 => theme.textTheme.titleSmall!.copyWith(
+  get titlesmall_15 => theme(context).textTheme.titleSmall!.copyWith(
         fontSize: 15.fontSize,
       );
-  static get titlesmallBlack900 => theme.textTheme.titleSmall!.copyWith(
+  get titlesmallBlack900 => theme(context).textTheme.titleSmall!.copyWith(
         color: appTheme.black900,
       );
-  static get titlesmallGray200 => theme.textTheme.titleSmall!.copyWith(
+  get titlesmallGray200 => theme(context).textTheme.titleSmall!.copyWith(
         color: appTheme.gray200,
       );
 }

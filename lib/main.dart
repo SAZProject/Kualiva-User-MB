@@ -2,8 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:like_it/common/style/theme_helper.dart';
-import 'package:like_it/router.dart';
+import 'common/app_export.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,22 +45,26 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: ThemeHelper().themeData(ColorSchemes.lightModeScheme),
-      dark: ThemeHelper().themeData(ColorSchemes.darkModeScheme),
-      initial: widget.savedThemeMode ?? AdaptiveThemeMode.light,
-      debugShowFloatingThemeButton: true,
-      builder: (light, dark) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        title: 'LIKE IT',
-        theme: light,
-        darkTheme: dark,
-        initialRoute: AppRoutes.splashScreen,
-        onGenerateRoute: (settings) => generateRoute(settings),
-      ),
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return AdaptiveTheme(
+          light: ThemeHelper().themeData(ColorSchemes.lightModeScheme),
+          dark: ThemeHelper().themeData(ColorSchemes.darkModeScheme),
+          initial: widget.savedThemeMode ?? AdaptiveThemeMode.light,
+          debugShowFloatingThemeButton: true,
+          builder: (light, dark) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            title: 'LIKE IT',
+            theme: light,
+            darkTheme: dark,
+            initialRoute: AppRoutes.splashScreen,
+            onGenerateRoute: (settings) => generateRoute(settings),
+          ),
+        );
+      },
     );
   }
 }

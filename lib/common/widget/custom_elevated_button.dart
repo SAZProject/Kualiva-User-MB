@@ -35,21 +35,21 @@ class CustomElevatedButton extends StatelessWidget {
   final Widget? rightIcon;
 
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return alignment != null
         ? Align(
             alignment: alignment ?? Alignment.center,
-            child: buildBtnWidget,
+            child: buildBtnWidget(context),
           )
-        : buildBtnWidget;
+        : buildBtnWidget(context);
   }
 
-  Widget get buildBtnWidget => Container(
+  Widget buildBtnWidget(BuildContext context) => Container(
         height: height ?? 50.h,
         width: width ?? double.maxFinite,
         margin: margin,
-        decoration:
-            decoration ?? CustomButtonStyles.gradientYellowAToPrimaryDecoration,
+        decoration: decoration ??
+            CustomButtonStyles(context).gradientYellowAToPrimaryDecoration,
         child: ElevatedButton(
           style: buttonStyle,
           onPressed: isDisabled ?? false ? null : onPressed ?? () {},

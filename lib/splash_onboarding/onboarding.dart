@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/style/theme_helper.dart';
-import 'package:like_it/common/utility/image_constant.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/data/model/onboarding_model.dart';
 
@@ -50,6 +48,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBody: true,
         extendBodyBehindAppBar: true,
         body: Container(
@@ -65,7 +64,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     : _activePage == 1
                         ? _pages[1].pageColor
                         : _pages[2].pageColor,
-                theme.colorScheme.onPrimaryContainer.withOpacity(1),
+                theme(context).colorScheme.onSecondaryContainer,
               ],
             ),
           ),
@@ -135,7 +134,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           SizedBox(height: 20.h),
           Text(
             context.tr(onboardingModel.title),
-            maxLines: 2,
+            maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.displaySmall,
           ),
@@ -144,7 +143,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             opacity: 0.6,
             child: Text(
               context.tr(onboardingModel.content),
-              maxLines: 2,
+              maxLines: 4,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
@@ -197,10 +196,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           _activePage == 2 ? context.tr("onboard.onboard_start_btn") : null,
       margin: EdgeInsets.all(10.h),
       buttonStyle: CustomButtonStyles.none,
-      decoration: CustomButtonStyles.gradientYellowAToPrimaryDecoration,
+      decoration:
+          CustomButtonStyles(context).gradientYellowAToPrimaryDecoration,
       buttonTextStyle: Theme.of(context).textTheme.titleLarge,
       onPressed: () {
         if (_activePage == 2) {
+          Navigator.of(context).pushNamed(AppRoutes.loginScreen);
         } else {
           _pageController.nextPage(
               duration: const Duration(milliseconds: 400),

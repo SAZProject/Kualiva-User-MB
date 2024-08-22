@@ -7,13 +7,18 @@ import 'package:like_it/common/style/theme_helper.dart';
 import 'package:like_it/common/utility/sized_utils.dart';
 
 class CustomPhoneNumber extends StatelessWidget {
-  const CustomPhoneNumber(
-      {super.key,
-      required this.country,
-      required this.onPressed,
-      this.controller});
+  const CustomPhoneNumber({
+    super.key,
+    required this.country,
+    this.hintText,
+    this.textInputType,
+    required this.onPressed,
+    this.controller,
+  });
 
   final Country country;
+  final String? hintText;
+  final TextInputType? textInputType;
   final Function(Country) onPressed;
   final TextEditingController? controller;
 
@@ -28,7 +33,7 @@ class CustomPhoneNumber extends StatelessWidget {
               CountryPickerUtils.getDefaultFlagImage(country),
               Text(
                 "+${country.phoneCode}",
-                style: CustomTextStyles.bodyMedium_15,
+                style: CustomTextStyles(context).bodyMedium_15,
               ),
             ],
           ),
@@ -39,19 +44,26 @@ class CustomPhoneNumber extends StatelessWidget {
             margin: EdgeInsets.only(left: 14.h),
             child: TextFormField(
               focusNode: FocusNode(),
-              autofocus: true,
+              autofocus: false,
               controller: controller,
-              style: CustomTextStyles.bodyLargeOnPrimaryContainer_03,
+              style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_03,
+              keyboardType: textInputType ?? TextInputType.phone,
               decoration: InputDecoration(
-                hintText: context.tr("custom_phone_number.phone_number"),
-                hintStyle: CustomTextStyles.bodyLargeOnPrimaryContainer_06,
-                enabledBorder: _defaultOutlinedInputBorder(),
-                disabledBorder: _defaultOutlinedInputBorder(),
-                border: _defaultOutlinedInputBorder(),
+                hintText:
+                    hintText ?? context.tr("custom_phone_number.phone_number"),
+                hintStyle:
+                    CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
+                enabledBorder: _defaultOutlinedInputBorder(context),
+                focusedBorder: _defaultOutlinedInputBorder(context),
+                disabledBorder: _defaultOutlinedInputBorder(context),
+                border: _defaultOutlinedInputBorder(context),
                 filled: true,
-                fillColor: theme.colorScheme.onPrimaryContainer,
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
+                fillColor: theme(context)
+                    .colorScheme
+                    .onSecondaryContainer
+                    .withOpacity(0.6),
+                isDense: false,
+                contentPadding: EdgeInsets.all(5.h),
               ),
             ),
           ),
@@ -60,10 +72,11 @@ class CustomPhoneNumber extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder _defaultOutlinedInputBorder() => OutlineInputBorder(
+  OutlineInputBorder _defaultOutlinedInputBorder(BuildContext context) =>
+      OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.h),
         borderSide: BorderSide(
-          color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
+          color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
           width: 1,
         ),
       );

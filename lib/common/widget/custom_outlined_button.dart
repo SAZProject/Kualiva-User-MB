@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:like_it/common/style/custom_text_style.dart';
 import 'package:like_it/common/utility/sized_utils.dart';
+import 'package:like_it/common/widget/base_button.dart';
 
-class CustomOutlinedButton extends StatelessWidget {
+class CustomOutlinedButton extends BaseButton {
   const CustomOutlinedButton(
       {super.key,
-      required this.initialText,
-      this.onPressed,
-      this.buttonStyle,
-      this.buttonTextStyle,
-      this.isDisabled,
-      this.height,
-      this.width,
-      this.margin,
-      this.alignment,
+      required super.text,
+      super.onPressed,
+      super.buttonStyle,
+      super.buttonTextStyle,
+      super.isDisabled,
+      super.height,
+      super.width,
+      super.margin,
+      super.alignment,
       this.decoration,
       this.leftIcon,
       this.rightIcon,
       this.label});
 
-  final String initialText;
-  final VoidCallback? onPressed;
-  final ButtonStyle? buttonStyle;
-  final TextStyle? buttonTextStyle;
-  final bool? isDisabled;
-  final double? height;
-  final double? width;
-  final EdgeInsets? margin;
-  final Alignment? alignment;
   final BoxDecoration? decoration;
   final Widget? leftIcon;
   final Widget? rightIcon;
@@ -35,15 +27,21 @@ class CustomOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return alignment != null
+        ? Align(
+            alignment: alignment ?? Alignment.center,
+            child: buildOutlinedButton(context),
+          )
+        : buildOutlinedButton(context);
   }
 
-  Widget get buildOutlinedButton => Container(
+  Widget buildOutlinedButton(BuildContext context) => Container(
         height: height ?? 50.h,
         width: width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,
         child: OutlinedButton(
+          style: buttonStyle,
           onPressed: isDisabled ?? false ? null : onPressed ?? () {},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -51,8 +49,9 @@ class CustomOutlinedButton extends StatelessWidget {
             children: [
               leftIcon ?? const SizedBox.shrink(),
               Text(
-                initialText,
-                style: buttonTextStyle ?? CustomTextStyles.titlesmall_15,
+                text,
+                style:
+                    buttonTextStyle ?? CustomTextStyles(context).titlesmall_15,
               ),
               rightIcon ?? const SizedBox.shrink(),
             ],

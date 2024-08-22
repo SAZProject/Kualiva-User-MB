@@ -1,5 +1,3 @@
-import 'package:country_pickers/country.dart';
-import 'package:country_pickers/country_pickers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +10,7 @@ import 'package:like_it/common/utility/sized_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/common/widget/custom_image_view.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
-import 'package:like_it/common/widget/custom_phone_number.dart';
+import 'package:like_it/common/widget/custom_text_form_field.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,9 +21,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Country selectedCountry = CountryPickerUtils.getCountryByPhoneCode("62");
-  TextEditingController phoneNumberController = TextEditingController();
+  bool passObscure = true;
+
+  TextEditingController phoneNumberOrUserNameCtl = TextEditingController();
+  TextEditingController passwordCtl = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    phoneNumberOrUserNameCtl.dispose();
+    passwordCtl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +57,13 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 6.h),
             child: Column(
               children: [
-                SizedBox(height: 25.h),
+                SizedBox(height: 26.h),
                 CustomImageView(
                   imagePath: ImageConstant.appLogo,
                   height: 100.h,
                   width: 100.h,
                 ),
-                SizedBox(height: 85.h),
+                SizedBox(height: 80.h),
                 _signInMenu(context),
                 const Spacer(),
                 RichText(
@@ -65,25 +72,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       TextSpan(
                         text: context.tr("sign_in.tos_statement"),
-                        style: CustomTextStyles.bodySmallOnPrimaryContainer,
+                        style: CustomTextStyles(context)
+                            .bodySmallOnPrimaryContainer,
                       ),
                       TextSpan(
                         text: context.tr("sign_in.tos"),
-                        style: theme.textTheme.labelMedium!.copyWith(
-                          decoration: TextDecoration.underline,
-                        ),
+                        style: theme(context).textTheme.labelMedium!.copyWith(
+                              color: theme(context).primaryColor,
+                              decorationColor: theme(context).primaryColor,
+                              decoration: TextDecoration.underline,
+                            ),
                         recognizer: TapGestureRecognizer()..onTap = () {},
                       ),
-                      TextSpan(text: "\n", style: theme.textTheme.labelMedium),
+                      TextSpan(
+                          text: " ",
+                          style: theme(context).textTheme.labelMedium),
                       TextSpan(
                         text: context.tr("sign_in.policy_statement"),
-                        style: CustomTextStyles.bodySmallOnPrimaryContainer,
+                        style: CustomTextStyles(context)
+                            .bodySmallOnPrimaryContainer,
                       ),
                       TextSpan(
-                        text: context.tr("sign_in.tos"),
-                        style: theme.textTheme.labelMedium!.copyWith(
-                          decoration: TextDecoration.underline,
-                        ),
+                        text: context.tr("sign_in.policy"),
+                        style: theme(context).textTheme.labelMedium!.copyWith(
+                              color: theme(context).primaryColor,
+                              decorationColor: theme(context).primaryColor,
+                              decoration: TextDecoration.underline,
+                            ),
                         recognizer: TapGestureRecognizer()..onTap = () {},
                       ),
                     ],
@@ -104,19 +119,27 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Text(
             context.tr("sign_in.sign_in_with"),
-            style: CustomTextStyles.bodyLargeOnPrimaryContainer_06,
+            style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
           ),
           SizedBox(height: 10.h),
           _signInWithSAZ(context),
           SizedBox(height: 10.h),
+          Text(
+            context.tr("sign_in.like_it_acc"),
+            style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
+          ),
+          SizedBox(height: 10.h),
           SizedBox(
-              width: double.maxFinite, child: _textFieldPhoneNumber(context)),
+              width: double.maxFinite,
+              child: _textFieldPhoneNumberOrUserName(context)),
+          SizedBox(height: 10.h),
+          SizedBox(width: double.maxFinite, child: _textFieldPassword(context)),
           SizedBox(height: 10.h),
           _signInButton(context),
           SizedBox(height: 10.h),
           Text(
             context.tr("sign_in.or"),
-            style: CustomTextStyles.bodyLargeOnPrimaryContainer_06,
+            style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
           ),
           SizedBox(height: 10.h),
           _signUpButton(context),
@@ -126,49 +149,50 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _signInWithSAZ(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 8.h,
-        vertical: 4.h,
-      ),
-      decoration: CustomDecoration.outlineBlack.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder10,
-      ),
-      width: double.maxFinite,
-      child: InkWell(
-        onTap: () {},
-        child: Row(
-          children: [
-            CustomImageView(
-              imagePath: ImageConstant.sazIcon,
-              height: 40.h,
-              width: 40.h,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10.h, bottom: 6.h),
-                child: Text(
-                  context.tr("sign_in.sign_in_with_saz"),
-                  style: CustomTextStyles.titleMediumCyanA200,
-                ),
-              ),
-            ),
-          ],
-        ),
+    return CustomOutlinedButton(
+      text: context.tr("sign_in.sign_in_with_saz"),
+      buttonTextStyle: CustomTextStyles(context).titleMediumCyanA200,
+      buttonStyle: CustomButtonStyles.outlineTranparent,
+      decoration: CustomDecoration(context).backgroundBlur.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder10,
+          ),
+      leftIcon: CustomImageView(
+        imagePath: ImageConstant.sazIcon,
+        height: 40.h,
+        width: 40.h,
       ),
     );
   }
 
-  Widget _textFieldPhoneNumber(BuildContext context) {
+  Widget _textFieldPhoneNumberOrUserName(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: CustomPhoneNumber(
-        country: selectedCountry,
-        controller: phoneNumberController,
-        onPressed: (country) {
-          selectedCountry = country;
-        },
+      child: CustomTextFormField(
+        controller: phoneNumberOrUserNameCtl,
+        hintText: context.tr("sign_in.phone_number_or_user_name"),
+        textInputType: TextInputType.text,
+      ),
+    );
+  }
+
+  Widget _textFieldPassword(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: CustomTextFormField(
+        controller: passwordCtl,
+        hintText: context.tr("sign_in.password"),
+        textInputType: TextInputType.text,
+        obscureText: passObscure,
+        suffix: IconButton(
+          onPressed: () {
+            setState(() {
+              passObscure = !passObscure;
+            });
+          },
+          icon: Icon(
+            passObscure ? Icons.visibility : Icons.visibility_off,
+          ),
+        ),
       ),
     );
   }
@@ -177,37 +201,37 @@ class _LoginScreenState extends State<LoginScreen> {
     return CustomElevatedButton(
       initialText: context.tr("sign_in.sign_in_btn"),
       buttonStyle: CustomButtonStyles.none,
-      decoration: CustomButtonStyles.gradientYellowAToPrimaryL10Decoration,
-      buttonTextStyle: CustomTextStyles.titleMediumOnSecondaryContainer,
+      decoration:
+          CustomButtonStyles(context).gradientYellowAToPrimaryL10Decoration,
+      buttonTextStyle:
+          CustomTextStyles(context).titleMediumOnSecondaryContainer,
       onPressed: () {},
     );
   }
 
   Widget _signUpButton(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 34.h),
-      child: OutlineGradientButton(
-        strokeWidth: 1.h,
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(0.5, 1),
-          colors: [
-            appTheme.yellowA700,
-            theme.colorScheme.primary,
-          ],
-        ),
-        corners: const Corners(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(10.0),
-          bottomLeft: Radius.circular(10.0),
-          bottomRight: Radius.circular(10.0),
-        ),
-        child: CustomOutlinedButton(
-          initialText: context.tr("sign_up.sign_up_btn"),
-          buttonStyle: CustomButtonStyles.outline,
-          buttonTextStyle: CustomTextStyles.titleMediumYellowA700,
-          onPressed: () {},
-        ),
+    return OutlineGradientButton(
+      padding: EdgeInsets.zero,
+      strokeWidth: 1.h,
+      gradient: LinearGradient(
+        begin: const Alignment(0.5, 0),
+        end: const Alignment(0.5, 1),
+        colors: [
+          appTheme.yellowA700,
+          theme(context).colorScheme.primary,
+        ],
+      ),
+      corners: const Corners(
+        topLeft: Radius.circular(10.0),
+        topRight: Radius.circular(10.0),
+        bottomLeft: Radius.circular(10.0),
+        bottomRight: Radius.circular(10.0),
+      ),
+      child: CustomOutlinedButton(
+        text: context.tr("sign_up.sign_up_btn"),
+        buttonStyle: CustomButtonStyles.outlineTranparent,
+        buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
+        onPressed: () {},
       ),
     );
   }

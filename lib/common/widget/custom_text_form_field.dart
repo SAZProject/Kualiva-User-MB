@@ -94,21 +94,23 @@ class CustomTextFormField extends StatelessWidget {
             }
           },
           autofocus: autoFocus!,
-          style: textStyle ?? CustomTextStyles.bodyMediumOnPrimaryContainer_06,
+          style: textStyle ??
+              CustomTextStyles(context).bodyMediumOnPrimaryContainer_06,
           obscureText: obscureText!,
           readOnly: readOnly!,
           onTap: onPressed,
           textInputAction: textInputAction,
           keyboardType: textInputType,
           maxLines: maxLines ?? 1,
-          decoration: decoration,
+          decoration: decoration(context),
           validator: validator,
         ),
       );
 
-  InputDecoration get decoration => InputDecoration(
+  InputDecoration decoration(BuildContext context) => InputDecoration(
         hintText: hintText ?? "-",
-        hintStyle: hintStyle ?? CustomTextStyles.bodyLargeOnPrimaryContainer_06,
+        hintStyle: hintStyle ??
+            CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
@@ -119,17 +121,18 @@ class CustomTextFormField extends StatelessWidget {
               horizontal: 10.h,
               vertical: 16.h,
             ),
-        fillColor: fillColor ?? theme.colorScheme.onPrimaryContainer,
+        fillColor: fillColor ?? theme(context).colorScheme.onSecondaryContainer,
         filled: filled,
-        border: inputBorder ?? _defaultOutlinedInputBorder(),
-        enabledBorder: inputBorder ?? _defaultOutlinedInputBorder(),
-        focusedBorder: inputBorder ?? _defaultOutlinedInputBorder(),
+        border: inputBorder ?? _defaultOutlinedInputBorder(context),
+        enabledBorder: inputBorder ?? _defaultOutlinedInputBorder(context),
+        focusedBorder: inputBorder ?? _defaultOutlinedInputBorder(context),
       );
 
-  OutlineInputBorder _defaultOutlinedInputBorder() => OutlineInputBorder(
+  OutlineInputBorder _defaultOutlinedInputBorder(BuildContext context) =>
+      OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.h),
         borderSide: BorderSide(
-          color: theme.colorScheme.onPrimaryContainer.withOpacity(0.6),
+          color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
           width: 1,
         ),
       );

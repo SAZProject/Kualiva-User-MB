@@ -5,8 +5,10 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.9
-- Fix otp & done screen
+Ver 0.0.10
+- Fix permission screen
+- Fix manifest
+- change app name
 ```
 
 ## Getting Started

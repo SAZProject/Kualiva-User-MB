@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.7+03
-- Fix Sign In
-- Fix theme and custom style
+Ver 0.0.9
+- Fix otp & done screen
 ```
 
 ## Getting Started

@@ -11,6 +11,7 @@ import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/common/widget/custom_image_view.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:like_it/router.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -34,9 +35,13 @@ class SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  onPressedSignIn(BuildContext context) {}
+  void _onPressedSignIn(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.otpScreen);
+  }
 
-  onPressedSignUp(BuildContext context) {}
+  void _onPressedSignUp(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.signUpScreen);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +87,8 @@ class SignInScreenState extends State<SignInScreen> {
                       TextSpan(
                         text: context.tr("sign_in.tos"),
                         style: theme(context).textTheme.labelMedium!.copyWith(
-                              color: theme(context).primaryColor,
-                              decorationColor: theme(context).primaryColor,
+                              color: appTheme.yellowA700,
+                              decorationColor: appTheme.yellowA700,
                               decoration: TextDecoration.underline,
                             ),
                         recognizer: TapGestureRecognizer()..onTap = () {},
@@ -99,8 +104,8 @@ class SignInScreenState extends State<SignInScreen> {
                       TextSpan(
                         text: context.tr("sign_in.policy"),
                         style: theme(context).textTheme.labelMedium!.copyWith(
-                              color: theme(context).primaryColor,
-                              decorationColor: theme(context).primaryColor,
+                              color: appTheme.yellowA700,
+                              decorationColor: appTheme.yellowA700,
                               decoration: TextDecoration.underline,
                             ),
                         recognizer: TapGestureRecognizer()..onTap = () {},
@@ -207,9 +212,8 @@ class SignInScreenState extends State<SignInScreen> {
       buttonStyle: CustomButtonStyles.none,
       decoration:
           CustomButtonStyles(context).gradientYellowAToPrimaryL10Decoration,
-      buttonTextStyle:
-          CustomTextStyles(context).titleMediumOnSecondaryContainer,
-      onPressed: () {},
+      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+      onPressed: () => _onPressedSignIn(context),
     );
   }
 
@@ -235,7 +239,7 @@ class SignInScreenState extends State<SignInScreen> {
         text: context.tr("sign_up.sign_up_btn"),
         buttonStyle: CustomButtonStyles.outlineTranparent,
         buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
-        onPressed: () {},
+        onPressed: () => _onPressedSignUp(context),
       ),
     );
   }

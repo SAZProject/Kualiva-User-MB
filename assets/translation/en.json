@@ -44,15 +44,16 @@
         "password_hint_2": "Letters, numbers, dots, underscore. No space or special characters.",
         "password_hint_3": "You can change your password anytime later",
         "re_enter_password": "Re-enter Password",
-        "already_had_acc": "Already have account? {} here",
+        "already_had_acc": "Already have account? ",
         "sign_in_link": "Sign In",
+        "here": " here",
 
         "sign_up_btn": "Sign Up"
     },
     "otp": {
         "otp_verif": "OTP Verification",
         "otp_check_sms": "We send 6-digit verification code to your phone number",
-        "no_code_recieve": "Didn\u0027t recieve any code? {}",
+        "no_code_recieve": "Didn\u0027t recieve any code? ",
         "resend": "resend Code"
     },
     "permission": {

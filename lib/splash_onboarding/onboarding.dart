@@ -201,7 +201,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       buttonTextStyle: Theme.of(context).textTheme.titleLarge,
       onPressed: () {
         if (_activePage == 2) {
-          Navigator.of(context).pushNamed(AppRoutes.loginScreen);
+          Navigator.of(context).pushNamed(AppRoutes.signInScreen);
         } else {
           _pageController.nextPage(
               duration: const Duration(milliseconds: 400),

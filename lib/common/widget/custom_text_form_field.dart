@@ -95,7 +95,11 @@ class CustomTextFormField extends StatelessWidget {
           },
           autofocus: autoFocus!,
           style: textStyle ??
-              CustomTextStyles(context).bodyMediumOnPrimaryContainer_06,
+              CustomTextStyles(context)
+                  .bodyMediumOnPrimaryContainer_06
+                  .copyWith(
+                    color: theme(context).colorScheme.onPrimaryContainer,
+                  ),
           obscureText: obscureText!,
           readOnly: readOnly!,
           onTap: onPressed,

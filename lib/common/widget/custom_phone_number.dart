@@ -11,6 +11,7 @@ class CustomPhoneNumber extends StatelessWidget {
     super.key,
     required this.country,
     this.hintText,
+    this.focusNode,
     this.textInputType,
     required this.onPressed,
     this.controller,
@@ -18,6 +19,7 @@ class CustomPhoneNumber extends StatelessWidget {
 
   final Country country;
   final String? hintText;
+  final FocusNode? focusNode;
   final TextInputType? textInputType;
   final Function(Country) onPressed;
   final TextEditingController? controller;
@@ -43,11 +45,22 @@ class CustomPhoneNumber extends StatelessWidget {
             width: 230.h,
             margin: EdgeInsets.only(left: 14.h),
             child: TextFormField(
-              focusNode: FocusNode(),
+              focusNode: focusNode,
               autofocus: false,
               controller: controller,
-              style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_03,
+              style: CustomTextStyles(context)
+                  .bodyLargeOnPrimaryContainer_03
+                  .copyWith(
+                    color: theme(context).colorScheme.onPrimaryContainer,
+                  ),
               keyboardType: textInputType ?? TextInputType.phone,
+              onTapOutside: (event) {
+                if (focusNode != null) {
+                  focusNode?.unfocus();
+                } else {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                }
+              },
               decoration: InputDecoration(
                 hintText:
                     hintText ?? context.tr("custom_phone_number.phone_number"),

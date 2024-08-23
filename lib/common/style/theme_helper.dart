@@ -170,6 +170,8 @@ class ColorSchemes {
 }
 
 class GlobalCodeColors {
+  //white
+  Color get white => Colors.white;
   //Amber
   Color get amber100 => const Color(0XFFFFEBBF);
   Color get amber300 => const Color(0XFFFFC957);

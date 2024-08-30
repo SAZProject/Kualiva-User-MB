@@ -8,8 +8,15 @@ class ImageConstant {
   static String onBoarding3 = "$imagePath/onboard-3.gif";
 
   static String sazIcon = "$imagePath/SaZ_icon.png";
-  static String done = "$imagePath/done_1.gif";
   static String permissionScreen = "$imagePath/permission_screen.gif";
+
+  static String background1 = "$imagePath/background_1.png";
+  static String background2 = "$imagePath/background_2.png";
+
+  static String navbarItem2 = "$imagePath/navbar_item_2.png";
+  static String navbarItem2Sel = "$imagePath/navbar_item_2_selected.png";
+  static String navbarItem3 = "$imagePath/navbar_item_3.png";
+  static String navbarItem3sel = "$imagePath/navbar_item_3_selected.png";
 
   static String homeFood = "$imagePath/home_food.png";
   static String homeHotel = "$imagePath/home_hotel.png";

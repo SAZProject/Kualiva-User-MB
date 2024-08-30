@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/widget/custom_alert_dialog.dart';
 import 'package:like_it/common/widget/custom_pin_code_text_field.dart';
 
 class OtpPageScreen extends StatefulWidget {
@@ -51,7 +52,20 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
               context: context,
               onChange: (value) {},
               onCompleted: (value) {
-                Navigator.pushNamed(context, AppRoutes.doneScreen);
+                customAlertDialog(
+                  context: context,
+                  dismissable: false,
+                  icon: const Center(
+                    child:
+                        Icon(Icons.done, color: Colors.greenAccent, size: 35.0),
+                  ),
+                  title: Text(context.tr("otp.otp_verified"),
+                      overflow: TextOverflow.ellipsis, maxLines: 1),
+                );
+                Future.delayed(const Duration(seconds: 6), () {
+                  Navigator.pushNamed(
+                      context, AppRoutes.devicePermissionScreen);
+                });
               },
             ),
           ),

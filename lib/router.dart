@@ -3,7 +3,6 @@ import 'package:like_it/auth/device_permission_screen.dart';
 import 'package:like_it/auth/otp_page_screen.dart';
 import 'package:like_it/auth/sign_in_screen.dart';
 import 'package:like_it/auth/sign_up_screen.dart';
-import 'package:like_it/common/screen/done_screen.dart';
 import 'package:like_it/splash_onboarding/onboarding.dart';
 import 'package:like_it/splash_onboarding/splash.dart';
 import 'package:page_transition/page_transition.dart';
@@ -51,11 +50,6 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
       return PageTransition(
           child: const OtpPageScreen(),
           type: PageTransitionType.leftToRight,
-          duration: const Duration(milliseconds: 300));
-    case AppRoutes.doneScreen:
-      return PageTransition(
-          child: const DoneScreen(),
-          type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.devicePermissionScreen:
       return PageTransition(

@@ -54,7 +54,8 @@
         "otp_verif": "OTP Verification",
         "otp_check_sms": "We send 6-digit verification code to your phone number",
         "no_code_recieve": "Didn\u0027t recieve any code? ",
-        "resend": "resend Code"
+        "resend": "resend Code",
+        "otp_verified": "OTP Verified"
     },
     "permission": {
         "permission_title": "Better Experience\nFor You",

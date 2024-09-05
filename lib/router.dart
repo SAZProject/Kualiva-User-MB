@@ -3,6 +3,7 @@ import 'package:like_it/auth/device_permission_screen.dart';
 import 'package:like_it/auth/otp_page_screen.dart';
 import 'package:like_it/auth/sign_in_screen.dart';
 import 'package:like_it/auth/sign_up_screen.dart';
+import 'package:like_it/presentation/home/home_navigation.dart';
 import 'package:like_it/splash_onboarding/onboarding.dart';
 import 'package:like_it/splash_onboarding/splash.dart';
 import 'package:page_transition/page_transition.dart';
@@ -21,6 +22,8 @@ class AppRoutes {
   static const String doneScreen = "/done_screen";
 
   static const String devicePermissionScreen = "/device_permission_screen";
+
+  static const String homeNavigationScreen = "/home_nav_screen";
 }
 
 Route<dynamic> generateRoute(RouteSettings routeSetting) {
@@ -55,6 +58,11 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
       return PageTransition(
           child: const DevicePermissionScreen(),
           type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.homeNavigationScreen:
+      return PageTransition(
+          child: const HomeNavigation(),
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
     default:
       return PageTransition(

@@ -14,9 +14,11 @@ class ImageConstant {
   static String background2 = "$imagePath/background_2.png";
 
   static String navbarItem2 = "$imagePath/navbar_item_2.png";
+  static String navbarItem2Dark = "$imagePath/navbar_item_2_dark.png";
   static String navbarItem2Sel = "$imagePath/navbar_item_2_selected.png";
   static String navbarItem3 = "$imagePath/navbar_item_3.png";
-  static String navbarItem3sel = "$imagePath/navbar_item_3_selected.png";
+  static String navbarItem3Dark = "$imagePath/navbar_item_3_dark.png";
+  static String navbarItem3Sel = "$imagePath/navbar_item_3_selected.png";
 
   static String homeFood = "$imagePath/home_food.png";
   static String homeHotel = "$imagePath/home_hotel.png";
@@ -35,6 +37,17 @@ class ImageConstant {
   static String foodTable8Item1 = "$imagePath/food_table8_item_1.jpeg";
   static String foodTable8Item2 = "$imagePath/food_table8_item_2.jpeg";
   static String foodTable8Item3 = "$imagePath/food_table8_item_3.jpeg";
+
+  static String fnb1Path = "assets/images/f_n_b/1";
+  static String fnb2Path = "assets/images/f_n_b/2";
+  static String fnb3Path = "assets/images/f_n_b/3";
+  static String fnb4Path = "assets/images/f_n_b/4";
+  static String fnb5Path = "assets/images/f_n_b/5";
+  static String fnb6Path = "assets/images/f_n_b/6";
+  static String fnb7Path = "assets/images/f_n_b/7";
+  static String fnb8Path = "assets/images/f_n_b/8";
+  static String fnb9Path = "assets/images/f_n_b/9";
+  static String fnb10Path = "assets/images/f_n_b/10";
 
   static String foodSugarSpice = "$imagePath/food_sugar&spice.jpeg";
 

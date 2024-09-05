@@ -16,6 +16,9 @@ class DevicePermissionScreen extends StatefulWidget {
 class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
   void _getdevicePermission(BuildContext context) async {
     if (await _requestPermission(context)) {
+      if (context.mounted) {
+        Navigator.of(context).pushNamed(AppRoutes.homeNavigationScreen);
+      }
     } else {}
   }
 

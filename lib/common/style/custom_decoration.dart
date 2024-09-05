@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:like_it/common/style/theme_helper.dart';
 import 'package:like_it/common/utility/sized_utils.dart';
 
@@ -14,6 +15,13 @@ class CustomDecoration {
         color: appTheme.black900.withOpacity(0.6),
         width: 1.h,
       ),
+    );
+  }
+
+  BoxDecoration get foregroundBlur {
+    return BoxDecoration(
+      color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+      borderRadius: BorderRadiusStyle.roundedBorder10,
     );
   }
 
@@ -56,6 +64,9 @@ class CustomDecoration {
       );
   BoxDecoration get fillOnSecondaryContainer => BoxDecoration(
         color: theme(context).colorScheme.onSecondaryContainer,
+      );
+  BoxDecoration get fillOnSecondaryContainer_03 => BoxDecoration(
+        color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.3),
       );
   // Gradient Decorations
   BoxDecoration get gradientCyanAToOnPrimaryContainer => BoxDecoration(
@@ -143,7 +154,7 @@ class CustomDecoration {
           begin: const Alignment(0.5, 0),
           end: const Alignment(0.5, 1),
           colors: [
-            appTheme.orange300.withOpacity(0.3),
+            appTheme.orange300.withOpacity(1),
             theme(context).colorScheme.primary,
           ],
         ),
@@ -155,7 +166,16 @@ class CustomDecoration {
   BoxDecoration get outline => BoxDecoration(
         color: theme(context).colorScheme.primary.withOpacity(0.3),
       );
+
   static BoxDecoration get outlineBlack => const BoxDecoration();
+
+  BoxDecoration get outlineOnSecondaryContainer => BoxDecoration(
+        color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+        border: Border.all(
+          color: theme(context).colorScheme.onSecondaryContainer,
+          width: 1.h,
+        ),
+      );
 
   BoxDecoration get outlineBlack900 => BoxDecoration(
       color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),

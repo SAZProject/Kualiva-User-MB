@@ -26,6 +26,7 @@ dependencies:
     flutter_svg: ^2.0.10+1
     device_info_plus: ^10.1.2
     curved_navigation_bar: ^1.0.6
+    carousel_slider: ^5.0.0
 
 dev_dependencies:
     flutter_test:
@@ -41,6 +42,26 @@ flutter:
     uses-material-design: true
     assets:
         - assets/images/
+        - assets/images/f_n_b/1/A/
+        - assets/images/f_n_b/1/B/
+        - assets/images/f_n_b/2/A/
+        - assets/images/f_n_b/2/B/
+        - assets/images/f_n_b/3/A/
+        - assets/images/f_n_b/3/B/
+        - assets/images/f_n_b/4/A/
+        - assets/images/f_n_b/4/B/
+        - assets/images/f_n_b/5/A/
+        - assets/images/f_n_b/5/B/
+        - assets/images/f_n_b/6/A/
+        - assets/images/f_n_b/6/B/
+        - assets/images/f_n_b/7/A/
+        - assets/images/f_n_b/7/B/
+        - assets/images/f_n_b/8/A/
+        - assets/images/f_n_b/8/B/
+        - assets/images/f_n_b/9/A/
+        - assets/images/f_n_b/9/B/
+        - assets/images/f_n_b/10/A/
+        - assets/images/f_n_b/10/B/
         - assets/translation/
     fonts:
         - family: K2D

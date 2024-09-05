@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.11
-- Change done screen
+Ver 0.0.12
+- add home screen
 - Add new Assets
 ```
 

@@ -1,5 +1,70 @@
 {
-    "common": {},
+    "common": {
+        "yes": "Yes",
+        "no": "No",
+        "confirm": "Confirm",
+        "pending": "Pending",
+        "approve": "Approve",
+        "reject": "Reject",
+        "warning": "Warning",
+        "ok": "Ok",
+        "cancel": "Cancel",
+        "retry": "Retry",
+
+        "progress": "Progress",
+        "loading": "Loading...",
+        "error": "Error",
+        "connection_error": "Connection Error",
+        "connection_error_content": "Please check your internet connection!",
+        "page_not_found": "Page Not Found!",
+        "data_not_found": "Data Not Found!",
+        "user_not_found": "User Not Found!",
+
+        "empty_field": "There is empty field!",
+        "field_validator": "Field Can't Be Empty",
+
+        "download_success": "Download Success {}",
+        "download_failed": "Download Failed {}",
+
+        "update_success": "Update {} Field Complete",
+        "update_failed": "Failed update {}",
+        "user_img_update_old_label": "Old {}",
+        "user_img_update_new_label": "New {}",
+        "update_button": "UPDATE",
+
+        "location_unavailable": "Location Unavailable",
+        "location_unavailable_content": "Location services are disabled,\nplease enable it!",
+        "location_denied_content": "Location permissions are denied\nplease approve it",
+        "location_denied_perm_content": "Location permissions are denied\nplease approve it",
+
+        "alert_action_text": "Close",
+
+        "open_file_no_app_to_open": "No App To Open File",
+        "open_file_not_found": "File Not Found",
+        "open_file_permission_denied": "Permission Denied",
+        "open_file_error": "Open File Error",
+        "open_file_no_app_to_open_content": "No native/external/third party app that supported to open this file!",
+        "open_file_not_found_content": "The file either not existed or with a wrong path name!",
+        "open_file_permission_denied_content": "Permission to access storage/directory is denied! Please go to app setting and allow app to access the file!",
+        "open_file_error_content": "Open File Error: ",
+
+        "handler_success": "Success",
+        "handler_created": "Created",
+        "handler_bad_request": "Bad request, please try again!",
+        "handler_unauthorized": "Unauthorized, you need login first!",
+        "handler_forbidden": "Forbidden, you don't have the required permissions!",
+        "handler_not_found": "Not found, data/page not found!",
+        "handler_unprocessable_entity": "Bad request data, please try again or contact admin!",
+        "handler_internal_server_error": "Internal server error, please contact admin!",
+        "handler_connection_time_out": "Connection timeout, please try again!",
+        "handler_send_time_out": "Send timeout, please try again!",
+        "handler_receive_time_out": "Receive timeout, please try again!",
+        "handler_bad_certificate": "Bad certificate, please contact admin!",
+        "handler_bad_response": "Bad response, please try again!",
+        "handler_cancel": "Cancel request",
+        "hendler_connection_error": "Connection error, please try again!",
+        "handler_unknown": "Unknown, please try again or contact admin!"
+    },
     "custom_phone_number": {
         "search": "Search...",
         "select_phone_code": "Select your phone code",
@@ -61,5 +126,28 @@
         "permission_title": "Better Experience\nFor You",
         "permission_content": "Allow some permissions on your device\nto have the best experience in LikeIt",
         "allow_btn": "Allow"
+    },
+    "home_nav_bar": {
+        "nav_1": "Home",
+        "nav_2": "HiChef",
+        "nav_3": "Main",
+        "nav_4": "Inbox",
+        "nav_5": "Profile"
+    },
+    "home_screen": {
+        "location": "Location",
+        "grid_1": "F&B",
+        "grid_2": "Hostelry",
+        "grid_3": "Groceries",
+        "grid_4": "Lounge",
+        "grid_5": "Spa",
+        "grid_6": "Mall",
+        "grid_7": "Recreation",
+        "grid_8": "More",
+        "featured": "Featured",
+        "tags_more": "+{} More",
+        "event": "What's goin on : {}",
+        "event_title": "Event Title",
+        "event_content": "Event Content"
     }
 }

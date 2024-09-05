@@ -17,6 +17,10 @@ class CustomTextStyles {
       theme(context).textTheme.bodyLarge!.copyWith(
             color: appTheme.blueGray100,
           );
+  TextStyle get bodyLargeGray800 =>
+      theme(context).textTheme.bodyLarge!.copyWith(
+            color: appTheme.gray800,
+          );
   TextStyle get bodyLargeOnPrimaryContainer_06 =>
       theme(context).textTheme.bodyLarge!.copyWith(
             color:
@@ -93,6 +97,11 @@ class CustomTextStyles {
   TextStyle get bodySmallGray200_10 =>
       theme(context).textTheme.bodySmall!.copyWith(
             color: appTheme.gray200,
+            fontSize: 10.fontSize,
+          );
+  TextStyle get bodySmallGray800 =>
+      theme(context).textTheme.bodySmall!.copyWith(
+            color: appTheme.gray800,
             fontSize: 10.fontSize,
           );
   TextStyle get bodySmallOnPrimaryContainer =>

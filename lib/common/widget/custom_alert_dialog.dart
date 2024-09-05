@@ -18,8 +18,7 @@ void customAlertDialog({
     builder: (context) {
       return AlertDialog(
         elevation: 5.0,
-        backgroundColor:
-            theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+        backgroundColor: theme(context).colorScheme.onSecondaryContainer,
         title: title,
         titleTextStyle: CustomTextStyles(context).titleLarge_22,
         content: content,

@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.12
-- add home screen
-- Add new Assets
+Ver 0.0.12+01
+- Fix OTP dialog opacity and navigation duration
+- Fix permission navigator
 ```
 
 ## Getting Started

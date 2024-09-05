@@ -14,12 +14,15 @@ class DevicePermissionScreen extends StatefulWidget {
 }
 
 class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
-  void _getdevicePermission(BuildContext context) async {
-    if (await _requestPermission(context)) {
-      if (context.mounted) {
-        Navigator.of(context).pushNamed(AppRoutes.homeNavigationScreen);
-      }
-    } else {}
+  void _getdevicePermission(BuildContext context) {
+    _requestPermission(context).then(
+      (value) {
+        if (value) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRoutes.homeNavigationScreen, (route) => false);
+        }
+      },
+    );
   }
 
   Future<bool> _requestPermission(context) async {

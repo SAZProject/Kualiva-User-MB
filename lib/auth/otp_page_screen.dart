@@ -62,7 +62,7 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
                   title: Text(context.tr("otp.otp_verified"),
                       overflow: TextOverflow.ellipsis, maxLines: 1),
                 );
-                Future.delayed(const Duration(seconds: 6), () {
+                Future.delayed(const Duration(seconds: 2), () {
                   Navigator.pushNamed(
                       context, AppRoutes.devicePermissionScreen);
                 });

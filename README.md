@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.13
-- Change Splash using video
+Ver 0.0.13+1
+- Fix Home featured list item view
 ```
 
 ## Getting Started

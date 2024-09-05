@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.tr("home_screen.location"),
+            context.tr("common.current_location"),
             style: CustomTextStyles(context).titleLargeBlack900W400_22,
           ),
           _locationFilterDropdown(context),
@@ -413,8 +413,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SizedBox(height: 4.h),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.h),
-            height: 175.h,
+            padding: EdgeInsets.symmetric(horizontal: 6.h),
+            height: 200.h,
             width: double.maxFinite,
             child: ListView.separated(
               shrinkWrap: true,

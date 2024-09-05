@@ -13,9 +13,9 @@ class HomeFeaturedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 110.h,
+      width: 150.h,
       child: Container(
-        width: 110.h,
+        width: 150.h,
         decoration: CustomDecoration(context)
             .outlineOnSecondaryContainer
             .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
@@ -95,53 +95,77 @@ class HomeFeaturedItem extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 5.h),
-              SizedBox(
-                height: 20.h,
-                width: double.maxFinite,
-                child: ListView.builder(
-                  itemCount:
-                      fnbModel.tags.length > 3 ? 4 : fnbModel.tags.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    if (fnbModel.tags.length > 3 &&
-                        index == (fnbModel.tags.length - 1)) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 2.h),
-                        padding: EdgeInsets.symmetric(horizontal: 4.h),
-                        decoration: CustomDecoration(context)
-                            .fillPrimary
-                            .copyWith(
-                              borderRadius: BorderRadiusStyle.roundedBorder5,
-                            ),
-                        child: Text(
-                          context.tr(
-                            "home_screen.tags_more",
-                            args: [(fnbModel.tags.length - 3).toString()],
-                          ),
-                          textAlign: TextAlign.center,
-                          style: CustomTextStyles(context).bodySmallBlack900,
-                        ),
-                      );
-                    }
-                    return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 2.h),
-                      padding: EdgeInsets.symmetric(horizontal: 4.h),
-                      decoration:
-                          CustomDecoration(context).fillPrimary.copyWith(
-                                borderRadius: BorderRadiusStyle.roundedBorder5,
-                              ),
-                      child: Text(
-                        fnbModel.tags[index],
-                        textAlign: TextAlign.center,
-                        style: CustomTextStyles(context).bodySmall12,
-                      ),
-                    );
-                  },
-                ),
+              Column(
+                children: [
+                  _firstTagRow(context),
+                  SizedBox(height: 4.h),
+                  fnbModel.tags.length > 2
+                      ? _secondTagRow(context)
+                      : Container(),
+                ],
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _firstTagRow(BuildContext context) {
+    return SizedBox(
+      height: 20.h,
+      width: double.maxFinite,
+      child: ListView.builder(
+        itemCount: fnbModel.tags.length >= 2 ? 2 : fnbModel.tags.length,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return _tagView(context, fnbModel.tags[index]);
+        },
+      ),
+    );
+  }
+
+  Widget _secondTagRow(BuildContext context) {
+    return SizedBox(
+      height: 20.h,
+      width: double.maxFinite,
+      child: ListView.builder(
+        itemCount: fnbModel.tags.length > 4 ? 2 : 1,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          if (index == 1) {
+            if (fnbModel.tags.length > 4) {
+              return _tagView(
+                context,
+                context.tr(
+                  "home_screen.tags_more",
+                  args: [(fnbModel.tags.length - 3).toString()],
+                ),
+              );
+            } else {
+              return _tagView(context, fnbModel.tags[index + 2]);
+            }
+          }
+          return _tagView(context, fnbModel.tags[index + 2]);
+        },
+      ),
+    );
+  }
+
+  Widget _tagView(BuildContext context, String label) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 2.h),
+      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      decoration: CustomDecoration(context).fillPrimary.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder5,
+          ),
+      child: Center(
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: CustomTextStyles(context).bodySmall10,
         ),
       ),
     );

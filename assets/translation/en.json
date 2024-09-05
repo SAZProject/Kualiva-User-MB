@@ -32,6 +32,7 @@
         "user_img_update_new_label": "New {}",
         "update_button": "UPDATE",
 
+        "current_location": "Current Location",
         "location_unavailable": "Location Unavailable",
         "location_unavailable_content": "Location services are disabled,\nplease enable it!",
         "location_denied_content": "Location permissions are denied\nplease approve it",
@@ -135,7 +136,6 @@
         "nav_5": "Profile"
     },
     "home_screen": {
-        "location": "Location",
         "grid_1": "F&B",
         "grid_2": "Hostelry",
         "grid_3": "Groceries",

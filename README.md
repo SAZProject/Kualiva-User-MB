@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.13+1
-- Fix Home featured list item view
+Ver 0.0.13+2
+- Fix Home user level(untested)
+- Use coming soon screen on home navigation
 ```
 
 ## Getting Started

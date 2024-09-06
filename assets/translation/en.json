@@ -19,6 +19,8 @@
         "page_not_found": "Page Not Found!",
         "data_not_found": "Data Not Found!",
         "user_not_found": "User Not Found!",
+        "coming_soon": "Coming Soon",
+        "see_more": "See More",
 
         "empty_field": "There is empty field!",
         "field_validator": "Field Can't Be Empty",
@@ -149,5 +151,13 @@
         "event": "What's goin on : {}",
         "event_title": "Event Title",
         "event_content": "Event Content"
+    },
+    "f_n_b": {
+        "nearest": "Nearest From You",
+        "promo": "Promo",
+        "promo_value": "{}% OFF",
+        "chef_choice": "Chef\u0027s Choices",
+        "best_rated": "Best Rated",
+        "tags_more": "+{} More"
     }
 }

@@ -277,33 +277,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(
                   width: double.maxFinite,
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Expanded(
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               "Level 0",
                               style: theme(context).textTheme.bodySmall,
                             ),
-                            LinearProgressIndicator(
-                              value: 0.6,
-                              color: theme(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withOpacity(0.8),
-                              backgroundColor:
-                                  theme(context).colorScheme.secondaryContainer,
-                              borderRadius: BorderRadius.circular(1.h),
+                            Text(
+                              "0/10",
+                              style: theme(context).textTheme.bodySmall,
                             ),
                           ],
                         ),
                       ),
-                      Text(
-                        "0/10",
-                        style: theme(context).textTheme.bodySmall,
+                      LinearProgressIndicator(
+                        value: 0.6,
+                        color: theme(context)
+                            .colorScheme
+                            .onPrimary
+                            .withOpacity(0.8),
+                        backgroundColor:
+                            theme(context).colorScheme.secondaryContainer,
+                        borderRadius: BorderRadius.circular(1.h),
                       ),
                     ],
                   ),

@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/screen/coming_soon.dart';
 import 'package:like_it/presentation/home/home_screen.dart';
 
 class HomeNavigation extends StatefulWidget {
@@ -45,13 +46,13 @@ class _HomeNavigationState extends State<HomeNavigation> {
   Widget _body(BuildContext context) {
     switch (_selectedPage) {
       case 1:
-        return const Placeholder();
+        return const ComingSoon();
       case 2:
-        return const Placeholder();
+        return const ComingSoon();
       case 3:
-        return const Placeholder();
+        return const ComingSoon();
       case 4:
-        return const Placeholder();
+        return const ComingSoon();
       default:
         return const HomeScreen();
     }

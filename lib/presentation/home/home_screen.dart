@@ -56,6 +56,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   LocDropdownModel? _selectedLocation;
 
+  void _gridMenuAction(int index) {
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, AppRoutes.fnbScreen);
+        break;
+      default:
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -270,45 +279,31 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Bronze",
                           style: theme(context).textTheme.bodyLarge,
                         ),
-                        Icon(Icons.arrow_forward_ios, size: 30.h)
+                        Icon(Icons.arrow_forward_ios, size: 20.h)
                       ],
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: double.maxFinite,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Level 0",
-                              style: theme(context).textTheme.bodySmall,
-                            ),
-                            Text(
-                              "0/10",
-                              style: theme(context).textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                      ),
-                      LinearProgressIndicator(
-                        value: 0.6,
-                        color: theme(context)
-                            .colorScheme
-                            .onPrimary
-                            .withOpacity(0.8),
-                        backgroundColor:
-                            theme(context).colorScheme.secondaryContainer,
-                        borderRadius: BorderRadius.circular(1.h),
-                      ),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Level 0",
+                      style: theme(context).textTheme.bodySmall,
+                    ),
+                    Text(
+                      "0/10",
+                      style: theme(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+                LinearProgressIndicator(
+                  value: 0.6,
+                  color: theme(context).colorScheme.onPrimary.withOpacity(0.8),
+                  backgroundColor:
+                      theme(context).colorScheme.secondaryContainer,
+                  borderRadius: BorderRadius.circular(1.h),
                 ),
               ],
             ),
@@ -353,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
       BuildContext context, int index, HomeGridMenuModel gridMenu) {
     return InkWell(
       borderRadius: BorderRadiusStyle.roundedBorder10,
-      onTap: index == 0 ? () {} : null,
+      onTap: index == 0 ? () => _gridMenuAction(index) : null,
       child: Container(
         width: double.maxFinite,
         padding: EdgeInsets.symmetric(horizontal: 4.h),
@@ -408,7 +403,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: theme(context).textTheme.titleLarge!.copyWith(
                         color: theme(context).colorScheme.onPrimaryContainer),
                   ),
-                  Icon(Icons.arrow_forward_ios, size: 30.h),
+                  Icon(Icons.arrow_forward_ios, size: 20.h),
                 ],
               ),
             ),
@@ -461,7 +456,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: theme(context).textTheme.titleLarge!.copyWith(
                           color: theme(context).colorScheme.onPrimaryContainer),
                     ),
-                    Icon(Icons.arrow_forward_ios, size: 30.h),
+                    Icon(Icons.arrow_forward_ios, size: 20.h),
                   ],
                 ),
               ),

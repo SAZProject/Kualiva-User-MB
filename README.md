@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.13+2
-- Fix Home user level(untested)
-- Use coming soon screen on home navigation
+Ver 0.0.14
+- Add FNB screen
+- Fix Home user level(tested)
 ```
 
 ## Getting Started

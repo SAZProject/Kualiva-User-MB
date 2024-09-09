@@ -105,6 +105,16 @@ class CustomDecoration {
           begin: const Alignment(0, 0.5),
           end: const Alignment(1, 0.5),
           colors: [
+            appTheme.yellowA700,
+            appTheme.redA700,
+          ],
+        ),
+      );
+  BoxDecoration get gradientYellowAContainerToRedA => BoxDecoration(
+        gradient: LinearGradient(
+          begin: const Alignment(0, 0.5),
+          end: const Alignment(1, 0.5),
+          colors: [
             theme(context).colorScheme.primaryContainer,
             appTheme.redA700,
           ],

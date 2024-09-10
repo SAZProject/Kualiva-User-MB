@@ -423,7 +423,10 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 return HomeFeaturedItem(
                   fnbModel: featuredListItems[index],
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
+                        arguments: featuredListItems[index]);
+                  },
                 );
               },
             ),

@@ -10,6 +10,7 @@ class ReviewModel {
   final DateTime reviewDate;
   final double rating;
   final String content;
+  final bool specialReview;
 
   ReviewModel({
     required this.id,
@@ -18,6 +19,7 @@ class ReviewModel {
     required this.reviewDate,
     required this.rating,
     required this.content,
+    required this.specialReview,
   });
 
   ReviewModel copyWith({
@@ -27,6 +29,7 @@ class ReviewModel {
     DateTime? reviewDate,
     double? rating,
     String? content,
+    bool? specialReview,
   }) {
     return ReviewModel(
       id: id ?? this.id,
@@ -35,6 +38,7 @@ class ReviewModel {
       reviewDate: reviewDate ?? this.reviewDate,
       rating: rating ?? this.rating,
       content: content ?? this.content,
+      specialReview: specialReview ?? this.specialReview,
     );
   }
 
@@ -46,6 +50,7 @@ class ReviewModel {
       'reviewDate': reviewDate.millisecondsSinceEpoch,
       'rating': rating,
       'content': content,
+      'specialReview': specialReview,
     };
   }
 
@@ -57,6 +62,7 @@ class ReviewModel {
       reviewDate: DateTime.fromMillisecondsSinceEpoch(map['reviewDate'] as int),
       rating: map['rating'] as double,
       content: map['content'] as String,
+      specialReview: map['specialReview'] as bool,
     );
   }
 
@@ -67,7 +73,7 @@ class ReviewModel {
 
   @override
   String toString() {
-    return 'ReviewModel(id: $id, username: $username, userImage: $userImage, reviewDate: $reviewDate, rating: $rating, content: $content)';
+    return 'ReviewModel(id: $id, username: $username, userImage: $userImage, reviewDate: $reviewDate, rating: $rating, content: $content, specialReview: $specialReview)';
   }
 
   @override
@@ -79,7 +85,8 @@ class ReviewModel {
         other.userImage == userImage &&
         other.reviewDate == reviewDate &&
         other.rating == rating &&
-        other.content == content;
+        other.content == content &&
+        other.specialReview == specialReview;
   }
 
   @override
@@ -89,6 +96,7 @@ class ReviewModel {
         userImage.hashCode ^
         reviewDate.hashCode ^
         rating.hashCode ^
-        content.hashCode;
+        content.hashCode ^
+        specialReview.hashCode;
   }
 }

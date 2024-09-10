@@ -3,7 +3,9 @@ import 'package:like_it/auth/device_permission_screen.dart';
 import 'package:like_it/auth/otp_page_screen.dart';
 import 'package:like_it/auth/sign_in_screen.dart';
 import 'package:like_it/auth/sign_up_screen.dart';
+import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/presentation/f_n_b/f_n_b.dart';
+import 'package:like_it/presentation/f_n_b/f_n_b_detail_screen.dart';
 import 'package:like_it/presentation/home/home_navigation.dart';
 import 'package:like_it/splash_onboarding/onboarding.dart';
 import 'package:like_it/splash_onboarding/splash.dart';
@@ -27,6 +29,8 @@ class AppRoutes {
   static const String homeNavigationScreen = "/home_nav_screen";
 
   static const String fnbScreen = "/f_n_b_screen";
+
+  static const String fnbDetailScreen = "/f_n_b_detail_screen";
 }
 
 Route<dynamic> generateRoute(RouteSettings routeSetting) {
@@ -70,6 +74,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.fnbScreen:
       return PageTransition(
           child: const FNBScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.fnbDetailScreen:
+      final fnbModel = routeSetting.arguments as FNBModel;
+      return PageTransition(
+          child: FNBDetailScreen(fnbModel: fnbModel),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     default:

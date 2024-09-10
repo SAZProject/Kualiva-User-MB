@@ -159,5 +159,13 @@
         "chef_choice": "Chef\u0027s Choices",
         "best_rated": "Best Rated",
         "tags_more": "+{} More"
+    },
+    "f_n_b_detail": {
+        "about": "About",
+        "menu": "Menu",
+        "review": "Reviews",
+        "about_open": "Operational day & hour (click to expand!)",
+        "about_open_detail": "{day}, {time_open}-{time_close}",
+        "about_price": "Starts from Rp{price} per meal"
     }
 }

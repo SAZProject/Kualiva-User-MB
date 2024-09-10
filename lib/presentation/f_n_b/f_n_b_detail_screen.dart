@@ -1,0 +1,617 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/utility/datetime_utils.dart';
+import 'package:like_it/common/widget/custom_rating_bar.dart';
+import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:like_it/data/model/review_model.dart';
+import 'package:outline_gradient_button/outline_gradient_button.dart';
+
+class FNBDetailScreen extends StatefulWidget {
+  const FNBDetailScreen({super.key, required this.fnbModel});
+
+  final FNBModel fnbModel;
+
+  @override
+  State<FNBDetailScreen> createState() => _FNBDetailScreenState();
+}
+
+class _FNBDetailScreenState extends State<FNBDetailScreen> {
+  FNBModel get fnbData => super.widget.fnbModel;
+
+  List<Widget> imageSliders = [];
+
+  @override
+  void initState() {
+    super.initState();
+    imageSliders = fnbData.placePicture.map(
+      (image) {
+        return Container(
+          margin: EdgeInsets.all(5.h),
+          child: CustomImageView(
+            imagePath: image,
+            boxFit: BoxFit.cover,
+            height: 360.h,
+            width: double.maxFinite,
+          ),
+        );
+      },
+    ).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        body: Container(
+          width: double.maxFinite,
+          height: Sizeutils.height,
+          decoration: BoxDecoration(
+            color: theme(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withOpacity(0.6),
+            image: DecorationImage(
+              image: AssetImage(ImageConstant.background2),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: _body(context),
+        ),
+      ),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            _fnbAppBar(context),
+          ];
+        },
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              _fnbPlaceImages(context),
+              SizedBox(height: 5.h),
+              _fnbPlaceName(context),
+              SizedBox(height: 5.h),
+              _fnbPlaceAbout(context),
+              SizedBox(height: 5.h),
+              _fnbPlaceMenu(context),
+              SizedBox(height: 5.h),
+              _fnbPlaceReviews(context),
+              SizedBox(height: 5.h),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _fnbAppBar(BuildContext context) {
+    return SliverAppBar(
+      backgroundColor: Colors.transparent,
+      toolbarHeight: 40.h,
+      leadingWidth: 50.h,
+      automaticallyImplyLeading: true,
+      pinned: false,
+      snap: false,
+      floating: false,
+      leading: Padding(
+        padding: EdgeInsets.all(10.h),
+        child: IconButton(
+          iconSize: 40.h,
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      actions: [
+        PopupMenuButton(
+          iconSize: 40.h,
+          itemBuilder: (ctx) => [
+            _buildPopupMenuItem(0, Icons.favorite),
+            _buildPopupMenuItem(1, Icons.flag),
+            _buildPopupMenuItem(2, Icons.share),
+          ],
+        )
+      ],
+    );
+  }
+
+  PopupMenuItem _buildPopupMenuItem(int index, IconData icon) {
+    return PopupMenuItem(
+      onTap: () {},
+      value: index,
+      child: Padding(
+        padding: EdgeInsets.all(10.h),
+        child: Icon(icon, size: 40.h),
+      ),
+    );
+  }
+
+  Widget _fnbPlaceImages(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      height: 360.h,
+      child: CarouselSlider(
+        items: imageSliders,
+        options: CarouselOptions(
+          autoPlay: true,
+          enlargeCenterPage: true,
+        ),
+      ),
+    );
+  }
+
+  Widget _fnbPlaceName(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              textAlign: TextAlign.center,
+              fnbData.placeName,
+              style: theme(context).textTheme.headlineSmall,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: InkWell(
+              onTap: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    child: Icon(
+                      Icons.star,
+                      size: 20.h,
+                      color: appTheme.amber700,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      fnbData.placeName,
+                      style: theme(context).textTheme.headlineSmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _fnbPlaceAbout(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 5.h),
+            child: Text(
+              context.tr("f_n_b_detail.about"),
+              style: theme(context).textTheme.titleMedium,
+            ),
+          ),
+          SizedBox(height: 6.h),
+          Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.all(5.h),
+            decoration:
+                CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder5,
+                    ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildAboutContent(
+                  context,
+                  icon: Icons.tag,
+                  label: "",
+                  trailingWidget: _aboutTag(context),
+                ),
+                _buildAboutContent(
+                  context,
+                  icon: Icons.timer,
+                  label: "",
+                  trailingWidget: _aboutOperationalTime(context),
+                ),
+                _buildAboutContent(
+                  context,
+                  icon: Icons.phone,
+                  label: fnbData.phoneNumber,
+                ),
+                _buildAboutContent(
+                  context,
+                  icon: Icons.place,
+                  label: fnbData.placeAddress,
+                  maxLines: 3,
+                ),
+                _buildAboutContent(
+                  context,
+                  icon: Icons.star,
+                  label: context.tr(
+                    "f_n_b_detail.about_price",
+                    namedArgs: {"price": "45.000"},
+                  ),
+                  leadingWidget: const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(Icons.attach_money, size: 20.0),
+                      Icon(Icons.attach_money, size: 20.0),
+                      Icon(Icons.attach_money, size: 20.0),
+                      Icon(Icons.attach_money, size: 20.0),
+                      Icon(Icons.attach_money, size: 20.0),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAboutContent(
+    BuildContext context, {
+    Widget? leadingWidget,
+    Widget? trailingWidget,
+    required IconData icon,
+    required String label,
+    int maxLines = 1,
+  }) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Row(
+        children: [
+          leadingWidget ?? Icon(icon, size: 20.h),
+          Padding(
+            padding: EdgeInsets.only(left: 10.h),
+            child: trailingWidget ??
+                Text(
+                  label,
+                  style: CustomTextStyles(context).bodySmall12,
+                  maxLines: maxLines,
+                  overflow: TextOverflow.ellipsis,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _aboutTag(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Wrap(
+        runSpacing: 5.h,
+        spacing: 5.h,
+        children: List<Widget>.generate(
+          fnbData.tags.length,
+          (index) => _tagView(context, label: fnbData.tags[index]),
+        ),
+      ),
+    );
+  }
+
+  Widget _tagView(BuildContext context, {required String label}) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 2.h),
+      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      decoration: CustomDecoration(context).fillPrimary.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder5,
+          ),
+      child: Center(
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: CustomTextStyles(context).bodyMedium_13,
+        ),
+      ),
+    );
+  }
+
+  Widget _aboutOperationalTime(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: ExpansionTile(
+        title: Text(
+          context.tr("f_n_b_detail.about_open"),
+          style: CustomTextStyles(context).bodySmall12,
+        ),
+        children: fnbData.operationalDay.map(
+          (index) {
+            return _operationalDayHourView(context, index);
+          },
+        ).toList(),
+      ),
+    );
+  }
+
+  Widget _operationalDayHourView(BuildContext context, int index) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Text(
+        context.tr(
+          "f_n_b_detail.about_open_detail",
+          namedArgs: {
+            "day": DatetimeUtils.getDays(index),
+            "time_open":
+                DatetimeUtils.getHour(fnbData.operationalTimeOpen[index]),
+            "time_close":
+                DatetimeUtils.getHour(fnbData.operationalTimeClose[index]),
+          },
+        ),
+        style: CustomTextStyles(context).bodySmall12,
+      ),
+    );
+  }
+
+  Widget _fnbPlaceMenu(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 5.h),
+      decoration:
+          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder10,
+              ),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
+            width: double.maxFinite,
+            child: InkWell(
+              onTap: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    context.tr("f_n_b_detail.menu"),
+                    style: theme(context).textTheme.titleLarge!.copyWith(
+                        color: theme(context).colorScheme.onPrimaryContainer),
+                  ),
+                  Icon(Icons.arrow_forward_ios, size: 20.h),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            height: 150.h,
+            margin: EdgeInsets.symmetric(horizontal: 5.h),
+            width: double.maxFinite,
+            child: ListView.builder(
+              itemCount: fnbData.priceListMenuPicture.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 8.h),
+                  child: CustomImageView(
+                    imagePath: fnbData.priceListMenuPicture[index],
+                    height: 130.h,
+                    width: 200.h,
+                    radius: BorderRadius.circular(10.h),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _fnbPlaceReviews(BuildContext context) {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 5.h),
+      decoration:
+          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder10,
+              ),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
+            width: double.maxFinite,
+            child: InkWell(
+              onTap: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    context.tr("f_n_b_detail.review"),
+                    style: theme(context).textTheme.titleLarge!.copyWith(
+                        color: theme(context).colorScheme.onPrimaryContainer),
+                  ),
+                  Icon(Icons.arrow_forward_ios, size: 20.h),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            height: 150.h,
+            margin: EdgeInsets.symmetric(horizontal: 5.h),
+            width: double.maxFinite,
+            child: ListView.builder(
+              itemCount: fnbData.review.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                ReviewModel reviewData = fnbData.review[index];
+                if (reviewData.specialReview) {
+                  return _specialReviewItem(context, reviewData);
+                }
+                return _reviewItem(context, reviewData);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _specialReviewItem(BuildContext context, ReviewModel reviewData) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: OutlineGradientButton(
+        padding: EdgeInsets.all(3.h),
+        strokeWidth: 3.h,
+        gradient: LinearGradient(
+          begin: const Alignment(0.5, 0),
+          end: const Alignment(0.5, 1),
+          colors: [appTheme.yellowA700, theme(context).colorScheme.primary],
+        ),
+        corners: const Corners(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+        ),
+        child: _reviewItem(context, reviewData),
+      ),
+    );
+  }
+
+  Widget _reviewItem(BuildContext context, ReviewModel reviewData) {
+    return Container(
+      width: double.maxFinite,
+      padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
+      decoration: CustomDecoration(context).orangeColorBackgroundBlur.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder10,
+          ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: double.maxFinite,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                    minRadius: 25.h,
+                    maxRadius: 25.h,
+                    child: Center(
+                      child: Icon(Icons.person, size: 50.h),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            reviewData.username,
+                            style: theme(context).textTheme.titleMedium,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(
+                            width: double.maxFinite,
+                            child: Row(
+                              children: [
+                                Text(
+                                  reviewData.rating.toString(),
+                                  style: theme(context).textTheme.bodySmall,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const CustomRatingBar(
+                                  initialRating: 5.0,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.h, top: 4.h),
+                  child: Text(
+                    "???",
+                    style: theme(context).textTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 4.h),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.favorite,
+                    size: 20.h,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 4.h),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.menu,
+                    size: 20.h,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 24.h),
+          SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  DatetimeUtils.dmy(reviewData.reviewDate),
+                  style: CustomTextStyles(context).bodySmallGray800,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  reviewData.content,
+                  style: CustomTextStyles(context).bodySmallGray800,
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 4.h),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

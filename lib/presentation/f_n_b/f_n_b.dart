@@ -333,7 +333,10 @@ class _FNBScreenState extends State<FNBScreen> {
               itemBuilder: (context, index) {
                 return FNBNearestItem(
                   fnbModel: featuredListItems[index],
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
+                        arguments: featuredListItems[index]);
+                  },
                 );
               },
             ),
@@ -383,7 +386,10 @@ class _FNBScreenState extends State<FNBScreen> {
               itemBuilder: (context, index) {
                 return FNBPromoItem(
                   fnbModel: featuredListItems[index],
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
+                        arguments: featuredListItems[index]);
+                  },
                 );
               },
             ),

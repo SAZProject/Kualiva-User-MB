@@ -64,6 +64,7 @@ class FNBDataset {
               rating: 5.0,
               content:
                   "Saya memesan Mango Juice dengan topping bubble di Chatime. Kebetulan siang itu cukup panas dan saya butuh pelepas dahaga yang menyegarkan. Dan benar saja, satu seruputannya saja sudah cukup membuat mood kembali baik. Apalagi ditambah bubble yang cukup fluffy.",
+              specialReview: true,
             ),
           ],
         ),
@@ -116,6 +117,7 @@ class FNBDataset {
               reviewDate: DateTime(2020, 3, 26, 0, 0, 0),
               rating: 5.0,
               content: "My fav menu is chocolate hazelnut pearl milk tea",
+              specialReview: false,
             ),
           ],
         ),
@@ -178,6 +180,7 @@ class FNBDataset {
               rating: 4.0,
               content:
                   "Good food but place is a bit small to host that many people. Please dont clean the table when there is still a guest that is eating.",
+              specialReview: true,
             ),
           ],
         ),
@@ -234,6 +237,7 @@ class FNBDataset {
               rating: 5.0,
               content:
                   "Good food, cozy place so nice waiters and worth it for the price",
+              specialReview: false,
             ),
           ],
         ),
@@ -290,6 +294,7 @@ class FNBDataset {
               rating: 5.0,
               content:
                   "I went here for new year's eve buffet. I tasted a wide variety of food: western food, chinese, japanese, etc. From smoked salmon to dimsum, sushi, and crepes, everything tasted generally great.",
+              specialReview: false,
             ),
           ],
         ),
@@ -351,6 +356,7 @@ class FNBDataset {
               rating: 5.0,
               content:
                   "Nice place, good ambience, delicious food, worth for money, polite staff.",
+              specialReview: false,
             ),
           ],
         ),
@@ -406,6 +412,7 @@ class FNBDataset {
               rating: 5.0,
               content:
                   "Super cool bar and great good.  Tallest building in Jakarta sure to get a good view on a clear night.  Its very windy when I was here and  the waiter was quick to find a table inside.There is a lady DJ spinning funky song and a lady sax player accompanied the music.",
+              specialReview: false,
             ),
           ],
         ),
@@ -464,6 +471,7 @@ class FNBDataset {
               rating: 5.0,
               content:
                   "My favorite McD, the service is fast, clean, and the portions are large hihihi",
+              specialReview: false,
             ),
           ],
         ),
@@ -523,6 +531,7 @@ class FNBDataset {
               rating: 4.0,
               content:
                   "I come here not for the pizza. I found the pizza tastes too salty. But they serve some others menu too. The good thing from this place is that they open early and served breakfast and the breakfast packet is so worth it, taste and price, all is fair.",
+              specialReview: false,
             ),
           ],
         ),
@@ -578,6 +587,7 @@ class FNBDataset {
               reviewDate: DateTime(2019, 1, 25, 0, 0, 0),
               rating: 5.0,
               content: "Cheap n tasty",
+              specialReview: false,
             ),
           ],
         ),

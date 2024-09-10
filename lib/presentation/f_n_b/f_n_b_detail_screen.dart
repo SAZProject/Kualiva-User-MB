@@ -3,10 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
-import 'package:like_it/common/widget/custom_rating_bar.dart';
+import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
+import 'package:like_it/presentation/review/widget/review_view.dart';
+import 'package:like_it/presentation/review/widget/special_review_view.dart';
 
 class FNBDetailScreen extends StatefulWidget {
   const FNBDetailScreen({super.key, required this.fnbModel});
@@ -158,8 +159,8 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              textAlign: TextAlign.center,
               fnbData.placeName,
+              textAlign: TextAlign.center,
               style: theme(context).textTheme.headlineSmall,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -379,27 +380,12 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
               ),
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
-            width: double.maxFinite,
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
-                    arguments: fnbData.priceListMenuPicture);
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.tr("f_n_b_detail.menu"),
-                    style: theme(context).textTheme.titleLarge!.copyWith(
-                        color: theme(context).colorScheme.onPrimaryContainer),
-                  ),
-                  Icon(Icons.arrow_forward_ios, size: 20.h),
-                ],
-              ),
-            ),
+          CustomSectionHeader(
+            label: context.tr("f_n_b_detail.menu"),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
+                  arguments: fnbData.priceListMenuPicture);
+            },
           ),
           Container(
             height: 150.h,
@@ -437,27 +423,12 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
               ),
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
-            width: double.maxFinite,
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
-                    arguments: fnbData.priceListMenuPicture);
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.tr("f_n_b_detail.review"),
-                    style: theme(context).textTheme.titleLarge!.copyWith(
-                        color: theme(context).colorScheme.onPrimaryContainer),
-                  ),
-                  Icon(Icons.arrow_forward_ios, size: 20.h),
-                ],
-              ),
-            ),
+          CustomSectionHeader(
+            label: context.tr("f_n_b_detail.review"),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
+                  arguments: fnbData.priceListMenuPicture);
+            },
           ),
           Container(
             height: 150.h,
@@ -470,150 +441,10 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
               itemBuilder: (context, index) {
                 ReviewModel reviewData = fnbData.review[index];
                 if (reviewData.specialReview) {
-                  return _specialReviewItem(context, reviewData);
+                  return SpecialReviewView(reviewData: reviewData);
                 }
-                return _reviewItem(context, reviewData);
+                return ReviewView(reviewData: reviewData);
               },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _specialReviewItem(BuildContext context, ReviewModel reviewData) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: OutlineGradientButton(
-        padding: EdgeInsets.all(3.h),
-        strokeWidth: 3.h,
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(0.5, 1),
-          colors: [appTheme.yellowA700, theme(context).colorScheme.primary],
-        ),
-        corners: const Corners(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-          bottomLeft: Radius.circular(10),
-          bottomRight: Radius.circular(10),
-        ),
-        child: _reviewItem(context, reviewData),
-      ),
-    );
-  }
-
-  Widget _reviewItem(BuildContext context, ReviewModel reviewData) {
-    return Container(
-      width: double.maxFinite,
-      padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
-      decoration: CustomDecoration(context).orangeColorBackgroundBlur.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder10,
-          ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.maxFinite,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: CircleAvatar(
-                    minRadius: 25.h,
-                    maxRadius: 25.h,
-                    child: Center(
-                      child: Icon(Icons.person, size: 50.h),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 10.h),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            reviewData.username,
-                            style: theme(context).textTheme.titleMedium,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(
-                            width: double.maxFinite,
-                            child: Row(
-                              children: [
-                                Text(
-                                  reviewData.rating.toString(),
-                                  style: theme(context).textTheme.bodySmall,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                const CustomRatingBar(
-                                  initialRating: 5.0,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 4.h, top: 4.h),
-                  child: Text(
-                    "???",
-                    style: theme(context).textTheme.bodySmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 4.h),
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.favorite,
-                    size: 20.h,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 4.h),
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.menu,
-                    size: 20.h,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 24.h),
-          SizedBox(
-            width: double.maxFinite,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  DatetimeUtils.dmy(reviewData.reviewDate),
-                  style: CustomTextStyles(context).bodySmallGray800,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  reviewData.content,
-                  style: CustomTextStyles(context).bodySmallGray800,
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 4.h),
-              ],
             ),
           ),
         ],

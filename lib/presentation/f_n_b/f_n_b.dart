@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/widget/custom_location_dropdown.dart';
+import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/loc_dropdown_model.dart';
@@ -299,24 +300,9 @@ class _FNBScreenState extends State<FNBScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 14.h),
-            width: double.maxFinite,
-            child: InkWell(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.tr("f_n_b.nearest"),
-                    style: theme(context).textTheme.titleLarge!.copyWith(
-                        color: theme(context).colorScheme.onPrimaryContainer),
-                  ),
-                  Icon(Icons.arrow_forward_ios, size: 20.h),
-                ],
-              ),
-            ),
+          CustomSectionHeader(
+            label: context.tr("f_n_b.nearest"),
+            onPressed: () {},
           ),
           SizedBox(height: 4.h),
           Container(
@@ -352,24 +338,9 @@ class _FNBScreenState extends State<FNBScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 14.h),
-            width: double.maxFinite,
-            child: InkWell(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.tr("f_n_b.promo"),
-                    style: theme(context).textTheme.titleLarge!.copyWith(
-                        color: theme(context).colorScheme.onPrimaryContainer),
-                  ),
-                  Icon(Icons.arrow_forward_ios, size: 20.h),
-                ],
-              ),
-            ),
+          CustomSectionHeader(
+            label: context.tr("f_n_b.promo"),
+            onPressed: () {},
           ),
           SizedBox(height: 4.h),
           Container(
@@ -409,24 +380,9 @@ class _FNBScreenState extends State<FNBScreen> {
               ),
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
-            width: double.maxFinite,
-            child: InkWell(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.tr("f_n_b.chef_choice"),
-                    style: theme(context).textTheme.titleLarge!.copyWith(
-                        color: theme(context).colorScheme.onPrimaryContainer),
-                  ),
-                  Icon(Icons.arrow_forward_ios, size: 20.h),
-                ],
-              ),
-            ),
+          CustomSectionHeader(
+            label: context.tr("f_n_b.chef_choice"),
+            onPressed: () {},
           ),
           Container(
             height: 150.h,
@@ -464,24 +420,9 @@ class _FNBScreenState extends State<FNBScreen> {
               ),
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
-            width: double.maxFinite,
-            child: InkWell(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    context.tr("f_n_b.best_rated"),
-                    style: theme(context).textTheme.titleLarge!.copyWith(
-                        color: theme(context).colorScheme.onPrimaryContainer),
-                  ),
-                  Icon(Icons.arrow_forward_ios, size: 20.h),
-                ],
-              ),
-            ),
+          CustomSectionHeader(
+            label: context.tr("f_n_b.best_rated"),
+            onPressed: () {},
           ),
           Container(
             height: 150.h,

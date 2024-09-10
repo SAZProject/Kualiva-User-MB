@@ -166,6 +166,8 @@
         "review": "Reviews",
         "about_open": "Operational day & hour (click to expand!)",
         "about_open_detail": "{day}, {time_open}-{time_close}",
-        "about_price": "Starts from Rp{price} per meal"
+        "about_price": "Starts from Rp{price} per meal",
+        "menu_title": "Menu Title",
+        "menu_description": "Menu Description"
     }
 }

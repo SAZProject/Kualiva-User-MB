@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.15
-- Add FNB Detail screen (untested)
-- Add custom rating bar and DatetimeUtils (untested)
+Ver 0.0.15+01
+- Add FNB Detail Menu screen (untested)
 ```
 
 ## Getting Started

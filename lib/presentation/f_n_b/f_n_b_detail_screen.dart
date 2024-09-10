@@ -384,7 +384,10 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
             width: double.maxFinite,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
+                    arguments: fnbData.priceListMenuPicture);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -439,7 +442,10 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
             width: double.maxFinite,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
+                    arguments: fnbData.priceListMenuPicture);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

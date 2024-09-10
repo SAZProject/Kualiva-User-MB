@@ -169,7 +169,10 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
           Align(
             alignment: Alignment.centerRight,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.reviewScreen,
+                    arguments: fnbData.review);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -426,8 +429,8 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
           CustomSectionHeader(
             label: context.tr("f_n_b_detail.review"),
             onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
-                  arguments: fnbData.priceListMenuPicture);
+              Navigator.pushNamed(context, AppRoutes.reviewScreen,
+                  arguments: fnbData.review);
             },
           ),
           Container(

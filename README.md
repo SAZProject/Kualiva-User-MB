@@ -5,10 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.15+03
-- Modularized section header (untested)
-- Commit special & normal review for previous commit
-- Fix text param order & section header (untested)
+Ver 0.0.16
+- Add Review Screen
 ```
 
 ## Getting Started

@@ -50,6 +50,13 @@ class FNBDetailMenuScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
+      title: Padding(
+        padding: EdgeInsets.zero,
+        child: Text(
+          context.tr("f_n_b_detail.menu"),
+          style: theme(context).textTheme.headlineSmall,
+        ),
+      ),
     );
   }
 

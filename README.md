@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.15+01
-- Add FNB Detail Menu screen (untested)
+Ver 0.0.15+02
+- Add FNB Detail Menu screen appbar title (untested)
 ```
 
 ## Getting Started

@@ -2,22 +2,24 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
+import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
 import 'package:like_it/presentation/review/widget/review_filters_item.dart';
 import 'package:like_it/presentation/review/widget/review_view.dart';
 import 'package:like_it/presentation/review/widget/special_review_view.dart';
 
 class ReviewScreen extends StatefulWidget {
-  const ReviewScreen({super.key, required this.listReviewData});
+  const ReviewScreen({super.key, required this.fnbModel});
 
-  final List<ReviewModel> listReviewData;
+  final FNBModel fnbModel;
 
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
-  List<ReviewModel> get listReviewData => super.widget.listReviewData;
+  FNBModel get fnbData => super.widget.fnbModel;
+  List<ReviewModel> get listReviewData => super.widget.fnbModel.review;
 
   List<String> filterByCategory = [
     "review.filter_1",
@@ -183,17 +185,23 @@ class _ReviewScreenState extends State<ReviewScreen> {
             label: context.tr("review.my_review"),
             useIcon: false,
           ),
-          Container(
-            height: 150.h,
-            margin: EdgeInsets.symmetric(horizontal: 5.h),
-            width: double.maxFinite,
-            child: Center(
-              child: Text(
-                context.tr("review.no_review"),
-                textAlign: TextAlign.center,
-                style: theme(context).textTheme.headlineSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.reviewFormScreen,
+                  arguments: fnbData);
+            },
+            child: Container(
+              height: 150.h,
+              margin: EdgeInsets.symmetric(horizontal: 5.h),
+              width: double.maxFinite,
+              child: Center(
+                child: Text(
+                  context.tr("review.no_review"),
+                  textAlign: TextAlign.center,
+                  style: theme(context).textTheme.headlineSmall,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
           ),

@@ -178,7 +178,14 @@
         "filter_4": "Video",
         "my_review": "My Reviews",
         "other_review": "Other\u0027s Reviews",
-        "no_review": "No Review"
+        "no_review": "No Review",
+        "review_msg": "Review :",
+        "attach_media": "Attach photo or video (optional) :",
+        "attach_media_content": "Upload (pdf, jpg, png)",
+        "max_media": "Max 5 Picture",
+        "hide_username": "Hide my name",
+
+        "submit_btn": "Submit"
     },
     "report": {
         "title": "Report",

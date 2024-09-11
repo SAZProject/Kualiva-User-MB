@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.17
-- Add Report Place & Review Screen (untested)
+Ver 0.0.18
+- Add Review Form Screen (untested)
+- Add new custom widget & minor fix on modularized component
 ```
 
 ## Getting Started

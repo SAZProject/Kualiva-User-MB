@@ -71,8 +71,9 @@ class CustomButtonStyles {
         ),
       );
 
-  static ButtonStyle get outlineTL10 => OutlinedButton.styleFrom(
-        backgroundColor: appTheme.black900.withOpacity(0.6),
+  ButtonStyle get outlineTL10 => OutlinedButton.styleFrom(
+        backgroundColor:
+            theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.h),
         ),
@@ -80,10 +81,11 @@ class CustomButtonStyles {
         elevation: 4,
       );
 
-  static ButtonStyle get outlineTL101 => OutlinedButton.styleFrom(
-        backgroundColor: appTheme.black900.withOpacity(0.6),
+  ButtonStyle get outlineTL25 => OutlinedButton.styleFrom(
+        backgroundColor:
+            theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.h),
+          borderRadius: BorderRadius.circular(25.h),
         ),
       );
 

@@ -18,7 +18,7 @@ extension RadioStyleHelper on CustomRadioButton {
 class CustomRadioButton extends StatelessWidget {
   const CustomRadioButton({
     super.key,
-    this.decoration,
+    this.boxDecoration,
     this.alignment,
     this.isRightCheck,
     this.iconSize,
@@ -34,7 +34,7 @@ class CustomRadioButton extends StatelessWidget {
     this.backgroundColor,
   });
 
-  final BoxDecoration? decoration;
+  final BoxDecoration? boxDecoration;
   final Alignment? alignment;
   final bool? isRightCheck;
   final double? iconSize;
@@ -64,7 +64,7 @@ class CustomRadioButton extends StatelessWidget {
   Widget buildRadioButtonWidget(BuildContext context) => InkWell(
         onTap: () => onChange(value!),
         child: Container(
-          decoration: decoration,
+          decoration: boxDecoration,
           width: width,
           padding: padding,
           child: (isRightCheck ?? false)

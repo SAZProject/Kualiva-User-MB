@@ -184,7 +184,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, AppRoutes.reviewScreen,
-                    arguments: fnbData.review);
+                    arguments: fnbData);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -443,7 +443,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             label: context.tr("f_n_b_detail.review"),
             onPressed: () {
               Navigator.pushNamed(context, AppRoutes.reviewScreen,
-                  arguments: fnbData.review);
+                  arguments: fnbData);
             },
           ),
           Container(

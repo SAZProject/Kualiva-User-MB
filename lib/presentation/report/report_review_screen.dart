@@ -123,7 +123,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
             value: context.tr("report.reason_review_1"),
             groupValue: selectedReason,
             padding: EdgeInsets.all(10.h),
-            decoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
             onChange: (value) {
               selectedReason = value;
             },
@@ -134,7 +134,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
             value: context.tr("report.reason_review_2"),
             groupValue: selectedReason,
             padding: EdgeInsets.all(10.h),
-            decoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
             onChange: (value) {
               selectedReason = value;
             },
@@ -145,7 +145,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
             value: context.tr("report.reason_review_3"),
             groupValue: selectedReason,
             padding: EdgeInsets.all(10.h),
-            decoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
             onChange: (value) {
               selectedReason = value;
             },
@@ -156,7 +156,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
             value: context.tr("report.reason_review_4"),
             groupValue: selectedReason,
             padding: EdgeInsets.all(10.h),
-            decoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
             onChange: (value) {
               selectedReason = value;
             },
@@ -167,7 +167,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
             value: context.tr("report.reason_review_5"),
             groupValue: selectedReason,
             padding: EdgeInsets.all(10.h),
-            decoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
             onChange: (value) {
               selectedReason = value;
             },
@@ -178,7 +178,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
             value: context.tr("report.reason_review_6"),
             groupValue: selectedReason,
             padding: EdgeInsets.all(10.h),
-            decoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
             onChange: (value) {
               selectedReason = value;
             },

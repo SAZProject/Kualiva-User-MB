@@ -9,6 +9,8 @@ import 'package:like_it/presentation/f_n_b/f_n_b.dart';
 import 'package:like_it/presentation/f_n_b/f_n_b_detail_menu_screen.dart';
 import 'package:like_it/presentation/f_n_b/f_n_b_detail_screen.dart';
 import 'package:like_it/presentation/home/home_navigation.dart';
+import 'package:like_it/presentation/report/report_place_screen.dart';
+import 'package:like_it/presentation/report/report_review_screen.dart';
 import 'package:like_it/presentation/review/review_screen.dart';
 import 'package:like_it/splash_onboarding/onboarding.dart';
 import 'package:like_it/splash_onboarding/splash.dart';
@@ -38,6 +40,10 @@ class AppRoutes {
   static const String fnbDetailMenuScreen = "/f_n_b_detail_menu_screen";
 
   static const String reviewScreen = "/review_screen";
+
+  static const String reportPlaceScreen = "/report_place_screen";
+
+  static const String reportReviewScreen = "/report_review_screen";
 }
 
 Route<dynamic> generateRoute(RouteSettings routeSetting) {
@@ -99,6 +105,18 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
       final listReviewData = routeSetting.arguments as List<ReviewModel>;
       return PageTransition(
           child: ReviewScreen(listReviewData: listReviewData),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.reportPlaceScreen:
+      final fnbModel = routeSetting.arguments as FNBModel;
+      return PageTransition(
+          child: ReportPlaceScreen(fnbModel: fnbModel),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.reportReviewScreen:
+      final reviewData = routeSetting.arguments as ReviewModel;
+      return PageTransition(
+          child: ReportReviewScreen(reviewData: reviewData),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     default:

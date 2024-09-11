@@ -4,11 +4,22 @@ import 'package:like_it/common/style/theme_helper.dart';
 import 'package:like_it/common/utility/sized_utils.dart';
 
 extension TextFormFieldStyleHelper on CustomTextFormField {
-  static OutlineInputBorder get outlineBlackTL14 => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14.h),
+  static OutlineInputBorder get outlineBlackTL24 => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(24.h),
         borderSide: BorderSide(
           color: appTheme.black900.withOpacity(0.6),
           width: 1,
+        ),
+      );
+
+  static OutlineInputBorder get fillOnSecondaryContainer => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.h),
+        borderSide: BorderSide.none,
+      );
+
+  static OutlineInputBorder get underlineBlack => OutlineInputBorder(
+        borderSide: BorderSide(
+          color: appTheme.black900,
         ),
       );
 }

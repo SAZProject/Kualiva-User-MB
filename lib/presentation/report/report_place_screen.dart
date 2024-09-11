@@ -1,0 +1,188 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:like_it/data/model/f_n_b_model.dart';
+
+class ReportPlaceScreen extends StatefulWidget {
+  const ReportPlaceScreen({super.key, required this.fnbModel});
+
+  final FNBModel fnbModel;
+
+  @override
+  State<ReportPlaceScreen> createState() => _ReportPlaceScreenState();
+}
+
+class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
+  FNBModel get fnbData => super.widget.fnbModel;
+
+  TextEditingController reasonCtl = TextEditingController();
+
+  @override
+  void dispose() {
+    reasonCtl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          width: double.maxFinite,
+          height: Sizeutils.height,
+          decoration: BoxDecoration(
+            color: theme(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withOpacity(0.6),
+            image: DecorationImage(
+              image: AssetImage(ImageConstant.background2),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: _body(context),
+        ),
+      ),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            _reportPlaceAppBar(context),
+          ];
+        },
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 10.h),
+              _buildReason(context),
+              SizedBox(height: 10.h),
+              _buildAttachMedia(context),
+              SizedBox(height: 10.h),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _reportPlaceAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      toolbarHeight: 55.h,
+      leadingWidth: 50.h,
+      titleSpacing: 0.0,
+      automaticallyImplyLeading: true,
+      centerTitle: true,
+      leading: Padding(
+        padding: EdgeInsets.all(10.h),
+        child: IconButton(
+          iconSize: 40.h,
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      title: Padding(
+        padding: EdgeInsets.zero,
+        child: Text(
+          context.tr("report.title"),
+          style: theme(context).textTheme.headlineSmall,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildReason(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.tr("report.reason"),
+            textAlign: TextAlign.center,
+            style: theme(context).textTheme.titleMedium,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(height: 10.h),
+          CustomTextFormField(
+            controller: reasonCtl,
+            textInputAction: TextInputAction.done,
+            maxLines: 11,
+            contentPadding: EdgeInsets.all(12.h),
+            boxDecoration:
+                CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+                      borderRadius: BorderRadius.circular(10.h),
+                    ),
+            inputBorder: TextFormFieldStyleHelper.fillOnSecondaryContainer,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAttachMedia(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.tr("report.attach_media"),
+            textAlign: TextAlign.center,
+            style: theme(context).textTheme.titleMedium,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(height: 10.h),
+          Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.symmetric(vertical: 22.h),
+            decoration:
+                CustomDecoration(context).fillOnSecondaryContainer.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder10,
+                    ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.upload_file,
+                  size: 16.h,
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  context.tr("report.attach_media_content"),
+                  textAlign: TextAlign.center,
+                  style: theme(context).textTheme.bodyMedium,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  context.tr("report.max_media"),
+                  textAlign: TextAlign.center,
+                  style: theme(context).textTheme.bodySmall,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10.h),
+        ],
+      ),
+    );
+  }
+}

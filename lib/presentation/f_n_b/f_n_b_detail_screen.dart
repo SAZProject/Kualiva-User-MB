@@ -23,6 +23,18 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
 
   List<Widget> imageSliders = [];
 
+  void _popUpMenuAction(BuildContext context, int index) {
+    switch (index) {
+      case 1:
+        Navigator.pushNamed(context, AppRoutes.reportPlaceScreen,
+            arguments: fnbData);
+        break;
+      case 2:
+        break;
+      default:
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -116,18 +128,19 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
         PopupMenuButton(
           iconSize: 40.h,
           itemBuilder: (ctx) => [
-            _buildPopupMenuItem(0, Icons.favorite),
-            _buildPopupMenuItem(1, Icons.flag),
-            _buildPopupMenuItem(2, Icons.share),
+            _buildPopupMenuItem(context, 0, Icons.favorite),
+            _buildPopupMenuItem(context, 1, Icons.flag),
+            _buildPopupMenuItem(context, 2, Icons.share),
           ],
-        )
+        ),
       ],
     );
   }
 
-  PopupMenuItem _buildPopupMenuItem(int index, IconData icon) {
+  PopupMenuItem _buildPopupMenuItem(
+      BuildContext context, int index, IconData icon) {
     return PopupMenuItem(
-      onTap: () {},
+      onTap: () => _popUpMenuAction(context, index),
       value: index,
       child: Padding(
         padding: EdgeInsets.all(10.h),
@@ -187,8 +200,8 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      textAlign: TextAlign.center,
                       fnbData.placeName,
+                      textAlign: TextAlign.center,
                       style: theme(context).textTheme.headlineSmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

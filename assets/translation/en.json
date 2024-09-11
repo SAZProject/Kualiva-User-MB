@@ -169,5 +169,29 @@
         "about_price": "Starts from Rp{price} per meal",
         "menu_title": "Menu Title",
         "menu_description": "Menu Description"
+    },
+    "review": {
+        "title": "Review",
+        "filter_1": "Recent",
+        "filter_2": "Most Likes",
+        "filter_3": "Photo",
+        "filter_4": "Video",
+        "my_review": "My Reviews",
+        "other_review": "Other\u0027s Reviews",
+        "no_review": "No Review"
+    },
+    "report": {
+        "title": "Report",
+        "reason": "Reason :",
+        "attach_media": "Attach photo or video :",
+        "attach_media_content": "Upload (pdf, jpg, png)",
+        "max_media": "Max 5 Picture",
+        "reason_review_1": "Off Topic",
+        "reason_review_2": "Spam",
+        "reason_review_3": "Profanity",
+        "reason_review_4": "Bullying or Harassment",
+        "reason_review_5": "Discrimination or Hate Speech",
+        "reason_review_6": "Personal Information",
+        "detail": "Details :"
     }
 }

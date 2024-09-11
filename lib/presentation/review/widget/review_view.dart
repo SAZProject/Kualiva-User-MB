@@ -9,6 +9,14 @@ class ReviewView extends StatelessWidget {
 
   final ReviewModel reviewData;
 
+  void _popUpMenuAction(BuildContext context, int index) {
+    switch (index) {
+      default:
+        Navigator.pushNamed(context, AppRoutes.reportReviewScreen,
+            arguments: reviewData);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -92,9 +100,11 @@ class ReviewView extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 4.h),
                   alignment: Alignment.center,
-                  child: Icon(
-                    Icons.menu,
-                    size: 20.h,
+                  child: PopupMenuButton(
+                    iconSize: 20.h,
+                    itemBuilder: (ctx) => [
+                      _buildPopupMenuItem(context, 0, Icons.flag),
+                    ],
                   ),
                 ),
               ],
@@ -124,6 +134,18 @@ class ReviewView extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  PopupMenuItem _buildPopupMenuItem(
+      BuildContext context, int index, IconData icon) {
+    return PopupMenuItem(
+      onTap: () => _popUpMenuAction(context, index),
+      value: index,
+      child: Padding(
+        padding: EdgeInsets.all(10.h),
+        child: Icon(icon, size: 40.h),
       ),
     );
   }

@@ -30,6 +30,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
         label: "profile.about_us", imageUri: ImageConstant.appLogo),
   ];
 
+  void _profileMenuNavigate(BuildContext context, int index) {
+    switch (index) {
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      case 5:
+        break;
+      case 6:
+        break;
+      case 7:
+        break;
+      case 8:
+        Navigator.pushNamed(context, AppRoutes.addPlaceScreen);
+        break;
+      case 9:
+        break;
+      case 10:
+        break;
+      case 11:
+        break;
+      case 12:
+        break;
+      default:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -256,7 +286,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           context.tr(label),
           style: CustomTextStyles(context).bodyMedium_15,
         ),
-        onTap: () {},
+        onTap: () => _profileMenuNavigate(context, index),
       ),
     );
   }

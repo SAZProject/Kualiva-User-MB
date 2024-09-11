@@ -5,6 +5,7 @@ import 'package:like_it/auth/sign_in_screen.dart';
 import 'package:like_it/auth/sign_up_screen.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
+import 'package:like_it/presentation/places/add_places_screen.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b_detail_menu_screen.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b_detail_screen.dart';
@@ -50,6 +51,8 @@ class AppRoutes {
   static const String reportReviewScreen = "/report_review_screen";
 
   static const String profileScreen = "/profile_screen";
+
+  static const String addPlaceScreen = "/add_place_screen";
 }
 
 Route<dynamic> generateRoute(RouteSettings routeSetting) {
@@ -134,6 +137,11 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.profileScreen:
       return PageTransition(
           child: const ProfileScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.addPlaceScreen:
+      return PageTransition(
+          child: const AddPlacesScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     default:

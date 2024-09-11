@@ -222,5 +222,40 @@
         "acc_setting": "Account Setting",
         "customer_support": "Customer Support",
         "about_us": "About Us"
+    },
+    "add_place": {
+        "title": "Add Place",
+        "personal": "Personal Data",
+        "full_name": "Full Name",
+        "location": "Location",
+        "loc_hint": "Use my current location",
+
+        "place": "Place Data",
+        "place_name": "Place Name",
+        "type": "Type",
+        "type_hint": "Select Type",
+        "licence_permit": "Business Licence or Permit (optional)",
+        "tags": "Tags",
+        "tags_hint": "Select tags",
+        "contact": "Contact",
+        "contact_hint": "Business Number",
+        "address": "Address",
+        "address_general": "City or Sub District",
+        "address_detail": "Address Detail",
+        "operational_time": "Operational Day & Time",
+        "operational_open": "Select open time",
+        "operational_close": "Select close time",
+        "place_picture": "Place Picture",
+        "place_picture_rule": "Contains: front View, Inside View, etc",
+        "place_menu_picture": "Price List & Menu Picture",
+        "place_menu_rule": "Contains: Price List, etc",
+        "attach_media_content": "Upload (pdf, jpg, png)",
+        "max_media": "Max 5 Picture",
+        "agreement": "I have read and agree to ",
+        "tos": "Terms & Service",
+        "and": " and ",
+        "policy": "Privacy Policy",
+
+        "submit_btn": "Submit"
     }
 }

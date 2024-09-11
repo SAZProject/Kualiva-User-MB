@@ -17,6 +17,8 @@ class CustomCheckboxButton extends StatelessWidget {
     this.textStyle,
     this.textAlignment,
     this.isExpandedText = false,
+    this.isRichtext = false,
+    this.richTextWidget = const SizedBox(),
   });
 
   final BoxDecoration? boxDecoration;
@@ -32,6 +34,8 @@ class CustomCheckboxButton extends StatelessWidget {
   final TextStyle? textStyle;
   final TextAlign? textAlignment;
   final bool isExpandedText;
+  final bool isRichtext;
+  final Widget richTextWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +66,22 @@ class CustomCheckboxButton extends StatelessWidget {
             child: checkboxWidget(context),
           ),
           isExpandedText
-              ? Expanded(child: textWidget(context))
-              : textWidget(context),
+              ? Expanded(
+                  child: isRichtext ? richTextWidget : textWidget(context))
+              : isRichtext
+                  ? richTextWidget
+                  : textWidget(context),
         ],
       );
   Widget rightSideCheckbox(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           isExpandedText
-              ? Expanded(child: textWidget(context))
-              : textWidget(context),
+              ? Expanded(
+                  child: isRichtext ? richTextWidget : textWidget(context))
+              : isRichtext
+                  ? richTextWidget
+                  : textWidget(context),
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: checkboxWidget(context),

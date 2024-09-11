@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.19+02
-- save to collection header use no icon
+Ver 0.0.20
+- Add add place screen UI (untested)
 ```
 
 ## Getting Started

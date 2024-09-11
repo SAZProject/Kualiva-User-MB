@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.18+02
-- Add fnb save to collection (untested)
-- fix some switch case
+Ver 0.0.19
+- Add Profile screen (untested)
 ```
 
 ## Getting Started

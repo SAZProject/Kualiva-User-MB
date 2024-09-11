@@ -89,6 +89,29 @@ class CustomButtonStyles {
         ),
       );
 
+  ButtonStyle get outlineOnPrimaryContainer => OutlinedButton.styleFrom(
+        backgroundColor: theme(context).colorScheme.primary.withOpacity(0.3),
+        side: BorderSide(
+          color: theme(context).colorScheme.onPrimaryContainer,
+          width: 2.0,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.h),
+        ),
+      );
+
+  ButtonStyle get outlinePrimaryContainer => OutlinedButton.styleFrom(
+        backgroundColor:
+            theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+        side: BorderSide(
+          color: theme(context).colorScheme.primaryContainer,
+          width: 1.0,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.h),
+        ),
+      );
+
   //text button style
   static ButtonStyle get none => const ButtonStyle(
       backgroundColor: WidgetStatePropertyAll(Colors.transparent),

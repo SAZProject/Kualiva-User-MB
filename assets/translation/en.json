@@ -207,5 +207,20 @@
         "add_to_collection": "Add to Collection :",
         "all": "All",
         "total_places": "{index} Places"
+    },
+    "profile": {
+        "title": "Hi, {name}",
+        "my_profile": "My Profile",
+        "my_voucher": "My Voucher",
+        "saved": "Saved",
+        "my_stats": "My Stats",
+        "my_reviews": "My Reviews",
+        "notif": "Notification",
+        "theme": "Theme",
+        "lang": "Language",
+        "add_place": "Add Place",
+        "acc_setting": "Account Setting",
+        "customer_support": "Customer Support",
+        "about_us": "About Us"
     }
 }

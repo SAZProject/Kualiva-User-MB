@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/screen/coming_soon.dart';
 import 'package:like_it/presentation/home/home_screen.dart';
+import 'package:like_it/presentation/profile/profile_screen.dart';
 
 class HomeNavigation extends StatefulWidget {
   const HomeNavigation({super.key});
@@ -52,7 +53,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
       case 3:
         return const ComingSoon();
       case 4:
-        return const ComingSoon();
+        return const ProfileScreen();
       default:
         return const HomeScreen();
     }

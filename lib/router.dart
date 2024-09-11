@@ -9,6 +9,7 @@ import 'package:like_it/presentation/f_n_b/f_n_b.dart';
 import 'package:like_it/presentation/f_n_b/f_n_b_detail_menu_screen.dart';
 import 'package:like_it/presentation/f_n_b/f_n_b_detail_screen.dart';
 import 'package:like_it/presentation/home/home_navigation.dart';
+import 'package:like_it/presentation/profile/profile_screen.dart';
 import 'package:like_it/presentation/report/report_place_screen.dart';
 import 'package:like_it/presentation/report/report_review_screen.dart';
 import 'package:like_it/presentation/review/review_form_screen.dart';
@@ -47,6 +48,8 @@ class AppRoutes {
   static const String reportPlaceScreen = "/report_place_screen";
 
   static const String reportReviewScreen = "/report_review_screen";
+
+  static const String profileScreen = "/profile_screen";
 }
 
 Route<dynamic> generateRoute(RouteSettings routeSetting) {
@@ -126,6 +129,11 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
       final reviewData = routeSetting.arguments as ReviewModel;
       return PageTransition(
           child: ReportReviewScreen(reviewData: reviewData),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.profileScreen:
+      return PageTransition(
+          child: const ProfileScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     default:

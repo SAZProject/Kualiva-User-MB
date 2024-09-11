@@ -122,7 +122,9 @@ class _SaveToCollectionState extends State<SaveToCollection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-              label: context.tr("save_to_collection.add_to_collection")),
+            label: context.tr("save_to_collection.add_to_collection"),
+            useIcon: false,
+          ),
           SizedBox(height: 4.h),
           Expanded(
             child: ListView.separated(

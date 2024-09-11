@@ -201,5 +201,11 @@
         "reason_review_5": "Discrimination or Hate Speech",
         "reason_review_6": "Personal Information",
         "detail": "Details :"
+    },
+    "save_to_collection": {
+        "title": "Place Saved",
+        "add_to_collection": "Add to Collection :",
+        "all": "All",
+        "total_places": "{index} Places"
     }
 }

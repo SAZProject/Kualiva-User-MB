@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/screen/save_to_collection.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
@@ -32,6 +33,15 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       case 2:
         break;
       default:
+        showModalBottomSheet(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(25.h),
+            ),
+          ),
+          context: context,
+          builder: (BuildContext context) => const SaveToCollection(),
+        );
     }
   }
 

@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.18+01
-- Add sign in with google (untested)
-- Change onBoarding page indicator
+Ver 0.0.18+02
+- Add fnb save to collection (untested)
+- fix some switch case
 ```
 
 ## Getting Started

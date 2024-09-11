@@ -14,6 +14,7 @@ class ReviewView extends StatelessWidget {
       default:
         Navigator.pushNamed(context, AppRoutes.reportReviewScreen,
             arguments: reviewData);
+        break;
     }
   }
 

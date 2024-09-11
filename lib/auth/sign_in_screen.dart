@@ -132,6 +132,8 @@ class SignInScreenState extends State<SignInScreen> {
           ),
           SizedBox(height: 10.h),
           _signInWithSAZ(context),
+          SizedBox(height: 5.h),
+          _signInWithGoogle(context),
           SizedBox(height: 10.h),
           Text(
             context.tr("sign_in.like_it_acc"),
@@ -167,6 +169,22 @@ class SignInScreenState extends State<SignInScreen> {
           ),
       leftIcon: CustomImageView(
         imagePath: ImageConstant.sazIcon,
+        height: 40.h,
+        width: 40.h,
+      ),
+    );
+  }
+
+  Widget _signInWithGoogle(BuildContext context) {
+    return CustomOutlinedButton(
+      text: context.tr("sign_in.sign_in_with_google"),
+      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+      buttonStyle: CustomButtonStyles.outlineTranparent,
+      decoration: CustomDecoration(context).backgroundBlur.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder10,
+          ),
+      leftIcon: CustomImageView(
+        imagePath: ImageConstant.googleIcon,
         height: 40.h,
         width: 40.h,
       ),

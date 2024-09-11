@@ -8,6 +8,7 @@ class ImageConstant {
   static String onBoarding3 = "$imagePath/onboard-3.gif";
 
   static String sazIcon = "$imagePath/SaZ_icon.png";
+  static String googleIcon = "$imagePath/google_icon.png";
   static String permissionScreen = "$imagePath/permission_screen.gif";
 
   static String background1 = "$imagePath/background_1.png";

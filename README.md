@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.18
-- Add Review Form Screen (untested)
-- Add new custom widget & minor fix on modularized component
+Ver 0.0.18+01
+- Add sign in with google (untested)
+- Change onBoarding page indicator
 ```
 
 ## Getting Started

@@ -7,8 +7,8 @@ import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/loc_dropdown_model.dart';
-import 'package:like_it/presentation/f_n_b/widget/f_n_b_nearest_item.dart';
-import 'package:like_it/presentation/f_n_b/widget/f_n_b_promo_item.dart';
+import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_nearest_item.dart';
+import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_promo_item.dart';
 
 class FNBScreen extends StatefulWidget {
   const FNBScreen({super.key});

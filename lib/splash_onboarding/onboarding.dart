@@ -197,7 +197,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       margin: EdgeInsets.all(10.h),
       buttonStyle: CustomButtonStyles.none,
       decoration:
-          CustomButtonStyles(context).gradientYellowAToPrimaryDecoration,
+          CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
       buttonTextStyle: Theme.of(context).textTheme.titleLarge,
       onPressed: () {
         if (_activePage == 2) {

@@ -211,7 +211,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Icon(_profileMenuModel[0].icon, size: 18.h),
               ),
               buttonStyle:
-                  CustomButtonStyles(context).outlineOnPrimaryContainer,
+                  CustomButtonStyles.outlineOnPrimaryContainer(context),
               buttonTextStyle: theme(context).textTheme.bodyMedium,
               onPressed: () {},
             ),
@@ -226,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Icon(_profileMenuModel[1].icon, size: 18.h),
               ),
               buttonStyle:
-                  CustomButtonStyles(context).outlineOnPrimaryContainer,
+                  CustomButtonStyles.outlineOnPrimaryContainer(context),
               buttonTextStyle: theme(context).textTheme.bodyMedium,
               onPressed: () {},
             ),

@@ -167,7 +167,7 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
       ),
       buttonStyle: CustomButtonStyles.none,
       decoration:
-          CustomButtonStyles(context).gradientYellowAToPrimaryL10Decoration,
+          CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
       buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
       onPressed: () => _getdevicePermission(context),
     );

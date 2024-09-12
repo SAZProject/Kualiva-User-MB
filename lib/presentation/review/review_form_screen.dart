@@ -251,7 +251,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
         ),
         child: CustomOutlinedButton(
           text: context.tr("review.submit_btn"),
-          buttonStyle: CustomButtonStyles(context).outlineTL25,
+          buttonStyle: CustomButtonStyles.outlineTL25(context),
           buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
           onPressed: () {},
         ),

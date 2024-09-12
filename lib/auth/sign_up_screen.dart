@@ -260,7 +260,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       initialText: context.tr("sign_up.sign_up_btn"),
       buttonStyle: CustomButtonStyles.none,
       decoration:
-          CustomButtonStyles(context).gradientYellowAToPrimaryL10Decoration,
+          CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
       buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
       onPressed: () => _onPressedSignUp(context),
     );

@@ -229,7 +229,7 @@ class SignInScreenState extends State<SignInScreen> {
       initialText: context.tr("sign_in.sign_in_btn"),
       buttonStyle: CustomButtonStyles.none,
       decoration:
-          CustomButtonStyles(context).gradientYellowAToPrimaryL10Decoration,
+          CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
       buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
       onPressed: () => _onPressedSignIn(context),
     );

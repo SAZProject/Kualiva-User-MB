@@ -49,7 +49,7 @@ class CustomElevatedButton extends StatelessWidget {
         width: width ?? double.maxFinite,
         margin: margin,
         decoration: decoration ??
-            CustomButtonStyles(context).gradientYellowAToPrimaryDecoration,
+            CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
         child: ElevatedButton(
           style: buttonStyle,
           onPressed: isDisabled ?? false ? null : onPressed ?? () {},

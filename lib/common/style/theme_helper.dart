@@ -22,6 +22,10 @@ class ThemeHelper {
     return _supportedCustomColor[_appTheme] ?? GlobalCodeColors();
   }
 
+  GlobalCodeColors themeColor() => _getThemeColors();
+
+  ThemeData themeData(ColorScheme colorScheme) => _getThemeData(colorScheme);
+
   ThemeData _getThemeData(ColorScheme colorScheme) {
     return ThemeData(
         useMaterial3: true,
@@ -64,10 +68,6 @@ class ThemeHelper {
         ),
         dividerTheme: const DividerThemeData(thickness: 4, space: 4));
   }
-
-  GlobalCodeColors themeColor() => _getThemeColors();
-
-  ThemeData themeData(ColorScheme colorScheme) => _getThemeData(colorScheme);
 }
 
 class TextThemes {

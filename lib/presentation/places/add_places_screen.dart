@@ -607,7 +607,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
       initialText: context.tr("add_place.submit_btn"),
       buttonStyle: CustomButtonStyles.none,
       decoration:
-          CustomButtonStyles(context).gradientYellowAToPrimaryL10Decoration,
+          CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
       buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
       onPressed: () {},
     );

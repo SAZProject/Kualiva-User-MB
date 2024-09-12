@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.20
-- Add add place screen UI (untested)
+Ver 0.0.21
+- Test & Fix onBoarding, signIn/Up, home, fnb detail & review screen
 ```
 
 ## Getting Started

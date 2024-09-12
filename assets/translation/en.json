@@ -88,8 +88,9 @@
         "onboard_start_btn": "Let\u0027s Start"
     },
     "sign_in": {
+        "welcome": "Welcome to Like It",
         "sign_in_with": "Sign In with",
-        "like_it_acc": "LikeIt Account",
+        "like_it_acc": "Like It Account",
         "sign_in_with_saz": "Sign In with SAZ",
         "sign_in_with_google": "Sign In with Google",
         "phone_number_or_user_name": "Phone Number or UserName",
@@ -124,7 +125,7 @@
         "otp_check_sms": "We send 6-digit verification code to your phone number",
         "no_code_recieve": "Didn\u0027t recieve any code? ",
         "resend": "resend Code",
-        "otp_verified": "OTP Verified"
+        "otp_verified": "Verified\nSuccessfully"
     },
     "permission": {
         "permission_title": "Better Experience\nFor You",
@@ -165,7 +166,7 @@
         "about": "About",
         "menu": "Menu",
         "review": "Reviews",
-        "about_open": "Operational day & hour (click to expand!)",
+        "about_open": "Operational day & hour\n(click to expand!)",
         "about_open_detail": "{day}, {time_open}-{time_close}",
         "about_price": "Starts from Rp{price} per meal",
         "menu_title": "Menu Title",

@@ -50,14 +50,11 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     super.initState();
     imageSliders = fnbData.placePicture.map(
       (image) {
-        return Container(
-          margin: EdgeInsets.all(5.h),
-          child: CustomImageView(
-            imagePath: image,
-            boxFit: BoxFit.cover,
-            height: 360.h,
-            width: double.maxFinite,
-          ),
+        return CustomImageView(
+          imagePath: image,
+          boxFit: BoxFit.cover,
+          height: 360.h,
+          width: double.maxFinite,
         );
       },
     ).toList();
@@ -69,6 +66,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       child: Scaffold(
         extendBody: true,
         extendBodyBehindAppBar: true,
+        appBar: _fnbAppBar(context),
         body: Container(
           width: double.maxFinite,
           height: Sizeutils.height,
@@ -91,57 +89,63 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
   Widget _body(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            _fnbAppBar(context),
-          ];
-        },
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              _fnbPlaceImages(context),
-              SizedBox(height: 5.h),
-              _fnbPlaceName(context),
-              SizedBox(height: 5.h),
-              _fnbPlaceAbout(context),
-              SizedBox(height: 5.h),
-              _fnbPlaceMenu(context),
-              SizedBox(height: 5.h),
-              _fnbPlaceReviews(context),
-              SizedBox(height: 5.h),
-            ],
-          ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            _fnbPlaceImages(context),
+            SizedBox(height: 5.h),
+            _fnbPlaceName(context),
+            SizedBox(height: 5.h),
+            _fnbPlaceAbout(context),
+            SizedBox(height: 5.h),
+            _fnbPlaceMenu(context),
+            SizedBox(height: 5.h),
+            _fnbPlaceReviews(context),
+            SizedBox(height: 5.h),
+          ],
         ),
       ),
     );
   }
 
-  Widget _fnbAppBar(BuildContext context) {
-    return SliverAppBar(
-      backgroundColor: Colors.transparent,
-      toolbarHeight: 40.h,
+  PreferredSizeWidget _fnbAppBar(BuildContext context) {
+    return AppBar(
+      toolbarHeight: 50.h,
       leadingWidth: 50.h,
+      forceMaterialTransparency: true,
       automaticallyImplyLeading: true,
-      pinned: false,
-      snap: false,
-      floating: false,
-      leading: Padding(
-        padding: EdgeInsets.all(10.h),
+      leading: Container(
+        margin: const EdgeInsets.only(left: 5.0),
+        decoration: BoxDecoration(
+          color:
+              theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+          shape: BoxShape.circle,
+        ),
         child: IconButton(
-          iconSize: 40.h,
+          iconSize: 25.h,
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () => Navigator.pop(context),
         ),
       ),
       actions: [
-        PopupMenuButton(
-          iconSize: 40.h,
-          itemBuilder: (ctx) => [
-            _buildPopupMenuItem(context, 0, Icons.favorite),
-            _buildPopupMenuItem(context, 1, Icons.flag),
-            _buildPopupMenuItem(context, 2, Icons.share),
-          ],
+        Container(
+          margin: const EdgeInsets.only(right: 5.0),
+          decoration: BoxDecoration(
+            color: theme(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withOpacity(0.6),
+            shape: BoxShape.circle,
+          ),
+          child: PopupMenuButton(
+            position: PopupMenuPosition.under,
+            iconSize: 25.h,
+            itemBuilder: (ctx) => [
+              _buildPopupMenuItem(context, 0, Icons.favorite),
+              _buildPopupMenuItem(context, 1, Icons.flag),
+              _buildPopupMenuItem(context, 2, Icons.share),
+            ],
+          ),
         ),
       ],
     );
@@ -152,22 +156,20 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     return PopupMenuItem(
       onTap: () => _popUpMenuAction(context, index),
       value: index,
-      child: Padding(
-        padding: EdgeInsets.all(10.h),
-        child: Icon(icon, size: 40.h),
-      ),
+      child: Icon(icon, size: 25.h),
     );
   }
 
   Widget _fnbPlaceImages(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      height: 360.h,
       child: CarouselSlider(
         items: imageSliders,
         options: CarouselOptions(
+          viewportFraction: 1,
           autoPlay: true,
-          enlargeCenterPage: true,
+
+          // enlargeCenterPage: true,
         ),
       ),
     );
@@ -198,9 +200,10 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Align(
+                    alignment: Alignment.center,
                     child: Icon(
                       Icons.star,
                       size: 20.h,
@@ -210,9 +213,9 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      fnbData.placeName,
+                      fnbData.overallRating.toString(),
                       textAlign: TextAlign.center,
-                      style: theme(context).textTheme.headlineSmall,
+                      style: theme(context).textTheme.bodyLarge,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -251,6 +254,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                     ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildAboutContent(
                   context,
@@ -258,23 +262,27 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                   label: "",
                   trailingWidget: _aboutTag(context),
                 ),
+                SizedBox(height: 8.h),
                 _buildAboutContent(
                   context,
                   icon: Icons.timer,
                   label: "",
                   trailingWidget: _aboutOperationalTime(context),
                 ),
+                SizedBox(height: 8.h),
                 _buildAboutContent(
                   context,
                   icon: Icons.phone,
                   label: fnbData.phoneNumber,
                 ),
+                SizedBox(height: 8.h),
                 _buildAboutContent(
                   context,
                   icon: Icons.place,
                   label: fnbData.placeAddress,
-                  maxLines: 3,
+                  maxLines: 4,
                 ),
+                SizedBox(height: 8.h),
                 _buildAboutContent(
                   context,
                   icon: Icons.star,
@@ -312,17 +320,20 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           leadingWidget ?? Icon(icon, size: 20.h),
-          Padding(
-            padding: EdgeInsets.only(left: 10.h),
-            child: trailingWidget ??
-                Text(
-                  label,
-                  style: CustomTextStyles(context).bodySmall12,
-                  maxLines: maxLines,
-                  overflow: TextOverflow.ellipsis,
-                ),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.h),
+              child: trailingWidget ??
+                  Text(
+                    label,
+                    style: CustomTextStyles(context).bodySmall12,
+                    maxLines: maxLines,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+            ),
           ),
         ],
       ),
@@ -333,8 +344,6 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: Wrap(
-        runSpacing: 5.h,
-        spacing: 5.h,
         children: List<Widget>.generate(
           fnbData.tags.length,
           (index) => _tagView(context, label: fnbData.tags[index]),
@@ -344,17 +353,19 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
   }
 
   Widget _tagView(BuildContext context, {required String label}) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2.h),
-      padding: EdgeInsets.symmetric(horizontal: 4.h),
-      decoration: CustomDecoration(context).fillPrimary.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder5,
+    return FittedBox(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 2.h),
+        padding: EdgeInsets.symmetric(horizontal: 4.h),
+        decoration: CustomDecoration(context).fillPrimary.copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder5,
+            ),
+        child: Center(
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: CustomTextStyles(context).bodyMedium_13,
           ),
-      child: Center(
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          style: CustomTextStyles(context).bodyMedium_13,
         ),
       ),
     );
@@ -364,9 +375,10 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: ExpansionTile(
+        childrenPadding: EdgeInsets.only(bottom: 5.h),
         title: Text(
           context.tr("f_n_b_detail.about_open"),
-          style: CustomTextStyles(context).bodySmall12,
+          style: CustomTextStyles(context).bodyMedium_13,
         ),
         children: fnbData.operationalDay.map(
           (index) {
@@ -380,18 +392,41 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
   Widget _operationalDayHourView(BuildContext context, int index) {
     return SizedBox(
       width: double.maxFinite,
-      child: Text(
-        context.tr(
-          "f_n_b_detail.about_open_detail",
-          namedArgs: {
-            "day": DatetimeUtils.getDays(index),
-            "time_open":
-                DatetimeUtils.getHour(fnbData.operationalTimeOpen[index]),
-            "time_close":
-                DatetimeUtils.getHour(fnbData.operationalTimeClose[index]),
-          },
-        ),
-        style: CustomTextStyles(context).bodySmall12,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            width: 120.h,
+            child: Text(
+              "${DatetimeUtils.getDays(index)},",
+              style: CustomTextStyles(context).bodySmall12,
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: 50.h,
+            child: Text(
+              DatetimeUtils.getHour(fnbData.operationalTimeOpen[index]),
+              style: CustomTextStyles(context).bodySmall12,
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: 20.h,
+            child: Text(
+              " - ",
+              style: CustomTextStyles(context).bodySmall12,
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: 50.h,
+            child: Text(
+              DatetimeUtils.getHour(fnbData.operationalTimeClose[index]),
+              style: CustomTextStyles(context).bodySmall12,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -457,7 +492,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             },
           ),
           Container(
-            height: 150.h,
+            height: 200.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
             child: ListView.builder(

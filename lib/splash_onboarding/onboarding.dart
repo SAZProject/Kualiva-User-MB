@@ -172,8 +172,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
     return AnimatedContainer(
       duration: const Duration(microseconds: 300),
-      height: 25.h,
-      width: _activePage == index ? 30.h : 25.h,
+      height: 15.h,
+      width: _activePage == index ? 25.h : 15.h,
       margin: EdgeInsets.only(right: 5.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.h),

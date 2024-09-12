@@ -19,9 +19,9 @@ class FNBScreen extends StatefulWidget {
 
 class _FNBScreenState extends State<FNBScreen> {
   final List<LocDropdownModel> _dummyLoc = [
-    LocDropdownModel(id: "0", subdistrict: "Tanah Abang", city: "Bekasi"),
     LocDropdownModel(
-        id: "1", subdistrict: "Pondok Gede", city: "Jakarta Pusat"),
+        id: "0", subdistrict: "Tanah Abang", city: "Jakarta Pusat"),
+    LocDropdownModel(id: "1", subdistrict: "Pondok Gede", city: "Bekasi"),
   ];
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;

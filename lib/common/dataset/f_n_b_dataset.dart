@@ -25,7 +25,7 @@ class FNBDataset {
               "Kota Kasablanka Lt. LG, Jl. Raya Casablanca No.88 16, RT.2/RW.5, Menteng Dalam, Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12870",
           latitude: "-6.223170950304152",
           longitude: "106.84265568085678",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 10, 0),
             DateTime(0, 0, 0, 10, 0),
@@ -80,7 +80,7 @@ class FNBDataset {
               "Grand Indonesia East Mall Lantai 3A, Jalan M.H. Thamrin No.28-30, Gondangdia, Menteng, RT.1/RW.5, RT.1/RW.5, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10350",
           latitude: "-6.194935145445106",
           longitude: "106.82130752208998",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 10, 0),
             DateTime(0, 0, 0, 10, 0),
@@ -140,7 +140,7 @@ class FNBDataset {
               "InterContinental Jakarta Pondok Indah, Level 1 Jalan Metro Pondok Indah Kav. IV, 1, RT.1/RW.16, TA, Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12310",
           latitude: "-6.2642906391457025",
           longitude: "106.78246473667721",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 9, 0),
             DateTime(0, 0, 0, 9, 0),
@@ -199,7 +199,7 @@ class FNBDataset {
               "SCBD, Sudirman Central Business District, Jl. Jend. Sudirman Kav 52-53, RT.5/RW.3, Senayan, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12190",
           latitude: "-6.223648522526731",
           longitude: "106.80976906551275",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 6, 30),
             DateTime(0, 0, 0, 6, 30),
@@ -256,7 +256,7 @@ class FNBDataset {
               "Pullman Jakarta Indonesia (Lobby Level, Jl. M.H. Thamrin No.59, RT.9/RW.5, Gondangdia, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10350",
           latitude: "-6.193573837147388",
           longitude: "106.82346786736449",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 6, 0),
             DateTime(0, 0, 0, 6, 0),
@@ -318,7 +318,7 @@ class FNBDataset {
               "Jl. Pintu Besar Utara No.14, RT.7/RW.6, Pinangsia, Kec. Taman Sari, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11110",
           latitude: "-6.134194043538811",
           longitude: "106.81274716551188",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 9, 0),
             DateTime(0, 0, 0, 9, 0),
@@ -374,7 +374,7 @@ class FNBDataset {
               "Level 67-69, The Westin Jakarta Jalan H.R. Rasuna Said Kav. C-22A, RT.2/RW.5, Karet Kuningan, Setiabudi, South Jakarta City, Jakarta 12940",
           latitude: "-6.2235864472898275",
           longitude: "106.8336608827088",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 17, 0),
             DateTime(0, 0, 0, 17, 0),
@@ -433,7 +433,7 @@ class FNBDataset {
               "Ground Floor, Jl. Garnisun No.Kav.47 48, RT.5/RW.4, Karet Semanggi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 10250",
           latitude: "-6.21712201614853",
           longitude: "106.81612843667673",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 24, 0),
             DateTime(0, 0, 0, 24, 0),
@@ -493,7 +493,7 @@ class FNBDataset {
               "Jl. Bendungan Hilir No.73, Bend. Hilir, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10210",
           latitude: "-6.21223936174374",
           longitude: "106.81227490182307",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 24, 0),
             DateTime(0, 0, 0, 24, 0),
@@ -550,7 +550,7 @@ class FNBDataset {
               "Jl. K.H. Mas Mansyur No.66, RT.5/RW.13, Kb. Melati, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10230",
           latitude: "-6.194603702353319",
           longitude: "106.8143352231845",
-          operationalDay: [1, 2, 3, 4, 5, 6, 7],
+          operationalDay: [0, 1, 2, 3, 4, 5, 6],
           operationalTimeOpen: [
             DateTime(0, 0, 0, 24, 0),
             DateTime(0, 0, 0, 24, 0),

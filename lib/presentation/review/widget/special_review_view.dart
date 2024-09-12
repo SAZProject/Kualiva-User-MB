@@ -12,7 +12,7 @@ class SpecialReviewView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.maxFinite,
+      width: 330.h,
       child: OutlineGradientButton(
         padding: EdgeInsets.all(3.h),
         strokeWidth: 3.h,

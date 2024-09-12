@@ -21,9 +21,9 @@ class ReviewView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.maxFinite,
+      width: 330.h,
       padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
-      decoration: CustomDecoration(context).orangeColorBackgroundBlur.copyWith(
+      decoration: CustomDecoration(context).backgroundBlur.copyWith(
             borderRadius: BorderRadiusStyle.roundedBorder10,
           ),
       child: Column(
@@ -34,10 +34,10 @@ class ReviewView extends StatelessWidget {
             width: double.maxFinite,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Align(
-                  alignment: Alignment.center,
+                  alignment: Alignment.centerLeft,
                   child: CircleAvatar(
                     minRadius: 25.h,
                     maxRadius: 25.h,
@@ -48,7 +48,7 @@ class ReviewView extends StatelessWidget {
                 ),
                 Expanded(
                   child: Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.only(left: 10.h),
                       child: Column(
@@ -70,8 +70,9 @@ class ReviewView extends StatelessWidget {
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                const CustomRatingBar(
+                                CustomRatingBar(
                                   initialRating: 5.0,
+                                  color: theme(context).colorScheme.primary,
                                 ),
                               ],
                             ),
@@ -82,7 +83,7 @@ class ReviewView extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 4.h, top: 4.h),
+                  padding: EdgeInsets.only(left: 4.h),
                   child: Text(
                     "???",
                     style: theme(context).textTheme.bodySmall,
@@ -92,20 +93,19 @@ class ReviewView extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 4.h),
-                  alignment: Alignment.center,
                   child: Icon(
                     Icons.favorite,
                     size: 20.h,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 4.h),
-                  alignment: Alignment.center,
-                  child: PopupMenuButton(
-                    iconSize: 20.h,
-                    itemBuilder: (ctx) => [
-                      _buildPopupMenuItem(context, 0, Icons.flag),
-                    ],
+                PopupMenuButton(
+                  padding: EdgeInsets.zero,
+                  iconSize: 20.h,
+                  itemBuilder: (ctx) => [
+                    _buildPopupMenuItem(context, 0, Icons.flag),
+                  ],
+                  child: const Icon(
+                    Icons.more_vert,
                   ),
                 ),
               ],
@@ -119,14 +119,14 @@ class ReviewView extends StatelessWidget {
               children: [
                 Text(
                   DatetimeUtils.dmy(reviewData.reviewDate),
-                  style: CustomTextStyles(context).bodySmallGray800,
+                  style: theme(context).textTheme.bodySmall,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 4.h),
                 Text(
                   reviewData.content,
-                  style: CustomTextStyles(context).bodySmallGray800,
+                  style: CustomTextStyles(context).bodySmall12,
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -144,10 +144,7 @@ class ReviewView extends StatelessWidget {
     return PopupMenuItem(
       onTap: () => _popUpMenuAction(context, index),
       value: index,
-      child: Padding(
-        padding: EdgeInsets.all(10.h),
-        child: Icon(icon, size: 40.h),
-      ),
+      child: Icon(icon, size: 25.h),
     );
   }
 }

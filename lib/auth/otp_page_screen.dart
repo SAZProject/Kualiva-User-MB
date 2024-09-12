@@ -57,10 +57,10 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
                   dismissable: false,
                   icon: const Center(
                     child:
-                        Icon(Icons.done, color: Colors.greenAccent, size: 35.0),
+                        Icon(Icons.done, color: Colors.greenAccent, size: 50.0),
                   ),
                   title: Text(context.tr("otp.otp_verified"),
-                      overflow: TextOverflow.ellipsis, maxLines: 1),
+                      overflow: TextOverflow.ellipsis, maxLines: 2),
                 );
                 Future.delayed(const Duration(seconds: 2), () {
                   Navigator.pushNamed(

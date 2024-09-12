@@ -25,7 +25,12 @@ class CustomRatingBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return alignment != null
+        ? Align(
+            alignment: alignment ?? Alignment.center,
+            child: ratingBarWidget,
+          )
+        : ratingBarWidget;
   }
 
   Widget get ratingBarWidget => RatingBar.builder(

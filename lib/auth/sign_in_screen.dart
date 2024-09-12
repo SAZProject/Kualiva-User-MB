@@ -72,7 +72,7 @@ class SignInScreenState extends State<SignInScreen> {
                   height: 100.h,
                   width: 100.h,
                 ),
-                SizedBox(height: 80.h),
+                SizedBox(height: 25.h),
                 _signInMenu(context),
                 const Spacer(),
                 RichText(
@@ -127,12 +127,17 @@ class SignInScreenState extends State<SignInScreen> {
       child: Column(
         children: [
           Text(
+            context.tr("sign_in.welcome"),
+            style: theme(context).textTheme.titleLarge,
+          ),
+          SizedBox(height: 20.h),
+          Text(
             context.tr("sign_in.sign_in_with"),
             style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
           ),
           SizedBox(height: 10.h),
           _signInWithSAZ(context),
-          SizedBox(height: 5.h),
+          SizedBox(height: 10.h),
           _signInWithGoogle(context),
           SizedBox(height: 10.h),
           Text(

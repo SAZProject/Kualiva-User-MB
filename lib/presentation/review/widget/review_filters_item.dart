@@ -20,64 +20,74 @@ class ReviewFiltersItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return multiSelect
-        ? RawChip(
-            padding: EdgeInsets.all(5.h),
-            showCheckmark: false,
-            labelPadding: EdgeInsets.zero,
-            selected: multiSelectedChoices == null
-                ? false
-                : multiSelectedChoices!.contains(label),
-            backgroundColor: appTheme.gray200,
-            selectedColor: theme(context).colorScheme.primary,
-            shape: RoundedRectangleBorder(
-              side: BorderSide.none,
-              borderRadius: BorderRadius.circular(15.h),
+        ? FittedBox(
+            child: RawChip(
+              visualDensity: VisualDensity.compact,
+              showCheckmark: false,
+              labelPadding: EdgeInsets.zero,
+              selected: multiSelectedChoices == null
+                  ? false
+                  : multiSelectedChoices!.contains(label),
+              backgroundColor: theme(context).colorScheme.onSecondaryContainer,
+              selectedColor: theme(context).colorScheme.primary,
+              shape: RoundedRectangleBorder(
+                side: BorderSide.none,
+                borderRadius: BorderRadius.circular(15.h),
+              ),
+              label: _chipLabel(context),
+              onSelected: onSelected,
             ),
-            label: _chipLabel(context),
-            onSelected: onSelected,
           )
-        : ChoiceChip(
-            padding: EdgeInsets.all(5.h),
-            showCheckmark: false,
-            labelPadding: EdgeInsets.zero,
-            selected: singleSelectedChoices == label,
-            backgroundColor: appTheme.gray200,
-            selectedColor: theme(context).colorScheme.primary,
-            shape: RoundedRectangleBorder(
-              side: BorderSide.none,
-              borderRadius: BorderRadius.circular(15.h),
+        : FittedBox(
+            child: ChoiceChip(
+              visualDensity: VisualDensity.compact,
+              showCheckmark: false,
+              labelPadding: EdgeInsets.zero,
+              selected: singleSelectedChoices == label,
+              backgroundColor: theme(context).colorScheme.onSecondaryContainer,
+              selectedColor: theme(context).colorScheme.primary,
+              shape: RoundedRectangleBorder(
+                side: BorderSide.none,
+                borderRadius: BorderRadius.circular(15.h),
+              ),
+              label: _chipLabel(context),
+              onSelected: onSelected,
             ),
-            label: _chipLabel(context),
-            onSelected: onSelected,
           );
   }
 
   Widget _chipLabel(BuildContext context) {
     return multiSelect
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.star,
-                size: 20.h,
-                color: appTheme.amber700,
-              ),
-              Text(
-                textAlign: TextAlign.center,
-                label,
-                style: theme(context).textTheme.headlineSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+        ? Container(
+            margin: EdgeInsets.symmetric(horizontal: 5.h),
+            child: Text(
+              textAlign: TextAlign.center,
+              label,
+              style: theme(context).textTheme.bodyMedium,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           )
-        : Text(
-            label,
-            textAlign: TextAlign.center,
-            style: CustomTextStyles(context).bodyMedium_13,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+        : Container(
+            margin: EdgeInsets.symmetric(horizontal: 5.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.star,
+                  size: 20.h,
+                  color: appTheme.amber700,
+                ),
+                Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: CustomTextStyles(context).bodyMedium_13,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           );
   }
 }

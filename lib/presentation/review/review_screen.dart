@@ -44,8 +44,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBody: true,
-        extendBodyBehindAppBar: true,
+        appBar: _reviewAppBar(context),
         body: Container(
           width: double.maxFinite,
           height: Sizeutils.height,
@@ -68,24 +67,17 @@ class _ReviewScreenState extends State<ReviewScreen> {
   Widget _body(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            _reviewAppBar(context),
-          ];
-        },
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 5.h),
-              _reviewFilter(context),
-              SizedBox(height: 5.h),
-              _myReview(context),
-              SizedBox(height: 5.h),
-              _otherReview(context),
-              SizedBox(height: 5.h),
-            ],
-          ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 5.h),
+            _reviewFilter(context),
+            SizedBox(height: 5.h),
+            _myReview(context),
+            SizedBox(height: 5.h),
+            _otherReview(context),
+            SizedBox(height: 5.h),
+          ],
         ),
       ),
     );
@@ -100,10 +92,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
       titleSpacing: 0.0,
       automaticallyImplyLeading: true,
       centerTitle: true,
-      leading: Padding(
-        padding: EdgeInsets.all(10.h),
+      leading: Container(
+        margin: const EdgeInsets.only(left: 5.0),
         child: IconButton(
-          iconSize: 40.h,
+          iconSize: 25.h,
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () => Navigator.pop(context),
         ),
@@ -132,14 +124,17 @@ class _ReviewScreenState extends State<ReviewScreen> {
               filterByCategory.length,
               (index) {
                 return ReviewFiltersItem(
-                  label: filterByCategory[index],
+                  label: context.tr(filterByCategory[index]),
                   multiSelect: true,
                   multiSelectedChoices: selectedCategory,
                   onSelected: (value) {
                     setState(() {
-                      selectedCategory.contains(filterByCategory[index])
-                          ? selectedCategory.remove(filterByCategory[index])
-                          : selectedCategory.add(filterByCategory[index]);
+                      selectedCategory
+                              .contains(context.tr(filterByCategory[index]))
+                          ? selectedCategory
+                              .remove(context.tr(filterByCategory[index]))
+                          : selectedCategory
+                              .add(context.tr(filterByCategory[index]));
                     });
                   },
                 );
@@ -159,7 +154,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   singleSelectedChoices: selectedStar,
                   onSelected: (value) {
                     setState(() {
-                      selectedStar = filterByStar[index];
+                      if (selectedStar == filterByStar[index]) {
+                        selectedStar = "";
+                      } else {
+                        selectedStar = filterByStar[index];
+                      }
                     });
                   },
                 );
@@ -175,10 +174,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 5.h),
-      decoration:
-          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder10,
-              ),
+      decoration: CustomDecoration(context).fillOnSecondaryContainer.copyWith(
+            color: theme(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withOpacity(0.6),
+            borderRadius: BorderRadiusStyle.roundedBorder10,
+          ),
       child: Column(
         children: [
           CustomSectionHeader(
@@ -225,7 +227,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             useIcon: false,
           ),
           Container(
-            height: 150.h,
+            height: 200.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
             child: ListView.builder(

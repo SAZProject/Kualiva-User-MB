@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.22
-- test & Fixed FNB detail & menu, save collection
+Ver 0.0.23
+- test & Fixed review, review form, report place & review screen
 ```
 
 ## Getting Started

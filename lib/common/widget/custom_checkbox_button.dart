@@ -9,7 +9,6 @@ class CustomCheckboxButton extends StatelessWidget {
     this.isRightCheck,
     this.iconSize,
     this.value = false,
-    this.onPressed,
     required this.onChange,
     this.text,
     this.width,
@@ -26,7 +25,6 @@ class CustomCheckboxButton extends StatelessWidget {
   final bool? isRightCheck;
   final double? iconSize;
   final bool? value;
-  final Function()? onPressed;
   final Function(bool) onChange;
   final String? text;
   final double? width;
@@ -47,19 +45,15 @@ class CustomCheckboxButton extends StatelessWidget {
         : buildCheckboxWidget(context);
   }
 
-  Widget buildCheckboxWidget(BuildContext context) => InkWell(
-        onTap: () => onPressed,
-        child: Container(
-          decoration: boxDecoration,
-          width: width,
-          padding: padding,
-          child: (isRightCheck ?? false)
-              ? rightSideCheckbox(context)
-              : leftSideCheckbox(context),
-        ),
+  Widget buildCheckboxWidget(BuildContext context) => Container(
+        decoration: boxDecoration,
+        width: width,
+        padding: padding,
+        child: (isRightCheck ?? false)
+            ? rightSideCheckbox(context)
+            : leftSideCheckbox(context),
       );
   Widget leftSideCheckbox(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -74,7 +68,6 @@ class CustomCheckboxButton extends StatelessWidget {
         ],
       );
   Widget rightSideCheckbox(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           isExpandedText
               ? Expanded(

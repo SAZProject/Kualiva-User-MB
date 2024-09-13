@@ -18,6 +18,17 @@ class CustomDecoration {
     );
   }
 
+  BoxDecoration get inputFormBg {
+    return BoxDecoration(
+      color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+      border: Border.all(
+        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+        width: 1.h,
+      ),
+      borderRadius: BorderRadiusStyle.roundedBorder10,
+    );
+  }
+
   BoxDecoration get foregroundBlur {
     return BoxDecoration(
       color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
@@ -51,6 +62,9 @@ class CustomDecoration {
         color: appTheme.blueGray100,
       );
   BoxDecoration get fillPrimary => BoxDecoration(
+        color: theme(context).colorScheme.primary,
+      );
+  BoxDecoration get fillPrimary_03 => BoxDecoration(
         color: theme(context).colorScheme.primary.withOpacity(0.3),
       );
   BoxDecoration get fillOnPrimaryContainer => BoxDecoration(
@@ -142,8 +156,8 @@ class CustomDecoration {
       );
   BoxDecoration get gradientYellowAToOnPrimary => BoxDecoration(
         border: Border.all(
-          color: appTheme.black900.withOpacity(0.6),
-          width: 1.0,
+          color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+          width: 1.h,
         ),
         gradient: LinearGradient(
           begin: const Alignment(0.5, 0),

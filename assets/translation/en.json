@@ -201,7 +201,9 @@
         "reason_review_4": "Bullying or Harassment",
         "reason_review_5": "Discrimination or Hate Speech",
         "reason_review_6": "Personal Information",
-        "detail": "Details :"
+        "detail": "Details :",
+
+        "submit_btn": "Submit"
     },
     "save_to_collection": {
         "title": "Place Saved",

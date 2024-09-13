@@ -20,7 +20,7 @@ class CustomRadioButton extends StatelessWidget {
     super.key,
     this.boxDecoration,
     this.alignment,
-    this.isRightCheck,
+    this.isRightCheck = false,
     this.iconSize,
     this.value,
     this.groupValue,
@@ -30,13 +30,11 @@ class CustomRadioButton extends StatelessWidget {
     this.padding,
     this.textStyle,
     this.textAlignment,
-    this.gradient,
-    this.backgroundColor,
   });
 
   final BoxDecoration? boxDecoration;
   final Alignment? alignment;
-  final bool? isRightCheck;
+  final bool isRightCheck;
   final double? iconSize;
   final String? value;
   final String? groupValue;
@@ -46,8 +44,6 @@ class CustomRadioButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final TextStyle? textStyle;
   final TextAlign? textAlignment;
-  final Gradient? gradient;
-  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -59,36 +55,34 @@ class CustomRadioButton extends StatelessWidget {
         : buildRadioButtonWidget(context);
   }
 
-  bool get isGradient => gradient != null;
-  BoxDecoration get gradientDecoration => BoxDecoration(gradient: gradient);
   Widget buildRadioButtonWidget(BuildContext context) => InkWell(
         onTap: () => onChange(value!),
         child: Container(
           decoration: boxDecoration,
           width: width,
           padding: padding,
-          child: (isRightCheck ?? false)
+          child: isRightCheck
               ? rightSideRadioButton(context)
               : leftSideRadioButton(context),
         ),
       );
   Widget leftSideRadioButton(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: radioButtonWidget,
+            child: radioButtonWidget(context),
           ),
           textWidget(context),
         ],
       );
   Widget rightSideRadioButton(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           textWidget(context),
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: radioButtonWidget,
+            child: radioButtonWidget(context),
           ),
         ],
       );
@@ -97,7 +91,7 @@ class CustomRadioButton extends StatelessWidget {
         textAlign: textAlignment ?? TextAlign.start,
         style: textStyle ?? theme(context).textTheme.bodyMedium,
       );
-  Widget get radioButtonWidget => SizedBox(
+  Widget radioButtonWidget(BuildContext context) => SizedBox(
         height: iconSize,
         width: iconSize,
         child: Radio<String>(
@@ -105,11 +99,15 @@ class CustomRadioButton extends StatelessWidget {
             vertical: -4,
             horizontal: -4,
           ),
+          fillColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            return (states.contains(WidgetState.selected))
+                ? theme(context).colorScheme.primary
+                : theme(context).colorScheme.onPrimaryContainer;
+          }),
+          // activeColor: theme(context).colorScheme.primary,
           value: value ?? "",
           groupValue: groupValue,
           onChanged: (value) => onChange(value!),
         ),
       );
-  BoxDecoration get radioButtonDecoration =>
-      BoxDecoration(color: backgroundColor);
 }

@@ -112,7 +112,7 @@ class CustomDropDown extends StatelessWidget {
                     borderRadius: BorderRadiusStyle.roundedBorder10))
             .copyWith(
           borderSide: BorderSide(
-            color: theme(context).colorScheme.primary,
+            color: theme(context).colorScheme.onPrimaryContainer,
             width: 1.0,
           ),
         ),

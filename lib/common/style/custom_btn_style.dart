@@ -115,10 +115,10 @@ class CustomButtonStyles {
 
   static ButtonStyle outlineOnPrimaryContainer(BuildContext context) {
     return OutlinedButton.styleFrom(
-      backgroundColor: theme(context).colorScheme.primary.withOpacity(0.3),
+      backgroundColor: theme(context).colorScheme.primary,
       side: BorderSide(
-        color: theme(context).colorScheme.onPrimaryContainer,
-        width: 2.0,
+        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+        width: 1.h,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.h),

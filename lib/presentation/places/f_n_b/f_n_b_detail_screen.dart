@@ -129,7 +129,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       ),
       actions: [
         Container(
-          margin: const EdgeInsets.only(right: 5.0),
+          margin: const EdgeInsets.only(right: 10.0),
           decoration: BoxDecoration(
             color: theme(context)
                 .colorScheme
@@ -140,6 +140,9 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
           child: PopupMenuButton(
             position: PopupMenuPosition.under,
             iconSize: 25.h,
+            constraints: BoxConstraints(
+              maxWidth: 50.h,
+            ),
             itemBuilder: (ctx) => [
               _buildPopupMenuItem(context, 0, Icons.favorite),
               _buildPopupMenuItem(context, 1, Icons.flag),
@@ -156,7 +159,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     return PopupMenuItem(
       onTap: () => _popUpMenuAction(context, index),
       value: index,
-      child: Icon(icon, size: 25.h),
+      child: Center(child: Icon(icon, size: 25.h)),
     );
   }
 
@@ -394,6 +397,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       width: double.maxFinite,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             width: 120.h,
@@ -408,6 +412,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             child: Text(
               DatetimeUtils.getHour(fnbData.operationalTimeOpen[index]),
               style: CustomTextStyles(context).bodySmall12,
+              textAlign: TextAlign.center,
             ),
           ),
           Container(
@@ -416,6 +421,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             child: Text(
               " - ",
               style: CustomTextStyles(context).bodySmall12,
+              textAlign: TextAlign.center,
             ),
           ),
           Container(
@@ -424,6 +430,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             child: Text(
               DatetimeUtils.getHour(fnbData.operationalTimeClose[index]),
               style: CustomTextStyles(context).bodySmall12,
+              textAlign: TextAlign.center,
             ),
           ),
         ],

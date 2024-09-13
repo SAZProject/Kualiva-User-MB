@@ -99,8 +99,12 @@ class ReviewView extends StatelessWidget {
                   ),
                 ),
                 PopupMenuButton(
+                  position: PopupMenuPosition.under,
                   padding: EdgeInsets.zero,
                   iconSize: 20.h,
+                  constraints: BoxConstraints(
+                    maxWidth: 50.h,
+                  ),
                   itemBuilder: (ctx) => [
                     _buildPopupMenuItem(context, 0, Icons.flag),
                   ],
@@ -142,9 +146,11 @@ class ReviewView extends StatelessWidget {
   PopupMenuItem _buildPopupMenuItem(
       BuildContext context, int index, IconData icon) {
     return PopupMenuItem(
+      padding: EdgeInsets.zero,
+      height: 0.0,
       onTap: () => _popUpMenuAction(context, index),
       value: index,
-      child: Icon(icon, size: 25.h),
+      child: Center(child: Icon(icon, size: 25.h)),
     );
   }
 }

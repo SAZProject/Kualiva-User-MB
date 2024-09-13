@@ -45,8 +45,8 @@ class _SaveToCollectionState extends State<SaveToCollection> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBody: true,
         extendBodyBehindAppBar: true,
+        appBar: _saveCollectionAppBar(context),
         body: Container(
           width: double.maxFinite,
           height: Sizeutils.height,
@@ -55,8 +55,8 @@ class _SaveToCollectionState extends State<SaveToCollection> {
               begin: const Alignment(0.5, 0),
               end: const Alignment(0.5, 1),
               colors: [
-                appTheme.yellowA700.withOpacity(0.3),
-                theme(context).colorScheme.primary.withOpacity(0.3),
+                appTheme.yellowA700,
+                theme(context).colorScheme.primary,
               ],
             ),
           ),
@@ -67,15 +67,10 @@ class _SaveToCollectionState extends State<SaveToCollection> {
   }
 
   Widget _body(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            _saveCollectionAppBar(context),
-          ];
-        },
-        body: SingleChildScrollView(
+    return SafeArea(
+      child: SizedBox(
+        width: double.maxFinite,
+        child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: 5.h),
@@ -95,16 +90,8 @@ class _SaveToCollectionState extends State<SaveToCollection> {
       toolbarHeight: 55.h,
       leadingWidth: 50.h,
       titleSpacing: 0.0,
-      automaticallyImplyLeading: true,
+      automaticallyImplyLeading: false,
       centerTitle: true,
-      leading: Padding(
-        padding: EdgeInsets.all(10.h),
-        child: IconButton(
-          iconSize: 40.h,
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
       title: Padding(
         padding: EdgeInsets.zero,
         child: Text(
@@ -116,8 +103,9 @@ class _SaveToCollectionState extends State<SaveToCollection> {
   }
 
   Widget _savedCollectionList(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -126,23 +114,21 @@ class _SaveToCollectionState extends State<SaveToCollection> {
             useIcon: false,
           ),
           SizedBox(height: 4.h),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              separatorBuilder: (context, index) {
-                return SizedBox(width: 10.h);
-              },
-              itemCount: _listCollection.length,
-              itemBuilder: (context, index) {
-                return _savedCollectionListItem(
-                  context,
-                  index,
-                  _listCollection[index].label,
-                  _listCollection[index].content,
-                );
-              },
-            ),
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            separatorBuilder: (context, index) {
+              return SizedBox(height: 10.h);
+            },
+            itemCount: _listCollection.length,
+            itemBuilder: (context, index) {
+              return _savedCollectionListItem(
+                context,
+                index,
+                _listCollection[index].label,
+                _listCollection[index].content,
+              );
+            },
           ),
         ],
       ),
@@ -169,7 +155,7 @@ class _SaveToCollectionState extends State<SaveToCollection> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  label,
+                  index == 0 ? context.tr(label) : label,
                   textAlign: TextAlign.center,
                   style: theme(context).textTheme.titleMedium,
                   maxLines: 1,
@@ -177,7 +163,7 @@ class _SaveToCollectionState extends State<SaveToCollection> {
                 ),
                 SizedBox(width: 10.h),
                 Text(
-                  content,
+                  context.tr(content, namedArgs: {"index": "$index"}),
                   textAlign: TextAlign.center,
                   style: theme(context).textTheme.bodySmall,
                   maxLines: 1,

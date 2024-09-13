@@ -42,10 +42,10 @@ class FNBDetailMenuScreen extends StatelessWidget {
       titleSpacing: 0.0,
       automaticallyImplyLeading: true,
       centerTitle: true,
-      leading: Padding(
-        padding: EdgeInsets.all(10.h),
+      leading: Container(
+        margin: const EdgeInsets.only(left: 5.0),
         child: IconButton(
-          iconSize: 40.h,
+          iconSize: 25.h,
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () => Navigator.pop(context),
         ),
@@ -81,7 +81,7 @@ class FNBDetailMenuScreen extends StatelessWidget {
         padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
         separatorBuilder: (context, index) {
-          return SizedBox(height: 20.h);
+          return SizedBox(height: 10.h);
         },
         itemBuilder: (context, index) {
           return _listDetailMenuItem(context, listImageMenu[index]);
@@ -92,7 +92,6 @@ class FNBDetailMenuScreen extends StatelessWidget {
 
   Widget _listDetailMenuItem(BuildContext context, String imageMenu) {
     return Container(
-      padding: EdgeInsets.all(4.h),
       decoration:
           CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
                 borderRadius: BorderRadiusStyle.roundedBorder10,

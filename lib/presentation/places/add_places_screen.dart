@@ -75,10 +75,10 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
   TextEditingController placeAddressgeneralCtl = TextEditingController();
   TextEditingController placeAddressDetailCtl = TextEditingController();
   List<int> listOperationalDay = List.generate(7, (index) => index);
-  List<DateTime> listOperationalTimeOpen =
-      List.generate(7, (index) => DateTime(0, 0, 0, 0, 0));
-  List<DateTime> listOperationalTimeClose =
-      List.generate(7, (index) => DateTime(0, 0, 0, 0, 0));
+  List<TimeOfDay> listOperationalTimeOpen =
+      List.generate(7, (index) => const TimeOfDay(hour: 0, minute: 0));
+  List<TimeOfDay> listOperationalTimeClose =
+      List.generate(7, (index) => const TimeOfDay(hour: 0, minute: 0));
   List<String>? placeImages;
   List<String>? placeMenuImages;
 
@@ -130,9 +130,9 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
                 _buildPlaceData(context),
                 SizedBox(height: 10.h),
                 _buildAgreedTosPolicy(context),
-                SizedBox(height: 10.h),
+                SizedBox(height: 25.h),
                 _submitBtn(context),
-                SizedBox(height: 10.h),
+                SizedBox(height: 25.h),
               ],
             ),
           ),
@@ -141,19 +141,22 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
     );
   }
 
-  PreferredSizeWidget _addPlaceAppBar(BuildContext context) {
-    return AppBar(
+  Widget _addPlaceAppBar(BuildContext context) {
+    return SliverAppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
       toolbarHeight: 55.h,
       leadingWidth: 50.h,
       titleSpacing: 0.0,
       automaticallyImplyLeading: true,
+      pinned: false,
+      snap: false,
+      floating: false,
       centerTitle: true,
-      leading: Padding(
-        padding: EdgeInsets.all(10.h),
+      leading: Container(
+        margin: const EdgeInsets.only(left: 5.0),
         child: IconButton(
-          iconSize: 40.h,
+          iconSize: 25.h,
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () => Navigator.pop(context),
         ),
@@ -182,7 +185,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             label: context.tr("add_place.personal"),
             useIcon: false,
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           _buildTextFormComponent(
             context,
             context.tr("add_place.full_name"),
@@ -190,7 +193,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             context.tr("add_place.full_name"),
             "50",
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           //TODO get location open google map
           _buildLocationComponent(
             context,
@@ -199,7 +202,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             context.tr("add_place.loc_hint"),
             () {},
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
         ],
       ),
     );
@@ -219,7 +222,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             label: context.tr("add_place.place"),
             useIcon: false,
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           _buildTextFormComponent(
             context,
             context.tr("add_place.place_name"),
@@ -227,7 +230,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             context.tr("add_place.place_name"),
             "50",
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           _buildDropDownComponent(
             context,
             context.tr("add_place.type"),
@@ -235,13 +238,13 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             context.tr("add_place.type_hint"),
             (value) {},
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           //TODO pick image by gallery or camera
           _buildAttachMedia(
             context,
             context.tr("add_place.licence_permit"),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           _buildDropDownComponent(
             context,
             context.tr("add_place.tags"),
@@ -249,7 +252,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             context.tr("add_place.tags_hint"),
             (value) {},
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           _buildTextFormComponent(
             context,
             context.tr("add_place.contact"),
@@ -257,7 +260,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             context.tr("add_place.contact_hint"),
             "15",
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           _buildLocationComponent(
             context,
             context.tr("add_place.address"),
@@ -265,7 +268,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             context.tr("add_place.address_general"),
             () {},
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           _buildTextFormComponent(
             context,
             context.tr("add_place.address_detail"),
@@ -273,10 +276,10 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             context.tr("add_place.address_detail"),
             "200",
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           //TODO add Time picker for open and close
           _buildOperationalDaynTime(context),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           //TODO pick image by gallery or camera
           _buildAttachMedia(
             context,
@@ -284,7 +287,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             hasrule: true,
             ruleContent: context.tr("add_place.place_picture_rule"),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
           //TODO pick image by gallery or camera
           _buildAttachMedia(
             context,
@@ -292,7 +295,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             hasrule: true,
             ruleContent: context.tr("add_place.place_menu_rule"),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 10.h),
         ],
       ),
     );
@@ -331,7 +334,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              "${controller.value.text.length}/$headerLabel",
+              "${controller.value.text.length}/$maxWord",
               textAlign: TextAlign.center,
               style: theme(context).textTheme.bodySmall,
               maxLines: 1,
@@ -422,8 +425,9 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
 
   Widget _buildAttachMedia(BuildContext context, String headerLabel,
       {bool hasrule = false, String ruleContent = ""}) {
-    return SizedBox(
+    return Container(
       width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -439,7 +443,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             width: double.maxFinite,
             padding: EdgeInsets.symmetric(vertical: 22.h),
             decoration:
-                CustomDecoration(context).fillOnSecondaryContainer.copyWith(
+                CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
                       borderRadius: BorderRadiusStyle.roundedBorder10,
                     ),
             child: Column(
@@ -492,9 +496,10 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: ExpansionTile(
+        childrenPadding: EdgeInsets.only(bottom: 5.h),
         title: Text(
           context.tr("f_n_b_detail.about_open"),
-          style: CustomTextStyles(context).bodySmall12,
+          style: CustomTextStyles(context).bodyMedium_13,
         ),
         children: listOperationalDay
             .map((index) => _operationalDayHourView(context, index))
@@ -504,9 +509,12 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
   }
 
   Widget _operationalDayHourView(BuildContext context, int index) {
-    return SizedBox(
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5.h),
       width: double.maxFinite,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 14.h,
@@ -519,33 +527,77 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
               value: selectedDay[index],
               checkColor: theme(context).colorScheme.primary,
               onChanged: (value) {
-                selectedDay[index] = value!;
+                setState(() {
+                  selectedDay[index] = value!;
+                });
               },
             ),
           ),
-          Text(
-            DatetimeUtils.getDays(index),
-            style: CustomTextStyles(context).bodySmall12,
+          SizedBox(
+            width: 120.h,
+            child: Text(
+              DatetimeUtils.getDays(index),
+              style: CustomTextStyles(context).bodyMedium_13,
+            ),
           ),
-          InkWell(
-            onTap: () {},
-            child: SizedBox(
-              height: 14.h,
-              width: 14.h,
+          Container(
+            alignment: Alignment.center,
+            width: 50.h,
+            decoration: CustomDecoration(context).outline,
+            child: InkWell(
+              onTap: () async {
+                await showTimePicker(
+                  context: context,
+                  initialTime: listOperationalTimeOpen[index],
+                ).then(
+                  (value) {
+                    if (value != null) {
+                      setState(() {
+                        listOperationalTimeOpen[index] = value;
+                      });
+                    }
+                  },
+                );
+              },
               child: Text(
-                DatetimeUtils.getHour(listOperationalTimeOpen[index]),
-                style: CustomTextStyles(context).bodySmall12,
+                listOperationalTimeOpen[index].format(context),
+                style: CustomTextStyles(context).bodyMedium_13,
+                textAlign: TextAlign.center,
               ),
             ),
           ),
-          InkWell(
-            onTap: () {},
-            child: SizedBox(
-              height: 14.h,
-              width: 14.h,
+          Container(
+            alignment: Alignment.center,
+            width: 20.h,
+            child: Text(
+              " - ",
+              style: CustomTextStyles(context).bodyMedium_13,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: 50.h,
+            decoration: CustomDecoration(context).outline,
+            child: InkWell(
+              onTap: () async {
+                await showTimePicker(
+                  context: context,
+                  initialTime: listOperationalTimeClose[index],
+                ).then(
+                  (value) {
+                    if (value != null) {
+                      setState(() {
+                        listOperationalTimeClose[index] = value;
+                      });
+                    }
+                  },
+                );
+              },
               child: Text(
-                DatetimeUtils.getHour(listOperationalTimeClose[index]),
-                style: CustomTextStyles(context).bodySmall12,
+                listOperationalTimeClose[index].format(context),
+                style: CustomTextStyles(context).bodyMedium_13,
+                textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -555,50 +607,52 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
   }
 
   Widget _buildAgreedTosPolicy(BuildContext context) {
-    return CustomCheckboxButton(
-      isRichtext: true,
-      value: isAgreed,
-      richTextWidget: RichText(
-        textAlign: TextAlign.left,
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: context.tr("add_place.agreement"),
-              style: CustomTextStyles(context).bodySmallOnPrimaryContainer,
-            ),
-            TextSpan(
-              text: context.tr("add_place.tos"),
-              style: theme(context).textTheme.labelMedium!.copyWith(
-                    color: appTheme.yellowA700,
-                    decorationColor: appTheme.yellowA700,
-                    decoration: TextDecoration.underline,
-                  ),
-              recognizer: TapGestureRecognizer()..onTap = () {},
-            ),
-            TextSpan(
-              text: context.tr("add_place.and"),
-              style: CustomTextStyles(context).bodySmallOnPrimaryContainer,
-            ),
-            TextSpan(
-              text: context.tr("add_place.policy"),
-              style: theme(context).textTheme.labelMedium!.copyWith(
-                    color: appTheme.yellowA700,
-                    decorationColor: appTheme.yellowA700,
-                    decoration: TextDecoration.underline,
-                  ),
-              recognizer: TapGestureRecognizer()..onTap = () {},
-            ),
-          ],
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      child: CustomCheckboxButton(
+        isRichtext: true,
+        value: isAgreed,
+        richTextWidget: RichText(
+          textAlign: TextAlign.left,
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: context.tr("add_place.agreement"),
+                style: CustomTextStyles(context).bodySmallOnPrimaryContainer,
+              ),
+              TextSpan(
+                text: context.tr("add_place.tos"),
+                style: theme(context).textTheme.labelMedium!.copyWith(
+                      color: theme(context).colorScheme.onPrimaryContainer,
+                      decorationColor:
+                          theme(context).colorScheme.onPrimaryContainer,
+                      decoration: TextDecoration.underline,
+                    ),
+                recognizer: TapGestureRecognizer()..onTap = () {},
+              ),
+              TextSpan(
+                text: context.tr("add_place.and"),
+                style: CustomTextStyles(context).bodySmallOnPrimaryContainer,
+              ),
+              TextSpan(
+                text: context.tr("add_place.policy"),
+                style: theme(context).textTheme.labelMedium!.copyWith(
+                      color: theme(context).colorScheme.onPrimaryContainer,
+                      decorationColor:
+                          theme(context).colorScheme.onPrimaryContainer,
+                      decoration: TextDecoration.underline,
+                    ),
+                recognizer: TapGestureRecognizer()..onTap = () {},
+              ),
+            ],
+          ),
         ),
+        onChange: (value) {
+          setState(() {
+            isAgreed = value;
+          });
+        },
       ),
-      onPressed: () {
-        setState(() {
-          isAgreed = !isAgreed;
-        });
-      },
-      onChange: (value) {
-        isAgreed = value;
-      },
     );
   }
 

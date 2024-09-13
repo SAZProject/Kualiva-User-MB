@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.23
-- test & Fixed review, review form, report place & review screen
+Ver 0.0.24
+- test & Fixed profile & add place screen
 ```
 
 ## Getting Started

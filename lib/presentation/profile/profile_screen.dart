@@ -64,6 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: _profileAppBar(context),
         backgroundColor: Colors.transparent,
         body: _body(context),
       ),
@@ -73,25 +74,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _body(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      height: MediaQuery.of(context).size.height,
-      child: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            _profileAppBar(context),
-          ];
-        },
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 5.h),
-              _userLevel(context),
-              SizedBox(height: 5.h),
-              _buildMyProfileVoucher(context),
-              SizedBox(height: 5.h),
-              _buildProfileMenuList(),
-              SizedBox(height: 5.h),
-            ],
-          ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10.h),
+            _userLevel(context),
+            SizedBox(height: 10.h),
+            _buildMyProfileVoucher(context),
+            SizedBox(height: 10.h),
+            _buildProfileMenuList(),
+            SizedBox(height: 10.h),
+          ],
         ),
       ),
     );
@@ -104,17 +97,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       toolbarHeight: 55.h,
       titleSpacing: 0.0,
       automaticallyImplyLeading: false,
-      centerTitle: true,
-      leading: Padding(
-        padding: EdgeInsets.all(10.h),
-        child: IconButton(
-          iconSize: 40.h,
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
+      centerTitle: false,
       title: Padding(
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.only(left: 20.h),
         child: Text(
           context.tr("profile.title", namedArgs: {"name": "User"}),
           style: theme(context).textTheme.headlineSmall,
@@ -130,10 +115,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         horizontal: 8.h,
         vertical: 6.h,
       ),
-      decoration:
-          CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder14,
-              ),
+      decoration: CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder14,
+          ),
       width: double.maxFinite,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,49 +185,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Expanded(
+          SizedBox(width: 10.h),
+          Flexible(
             child: CustomOutlinedButton(
               height: 40.h,
-              text: _profileMenuModel[0].label,
+              text: context.tr(_profileMenuModel[0].label),
               leftIcon: Container(
                 margin: EdgeInsets.only(right: 10.h),
-                child: Icon(_profileMenuModel[0].icon, size: 18.h),
+                child: Icon(
+                  _profileMenuModel[0].icon,
+                  size: 18.h,
+                  color: theme(context).colorScheme.onPrimaryContainer,
+                ),
               ),
-              buttonStyle:
-                  CustomButtonStyles.outlineOnPrimaryContainer(context),
+              decoration:
+                  CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder10,
+                      ),
+              buttonStyle: CustomButtonStyles.none,
               buttonTextStyle: theme(context).textTheme.bodyMedium,
               onPressed: () {},
             ),
           ),
           SizedBox(width: 10.h),
-          Expanded(
+          Flexible(
             child: CustomOutlinedButton(
               height: 40.h,
-              text: _profileMenuModel[1].label,
+              text: context.tr(_profileMenuModel[1].label),
               leftIcon: Container(
                 margin: EdgeInsets.only(right: 10.h),
-                child: Icon(_profileMenuModel[1].icon, size: 18.h),
+                child: Icon(
+                  _profileMenuModel[1].icon,
+                  size: 18.h,
+                  color: theme(context).colorScheme.onPrimaryContainer,
+                ),
               ),
-              buttonStyle:
-                  CustomButtonStyles.outlineOnPrimaryContainer(context),
+              decoration:
+                  CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder10,
+                      ),
+              buttonStyle: CustomButtonStyles.none,
               buttonTextStyle: theme(context).textTheme.bodyMedium,
               onPressed: () {},
             ),
           ),
+          SizedBox(width: 10.h),
         ],
       ),
     );
   }
 
   Widget _buildProfileMenuList() {
-    return Expanded(
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      decoration:
+          CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder10,
+              ),
       child: ListView.separated(
+        shrinkWrap: true,
         itemCount: (_profileMenuModel.length - 2),
         padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
         separatorBuilder: (context, index) {
-          return SizedBox(height: 20.h);
+          return SizedBox(height: 5.h);
         },
         itemBuilder: (context, index) {
           return _buildProfileMenuListItem(
@@ -265,22 +273,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
     IconData? icon,
     String? imageUri,
   ) {
-    return Container(
+    return SizedBox(
       width: double.maxFinite,
-      margin: EdgeInsets.only(top: 5.h),
       child: ListTile(
+        dense: true,
+        visualDensity: VisualDensity.compact,
         leading: icon != null
-            ? Center(
-                child: Icon(
-                  icon,
-                  size: 20.h,
-                ),
-              )
-            : CustomImageView(
-                imagePath: imageUri ?? "",
+            ? SizedBox(
                 width: 20.h,
                 height: 20.h,
-                alignment: Alignment.center,
+                child: Center(
+                  child: Icon(
+                    icon,
+                    size: 20.h,
+                  ),
+                ),
+              )
+            : SizedBox(
+                width: 20.h,
+                height: 20.h,
+                child: CustomImageView(
+                  imagePath: imageUri ?? "",
+                  width: 20.h,
+                  height: 20.h,
+                  alignment: Alignment.center,
+                ),
               ),
         title: Text(
           context.tr(label),

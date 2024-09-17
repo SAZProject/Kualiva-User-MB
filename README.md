@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.25
-- FNB detail screen add call support (untested)
+Ver 0.0.25+01
+- Add select image utility
+- Add mounted checker in permission & otp screen
 ```
 
 ## Getting Started

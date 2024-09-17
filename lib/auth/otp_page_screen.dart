@@ -63,6 +63,7 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
                       overflow: TextOverflow.ellipsis, maxLines: 2),
                 );
                 Future.delayed(const Duration(seconds: 2), () {
+                  if (!context.mounted) return;
                   Navigator.pushNamed(
                       context, AppRoutes.devicePermissionScreen);
                 });

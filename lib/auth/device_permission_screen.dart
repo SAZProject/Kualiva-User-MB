@@ -18,6 +18,7 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
     _requestPermission(context).then(
       (value) {
         if (value) {
+          if (!context.mounted) return;
           Navigator.pushNamedAndRemoveUntil(
               context, AppRoutes.homeNavigationScreen, (route) => false);
         }

@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.24
-- test & Fixed profile & add place screen
+Ver 0.0.25
+- FNB detail screen add call support (untested)
 ```
 
 ## Getting Started

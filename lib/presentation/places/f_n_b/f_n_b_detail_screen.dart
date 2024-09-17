@@ -9,6 +9,7 @@ import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
 import 'package:like_it/presentation/review/widget/review_view.dart';
 import 'package:like_it/presentation/review/widget/special_review_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FNBDetailScreen extends StatefulWidget {
   const FNBDetailScreen({super.key, required this.fnbModel});
@@ -21,6 +22,7 @@ class FNBDetailScreen extends StatefulWidget {
 
 class _FNBDetailScreenState extends State<FNBDetailScreen> {
   FNBModel get fnbData => super.widget.fnbModel;
+  bool _hasCallSupport = false;
 
   List<Widget> imageSliders = [];
 
@@ -45,6 +47,14 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     }
   }
 
+  Future<void> _launchContact(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -58,6 +68,11 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
         );
       },
     ).toList();
+    canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
+      setState(() {
+        _hasCallSupport = result;
+      });
+    });
   }
 
   @override
@@ -277,6 +292,9 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                   context,
                   icon: Icons.phone,
                   label: fnbData.phoneNumber,
+                  onPressed: _hasCallSupport
+                      ? () => _launchContact(fnbData.phoneNumber)
+                      : null,
                 ),
                 SizedBox(height: 8.h),
                 _buildAboutContent(
@@ -319,6 +337,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     required IconData icon,
     required String label,
     int maxLines = 1,
+    void Function()? onPressed,
   }) {
     return SizedBox(
       width: double.maxFinite,
@@ -330,11 +349,18 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             child: Padding(
               padding: EdgeInsets.only(left: 10.h),
               child: trailingWidget ??
-                  Text(
-                    label,
-                    style: CustomTextStyles(context).bodySmall12,
-                    maxLines: maxLines,
-                    overflow: TextOverflow.ellipsis,
+                  InkWell(
+                    onTap: onPressed,
+                    child: Text(
+                      label,
+                      style: onPressed != null
+                          ? CustomTextStyles(context).bodySmall12.copyWith(
+                                color: theme(context).colorScheme.onPrimary,
+                              )
+                          : CustomTextStyles(context).bodySmall12,
+                      maxLines: maxLines,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
             ),
           ),

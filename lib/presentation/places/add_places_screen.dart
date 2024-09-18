@@ -277,7 +277,6 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             "200",
           ),
           SizedBox(height: 10.h),
-          //TODO add Time picker for open and close
           _buildOperationalDaynTime(context),
           SizedBox(height: 10.h),
           //TODO pick image by gallery or camera
@@ -457,7 +456,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  context.tr("add_place.attach_media_content"),
+                  context.tr("common.attach_media_image"),
                   textAlign: TextAlign.center,
                   style: theme(context).textTheme.bodyMedium,
                   maxLines: 1,
@@ -465,7 +464,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  context.tr("add_place.max_media"),
+                  context.tr("common.max_media"),
                   textAlign: TextAlign.center,
                   style: theme(context).textTheme.bodySmall,
                   maxLines: 1,

@@ -22,6 +22,9 @@
         "coming_soon": "Coming Soon",
         "see_more": "See More",
 
+        "attach_media_content": "Upload (pdf, jpg, png)",
+        "attach_media_image": "Upload (jpeg, jpg, png)",
+        "max_media": "Max 5 Picture",
         "gallery": "Gallery",
         "camera": "Camera",
         "select_image_media": "Choose Media",
@@ -187,9 +190,7 @@
         "other_review": "Other\u0027s Reviews",
         "no_review": "No Review",
         "review_msg": "Review :",
-        "attach_media": "Attach photo or video (optional) :",
-        "attach_media_content": "Upload (pdf, jpg, png)",
-        "max_media": "Max 5 Picture",
+        "attach_media": "Attach photo (optional) :",
         "hide_username": "Hide my name",
 
         "submit_btn": "Submit"
@@ -197,9 +198,7 @@
     "report": {
         "title": "Report",
         "reason": "Reason :",
-        "attach_media": "Attach photo or video :",
-        "attach_media_content": "Upload (pdf, jpg, png)",
-        "max_media": "Max 5 Picture",
+        "attach_media": "Attach photo :",
         "reason_review_1": "Off Topic",
         "reason_review_2": "Spam",
         "reason_review_3": "Profanity",
@@ -257,8 +256,6 @@
         "place_picture_rule": "Contains: front View, Inside View, etc",
         "place_menu_picture": "Price List & Menu Picture",
         "place_menu_rule": "Contains: Price List, etc",
-        "attach_media_content": "Upload (pdf, jpg, png)",
-        "max_media": "Max 5 Picture",
         "agreement": "I have read and agree to ",
         "tos": "Terms & Service",
         "and": " and ",

@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.25+01
-- Add select image utility
-- Add mounted checker in permission & otp screen
+Ver 0.0.25+02
+- Same Localization make it common
+- add todo
 ```
 
 ## Getting Started

@@ -293,7 +293,8 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                   icon: Icons.phone,
                   label: fnbData.phoneNumber,
                   onPressed: _hasCallSupport
-                      ? () => _launchContact(fnbData.phoneNumber)
+                      ? () => _launchContact(
+                          fnbData.phoneNumber.replaceAll("-", ""))
                       : null,
                 ),
                 SizedBox(height: 8.h),

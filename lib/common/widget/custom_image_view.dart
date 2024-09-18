@@ -3,22 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-extension ImageTypeExtension on String {
-  ImageType get imagetype {
-    if (startsWith("http") || startsWith("https")) {
-      return ImageType.network;
-    } else if (endsWith(".svg")) {
-      return ImageType.svg;
-    } else if (startsWith("file://")) {
-      return ImageType.file;
-    } else {
-      return ImageType.png;
-    }
-  }
-}
-
-enum ImageType { svg, png, network, file, unknown }
+import 'package:like_it/common/utility/image_utility.dart';
 
 class CustomImageView extends StatelessWidget {
   const CustomImageView(

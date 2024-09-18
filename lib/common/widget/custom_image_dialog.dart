@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 
-Future<void> selectImageMedia({
+Future<void> customImageDialog({
   required BuildContext context,
   required void Function()? onPressedGallery,
   required void Function()? onPressedCamera,
@@ -14,6 +14,7 @@ Future<void> selectImageMedia({
       icon: Icon(
         Icons.info_outline,
         size: 50.h,
+        color: theme(context).colorScheme.primary,
       ),
       title: Text(context.tr("common.select_image_media")),
       content: SizedBox(

@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.25+02
-- Same Localization make it common
-- add todo
+Ver 0.0.26
+- Add get image from gallery/camera, fullscreen image
+- Navigate phone number to contact (tested)
 ```
 
 ## Getting Started

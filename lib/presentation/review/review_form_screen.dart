@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
+import 'package:like_it/common/utility/image_utility.dart';
+import 'package:like_it/common/widget/custom_attach_media.dart';
 import 'package:like_it/common/widget/custom_checkbox_button.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/common/widget/custom_rating_bar.dart';
@@ -22,6 +24,8 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
   FNBModel get fnbData => super.widget.fnbModel;
 
   TextEditingController reviewMsgCtl = TextEditingController();
+
+  List<String> reviewMedia = [];
 
   double ratingStar = 0.0;
 
@@ -68,7 +72,28 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
             SizedBox(height: 20.h),
             _buildReviewMsg(context),
             SizedBox(height: 10.h),
-            _buildAttachMedia(context),
+            CustomAttachMedia(
+              headerLabel: "review.attach_media",
+              listImages: reviewMedia,
+              onPressedGallery: () {
+                ImageUtility()
+                    .getMediaFromGallery(context, reviewMedia)
+                    .then((value) => setState(() => reviewMedia = value));
+                Navigator.pop(context);
+              },
+              onPressedCamera: () {
+                ImageUtility()
+                    .getMediaFromCamera(context, reviewMedia)
+                    .then((value) => setState(() => reviewMedia = value));
+                Navigator.pop(context);
+              },
+              onCancelPressed: () => Navigator.pop(context),
+              onRemovePressed: (index) {
+                setState(() {
+                  reviewMedia.remove(reviewMedia[index]);
+                });
+              },
+            ),
             SizedBox(height: 10.h),
             _buildHideUsername(context),
             SizedBox(height: 25.h),
@@ -149,63 +174,6 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
                 .withOpacity(0.6),
             inputBorder: TextFormFieldStyleHelper.fillOnSecondaryContainer,
           ),
-        ],
-      ),
-    );
-  }
-
-  //TODO pick image by gallery or camera
-  Widget _buildAttachMedia(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 10.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.tr("review.attach_media"),
-            textAlign: TextAlign.center,
-            style: theme(context).textTheme.titleMedium,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: 10.h),
-          Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(vertical: 22.h),
-            decoration:
-                CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder10,
-                    ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.upload_file,
-                  size: 16.h,
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  context.tr("common.attach_media_image"),
-                  textAlign: TextAlign.center,
-                  style: theme(context).textTheme.bodyMedium,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  context.tr("common.max_media"),
-                  textAlign: TextAlign.center,
-                  style: theme(context).textTheme.bodySmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 10.h),
         ],
       ),
     );

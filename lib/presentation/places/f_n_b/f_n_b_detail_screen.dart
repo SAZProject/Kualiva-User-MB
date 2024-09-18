@@ -297,6 +297,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                       : null,
                 ),
                 SizedBox(height: 8.h),
+                //TODO navigate to maps app
                 _buildAboutContent(
                   context,
                   icon: Icons.place,

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
+import 'package:like_it/common/utility/image_utility.dart';
+import 'package:like_it/common/widget/custom_attach_media.dart';
 import 'package:like_it/common/widget/custom_checkbox_button.dart';
 import 'package:like_it/common/widget/custom_drop_down.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
@@ -70,7 +72,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
   TextEditingController placeFullNameCtl = TextEditingController();
   String? placeType;
   TextEditingController placeContactCtl = TextEditingController();
-  List<String>? placePermitImages;
+  List<String> placePermitImages = [];
   List<String>? placeTags;
   TextEditingController placeAddressgeneralCtl = TextEditingController();
   TextEditingController placeAddressDetailCtl = TextEditingController();
@@ -79,8 +81,8 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
       List.generate(7, (index) => const TimeOfDay(hour: 0, minute: 0));
   List<TimeOfDay> listOperationalTimeClose =
       List.generate(7, (index) => const TimeOfDay(hour: 0, minute: 0));
-  List<String>? placeImages;
-  List<String>? placeMenuImages;
+  List<String> placeImages = [];
+  List<String> placeMenuImages = [];
 
   bool isAgreed = false;
 
@@ -239,10 +241,28 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             (value) {},
           ),
           SizedBox(height: 10.h),
-          //TODO pick image by gallery or camera
-          _buildAttachMedia(
-            context,
-            context.tr("add_place.licence_permit"),
+          CustomAttachMedia(
+            headerLabel: "add_place.licence_permit",
+            listImages: placePermitImages,
+            defaultContentType: "common.attach_media_content",
+            onPressedGallery: () {
+              ImageUtility()
+                  .getMediaFromGallery(context, placePermitImages)
+                  .then((value) => setState(() => placePermitImages = value));
+              Navigator.pop(context);
+            },
+            onPressedCamera: () {
+              ImageUtility()
+                  .getMediaFromCamera(context, placePermitImages)
+                  .then((value) => setState(() => placePermitImages = value));
+              Navigator.pop(context);
+            },
+            onCancelPressed: () => Navigator.pop(context),
+            onRemovePressed: (index) {
+              setState(() {
+                placePermitImages.remove(placePermitImages[index]);
+              });
+            },
           ),
           SizedBox(height: 10.h),
           _buildDropDownComponent(
@@ -279,20 +299,54 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
           SizedBox(height: 10.h),
           _buildOperationalDaynTime(context),
           SizedBox(height: 10.h),
-          //TODO pick image by gallery or camera
-          _buildAttachMedia(
-            context,
-            context.tr("add_place.place_picture"),
-            hasrule: true,
-            ruleContent: context.tr("add_place.place_picture_rule"),
+          CustomAttachMedia(
+            headerLabel: "add_place.place_picture",
+            listImages: placeImages,
+            hasRule: true,
+            ruleContent: "add_place.place_picture_rule",
+            onPressedGallery: () {
+              ImageUtility()
+                  .getMediaFromGallery(context, placeImages)
+                  .then((value) => setState(() => placeImages = value));
+              Navigator.pop(context);
+            },
+            onPressedCamera: () {
+              ImageUtility()
+                  .getMediaFromCamera(context, placeImages)
+                  .then((value) => setState(() => placeImages = value));
+              Navigator.pop(context);
+            },
+            onCancelPressed: () => Navigator.pop(context),
+            onRemovePressed: (index) {
+              setState(() {
+                placeImages.remove(placeImages[index]);
+              });
+            },
           ),
           SizedBox(height: 10.h),
-          //TODO pick image by gallery or camera
-          _buildAttachMedia(
-            context,
-            context.tr("add_place.place_menu_picture"),
-            hasrule: true,
-            ruleContent: context.tr("add_place.place_menu_rule"),
+          CustomAttachMedia(
+            headerLabel: "add_place.place_menu_picture",
+            listImages: placeMenuImages,
+            hasRule: true,
+            ruleContent: "add_place.place_menu_rule",
+            onPressedGallery: () {
+              ImageUtility()
+                  .getMediaFromGallery(context, placeMenuImages)
+                  .then((value) => setState(() => placeMenuImages = value));
+              Navigator.pop(context);
+            },
+            onPressedCamera: () {
+              ImageUtility()
+                  .getMediaFromCamera(context, placeMenuImages)
+                  .then((value) => setState(() => placeMenuImages = value));
+              Navigator.pop(context);
+            },
+            onCancelPressed: () => Navigator.pop(context),
+            onRemovePressed: (index) {
+              setState(() {
+                placeMenuImages.remove(placeMenuImages[index]);
+              });
+            },
           ),
           SizedBox(height: 10.h),
         ],
@@ -417,75 +471,6 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             contentPadding: EdgeInsets.all(10.h),
             onChange: onChange,
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAttachMedia(BuildContext context, String headerLabel,
-      {bool hasrule = false, String ruleContent = ""}) {
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 10.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            headerLabel,
-            textAlign: TextAlign.center,
-            style: theme(context).textTheme.titleMedium,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: 10.h),
-          Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(vertical: 22.h),
-            decoration:
-                CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder10,
-                    ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.upload_file,
-                  size: 16.h,
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  context.tr("common.attach_media_image"),
-                  textAlign: TextAlign.center,
-                  style: theme(context).textTheme.bodyMedium,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  context.tr("common.max_media"),
-                  textAlign: TextAlign.center,
-                  style: theme(context).textTheme.bodySmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          hasrule
-              ? Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    ruleContent,
-                    textAlign: TextAlign.center,
-                    style: theme(context).textTheme.bodySmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )
-              : Container(),
-          SizedBox(height: 10.h),
         ],
       ),
     );

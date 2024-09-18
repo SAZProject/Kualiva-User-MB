@@ -7,14 +7,30 @@ import 'package:image_picker/image_picker.dart';
 import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/widget/custom_snack_bar.dart';
 
+extension ImageTypeExtension on String {
+  ImageType get imagetype {
+    if (startsWith("http") || startsWith("https")) {
+      return ImageType.network;
+    } else if (endsWith(".svg")) {
+      return ImageType.svg;
+    } else if (startsWith("file://")) {
+      return ImageType.file;
+    } else {
+      return ImageType.png;
+    }
+  }
+}
+
+enum ImageType { svg, png, network, file, unknown }
+
 class ImageUtility {
   final ImagePicker picker = ImagePicker();
 
-  Future<List<XFile>> getMediaFromGallery(
-      BuildContext context, List<XFile> listImage) async {
+  Future<List<String>> getMediaFromGallery(
+      BuildContext context, List<String> listImage) async {
     try {
       List<XFile>? getRawMedia = await picker.pickMultiImage();
-      List<XFile> temp = [];
+      List<String> temp = [];
       if (listImage.isEmpty) {
         if (getRawMedia.isNotEmpty) {
           List<XFile>? getMedia = [];
@@ -22,7 +38,9 @@ class ImageUtility {
             XFile? newCompressImg = await _compressImage(selectedRawMedia);
             if (newCompressImg != null) getMedia.add(newCompressImg);
           }
-          temp = getMedia;
+          for (var media in getMedia) {
+            temp.add(media.path);
+          }
         } else {
           temp = [];
         }
@@ -33,31 +51,37 @@ class ImageUtility {
             XFile? newCompressImg = await _compressImage(selectedRawMedia);
             if (newCompressImg != null) getMedia.add(newCompressImg);
           }
-          temp = [...listImage, ...getMedia];
+          temp = [
+            ...listImage,
+            ...List.generate(
+              getMedia.length,
+              (index) => getMedia[index].path,
+            )
+          ];
         } else {}
       }
       return temp;
     } catch (e) {
       LeLog.pe(this, getMediaFromGallery, e.toString());
-      if (!context.mounted) return Future<List<XFile>>.value([]);
+      if (!context.mounted) return Future<List<String>>.value([]);
       showSnackBar(context, Icons.error_outline, Colors.red,
           "${"common.error".tr()} $e", Colors.red);
-      return Future<List<XFile>>.value([]);
+      return Future<List<String>>.value([]);
     }
   }
 
-  Future<List<XFile>> getMediaFromCamera(
-      BuildContext context, List<XFile> listImage) async {
+  Future<List<String>> getMediaFromCamera(
+      BuildContext context, List<String> listImage) async {
     try {
       XFile? getRawMedia = await picker.pickImage(source: ImageSource.camera);
-      List<XFile> temp = [];
+      List<String> temp = [];
       if (listImage.isEmpty) {
         if (getRawMedia != null) {
           XFile? newCompressImg = await _compressImage(getRawMedia);
           if (newCompressImg != null) {
-            temp = [newCompressImg];
+            temp = [newCompressImg.path];
           } else {
-            temp = [getRawMedia];
+            temp = [getRawMedia.path];
           }
         } else {
           temp = [];
@@ -66,19 +90,19 @@ class ImageUtility {
         if (getRawMedia != null) {
           XFile? newCompressImg = await _compressImage(getRawMedia);
           if (newCompressImg != null) {
-            temp = [...listImage, newCompressImg];
+            temp = [...listImage, newCompressImg.path];
           } else {
-            temp = [...listImage, getRawMedia];
+            temp = [...listImage, getRawMedia.path];
           }
         } else {}
       }
       return temp;
     } catch (e) {
       LeLog.pe(this, getMediaFromCamera, e.toString());
-      if (!context.mounted) return Future<List<XFile>>.value([]);
+      if (!context.mounted) return Future<List<String>>.value([]);
       showSnackBar(context, Icons.error_outline, Colors.red,
           "${"common.error".tr()} $e", Colors.red);
-      return Future<List<XFile>>.value([]);
+      return Future<List<String>>.value([]);
     }
   }
 
@@ -105,6 +129,17 @@ class ImageUtility {
         quality: 50,
       );
       return compressedImage;
+    }
+  }
+
+  ImageProvider<Object>? getImageType(String imagePath) {
+    switch (imagePath.imagetype) {
+      case ImageType.network:
+        return NetworkImage(imagePath);
+      case ImageType.file:
+      case ImageType.png:
+      default:
+        return FileImage(File(imagePath));
     }
   }
 }

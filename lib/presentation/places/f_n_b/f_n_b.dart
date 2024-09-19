@@ -1,12 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
+import 'package:like_it/common/utility/location_utility.dart';
 import 'package:like_it/common/widget/custom_location_dropdown.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/loc_dropdown_model.dart';
+import 'package:like_it/data/model/util_model/distance_checking_result_model.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_nearest_item.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_promo_item.dart';
 
@@ -18,10 +21,22 @@ class FNBScreen extends StatefulWidget {
 }
 
 class _FNBScreenState extends State<FNBScreen> {
+  bool _locIsInitialized = false;
   final List<LocDropdownModel> _dummyLoc = [
     LocDropdownModel(
-        id: "0", subdistrict: "Tanah Abang", city: "Jakarta Pusat"),
-    LocDropdownModel(id: "1", subdistrict: "Pondok Gede", city: "Bekasi"),
+      id: "0",
+      subdistrict: "Tanah Abang",
+      city: "Jakarta Pusat",
+      latitude: "-6.186486",
+      longitude: "106.834091",
+    ),
+    LocDropdownModel(
+      id: "1",
+      subdistrict: "Pondok Gede",
+      city: "Bekasi",
+      latitude: "-6.241586",
+      longitude: "106.992416",
+    ),
   ];
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
@@ -151,7 +166,30 @@ class _FNBScreenState extends State<FNBScreen> {
   Widget _locationFilterDropdown(BuildContext context) {
     return FutureBuilder<List<DropdownMenuItem<LocDropdownModel>>>(
       future: Future<List<DropdownMenuItem<LocDropdownModel>>>(
-        () {
+        () async {
+          if (!context.mounted) return Future.error("No context mounted");
+          if (_locIsInitialized == false) {
+            if (await LocationUtility.checkPermission(context)) {
+              try {
+                Position getCurrPos =
+                    await LocationUtility.getCurrentLocation();
+                DistanceCheckingResultModel res =
+                    await LocationUtility.distanceChecking(
+                  userLatitude: getCurrPos.latitude,
+                  userLongitude: getCurrPos.longitude,
+                  locationsGeoPoint: _dummyLoc,
+                );
+                setState(() {
+                  _selectedLocation = res.closestPlace;
+                  _locIsInitialized = true;
+                });
+              } catch (e) {
+                return Future.error(e);
+              }
+            } else {
+              return Future.error("No Connection or error on locator");
+            }
+          }
           _locationsItem.clear();
           _locationsItem.addAll(_dummyLoc.map(
             (locationModel) {

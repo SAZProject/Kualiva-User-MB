@@ -1,9 +1,13 @@
+import 'dart:math' as math;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/widget/custom_alert_dialog.dart';
+import 'package:like_it/data/model/ui_model/loc_dropdown_model.dart';
+import 'package:like_it/data/model/util_model/distance_checking_result_model.dart';
 
 void showAlertDialog({
   required BuildContext context,
@@ -36,13 +40,13 @@ void showAlertDialog({
 }
 
 class LocationUtility {
-  void checkPermission(context) async {
+  static Future<bool> checkPermission(context) async {
     bool serviceEnabled;
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return showAlertDialog(
+      showAlertDialog(
         context: context,
         icon: Icons.error_outline,
         title: "common.location_unavailable".tr(),
@@ -53,13 +57,14 @@ class LocationUtility {
           Navigator.pop(context);
         },
       );
+      return false;
     }
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return showAlertDialog(
+        showAlertDialog(
           context: context,
           icon: Icons.error_outline,
           title: "common.location_unavailable".tr(),
@@ -69,24 +74,29 @@ class LocationUtility {
             Navigator.pop(context);
           },
         );
+        return false;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return showAlertDialog(
+      showAlertDialog(
         context: context,
         icon: Icons.error_outline,
         title: "common.location_unavailable".tr(),
         content: "common.location_denied_perm_content".tr(),
         defaultActionText: "common.alert_action_text".tr(),
         onButtonPressed: () async {
+          Geolocator.openAppSettings();
           Navigator.pop(context);
         },
       );
+      return false;
     }
+
+    return true;
   }
 
-  Future<Position> _getCurrentLocation() async {
+  static Future<Position> getCurrentLocation() async {
     late LocationSettings locationSettings = const LocationSettings(
       accuracy: LocationAccuracy.high,
       distanceFilter: 100,
@@ -96,19 +106,50 @@ class LocationUtility {
         locationSettings: locationSettings);
   }
 
-  Future<Placemark> _getPlacemarkFromCoord(
-      double latitude, double longitude) async {
+  static Future<Placemark> getPlacemarkFromCoord(Position position) async {
     final List<Placemark> placemarks = await placemarkFromCoordinates(
-      latitude,
-      longitude,
+      position.latitude,
+      position.longitude,
     );
     Placemark place = placemarks[0];
     return place;
   }
 
-  String _getAddress(Placemark place) {
+  static String getCitySubDistrict(Placemark place) {
+    String locationAddress = '${place.locality}, ${place.subLocality}';
+    return locationAddress;
+  }
+
+  static String getAddress(Placemark place) {
     String locationAddress =
         '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
     return locationAddress;
+  }
+
+  static Future<DistanceCheckingResultModel> distanceChecking({
+    required double userLatitude,
+    required double userLongitude,
+    required List<LocDropdownModel> locationsGeoPoint,
+  }) async {
+    List<double> distance = [];
+
+    for (int i = 0; i < locationsGeoPoint.length; i++) {
+      LocDropdownModel temp = locationsGeoPoint[i];
+
+      // Dalam satuan meter
+      double distanceBetweenPos = Geolocator.distanceBetween(
+        userLatitude,
+        userLongitude,
+        double.parse(temp.latitude),
+        double.parse(temp.longitude),
+      );
+      distance.add(distanceBetweenPos);
+    }
+    double min = distance.reduce(math.min);
+
+    return DistanceCheckingResultModel(
+      distanceBetween: min,
+      closestPlace: locationsGeoPoint[distance.indexOf(min)],
+    );
   }
 }

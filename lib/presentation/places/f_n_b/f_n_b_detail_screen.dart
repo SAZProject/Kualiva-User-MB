@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/screen/save_to_collection.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
+import 'package:like_it/common/widget/custom_map_bottom_sheet.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
@@ -298,13 +299,17 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                       : null,
                 ),
                 SizedBox(height: 8.h),
-                //TODO navigate to maps app
-                _buildAboutContent(
-                  context,
-                  icon: Icons.place,
-                  label: fnbData.placeAddress,
-                  maxLines: 4,
-                ),
+                _buildAboutContent(context,
+                    icon: Icons.place,
+                    label: fnbData.placeAddress,
+                    maxLines: 4, onPressed: () {
+                  customMapBottomSheet(
+                    context,
+                    double.parse(fnbData.latitude),
+                    double.parse(fnbData.longitude),
+                    fnbData.placeName,
+                  );
+                }),
                 SizedBox(height: 8.h),
                 _buildAboutContent(
                   context,

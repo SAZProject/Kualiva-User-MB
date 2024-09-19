@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.27
-- Add Location checker
-- Add more location utility
+Ver 0.0.28
+- Add map launcher function (untested)
 ```
 
 ## Getting Started

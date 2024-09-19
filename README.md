@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.26+01
-- Navigate to contact sent number only
+Ver 0.0.26+02
+- Add location utility
 ```
 
 ## Getting Started

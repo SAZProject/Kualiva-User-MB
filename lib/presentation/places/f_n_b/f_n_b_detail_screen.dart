@@ -316,7 +316,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                   icon: Icons.star,
                   label: context.tr(
                     "f_n_b_detail.about_price",
-                    namedArgs: {"price": "45.h00"},
+                    namedArgs: {"price": "45.000"},
                   ),
                   leadingWidget: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -412,60 +412,79 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       width: double.maxFinite,
       child: ExpansionTile(
         childrenPadding: EdgeInsets.only(bottom: 5.h),
-        title: Text(
-          context.tr("f_n_b_detail.about_open"),
-          style: CustomTextStyles(context).bodyMedium_13,
+        dense: true,
+        tilePadding: const EdgeInsets.symmetric(horizontal: 0.0),
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.tr("f_n_b_detail.about_open"),
+              style: CustomTextStyles(context).bodyMedium_13,
+            ),
+            _operationalDayHourView(
+                context, DatetimeUtils.getTodayOperationalTime(), true),
+          ],
         ),
         children: fnbData.operationalDay.map(
           (index) {
-            return _operationalDayHourView(context, index);
+            return _operationalDayHourView(context, index, false);
           },
         ).toList(),
       ),
     );
   }
 
-  Widget _operationalDayHourView(BuildContext context, int index) {
+  Widget _operationalDayHourView(
+      BuildContext context, int index, bool isTitle) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 120.h,
+            width: isTitle ? 60.h : 120.h,
             child: Text(
               "${DatetimeUtils.getDays(index)},",
               style: CustomTextStyles(context).bodySmall12,
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            width: 50.h,
-            child: Text(
-              DatetimeUtils.getHour(fnbData.operationalTimeOpen[index]),
-              style: CustomTextStyles(context).bodySmall12,
-              textAlign: TextAlign.center,
-            ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: 50.h,
+                child: Text(
+                  DatetimeUtils.getHour(fnbData.operationalTimeOpen[index]),
+                  style: CustomTextStyles(context).bodySmall12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: 20.h,
+                child: Text(
+                  " - ",
+                  style: CustomTextStyles(context).bodySmall12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: 50.h,
+                child: Text(
+                  DatetimeUtils.getHour(fnbData.operationalTimeClose[index]),
+                  style: CustomTextStyles(context).bodySmall12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
           ),
-          Container(
-            alignment: Alignment.center,
-            width: 20.h,
-            child: Text(
-              " - ",
-              style: CustomTextStyles(context).bodySmall12,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: 50.h,
-            child: Text(
-              DatetimeUtils.getHour(fnbData.operationalTimeClose[index]),
-              style: CustomTextStyles(context).bodySmall12,
-              textAlign: TextAlign.center,
-            ),
-          ),
+          const Spacer(),
         ],
       ),
     );

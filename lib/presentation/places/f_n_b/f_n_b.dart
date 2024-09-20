@@ -21,6 +21,8 @@ class FNBScreen extends StatefulWidget {
 }
 
 class _FNBScreenState extends State<FNBScreen> {
+  final ScrollController _parentScrollController = ScrollController();
+  final ScrollController _childScrollController = ScrollController();
   bool _locIsInitialized = false;
   final List<LocDropdownModel> _dummyLoc = [
     LocDropdownModel(
@@ -78,6 +80,13 @@ class _FNBScreenState extends State<FNBScreen> {
   LocDropdownModel? _selectedLocation;
 
   @override
+  void dispose() {
+    _parentScrollController.dispose();
+    _childScrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Stack(
@@ -109,6 +118,7 @@ class _FNBScreenState extends State<FNBScreen> {
       width: double.maxFinite,
       height: MediaQuery.of(context).size.height,
       child: NestedScrollView(
+        controller: _parentScrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             _homeAppBar(context),
@@ -347,22 +357,45 @@ class _FNBScreenState extends State<FNBScreen> {
             padding: EdgeInsets.symmetric(horizontal: 6.h),
             height: 450.h,
             width: double.maxFinite,
-            child: ListView.separated(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              separatorBuilder: (context, index) {
-                return SizedBox(width: 14.h);
+            child: NotificationListener(
+              onNotification: (ScrollNotification notification) {
+                if (notification is ScrollUpdateNotification) {
+                  if (notification.metrics.pixels ==
+                      notification.metrics.maxScrollExtent) {
+                    debugPrint('Reached the bottom');
+                    _parentScrollController.animateTo(
+                        _parentScrollController.position.maxScrollExtent,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeIn);
+                  } else if (notification.metrics.pixels ==
+                      notification.metrics.minScrollExtent) {
+                    debugPrint('Reached the top');
+                    _parentScrollController.animateTo(
+                        _parentScrollController.position.minScrollExtent,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeIn);
+                  }
+                }
+                return true;
               },
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                return FNBNearestItem(
-                  fnbModel: featuredListItems[index],
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-                        arguments: featuredListItems[index]);
-                  },
-                );
-              },
+              child: ListView.separated(
+                controller: _childScrollController,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                separatorBuilder: (context, index) {
+                  return SizedBox(width: 14.h);
+                },
+                itemCount: 6,
+                itemBuilder: (context, index) {
+                  return FNBNearestItem(
+                    fnbModel: featuredListItems[index],
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
+                          arguments: featuredListItems[index]);
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],

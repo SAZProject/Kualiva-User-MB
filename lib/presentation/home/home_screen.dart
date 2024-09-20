@@ -23,6 +23,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ScrollController _parentScrollController = ScrollController();
+  final ScrollController _childScrollController = ScrollController();
   bool _locIsInitialized = false;
   final List<LocDropdownModel> _dummyLoc = [
     LocDropdownModel(
@@ -83,6 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void dispose() {
+    _parentScrollController.dispose();
+    _childScrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -97,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
       width: double.maxFinite,
       height: MediaQuery.of(context).size.height,
       child: NestedScrollView(
+        controller: _parentScrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             _homeAppBar(context),
@@ -479,12 +489,35 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 4.h),
             SizedBox(
               width: double.maxFinite,
-              child: ListView.builder(
-                itemCount: _homeEventList.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return _eventListItems(context, _homeEventList[index]);
+              child: NotificationListener(
+                onNotification: (ScrollNotification notification) {
+                  if (notification is ScrollUpdateNotification) {
+                    if (notification.metrics.pixels ==
+                        notification.metrics.maxScrollExtent) {
+                      debugPrint('Reached the bottom');
+                      _parentScrollController.animateTo(
+                          _parentScrollController.position.maxScrollExtent,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeIn);
+                    } else if (notification.metrics.pixels ==
+                        notification.metrics.minScrollExtent) {
+                      debugPrint('Reached the top');
+                      _parentScrollController.animateTo(
+                          _parentScrollController.position.minScrollExtent,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeIn);
+                    }
+                  }
+                  return true;
                 },
+                child: ListView.builder(
+                  controller: _childScrollController,
+                  itemCount: _homeEventList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return _eventListItems(context, _homeEventList[index]);
+                  },
+                ),
               ),
             ),
             SizedBox(height: 4.h),

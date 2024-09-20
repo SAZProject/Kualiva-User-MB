@@ -57,6 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Theme(
         data: ThemeData.light(),
         child: Scaffold(
+          backgroundColor: Colors.white,
           body: _body(),
         ),
       ),

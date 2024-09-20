@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.29+01
-- Fix widget constraint
+Ver 0.0.29+02
+- Fix splash screen background mismatch
 ```
 
 ## Getting Started

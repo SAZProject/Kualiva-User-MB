@@ -106,10 +106,10 @@ class _SplashScreenState extends State<SplashScreen> {
           return FittedBox(
             fit: BoxFit.contain,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(250.0),
+              borderRadius: BorderRadius.circular(25.0),
               child: SizedBox(
-                width: 250.0,
-                height: 250.0,
+                width: 250.h,
+                height: 250.h,
                 child: VideoPlayer(_videoPlayerController),
               ),
             ),

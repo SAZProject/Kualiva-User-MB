@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {},
           icon: Icon(
             Icons.qr_code_scanner,
-            size: 30.0,
+            size: 30.h,
             color: appTheme.black900,
           ),
         ),
@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {},
           icon: Icon(
             Icons.notifications,
-            size: 30.0,
+            size: 30.h,
             color: appTheme.black900,
           ),
         ),
@@ -235,17 +235,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return SliverPersistentHeader(
       pinned: true,
       delegate: SliverAppBarDelegate(
-        minHeight: 60.0,
-        maxHeight: 60.0,
+        minHeight: 60.h,
+        maxHeight: 60.h,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.h),
           child: SearchAnchor(
             builder: (BuildContext context, SearchController controller) {
               return SearchBar(
                 controller: controller,
                 focusNode: FocusNode(),
-                padding: const WidgetStatePropertyAll<EdgeInsets>(
-                    EdgeInsets.symmetric(horizontal: 16.0)),
+                padding: WidgetStatePropertyAll<EdgeInsets>(
+                    EdgeInsets.symmetric(horizontal: 16.h)),
                 onTap: () {
                   controller.openView();
                 },
@@ -414,8 +414,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             SizedBox(height: 2.h),
             index == 7
-                ? const Center(
-                    child: Icon(Icons.add, size: 60.0),
+                ? Center(
+                    child: Icon(Icons.add, size: 60.h),
                   )
                 : CustomImageView(
                     imagePath: gridMenu.imageUrl,
@@ -541,7 +541,7 @@ class _HomeScreenState extends State<HomeScreen> {
         borderRadius: BorderRadiusStyle.roundedBorder10,
         onTap: () {},
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+          filter: ImageFilter.blur(sigmaX: 3.h, sigmaY: 3.h),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

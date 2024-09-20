@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.29
-- Fix nested scroll on reach min/max item
-- Location and map launcher Tested
+Ver 0.0.29+01
+- Fix widget constraint
 ```
 
 ## Getting Started

@@ -102,14 +102,14 @@ class FNBNearestItem extends StatelessWidget {
                     SizedBox(height: 5.h),
                     SizedBox(
                       height: 20.h,
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Icon(Icons.attach_money, size: 15.0),
-                          Icon(Icons.attach_money, size: 15.0),
-                          Icon(Icons.attach_money, size: 15.0),
-                          Icon(Icons.attach_money, size: 15.0),
-                          Icon(Icons.attach_money, size: 15.0),
+                          Icon(Icons.attach_money, size: 15.h),
+                          Icon(Icons.attach_money, size: 15.h),
+                          Icon(Icons.attach_money, size: 15.h),
+                          Icon(Icons.attach_money, size: 15.h),
+                          Icon(Icons.attach_money, size: 15.h),
                         ],
                       ),
                     ),

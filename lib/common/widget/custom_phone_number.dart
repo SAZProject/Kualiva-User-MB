@@ -105,7 +105,7 @@ class CustomPhoneNumber extends StatelessWidget {
               style: TextStyle(fontSize: 14.fontSize),
             ),
           ),
-          const SizedBox(width: 8.0),
+          SizedBox(width: 8.h),
           Flexible(
             child: Text(
               country.name,

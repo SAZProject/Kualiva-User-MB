@@ -56,7 +56,7 @@ class CustomCheckboxButton extends StatelessWidget {
   Widget leftSideCheckbox(BuildContext context) => Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(right: 8.h),
             child: checkboxWidget(context),
           ),
           isExpandedText
@@ -76,7 +76,7 @@ class CustomCheckboxButton extends StatelessWidget {
                   ? richTextWidget
                   : textWidget(context),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: EdgeInsets.only(left: 8.h),
             child: checkboxWidget(context),
           ),
         ],

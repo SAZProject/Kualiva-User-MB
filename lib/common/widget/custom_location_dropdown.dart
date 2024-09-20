@@ -71,8 +71,8 @@ Widget filterDropdownButton(
     void Function(LocDropdownModel?)? onChanged) {
   return DropdownButton(
     isExpanded: true,
-    borderRadius: BorderRadius.circular(20.0),
-    menuMaxHeight: 300.0,
+    borderRadius: BorderRadius.circular(20.h),
+    menuMaxHeight: 300.h,
     value: selectedItem,
     onChanged: onChanged,
     items: items,

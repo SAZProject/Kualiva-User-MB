@@ -20,7 +20,7 @@ void showAlertDialog({
   return customAlertDialog(
     dismissable: false,
     context: context,
-    icon: Icon(icon, size: 75.0, color: theme(context).colorScheme.primary),
+    icon: Icon(icon, size: 75.h, color: theme(context).colorScheme.primary),
     title: Text(title, maxLines: 2, overflow: TextOverflow.ellipsis),
     content: Text(content, maxLines: 4, overflow: TextOverflow.ellipsis),
     actionBtn: <Widget>[

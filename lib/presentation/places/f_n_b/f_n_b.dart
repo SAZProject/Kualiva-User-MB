@@ -235,17 +235,17 @@ class _FNBScreenState extends State<FNBScreen> {
     return SliverPersistentHeader(
       pinned: true,
       delegate: SliverAppBarDelegate(
-        minHeight: 60.0,
-        maxHeight: 60.0,
+        minHeight: 60.h,
+        maxHeight: 60.h,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.h),
           child: SearchAnchor(
             builder: (BuildContext context, SearchController controller) {
               return SearchBar(
                 controller: controller,
                 focusNode: FocusNode(),
-                padding: const WidgetStatePropertyAll<EdgeInsets>(
-                    EdgeInsets.symmetric(horizontal: 16.0)),
+                padding: WidgetStatePropertyAll<EdgeInsets>(
+                    EdgeInsets.symmetric(horizontal: 16.h)),
                 onTap: () {
                   controller.openView();
                 },
@@ -320,14 +320,14 @@ class _FNBScreenState extends State<FNBScreen> {
 
   Widget _tagView(BuildContext context, {String? label, Widget? icon}) {
     return InkWell(
-      borderRadius: BorderRadius.circular(50.0),
+      borderRadius: BorderRadius.circular(50.h),
       onTap: () {},
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 2.h),
         padding: EdgeInsets.symmetric(horizontal: 4.h),
         decoration: CustomDecoration(context).fillPrimary.copyWith(
               borderRadius: icon != null
-                  ? BorderRadius.circular(50.0)
+                  ? BorderRadius.circular(50.h)
                   : BorderRadiusStyle.roundedBorder5,
             ),
         child: Center(

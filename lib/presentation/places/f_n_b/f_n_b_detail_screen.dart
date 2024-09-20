@@ -131,7 +131,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       forceMaterialTransparency: true,
       automaticallyImplyLeading: true,
       leading: Container(
-        margin: const EdgeInsets.only(left: 5.0),
+        margin: EdgeInsets.only(left: 5.h),
         decoration: BoxDecoration(
           color:
               theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
@@ -145,7 +145,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       ),
       actions: [
         Container(
-          margin: const EdgeInsets.only(right: 10.0),
+          margin: EdgeInsets.only(right: 10.h),
           decoration: BoxDecoration(
             color: theme(context)
                 .colorScheme
@@ -316,16 +316,16 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                   icon: Icons.star,
                   label: context.tr(
                     "f_n_b_detail.about_price",
-                    namedArgs: {"price": "45.000"},
+                    namedArgs: {"price": "45.h00"},
                   ),
-                  leadingWidget: const Row(
+                  leadingWidget: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.attach_money, size: 20.0),
-                      Icon(Icons.attach_money, size: 20.0),
-                      Icon(Icons.attach_money, size: 20.0),
-                      Icon(Icons.attach_money, size: 20.0),
-                      Icon(Icons.attach_money, size: 20.0),
+                      Icon(Icons.attach_money, size: 20.h),
+                      Icon(Icons.attach_money, size: 20.h),
+                      Icon(Icons.attach_money, size: 20.h),
+                      Icon(Icons.attach_money, size: 20.h),
+                      Icon(Icons.attach_money, size: 20.h),
                     ],
                   ),
                 ),

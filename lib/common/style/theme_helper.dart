@@ -37,7 +37,7 @@ class ThemeHelper {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24.0)),
+                borderRadius: BorderRadius.circular(25.0)),
             elevation: 0,
             visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
             padding: EdgeInsets.zero,
@@ -51,7 +51,7 @@ class ThemeHelper {
               width: 1,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(25.0),
             ),
             visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
             padding: EdgeInsets.zero,

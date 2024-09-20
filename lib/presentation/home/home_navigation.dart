@@ -68,7 +68,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
       items: [
         // Icon(
         //   _selectedPage == 0 ? Icons.home : Icons.home_outlined,
-        //   size: 30.0,
+        //   size: 30.h,
         // ),
         // Image.asset(
         //   _selectedPage == 1
@@ -77,8 +77,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
         //           ? ImageConstant.navbarItem2Dark
         //           : ImageConstant.navbarItem2,
         //   fit: BoxFit.cover,
-        //   width: 30.0,
-        //   height: 30.0,
+        //   width: 30.h,
+        //   height: 30.h,
         // ),
         // Image.asset(
         //   _selectedPage == 2
@@ -87,16 +87,16 @@ class _HomeNavigationState extends State<HomeNavigation> {
         //           ? ImageConstant.navbarItem3Dark
         //           : ImageConstant.navbarItem3,
         //   fit: BoxFit.cover,
-        //   width: 30.0,
-        //   height: 30.0,
+        //   width: 30.h,
+        //   height: 30.h,
         // ),
         // Icon(
         //   _selectedPage == 3 ? Icons.mail : Icons.mail_outline,
-        //   size: 30.0,
+        //   size: 30.h,
         // ),
         // Icon(
         //   _selectedPage == 4 ? Icons.person : Icons.person_outline,
-        //   size: 30.0,
+        //   size: 30.h,
         // ),
         _bottomNavBarItems(
           context,
@@ -162,7 +162,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
           visible: unselectedIcon != null,
           child: Icon(
             _selectedPage == index ? selectedIcon : unselectedIcon,
-            size: 30.0,
+            size: 30.h,
             color: _selectedPage == index
                 ? appTheme.black900
                 : theme(context).iconTheme.color,
@@ -177,8 +177,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
                     ? imageDark ?? "-"
                     : unselectedImage ?? "-",
             fit: BoxFit.cover,
-            width: 30.0,
-            height: 30.0,
+            width: 30.h,
+            height: 30.h,
           ),
         ),
         Visibility(

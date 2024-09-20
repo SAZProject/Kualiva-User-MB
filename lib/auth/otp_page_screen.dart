@@ -55,9 +55,9 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
                 customAlertDialog(
                   context: context,
                   dismissable: false,
-                  icon: const Center(
+                  icon: Center(
                     child:
-                        Icon(Icons.done, color: Colors.greenAccent, size: 50.0),
+                        Icon(Icons.done, color: Colors.greenAccent, size: 50.h),
                   ),
                   title: Text(context.tr("otp.otp_verified"),
                       overflow: TextOverflow.ellipsis, maxLines: 2),

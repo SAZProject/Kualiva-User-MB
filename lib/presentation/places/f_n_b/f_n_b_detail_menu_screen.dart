@@ -43,7 +43,7 @@ class FNBDetailMenuScreen extends StatelessWidget {
       automaticallyImplyLeading: true,
       centerTitle: true,
       leading: Container(
-        margin: const EdgeInsets.only(left: 5.0),
+        margin: EdgeInsets.only(left: 5.h),
         child: IconButton(
           iconSize: 25.h,
           icon: const Icon(Icons.arrow_back_ios_new),

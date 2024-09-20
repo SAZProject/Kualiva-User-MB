@@ -83,7 +83,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
       automaticallyImplyLeading: true,
       centerTitle: true,
       leading: Container(
-        margin: const EdgeInsets.only(left: 5.0),
+        margin: EdgeInsets.only(left: 5.h),
         child: IconButton(
           iconSize: 25.h,
           icon: const Icon(Icons.arrow_back_ios_new),
@@ -230,7 +230,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
 
   Widget _buildSubmitButton(BuildContext context) {
     return Container(
-      height: 60.0,
+      height: 60.h,
       width: double.maxFinite,
       padding: EdgeInsets.symmetric(horizontal: 30.h),
       child: OutlineGradientButton(

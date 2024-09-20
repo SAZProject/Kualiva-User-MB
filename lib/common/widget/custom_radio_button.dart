@@ -70,7 +70,7 @@ class CustomRadioButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(right: 8.h),
             child: radioButtonWidget(context),
           ),
           textWidget(context),
@@ -81,7 +81,7 @@ class CustomRadioButton extends StatelessWidget {
         children: [
           textWidget(context),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: EdgeInsets.only(left: 8.h),
             child: radioButtonWidget(context),
           ),
         ],

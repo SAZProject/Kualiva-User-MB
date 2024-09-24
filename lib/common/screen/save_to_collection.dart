@@ -114,12 +114,9 @@ class _SaveToCollectionState extends State<SaveToCollection> {
             useIcon: false,
           ),
           SizedBox(height: 4.h),
-          ListView.separated(
+          ListView.builder(
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 10.h);
-            },
             itemCount: _listCollection.length,
             itemBuilder: (context, index) {
               return _savedCollectionListItem(
@@ -137,7 +134,8 @@ class _SaveToCollectionState extends State<SaveToCollection> {
 
   Widget _savedCollectionListItem(
       BuildContext context, int index, String label, String content) {
-    return SizedBox(
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5.h),
       width: double.maxFinite,
       child: Row(
         children: [

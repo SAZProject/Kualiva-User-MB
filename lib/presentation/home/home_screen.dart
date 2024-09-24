@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text(
             context.tr("common.current_location"),
-            style: CustomTextStyles(context).titleLargeBlack900W400_22,
+            style: CustomTextStyles(context).titleLargeOnPrimaryContainer,
           ),
           _locationFilterDropdown(context),
         ],
@@ -448,12 +448,9 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(horizontal: 6.h),
             height: 200.h,
             width: double.maxFinite,
-            child: ListView.separated(
+            child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              separatorBuilder: (context, index) {
-                return SizedBox(width: 14.h);
-              },
               itemCount: 6,
               itemBuilder: (context, index) {
                 return HomeFeaturedItem(

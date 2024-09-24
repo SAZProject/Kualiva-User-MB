@@ -12,100 +12,97 @@ class HomeFeaturedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 150.h,
-      child: Container(
-        width: 150.h,
-        decoration: CustomDecoration(context)
-            .outlineOnSecondaryContainer
-            .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
-        child: InkWell(
-          borderRadius: BorderRadiusStyle.roundedBorder10,
-          onTap: onPressed,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 100.h,
-                width: double.maxFinite,
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    CustomImageView(
-                      imagePath: fnbModel.placePicture[0],
-                      height: 100.h,
-                      width: double.maxFinite,
-                      radius: BorderRadius.vertical(
-                        top: Radius.circular(10.h),
+      margin: EdgeInsets.symmetric(horizontal: 6.h),
+      decoration: CustomDecoration(context)
+          .outlineOnSecondaryContainer
+          .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
+      child: InkWell(
+        borderRadius: BorderRadiusStyle.roundedBorder10,
+        onTap: onPressed,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 100.h,
+              width: double.maxFinite,
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  CustomImageView(
+                    imagePath: fnbModel.placePicture[0],
+                    height: 100.h,
+                    width: double.maxFinite,
+                    radius: BorderRadius.vertical(
+                      top: Radius.circular(10.h),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      height: 20.h,
+                      width: 50.h,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.h,
+                        vertical: 2.h,
+                      ),
+                      decoration:
+                          CustomDecoration(context).orange60Color.copyWith(
+                                borderRadius: BorderRadiusStyle.roundedBorder10,
+                              ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Icon(
+                              Icons.star,
+                              size: 12.h,
+                            ),
+                          ),
+                          SizedBox(width: 4.h),
+                          Text(
+                            fnbModel.overallRating.toString(),
+                            style: theme(context).textTheme.labelMedium,
+                          ),
+                        ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        height: 20.h,
-                        width: 50.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 8.h,
-                          vertical: 2.h,
-                        ),
-                        decoration: CustomDecoration(context)
-                            .orange60Color
-                            .copyWith(
-                              borderRadius: BorderRadiusStyle.roundedBorder10,
-                            ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Icon(
-                                Icons.star,
-                                size: 12.h,
-                              ),
-                            ),
-                            SizedBox(width: 4.h),
-                            Text(
-                              fnbModel.overallRating.toString(),
-                              style: theme(context).textTheme.labelMedium,
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 4.h),
-                child: Text(
-                  fnbModel.placeName,
-                  style: theme(context).textTheme.titleSmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 4.h),
-                child: Text(
-                  fnbModel.city,
-                  style: theme(context).textTheme.bodySmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              SizedBox(height: 5.h),
-              Column(
-                children: [
-                  _firstTagRow(context),
-                  SizedBox(height: 4.h),
-                  fnbModel.tags.length > 2
-                      ? _secondTagRow(context)
-                      : Container(),
+                  )
                 ],
-              )
-            ],
-          ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 4.h),
+              child: Text(
+                fnbModel.placeName,
+                style: theme(context).textTheme.titleSmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 4.h),
+              child: Text(
+                fnbModel.city,
+                style: theme(context).textTheme.bodySmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            SizedBox(height: 5.h),
+            Column(
+              children: [
+                _firstTagRow(context),
+                SizedBox(height: 4.h),
+                fnbModel.tags.length > 2
+                    ? _secondTagRow(context)
+                    : const SizedBox(),
+              ],
+            )
+          ],
         ),
       ),
     );

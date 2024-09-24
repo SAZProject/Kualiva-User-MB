@@ -65,7 +65,7 @@ class CustomAttachMedia extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 )
-              : Container(),
+              : const SizedBox(),
           SizedBox(height: 10.h),
         ],
       ),
@@ -124,18 +124,15 @@ class CustomAttachMedia extends StatelessWidget {
   Widget _editableAttachMedia(BuildContext context) {
     return SizedBox(
       height: 125.h,
-      child: ListView.separated(
+      child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         physics: listImages.isEmpty
             ? const NeverScrollableScrollPhysics()
             : const ScrollPhysics(),
         itemCount: listImages.isEmpty ? 1 : listImages.length + 1,
-        separatorBuilder: (context, index) {
-          return SizedBox(width: 5.h);
-        },
         itemBuilder: (context, index) {
-          if (listImages.isEmpty) return Container();
+          if (listImages.isEmpty) return const SizedBox();
           if ((index + 1) <= listImages.length) {
             return _attachMediaItem(
               context,
@@ -161,6 +158,7 @@ class CustomAttachMedia extends StatelessWidget {
     return Container(
       width: 100.h,
       height: 100.h,
+      margin: EdgeInsets.symmetric(horizontal: 2.5.h),
       decoration: CustomDecoration(context).fillOnSecondaryContainer,
       child: mediaFilePath != null
           ? Stack(

@@ -31,7 +31,9 @@ class CustomSectionHeader extends StatelessWidget {
               style: theme(context).textTheme.titleLarge!.copyWith(
                   color: theme(context).colorScheme.onPrimaryContainer),
             ),
-            useIcon ? Icon(Icons.arrow_forward_ios, size: 20.h) : Container(),
+            useIcon
+                ? Icon(Icons.arrow_forward_ios, size: 20.h)
+                : const SizedBox(),
           ],
         ),
       ),

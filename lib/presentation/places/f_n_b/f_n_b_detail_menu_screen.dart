@@ -76,13 +76,10 @@ class FNBDetailMenuScreen extends StatelessWidget {
 
   Widget _listDetailMenu(BuildContext context) {
     return Expanded(
-      child: ListView.separated(
+      child: ListView.builder(
         itemCount: listImageMenu.length,
         padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
-        separatorBuilder: (context, index) {
-          return SizedBox(height: 10.h);
-        },
         itemBuilder: (context, index) {
           return _listDetailMenuItem(context, listImageMenu[index]);
         },
@@ -92,6 +89,7 @@ class FNBDetailMenuScreen extends StatelessWidget {
 
   Widget _listDetailMenuItem(BuildContext context, String imageMenu) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 5.h),
       decoration:
           CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
                 borderRadius: BorderRadiusStyle.roundedBorder10,

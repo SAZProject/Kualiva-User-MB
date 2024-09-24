@@ -77,6 +77,6 @@ Widget filterDropdownButton(
     onChanged: onChanged,
     items: items,
     dropdownColor: theme(context).colorScheme.onSecondaryContainer,
-    underline: Container(),
+    underline: const SizedBox(),
   );
 }

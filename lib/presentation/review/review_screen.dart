@@ -28,7 +28,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     "review.filter_4",
   ];
 
-  List<String> selectedCategory = [];
+  ValueNotifier<Set<String>> selectedCategory = ValueNotifier<Set<String>>({});
 
   List<String> filterByStar = [
     "1",
@@ -38,7 +38,14 @@ class _ReviewScreenState extends State<ReviewScreen> {
     "5",
   ];
 
-  String selectedStar = "";
+  ValueNotifier<String> selectedStar = ValueNotifier<String>("");
+
+  @override
+  void dispose() {
+    selectedCategory.dispose();
+    selectedStar.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,16 +134,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   label: context.tr(filterByCategory[index]),
                   multiSelect: true,
                   multiSelectedChoices: selectedCategory,
-                  onSelected: (value) {
-                    setState(() {
-                      selectedCategory
-                              .contains(context.tr(filterByCategory[index]))
-                          ? selectedCategory
-                              .remove(context.tr(filterByCategory[index]))
-                          : selectedCategory
-                              .add(context.tr(filterByCategory[index]));
-                    });
-                  },
                 );
               },
             ),
@@ -152,15 +149,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   label: filterByStar[index],
                   multiSelect: false,
                   singleSelectedChoices: selectedStar,
-                  onSelected: (value) {
-                    setState(() {
-                      if (selectedStar == filterByStar[index]) {
-                        selectedStar = "";
-                      } else {
-                        selectedStar = filterByStar[index];
-                      }
-                    });
-                  },
                 );
               },
             ),

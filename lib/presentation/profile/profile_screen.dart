@@ -245,14 +245,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
                 borderRadius: BorderRadiusStyle.roundedBorder10,
               ),
-      child: ListView.separated(
+      child: ListView.builder(
         shrinkWrap: true,
         itemCount: (_profileMenuModel.length - 2),
         padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
-        separatorBuilder: (context, index) {
-          return SizedBox(height: 5.h);
-        },
         itemBuilder: (context, index) {
           return _buildProfileMenuListItem(
             context,
@@ -273,8 +270,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     IconData? icon,
     String? imageUri,
   ) {
-    return SizedBox(
+    return Container(
       width: double.maxFinite,
+      margin: EdgeInsets.symmetric(vertical: 2.5.h),
       child: ListTile(
         dense: true,
         visualDensity: VisualDensity.compact,

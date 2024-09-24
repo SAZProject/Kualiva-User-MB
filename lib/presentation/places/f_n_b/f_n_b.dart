@@ -366,13 +366,10 @@ class _FNBScreenState extends State<FNBScreen> {
                 }
                 return true;
               },
-              child: ListView.separated(
+              child: ListView.builder(
                 controller: _childScrollController,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                separatorBuilder: (context, index) {
-                  return SizedBox(width: 14.h);
-                },
                 itemCount: 6,
                 itemBuilder: (context, index) {
                   return FNBNearestItem(
@@ -406,12 +403,9 @@ class _FNBScreenState extends State<FNBScreen> {
             padding: EdgeInsets.symmetric(horizontal: 6.h),
             height: 200.h,
             width: double.maxFinite,
-            child: ListView.separated(
+            child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              separatorBuilder: (context, index) {
-                return SizedBox(width: 14.h);
-              },
               itemCount: 6,
               itemBuilder: (context, index) {
                 return FNBPromoItem(

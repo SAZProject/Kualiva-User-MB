@@ -37,13 +37,13 @@ class FNBFiltersItem extends StatelessWidget {
     return multiSelect
         ? ValueListenableBuilder(
             valueListenable: multiSelectedChoices!,
-            builder: (context, setValue, child) => FilterChip(
+            builder: (context, listenValue, child) => FilterChip(
               visualDensity: VisualDensity.compact,
               showCheckmark: false,
               labelPadding: EdgeInsets.zero,
               selected: multiSelectedChoices == null
                   ? false
-                  : setValue.contains(label),
+                  : listenValue.contains(label),
               backgroundColor: theme(context).colorScheme.onSecondaryContainer,
               selectedColor: theme(context).colorScheme.primary,
               shape: RoundedRectangleBorder(
@@ -53,7 +53,7 @@ class FNBFiltersItem extends StatelessWidget {
               label: _chipLabel(context),
               onSelected: onSelected ??
                   (value) {
-                    final updatedSelectedChips = Set<String>.from(setValue);
+                    final updatedSelectedChips = Set<String>.from(listenValue);
                     updatedSelectedChips.contains(label)
                         ? updatedSelectedChips.remove(label)
                         : updatedSelectedChips.add(label);
@@ -63,11 +63,11 @@ class FNBFiltersItem extends StatelessWidget {
           )
         : ValueListenableBuilder(
             valueListenable: singleSelectedChoices!,
-            builder: (context, value, child) => ChoiceChip(
+            builder: (context, listenValue, child) => ChoiceChip(
               visualDensity: VisualDensity.compact,
               showCheckmark: false,
               labelPadding: EdgeInsets.zero,
-              selected: value == label,
+              selected: listenValue == label,
               backgroundColor: theme(context).colorScheme.onSecondaryContainer,
               selectedColor: theme(context).colorScheme.primary,
               shape: RoundedRectangleBorder(
@@ -75,7 +75,9 @@ class FNBFiltersItem extends StatelessWidget {
                 borderRadius: BorderRadiusStyle.roundedBorder5,
               ),
               label: _chipLabel(context),
-              onSelected: onSelected,
+              onSelected: (value) {
+                singleSelectedChoices!.value = label;
+              },
             ),
           );
   }

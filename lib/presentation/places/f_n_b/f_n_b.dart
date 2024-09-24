@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
+import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/utility/location_utility.dart';
 import 'package:like_it/common/widget/custom_location_dropdown.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/model/ui_model/loc_dropdown_model.dart';
 import 'package:like_it/data/model/util_model/distance_checking_result_model.dart';
+import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_nearest_item.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_promo_item.dart';
 
@@ -23,7 +27,9 @@ class FNBScreen extends StatefulWidget {
 class _FNBScreenState extends State<FNBScreen> {
   final ScrollController _parentScrollController = ScrollController();
   final ScrollController _childScrollController = ScrollController();
+
   bool _locIsInitialized = false;
+
   final List<LocDropdownModel> _dummyLoc = [
     LocDropdownModel(
       id: "0",
@@ -43,29 +49,10 @@ class _FNBScreenState extends State<FNBScreen> {
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
-  final List<String> _listTagsFilter = [
-    "Beverages",
-    "All You Can Eat",
-    "Chinese Dish",
-    "Japanese Dish",
-    "Indian Dish",
-    "Seafood",
-    "Dine In",
-    "Buffet",
-    "Vegetarian",
-    "Cafe",
-    "Cocktail",
-    "Coffee",
-    "Tea",
-    "European Dish",
-    "Asian Dish",
-    "Fast Food",
-    "Drive Thru",
-    "Takeaway",
-    "Italian Food",
-    "Local Food",
-    "Warteg",
-  ];
+  final List<String> _listTagsFilter = FNBFilterDataset.fnbFilter;
+
+  ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
+  late FiltersModel filtersModel;
 
   final List<String> _dummyImageData = [
     "${ImageConstant.fnb1Path}/A/2.jpg",
@@ -83,6 +70,7 @@ class _FNBScreenState extends State<FNBScreen> {
   void dispose() {
     _parentScrollController.dispose();
     _childScrollController.dispose();
+    selectedFilters.dispose();
     super.dispose();
   }
 
@@ -164,7 +152,7 @@ class _FNBScreenState extends State<FNBScreen> {
         children: [
           Text(
             context.tr("common.current_location"),
-            style: CustomTextStyles(context).titleLargeBlack900W400_22,
+            style: CustomTextStyles(context).titleLargeOnPrimaryContainer,
           ),
           _locationFilterDropdown(context),
         ],
@@ -297,46 +285,46 @@ class _FNBScreenState extends State<FNBScreen> {
         width: double.maxFinite,
         child: ListView.builder(
           itemCount: _listTagsFilter.length + 1,
-          shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            if (index == 0) {
-              return _tagView(
-                context,
-                icon: Center(
-                  child: Icon(
-                    Icons.filter_alt,
-                    size: 20.h,
-                  ),
-                ),
-              );
-            }
-            return _tagView(context, label: _listTagsFilter[index - 1]);
+            if (index == 0) return _filterScreenBtn(context, index, label: "");
+            return FNBFiltersItem(
+              label: _listTagsFilter[index - 1],
+              isWrap: false,
+              multiSelect: true,
+              multiSelectedChoices: selectedFilters,
+            );
           },
         ),
       ),
     );
   }
 
-  Widget _tagView(BuildContext context, {String? label, Widget? icon}) {
+  Widget _filterScreenBtn(BuildContext context, int index, {String? label}) {
     return InkWell(
       borderRadius: BorderRadius.circular(50.h),
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.fnbFilterScreen).then(
+          (value) {
+            setState(() {
+              filtersModel = value as FiltersModel;
+            });
+          },
+        );
+      },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 2.h),
+        margin: EdgeInsets.symmetric(horizontal: 5.h),
         padding: EdgeInsets.symmetric(horizontal: 4.h),
         decoration: CustomDecoration(context).fillPrimary.copyWith(
-              borderRadius: icon != null
-                  ? BorderRadius.circular(50.h)
-                  : BorderRadiusStyle.roundedBorder5,
+              borderRadius: BorderRadius.circular(50.h),
             ),
         child: Center(
-          child: icon ??
-              Text(
-                label!,
-                textAlign: TextAlign.center,
-                style: CustomTextStyles(context).bodyMedium_13,
-              ),
+          child: Center(
+            child: Icon(
+              Icons.filter_alt,
+              size: 20.h,
+            ),
+          ),
         ),
       ),
     );

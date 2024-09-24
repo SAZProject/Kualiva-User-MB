@@ -12,7 +12,7 @@ DropdownMenuItem<LocDropdownModel> firstDropdownItem(context, String text) {
         text,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: CustomTextStyles(context).bodyMediumBlack900,
+        style: theme(context).textTheme.bodyMedium,
       ),
     ),
   );
@@ -28,7 +28,7 @@ DropdownMenuItem<LocDropdownModel> dataDropdownItem(
         text,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: CustomTextStyles(context).bodyMediumBlack900,
+        style: theme(context).textTheme.bodyMedium,
       ),
     ),
   );
@@ -43,7 +43,7 @@ DropdownMenuItem<LocDropdownModel> errorDropdownItem(context) {
         "common.error".tr(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: CustomTextStyles(context).bodyMediumBlack900,
+        style: theme(context).textTheme.bodyMedium,
       ),
     ),
   );
@@ -58,7 +58,7 @@ DropdownMenuItem<LocDropdownModel> loadingDropdownItem(context) {
         "common.loading".tr(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: CustomTextStyles(context).bodyMediumBlack900,
+        style: theme(context).textTheme.bodyMedium,
       ),
     ),
   );
@@ -76,7 +76,7 @@ Widget filterDropdownButton(
     value: selectedItem,
     onChanged: onChanged,
     items: items,
-    dropdownColor: appTheme.white,
+    dropdownColor: theme(context).colorScheme.onSecondaryContainer,
     underline: Container(),
   );
 }

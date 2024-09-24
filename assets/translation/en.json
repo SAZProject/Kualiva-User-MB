@@ -162,6 +162,21 @@
         "event_title": "Event Title",
         "event_content": "Event Content"
     },
+    "filter": {
+        "title": "Filter",
+        "radius": "Radius",
+        "radius_value": "{radius}Km",
+        "price_range": "Price Range",
+        "price_range_value": "Rp{price}{prefix}",
+        "rating": "Rating",
+        "rating_min_value": "0.0",
+        "rating_max_value": "5.0",
+        "foods": "Foods",
+        "beverages": "Beverages",
+
+        "clear_btn": "Clear",
+        "submit_btn": "Submit"
+    },
     "f_n_b": {
         "nearest": "Nearest From You",
         "promo": "Promo",

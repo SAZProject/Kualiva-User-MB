@@ -181,6 +181,12 @@ class CustomTextStyles {
       theme(context).textTheme.titleLarge!.copyWith(
             color: theme(context).colorScheme.onSecondaryContainer,
           );
+  TextStyle get titleLargeOnPrimaryContainer =>
+      theme(context).textTheme.titleLarge!.copyWith(
+            color: theme(context).colorScheme.onPrimaryContainer,
+            fontSize: 22.fontSize,
+            fontWeight: FontWeight.w400,
+          );
   // Title Medium
   TextStyle get titleMedium_17 =>
       theme(context).textTheme.titleMedium!.copyWith(

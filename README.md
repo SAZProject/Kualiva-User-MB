@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.30
-- Revising FNB detail operational time
+Ver 0.0.31
+- Add FNB Filter Screen
+- Fix Home & FNB appbar text
 ```
 
 ## Getting Started

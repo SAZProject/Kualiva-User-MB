@@ -61,8 +61,8 @@ class ReviewFiltersItem extends StatelessWidget {
         ? Container(
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             child: Text(
-              textAlign: TextAlign.center,
               label,
+              textAlign: TextAlign.center,
               style: theme(context).textTheme.bodyMedium,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

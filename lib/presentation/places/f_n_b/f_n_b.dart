@@ -4,7 +4,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
-import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/utility/location_utility.dart';
 import 'package:like_it/common/widget/custom_location_dropdown.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';

@@ -5,11 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.31+01
-- Change container to const sizedbox
-- Change home appbar title style
-- Change review filter item using value notifier
-- Change list separated into builder
+Ver 0.0.31+02
+- Home Screen convert UserLevel into AdBanner (untested)
 ```
 
 ## Getting Started

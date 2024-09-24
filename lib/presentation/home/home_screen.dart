@@ -70,6 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
     ImageConstant.event3,
   ];
 
+  final List<String> _adBannerList = [
+    ImageConstant.event1,
+    ImageConstant.foodSugarSpice,
+    ImageConstant.event2,
+    ImageConstant.foodTable8,
+    ImageConstant.event3,
+  ];
+
   final List<DropdownMenuItem<LocDropdownModel>> _locationsItem = [];
 
   LocDropdownModel? _selectedLocation;
@@ -117,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               SizedBox(height: 5.h),
-              _userLevel(context),
+              _adBanner(context),
               SizedBox(height: 5.h),
               _gridMenu(context),
               SizedBox(height: 5.h),
@@ -289,76 +297,41 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _userLevel(BuildContext context) {
+  Widget _adBanner(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.h),
-      padding: EdgeInsets.symmetric(
-        horizontal: 8.h,
-        vertical: 6.h,
-      ),
-      decoration:
-          CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder14,
-              ),
+      padding: EdgeInsets.symmetric(horizontal: 6.h),
+      height: 200.h,
       width: double.maxFinite,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: CircleAvatar(
-              minRadius: 25.h,
-              maxRadius: 25.h,
-              child: Center(
-                child: Icon(Icons.person, size: 50.h),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        controller: _childScrollController,
+        itemCount: _adBannerList.length,
+        itemBuilder: (context, index) {
+          return _adBannerListItem(context, _adBannerList[index]);
+        },
+      ),
+    );
+  }
+
+  Widget _adBannerListItem(BuildContext context, String imgUrl) {
+    return Container(
+      height: 180.h,
+      margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 4.h, vertical: 4.h),
+      decoration:
+          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder10,
               ),
-            ),
-          ),
-          SizedBox(width: 10.h),
-          Expanded(
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.maxFinite,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Bronze",
-                          style: theme(context).textTheme.bodyLarge,
-                        ),
-                        Icon(Icons.arrow_forward_ios, size: 20.h)
-                      ],
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Level 0",
-                      style: theme(context).textTheme.bodySmall,
-                    ),
-                    Text(
-                      "0/10",
-                      style: theme(context).textTheme.bodySmall,
-                    ),
-                  ],
-                ),
-                LinearProgressIndicator(
-                  value: 0.6,
-                  color: theme(context).colorScheme.onPrimary.withOpacity(0.8),
-                  backgroundColor:
-                      theme(context).colorScheme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(1.h),
-                ),
-              ],
-            ),
-          ),
-        ],
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        borderRadius: BorderRadiusStyle.roundedBorder10,
+        onTap: () {},
+        child: CustomImageView(
+          imagePath: imgUrl,
+          height: 180.h,
+          width: 320.h,
+          radius: BorderRadiusStyle.roundedBorder10,
+        ),
       ),
     );
   }

@@ -177,6 +177,17 @@
         "clear_btn": "Clear",
         "submit_btn": "Submit"
     },
+    "location": {
+        "title": "Location",
+        "search_hint": "Search for location",
+        "popular_city": "Popular City",
+        "recent_location": "Recent Location",
+        "nearby_landmark": "Nearby Landmark",
+        "content_title_hint": "Address Title",
+        "content_detail_hint": "Address Details",
+
+        "current_loc_btn": "Use my current location"
+    },
     "f_n_b": {
         "nearest": "Nearest From You",
         "promo": "Promo",

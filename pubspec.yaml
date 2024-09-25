@@ -36,6 +36,7 @@ dependencies:
     geolocator: ^13.0.1
     geocoding: ^3.0.0
     map_launcher: ^3.5.0
+    faker: ^2.2.0
 
 dev_dependencies:
     flutter_test:

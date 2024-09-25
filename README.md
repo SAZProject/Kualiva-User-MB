@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.31+02
-- Home Screen convert UserLevel into AdBanner (untested)
+Ver 0.0.32
+- Add location screen (untested)
+- change current location on Home & FNB Screen
 ```
 
 ## Getting Started

@@ -7,7 +7,7 @@ DropdownMenuItem<LocDropdownModel> firstDropdownItem(context, String text) {
   return DropdownMenuItem(
     value: null,
     child: SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: double.maxFinite,
       child: Text(
         text,
         maxLines: 1,
@@ -23,7 +23,7 @@ DropdownMenuItem<LocDropdownModel> dataDropdownItem(
   return DropdownMenuItem(
     value: value,
     child: SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: double.maxFinite,
       child: Text(
         text,
         maxLines: 1,
@@ -38,7 +38,7 @@ DropdownMenuItem<LocDropdownModel> errorDropdownItem(context) {
   return DropdownMenuItem(
     value: null,
     child: SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: double.maxFinite,
       child: Text(
         "common.error".tr(),
         maxLines: 1,
@@ -53,7 +53,7 @@ DropdownMenuItem<LocDropdownModel> loadingDropdownItem(context) {
   return DropdownMenuItem(
     value: null,
     child: SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: double.maxFinite,
       child: Text(
         "common.loading".tr(),
         maxLines: 1,

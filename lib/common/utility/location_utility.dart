@@ -8,6 +8,7 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/widget/custom_alert_dialog.dart';
 import 'package:like_it/data/model/ui_model/loc_dropdown_model.dart';
 import 'package:like_it/data/model/util_model/distance_checking_result_model.dart';
+import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 
 void showAlertDialog({
   required BuildContext context,
@@ -96,7 +97,7 @@ class LocationUtility {
     return true;
   }
 
-  static Future<Position> getCurrentLocation() async {
+  static Future<Position> getCurrentPosition() async {
     late LocationSettings locationSettings = const LocationSettings(
       accuracy: LocationAccuracy.high,
       distanceFilter: 100,
@@ -124,6 +125,25 @@ class LocationUtility {
     String locationAddress =
         '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
     return locationAddress;
+  }
+
+  static Future<UserCurrLocModel> getUserCurrLoc() async {
+    try {
+      Position currPos = await getCurrentPosition();
+      Placemark getCurrPlacemark = await getPlacemarkFromCoord(currPos);
+      String fullUserCurrLocAddress = getAddress(getCurrPlacemark);
+
+      return UserCurrLocModel(
+        userCurrLoc: fullUserCurrLocAddress,
+        userCurrCity: getCurrPlacemark.locality ?? "-",
+        userCurrSubDistrict: getCurrPlacemark.subLocality ?? "-",
+        userFullPLacemark: getCurrPlacemark,
+        latitude: currPos.latitude,
+        longitude: currPos.longitude,
+      );
+    } catch (e) {
+      return Future.error(e);
+    }
   }
 
   static Future<DistanceCheckingResultModel> distanceChecking({

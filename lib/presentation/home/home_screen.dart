@@ -2,17 +2,14 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/utility/location_utility.dart';
-import 'package:like_it/common/widget/custom_location_dropdown.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/home_grid_menu_model.dart';
-import 'package:like_it/data/model/ui_model/loc_dropdown_model.dart';
-import 'package:like_it/data/model/util_model/distance_checking_result_model.dart';
+import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/home/widget/home_featured_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,22 +23,22 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _parentScrollController = ScrollController();
   final ScrollController _childScrollController = ScrollController();
   bool _locIsInitialized = false;
-  final List<LocDropdownModel> _dummyLoc = [
-    LocDropdownModel(
-      id: "0",
-      subdistrict: "Tanah Abang",
-      city: "Jakarta Pusat",
-      latitude: "-6.186486",
-      longitude: "106.834091",
-    ),
-    LocDropdownModel(
-      id: "1",
-      subdistrict: "Pondok Gede",
-      city: "Bekasi",
-      latitude: "-6.241586",
-      longitude: "106.992416",
-    ),
-  ];
+  // final List<LocDropdownModel> _dummyLoc = [
+  //   LocDropdownModel(
+  //     id: "0",
+  //     subdistrict: "Tanah Abang",
+  //     city: "Jakarta Pusat",
+  //     latitude: "-6.186486",
+  //     longitude: "106.834091",
+  //   ),
+  //   LocDropdownModel(
+  //     id: "1",
+  //     subdistrict: "Pondok Gede",
+  //     city: "Bekasi",
+  //     latitude: "-6.241586",
+  //     longitude: "106.992416",
+  //   ),
+  // ];
 
   final List<HomeGridMenuModel> _homeGridMenu = [
     HomeGridMenuModel(
@@ -78,9 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ImageConstant.event3,
   ];
 
-  final List<DropdownMenuItem<LocDropdownModel>> _locationsItem = [];
-
-  LocDropdownModel? _selectedLocation;
+  late UserCurrLocModel getUserCurrentLoc;
 
   void _gridMenuAction(int index) {
     switch (index) {
@@ -156,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
             context.tr("common.current_location"),
             style: CustomTextStyles(context).titleLargeOnPrimaryContainer,
           ),
-          _locationFilterDropdown(context),
+          _currentUserLocation(context),
         ],
       ),
       toolbarHeight: 100.h,
@@ -181,24 +176,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _locationFilterDropdown(BuildContext context) {
-    return FutureBuilder<List<DropdownMenuItem<LocDropdownModel>>>(
-      future: Future<List<DropdownMenuItem<LocDropdownModel>>>(
+  Widget _currentUserLocation(BuildContext context) {
+    return FutureBuilder<UserCurrLocModel>(
+      future: Future<UserCurrLocModel>(
         () async {
           if (!context.mounted) return Future.error("No context mounted");
           if (_locIsInitialized == false) {
             if (await LocationUtility.checkPermission(context)) {
               try {
-                Position getCurrPos =
-                    await LocationUtility.getCurrentLocation();
-                DistanceCheckingResultModel res =
-                    await LocationUtility.distanceChecking(
-                  userLatitude: getCurrPos.latitude,
-                  userLongitude: getCurrPos.longitude,
-                  locationsGeoPoint: _dummyLoc,
-                );
+                final res = await LocationUtility.getUserCurrLoc();
                 setState(() {
-                  _selectedLocation = res.closestPlace;
+                  getUserCurrentLoc = res;
                   _locIsInitialized = true;
                 });
               } catch (e) {
@@ -208,34 +196,36 @@ class _HomeScreenState extends State<HomeScreen> {
               return Future.error("No Connection or error on locator");
             }
           }
-          _locationsItem.clear();
-          _locationsItem.addAll(_dummyLoc.map(
-            (locationModel) {
-              return dataDropdownItem(context, locationModel,
-                  "${locationModel.subdistrict}, ${locationModel.city}");
-            },
-          ));
-          return _locationsItem;
+          return getUserCurrentLoc;
         },
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return errorDropdownItem(context);
+          return _buildUserLoc(context, context.tr("common.error"));
         }
         if (snapshot.hasData) {
-          return filterDropdownButton(
-            context,
-            _selectedLocation,
-            _locationsItem,
-            (value) {
-              setState(() {
-                _selectedLocation = value;
-              });
-            },
-          );
+          return _buildUserLoc(context,
+              "${getUserCurrentLoc.userCurrSubDistrict}, ${getUserCurrentLoc.userCurrCity}");
         }
-        return loadingDropdownItem(context);
+        return const Center(child: CircularProgressIndicator());
       },
+    );
+  }
+
+  Widget _buildUserLoc(BuildContext context, String label) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.locationScreen);
+      },
+      child: SizedBox(
+        width: double.maxFinite,
+        child: Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: theme(context).textTheme.bodyMedium,
+        ),
+      ),
     );
   }
 

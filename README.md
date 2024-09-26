@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.32
-- Add location screen (untested)
-- change current location on Home & FNB Screen
+Ver 0.0.33
+- Add What's going on screen
 ```
 
 ## Getting Started

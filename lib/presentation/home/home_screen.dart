@@ -444,7 +444,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CustomSectionHeader(
               label: context.tr("home_screen.event", args: ["Jakarta"]),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.homeEventScreen);
+              },
             ),
             SizedBox(height: 4.h),
             SizedBox(

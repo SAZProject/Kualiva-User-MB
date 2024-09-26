@@ -158,9 +158,19 @@
         "grid_8": "More",
         "featured": "Featured",
         "tags_more": "+{} More",
-        "event": "What's goin on : {}",
+        "event": "What\u0027s going on : {}",
         "event_title": "Event Title",
         "event_content": "Event Content"
+    },
+    "event": {
+        "title": "What\u0027s Going On",
+        "search_hint": "Search for event",
+        "popular_city": "Popular City",
+        "event": "Latest Post",
+        "event_title": "Event Title",
+        "event_content": "Event Content",
+
+        "current_loc_btn": "Use my current location"
     },
     "filter": {
         "title": "Filter",

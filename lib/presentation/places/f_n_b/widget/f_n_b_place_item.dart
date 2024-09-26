@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 
-class FNBNearestItem extends StatelessWidget {
-  const FNBNearestItem(
+class FNBPlaceItem extends StatelessWidget {
+  const FNBPlaceItem(
       {super.key, required this.fnbModel, required this.onPressed});
 
   final FNBModel fnbModel;

@@ -9,6 +9,7 @@ import 'package:like_it/data/model/review_model.dart';
 import 'package:like_it/presentation/home/what_going_on_screen.dart';
 import 'package:like_it/presentation/places/add_places_screen.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b.dart';
+import 'package:like_it/presentation/places/f_n_b/f_n_b_cuisine.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b_detail_menu_screen.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b_detail_screen.dart';
 import 'package:like_it/presentation/home/home_navigation.dart';
@@ -42,6 +43,8 @@ class AppRoutes {
   static const String homeEventScreen = "/home_event_screen";
 
   static const String fnbScreen = "/f_n_b_screen";
+
+  static const String fnbCuisineScreen = "/f_n_b_cuisine_screen";
 
   static const String fnbFilterScreen = "/f_n_b_filter_screen";
 
@@ -110,6 +113,11 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.fnbScreen:
       return PageTransition(
           child: const FNBScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.fnbCuisineScreen:
+      return PageTransition(
+          child: const FNBCuisine(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbFilterScreen:

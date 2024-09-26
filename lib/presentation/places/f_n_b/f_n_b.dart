@@ -10,7 +10,7 @@ import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_nearest_item.dart';
+import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_promo_item.dart';
 
 class FNBScreen extends StatefulWidget {
@@ -117,9 +117,7 @@ class _FNBScreenState extends State<FNBScreen> {
               SizedBox(height: 5.h),
               _promoList(context),
               SizedBox(height: 5.h),
-              _chefChoices(context),
-              SizedBox(height: 5.h),
-              _bestRated(context),
+              _cuisine(context),
               SizedBox(height: 5.h),
             ],
           ),
@@ -359,7 +357,7 @@ class _FNBScreenState extends State<FNBScreen> {
                 scrollDirection: Axis.vertical,
                 itemCount: 6,
                 itemBuilder: (context, index) {
-                  return FNBNearestItem(
+                  return FNBPlaceItem(
                     fnbModel: featuredListItems[index],
                     onPressed: () {
                       Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
@@ -412,7 +410,7 @@ class _FNBScreenState extends State<FNBScreen> {
     );
   }
 
-  Widget _chefChoices(BuildContext context) {
+  Widget _cuisine(BuildContext context) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 5.h),
@@ -423,54 +421,17 @@ class _FNBScreenState extends State<FNBScreen> {
       child: Column(
         children: [
           CustomSectionHeader(
-            label: context.tr("f_n_b.chef_choice"),
+            label: context.tr("f_n_b.cuisine"),
             onPressed: () {},
           ),
           Container(
             height: 150.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
-            child: ListView.builder(
-              itemCount: _dummyImageData.length,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 8.h),
-                  child: CustomImageView(
-                    imagePath: _dummyImageData[index],
-                    height: 130.h,
-                    width: 200.h,
-                    radius: BorderRadius.circular(10.h),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _bestRated(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 5.h),
-      decoration:
-          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder10,
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, // Number of items in each row
               ),
-      child: Column(
-        children: [
-          CustomSectionHeader(
-            label: context.tr("f_n_b.best_rated"),
-            onPressed: () {},
-          ),
-          Container(
-            height: 150.h,
-            margin: EdgeInsets.symmetric(horizontal: 5.h),
-            width: double.maxFinite,
-            child: ListView.builder(
               itemCount: _dummyImageData.length,
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -479,8 +440,8 @@ class _FNBScreenState extends State<FNBScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 8.h),
                   child: CustomImageView(
                     imagePath: _dummyImageData[index],
-                    height: 130.h,
-                    width: 200.h,
+                    height: 120.h,
+                    width: 100.h,
                     radius: BorderRadius.circular(10.h),
                   ),
                 );

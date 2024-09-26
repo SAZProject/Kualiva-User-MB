@@ -204,7 +204,11 @@
         "promo_value": "{}% OFF",
         "chef_choice": "Chef\u0027s Choices",
         "best_rated": "Best Rated",
+        "cuisine": "cuisine",
         "tags_more": "+{} More"
+    },
+    "cuisine": {
+        "title": "Cuisine"
     },
     "f_n_b_detail": {
         "about": "About",

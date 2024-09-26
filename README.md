@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.33
-- Add What's going on screen
+Ver 0.0.34
+- Add FNB Cuisine screen
 ```
 
 ## Getting Started

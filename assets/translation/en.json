@@ -17,7 +17,7 @@
         "connection_error": "Connection Error",
         "connection_error_content": "Please check your internet connection!",
         "page_not_found": "Page Not Found!",
-        "data_not_found": "Data Not Found!",
+        "data_not_found": "The data is either empty or does not have valid datapoints!",
         "user_not_found": "User Not Found!",
         "coming_soon": "Coming Soon",
         "see_more": "See More",
@@ -184,7 +184,7 @@
         "foods": "Foods",
         "beverages": "Beverages",
 
-        "clear_btn": "Clear",
+        "revert_btn": "Revert",
         "submit_btn": "Submit"
     },
     "location": {

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/ui_model/loc_popular_city_model.dart';
 
@@ -49,6 +50,13 @@ class _WhatGoingOnScreenState extends State<WhatGoingOnScreen> {
     ImageConstant.event2,
     ImageConstant.event3,
   ];
+
+  @override
+  void dispose() {
+    _parentScrollController.dispose();
+    _childScrollController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -216,14 +224,20 @@ class _WhatGoingOnScreenState extends State<WhatGoingOnScreen> {
                   }
                   return true;
                 },
-                child: ListView.builder(
-                  controller: _childScrollController,
-                  itemCount: _homeEventList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return _eventListItems(context, _homeEventList[index]);
-                  },
-                ),
+                child: _homeEventList.isEmpty
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        controller: _childScrollController,
+                        itemCount: _homeEventList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          if (listPopularCity.isNotEmpty) {
+                            return _eventListItems(
+                                context, _homeEventList[index]);
+                          }
+                          return const CustomEmptyState();
+                        },
+                      ),
               ),
             ),
             SizedBox(height: 4.h),

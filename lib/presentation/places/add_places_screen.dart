@@ -87,6 +87,17 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
   bool isAgreed = false;
 
   @override
+  void dispose() {
+    personalFullNameCtl.dispose();
+    personalCurrentLocation.dispose();
+    placeFullNameCtl.dispose();
+    placeContactCtl.dispose();
+    placeAddressgeneralCtl.dispose();
+    placeAddressDetailCtl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

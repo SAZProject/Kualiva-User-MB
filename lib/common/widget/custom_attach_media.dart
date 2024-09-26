@@ -132,6 +132,7 @@ class CustomAttachMedia extends StatelessWidget {
             : const ScrollPhysics(),
         itemCount: listImages.isEmpty ? 1 : listImages.length + 1,
         itemBuilder: (context, index) {
+          //TODO add waiting, empty, error state in future (maybe?)
           if (listImages.isEmpty) return const SizedBox();
           if ((index + 1) <= listImages.length) {
             return _attachMediaItem(

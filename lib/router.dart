@@ -6,7 +6,7 @@ import 'package:like_it/auth/sign_up_screen.dart';
 import 'package:like_it/common/screen/location_screen.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
-import 'package:like_it/presentation/home/what_going_on_screen.dart';
+import 'package:like_it/presentation/home/home_event_screen.dart';
 import 'package:like_it/presentation/places/add_places_screen.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b_cuisine.dart';

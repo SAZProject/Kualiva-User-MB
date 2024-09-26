@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 
 class FNBDetailMenuScreen extends StatelessWidget {
   const FNBDetailMenuScreen({super.key, required this.listImageMenu});
@@ -76,14 +77,19 @@ class FNBDetailMenuScreen extends StatelessWidget {
 
   Widget _listDetailMenu(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-        itemCount: listImageMenu.length,
-        padding: EdgeInsets.zero,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-          return _listDetailMenuItem(context, listImageMenu[index]);
-        },
-      ),
+      child: listImageMenu.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: listImageMenu.length,
+              padding: EdgeInsets.zero,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                if (listImageMenu.isNotEmpty) {
+                  return _listDetailMenuItem(context, listImageMenu[index]);
+                }
+                return const CustomEmptyState();
+              },
+            ),
     );
   }
 

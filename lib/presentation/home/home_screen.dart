@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/utility/location_utility.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
@@ -292,14 +293,19 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: EdgeInsets.symmetric(horizontal: 6.h),
       height: 200.h,
       width: double.maxFinite,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        controller: _childScrollController,
-        itemCount: _adBannerList.length,
-        itemBuilder: (context, index) {
-          return _adBannerListItem(context, _adBannerList[index]);
-        },
-      ),
+      child: _adBannerList.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              scrollDirection: Axis.horizontal,
+              controller: _childScrollController,
+              itemCount: _adBannerList.length,
+              itemBuilder: (context, index) {
+                if (_adBannerList.isNotEmpty) {
+                  return _adBannerListItem(context, _adBannerList[index]);
+                }
+                return const CustomEmptyState();
+              },
+            ),
     );
   }
 
@@ -416,6 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               itemCount: 6,
               itemBuilder: (context, index) {
+                //TODO add waiting, empty, error state in future
                 return HomeFeaturedItem(
                   fnbModel: featuredListItems[index],
                   onPressed: () {
@@ -472,14 +479,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                   return true;
                 },
-                child: ListView.builder(
-                  controller: _childScrollController,
-                  itemCount: _homeEventList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return _eventListItems(context, _homeEventList[index]);
-                  },
-                ),
+                child: _homeEventList.isEmpty
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        controller: _childScrollController,
+                        itemCount: _homeEventList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          if (_homeEventList.isNotEmpty) {
+                            return _eventListItems(
+                                context, _homeEventList[index]);
+                          }
+                          return const CustomEmptyState();
+                        },
+                      ),
               ),
             ),
             SizedBox(height: 4.h),

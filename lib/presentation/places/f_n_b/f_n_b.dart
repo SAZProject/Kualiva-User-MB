@@ -4,6 +4,7 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:like_it/common/utility/location_utility.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
@@ -272,6 +273,7 @@ class _FNBScreenState extends State<FNBScreen> {
           itemCount: _listTagsFilter.length + 1,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
+            //TODO add waiting, empty, error state in future
             if (index == 0) return _filterScreenBtn(context, index, label: "");
             return FNBFiltersItem(
               label: _listTagsFilter[index - 1],
@@ -357,6 +359,7 @@ class _FNBScreenState extends State<FNBScreen> {
                 scrollDirection: Axis.vertical,
                 itemCount: 6,
                 itemBuilder: (context, index) {
+                  //TODO add waiting, empty, error state in future
                   return FNBPlaceItem(
                     fnbModel: featuredListItems[index],
                     onPressed: () {
@@ -395,6 +398,7 @@ class _FNBScreenState extends State<FNBScreen> {
               scrollDirection: Axis.horizontal,
               itemCount: 6,
               itemBuilder: (context, index) {
+                //TODO add waiting, empty, error state in future
                 return FNBPromoItem(
                   fnbModel: featuredListItems[index],
                   onPressed: () {
@@ -428,25 +432,32 @@ class _FNBScreenState extends State<FNBScreen> {
             height: 150.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, // Number of items in each row
-              ),
-              itemCount: _dummyImageData.length,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 8.h),
-                  child: CustomImageView(
-                    imagePath: _dummyImageData[index],
-                    height: 120.h,
-                    width: 100.h,
-                    radius: BorderRadius.circular(10.h),
+            child: _dummyImageData.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // Number of items in each row
+                    ),
+                    itemCount: _dummyImageData.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      if (_dummyImageData.isNotEmpty) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5.h, vertical: 8.h),
+                          child: CustomImageView(
+                            imagePath: _dummyImageData[index],
+                            height: 120.h,
+                            width: 100.h,
+                            radius: BorderRadius.circular(10.h),
+                          ),
+                        );
+                      }
+                      return const CustomEmptyState();
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),

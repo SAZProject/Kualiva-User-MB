@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/screen/save_to_collection.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_map_bottom_sheet.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
@@ -511,22 +512,28 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             height: 150.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
-            child: ListView.builder(
-              itemCount: fnbData.priceListMenuPicture.length,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 8.h),
-                  child: CustomImageView(
-                    imagePath: fnbData.priceListMenuPicture[index],
-                    height: 130.h,
-                    width: 200.h,
-                    radius: BorderRadius.circular(10.h),
+            child: fnbData.priceListMenuPicture.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: fnbData.priceListMenuPicture.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      if (fnbData.priceListMenuPicture.isNotEmpty) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5.h, vertical: 8.h),
+                          child: CustomImageView(
+                            imagePath: fnbData.priceListMenuPicture[index],
+                            height: 130.h,
+                            width: 200.h,
+                            radius: BorderRadius.circular(10.h),
+                          ),
+                        );
+                      }
+                      return const CustomEmptyState();
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
@@ -554,18 +561,23 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             height: 200.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
-            child: ListView.builder(
-              itemCount: fnbData.review.length,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                ReviewModel reviewData = fnbData.review[index];
-                if (reviewData.specialReview) {
-                  return SpecialReviewView(reviewData: reviewData);
-                }
-                return ReviewView(reviewData: reviewData);
-              },
-            ),
+            child: fnbData.review.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: fnbData.review.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      if (fnbData.review.isNotEmpty) {
+                        ReviewModel reviewData = fnbData.review[index];
+                        if (reviewData.specialReview) {
+                          return SpecialReviewView(reviewData: reviewData);
+                        }
+                        return ReviewView(reviewData: reviewData);
+                      }
+                      return const CustomEmptyState();
+                    },
+                  ),
           ),
         ],
       ),

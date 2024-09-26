@@ -131,6 +131,7 @@ class FNBPlaceItem extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
+          //TODO add waiting, empty, error state in future
           if (index == 3) {
             if (fnbModel.tags.length > 4) {
               return _tagView(

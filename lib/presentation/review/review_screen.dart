@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
@@ -218,18 +219,23 @@ class _ReviewScreenState extends State<ReviewScreen> {
             height: 200.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
-            child: ListView.builder(
-              itemCount: listReviewData.length,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                ReviewModel reviewData = listReviewData[index];
-                if (reviewData.specialReview) {
-                  return SpecialReviewView(reviewData: reviewData);
-                }
-                return ReviewView(reviewData: reviewData);
-              },
-            ),
+            child: listReviewData.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: listReviewData.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      if (listReviewData.isNotEmpty) {
+                        ReviewModel reviewData = listReviewData[index];
+                        if (reviewData.specialReview) {
+                          return SpecialReviewView(reviewData: reviewData);
+                        }
+                        return ReviewView(reviewData: reviewData);
+                      }
+                      return const CustomEmptyState();
+                    },
+                  ),
           ),
         ],
       ),

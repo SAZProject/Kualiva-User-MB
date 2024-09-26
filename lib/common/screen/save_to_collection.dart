@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/ui_model/collection_model.dart';
 
@@ -114,19 +115,24 @@ class _SaveToCollectionState extends State<SaveToCollection> {
             useIcon: false,
           ),
           SizedBox(height: 4.h),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            itemCount: _listCollection.length,
-            itemBuilder: (context, index) {
-              return _savedCollectionListItem(
-                context,
-                index,
-                _listCollection[index].label,
-                _listCollection[index].content,
-              );
-            },
-          ),
+          _listCollection.isEmpty
+              ? const Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: _listCollection.length,
+                  itemBuilder: (context, index) {
+                    if (_listCollection.isNotEmpty) {
+                      return _savedCollectionListItem(
+                        context,
+                        index,
+                        _listCollection[index].label,
+                        _listCollection[index].content,
+                      );
+                    }
+                    return const CustomEmptyState();
+                  },
+                ),
         ],
       ),
     );

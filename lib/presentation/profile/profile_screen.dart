@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
 
@@ -245,21 +246,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
           CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
                 borderRadius: BorderRadiusStyle.roundedBorder10,
               ),
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: (_profileMenuModel.length - 2),
-        padding: EdgeInsets.zero,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-          return _buildProfileMenuListItem(
-            context,
-            (index + 2),
-            _profileMenuModel[(index + 2)].label,
-            _profileMenuModel[(index + 2)].icon,
-            _profileMenuModel[(index + 2)].imageUri,
-          );
-        },
-      ),
+      child: _profileMenuModel.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              shrinkWrap: true,
+              itemCount: (_profileMenuModel.length - 2),
+              padding: EdgeInsets.zero,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                if (_profileMenuModel.isNotEmpty) {
+                  return _buildProfileMenuListItem(
+                    context,
+                    (index + 2),
+                    _profileMenuModel[(index + 2)].label,
+                    _profileMenuModel[(index + 2)].icon,
+                    _profileMenuModel[(index + 2)].imageUri,
+                  );
+                }
+                return const CustomEmptyState();
+              },
+            ),
     );
   }
 

@@ -7,6 +7,7 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/screen/widget/location_popular_city_items.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/ui_model/loc_full_address_model.dart';
 import 'package:like_it/data/model/ui_model/loc_popular_city_model.dart';
@@ -20,21 +21,21 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   List<LocPopularCityModel> listPopularCity = [];
-  List<String> cityNames = [
+  final List<String> _cityNames = [
     "Jakarta",
     "Yogyakarta",
     "Bali",
     "Banda Aceh",
     "Bandung"
   ];
-  List<double> latCoord = [
+  final List<double> _latCoord = [
     -6.200000,
     -7.797068,
     -8.650000,
     5.548290,
     -6.914864,
   ];
-  List<double> longCoord = [
+  final List<double> _longCoord = [
     106.816666,
     110.370529,
     115.216667,
@@ -42,7 +43,7 @@ class _LocationScreenState extends State<LocationScreen> {
     107.608238,
   ];
 
-  List<LocFullAddressModel> listRecentLoc = [
+  final List<LocFullAddressModel> _listRecentLoc = [
     LocFullAddressModel(
       placeName: "Park Royale Executive Suites",
       addressDetail:
@@ -51,7 +52,8 @@ class _LocationScreenState extends State<LocationScreen> {
       longitude: 106.80943878888415,
     ),
   ];
-  List<LocFullAddressModel> listNearbyLoc = [
+
+  final List<LocFullAddressModel> _listNearbyLoc = [
     LocFullAddressModel(
       placeName: "Jakarta Convention Center",
       addressDetail:
@@ -85,9 +87,9 @@ class _LocationScreenState extends State<LocationScreen> {
         Random rng = Random();
         listPopularCity.add(LocPopularCityModel(
           cityImagePath: faker.image.loremPicsum(random: rng.nextInt(300)),
-          cityName: cityNames[index],
-          latitude: latCoord[index],
-          longitude: longCoord[index],
+          cityName: _cityNames[index],
+          latitude: _latCoord[index],
+          longitude: _longCoord[index],
         ));
       },
     );
@@ -96,26 +98,23 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                color: theme(context).scaffoldBackgroundColor,
-                image: DecorationImage(
-                  image: AssetImage(ImageConstant.background2),
-                  fit: BoxFit.cover,
-                ),
-              ),
+      child: Scaffold(
+        appBar: _locationAppBar(context),
+        body: Container(
+          width: double.maxFinite,
+          height: Sizeutils.height,
+          decoration: BoxDecoration(
+            color: theme(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withOpacity(0.6),
+            image: DecorationImage(
+              image: AssetImage(ImageConstant.background2),
+              fit: BoxFit.cover,
             ),
           ),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            body: _body(context),
-          ),
-        ],
+          child: _body(context),
+        ),
       ),
     );
   }
@@ -139,6 +138,33 @@ class _LocationScreenState extends State<LocationScreen> {
             _nearbyLoc(context),
             SizedBox(height: 5.h),
           ],
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _locationAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      toolbarHeight: 55.h,
+      leadingWidth: 50.h,
+      titleSpacing: 0.0,
+      automaticallyImplyLeading: true,
+      centerTitle: true,
+      leading: Container(
+        margin: EdgeInsets.only(left: 5.h),
+        child: IconButton(
+          iconSize: 25.h,
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      title: Padding(
+        padding: EdgeInsets.zero,
+        child: Text(
+          context.tr("location.title"),
+          style: theme(context).textTheme.headlineSmall,
         ),
       ),
     );
@@ -221,20 +247,23 @@ class _LocationScreenState extends State<LocationScreen> {
             padding: EdgeInsets.symmetric(horizontal: 6.h),
             height: 150.h,
             width: double.maxFinite,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: listPopularCity.isEmpty ? 1 : listPopularCity.length,
-              itemBuilder: (context, index) {
-                if (listPopularCity.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return LocationPopularCityItems(
-                  locPopularCityModel: listPopularCity[index],
-                  onPressed: () {},
-                );
-              },
-            ),
+            child: listPopularCity.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount:
+                        listPopularCity.isEmpty ? 1 : listPopularCity.length,
+                    itemBuilder: (context, index) {
+                      if (listPopularCity.isNotEmpty) {
+                        return LocationPopularCityItems(
+                          locPopularCityModel: listPopularCity[index],
+                          onPressed: () {},
+                        );
+                      }
+                      return const CustomEmptyState();
+                    },
+                  ),
           ),
         ],
       ),
@@ -261,12 +290,13 @@ class _LocationScreenState extends State<LocationScreen> {
               scrollDirection: Axis.vertical,
               itemCount: 3,
               itemBuilder: (context, index) {
-                if (index < listRecentLoc.length) {
+                //TODO add waiting, empty, error state in future
+                if (index < _listRecentLoc.length) {
                   return _buildAddressItems(
                     context,
                     leadingIcon: Icons.repeat,
-                    title: listRecentLoc[index].placeName,
-                    content: listRecentLoc[index].addressDetail,
+                    title: _listRecentLoc[index].placeName,
+                    content: _listRecentLoc[index].addressDetail,
                   );
                 }
                 return _buildAddressItems(
@@ -303,12 +333,13 @@ class _LocationScreenState extends State<LocationScreen> {
               scrollDirection: Axis.vertical,
               itemCount: 3,
               itemBuilder: (context, index) {
-                if (index < listNearbyLoc.length) {
+                //TODO add waiting, empty, error state in future
+                if (index < _listNearbyLoc.length) {
                   return _buildAddressItems(
                     context,
                     leadingIcon: Icons.repeat,
-                    title: listNearbyLoc[index].placeName,
-                    content: listNearbyLoc[index].addressDetail,
+                    title: _listNearbyLoc[index].placeName,
+                    content: _listNearbyLoc[index].addressDetail,
                   );
                 }
                 return _buildAddressItems(

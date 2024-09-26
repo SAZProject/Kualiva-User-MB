@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
@@ -166,6 +167,7 @@ class _FNBCuisineState extends State<FNBCuisine> {
           itemCount: _listTagsFilter.length + 1,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
+            //TODO add waiting, empty, error state in future
             if (index == 0) return _filterScreenBtn(context, index, label: "");
             return FNBFiltersItem(
               label: _listTagsFilter[index - 1],
@@ -235,21 +237,26 @@ class _FNBCuisineState extends State<FNBCuisine> {
           }
           return true;
         },
-        child: ListView.builder(
-          controller: _childScrollController,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: featuredListItems.length,
-          itemBuilder: (context, index) {
-            return FNBPlaceItem(
-              fnbModel: featuredListItems[index],
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-                    arguments: featuredListItems[index]);
-              },
-            );
-          },
-        ),
+        child: featuredListItems.isEmpty
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                controller: _childScrollController,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: featuredListItems.length,
+                itemBuilder: (context, index) {
+                  if (featuredListItems.isNotEmpty) {
+                    return FNBPlaceItem(
+                      fnbModel: featuredListItems[index],
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
+                            arguments: featuredListItems[index]);
+                      },
+                    );
+                  }
+                  return const CustomEmptyState();
+                },
+              ),
       ),
     );
   }

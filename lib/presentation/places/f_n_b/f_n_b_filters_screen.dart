@@ -92,8 +92,6 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBody: true,
-        extendBodyBehindAppBar: true,
         appBar: _fnbFiltersAppBar(context),
         body: Container(
           width: double.maxFinite,
@@ -246,7 +244,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
                 children: [
                   Flexible(
                       child: _buildSubmitButton(
-                          context, "filter.clear_btn", () => _resetValue())),
+                          context, "filter.revert_btn", () => _resetValue())),
                   Flexible(
                       child: _buildSubmitButton(context, "filter.submit_btn",
                           () => _confirmFilter(context))),

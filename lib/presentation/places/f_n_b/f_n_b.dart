@@ -441,7 +441,7 @@ class _FNBScreenState extends State<FNBScreen> {
                     ),
                     itemCount: _dummyImageData.length,
                     shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
                       if (_dummyImageData.isNotEmpty) {
                         return Padding(

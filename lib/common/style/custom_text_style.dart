@@ -6,6 +6,7 @@ class CustomTextStyles {
   final BuildContext context;
 
   CustomTextStyles(this.context);
+
   TextStyle get onPrimaryContainer => TextStyle(
         color: theme(context).colorScheme.onPrimaryContainer.withOpacity(1.0),
       );
@@ -113,6 +114,11 @@ class CustomTextStyles {
             color:
                 theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
             fontSize: 10.fontSize,
+          );
+  TextStyle get bodySmallPrimary12 =>
+      theme(context).textTheme.bodySmall!.copyWith(
+            color: theme(context).colorScheme.primary,
+            fontSize: 12.fontSize,
           );
   // Display Small
   TextStyle get displaySmallBlack900 =>

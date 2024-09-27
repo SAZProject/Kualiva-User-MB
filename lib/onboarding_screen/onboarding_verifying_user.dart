@@ -1,0 +1,225 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/style/custom_btn_style.dart';
+import 'package:like_it/common/utility/datetime_utils.dart';
+import 'package:like_it/common/widget/custom_elevated_button.dart';
+import 'package:like_it/data/model/ui_model/onboarding_model.dart';
+import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
+import 'package:like_it/onboarding_screen/widget/onboarding_pick_birthdate.dart';
+import 'package:like_it/onboarding_screen/widget/onboarding_pick_cuisine.dart';
+import 'package:like_it/onboarding_screen/widget/onboarding_pick_notification.dart';
+
+class OnboardingVerifyingUser extends StatefulWidget {
+  const OnboardingVerifyingUser({super.key});
+
+  @override
+  State<OnboardingVerifyingUser> createState() =>
+      _OnboardingVerifyingUserState();
+}
+
+class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
+  final List<OnboardingModel> _pages = [
+    const OnboardingModel(
+      icon: Icons.calendar_month,
+      pageTitle: "onboard.onboard_pick_birthdate",
+    ),
+    const OnboardingModel(
+      icon: Icons.star,
+      pageTitle: "onboard.onboard_pick_cuisine",
+    ),
+    const OnboardingModel(
+      icon: Icons.notifications,
+      pageTitle: "onboard.onboard_pick_notif",
+    ),
+  ];
+
+  final PageController _pageController = PageController();
+
+  int _activePage = 0;
+
+  DateTime? selectedDate;
+
+  final List<String> _dummyImageData = [
+    "${ImageConstant.fnb1Path}/A/2.jpg",
+    "${ImageConstant.fnb2Path}/A/2.jpg",
+    "${ImageConstant.fnb3Path}/A/2.jpg",
+    "${ImageConstant.fnb4Path}/A/2.jpg",
+    "${ImageConstant.fnb5Path}/A/2.jpg",
+  ];
+
+  Set<int> dummySelectedCuisine = {};
+
+  final List<ProfileMenuModel> _listBtnItem = [];
+
+  Set<int> selectedNotifChoice = {};
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          extendBody: true,
+          extendBodyBehindAppBar: true,
+          body: SizedBox(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            child: _body(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _body() {
+    return PageView.builder(
+      controller: _pageController,
+      itemCount: _pages.length,
+      onPageChanged: (int page) {
+        setState(() {
+          _activePage = page;
+        });
+      },
+      itemBuilder: (BuildContext context, int index) {
+        return Column(
+          children: [
+            SizedBox(height: 10.h),
+            _onBoardingHeader(context, _pages[index]),
+            SizedBox(height: 10.h),
+            _buildPage(context),
+            const Spacer(),
+            _buildConfirm(context),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _onBoardingHeader(
+      BuildContext context, OnboardingModel onboardingModel) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 5.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 20.h),
+          Text(
+            context.tr(onboardingModel.pageTitle),
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+          SizedBox(height: 20.h),
+          Icon(
+            onboardingModel.icon,
+            size: 40.h,
+          ),
+          SizedBox(height: 20.h),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPage(BuildContext context) {
+    switch (_activePage) {
+      case 1:
+        return OnboardingPickCuisine(
+          dummyImageData: _dummyImageData,
+          selectedIndexes: dummySelectedCuisine,
+          hintText: "onboard.onboard_pick_cuisine_hint",
+          onHintPressed: () {},
+          onSelected: (index) {
+            setState(() {
+              if (dummySelectedCuisine.contains(index)) {
+                dummySelectedCuisine.remove(index);
+              } else {
+                dummySelectedCuisine.add(index);
+              }
+            });
+          },
+        );
+      case 2:
+        return OnboardingPickNotification(
+          listBtnItem: _listBtnItem,
+          selectedIndexes: selectedNotifChoice,
+          onSelectAll: () {
+            Set<int> temp = {};
+            for (int i = 0; i < _listBtnItem.length; i++) {
+              temp.add(i);
+            }
+            setState(() {
+              if (selectedNotifChoice.containsAll(temp)) {
+                selectedNotifChoice.removeAll(temp);
+              } else {
+                selectedNotifChoice.addAll(temp);
+              }
+            });
+          },
+          onSelected: (index) {
+            setState(() {
+              if (selectedNotifChoice.contains(index)) {
+                selectedNotifChoice.remove(index);
+              } else {
+                selectedNotifChoice.add(index);
+              }
+            });
+          },
+        );
+      default:
+        return OnboardingPickBirthdate(
+          leftIcon: Icons.calendar_month,
+          label: selectedDate != null
+              ? DatetimeUtils.dmy(selectedDate!)
+              : context.tr("onboard.onboard_pick_birthdate_btn_date"),
+          hintText: context.tr("onboard.onboard_pick_birthdate_hint"),
+          onHintPressed: () {},
+          onPressed: () => _selectDate(context),
+        );
+    }
+  }
+
+  Widget _buildConfirm(BuildContext context) {
+    return CustomElevatedButton(
+      initialText: context.tr("onboard.onboard_confirm_btn"),
+      secondText:
+          _activePage == 2 ? context.tr("onboard.onboard_save_btn") : null,
+      margin: EdgeInsets.all(10.h),
+      buttonStyle: CustomButtonStyles.none,
+      decoration:
+          CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
+      buttonTextStyle: Theme.of(context).textTheme.titleLarge,
+      onPressed: () {
+        if (_activePage == 2) {
+          Navigator.of(context).pushNamed(AppRoutes.devicePermissionScreen);
+        } else {
+          _pageController.nextPage(
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeInOut);
+        }
+      },
+    );
+  }
+
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(DateTime.now().year),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+}

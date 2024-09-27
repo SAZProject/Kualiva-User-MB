@@ -5,11 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.34+01
-- Change what's going on into home event screen
-- Some List Builder add empty and waiting widget
-- Add forgotten appbar for some screen
-- Add forgotten dispose func on some controller
+Ver 0.0.35
+- Change onBoarding into three veryfing user
 ```
 
 ## Getting Started

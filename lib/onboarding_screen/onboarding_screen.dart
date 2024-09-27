@@ -16,19 +16,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final List<OnboardingModel> _pages = [
     OnboardingModel(
       imageUri: ImageConstant.onBoarding1,
-      title: "onboard.onboard_1_title",
+      pageTitle: "onboard.onboard_1_title",
       content: "onboard.onboard_1_content",
       pageColor: const Color(0xFF04CCFF),
     ),
     OnboardingModel(
       imageUri: ImageConstant.onBoarding2,
-      title: "onboard.onboard_2_title",
+      pageTitle: "onboard.onboard_2_title",
       content: "onboard.onboard_2_content",
       pageColor: const Color(0xFF73FF2D),
     ),
     OnboardingModel(
       imageUri: ImageConstant.onBoarding3,
-      title: "onboard.onboard_3_title",
+      pageTitle: "onboard.onboard_3_title",
       content: "onboard.onboard_3_content",
       pageColor: const Color(0xFFFFDD00),
     ),
@@ -60,10 +60,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               end: const Alignment(1, 1),
               colors: [
                 _activePage == 0
-                    ? _pages[0].pageColor
+                    ? _pages[0].pageColor!
                     : _activePage == 1
-                        ? _pages[1].pageColor
-                        : _pages[2].pageColor,
+                        ? _pages[1].pageColor!
+                        : _pages[2].pageColor!,
                 theme(context).colorScheme.onSecondaryContainer,
               ],
             ),
@@ -126,14 +126,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         children: [
           SizedBox(height: 20.h),
           Image.asset(
-            onboardingModel.imageUri,
+            onboardingModel.imageUri!,
             height: 300.h,
             width: double.maxFinite,
             fit: BoxFit.cover,
           ),
           SizedBox(height: 20.h),
           Text(
-            context.tr(onboardingModel.title),
+            context.tr(onboardingModel.pageTitle),
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.displaySmall,
@@ -142,7 +142,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           Opacity(
             opacity: 0.6,
             child: Text(
-              context.tr(onboardingModel.content),
+              context.tr(onboardingModel.content!),
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyLarge,

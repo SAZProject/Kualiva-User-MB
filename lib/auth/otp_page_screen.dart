@@ -65,7 +65,7 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
                 Future.delayed(const Duration(seconds: 2), () {
                   if (!context.mounted) return;
                   Navigator.pushNamed(
-                      context, AppRoutes.devicePermissionScreen);
+                      context, AppRoutes.onBoardingVerifyUserScreen);
                 });
               },
             ),

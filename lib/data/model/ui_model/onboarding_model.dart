@@ -5,27 +5,35 @@ import 'package:flutter/material.dart';
 
 @immutable
 class OnboardingModel {
-  final String imageUri;
-  final String title;
-  final String content;
-  final Color pageColor;
+  final String? imageUri;
+  final IconData? icon;
+  final String pageTitle;
+  final String? pageHint;
+  final String? content;
+  final Color? pageColor;
 
   const OnboardingModel({
-    required this.imageUri,
-    required this.title,
-    required this.content,
-    required this.pageColor,
+    this.imageUri,
+    this.icon,
+    required this.pageTitle,
+    this.pageHint,
+    this.content,
+    this.pageColor,
   });
 
   OnboardingModel copyWith({
     String? imageUri,
-    String? title,
+    IconData? icon,
+    String? pageTitle,
+    String? pageHint,
     String? content,
     Color? pageColor,
   }) {
     return OnboardingModel(
       imageUri: imageUri ?? this.imageUri,
-      title: title ?? this.title,
+      icon: icon ?? this.icon,
+      pageTitle: pageTitle ?? this.pageTitle,
+      pageHint: pageHint ?? this.pageHint,
       content: content ?? this.content,
       pageColor: pageColor ?? this.pageColor,
     );
@@ -34,18 +42,25 @@ class OnboardingModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'imageUri': imageUri,
-      'title': title,
+      'icon': icon?.codePoint,
+      'pageTitle': pageTitle,
+      'pageHint': pageHint,
       'content': content,
-      'pageColor': pageColor.value,
+      'pageColor': pageColor?.value,
     };
   }
 
   factory OnboardingModel.fromMap(Map<String, dynamic> map) {
     return OnboardingModel(
-      imageUri: map['imageUri'] as String,
-      title: map['title'] as String,
-      content: map['content'] as String,
-      pageColor: Color(map['pageColor'] as int),
+      imageUri: map['imageUri'] != null ? map['imageUri'] as String : null,
+      icon: map['icon'] != null
+          ? IconData(map['icon'] as int, fontFamily: 'MaterialIcons')
+          : null,
+      pageTitle: map['pageTitle'] as String,
+      pageHint: map['pageHint'] != null ? map['pageHint'] as String : null,
+      content: map['content'] != null ? map['content'] as String : null,
+      pageColor:
+          map['pageColor'] != null ? Color(map['pageColor'] as int) : null,
     );
   }
 
@@ -56,7 +71,7 @@ class OnboardingModel {
 
   @override
   String toString() {
-    return 'OnboardingModel(imageUri: $imageUri, title: $title, content: $content, pageColor: $pageColor)';
+    return 'OnboardingModel(imageUri: $imageUri, icon: $icon, pageTitle: $pageTitle, pageHint: $pageHint, content: $content, pageColor: $pageColor)';
   }
 
   @override
@@ -64,7 +79,9 @@ class OnboardingModel {
     if (identical(this, other)) return true;
 
     return other.imageUri == imageUri &&
-        other.title == title &&
+        other.icon == icon &&
+        other.pageTitle == pageTitle &&
+        other.pageHint == pageHint &&
         other.content == content &&
         other.pageColor == pageColor;
   }
@@ -72,7 +89,9 @@ class OnboardingModel {
   @override
   int get hashCode {
     return imageUri.hashCode ^
-        title.hashCode ^
+        icon.hashCode ^
+        pageTitle.hashCode ^
+        pageHint.hashCode ^
         content.hashCode ^
         pageColor.hashCode;
   }

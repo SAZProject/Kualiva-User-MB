@@ -6,6 +6,7 @@ import 'package:like_it/auth/sign_up_screen.dart';
 import 'package:like_it/common/screen/location_screen.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
+import 'package:like_it/onboarding_screen/onboarding_verifying_user.dart';
 import 'package:like_it/presentation/home/home_event_screen.dart';
 import 'package:like_it/presentation/places/add_places_screen.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b.dart';
@@ -19,14 +20,16 @@ import 'package:like_it/presentation/report/report_place_screen.dart';
 import 'package:like_it/presentation/report/report_review_screen.dart';
 import 'package:like_it/presentation/review/review_form_screen.dart';
 import 'package:like_it/presentation/review/review_screen.dart';
-import 'package:like_it/splash_onboarding/onboarding.dart';
-import 'package:like_it/splash_onboarding/splash.dart';
+import 'package:like_it/onboarding_screen/onboarding_screen.dart';
+import 'package:like_it/splash_screen/splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AppRoutes {
   static const String splashScreen = "/splash_screen";
 
   static const String onBoardingScreen = "/onboarding";
+
+  static const String onBoardingVerifyUserScreen = "/onboarding_verify_user";
 
   static const String signInScreen = "/sign_in_screen";
 
@@ -78,6 +81,11 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.onBoardingScreen:
       return PageTransition(
           child: const OnBoardingScreen(),
+          type: PageTransitionType.fade,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.onBoardingVerifyUserScreen:
+      return PageTransition(
+          child: const OnboardingVerifyingUser(),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.signInScreen:

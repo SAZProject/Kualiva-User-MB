@@ -92,6 +92,20 @@
         "onboard_3_title": "Share your\nMoments",
         "onboard_3_content": "Let the world know about your journey!\nLeave a review everytime you finish your journey!",
 
+        "onboard_pick_birthdate": "Please enter\nyour birthdate",
+        "onboard_pick_birthdate_hint": "Why we askfor your birthdate?",
+        "onboard_pick_birthdate_btn_date": "Select Date",
+        "onboard_pick_cuisine": "Pick your\nfavorite cuisines",
+        "onboard_pick_cuisine_hint": "You can select up to 5 cuisines",
+        "onboard_pick_notif": "How would you\nlike to recieve our\nnotifications?",
+        "onboard_pick_notif_item_1": "Like it",
+        "onboard_pick_notif_item_2": "WhatsApp",
+        "onboard_pick_notif_item_3": "Message",
+        "onboard_pick_notif_item_4": "Email",
+        "onboard_pick_notif_btn_select": "Select All",
+
+        "onboard_confirm_btn": "Confirm",
+        "onboard_save_btn": "Save",
         "onboard_next_btn": "Next",
         "onboard_start_btn": "Let\u0027s Start"
     },

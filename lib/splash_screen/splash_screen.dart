@@ -18,9 +18,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Future.delayed(const Duration(seconds: 2), () {
-    //   Navigator.of(context).pushNamed(AppRoutes.onBoardingScreen);
-    // });
+    Future.delayed(const Duration(seconds: 2), () {
+      if (!mounted) return;
+      Navigator.of(context).pushNamed(AppRoutes.signInScreen);
+    });
     _videoPlayerController =
         VideoPlayerController.asset(VideoConstant.splashVideo);
     _videoPlayerInitialized = _videoPlayerController.initialize().then(

@@ -65,7 +65,7 @@ class FullscreenImageState extends State<CustomFullscreenImage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
+                    Padding(
                       padding: EdgeInsets.all(5.h),
                       child: IconButton(
                         onPressed: () {

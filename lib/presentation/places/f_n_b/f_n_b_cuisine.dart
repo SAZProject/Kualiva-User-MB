@@ -213,50 +213,53 @@ class _FNBCuisineState extends State<FNBCuisine> {
   }
 
   Widget _placeList(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 6.h),
-      width: double.maxFinite,
-      child: NotificationListener(
-        onNotification: (ScrollNotification notification) {
-          if (notification is ScrollUpdateNotification) {
-            if (notification.metrics.pixels ==
-                notification.metrics.maxScrollExtent) {
-              debugPrint('Reached the bottom');
-              _parentScrollController.animateTo(
-                  _parentScrollController.position.maxScrollExtent,
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.easeIn);
-            } else if (notification.metrics.pixels ==
-                notification.metrics.minScrollExtent) {
-              debugPrint('Reached the top');
-              _parentScrollController.animateTo(
-                  _parentScrollController.position.minScrollExtent,
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.easeIn);
+      child: SizedBox(
+        width: double.maxFinite,
+        child: NotificationListener(
+          onNotification: (ScrollNotification notification) {
+            if (notification is ScrollUpdateNotification) {
+              if (notification.metrics.pixels ==
+                  notification.metrics.maxScrollExtent) {
+                debugPrint('Reached the bottom');
+                _parentScrollController.animateTo(
+                    _parentScrollController.position.maxScrollExtent,
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.easeIn);
+              } else if (notification.metrics.pixels ==
+                  notification.metrics.minScrollExtent) {
+                debugPrint('Reached the top');
+                _parentScrollController.animateTo(
+                    _parentScrollController.position.minScrollExtent,
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.easeIn);
+              }
             }
-          }
-          return true;
-        },
-        child: featuredListItems.isEmpty
-            ? const Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                controller: _childScrollController,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: featuredListItems.length,
-                itemBuilder: (context, index) {
-                  if (featuredListItems.isNotEmpty) {
-                    return FNBPlaceItem(
-                      fnbModel: featuredListItems[index],
-                      onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-                            arguments: featuredListItems[index]);
-                      },
-                    );
-                  }
-                  return const CustomEmptyState();
-                },
-              ),
+            return true;
+          },
+          child: featuredListItems.isEmpty
+              ? const Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  controller: _childScrollController,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: featuredListItems.length,
+                  itemBuilder: (context, index) {
+                    if (featuredListItems.isNotEmpty) {
+                      return FNBPlaceItem(
+                        fnbModel: featuredListItems[index],
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, AppRoutes.fnbDetailScreen,
+                              arguments: featuredListItems[index]);
+                        },
+                      );
+                    }
+                    return const CustomEmptyState();
+                  },
+                ),
+        ),
       ),
     );
   }

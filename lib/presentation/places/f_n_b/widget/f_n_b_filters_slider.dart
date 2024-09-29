@@ -65,30 +65,32 @@ class FNBFiltersSlider extends StatelessWidget {
           ),
           ValueListenableBuilder(
             valueListenable: rangeValuesNotifier,
-            builder: (context, value, child) => Container(
+            builder: (context, value, child) => Align(
               alignment: Alignment.center,
-              width: 200.h,
-              child: SliderTheme(
-                data: SliderThemeData(
-                  showValueIndicator: ShowValueIndicator.always,
-                  valueIndicatorColor: theme(context).colorScheme.primary,
-                  valueIndicatorTextStyle:
-                      CustomTextStyles(context).bodySmall12,
-                ),
-                child: RangeSlider(
-                  activeColor: theme(context).colorScheme.primary,
-                  min: slideMinVal,
-                  max: slideMaxVal,
-                  values: value,
-                  labels: RangeLabels(
-                    rangeValuesNotifier.value.start.round().toString(),
-                    rangeValuesNotifier.value.end.round().toString(),
+              child: SizedBox(
+                width: 200.h,
+                child: SliderTheme(
+                  data: SliderThemeData(
+                    showValueIndicator: ShowValueIndicator.always,
+                    valueIndicatorColor: theme(context).colorScheme.primary,
+                    valueIndicatorTextStyle:
+                        CustomTextStyles(context).bodySmall12,
                   ),
-                  onChanged: (newValues) {
-                    rangeValuesNotifier.value = newValues;
-                  },
-                  onChangeEnd: onChangeEnd,
-                  divisions: division,
+                  child: RangeSlider(
+                    activeColor: theme(context).colorScheme.primary,
+                    min: slideMinVal,
+                    max: slideMaxVal,
+                    values: value,
+                    labels: RangeLabels(
+                      rangeValuesNotifier.value.start.round().toString(),
+                      rangeValuesNotifier.value.end.round().toString(),
+                    ),
+                    onChanged: (newValues) {
+                      rangeValuesNotifier.value = newValues;
+                    },
+                    onChangeEnd: onChangeEnd,
+                    divisions: division,
+                  ),
                 ),
               ),
             ),

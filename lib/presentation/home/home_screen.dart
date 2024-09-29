@@ -289,23 +289,25 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _adBanner(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 6.h),
-      height: 200.h,
-      width: double.maxFinite,
-      child: _adBannerList.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              scrollDirection: Axis.horizontal,
-              controller: _childScrollController,
-              itemCount: _adBannerList.length,
-              itemBuilder: (context, index) {
-                if (_adBannerList.isNotEmpty) {
-                  return _adBannerListItem(context, _adBannerList[index]);
-                }
-                return const CustomEmptyState();
-              },
-            ),
+      child: SizedBox(
+        height: 200.h,
+        width: double.maxFinite,
+        child: _adBannerList.isEmpty
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                scrollDirection: Axis.horizontal,
+                controller: _childScrollController,
+                itemCount: _adBannerList.length,
+                itemBuilder: (context, index) {
+                  if (_adBannerList.isNotEmpty) {
+                    return _adBannerListItem(context, _adBannerList[index]);
+                  }
+                  return const CustomEmptyState();
+                },
+              ),
+      ),
     );
   }
 
@@ -413,24 +415,26 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {},
           ),
           SizedBox(height: 4.h),
-          Container(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
-            height: 200.h,
-            width: double.maxFinite,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                //TODO add waiting, empty, error state in future
-                return HomeFeaturedItem(
-                  fnbModel: featuredListItems[index],
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-                        arguments: featuredListItems[index]);
-                  },
-                );
-              },
+            child: SizedBox(
+              height: 200.h,
+              width: double.maxFinite,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: 6,
+                itemBuilder: (context, index) {
+                  //TODO add waiting, empty, error state in future
+                  return HomeFeaturedItem(
+                    fnbModel: featuredListItems[index],
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
+                          arguments: featuredListItems[index]);
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],

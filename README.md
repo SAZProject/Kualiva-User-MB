@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.35+02
-- Fix & tested Location, home event, cuisine screen
-- Fix minor bugs
+Ver 0.0.35+03
+- Major change for performance, swap some container into sizedbox and padding separately
 ```
 
 ## Getting Started

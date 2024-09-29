@@ -91,17 +91,19 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
   }
 
   Widget _body(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _imageTitleContentView(context),
-          SizedBox(height: 4.h),
-          _allowBtn(context),
-          SizedBox(height: 4.h),
-        ],
+      child: SizedBox(
+        width: double.maxFinite,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _imageTitleContentView(context),
+            SizedBox(height: 4.h),
+            _allowBtn(context),
+            SizedBox(height: 4.h),
+          ],
+        ),
       ),
     );
   }
@@ -130,7 +132,7 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
   }
 
   Widget _permissionTitleContent(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 4.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

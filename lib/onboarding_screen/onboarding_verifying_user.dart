@@ -116,7 +116,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   Widget _onBoardingHeader(
       BuildContext context, OnboardingModel onboardingModel) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 5.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

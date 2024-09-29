@@ -248,27 +248,29 @@ class _LocationScreenState extends State<LocationScreen> {
             onPressed: () {},
           ),
           SizedBox(height: 4.h),
-          Container(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
-            height: 150.h,
-            width: double.maxFinite,
-            child: listPopularCity.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount:
-                        listPopularCity.isEmpty ? 1 : listPopularCity.length,
-                    itemBuilder: (context, index) {
-                      if (listPopularCity.isNotEmpty) {
-                        return LocationPopularCityItems(
-                          locPopularCityModel: listPopularCity[index],
-                          onPressed: () {},
-                        );
-                      }
-                      return const CustomEmptyState();
-                    },
-                  ),
+            child: SizedBox(
+              height: 150.h,
+              width: double.maxFinite,
+              child: listPopularCity.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          listPopularCity.isEmpty ? 1 : listPopularCity.length,
+                      itemBuilder: (context, index) {
+                        if (listPopularCity.isNotEmpty) {
+                          return LocationPopularCityItems(
+                            locPopularCityModel: listPopularCity[index],
+                            onPressed: () {},
+                          );
+                        }
+                        return const CustomEmptyState();
+                      },
+                    ),
+            ),
           ),
         ],
       ),
@@ -333,31 +335,33 @@ class _LocationScreenState extends State<LocationScreen> {
             onPressed: () {},
           ),
           SizedBox(height: 4.h),
-          Container(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
-            width: double.maxFinite,
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                //TODO add waiting, empty, error state in future
-                if (index < _listNearbyLoc.length) {
+            child: SizedBox(
+              width: double.maxFinite,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  //TODO add waiting, empty, error state in future
+                  if (index < _listNearbyLoc.length) {
+                    return _buildAddressItems(
+                      context,
+                      leadingIcon: Icons.place,
+                      title: _listNearbyLoc[index].placeName,
+                      content: _listNearbyLoc[index].addressDetail,
+                    );
+                  }
                   return _buildAddressItems(
                     context,
                     leadingIcon: Icons.place,
-                    title: _listNearbyLoc[index].placeName,
-                    content: _listNearbyLoc[index].addressDetail,
+                    title: context.tr("location.content_title_hint"),
+                    content: context.tr("location.content_detail_hint"),
                   );
-                }
-                return _buildAddressItems(
-                  context,
-                  leadingIcon: Icons.place,
-                  title: context.tr("location.content_title_hint"),
-                  content: context.tr("location.content_detail_hint"),
-                );
-              },
+                },
+              ),
             ),
           ),
         ],

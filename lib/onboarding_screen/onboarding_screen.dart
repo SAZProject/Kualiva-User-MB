@@ -119,7 +119,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   Widget onBoardingPage(OnboardingModel onboardingModel) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 4.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

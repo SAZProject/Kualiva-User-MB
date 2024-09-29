@@ -61,59 +61,61 @@ class SignInScreenState extends State<SignInScreen> {
         height: Sizeutils.height,
         child: Form(
           key: _formKey,
-          child: Container(
-            width: double.maxFinite,
+          child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 6.h),
-            child: Column(
-              children: [
-                SizedBox(height: 26.h),
-                CustomImageView(
-                  imagePath: ImageConstant.appLogo,
-                  height: 100.h,
-                  width: 100.h,
-                ),
-                SizedBox(height: 25.h),
-                _signInMenu(context),
-                const Spacer(),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: context.tr("sign_in.tos_statement"),
-                        style: CustomTextStyles(context)
-                            .bodySmallOnPrimaryContainer,
-                      ),
-                      TextSpan(
-                        text: context.tr("sign_in.tos"),
-                        style: theme(context).textTheme.labelMedium!.copyWith(
-                              color: appTheme.yellowA700,
-                              decorationColor: appTheme.yellowA700,
-                              decoration: TextDecoration.underline,
-                            ),
-                        recognizer: TapGestureRecognizer()..onTap = () {},
-                      ),
-                      TextSpan(
-                          text: " ",
-                          style: theme(context).textTheme.labelMedium),
-                      TextSpan(
-                        text: context.tr("sign_in.policy_statement"),
-                        style: CustomTextStyles(context)
-                            .bodySmallOnPrimaryContainer,
-                      ),
-                      TextSpan(
-                        text: context.tr("sign_in.policy"),
-                        style: theme(context).textTheme.labelMedium!.copyWith(
-                              color: appTheme.yellowA700,
-                              decorationColor: appTheme.yellowA700,
-                              decoration: TextDecoration.underline,
-                            ),
-                        recognizer: TapGestureRecognizer()..onTap = () {},
-                      ),
-                    ],
+            child: SizedBox(
+              width: double.maxFinite,
+              child: Column(
+                children: [
+                  SizedBox(height: 26.h),
+                  CustomImageView(
+                    imagePath: ImageConstant.appLogo,
+                    height: 100.h,
+                    width: 100.h,
                   ),
-                ),
-              ],
+                  SizedBox(height: 25.h),
+                  _signInMenu(context),
+                  const Spacer(),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: context.tr("sign_in.tos_statement"),
+                          style: CustomTextStyles(context)
+                              .bodySmallOnPrimaryContainer,
+                        ),
+                        TextSpan(
+                          text: context.tr("sign_in.tos"),
+                          style: theme(context).textTheme.labelMedium!.copyWith(
+                                color: appTheme.yellowA700,
+                                decorationColor: appTheme.yellowA700,
+                                decoration: TextDecoration.underline,
+                              ),
+                          recognizer: TapGestureRecognizer()..onTap = () {},
+                        ),
+                        TextSpan(
+                            text: " ",
+                            style: theme(context).textTheme.labelMedium),
+                        TextSpan(
+                          text: context.tr("sign_in.policy_statement"),
+                          style: CustomTextStyles(context)
+                              .bodySmallOnPrimaryContainer,
+                        ),
+                        TextSpan(
+                          text: context.tr("sign_in.policy"),
+                          style: theme(context).textTheme.labelMedium!.copyWith(
+                                color: appTheme.yellowA700,
+                                decorationColor: appTheme.yellowA700,
+                                decoration: TextDecoration.underline,
+                              ),
+                          recognizer: TapGestureRecognizer()..onTap = () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

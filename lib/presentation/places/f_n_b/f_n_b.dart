@@ -333,46 +333,48 @@ class _FNBScreenState extends State<FNBScreen> {
             onPressed: () {},
           ),
           SizedBox(height: 4.h),
-          Container(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
-            height: 450.h,
-            width: double.maxFinite,
-            child: NotificationListener(
-              onNotification: (ScrollNotification notification) {
-                if (notification is ScrollUpdateNotification) {
-                  if (notification.metrics.pixels ==
-                      notification.metrics.maxScrollExtent) {
-                    debugPrint('Reached the bottom');
-                    _parentScrollController.animateTo(
-                        _parentScrollController.position.maxScrollExtent,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeIn);
-                  } else if (notification.metrics.pixels ==
-                      notification.metrics.minScrollExtent) {
-                    debugPrint('Reached the top');
-                    _parentScrollController.animateTo(
-                        _parentScrollController.position.minScrollExtent,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeIn);
+            child: SizedBox(
+              height: 450.h,
+              width: double.maxFinite,
+              child: NotificationListener(
+                onNotification: (ScrollNotification notification) {
+                  if (notification is ScrollUpdateNotification) {
+                    if (notification.metrics.pixels ==
+                        notification.metrics.maxScrollExtent) {
+                      debugPrint('Reached the bottom');
+                      _parentScrollController.animateTo(
+                          _parentScrollController.position.maxScrollExtent,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeIn);
+                    } else if (notification.metrics.pixels ==
+                        notification.metrics.minScrollExtent) {
+                      debugPrint('Reached the top');
+                      _parentScrollController.animateTo(
+                          _parentScrollController.position.minScrollExtent,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeIn);
+                    }
                   }
-                }
-                return true;
-              },
-              child: ListView.builder(
-                controller: _childScrollController,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  //TODO add waiting, empty, error state in future
-                  return FNBPlaceItem(
-                    fnbModel: featuredListItems[index],
-                    onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-                          arguments: featuredListItems[index]);
-                    },
-                  );
+                  return true;
                 },
+                child: ListView.builder(
+                  controller: _childScrollController,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: 6,
+                  itemBuilder: (context, index) {
+                    //TODO add waiting, empty, error state in future
+                    return FNBPlaceItem(
+                      fnbModel: featuredListItems[index],
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
+                            arguments: featuredListItems[index]);
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -394,24 +396,26 @@ class _FNBScreenState extends State<FNBScreen> {
             },
           ),
           SizedBox(height: 4.h),
-          Container(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
-            height: 200.h,
-            width: double.maxFinite,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                //TODO add waiting, empty, error state in future
-                return FNBPromoItem(
-                  fnbModel: featuredListItems[index],
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-                        arguments: featuredListItems[index]);
-                  },
-                );
-              },
+            child: SizedBox(
+              height: 200.h,
+              width: double.maxFinite,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: 6,
+                itemBuilder: (context, index) {
+                  //TODO add waiting, empty, error state in future
+                  return FNBPromoItem(
+                    fnbModel: featuredListItems[index],
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
+                          arguments: featuredListItems[index]);
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],

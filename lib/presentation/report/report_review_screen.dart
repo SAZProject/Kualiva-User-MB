@@ -229,35 +229,37 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
   }
 
   Widget _buildSubmitButton(BuildContext context) {
-    return Container(
-      height: 60.h,
-      width: double.maxFinite,
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: OutlineGradientButton(
-        padding: EdgeInsets.all(2.h),
-        strokeWidth: 2.h,
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(0.5, 1),
-          colors: [
-            appTheme.yellowA700,
-            theme(context).colorScheme.primary,
-          ],
-        ),
-        corners: const Corners(
-          topLeft: Radius.circular(25.0),
-          topRight: Radius.circular(25.0),
-          bottomLeft: Radius.circular(25.0),
-          bottomRight: Radius.circular(25.0),
-        ),
-        child: CustomOutlinedButton(
-          text: context.tr("report.submit_btn"),
-          buttonStyle: CustomButtonStyles.outlineTL25(context).copyWith(
-            backgroundColor: WidgetStatePropertyAll(
-                theme(context).colorScheme.onSecondaryContainer),
+      child: SizedBox(
+        height: 60.h,
+        width: double.maxFinite,
+        child: OutlineGradientButton(
+          padding: EdgeInsets.all(2.h),
+          strokeWidth: 2.h,
+          gradient: LinearGradient(
+            begin: const Alignment(0.5, 0),
+            end: const Alignment(0.5, 1),
+            colors: [
+              appTheme.yellowA700,
+              theme(context).colorScheme.primary,
+            ],
           ),
-          buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
-          onPressed: () {},
+          corners: const Corners(
+            topLeft: Radius.circular(25.0),
+            topRight: Radius.circular(25.0),
+            bottomLeft: Radius.circular(25.0),
+            bottomRight: Radius.circular(25.0),
+          ),
+          child: CustomOutlinedButton(
+            text: context.tr("report.submit_btn"),
+            buttonStyle: CustomButtonStyles.outlineTL25(context).copyWith(
+              backgroundColor: WidgetStatePropertyAll(
+                  theme(context).colorScheme.onSecondaryContainer),
+            ),
+            buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
+            onPressed: () {},
+          ),
         ),
       ),
     );

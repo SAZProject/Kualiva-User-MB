@@ -16,7 +16,7 @@ class LocationPopularCityItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 100.h,
-      margin: EdgeInsets.symmetric(vertical: 6.h),
+      margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 5.h),
       decoration: CustomDecoration(context)
           .outlineOnSecondaryContainer
           .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
@@ -29,21 +29,23 @@ class LocationPopularCityItems extends StatelessWidget {
             CustomImageView(
               alignment: Alignment.center,
               imagePath: locPopularCityModel.cityImagePath,
+              boxFit: BoxFit.cover,
               height: double.maxFinite,
               width: double.maxFinite,
-              radius: BorderRadius.vertical(
-                top: Radius.circular(10.h),
-              ),
+              radius: BorderRadiusStyle.roundedBorder10,
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(left: 4.h),
+              child: Container(
+                width: double.maxFinite,
+                decoration:
+                    CustomDecoration(context).fillOnSecondaryContainer_06,
                 child: Text(
                   locPopularCityModel.cityName,
                   style: theme(context).textTheme.titleSmall,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),

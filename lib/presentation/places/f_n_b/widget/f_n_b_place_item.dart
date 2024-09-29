@@ -15,7 +15,7 @@ class FNBPlaceItem extends StatelessWidget {
     return Container(
       height: 100.h,
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 6.h),
+      margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 6.h),
       decoration: CustomDecoration(context)
           .outlineOnSecondaryContainer
           .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),

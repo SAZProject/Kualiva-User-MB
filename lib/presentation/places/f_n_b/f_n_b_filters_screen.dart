@@ -92,6 +92,8 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
         appBar: _fnbFiltersAppBar(context),
         body: Container(
           width: double.maxFinite,

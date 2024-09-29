@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/screen/widget/location_popular_city_items.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
@@ -79,26 +80,23 @@ class _WhatGoingOnScreenState extends State<WhatGoingOnScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                color: theme(context).scaffoldBackgroundColor,
-                image: DecorationImage(
-                  image: AssetImage(ImageConstant.background2),
-                  fit: BoxFit.cover,
-                ),
-              ),
+      child: Scaffold(
+        appBar: _homeEventAppBar(context),
+        body: Container(
+          width: double.maxFinite,
+          height: Sizeutils.height,
+          decoration: BoxDecoration(
+            color: theme(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withOpacity(0.6),
+            image: DecorationImage(
+              image: AssetImage(ImageConstant.background2),
+              fit: BoxFit.cover,
             ),
           ),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            body: _body(context),
-          ),
-        ],
+          child: _body(context),
+        ),
       ),
     );
   }
@@ -115,9 +113,38 @@ class _WhatGoingOnScreenState extends State<WhatGoingOnScreen> {
             SizedBox(height: 5.h),
             _userCurrLocBtn(context),
             SizedBox(height: 5.h),
+            _popularCity(context),
+            SizedBox(height: 5.h),
             _eventList(context),
             SizedBox(height: 5.h),
           ],
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _homeEventAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      toolbarHeight: 55.h,
+      leadingWidth: 50.h,
+      titleSpacing: 0.0,
+      automaticallyImplyLeading: true,
+      centerTitle: true,
+      leading: Container(
+        margin: EdgeInsets.only(left: 5.h),
+        child: IconButton(
+          iconSize: 25.h,
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      title: Padding(
+        padding: EdgeInsets.zero,
+        child: Text(
+          context.tr("event.title"),
+          style: theme(context).textTheme.headlineSmall,
         ),
       ),
     );
@@ -175,33 +202,77 @@ class _WhatGoingOnScreenState extends State<WhatGoingOnScreen> {
   }
 
   Widget _userCurrLocBtn(BuildContext context) {
-    return CustomElevatedButton(
-      initialText: context.tr("event.current_loc_btn"),
-      buttonStyle: CustomButtonStyles.none,
-      decoration:
-          CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
-      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-      onPressed: () {},
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.h),
+      child: CustomElevatedButton(
+        initialText: context.tr("event.current_loc_btn"),
+        buttonStyle: CustomButtonStyles.none,
+        decoration:
+            CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
+        buttonTextStyle:
+            CustomTextStyles(context).titleMediumOnPrimaryContainer,
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget _popularCity(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomSectionHeader(
+            useIcon: false,
+            label: context.tr("event.popular_city"),
+            onPressed: () {},
+          ),
+          SizedBox(height: 4.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.h),
+            child: SizedBox(
+              height: 150.h,
+              width: double.maxFinite,
+              child: listPopularCity.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          listPopularCity.isEmpty ? 1 : listPopularCity.length,
+                      itemBuilder: (context, index) {
+                        if (listPopularCity.isNotEmpty) {
+                          return LocationPopularCityItems(
+                            locPopularCityModel: listPopularCity[index],
+                            onPressed: () {},
+                          );
+                        }
+                        return const CustomEmptyState();
+                      },
+                    ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _eventList(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: Container(
-        width: double.maxFinite,
-        margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-        padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 14.h),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomSectionHeader(
-              label: context.tr("event.event"),
-              onPressed: () {},
-            ),
-            SizedBox(height: 4.h),
-            SizedBox(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomSectionHeader(
+            useIcon: false,
+            label: context.tr("event.event"),
+            onPressed: () {},
+          ),
+          SizedBox(height: 4.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.h),
+            child: SizedBox(
               width: double.maxFinite,
               child: NotificationListener(
                 onNotification: (ScrollNotification notification) {
@@ -240,9 +311,9 @@ class _WhatGoingOnScreenState extends State<WhatGoingOnScreen> {
                       ),
               ),
             ),
-            SizedBox(height: 4.h),
-          ],
-        ),
+          ),
+          SizedBox(height: 4.h),
+        ],
       ),
     );
   }

@@ -14,7 +14,7 @@ class FNBPromoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150.h,
-      margin: EdgeInsets.symmetric(vertical: 6.h),
+      margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 5.h),
       decoration: CustomDecoration(context)
           .outlineOnSecondaryContainer
           .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),

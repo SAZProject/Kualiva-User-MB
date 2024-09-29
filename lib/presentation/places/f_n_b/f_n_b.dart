@@ -24,6 +24,7 @@ class FNBScreen extends StatefulWidget {
 class _FNBScreenState extends State<FNBScreen> {
   final ScrollController _parentScrollController = ScrollController();
   final ScrollController _childScrollController = ScrollController();
+  final ScrollController _childScrollController2 = ScrollController();
 
   bool _locIsInitialized = false;
 
@@ -65,6 +66,7 @@ class _FNBScreenState extends State<FNBScreen> {
   void dispose() {
     _parentScrollController.dispose();
     _childScrollController.dispose();
+    _childScrollController2.dispose();
     selectedFilters.dispose();
     super.dispose();
   }
@@ -192,7 +194,9 @@ class _FNBScreenState extends State<FNBScreen> {
 
   Widget _buildUserLoc(BuildContext context, String label) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.locationScreen);
+      },
       child: SizedBox(
         width: double.maxFinite,
         child: Text(
@@ -293,6 +297,7 @@ class _FNBScreenState extends State<FNBScreen> {
       onTap: () {
         Navigator.pushNamed(context, AppRoutes.fnbFilterScreen).then(
           (value) {
+            if (value == null) return;
             setState(() {
               filtersModel = value as FiltersModel;
             });
@@ -426,38 +431,63 @@ class _FNBScreenState extends State<FNBScreen> {
         children: [
           CustomSectionHeader(
             label: context.tr("f_n_b.cuisine"),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.fnbCuisineScreen);
+            },
           ),
           Container(
-            height: 150.h,
+            height: 250.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
-            child: _dummyImageData.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // Number of items in each row
+            child: NotificationListener(
+              onNotification: (ScrollNotification notification) {
+                if (notification is ScrollUpdateNotification) {
+                  if (notification.metrics.pixels ==
+                      notification.metrics.maxScrollExtent) {
+                    debugPrint('Reached the bottom');
+                    _parentScrollController.animateTo(
+                        _parentScrollController.position.maxScrollExtent,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeIn);
+                  } else if (notification.metrics.pixels ==
+                      notification.metrics.minScrollExtent) {
+                    debugPrint('Reached the top');
+                    _parentScrollController.animateTo(
+                        _parentScrollController.position.minScrollExtent,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeIn);
+                  }
+                }
+                return true;
+              },
+              child: _dummyImageData.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : GridView.builder(
+                      controller: _childScrollController2,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3, // Number of items in each row
+                      ),
+                      itemCount: _dummyImageData.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        if (_dummyImageData.isNotEmpty) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5.h, vertical: 8.h),
+                            child: CustomImageView(
+                              imagePath: _dummyImageData[index],
+                              height: 120.h,
+                              width: 100.h,
+                              radius: BorderRadius.circular(10.h),
+                            ),
+                          );
+                        }
+                        return const CustomEmptyState();
+                      },
                     ),
-                    itemCount: _dummyImageData.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      if (_dummyImageData.isNotEmpty) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 5.h, vertical: 8.h),
-                          child: CustomImageView(
-                            imagePath: _dummyImageData[index],
-                            height: 120.h,
-                            width: 100.h,
-                            radius: BorderRadius.circular(10.h),
-                          ),
-                        );
-                      }
-                      return const CustomEmptyState();
-                    },
-                  ),
+            ),
           ),
         ],
       ),

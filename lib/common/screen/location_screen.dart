@@ -222,13 +222,17 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   Widget _userCurrLocBtn(BuildContext context) {
-    return CustomElevatedButton(
-      initialText: context.tr("location.current_loc_btn"),
-      buttonStyle: CustomButtonStyles.none,
-      decoration:
-          CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
-      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-      onPressed: () {},
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.h),
+      child: CustomElevatedButton(
+        initialText: context.tr("location.current_loc_btn"),
+        buttonStyle: CustomButtonStyles.none,
+        decoration:
+            CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
+        buttonTextStyle:
+            CustomTextStyles(context).titleMediumOnPrimaryContainer,
+        onPressed: () {},
+      ),
     );
   }
 
@@ -239,6 +243,7 @@ class _LocationScreenState extends State<LocationScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
+            useIcon: false,
             label: context.tr("location.popular_city"),
             onPressed: () {},
           ),
@@ -277,35 +282,38 @@ class _LocationScreenState extends State<LocationScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
+            useIcon: false,
             label: context.tr("location.recent_location"),
             onPressed: () {},
           ),
           SizedBox(height: 4.h),
-          Container(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
-            height: 150.h,
-            width: double.maxFinite,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                //TODO add waiting, empty, error state in future
-                if (index < _listRecentLoc.length) {
+            child: SizedBox(
+              width: double.maxFinite,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  //TODO add waiting, empty, error state in future
+                  if (index < _listRecentLoc.length) {
+                    return _buildAddressItems(
+                      context,
+                      leadingIcon: Icons.repeat,
+                      title: _listRecentLoc[index].placeName,
+                      content: _listRecentLoc[index].addressDetail,
+                    );
+                  }
                   return _buildAddressItems(
                     context,
                     leadingIcon: Icons.repeat,
-                    title: _listRecentLoc[index].placeName,
-                    content: _listRecentLoc[index].addressDetail,
+                    title: context.tr("location.content_title_hint"),
+                    content: context.tr("location.content_detail_hint"),
                   );
-                }
-                return _buildAddressItems(
-                  context,
-                  leadingIcon: Icons.repeat,
-                  title: context.tr("location.content_title_hint"),
-                  content: context.tr("location.content_detail_hint"),
-                );
-              },
+                },
+              ),
             ),
           ),
         ],
@@ -320,15 +328,16 @@ class _LocationScreenState extends State<LocationScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
+            useIcon: false,
             label: context.tr("location.nearby_landmark"),
             onPressed: () {},
           ),
           SizedBox(height: 4.h),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
-            height: 150.h,
             width: double.maxFinite,
             child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemCount: 3,
@@ -337,7 +346,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 if (index < _listNearbyLoc.length) {
                   return _buildAddressItems(
                     context,
-                    leadingIcon: Icons.repeat,
+                    leadingIcon: Icons.place,
                     title: _listNearbyLoc[index].placeName,
                     content: _listNearbyLoc[index].addressDetail,
                   );
@@ -377,6 +386,7 @@ class _LocationScreenState extends State<LocationScreen> {
               child: Padding(
                 padding: EdgeInsets.only(left: 10.h),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       title,
@@ -388,12 +398,13 @@ class _LocationScreenState extends State<LocationScreen> {
                       textAlign: TextAlign.start,
                     ),
                     Text(
-                      title,
+                      content,
                       style: CustomTextStyles(context).bodySmall12,
                       maxLines: maxLinesContent,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
                     ),
+                    SizedBox(height: 5.h),
                   ],
                 ),
               ),

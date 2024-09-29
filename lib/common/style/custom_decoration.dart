@@ -82,6 +82,9 @@ class CustomDecoration {
   BoxDecoration get fillOnSecondaryContainer_03 => BoxDecoration(
         color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.3),
       );
+  BoxDecoration get fillOnSecondaryContainer_06 => BoxDecoration(
+        color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+      );
   // Gradient Decorations
   BoxDecoration get gradientCyanAToOnPrimaryContainer => BoxDecoration(
         gradient: LinearGradient(

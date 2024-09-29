@@ -187,6 +187,7 @@ class _FNBCuisineState extends State<FNBCuisine> {
       onTap: () {
         Navigator.pushNamed(context, AppRoutes.fnbFilterScreen).then(
           (value) {
+            if (value == null) return;
             setState(() {
               filtersModel = value as FiltersModel;
             });
@@ -214,7 +215,6 @@ class _FNBCuisineState extends State<FNBCuisine> {
   Widget _placeList(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 6.h),
-      height: double.maxFinite,
       width: double.maxFinite,
       child: NotificationListener(
         onNotification: (ScrollNotification notification) {

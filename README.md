@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.35
-- Change onBoarding into three veryfing user
+Ver 0.0.35+01
+- Fix & tested Onboarding verifying screen
 ```
 
 ## Getting Started

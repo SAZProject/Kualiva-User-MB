@@ -50,7 +50,17 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   Set<int> dummySelectedCuisine = {};
 
-  final List<ProfileMenuModel> _listBtnItem = [];
+  final List<ProfileMenuModel> _listBtnItem = [
+    ProfileMenuModel(
+        imageUri: ImageConstant.appLogo,
+        label: "onboard.onboard_pick_notif_item_1"),
+    ProfileMenuModel(
+        icon: Icons.call, label: "onboard.onboard_pick_notif_item_2"),
+    ProfileMenuModel(
+        icon: Icons.sms, label: "onboard.onboard_pick_notif_item_3"),
+    ProfileMenuModel(
+        icon: Icons.email, label: "onboard.onboard_pick_notif_item_4"),
+  ];
 
   Set<int> selectedNotifChoice = {};
 
@@ -72,14 +82,14 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
           body: SizedBox(
             width: double.maxFinite,
             height: double.maxFinite,
-            child: _body(),
+            child: _body(context),
           ),
         ),
       ),
     );
   }
 
-  Widget _body() {
+  Widget _body(BuildContext context) {
     return PageView.builder(
       controller: _pageController,
       itemCount: _pages.length,
@@ -88,15 +98,16 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
           _activePage = page;
         });
       },
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (BuildContext ctx, int index) {
         return Column(
           children: [
-            SizedBox(height: 10.h),
+            SizedBox(height: 25.h),
             _onBoardingHeader(context, _pages[index]),
-            SizedBox(height: 10.h),
-            _buildPage(context),
             const Spacer(),
+            _buildPage(context),
+            const Spacer(flex: 2),
             _buildConfirm(context),
+            SizedBox(height: 25.h),
           ],
         );
       },
@@ -106,24 +117,23 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
   Widget _onBoardingHeader(
       BuildContext context, OnboardingModel onboardingModel) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 5.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20.h),
           Text(
             context.tr(onboardingModel.pageTitle),
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.displaySmall,
+            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  fontSize: 30.fontSize,
+                ),
           ),
-          SizedBox(height: 20.h),
           Icon(
             onboardingModel.icon,
             size: 40.h,
           ),
-          SizedBox(height: 20.h),
         ],
       ),
     );
@@ -135,7 +145,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
         return OnboardingPickCuisine(
           dummyImageData: _dummyImageData,
           selectedIndexes: dummySelectedCuisine,
-          hintText: "onboard.onboard_pick_cuisine_hint",
+          hintText: context.tr("onboard.onboard_pick_cuisine_hint"),
           onHintPressed: () {},
           onSelected: (index) {
             setState(() {
@@ -176,7 +186,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
         );
       default:
         return OnboardingPickBirthdate(
-          leftIcon: Icons.calendar_month,
+          leftIcon: selectedDate != null ? null : Icons.calendar_month,
           label: selectedDate != null
               ? DatetimeUtils.dmy(selectedDate!)
               : context.tr("onboard.onboard_pick_birthdate_btn_date"),

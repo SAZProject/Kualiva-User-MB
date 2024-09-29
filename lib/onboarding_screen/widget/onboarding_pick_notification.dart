@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
@@ -22,17 +23,26 @@ class OnboardingPickNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSelectedNotif(context),
-        SizedBox(height: 10.h),
-        CustomElevatedButton(
-          alignment: Alignment.center,
-          leftIcon: Icon(
-            Icons.done,
-            size: 16.h,
+        SizedBox(height: 25.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25.h),
+          child: CustomElevatedButton(
+            alignment: Alignment.center,
+            leftIcon: Icon(
+              Icons.done,
+              size: 20.h,
+              color: theme(context).colorScheme.onPrimaryContainer,
+            ),
+            initialText: context.tr("onboard.onboard_pick_notif_btn_select"),
+            onPressed: onSelectAll,
+            buttonStyle: CustomButtonStyles.none,
+            decoration: CustomDecoration(context).outline,
+            buttonTextStyle:
+                CustomTextStyles(context).titleMediumOnPrimaryContainer,
           ),
-          initialText: "onboard.onboard_pick_notif_btn_select",
-          onPressed: onSelectAll,
         ),
       ],
     );
@@ -50,17 +60,17 @@ class OnboardingPickNotification extends StatelessWidget {
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               shrinkWrap: true,
-              itemCount: (listBtnItem.length - 2),
+              itemCount: listBtnItem.length,
               padding: EdgeInsets.zero,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 if (listBtnItem.isNotEmpty) {
                   return _buildProfileMenuListItem(
                     context,
-                    (index + 2),
-                    listBtnItem[(index + 2)].label,
-                    listBtnItem[(index + 2)].icon,
-                    listBtnItem[(index + 2)].imageUri,
+                    index,
+                    listBtnItem[index].label,
+                    listBtnItem[index].icon,
+                    listBtnItem[index].imageUri,
                   );
                 }
                 return const CustomEmptyState();

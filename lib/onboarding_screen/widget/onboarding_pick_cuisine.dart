@@ -21,14 +21,19 @@ class OnboardingPickCuisine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildGridCuisine(context),
-        InkWell(
-          onTap: onHintPressed,
-          child: Text(
-            hintText,
-            style: CustomTextStyles(context).bodySmallPrimary12,
-            overflow: TextOverflow.ellipsis,
+        SizedBox(height: 10.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.h),
+          child: InkWell(
+            onTap: onHintPressed,
+            child: Text(
+              hintText,
+              style: CustomTextStyles(context).bodySmallPrimary12,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         )
       ],
@@ -37,7 +42,7 @@ class OnboardingPickCuisine extends StatelessWidget {
 
   Widget _buildGridCuisine(BuildContext context) {
     return Container(
-      height: 150.h,
+      height: 400.h,
       margin: EdgeInsets.symmetric(horizontal: 5.h),
       width: double.maxFinite,
       child: dummyImageData.isEmpty

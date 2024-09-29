@@ -18,10 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
-      if (!mounted) return;
-      Navigator.of(context).pushNamed(AppRoutes.signInScreen);
-    });
     _videoPlayerController =
         VideoPlayerController.asset(VideoConstant.splashVideo);
     _videoPlayerInitialized = _videoPlayerController.initialize().then(
@@ -48,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_videoPlayerController.value.position ==
         _videoPlayerController.value.duration) {
       debugPrint('video Ended');
-      Navigator.of(context).pushNamed(AppRoutes.onBoardingScreen);
+      Navigator.of(context).pushNamed(AppRoutes.signInScreen);
     }
   }
 

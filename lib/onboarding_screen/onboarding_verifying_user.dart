@@ -64,6 +64,29 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   Set<int> selectedNotifChoice = {};
 
+  void _confirmBtnFunc(BuildContext context) {
+    if (_activePage == 2) {
+      Navigator.of(context).pushNamed(AppRoutes.devicePermissionScreen);
+    } else {
+      _pageController.nextPage(
+          duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
+    }
+  }
+
+  bool _fieldValidation(int page) {
+    switch (page) {
+      case 0:
+        if (selectedDate == null) return false;
+        return true;
+      case 1:
+        if (dummySelectedCuisine.isEmpty) return false;
+        return true;
+      default:
+        if (selectedNotifChoice.isEmpty) return false;
+        return true;
+    }
+  }
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -207,15 +230,9 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
       decoration:
           CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
       buttonTextStyle: Theme.of(context).textTheme.titleLarge,
-      onPressed: () {
-        if (_activePage == 2) {
-          Navigator.of(context).pushNamed(AppRoutes.devicePermissionScreen);
-        } else {
-          _pageController.nextPage(
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.easeInOut);
-        }
-      },
+      onPressed: !_fieldValidation(_activePage)
+          ? null
+          : () => _confirmBtnFunc(context),
     );
   }
 
@@ -224,7 +241,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(1900),
-      lastDate: DateTime(DateTime.now().year),
+      lastDate: DateTime.now(),
     );
     if (picked != null && picked != selectedDate) {
       setState(() {

@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.35+03
-- Major change for performance, swap some container into sizedbox and padding separately
+Ver 0.0.35+04
+- Add field validation on OnboardingVerifyingUser screen
+- Minor fix for overlay mode
 ```
 
 ## Getting Started

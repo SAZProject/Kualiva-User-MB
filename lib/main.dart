@@ -9,8 +9,7 @@ void main() async {
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.top]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   SystemChrome.setSystemUIChangeCallback((systemOverlaysAreVisible) async {
     await Future.delayed(const Duration(seconds: 1));

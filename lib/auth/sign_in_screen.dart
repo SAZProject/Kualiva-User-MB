@@ -47,7 +47,6 @@ class SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: _body(context),
       ),
     );
@@ -67,7 +66,7 @@ class SignInScreenState extends State<SignInScreen> {
               width: double.maxFinite,
               child: Column(
                 children: [
-                  SizedBox(height: 26.h),
+                  SizedBox(height: 25.h),
                   CustomImageView(
                     imagePath: ImageConstant.appLogo,
                     height: 100.h,

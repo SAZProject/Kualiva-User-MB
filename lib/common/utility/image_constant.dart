@@ -33,6 +33,7 @@ class ImageConstant {
   static String event1 = "$imagePath/event_news_1.jpeg";
   static String event2 = "$imagePath/event_news_2.jpeg";
   static String event3 = "$imagePath/event_news_3.jpeg";
+  static String event4 = "$imagePath/event_news_4.jpeg";
 
   static String foodTable8 = "$imagePath/food_table8.jpeg";
   static String foodTable8Item1 = "$imagePath/food_table8_item_1.jpeg";

@@ -2,7 +2,7 @@ class FNBFilterDataset {
   static List<String> get fnbFilter => [
         "24 Hour",
         "Vegetarian",
-        "all You Can Eat",
+        "All You Can Eat",
         "Michelin",
         "Shabu",
         "Grill",

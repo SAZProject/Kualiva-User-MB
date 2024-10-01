@@ -9,6 +9,7 @@ import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:like_it/data/model/ui_model/home_event_model.dart';
 import 'package:like_it/data/model/ui_model/home_grid_menu_model.dart';
 import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/home/widget/home_featured_item.dart';
@@ -62,10 +63,41 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
-  final List<String> _homeEventList = [
-    ImageConstant.event1,
-    ImageConstant.event2,
-    ImageConstant.event3,
+  final List<HomeEventModel> _homeEventList = [
+    HomeEventModel(
+      imagePath: ImageConstant.event1,
+      eventTitle: "Peter Pan On Ice",
+      eventDate:
+          "14-15 December 2024, Planetary Hall Jakarta Convention Center",
+      eventHost: "By KONSERKITA",
+      eventDesc:
+          '''The classic story of Peter Pan on ice will come back to Jakarta, Indonesia, the enchanting tale of adventure, imagination, and childhood nostalgia comes to life on ice for 6 Shows (3 shows each day) at Indonesia Arena, Senayan Jakarta.
+The world-renowned International Ice Stars brings to your theatre a new adaptation of this famous fantasy adventure by J.M. Barrie. This event offers a unique and unforgettable entertainment option for families celebrating Idul Fitri, allowing them to witness the skillful performances of The International Ice Stars as they bring to life the timeless characters of Peter Pan, Wendy, Captain Hook, and more.
+
+Syarat dan Ketentuan :
+Tiket yang sudah dibeli tidak dapat dikembalikan.
+Penukaran Tiket harus menunjukan identitas diri ( Ktp/ Sim/ Paspor) apabila diwakilkan atau nama tidak sesuai dengan yang tertera di e-tiket harus membawa surat kuasa yang ditandatangani oleh pembeli tiket.
+Tiket hanya berlaku untuk 1 (satu) orang dan 1 (satu) kali pertunjukan. Penggunaannya harus sesuai dengan tanggal dan jam yang tertera pada Tiket.
+Tiket yang hilang karena kelalaian pembeli/ pemegang tiket tidak dapat dicetak ulang.
+Anak berusia 2 (dua) tahun ke atas, wajib memiliki tiket masuk di bawah usia 2 (dua) tahun free dengan catatan harus duduk di pangkuan orang tua atau walinya saat menonton pertunjukan.
+Semua anak dibawah usia 12 tahun harus didampingi orang tua atau wali 18 tahun keatas.
+Seat Number akan diberikan pada saat melakukan penukaran tiket khusus untuk kategori Super VIP dan VIP sedangkan kategori Gold dan Silver bersifat free seating.
+Penyelenggara acara berhak melarang pengunjung untuk memasuki lokasi acara apabila pengunjung tidak memiliki tiket yang sah.''',
+    ),
+    HomeEventModel(
+      imagePath: ImageConstant.event2,
+      eventTitle: "Event Title",
+      eventDate: "Date(dd/mm/yyyy), Place",
+      eventHost: "By Dummy",
+      eventDesc: "Event Desc",
+    ),
+    HomeEventModel(
+      imagePath: ImageConstant.event3,
+      eventTitle: "Event Title",
+      eventDate: "Date(dd/mm/yyyy), Place",
+      eventHost: "By Dummy",
+      eventDesc: "Event Desc",
+    ),
   ];
 
   final List<String> _adBannerList = [
@@ -492,7 +524,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           if (_homeEventList.isNotEmpty) {
                             return _eventListItems(
-                                context, _homeEventList[index]);
+                                context, index, _homeEventList[index]);
                           }
                           return const CustomEmptyState();
                         },
@@ -506,7 +538,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _eventListItems(BuildContext context, String imgUrl) {
+  Widget _eventListItems(
+      BuildContext context, int index, HomeEventModel homeEventModel) {
     return Container(
       height: 120.h,
       margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 4.h),
@@ -518,7 +551,10 @@ class _HomeScreenState extends State<HomeScreen> {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, AppRoutes.homeEventDetailScreen,
+              arguments: homeEventModel);
+        },
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 3.h, sigmaY: 3.h),
           child: Row(
@@ -531,17 +567,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "(Date Today/Yesterday/DD-MM-YYYy)",
+                        homeEventModel.eventDate,
                         style: CustomTextStyles(context).bodySmall10,
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        "Title",
+                        homeEventModel.eventTitle,
                         style: theme(context).textTheme.titleMedium,
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        "Description",
+                        homeEventModel.eventDesc,
                         style: CustomTextStyles(context).bodySmall12,
                       ),
                     ],
@@ -550,7 +586,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(width: 10.h),
               CustomImageView(
-                imagePath: imgUrl,
+                imagePath: homeEventModel.imagePath,
                 height: double.maxFinite,
                 width: 100.h,
                 radius: BorderRadiusStyle.roundedBorder10,

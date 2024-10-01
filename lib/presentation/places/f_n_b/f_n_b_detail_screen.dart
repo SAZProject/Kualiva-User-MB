@@ -188,7 +188,6 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
         options: CarouselOptions(
           viewportFraction: 1,
           autoPlay: true,
-
           // enlargeCenterPage: true,
         ),
       ),
@@ -300,17 +299,20 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                       : null,
                 ),
                 SizedBox(height: 8.h),
-                _buildAboutContent(context,
-                    icon: Icons.place,
-                    label: fnbData.placeAddress,
-                    maxLines: 4, onPressed: () {
-                  customMapBottomSheet(
-                    context,
-                    double.parse(fnbData.latitude),
-                    double.parse(fnbData.longitude),
-                    fnbData.placeName,
-                  );
-                }),
+                _buildAboutContent(
+                  context,
+                  icon: Icons.place,
+                  label: fnbData.placeAddress,
+                  maxLines: 4,
+                  onPressed: () {
+                    customMapBottomSheet(
+                      context,
+                      double.parse(fnbData.latitude),
+                      double.parse(fnbData.longitude),
+                      fnbData.placeName,
+                    );
+                  },
+                ),
                 SizedBox(height: 8.h),
                 _buildAboutContent(
                   context,

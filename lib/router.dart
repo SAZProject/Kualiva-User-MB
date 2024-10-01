@@ -6,7 +6,9 @@ import 'package:like_it/auth/sign_up_screen.dart';
 import 'package:like_it/common/screen/location_screen.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
+import 'package:like_it/data/model/ui_model/home_event_model.dart';
 import 'package:like_it/onboarding_screen/onboarding_verifying_user.dart';
+import 'package:like_it/presentation/home/home_event_detail_screen.dart';
 import 'package:like_it/presentation/home/home_event_screen.dart';
 import 'package:like_it/presentation/places/add_places_screen.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b.dart';
@@ -44,6 +46,8 @@ class AppRoutes {
   static const String homeNavigationScreen = "/home_nav_screen";
 
   static const String homeEventScreen = "/home_event_screen";
+
+  static const String homeEventDetailScreen = "/home_event_detail_screen";
 
   static const String fnbScreen = "/f_n_b_screen";
 
@@ -116,6 +120,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.homeEventScreen:
       return PageTransition(
           child: const WhatGoingOnScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+    case AppRoutes.homeEventDetailScreen:
+      final homeEventModel = routeSetting.arguments as HomeEventModel;
+      return PageTransition(
+          child: HomeEventDetailScreen(eventModel: homeEventModel),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbScreen:

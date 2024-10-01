@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.35+04
-- Add field validation on OnboardingVerifyingUser screen
-- Minor fix for overlay mode
+Ver 0.0.36
+- Add home event detail screen (What's Going On)
 ```
 
 ## Getting Started

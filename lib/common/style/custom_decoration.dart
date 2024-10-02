@@ -73,9 +73,6 @@ class CustomDecoration {
   BoxDecoration get fillOnPrimaryContainerOpacity_03 => BoxDecoration(
         color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
       );
-  BoxDecoration get fillOnPrimaryContainerOpacity_1 => BoxDecoration(
-        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(1),
-      );
   BoxDecoration get fillOnSecondaryContainer => BoxDecoration(
         color: theme(context).colorScheme.onSecondaryContainer,
       );

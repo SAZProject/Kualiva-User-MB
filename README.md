@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.36
-- Add home event detail screen (What's Going On)
+Ver 0.0.36+01
+- Revised FNB Detail Screen (Unfinished)
 ```
 
 ## Getting Started

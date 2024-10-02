@@ -67,6 +67,7 @@ class FNBDataset {
               specialReview: true,
             ),
           ],
+          isClaimed: true,
         ),
         FNBModel(
           id: "1",
@@ -120,6 +121,7 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
+          isClaimed: false,
         ),
         FNBModel(
           id: "2",
@@ -183,6 +185,7 @@ class FNBDataset {
               specialReview: true,
             ),
           ],
+          isClaimed: true,
         ),
         FNBModel(
           id: "3",
@@ -240,6 +243,7 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
+          isClaimed: false,
         ),
         FNBModel(
           id: "4",
@@ -297,6 +301,7 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
+          isClaimed: false,
         ),
         FNBModel(
           id: "5",
@@ -359,6 +364,7 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
+          isClaimed: false,
         ),
         FNBModel(
           id: "6",
@@ -415,6 +421,7 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
+          isClaimed: false,
         ),
         FNBModel(
           id: "7",
@@ -474,6 +481,7 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
+          isClaimed: false,
         ),
         FNBModel(
           id: "8",
@@ -534,6 +542,7 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
+          isClaimed: false,
         ),
         FNBModel(
           id: "9",
@@ -590,6 +599,7 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
+          isClaimed: false,
         ),
       ];
 }

@@ -226,6 +226,8 @@
     },
     "f_n_b_detail": {
         "about": "About",
+        "place_not_claimed": "This business is\nnot yet claimed",
+        "place_claimed": "This business is\nclaimed",
         "menu": "Menu",
         "review": "Reviews",
         "about_open": "Operational day & hour (click to expand!)",

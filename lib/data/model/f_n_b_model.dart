@@ -22,6 +22,7 @@ class FNBModel {
   final List<String> placePicture;
   final List<String> priceListMenuPicture;
   final List<ReviewModel> review;
+  final bool isClaimed;
 
   FNBModel({
     required this.id,
@@ -40,6 +41,7 @@ class FNBModel {
     required this.placePicture,
     required this.priceListMenuPicture,
     required this.review,
+    required this.isClaimed,
   });
 
   FNBModel copyWith({
@@ -59,6 +61,7 @@ class FNBModel {
     List<String>? placePicture,
     List<String>? priceListMenuPicture,
     List<ReviewModel>? review,
+    bool? isClaimed,
   }) {
     return FNBModel(
       id: id ?? this.id,
@@ -77,6 +80,7 @@ class FNBModel {
       placePicture: placePicture ?? this.placePicture,
       priceListMenuPicture: priceListMenuPicture ?? this.priceListMenuPicture,
       review: review ?? this.review,
+      isClaimed: isClaimed ?? this.isClaimed,
     );
   }
 
@@ -100,6 +104,7 @@ class FNBModel {
       'placePicture': placePicture,
       'priceListMenuPicture': priceListMenuPicture,
       'review': review.map((x) => x.toMap()).toList(),
+      'isClaimed': isClaimed,
     };
   }
 
@@ -134,6 +139,7 @@ class FNBModel {
           (x) => ReviewModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
+      isClaimed: map['isClaimed'] as bool,
     );
   }
 
@@ -144,7 +150,7 @@ class FNBModel {
 
   @override
   String toString() {
-    return 'FNBModel(id: $id, type: $type, placeName: $placeName, overallRating: $overallRating, tags: $tags, phoneNumber: $phoneNumber, city: $city, placeAddress: $placeAddress, latitude: $latitude, longitude: $longitude, operationalDay: $operationalDay, operationalTimeOpen: $operationalTimeOpen, operationalTimeClose: $operationalTimeClose, placePicture: $placePicture, priceListMenuPicture: $priceListMenuPicture, review: $review)';
+    return 'FNBModel(id: $id, type: $type, placeName: $placeName, overallRating: $overallRating, tags: $tags, phoneNumber: $phoneNumber, city: $city, placeAddress: $placeAddress, latitude: $latitude, longitude: $longitude, operationalDay: $operationalDay, operationalTimeOpen: $operationalTimeOpen, operationalTimeClose: $operationalTimeClose, placePicture: $placePicture, priceListMenuPicture: $priceListMenuPicture, review: $review, isClaimed: $isClaimed)';
   }
 
   @override
@@ -166,7 +172,8 @@ class FNBModel {
         listEquals(other.operationalTimeClose, operationalTimeClose) &&
         listEquals(other.placePicture, placePicture) &&
         listEquals(other.priceListMenuPicture, priceListMenuPicture) &&
-        listEquals(other.review, review);
+        listEquals(other.review, review) &&
+        other.isClaimed == isClaimed;
   }
 
   @override
@@ -186,6 +193,7 @@ class FNBModel {
         operationalTimeClose.hashCode ^
         placePicture.hashCode ^
         priceListMenuPicture.hashCode ^
-        review.hashCode;
+        review.hashCode ^
+        isClaimed.hashCode;
   }
 }

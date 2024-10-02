@@ -7,6 +7,7 @@ import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_map_bottom_sheet.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
+import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
 import 'package:like_it/presentation/review/widget/review_view.dart';
@@ -23,6 +24,8 @@ class FNBDetailScreen extends StatefulWidget {
 }
 
 class _FNBDetailScreenState extends State<FNBDetailScreen> {
+  final GlobalKey _toolTipKey = GlobalKey();
+
   FNBModel get fnbData => super.widget.fnbModel;
   bool _hasCallSupport = false;
 
@@ -57,9 +60,18 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     await launchUrl(launchUri);
   }
 
+  Future showAndCloseTooltip() async {
+    await Future.delayed(const Duration(milliseconds: 10));
+    final dynamic tooltip = _toolTipKey.currentState;
+    tooltip?.ensureTooltipVisible();
+    await Future.delayed(const Duration(seconds: 3));
+    tooltip?.deactivate();
+  }
+
   @override
   void initState() {
     super.initState();
+    showAndCloseTooltip();
     imageSliders = fnbData.placePicture.map(
       (image) {
         return CustomImageView(
@@ -83,7 +95,6 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       child: Scaffold(
         extendBody: true,
         extendBodyBehindAppBar: true,
-        appBar: _fnbAppBar(context),
         body: Container(
           width: double.maxFinite,
           height: Sizeutils.height,
@@ -106,31 +117,61 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
   Widget _body(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _fnbPlaceImages(context),
-            SizedBox(height: 5.h),
-            _fnbPlaceName(context),
-            SizedBox(height: 5.h),
-            _fnbPlaceAbout(context),
-            SizedBox(height: 5.h),
-            _fnbPlaceMenu(context),
-            SizedBox(height: 5.h),
-            _fnbPlaceReviews(context),
-            SizedBox(height: 5.h),
-          ],
+      height: MediaQuery.of(context).size.height,
+      child: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            _fnbAppBar(context),
+          ];
+        },
+        body: SizedBox(
+          width: double.maxFinite,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: _fnbPlaceImages(context),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
+                child: Container(
+                  width: double.maxFinite,
+                  decoration: CustomDecoration(context)
+                      .fillOnSecondaryContainer_06
+                      .copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder10,
+                      ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 5.h),
+                        _fnbPlaceName(context),
+                        SizedBox(height: 5.h),
+                        _fnbPlaceAbout(context),
+                        SizedBox(height: 5.h),
+                        _fnbPlaceMenu(context),
+                        SizedBox(height: 5.h),
+                        _fnbPlaceReviews(context),
+                        SizedBox(height: 5.h),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  PreferredSizeWidget _fnbAppBar(BuildContext context) {
-    return AppBar(
+  Widget _fnbAppBar(BuildContext context) {
+    return SliverAppBar(
       toolbarHeight: 50.h,
       leadingWidth: 50.h,
       forceMaterialTransparency: true,
       automaticallyImplyLeading: true,
+      pinned: true,
       leading: Container(
         margin: EdgeInsets.only(left: 5.h),
         decoration: BoxDecoration(
@@ -181,20 +222,27 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
   }
 
   Widget _fnbPlaceImages(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: CarouselSlider(
-        items: imageSliders,
-        options: CarouselOptions(
-          viewportFraction: 1,
-          autoPlay: true,
-          // enlargeCenterPage: true,
+    return SliverPersistentHeader(
+      delegate: SliverAppBarDelegate(
+        minHeight: 60.h,
+        maxHeight: 60.h,
+        child: SizedBox(
+          width: double.maxFinite,
+          child: CarouselSlider(
+            items: imageSliders,
+            options: CarouselOptions(
+              viewportFraction: 1,
+              autoPlay: true,
+              // enlargeCenterPage: true,
+            ),
+          ),
         ),
       ),
     );
   }
 
   Widget _fnbPlaceName(BuildContext context) {
+    var brightness = Theme.of(context).brightness;
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 10.h),
@@ -211,35 +259,22 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
             ),
           ),
           Align(
-            alignment: Alignment.centerRight,
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.reviewScreen,
-                    arguments: fnbData);
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.star,
-                      size: 20.h,
-                      color: appTheme.amber700,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      fnbData.overallRating.toString(),
-                      textAlign: TextAlign.center,
-                      style: theme(context).textTheme.bodyLarge,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+            alignment: Alignment.centerLeft,
+            child: Align(
+              alignment: Alignment.center,
+              child: Tooltip(
+                key: _toolTipKey,
+                triggerMode: TooltipTriggerMode.manual,
+                message: fnbData.isClaimed
+                    ? context.tr("f_n_b_detail.place_claimed")
+                    : context.tr("f_n_b_detail.place_not_claimed"),
+                child: CustomImageView(
+                  imagePath: fnbData.isClaimed
+                      ? ImageConstant.placeVerify
+                      : brightness == Brightness.light
+                          ? ImageConstant.placeVerifyLight
+                          : ImageConstant.placeVerifyDark,
+                ),
               ),
             ),
           ),
@@ -316,21 +351,9 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                 SizedBox(height: 8.h),
                 _buildAboutContent(
                   context,
-                  icon: Icons.star,
-                  label: context.tr(
-                    "f_n_b_detail.about_price",
-                    namedArgs: {"price": "45.000"},
-                  ),
-                  leadingWidget: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(Icons.attach_money, size: 20.h),
-                      Icon(Icons.attach_money, size: 20.h),
-                      Icon(Icons.attach_money, size: 20.h),
-                      Icon(Icons.attach_money, size: 20.h),
-                      Icon(Icons.attach_money, size: 20.h),
-                    ],
-                  ),
+                  icon: Icons.attach_money,
+                  label: "",
+                  trailingWidget: _aboutPrice(context),
                 ),
               ],
             ),
@@ -440,6 +463,91 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
 
   Widget _operationalDayHourView(
       BuildContext context, int index, bool isTitle) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: isTitle ? 60.h : 120.h,
+            child: Text(
+              "${DatetimeUtils.getDays(index)},",
+              style: CustomTextStyles(context).bodySmall12,
+            ),
+          ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: 50.h,
+                child: Text(
+                  DatetimeUtils.getHour(fnbData.operationalTimeOpen[index]),
+                  style: CustomTextStyles(context).bodySmall12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: 20.h,
+                child: Text(
+                  " - ",
+                  style: CustomTextStyles(context).bodySmall12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: 50.h,
+                child: Text(
+                  DatetimeUtils.getHour(fnbData.operationalTimeClose[index]),
+                  style: CustomTextStyles(context).bodySmall12,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+
+  Widget _aboutPrice(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: ExpansionTile(
+        childrenPadding: EdgeInsets.only(bottom: 5.h),
+        dense: true,
+        tilePadding: const EdgeInsets.symmetric(horizontal: 0.0),
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.tr(
+                "f_n_b_detail.about_price",
+                namedArgs: {"price": "45.000"},
+              ),
+              style: CustomTextStyles(context).bodyMedium_13,
+            ),
+            _priceStartFromFnB(
+                context, DatetimeUtils.getTodayOperationalTime(), true),
+          ],
+        ),
+        children: fnbData.operationalDay.map(
+          (index) {
+            return _priceStartFromFnB(context, index, false);
+          },
+        ).toList(),
+      ),
+    );
+  }
+
+  Widget _priceStartFromFnB(BuildContext context, int index, bool isTitle) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(

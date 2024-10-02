@@ -60,4 +60,8 @@ class ImageConstant {
   static String questLuckySpin = "$imagePath/quest_lucky_spin.png";
 
   static String noMailIcon = "$imagePath/no_mail_icon.png";
+
+  static String placeVerify = "$imagePath/place_verify.png";
+  static String placeVerifyLight = "$imagePath/place_verify_light.png";
+  static String placeVerifyDark = "$imagePath/place_verify_dark.png";
 }

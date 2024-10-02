@@ -173,9 +173,6 @@ Penyelenggara acara berhak melarang pengunjung untuk memasuki lokasi acara apabi
       backgroundColor: Colors.transparent,
       centerTitle: false,
       automaticallyImplyLeading: false,
-      pinned: false,
-      snap: false,
-      floating: false,
       title: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

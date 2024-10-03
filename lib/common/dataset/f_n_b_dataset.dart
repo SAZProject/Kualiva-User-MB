@@ -44,6 +44,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 22, 0),
             DateTime(0, 0, 0, 22, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb1Path}/A/1.jpg",
             "${ImageConstant.fnb1Path}/A/2.jpg",
@@ -55,6 +57,9 @@ class FNBDataset {
             "${ImageConstant.fnb1Path}/B/3.jpg",
             "${ImageConstant.fnb1Path}/B/4.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -100,6 +105,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 22, 0),
             DateTime(0, 0, 0, 22, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb2Path}/A/1.jpg",
             "${ImageConstant.fnb2Path}/A/2.jpg",
@@ -110,6 +117,9 @@ class FNBDataset {
             "${ImageConstant.fnb2Path}/B/2.jpg",
             "${ImageConstant.fnb2Path}/B/3.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -161,6 +171,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 22, 0),
             DateTime(0, 0, 0, 22, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb3Path}/A/1.jpg",
             "${ImageConstant.fnb3Path}/A/2.jpg",
@@ -173,6 +185,9 @@ class FNBDataset {
             "${ImageConstant.fnb3Path}/B/3.jpg",
             "${ImageConstant.fnb3Path}/B/4.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -221,6 +236,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 22, 0),
             DateTime(0, 0, 0, 22, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb4Path}/A/1.jpg",
             "${ImageConstant.fnb4Path}/A/2.jpg",
@@ -231,6 +248,9 @@ class FNBDataset {
             "${ImageConstant.fnb4Path}/B/2.jpg",
             "${ImageConstant.fnb4Path}/B/3.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -279,6 +299,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 22, 0),
             DateTime(0, 0, 0, 22, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb5Path}/A/1.jpg",
             "${ImageConstant.fnb5Path}/A/2.jpg",
@@ -289,6 +311,9 @@ class FNBDataset {
             "${ImageConstant.fnb5Path}/B/2.jpg",
             "${ImageConstant.fnb5Path}/B/3.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -342,6 +367,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 1, 0),
             DateTime(0, 0, 0, 24, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb6Path}/A/1.jpg",
             "${ImageConstant.fnb6Path}/A/2.jpg",
@@ -352,6 +379,9 @@ class FNBDataset {
             "${ImageConstant.fnb6Path}/B/2.jpg",
             "${ImageConstant.fnb6Path}/B/3.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -399,6 +429,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 2, 0),
             DateTime(0, 0, 0, 2, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb7Path}/A/1.jpg",
             "${ImageConstant.fnb7Path}/A/2.jpg",
@@ -409,6 +441,9 @@ class FNBDataset {
             "${ImageConstant.fnb7Path}/B/2.jpg",
             "${ImageConstant.fnb7Path}/B/3.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -459,6 +494,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 24, 0),
             DateTime(0, 0, 0, 24, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb8Path}/A/1.jpg",
             "${ImageConstant.fnb8Path}/A/2.jpg",
@@ -469,6 +506,9 @@ class FNBDataset {
             "${ImageConstant.fnb8Path}/B/2.jpg",
             "${ImageConstant.fnb8Path}/B/3.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -520,6 +560,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 24, 0),
             DateTime(0, 0, 0, 24, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb9Path}/A/1.jpg",
             "${ImageConstant.fnb9Path}/A/2.jpg",
@@ -530,6 +572,9 @@ class FNBDataset {
             "${ImageConstant.fnb9Path}/B/2.jpg",
             "${ImageConstant.fnb9Path}/B/3.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",
@@ -578,6 +623,8 @@ class FNBDataset {
             DateTime(0, 0, 0, 24, 0),
             DateTime(0, 0, 0, 24, 0),
           ],
+          avgPrice: "30.000",
+          listPriceFnB: ["35.000", "25.000"],
           placePicture: [
             "${ImageConstant.fnb10Path}/A/1.jpg",
             "${ImageConstant.fnb10Path}/A/2.jpg",
@@ -588,6 +635,9 @@ class FNBDataset {
             "${ImageConstant.fnb10Path}/B/2.jpg",
             "${ImageConstant.fnb10Path}/B/3.jpg",
           ],
+          totalReview: 1,
+          avgRating: 5.0,
+          totalRatingPerStar: [0, 0, 0, 0, 1],
           review: [
             ReviewModel(
               id: "0",

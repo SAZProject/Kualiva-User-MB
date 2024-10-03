@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.36+02
-- Fix splash screen video player bug
-- Fix home event bug
+Ver 0.0.37
+- Revised FNB Detail Screen
 ```
 
 ## Getting Started

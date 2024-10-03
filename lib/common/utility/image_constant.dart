@@ -11,6 +11,8 @@ class ImageConstant {
   static String googleIcon = "$imagePath/google_icon.png";
   static String permissionScreen = "$imagePath/permission_screen.gif";
 
+  static String arasaka = "$imagePath/arasaka.png";
+
   static String background1 = "$imagePath/background_1.png";
   static String background2 = "$imagePath/background_2.png";
 

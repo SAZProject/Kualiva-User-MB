@@ -19,8 +19,13 @@ class FNBModel {
   final List<int> operationalDay;
   final List<DateTime> operationalTimeOpen;
   final List<DateTime> operationalTimeClose;
+  final String avgPrice;
+  final List<String> listPriceFnB;
   final List<String> placePicture;
   final List<String> priceListMenuPicture;
+  final int totalReview;
+  final double avgRating;
+  final List<int> totalRatingPerStar;
   final List<ReviewModel> review;
   final bool isClaimed;
 
@@ -38,8 +43,13 @@ class FNBModel {
     required this.operationalDay,
     required this.operationalTimeOpen,
     required this.operationalTimeClose,
+    required this.avgPrice,
+    required this.listPriceFnB,
     required this.placePicture,
     required this.priceListMenuPicture,
+    required this.totalReview,
+    required this.avgRating,
+    required this.totalRatingPerStar,
     required this.review,
     required this.isClaimed,
   });
@@ -58,8 +68,13 @@ class FNBModel {
     List<int>? operationalDay,
     List<DateTime>? operationalTimeOpen,
     List<DateTime>? operationalTimeClose,
+    String? avgPrice,
+    List<String>? listPriceFnB,
     List<String>? placePicture,
     List<String>? priceListMenuPicture,
+    int? totalReview,
+    double? avgRating,
+    List<int>? totalRatingPerStar,
     List<ReviewModel>? review,
     bool? isClaimed,
   }) {
@@ -77,8 +92,13 @@ class FNBModel {
       operationalDay: operationalDay ?? this.operationalDay,
       operationalTimeOpen: operationalTimeOpen ?? this.operationalTimeOpen,
       operationalTimeClose: operationalTimeClose ?? this.operationalTimeClose,
+      avgPrice: avgPrice ?? this.avgPrice,
+      listPriceFnB: listPriceFnB ?? this.listPriceFnB,
       placePicture: placePicture ?? this.placePicture,
       priceListMenuPicture: priceListMenuPicture ?? this.priceListMenuPicture,
+      totalReview: totalReview ?? this.totalReview,
+      avgRating: avgRating ?? this.avgRating,
+      totalRatingPerStar: totalRatingPerStar ?? this.totalRatingPerStar,
       review: review ?? this.review,
       isClaimed: isClaimed ?? this.isClaimed,
     );
@@ -101,8 +121,13 @@ class FNBModel {
           operationalTimeOpen.map((x) => x.millisecondsSinceEpoch).toList(),
       'operationalTimeClose':
           operationalTimeClose.map((x) => x.millisecondsSinceEpoch).toList(),
+      'avgPrice': avgPrice,
+      'listPriceFnB': listPriceFnB,
       'placePicture': placePicture,
       'priceListMenuPicture': priceListMenuPicture,
+      'totalReview': totalReview,
+      'avgRating': avgRating,
+      'totalRatingPerStar': totalRatingPerStar,
       'review': review.map((x) => x.toMap()).toList(),
       'isClaimed': isClaimed,
     };
@@ -131,9 +156,15 @@ class FNBModel {
           (x) => DateTime.fromMillisecondsSinceEpoch(x),
         ),
       ),
+      avgPrice: map['avgPrice'] as String,
+      listPriceFnB: List<String>.from((map['listPriceFnB'] as List<String>)),
       placePicture: List<String>.from((map['placePicture'] as List<String>)),
       priceListMenuPicture:
           List<String>.from((map['priceListMenuPicture'] as List<String>)),
+      totalReview: map['totalReview'] as int,
+      avgRating: map['avgRating'] as double,
+      totalRatingPerStar:
+          List<int>.from((map['totalRatingPerStar'] as List<int>)),
       review: List<ReviewModel>.from(
         (map['review'] as List<int>).map<ReviewModel>(
           (x) => ReviewModel.fromMap(x as Map<String, dynamic>),
@@ -150,7 +181,7 @@ class FNBModel {
 
   @override
   String toString() {
-    return 'FNBModel(id: $id, type: $type, placeName: $placeName, overallRating: $overallRating, tags: $tags, phoneNumber: $phoneNumber, city: $city, placeAddress: $placeAddress, latitude: $latitude, longitude: $longitude, operationalDay: $operationalDay, operationalTimeOpen: $operationalTimeOpen, operationalTimeClose: $operationalTimeClose, placePicture: $placePicture, priceListMenuPicture: $priceListMenuPicture, review: $review, isClaimed: $isClaimed)';
+    return 'FNBModel(id: $id, type: $type, placeName: $placeName, overallRating: $overallRating, tags: $tags, phoneNumber: $phoneNumber, city: $city, placeAddress: $placeAddress, latitude: $latitude, longitude: $longitude, operationalDay: $operationalDay, operationalTimeOpen: $operationalTimeOpen, operationalTimeClose: $operationalTimeClose, avgPrice: $avgPrice, listPriceFnB: $listPriceFnB, placePicture: $placePicture, priceListMenuPicture: $priceListMenuPicture, totalReview: $totalReview, avgRating: $avgRating, totalRatingPerStar: $totalRatingPerStar, review: $review, isClaimed: $isClaimed)';
   }
 
   @override
@@ -170,8 +201,13 @@ class FNBModel {
         listEquals(other.operationalDay, operationalDay) &&
         listEquals(other.operationalTimeOpen, operationalTimeOpen) &&
         listEquals(other.operationalTimeClose, operationalTimeClose) &&
+        other.avgPrice == avgPrice &&
+        listEquals(other.listPriceFnB, listPriceFnB) &&
         listEquals(other.placePicture, placePicture) &&
         listEquals(other.priceListMenuPicture, priceListMenuPicture) &&
+        other.totalReview == totalReview &&
+        other.avgRating == avgRating &&
+        listEquals(other.totalRatingPerStar, totalRatingPerStar) &&
         listEquals(other.review, review) &&
         other.isClaimed == isClaimed;
   }
@@ -191,8 +227,13 @@ class FNBModel {
         operationalDay.hashCode ^
         operationalTimeOpen.hashCode ^
         operationalTimeClose.hashCode ^
+        avgPrice.hashCode ^
+        listPriceFnB.hashCode ^
         placePicture.hashCode ^
         priceListMenuPicture.hashCode ^
+        totalReview.hashCode ^
+        avgRating.hashCode ^
+        totalRatingPerStar.hashCode ^
         review.hashCode ^
         isClaimed.hashCode;
   }

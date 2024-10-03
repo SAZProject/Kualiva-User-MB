@@ -62,7 +62,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
         icon: Icons.email, label: "onboard.onboard_pick_notif_item_4"),
   ];
 
-  Set<int> selectedNotifChoice = {};
+  Set<int> selectedNotifChoice = {0};
 
   void _confirmBtnFunc(BuildContext context) {
     if (_activePage == 2) {
@@ -227,8 +227,9 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
           _activePage == 2 ? context.tr("onboard.onboard_save_btn") : null,
       margin: EdgeInsets.all(10.h),
       buttonStyle: CustomButtonStyles.none,
-      decoration:
-          CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
+      decoration: !_fieldValidation(_activePage)
+          ? CustomDecoration(context).outline
+          : CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
       buttonTextStyle: Theme.of(context).textTheme.titleLarge,
       onPressed: !_fieldValidation(_activePage)
           ? null

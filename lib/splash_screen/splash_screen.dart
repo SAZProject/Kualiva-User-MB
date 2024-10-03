@@ -31,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
+    _videoPlayerController.removeListener(_videoListener);
     _videoPlayerController.dispose();
     super.dispose();
   }
@@ -44,7 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_videoPlayerController.value.position ==
         _videoPlayerController.value.duration) {
       debugPrint('video Ended');
-      Navigator.of(context).pushNamed(AppRoutes.signInScreen);
+      Navigator.pushNamedAndRemoveUntil(
+          context, AppRoutes.signInScreen, (route) => false);
     }
   }
 

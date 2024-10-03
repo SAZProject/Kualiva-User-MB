@@ -399,7 +399,7 @@ class _FNBScreenState extends State<FNBScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
             child: SizedBox(
-              height: 200.h,
+              height: 225.h,
               width: double.maxFinite,
               child: ListView.builder(
                 shrinkWrap: true,

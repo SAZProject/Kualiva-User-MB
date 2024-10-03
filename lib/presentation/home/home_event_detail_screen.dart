@@ -132,7 +132,7 @@ class HomeEventDetailScreen extends StatelessWidget {
                 _buildAboutContent(
                   context,
                   label: eventModel.eventDesc,
-                  maxLines: 0,
+                  maxLines: 500,
                   customTextStyle: CustomTextStyles(context).bodySmall10,
                 ),
                 SizedBox(height: 8.h),
@@ -147,7 +147,7 @@ class HomeEventDetailScreen extends StatelessWidget {
   Widget _buildAboutContent(
     BuildContext context, {
     required String label,
-    int maxLines = 1,
+    int? maxLines,
     void Function()? onPressed,
     required TextStyle customTextStyle,
   }) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
-import 'package:like_it/data/model/ui_model/cuisine_model.dart';
+import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
 
 class OnboardingPickCuisine extends StatelessWidget {
   const OnboardingPickCuisine({
@@ -13,7 +13,7 @@ class OnboardingPickCuisine extends StatelessWidget {
     required this.onSelected,
   });
 
-  final CuisineModel? cuisineData;
+  final FNBAssetModel? cuisineData;
   final Set<int> selectedIndexes;
   final String hintText;
   final Function()? onHintPressed;
@@ -27,10 +27,10 @@ class OnboardingPickCuisine extends StatelessWidget {
       children: [
         CustomSelectableStaggeredGrid(
           totalItem: cuisineData!.totalItem,
-          bgImages: cuisineData!.listCuisineBg,
+          bgImages: cuisineData!.listAssetBg ?? [],
           iconImages: brightness == Brightness.light
-              ? cuisineData!.listCuisineLight
-              : cuisineData!.listCuisineDark,
+              ? cuisineData!.listAssetLight
+              : cuisineData!.listAssetDark,
           labels: cuisineData!.listTitle,
           isEmpty: cuisineData!.listTitle.isEmpty,
           selectedIndexes: selectedIndexes,

@@ -8,7 +8,7 @@ import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/data/model/ui_model/cuisine_model.dart';
+import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
@@ -48,12 +48,12 @@ class _FNBScreenState extends State<FNBScreen> {
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
-  final List<String> _listTagsFilter = FNBFilterDataset.fnbFilter;
+  final List<String> _listTagsFilter = FNBFilterDataset.fnbFoodFilter;
 
   ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
   late FiltersModel filtersModel;
 
-  final CuisineModel _dummyCuisineData = FNBDataset.cuisineDataset;
+  final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
   Set<int> dummySelectedCuisine = {};
 
   late UserCurrLocModel getUserCurrentLoc;
@@ -280,6 +280,15 @@ class _FNBScreenState extends State<FNBScreen> {
           itemBuilder: (context, index) {
             //TODO add waiting, empty, error state in future
             if (index == 0) return _filterScreenBtn(context, index, label: "");
+            if ((index - 1) == 0) {
+              return FNBFiltersItem(
+                label: _listTagsFilter[index - 1],
+                isWrap: false,
+                multiSelect: true,
+                isExecutive: true,
+                multiSelectedChoices: selectedFilters,
+              );
+            }
             return FNBFiltersItem(
               label: _listTagsFilter[index - 1],
               isWrap: false,
@@ -470,10 +479,10 @@ class _FNBScreenState extends State<FNBScreen> {
               child: CustomSelectableStaggeredGrid(
                 controller: _childScrollController2,
                 totalItem: _dummyCuisineData.totalItem,
-                bgImages: _dummyCuisineData.listCuisineBg,
+                bgImages: _dummyCuisineData.listAssetBg ?? [],
                 iconImages: brightness == Brightness.light
-                    ? _dummyCuisineData.listCuisineLight
-                    : _dummyCuisineData.listCuisineDark,
+                    ? _dummyCuisineData.listAssetLight
+                    : _dummyCuisineData.listAssetDark,
                 labels: _dummyCuisineData.listTitle,
                 isEmpty: _dummyCuisineData.listTitle.isEmpty,
               ),

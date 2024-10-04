@@ -6,11 +6,12 @@ class FNBFilterDataset {
   static List<String> get fnbFilter => [
         "24 Hour",
         "Vegetarian",
-        "All You Can Eat",
-        "Michelin",
+        "Seafood",
+        "Halal",
         "Shabu",
         "Grill",
-        "Halal",
+        "All You Can Eat",
+        "Michelin",
         "Vegan",
         "Drive Thru",
       ];
@@ -35,7 +36,7 @@ class FNBFilterDataset {
         "Snack",
         "Dessert",
         "Fusion",
-        "Seafood",
+        "Beverages",
       ];
 
   static List<String> get fnbSubCategBvg => [
@@ -45,6 +46,6 @@ class FNBFilterDataset {
         "Soft Drink",
         "Herbal",
         "Alcohol",
-        "Blend"
+        "Blend",
       ];
 }

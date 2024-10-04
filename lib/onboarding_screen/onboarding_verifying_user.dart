@@ -5,7 +5,7 @@ import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/data/model/ui_model/cuisine_model.dart';
+import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:like_it/data/model/ui_model/onboarding_model.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
 import 'package:like_it/onboarding_screen/widget/onboarding_pick_birthdate.dart';
@@ -42,7 +42,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   DateTime? selectedDate;
 
-  final CuisineModel _dummyCuisineData = FNBDataset.cuisineDataset;
+  final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
   Set<int> dummySelectedCuisine = {};
 
   final List<ProfileMenuModel> _listBtnItem = [

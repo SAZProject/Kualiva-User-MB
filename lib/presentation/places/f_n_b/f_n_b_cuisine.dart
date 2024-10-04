@@ -22,7 +22,7 @@ class _FNBCuisineState extends State<FNBCuisine> {
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
-  final List<String> _listTagsFilter = FNBFilterDataset.fnbFilter;
+  final List<String> _listTagsFilter = FNBFilterDataset.fnbFoodFilter;
   ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
 
   late FiltersModel filtersModel;
@@ -169,6 +169,15 @@ class _FNBCuisineState extends State<FNBCuisine> {
           itemBuilder: (context, index) {
             //TODO add waiting, empty, error state in future
             if (index == 0) return _filterScreenBtn(context, index, label: "");
+            if ((index - 1) == 0) {
+              return FNBFiltersItem(
+                label: _listTagsFilter[index - 1],
+                isWrap: false,
+                multiSelect: true,
+                isExecutive: true,
+                multiSelectedChoices: selectedFilters,
+              );
+            }
             return FNBFiltersItem(
               label: _listTagsFilter[index - 1],
               isWrap: false,

@@ -32,6 +32,7 @@ class ImageConstant {
     "$cuisineBg/Vector-16.png",
     "$cuisineBg/Vector-17.png",
     "$cuisineBg/Vector-18.png",
+    "$cuisineBg/Vector-19.png",
   ];
 
   static String cuisineLightPath = "$imagePath/cuisine_logo_light";
@@ -55,6 +56,7 @@ class ImageConstant {
     "$cuisineLightPath/Vector-16.png",
     "$cuisineLightPath/Vector-17.png",
     "$cuisineLightPath/Vector-18.png",
+    "$cuisineLightPath/Vector-19.png",
   ];
 
   static String cuisineDarkPath = "$imagePath/cuisine_logo_dark";
@@ -78,6 +80,55 @@ class ImageConstant {
     "$cuisineDarkPath/Vector-16.png",
     "$cuisineDarkPath/Vector-17.png",
     "$cuisineDarkPath/Vector-18.png",
+    "$cuisineDarkPath/Vector-19.png",
+  ];
+
+  static String fnbBvgFilterLight = "$imagePath/f_n_b_bvg_filter_light";
+  static List<String> listBvgFilterLight = [
+    "$fnbBvgFilterLight/Vector.png",
+    "$fnbBvgFilterLight/Vector-1.png",
+    "$fnbBvgFilterLight/Vector-2.png",
+    "$fnbBvgFilterLight/Vector-3.png",
+    "$fnbBvgFilterLight/Vector-4.png",
+    "$fnbBvgFilterLight/Vector-5.png",
+    "$fnbBvgFilterLight/Vector-6.png",
+  ];
+
+  static String fnbBvgFilterDark = "$imagePath/f_n_b_bvg_filter_dark";
+  static List<String> listBvgFilterDark = [
+    "$fnbBvgFilterDark/Vector.png",
+    "$fnbBvgFilterDark/Vector-1.png",
+    "$fnbBvgFilterDark/Vector-2.png",
+    "$fnbBvgFilterDark/Vector-3.png",
+    "$fnbBvgFilterDark/Vector-4.png",
+    "$fnbBvgFilterDark/Vector-5.png",
+    "$fnbBvgFilterDark/Vector-6.png",
+  ];
+
+  static String fnbFoodFilterLight = "$imagePath/f_n_b_food_filter_light";
+  static List<String> listFoodFilterLight = [
+    "$fnbFoodFilterLight/Vector.png",
+    "$fnbFoodFilterLight/Vector-1.png",
+    "$fnbFoodFilterLight/Vector-2.png",
+    "$fnbFoodFilterLight/Vector-3.png",
+    "$fnbFoodFilterLight/Vector-4.png",
+    "$fnbFoodFilterLight/Vector-5.png",
+    "$fnbFoodFilterLight/Vector-6.png",
+    "$fnbFoodFilterLight/Vector-7.png",
+    "$fnbFoodFilterLight/Vector-8.png",
+  ];
+
+  static String fnbFoodFilterDark = "$imagePath/f_n_b_food_filter_dark";
+  static List<String> listFoodFilterDark = [
+    "$fnbFoodFilterDark/Vector.png",
+    "$fnbFoodFilterDark/Vector-1.png",
+    "$fnbFoodFilterDark/Vector-2.png",
+    "$fnbFoodFilterDark/Vector-3.png",
+    "$fnbFoodFilterDark/Vector-4.png",
+    "$fnbFoodFilterDark/Vector-5.png",
+    "$fnbFoodFilterDark/Vector-6.png",
+    "$fnbFoodFilterDark/Vector-7.png",
+    "$fnbFoodFilterDark/Vector-8.png",
   ];
 
   static String arasaka = "$imagePath/arasaka.png";

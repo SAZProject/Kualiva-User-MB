@@ -55,6 +55,20 @@ class CustomSelectableStaggeredGrid extends StatelessWidget {
                 children: List.generate(
                   totalItem,
                   (index) {
+                    if (index == (totalItem - 2)) {
+                      return StaggeredGridTile.count(
+                        crossAxisCellCount: 3,
+                        mainAxisCellCount: 1,
+                        child: _buildGridItemCuisine(
+                          context,
+                          index,
+                          true,
+                          bgImages[index],
+                          iconImages[index],
+                          labels[index],
+                        ),
+                      );
+                    }
                     if (index == (totalItem - 1)) {
                       return StaggeredGridTile.count(
                         crossAxisCellCount: 3,

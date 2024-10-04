@@ -8,6 +8,7 @@ class FNBFiltersItem extends StatelessWidget {
     this.onSelected,
     this.multiSelect = true,
     this.isWrap = false,
+    this.isExecutive = false,
     this.singleSelectedChoices,
     this.multiSelectedChoices,
   });
@@ -16,6 +17,7 @@ class FNBFiltersItem extends StatelessWidget {
   final Function(bool)? onSelected;
   final bool multiSelect;
   final bool isWrap;
+  final bool isExecutive;
   final ValueNotifier<String>? singleSelectedChoices;
   final ValueNotifier<Set<String>>? multiSelectedChoices;
 
@@ -85,12 +87,24 @@ class FNBFiltersItem extends StatelessWidget {
   Widget _chipLabel(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5.h),
-      child: Text(
-        label,
-        textAlign: TextAlign.center,
-        style: CustomTextStyles(context).bodyMedium_13,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          isExecutive
+              ? Icon(
+                  Icons.star,
+                  color: theme(context).colorScheme.primary,
+                  size: 15.h,
+                )
+              : const SizedBox(),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: CustomTextStyles(context).bodyMedium_13,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }

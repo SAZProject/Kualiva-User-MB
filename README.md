@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.38
-- Revised Cuisine gridview using staggered grid
+Ver 0.0.39
+- Revised Filter Dataset
+- Add new Dataset
 ```
 
 ## Getting Started

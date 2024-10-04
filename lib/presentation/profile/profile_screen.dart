@@ -1,8 +1,8 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
 
@@ -15,20 +15,66 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final List<ProfileMenuModel> _profileMenuModel = [
-    ProfileMenuModel(label: "profile.my_profile", icon: Icons.edit),
-    ProfileMenuModel(label: "profile.my_voucher", icon: Icons.card_giftcard),
-    ProfileMenuModel(label: "profile.saved", icon: Icons.favorite),
-    ProfileMenuModel(label: "profile.my_stats", icon: Icons.bar_chart),
-    ProfileMenuModel(label: "profile.my_reviews", icon: Icons.star),
-    ProfileMenuModel(label: "profile.notif", icon: Icons.notifications),
-    ProfileMenuModel(label: "profile.theme", icon: Icons.brightness_4_outlined),
-    ProfileMenuModel(label: "profile.lang", icon: Icons.language),
-    ProfileMenuModel(label: "profile.add_place", icon: Icons.add),
-    ProfileMenuModel(label: "profile.acc_setting", icon: Icons.lock_person),
     ProfileMenuModel(
-        label: "profile.customer_support", icon: Icons.support_agent),
+        label: "profile.my_profile",
+        icon: Icons.edit,
+        isRightIcon: false,
+        isCommingSoon: false),
     ProfileMenuModel(
-        label: "profile.about_us", imageUri: ImageConstant.appLogo),
+        label: "profile.my_voucher",
+        icon: Icons.card_giftcard,
+        isRightIcon: false,
+        isCommingSoon: true),
+    ProfileMenuModel(
+        label: "profile.saved",
+        icon: Icons.favorite,
+        isRightIcon: false,
+        isCommingSoon: true),
+    ProfileMenuModel(
+        label: "profile.my_stats",
+        icon: Icons.bar_chart,
+        isRightIcon: false,
+        isCommingSoon: true),
+    ProfileMenuModel(
+        label: "profile.my_reviews",
+        icon: Icons.star,
+        isRightIcon: false,
+        isCommingSoon: true),
+    ProfileMenuModel(
+        label: "profile.notif",
+        icon: Icons.notifications,
+        isRightIcon: false,
+        isCommingSoon: true),
+    ProfileMenuModel(
+        label: "profile.theme",
+        icon: Icons.brightness_4_outlined,
+        isRightIcon: true,
+        isCommingSoon: false),
+    ProfileMenuModel(
+        label: "profile.lang",
+        icon: Icons.language,
+        isRightIcon: false,
+        isCommingSoon: false),
+    ProfileMenuModel(
+        label: "profile.add_place",
+        icon: Icons.add,
+        isRightIcon: false,
+        isCommingSoon: false),
+    ProfileMenuModel(
+        label: "profile.acc_setting",
+        icon: Icons.lock_person,
+        isRightIcon: false,
+        isCommingSoon: false),
+    ProfileMenuModel(
+        label: "profile.customer_support",
+        icon: Icons.support_agent,
+        isRightIcon: false,
+        isCommingSoon: true),
+    ProfileMenuModel(
+        label: "profile.about_us",
+        imageUri: ImageConstant.appLogo,
+        isRightIcon: false,
+        isCommingSoon: true),
   ];
 
   void _profileMenuNavigate(BuildContext context, int index) {
@@ -42,7 +88,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 5:
         break;
       case 6:
-        break;
+        final brightness = theme(context).brightness;
+        if (brightness == Brightness.light) {
+          return AdaptiveTheme.of(context).setDark();
+        } else {
+          return AdaptiveTheme.of(context).setLight();
+        }
+
       case 7:
         break;
       case 8:
@@ -53,8 +105,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 10:
         break;
       case 11:
-        break;
-      case 12:
         break;
       default:
         break;
@@ -239,6 +289,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildProfileMenuList() {
+    final brightness = theme(context).brightness;
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 10.h),
@@ -246,26 +297,122 @@ class _ProfileScreenState extends State<ProfileScreen> {
           CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
                 borderRadius: BorderRadiusStyle.roundedBorder10,
               ),
-      child: _profileMenuModel.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              shrinkWrap: true,
-              itemCount: (_profileMenuModel.length - 2),
-              padding: EdgeInsets.zero,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                if (_profileMenuModel.isNotEmpty) {
-                  return _buildProfileMenuListItem(
-                    context,
-                    (index + 2),
-                    _profileMenuModel[(index + 2)].label,
-                    _profileMenuModel[(index + 2)].icon,
-                    _profileMenuModel[(index + 2)].imageUri,
-                  );
-                }
-                return const CustomEmptyState();
+      child: Column(
+        children: [
+          _buildProfileMenuListItem(
+            context,
+            2,
+            _profileMenuModel[2].label,
+            _profileMenuModel[2].icon,
+            _profileMenuModel[2].imageUri,
+            _profileMenuModel[2].isRightIcon,
+            _profileMenuModel[2].isCommingSoon,
+          ),
+          _buildProfileMenuListItem(
+            context,
+            3,
+            _profileMenuModel[3].label,
+            _profileMenuModel[3].icon,
+            _profileMenuModel[3].imageUri,
+            _profileMenuModel[3].isRightIcon,
+            _profileMenuModel[3].isCommingSoon,
+          ),
+          _buildProfileMenuListItem(
+            context,
+            4,
+            _profileMenuModel[4].label,
+            _profileMenuModel[4].icon,
+            _profileMenuModel[4].imageUri,
+            _profileMenuModel[4].isRightIcon,
+            _profileMenuModel[4].isCommingSoon,
+          ),
+          _buildProfileMenuListItem(
+            context,
+            5,
+            _profileMenuModel[5].label,
+            _profileMenuModel[5].icon,
+            _profileMenuModel[5].imageUri,
+            _profileMenuModel[5].isRightIcon,
+            _profileMenuModel[5].isCommingSoon,
+          ), //as
+          _buildProfileMenuListItem(
+            context,
+            6,
+            _profileMenuModel[6].label,
+            _profileMenuModel[6].icon,
+            _profileMenuModel[6].imageUri,
+            _profileMenuModel[6].isRightIcon,
+            _profileMenuModel[6].isCommingSoon,
+            buildRight: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return RotationTransition(
+                  turns: child.key == const ValueKey("dark")
+                      ? Tween<double>(begin: 1, end: 0.75).animate(animation)
+                      : Tween<double>(begin: 0.75, end: 1).animate(animation),
+                  child: FadeTransition(opacity: animation, child: child),
+                );
               },
+              child: brightness == Brightness.dark
+                  ? Icon(
+                      Icons.dark_mode,
+                      key: const ValueKey("dark"),
+                      size: 20.h,
+                    )
+                  : Icon(
+                      Icons.light_mode,
+                      key: const ValueKey("light"),
+                      size: 20.h,
+                    ),
             ),
+          ),
+          _buildProfileMenuListItem(
+            context,
+            7,
+            _profileMenuModel[7].label,
+            _profileMenuModel[7].icon,
+            _profileMenuModel[7].imageUri,
+            _profileMenuModel[7].isRightIcon,
+            _profileMenuModel[7].isCommingSoon,
+          ),
+          _buildProfileMenuListItem(
+            context,
+            8,
+            _profileMenuModel[8].label,
+            _profileMenuModel[8].icon,
+            _profileMenuModel[8].imageUri,
+            _profileMenuModel[8].isRightIcon,
+            _profileMenuModel[8].isCommingSoon,
+          ),
+          _buildProfileMenuListItem(
+            context,
+            9,
+            _profileMenuModel[9].label,
+            _profileMenuModel[9].icon,
+            _profileMenuModel[9].imageUri,
+            _profileMenuModel[9].isRightIcon,
+            _profileMenuModel[9].isCommingSoon,
+          ),
+          _buildProfileMenuListItem(
+            context,
+            10,
+            _profileMenuModel[10].label,
+            _profileMenuModel[10].icon,
+            _profileMenuModel[10].imageUri,
+            _profileMenuModel[10].isRightIcon,
+            _profileMenuModel[10].isCommingSoon,
+          ),
+          _buildProfileMenuListItem(
+            context,
+            11,
+            _profileMenuModel[11].label,
+            _profileMenuModel[11].icon,
+            _profileMenuModel[11].imageUri,
+            _profileMenuModel[11].isRightIcon,
+            _profileMenuModel[11].isCommingSoon,
+          ),
+        ],
+      ),
     );
   }
 
@@ -275,7 +422,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String label,
     IconData? icon,
     String? imageUri,
-  ) {
+    bool isRightIcon,
+    bool isCommingSoon, {
+    Widget? buildRight,
+  }) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(vertical: 2.5.h),
@@ -303,6 +453,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   alignment: Alignment.center,
                 ),
               ),
+        trailing: isRightIcon ? buildRight : const SizedBox(),
         title: Text(
           context.tr(label),
           style: CustomTextStyles(context).bodyMedium_15,

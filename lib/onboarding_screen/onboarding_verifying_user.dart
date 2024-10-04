@@ -47,14 +47,29 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   final List<ProfileMenuModel> _listBtnItem = [
     ProfileMenuModel(
-        imageUri: ImageConstant.appLogo,
-        label: "onboard.onboard_pick_notif_item_1"),
+      imageUri: ImageConstant.appLogo,
+      label: "onboard.onboard_pick_notif_item_1",
+      isRightIcon: false,
+      isCommingSoon: false,
+    ),
     ProfileMenuModel(
-        icon: Icons.call, label: "onboard.onboard_pick_notif_item_2"),
+      icon: Icons.call,
+      label: "onboard.onboard_pick_notif_item_2",
+      isRightIcon: false,
+      isCommingSoon: false,
+    ),
     ProfileMenuModel(
-        icon: Icons.sms, label: "onboard.onboard_pick_notif_item_3"),
+      icon: Icons.sms,
+      label: "onboard.onboard_pick_notif_item_3",
+      isRightIcon: false,
+      isCommingSoon: false,
+    ),
     ProfileMenuModel(
-        icon: Icons.email, label: "onboard.onboard_pick_notif_item_4"),
+      icon: Icons.email,
+      label: "onboard.onboard_pick_notif_item_4",
+      isRightIcon: false,
+      isCommingSoon: false,
+    ),
   ];
 
   Set<int> selectedNotifChoice = {0};

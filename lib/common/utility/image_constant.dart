@@ -11,6 +11,75 @@ class ImageConstant {
   static String googleIcon = "$imagePath/google_icon.png";
   static String permissionScreen = "$imagePath/permission_screen.gif";
 
+  static String cuisineBg = "$imagePath/cuisine_bg";
+  static List<String> listCuisineBg = [
+    "$cuisineBg/Vector.png",
+    "$cuisineBg/Vector-1.png",
+    "$cuisineBg/Vector-2.png",
+    "$cuisineBg/Vector-3.png",
+    "$cuisineBg/Vector-4.png",
+    "$cuisineBg/Vector-5.png",
+    "$cuisineBg/Vector-6.png",
+    "$cuisineBg/Vector-7.png",
+    "$cuisineBg/Vector-8.png",
+    "$cuisineBg/Vector-9.png",
+    "$cuisineBg/Vector-10.png",
+    "$cuisineBg/Vector-11.png",
+    "$cuisineBg/Vector-12.png",
+    "$cuisineBg/Vector-13.png",
+    "$cuisineBg/Vector-14.png",
+    "$cuisineBg/Vector-15.png",
+    "$cuisineBg/Vector-16.png",
+    "$cuisineBg/Vector-17.png",
+    "$cuisineBg/Vector-18.png",
+  ];
+
+  static String cuisineLightPath = "$imagePath/cuisine_logo_light";
+  static List<String> listCuisineLight = [
+    "$cuisineLightPath/Vector.png",
+    "$cuisineLightPath/Vector-1.png",
+    "$cuisineLightPath/Vector-2.png",
+    "$cuisineLightPath/Vector-3.png",
+    "$cuisineLightPath/Vector-4.png",
+    "$cuisineLightPath/Vector-5.png",
+    "$cuisineLightPath/Vector-6.png",
+    "$cuisineLightPath/Vector-7.png",
+    "$cuisineLightPath/Vector-8.png",
+    "$cuisineLightPath/Vector-9.png",
+    "$cuisineLightPath/Vector-10.png",
+    "$cuisineLightPath/Vector-11.png",
+    "$cuisineLightPath/Vector-12.png",
+    "$cuisineLightPath/Vector-13.png",
+    "$cuisineLightPath/Vector-14.png",
+    "$cuisineLightPath/Vector-15.png",
+    "$cuisineLightPath/Vector-16.png",
+    "$cuisineLightPath/Vector-17.png",
+    "$cuisineLightPath/Vector-18.png",
+  ];
+
+  static String cuisineDarkPath = "$imagePath/cuisine_logo_dark";
+  static List<String> listCuisinedark = [
+    "$cuisineDarkPath/Vector.png",
+    "$cuisineDarkPath/Vector-1.png",
+    "$cuisineDarkPath/Vector-2.png",
+    "$cuisineDarkPath/Vector-3.png",
+    "$cuisineDarkPath/Vector-4.png",
+    "$cuisineDarkPath/Vector-5.png",
+    "$cuisineDarkPath/Vector-6.png",
+    "$cuisineDarkPath/Vector-7.png",
+    "$cuisineDarkPath/Vector-8.png",
+    "$cuisineDarkPath/Vector-9.png",
+    "$cuisineDarkPath/Vector-10.png",
+    "$cuisineDarkPath/Vector-11.png",
+    "$cuisineDarkPath/Vector-12.png",
+    "$cuisineDarkPath/Vector-13.png",
+    "$cuisineDarkPath/Vector-14.png",
+    "$cuisineDarkPath/Vector-15.png",
+    "$cuisineDarkPath/Vector-16.png",
+    "$cuisineDarkPath/Vector-17.png",
+    "$cuisineDarkPath/Vector-18.png",
+  ];
+
   static String arasaka = "$imagePath/arasaka.png";
 
   static String background1 = "$imagePath/background_1.png";

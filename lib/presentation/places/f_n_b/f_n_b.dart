@@ -4,10 +4,11 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:like_it/common/utility/location_utility.dart';
-import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
+import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:like_it/data/model/ui_model/cuisine_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
@@ -52,15 +53,15 @@ class _FNBScreenState extends State<FNBScreen> {
   ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
   late FiltersModel filtersModel;
 
-  final List<String> _dummyImageData = [
-    "${ImageConstant.fnb1Path}/A/2.jpg",
-    "${ImageConstant.fnb2Path}/A/2.jpg",
-    "${ImageConstant.fnb3Path}/A/2.jpg",
-    "${ImageConstant.fnb4Path}/A/2.jpg",
-    "${ImageConstant.fnb5Path}/A/2.jpg",
-  ];
+  final CuisineModel _dummyCuisineData = FNBDataset.cuisineDataset;
+  Set<int> dummySelectedCuisine = {};
 
   late UserCurrLocModel getUserCurrentLoc;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -424,6 +425,7 @@ class _FNBScreenState extends State<FNBScreen> {
   }
 
   Widget _cuisine(BuildContext context) {
+    var brightness = Theme.of(context).brightness;
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 5.h),
@@ -440,7 +442,7 @@ class _FNBScreenState extends State<FNBScreen> {
             },
           ),
           Container(
-            height: 250.h,
+            height: 350.h,
             margin: EdgeInsets.symmetric(horizontal: 5.h),
             width: double.maxFinite,
             child: NotificationListener(
@@ -449,8 +451,9 @@ class _FNBScreenState extends State<FNBScreen> {
                   if (notification.metrics.pixels ==
                       notification.metrics.maxScrollExtent) {
                     debugPrint('Reached the bottom');
+                    if (_parentScrollController.position.atEdge) return true;
                     _parentScrollController.animateTo(
-                        _parentScrollController.position.maxScrollExtent,
+                        _parentScrollController.position.minScrollExtent,
                         duration: const Duration(seconds: 1),
                         curve: Curves.easeIn);
                   } else if (notification.metrics.pixels ==
@@ -464,33 +467,16 @@ class _FNBScreenState extends State<FNBScreen> {
                 }
                 return true;
               },
-              child: _dummyImageData.isEmpty
-                  ? const Center(child: CircularProgressIndicator())
-                  : GridView.builder(
-                      controller: _childScrollController2,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3, // Number of items in each row
-                      ),
-                      itemCount: _dummyImageData.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        if (_dummyImageData.isNotEmpty) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 5.h, vertical: 8.h),
-                            child: CustomImageView(
-                              imagePath: _dummyImageData[index],
-                              height: 120.h,
-                              width: 100.h,
-                              radius: BorderRadius.circular(10.h),
-                            ),
-                          );
-                        }
-                        return const CustomEmptyState();
-                      },
-                    ),
+              child: CustomSelectableStaggeredGrid(
+                controller: _childScrollController2,
+                totalItem: _dummyCuisineData.totalItem,
+                bgImages: _dummyCuisineData.listCuisineBg,
+                iconImages: brightness == Brightness.light
+                    ? _dummyCuisineData.listCuisineLight
+                    : _dummyCuisineData.listCuisineDark,
+                labels: _dummyCuisineData.listTitle,
+                isEmpty: _dummyCuisineData.listTitle.isEmpty,
+              ),
             ),
           ),
         ],

@@ -1,6 +1,8 @@
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
+import 'package:like_it/data/model/ui_model/cuisine_model.dart';
 import 'package:like_it/data/model/ui_model/image_model.dart';
 
 class FNBDataset {
@@ -11,6 +13,14 @@ class FNBDataset {
     url:
         "https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg",
   );
+
+  static CuisineModel get cuisineDataset => CuisineModel(
+        totalItem: 19,
+        listTitle: FNBFilterDataset.fnbSubCategFoods,
+        listCuisineLight: ImageConstant.listCuisineLight,
+        listCuisineDark: ImageConstant.listCuisinedark,
+        listCuisineBg: ImageConstant.listCuisineBg,
+      );
 
   List<FNBModel> get featuredItemsDataset => [
         FNBModel(

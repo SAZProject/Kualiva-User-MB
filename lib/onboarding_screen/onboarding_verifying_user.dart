@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
+import 'package:like_it/data/model/ui_model/cuisine_model.dart';
 import 'package:like_it/data/model/ui_model/onboarding_model.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
 import 'package:like_it/onboarding_screen/widget/onboarding_pick_birthdate.dart';
@@ -40,14 +42,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   DateTime? selectedDate;
 
-  final List<String> _dummyImageData = [
-    "${ImageConstant.fnb1Path}/A/2.jpg",
-    "${ImageConstant.fnb2Path}/A/2.jpg",
-    "${ImageConstant.fnb3Path}/A/2.jpg",
-    "${ImageConstant.fnb4Path}/A/2.jpg",
-    "${ImageConstant.fnb5Path}/A/2.jpg",
-  ];
-
+  final CuisineModel _dummyCuisineData = FNBDataset.cuisineDataset;
   Set<int> dummySelectedCuisine = {};
 
   final List<ProfileMenuModel> _listBtnItem = [
@@ -166,7 +161,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
     switch (_activePage) {
       case 1:
         return OnboardingPickCuisine(
-          dummyImageData: _dummyImageData,
+          cuisineData: _dummyCuisineData,
           selectedIndexes: dummySelectedCuisine,
           hintText: context.tr("onboard.onboard_pick_cuisine_hint"),
           onHintPressed: () {},
@@ -175,6 +170,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
               if (dummySelectedCuisine.contains(index)) {
                 dummySelectedCuisine.remove(index);
               } else {
+                if (dummySelectedCuisine.length == 5) return;
                 dummySelectedCuisine.add(index);
               }
             });

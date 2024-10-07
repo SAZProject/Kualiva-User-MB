@@ -30,45 +30,37 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
     bool havePermission = false;
 
     if (CheckDevice.isAndroid()) {
+      if (await Permission.location.isPermanentlyDenied) {
+        Permission.location.request();
+      }
+      if (await Permission.camera.isPermanentlyDenied) {
+        Permission.camera.request();
+      }
+      if (await Permission.microphone.isPermanentlyDenied) {
+        Permission.microphone.request();
+      }
+      List<Permission> defaultPerm = [
+        Permission.location,
+        Permission.camera,
+        Permission.microphone,
+      ];
       if (await CheckDevice.isAndroid13plus()) {
-        if (await Permission.location.isPermanentlyDenied) {
-          Permission.location.request();
-        }
         if (await Permission.photos.isPermanentlyDenied) {
           Permission.photos.request();
         }
-        if (await Permission.camera.isPermanentlyDenied) {
-          Permission.camera.request();
-        }
-        if (await Permission.microphone.isPermanentlyDenied) {
-          Permission.microphone.request();
-        }
         final request = await [
-          Permission.location,
+          ...defaultPerm,
           Permission.photos,
-          Permission.camera,
-          Permission.microphone,
         ].request();
         havePermission = request.values
             .every((status) => status == PermissionStatus.granted);
       } else {
-        if (await Permission.location.isPermanentlyDenied) {
-          Permission.location.request();
-        }
         if (await Permission.storage.isPermanentlyDenied) {
           Permission.storage.request();
         }
-        if (await Permission.camera.isPermanentlyDenied) {
-          Permission.camera.request();
-        }
-        if (await Permission.microphone.isPermanentlyDenied) {
-          Permission.microphone.request();
-        }
         final request = await [
-          Permission.location,
+          ...defaultPerm,
           Permission.storage,
-          Permission.camera,
-          Permission.microphone,
         ].request();
         havePermission = request.values
             .every((status) => status == PermissionStatus.granted);

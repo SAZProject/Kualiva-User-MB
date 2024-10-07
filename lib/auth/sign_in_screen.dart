@@ -147,11 +147,9 @@ class SignInScreenState extends State<SignInScreen> {
             style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
           ),
           SizedBox(height: 10.h),
-          SizedBox(
-              width: double.maxFinite,
-              child: _textFieldPhoneNumberOrUserName(context)),
+          _textFieldPhoneNumberOrUserName(context),
           SizedBox(height: 10.h),
-          SizedBox(width: double.maxFinite, child: _textFieldPassword(context)),
+          _textFieldPassword(context),
           SizedBox(height: 10.h),
           _signInButton(context),
           SizedBox(height: 10.h),
@@ -166,21 +164,21 @@ class SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _signInWithSAZ(BuildContext context) {
-    return CustomOutlinedButton(
-      text: context.tr("sign_in.sign_in_with_saz"),
-      buttonTextStyle: CustomTextStyles(context).titleMediumCyanA200,
-      buttonStyle: CustomButtonStyles.outlineTranparent,
-      decoration: CustomDecoration(context).backgroundBlur.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder10,
-          ),
-      leftIcon: CustomImageView(
-        imagePath: ImageConstant.sazIcon,
-        height: 40.h,
-        width: 40.h,
-      ),
-    );
-  }
+  // Widget _signInWithSAZ(BuildContext context) {
+  //   return CustomOutlinedButton(
+  //     text: context.tr("sign_in.sign_in_with_saz"),
+  //     buttonTextStyle: CustomTextStyles(context).titleMediumCyanA200,
+  //     buttonStyle: CustomButtonStyles.outlineTranparent,
+  //     decoration: CustomDecoration(context).backgroundBlur.copyWith(
+  //           borderRadius: BorderRadiusStyle.roundedBorder10,
+  //         ),
+  //     leftIcon: CustomImageView(
+  //       imagePath: ImageConstant.sazIcon,
+  //       height: 40.h,
+  //       width: 40.h,
+  //     ),
+  //   );
+  // }
 
   Widget _signInWithGoogle(BuildContext context) {
     return CustomOutlinedButton(

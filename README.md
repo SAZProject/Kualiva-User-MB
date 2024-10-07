@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.40+01
-- Disable some function for V1 in sign in and onboarding screen
+Ver 0.0.40+02
+- Can guest login, change the app flow for V1
+- Add permission checking in splash screen
 ```
 
 ## Getting Started

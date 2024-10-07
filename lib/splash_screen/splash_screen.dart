@@ -1,6 +1,7 @@
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/utility/check_permission.dart';
 import 'package:like_it/common/utility/video_constant.dart';
 import 'package:video_player/video_player.dart';
 
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.dispose();
   }
 
-  void _videoListener() {
+  void _videoListener() async {
     if (_videoPlayerController.value.position ==
         const Duration(seconds: 0, minutes: 0, hours: 0)) {
       debugPrint('video Started');
@@ -45,8 +46,15 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_videoPlayerController.value.position ==
         _videoPlayerController.value.duration) {
       debugPrint('video Ended');
-      Navigator.pushNamedAndRemoveUntil(
-          context, AppRoutes.signInScreen, (route) => false);
+      if (await CheckPermission.checkDevicePermission()) {
+        if (!mounted) return;
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.homeNavigationScreen, (route) => false);
+      } else {
+        if (!mounted) return;
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.devicePermissionScreen, (route) => false);
+      }
     }
   }
 

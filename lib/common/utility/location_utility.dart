@@ -54,7 +54,7 @@ class LocationUtility {
         content: "common.location_unavailable_content".tr(),
         defaultActionText: "common.alert_action_text".tr(),
         onButtonPressed: () async {
-          Geolocator.openLocationSettings();
+          await Geolocator.openLocationSettings();
           Navigator.pop(context);
         },
       );
@@ -87,7 +87,7 @@ class LocationUtility {
         content: "common.location_denied_perm_content".tr(),
         defaultActionText: "common.alert_action_text".tr(),
         onButtonPressed: () async {
-          Geolocator.openAppSettings();
+          await Geolocator.openLocationSettings();
           Navigator.pop(context);
         },
       );

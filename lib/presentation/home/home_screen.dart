@@ -212,6 +212,7 @@ Syarat dan Ketentuan :
         () async {
           if (!context.mounted) return Future.error("No context mounted");
           if (_locIsInitialized == false) {
+            //TODO after user go to open setting and allow permission, refresh page to get user loc
             if (await LocationUtility.checkPermission(context)) {
               try {
                 final res = await LocationUtility.getUserCurrLoc();

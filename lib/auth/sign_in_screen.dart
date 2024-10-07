@@ -131,14 +131,15 @@ class SignInScreenState extends State<SignInScreen> {
             context.tr("sign_in.welcome"),
             style: theme(context).textTheme.titleLarge,
           ),
-          SizedBox(height: 20.h),
-          Text(
-            context.tr("sign_in.sign_in_with"),
-            style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
-          ),
-          SizedBox(height: 10.h),
-          _signInWithSAZ(context),
-          SizedBox(height: 10.h),
+          // TODO di non aktifkan untuk V1
+          // SizedBox(height: 20.h),
+          // Text(
+          //   context.tr("sign_in.sign_in_with"),
+          //   style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
+          // ),
+          // SizedBox(height: 10.h),
+          // _signInWithSAZ(context),
+          // SizedBox(height: 10.h),
           _signInWithGoogle(context),
           SizedBox(height: 10.h),
           Text(

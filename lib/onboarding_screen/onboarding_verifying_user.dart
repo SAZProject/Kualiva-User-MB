@@ -1,15 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:like_it/data/model/ui_model/onboarding_model.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
 import 'package:like_it/onboarding_screen/widget/onboarding_pick_birthdate.dart';
-import 'package:like_it/onboarding_screen/widget/onboarding_pick_cuisine.dart';
 import 'package:like_it/onboarding_screen/widget/onboarding_pick_notification.dart';
 
 class OnboardingVerifyingUser extends StatefulWidget {
@@ -26,10 +23,10 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
       icon: Icons.calendar_month,
       pageTitle: "onboard.onboard_pick_birthdate",
     ),
-    const OnboardingModel(
-      icon: Icons.star,
-      pageTitle: "onboard.onboard_pick_cuisine",
-    ),
+    // const OnboardingModel(
+    //   icon: Icons.star,
+    //   pageTitle: "onboard.onboard_pick_cuisine",
+    // ),
     const OnboardingModel(
       icon: Icons.notifications,
       pageTitle: "onboard.onboard_pick_notif",
@@ -42,8 +39,8 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   DateTime? selectedDate;
 
-  final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
-  Set<int> dummySelectedCuisine = {};
+  // final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
+  // Set<int> dummySelectedCuisine = {};
 
   final List<ProfileMenuModel> _listBtnItem = [
     ProfileMenuModel(
@@ -85,14 +82,15 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   bool _fieldValidation(int page) {
     switch (page) {
-      case 0:
-        if (selectedDate == null) return false;
-        return true;
+      // TODO dimatikan untuk v1
+      // case 1:
+      //   if (dummySelectedCuisine.isEmpty) return false;
+      //   return true;
       case 1:
-        if (dummySelectedCuisine.isEmpty) return false;
+        if (selectedNotifChoice.isEmpty) return false;
         return true;
       default:
-        if (selectedNotifChoice.isEmpty) return false;
+        if (selectedDate == null) return false;
         return true;
     }
   }
@@ -174,24 +172,25 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   Widget _buildPage(BuildContext context) {
     switch (_activePage) {
+      // TODO dimatikan untuk V1
+      // case 1:
+      //   return OnboardingPickCuisine(
+      //     cuisineData: _dummyCuisineData,
+      //     selectedIndexes: dummySelectedCuisine,
+      //     hintText: context.tr("onboard.onboard_pick_cuisine_hint"),
+      //     onHintPressed: () {},
+      //     onSelected: (index) {
+      //       setState(() {
+      //         if (dummySelectedCuisine.contains(index)) {
+      //           dummySelectedCuisine.remove(index);
+      //         } else {
+      //           if (dummySelectedCuisine.length == 5) return;
+      //           dummySelectedCuisine.add(index);
+      //         }
+      //       });
+      //     },
+      //   );
       case 1:
-        return OnboardingPickCuisine(
-          cuisineData: _dummyCuisineData,
-          selectedIndexes: dummySelectedCuisine,
-          hintText: context.tr("onboard.onboard_pick_cuisine_hint"),
-          onHintPressed: () {},
-          onSelected: (index) {
-            setState(() {
-              if (dummySelectedCuisine.contains(index)) {
-                dummySelectedCuisine.remove(index);
-              } else {
-                if (dummySelectedCuisine.length == 5) return;
-                dummySelectedCuisine.add(index);
-              }
-            });
-          },
-        );
-      case 2:
         return OnboardingPickNotification(
           listBtnItem: _listBtnItem,
           selectedIndexes: selectedNotifChoice,
@@ -235,7 +234,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
     return CustomElevatedButton(
       initialText: context.tr("onboard.onboard_confirm_btn"),
       secondText:
-          _activePage == 2 ? context.tr("onboard.onboard_save_btn") : null,
+          _activePage == 1 ? context.tr("onboard.onboard_save_btn") : null,
       margin: EdgeInsets.all(10.h),
       buttonStyle: CustomButtonStyles.none,
       decoration: !_fieldValidation(_activePage)

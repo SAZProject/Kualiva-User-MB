@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.40
-- Add Change theme in Profile
+Ver 0.0.40+01
+- Disable some function for V1 in sign in and onboarding screen
 ```
 
 ## Getting Started

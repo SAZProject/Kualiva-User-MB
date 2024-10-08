@@ -316,6 +316,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
           theme(context).colorScheme.primary,
         ],
         textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+        onPressed: onPressed,
       ),
     );
   }

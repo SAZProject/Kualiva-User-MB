@@ -158,9 +158,10 @@ Syarat dan Ketentuan :
               _gridMenu(context),
               SizedBox(height: 5.h),
               _featured(context),
-              SizedBox(height: 5.h),
-              _eventList(context),
-              SizedBox(height: 5.h),
+              //TODO hide it for V1 version
+              // SizedBox(height: 5.h),
+              // _eventList(context),
+              SizedBox(height: 50.h),
             ],
           ),
         ),

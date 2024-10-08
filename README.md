@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.42+03
-- Removed Unused Import
+Ver 0.0.43
+- Slicing home scree based on V1 screen
 ```
 
 ## Getting Started

@@ -4,6 +4,7 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/image_utility.dart';
 import 'package:like_it/common/widget/custom_attach_media.dart';
 import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
+import 'package:like_it/common/widget/custom_radio_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 
@@ -20,6 +21,8 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
   FNBModel get fnbData => super.widget.fnbModel;
 
   TextEditingController reasonCtl = TextEditingController();
+
+  String selectedReason = "";
 
   List<String> reportMedia = [];
 
@@ -135,16 +138,72 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 10.h),
-          CustomTextFormField(
-            controller: reasonCtl,
-            textInputAction: TextInputAction.done,
-            maxLines: 11,
-            contentPadding: EdgeInsets.all(12.h),
-            fillColor: theme(context)
-                .colorScheme
-                .onSecondaryContainer
-                .withOpacity(0.6),
-            inputBorder: TextFormFieldStyleHelper.fillOnSecondaryContainer,
+          CustomRadioButton(
+            text: context.tr("report.reason_place_1"),
+            value: context.tr("report.reason_place_1"),
+            groupValue: selectedReason,
+            padding: EdgeInsets.all(10.h),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            onChange: (value) {
+              setState(() {
+                selectedReason = value;
+              });
+            },
+          ),
+          SizedBox(height: 4.h),
+          CustomRadioButton(
+            text: context.tr("report.reason_place_2"),
+            value: context.tr("report.reason_place_2"),
+            groupValue: selectedReason,
+            padding: EdgeInsets.all(10.h),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            onChange: (value) {
+              setState(() {
+                selectedReason = value;
+              });
+            },
+          ),
+          SizedBox(height: 4.h),
+          CustomRadioButton(
+            text: context.tr("report.reason_place_3"),
+            value: context.tr("report.reason_place_3"),
+            groupValue: selectedReason,
+            padding: EdgeInsets.all(10.h),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            onChange: (value) {
+              setState(() {
+                selectedReason = value;
+              });
+            },
+          ),
+          SizedBox(height: 4.h),
+          CustomRadioButton(
+            text: context.tr("report.reason_place_4"),
+            value: context.tr("report.reason_place_4"),
+            groupValue: selectedReason,
+            padding: EdgeInsets.all(10.h),
+            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
+            onChange: (value) {
+              setState(() {
+                selectedReason = value;
+              });
+            },
+          ),
+          SizedBox(height: 4.h),
+          Visibility(
+            visible: selectedReason == context.tr("report.reason_place_4"),
+            child: CustomTextFormField(
+              controller: reasonCtl,
+              textInputAction: TextInputAction.done,
+              maxLines: 1,
+              contentPadding: EdgeInsets.all(12.h),
+              fillColor: theme(context).colorScheme.onSecondaryContainer,
+              boxDecoration:
+                  CustomDecoration(context).outlineOnPrimaryContainer.copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder10,
+                      ),
+              inputBorder: TextFormFieldStyleHelper.fillOnSecondaryContainer,
+            ),
           ),
         ],
       ),

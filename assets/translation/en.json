@@ -261,6 +261,10 @@
     "report": {
         "title": "Report",
         "reason": "Reason :",
+        "reason_place_1": "Outlet Closed/Moved",
+        "reason_place_2": "Photos do not match",
+        "reason_place_3": "Photos are disturbing",
+        "reason_place_4": "Other",
         "attach_media": "Attach photo :",
         "reason_review_1": "Off Topic",
         "reason_review_2": "Spam",

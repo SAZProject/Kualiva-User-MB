@@ -72,7 +72,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
   Set<int> selectedNotifChoice = {0};
 
   void _confirmBtnFunc(BuildContext context) {
-    if (_activePage == 2) {
+    if (_activePage == 1) {
       Navigator.of(context).pushNamed(AppRoutes.devicePermissionScreen);
     } else {
       _pageController.nextPage(

@@ -48,19 +48,19 @@ class _SaveToCollectionState extends State<SaveToCollection> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: _saveCollectionAppBar(context),
-        body: Container(
+        body: SizedBox(
           width: double.maxFinite,
           height: Sizeutils.height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: const Alignment(0.5, 0),
-              end: const Alignment(0.5, 1),
-              colors: [
-                appTheme.yellowA700,
-                theme(context).colorScheme.primary,
-              ],
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   gradient: LinearGradient(
+          //     begin: const Alignment(0.5, 0),
+          //     end: const Alignment(0.5, 1),
+          //     colors: [
+          //       appTheme.yellowA700,
+          //       theme(context).colorScheme.primary,
+          //     ],
+          //   ),
+          // ),
           child: _body(context),
         ),
       ),

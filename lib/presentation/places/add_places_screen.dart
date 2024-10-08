@@ -104,19 +104,19 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
         extendBody: true,
         extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: false,
-        body: Container(
+        body: SizedBox(
           width: double.maxFinite,
           height: Sizeutils.height,
-          decoration: BoxDecoration(
-            color: theme(context)
-                .colorScheme
-                .onSecondaryContainer
-                .withOpacity(0.6),
-            image: DecorationImage(
-              image: AssetImage(ImageConstant.background2),
-              fit: BoxFit.cover,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   color: theme(context)
+          //       .colorScheme
+          //       .onSecondaryContainer
+          //       .withOpacity(0.6),
+          //   image: DecorationImage(
+          //     image: AssetImage(ImageConstant.background2),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           child: _body(context),
         ),
       ),

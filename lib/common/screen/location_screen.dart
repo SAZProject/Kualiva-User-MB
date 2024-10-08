@@ -100,19 +100,19 @@ class _LocationScreenState extends State<LocationScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: _locationAppBar(context),
-        body: Container(
+        body: SizedBox(
           width: double.maxFinite,
           height: Sizeutils.height,
-          decoration: BoxDecoration(
-            color: theme(context)
-                .colorScheme
-                .onSecondaryContainer
-                .withOpacity(0.6),
-            image: DecorationImage(
-              image: AssetImage(ImageConstant.background2),
-              fit: BoxFit.cover,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   color: theme(context)
+          //       .colorScheme
+          //       .onSecondaryContainer
+          //       .withOpacity(0.6),
+          //   image: DecorationImage(
+          //     image: AssetImage(ImageConstant.background2),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           child: _body(context),
         ),
       ),

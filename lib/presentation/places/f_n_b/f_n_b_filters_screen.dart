@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_outlined_button.dart';
+import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_slider.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class FNBFiltersScreen extends StatefulWidget {
   const FNBFiltersScreen({super.key});
@@ -95,19 +94,19 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
         extendBody: true,
         extendBodyBehindAppBar: true,
         appBar: _fnbFiltersAppBar(context),
-        body: Container(
+        body: SizedBox(
           width: double.maxFinite,
           height: Sizeutils.height,
-          decoration: BoxDecoration(
-            color: theme(context)
-                .colorScheme
-                .onSecondaryContainer
-                .withOpacity(0.6),
-            image: DecorationImage(
-              image: AssetImage(ImageConstant.background2),
-              fit: BoxFit.cover,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   color: theme(context)
+          //       .colorScheme
+          //       .onSecondaryContainer
+          //       .withOpacity(0.6),
+          //   image: DecorationImage(
+          //     image: AssetImage(ImageConstant.background2),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           child: _body(context),
         ),
       ),
@@ -305,38 +304,19 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
 
   Widget _buildSubmitButton(
       BuildContext context, String label, Function()? onPressed) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: SizedBox(
-        height: 60.h,
-        width: double.maxFinite,
-        child: OutlineGradientButton(
-          padding: EdgeInsets.all(2.h),
-          strokeWidth: 2.h,
-          gradient: LinearGradient(
-            begin: const Alignment(0.5, 0),
-            end: const Alignment(0.5, 1),
-            colors: [
-              appTheme.yellowA700,
-              theme(context).colorScheme.primary,
-            ],
-          ),
-          corners: const Corners(
-            topLeft: Radius.circular(25.0),
-            topRight: Radius.circular(25.0),
-            bottomLeft: Radius.circular(25.0),
-            bottomRight: Radius.circular(25.0),
-          ),
-          child: CustomOutlinedButton(
-            text: context.tr(label),
-            buttonStyle: CustomButtonStyles.outlineTL25(context).copyWith(
-              backgroundColor: WidgetStatePropertyAll(
-                  theme(context).colorScheme.onSecondaryContainer),
-            ),
-            buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
-            onPressed: onPressed,
-          ),
-        ),
+    return SizedBox(
+      height: 60.h,
+      width: double.maxFinite,
+      child: CustomGradientOutlinedButton(
+        text: context.tr(label),
+        outerPadding: EdgeInsets.symmetric(horizontal: 30.h),
+        innerPadding: EdgeInsets.all(2.h),
+        strokeWidth: 2.h,
+        colors: [
+          appTheme.yellowA700,
+          theme(context).colorScheme.primary,
+        ],
+        textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
       ),
     );
   }

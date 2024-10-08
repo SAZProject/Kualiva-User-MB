@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_outlined_button.dart';
+import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
@@ -49,14 +47,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 headerLabel: context.tr("my_profile.nickname"),
                 controller: nicknameCtl,
                 hintText: context.tr("my_profile.nickname_hint"),
-                suffix: context.tr("my_profile.nickname_edit"),
+                suffix: context.tr("my_profile.edit"),
               ),
               SizedBox(height: 5.h),
               _buildTextField(
                 context,
                 headerLabel: context.tr("my_profile.email"),
                 controller: emailCtl,
-                suffix: context.tr("my_profile.email_verify"),
+                suffix: context.tr("my_profile.verify"),
               ),
               SizedBox(height: 5.h),
               _buildTextField(
@@ -180,33 +178,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   Widget _saveBtn(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.h),
-      child: OutlineGradientButton(
-        padding: EdgeInsets.zero,
-        strokeWidth: 1.h,
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(0.5, 1),
-          colors: [
-            appTheme.yellowA700,
-            theme(context).colorScheme.primary,
-          ],
-        ),
-        corners: const Corners(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(10.0),
-          bottomLeft: Radius.circular(10.0),
-          bottomRight: Radius.circular(10.0),
-        ),
-        child: CustomOutlinedButton(
-          text: context.tr("my_profile.save_btn"),
-          buttonStyle: CustomButtonStyles.outlineTranparent,
-          buttonTextStyle:
-              CustomTextStyles(context).titleMediumOnPrimaryContainer,
-          onPressed: () {},
-        ),
-      ),
+    return CustomGradientOutlinedButton(
+      text: context.tr("my_profile.save_btn"),
+      outerPadding: EdgeInsets.symmetric(horizontal: 20.h),
+      innerPadding: EdgeInsets.all(2.h),
+      strokeWidth: 2.h,
+      colors: [
+        appTheme.yellowA700,
+        theme(context).colorScheme.primary,
+      ],
+      textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+      onPressed: () {},
     );
   }
 }

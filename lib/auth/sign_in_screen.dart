@@ -8,6 +8,7 @@ import 'package:like_it/common/style/theme_helper.dart';
 import 'package:like_it/common/utility/image_constant.dart';
 import 'package:like_it/common/utility/sized_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
+import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_image_view.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
@@ -241,29 +242,17 @@ class SignInScreenState extends State<SignInScreen> {
   }
 
   Widget _signUpButton(BuildContext context) {
-    return OutlineGradientButton(
-      padding: EdgeInsets.zero,
-      strokeWidth: 1.h,
-      gradient: LinearGradient(
-        begin: const Alignment(0.5, 0),
-        end: const Alignment(0.5, 1),
-        colors: [
-          appTheme.yellowA700,
-          theme(context).colorScheme.primary,
-        ],
-      ),
-      corners: const Corners(
-        topLeft: Radius.circular(10.0),
-        topRight: Radius.circular(10.0),
-        bottomLeft: Radius.circular(10.0),
-        bottomRight: Radius.circular(10.0),
-      ),
-      child: CustomOutlinedButton(
-        text: context.tr("sign_up.sign_up_btn"),
-        buttonStyle: CustomButtonStyles.outlineTranparent,
-        buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
-        onPressed: () => _onPressedSignUp(context),
-      ),
+    return CustomGradientOutlinedButton(
+      text: context.tr("sign_up.sign_up_btn"),
+      outerPadding: EdgeInsets.zero,
+      innerPadding: EdgeInsets.all(2.h),
+      strokeWidth: 2.h,
+      colors: [
+        appTheme.yellowA700,
+        theme(context).colorScheme.primary,
+      ],
+      textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+      onPressed: () => _onPressedSignUp(context),
     );
   }
 }

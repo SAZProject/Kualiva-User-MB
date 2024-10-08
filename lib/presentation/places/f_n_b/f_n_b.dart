@@ -77,21 +77,21 @@ class _FNBScreenState extends State<FNBScreen> {
     return SafeArea(
       child: Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                color: theme(context).scaffoldBackgroundColor,
-                image: DecorationImage(
-                  image: AssetImage(ImageConstant.background2),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.topCenter,
+          //   child: Container(
+          //     width: double.maxFinite,
+          //     decoration: BoxDecoration(
+          //       color: theme(context).scaffoldBackgroundColor,
+          //       image: DecorationImage(
+          //         image: AssetImage(ImageConstant.background2),
+          //         fit: BoxFit.cover,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Scaffold(
-            backgroundColor: Colors.transparent,
+            // backgroundColor: Colors.transparent,
             body: _body(context),
           ),
         ],

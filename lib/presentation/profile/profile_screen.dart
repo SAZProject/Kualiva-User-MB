@@ -294,128 +294,132 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildProfileMenuList() {
     final brightness = theme(context).brightness;
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 10.h),
-      decoration:
-          CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder10,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.h),
+      child: SizedBox(
+        width: double.maxFinite,
+        child: Card(
+          color: theme(context).colorScheme.onSecondaryContainer,
+          elevation: 10.0,
+          child: Column(
+            children: [
+              _buildProfileMenuListItem(
+                context,
+                2,
+                _profileMenuModel[2].label,
+                _profileMenuModel[2].icon,
+                _profileMenuModel[2].imageUri,
+                _profileMenuModel[2].isRightIcon,
+                _profileMenuModel[2].isCommingSoon,
               ),
-      child: Column(
-        children: [
-          _buildProfileMenuListItem(
-            context,
-            2,
-            _profileMenuModel[2].label,
-            _profileMenuModel[2].icon,
-            _profileMenuModel[2].imageUri,
-            _profileMenuModel[2].isRightIcon,
-            _profileMenuModel[2].isCommingSoon,
+              _buildProfileMenuListItem(
+                context,
+                3,
+                _profileMenuModel[3].label,
+                _profileMenuModel[3].icon,
+                _profileMenuModel[3].imageUri,
+                _profileMenuModel[3].isRightIcon,
+                _profileMenuModel[3].isCommingSoon,
+              ),
+              _buildProfileMenuListItem(
+                context,
+                4,
+                _profileMenuModel[4].label,
+                _profileMenuModel[4].icon,
+                _profileMenuModel[4].imageUri,
+                _profileMenuModel[4].isRightIcon,
+                _profileMenuModel[4].isCommingSoon,
+              ),
+              _buildProfileMenuListItem(
+                context,
+                5,
+                _profileMenuModel[5].label,
+                _profileMenuModel[5].icon,
+                _profileMenuModel[5].imageUri,
+                _profileMenuModel[5].isRightIcon,
+                _profileMenuModel[5].isCommingSoon,
+              ), //as
+              _buildProfileMenuListItem(
+                context,
+                6,
+                _profileMenuModel[6].label,
+                _profileMenuModel[6].icon,
+                _profileMenuModel[6].imageUri,
+                _profileMenuModel[6].isRightIcon,
+                _profileMenuModel[6].isCommingSoon,
+                buildRight: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) {
+                    return RotationTransition(
+                      turns: child.key == const ValueKey("dark")
+                          ? Tween<double>(begin: 1, end: 0.75)
+                              .animate(animation)
+                          : Tween<double>(begin: 0.75, end: 1)
+                              .animate(animation),
+                      child: FadeTransition(opacity: animation, child: child),
+                    );
+                  },
+                  child: brightness == Brightness.dark
+                      ? Icon(
+                          Icons.dark_mode,
+                          key: const ValueKey("dark"),
+                          size: 20.h,
+                        )
+                      : Icon(
+                          Icons.light_mode,
+                          key: const ValueKey("light"),
+                          size: 20.h,
+                        ),
+                ),
+              ),
+              _buildProfileMenuListItem(
+                context,
+                7,
+                _profileMenuModel[7].label,
+                _profileMenuModel[7].icon,
+                _profileMenuModel[7].imageUri,
+                _profileMenuModel[7].isRightIcon,
+                _profileMenuModel[7].isCommingSoon,
+              ),
+              _buildProfileMenuListItem(
+                context,
+                8,
+                _profileMenuModel[8].label,
+                _profileMenuModel[8].icon,
+                _profileMenuModel[8].imageUri,
+                _profileMenuModel[8].isRightIcon,
+                _profileMenuModel[8].isCommingSoon,
+              ),
+              _buildProfileMenuListItem(
+                context,
+                9,
+                _profileMenuModel[9].label,
+                _profileMenuModel[9].icon,
+                _profileMenuModel[9].imageUri,
+                _profileMenuModel[9].isRightIcon,
+                _profileMenuModel[9].isCommingSoon,
+              ),
+              _buildProfileMenuListItem(
+                context,
+                10,
+                _profileMenuModel[10].label,
+                _profileMenuModel[10].icon,
+                _profileMenuModel[10].imageUri,
+                _profileMenuModel[10].isRightIcon,
+                _profileMenuModel[10].isCommingSoon,
+              ),
+              _buildProfileMenuListItem(
+                context,
+                11,
+                _profileMenuModel[11].label,
+                _profileMenuModel[11].icon,
+                _profileMenuModel[11].imageUri,
+                _profileMenuModel[11].isRightIcon,
+                _profileMenuModel[11].isCommingSoon,
+              ),
+            ],
           ),
-          _buildProfileMenuListItem(
-            context,
-            3,
-            _profileMenuModel[3].label,
-            _profileMenuModel[3].icon,
-            _profileMenuModel[3].imageUri,
-            _profileMenuModel[3].isRightIcon,
-            _profileMenuModel[3].isCommingSoon,
-          ),
-          _buildProfileMenuListItem(
-            context,
-            4,
-            _profileMenuModel[4].label,
-            _profileMenuModel[4].icon,
-            _profileMenuModel[4].imageUri,
-            _profileMenuModel[4].isRightIcon,
-            _profileMenuModel[4].isCommingSoon,
-          ),
-          _buildProfileMenuListItem(
-            context,
-            5,
-            _profileMenuModel[5].label,
-            _profileMenuModel[5].icon,
-            _profileMenuModel[5].imageUri,
-            _profileMenuModel[5].isRightIcon,
-            _profileMenuModel[5].isCommingSoon,
-          ), //as
-          _buildProfileMenuListItem(
-            context,
-            6,
-            _profileMenuModel[6].label,
-            _profileMenuModel[6].icon,
-            _profileMenuModel[6].imageUri,
-            _profileMenuModel[6].isRightIcon,
-            _profileMenuModel[6].isCommingSoon,
-            buildRight: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, animation) {
-                return RotationTransition(
-                  turns: child.key == const ValueKey("dark")
-                      ? Tween<double>(begin: 1, end: 0.75).animate(animation)
-                      : Tween<double>(begin: 0.75, end: 1).animate(animation),
-                  child: FadeTransition(opacity: animation, child: child),
-                );
-              },
-              child: brightness == Brightness.dark
-                  ? Icon(
-                      Icons.dark_mode,
-                      key: const ValueKey("dark"),
-                      size: 20.h,
-                    )
-                  : Icon(
-                      Icons.light_mode,
-                      key: const ValueKey("light"),
-                      size: 20.h,
-                    ),
-            ),
-          ),
-          _buildProfileMenuListItem(
-            context,
-            7,
-            _profileMenuModel[7].label,
-            _profileMenuModel[7].icon,
-            _profileMenuModel[7].imageUri,
-            _profileMenuModel[7].isRightIcon,
-            _profileMenuModel[7].isCommingSoon,
-          ),
-          _buildProfileMenuListItem(
-            context,
-            8,
-            _profileMenuModel[8].label,
-            _profileMenuModel[8].icon,
-            _profileMenuModel[8].imageUri,
-            _profileMenuModel[8].isRightIcon,
-            _profileMenuModel[8].isCommingSoon,
-          ),
-          _buildProfileMenuListItem(
-            context,
-            9,
-            _profileMenuModel[9].label,
-            _profileMenuModel[9].icon,
-            _profileMenuModel[9].imageUri,
-            _profileMenuModel[9].isRightIcon,
-            _profileMenuModel[9].isCommingSoon,
-          ),
-          _buildProfileMenuListItem(
-            context,
-            10,
-            _profileMenuModel[10].label,
-            _profileMenuModel[10].icon,
-            _profileMenuModel[10].imageUri,
-            _profileMenuModel[10].isRightIcon,
-            _profileMenuModel[10].isCommingSoon,
-          ),
-          _buildProfileMenuListItem(
-            context,
-            11,
-            _profileMenuModel[11].label,
-            _profileMenuModel[11].icon,
-            _profileMenuModel[11].imageUri,
-            _profileMenuModel[11].isRightIcon,
-            _profileMenuModel[11].isCommingSoon,
-          ),
-        ],
+        ),
       ),
     );
   }

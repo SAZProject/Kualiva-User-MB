@@ -5,11 +5,10 @@ import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/utility/image_utility.dart';
 import 'package:like_it/common/widget/custom_attach_media.dart';
 import 'package:like_it/common/widget/custom_checkbox_button.dart';
-import 'package:like_it/common/widget/custom_outlined_button.dart';
+import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_rating_bar.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class ReviewFormScreen extends StatefulWidget {
   const ReviewFormScreen({super.key, required this.fnbModel});
@@ -42,19 +41,19 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: _reviewFormAppBar(context),
-        body: Container(
+        body: SizedBox(
           width: double.maxFinite,
           height: Sizeutils.height,
-          decoration: BoxDecoration(
-            color: theme(context)
-                .colorScheme
-                .onSecondaryContainer
-                .withOpacity(0.6),
-            image: DecorationImage(
-              image: AssetImage(ImageConstant.background2),
-              fit: BoxFit.cover,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   color: theme(context)
+          //       .colorScheme
+          //       .onSecondaryContainer
+          //       .withOpacity(0.6),
+          //   image: DecorationImage(
+          //     image: AssetImage(ImageConstant.background2),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           child: _body(context),
         ),
       ),
@@ -200,32 +199,16 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
       child: SizedBox(
         height: 60.h,
         width: double.maxFinite,
-        child: OutlineGradientButton(
-          padding: EdgeInsets.all(2.h),
+        child: CustomGradientOutlinedButton(
+          text: context.tr("review.submit_btn"),
+          outerPadding: EdgeInsets.symmetric(horizontal: 30.h),
+          innerPadding: EdgeInsets.all(2.h),
           strokeWidth: 2.h,
-          gradient: LinearGradient(
-            begin: const Alignment(0.5, 0),
-            end: const Alignment(0.5, 1),
-            colors: [
-              appTheme.yellowA700,
-              theme(context).colorScheme.primary,
-            ],
-          ),
-          corners: const Corners(
-            topLeft: Radius.circular(25.0),
-            topRight: Radius.circular(25.0),
-            bottomLeft: Radius.circular(25.0),
-            bottomRight: Radius.circular(25.0),
-          ),
-          child: CustomOutlinedButton(
-            text: context.tr("review.submit_btn"),
-            buttonStyle: CustomButtonStyles.outlineTL25(context).copyWith(
-              backgroundColor: WidgetStatePropertyAll(
-                  theme(context).colorScheme.onSecondaryContainer),
-            ),
-            buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
-            onPressed: () {},
-          ),
+          colors: [
+            appTheme.yellowA700,
+            theme(context).colorScheme.primary,
+          ],
+          textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
         ),
       ),
     );

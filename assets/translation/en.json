@@ -296,10 +296,10 @@
     "my_profile": {
         "title": "My Profile",
         "nickname": "Nickname",
-        "nickname_edit": "Edit",
         "nickname_hint": "You can only change your nickname once every 7 days",
         "email": "Email",
-        "email_verify": "Verify",
+        "edit": "Edit",
+        "verify": "Verify",
         "gender": "Gender",
         "date_of_birth": "Date of Birth",
 

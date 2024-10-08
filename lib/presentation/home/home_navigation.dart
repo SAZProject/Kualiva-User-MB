@@ -21,21 +21,21 @@ class _HomeNavigationState extends State<HomeNavigation> {
     return SafeArea(
       child: Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                color: theme(context).scaffoldBackgroundColor,
-                image: DecorationImage(
-                  image: AssetImage(ImageConstant.background1),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.topCenter,
+          //   child: Container(
+          //     width: double.maxFinite,
+          //     decoration: BoxDecoration(
+          //       color: theme(context).scaffoldBackgroundColor,
+          //       image: DecorationImage(
+          //         image: AssetImage(ImageConstant.background1),
+          //         fit: BoxFit.cover,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Scaffold(
-            backgroundColor: Colors.transparent,
+            // backgroundColor: Colors.transparent,
             body: _body(context),
             bottomNavigationBar: _bottomNavBar(),
           ),

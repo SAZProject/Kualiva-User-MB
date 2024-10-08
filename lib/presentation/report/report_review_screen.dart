@@ -2,11 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_outlined_button.dart';
+import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_radio_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
 import 'package:like_it/data/model/review_model.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class ReportReviewScreen extends StatefulWidget {
   const ReportReviewScreen({super.key, required this.reviewData});
@@ -35,19 +34,19 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: _reportPlaceAppBar(context),
-        body: Container(
+        body: SizedBox(
           width: double.maxFinite,
           height: Sizeutils.height,
-          decoration: BoxDecoration(
-            color: theme(context)
-                .colorScheme
-                .onSecondaryContainer
-                .withOpacity(0.6),
-            image: DecorationImage(
-              image: AssetImage(ImageConstant.background2),
-              fit: BoxFit.cover,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   color: theme(context)
+          //       .colorScheme
+          //       .onSecondaryContainer
+          //       .withOpacity(0.6),
+          //   image: DecorationImage(
+          //     image: AssetImage(ImageConstant.background2),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           child: _body(context),
         ),
       ),
@@ -229,38 +228,19 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
   }
 
   Widget _buildSubmitButton(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: SizedBox(
-        height: 60.h,
-        width: double.maxFinite,
-        child: OutlineGradientButton(
-          padding: EdgeInsets.all(2.h),
-          strokeWidth: 2.h,
-          gradient: LinearGradient(
-            begin: const Alignment(0.5, 0),
-            end: const Alignment(0.5, 1),
-            colors: [
-              appTheme.yellowA700,
-              theme(context).colorScheme.primary,
-            ],
-          ),
-          corners: const Corners(
-            topLeft: Radius.circular(25.0),
-            topRight: Radius.circular(25.0),
-            bottomLeft: Radius.circular(25.0),
-            bottomRight: Radius.circular(25.0),
-          ),
-          child: CustomOutlinedButton(
-            text: context.tr("report.submit_btn"),
-            buttonStyle: CustomButtonStyles.outlineTL25(context).copyWith(
-              backgroundColor: WidgetStatePropertyAll(
-                  theme(context).colorScheme.onSecondaryContainer),
-            ),
-            buttonTextStyle: CustomTextStyles(context).titleMediumYellowA700,
-            onPressed: () {},
-          ),
-        ),
+    return SizedBox(
+      height: 60.h,
+      width: double.maxFinite,
+      child: CustomGradientOutlinedButton(
+        text: context.tr("report.submit_btn"),
+        outerPadding: EdgeInsets.symmetric(horizontal: 30.h),
+        innerPadding: EdgeInsets.all(2.h),
+        strokeWidth: 2.h,
+        colors: [
+          appTheme.yellowA700,
+          theme(context).colorScheme.primary,
+        ],
+        textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
       ),
     );
   }

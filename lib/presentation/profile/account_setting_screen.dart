@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -7,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/common/widget/custom_outlined_button.dart';
+import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_phone_number.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class AccountSettingScreen extends StatefulWidget {
   const AccountSettingScreen({super.key});
@@ -368,36 +365,19 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   Widget _logOutBtn(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.h),
-      child: OutlineGradientButton(
-        padding: EdgeInsets.zero,
+      child: CustomGradientOutlinedButton(
+        text: context.tr("account_setting.log_out_btn"),
+        outerPadding: EdgeInsets.symmetric(horizontal: 20.h),
         strokeWidth: 1.h,
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(0.5, 1),
-          colors: [
-            appTheme.redA700,
-            theme(context).colorScheme.primaryContainer,
-          ],
-        ),
-        corners: const Corners(
-          topLeft: Radius.circular(10.0),
-          topRight: Radius.circular(10.0),
-          bottomLeft: Radius.circular(10.0),
-          bottomRight: Radius.circular(10.0),
-        ),
-        child: CustomOutlinedButton(
-          leftIcon: Icon(
-            Icons.logout_outlined,
-            color: theme(context).colorScheme.primaryContainer,
-          ),
-          text: context.tr("account_setting.log_out_btn"),
-          buttonStyle: CustomButtonStyles.outlineTranparent,
-          buttonTextStyle:
-              CustomTextStyles(context).titleMediumOnPrimaryContainer.copyWith(
-                    color: theme(context).colorScheme.primaryContainer,
-                  ),
-          onPressed: _logoutDialog,
-        ),
+        colors: [
+          appTheme.redA700,
+          theme(context).colorScheme.primaryContainer,
+        ],
+        textStyle:
+            CustomTextStyles(context).titleMediumOnPrimaryContainer.copyWith(
+                  color: theme(context).colorScheme.primaryContainer,
+                ),
+        onPressed: _logoutDialog,
       ),
     );
   }

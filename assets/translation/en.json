@@ -305,6 +305,17 @@
 
         "save_btn": "Save"
     },
+    "account_setting": {
+        "title": "Account Setting",
+        "account_creation_date": "Account Creation Date",
+        "phone_number": "Phone Number",
+        "password": "Password",
+        "pin": "Pin",
+        "edit":"Edit",
+
+        "logout_confirmation": "Are you sure want to log out?",
+        "log_out_btn": "Log Out"
+    },
     "add_place": {
         "title": "Add Place",
         "personal": "Personal Data",

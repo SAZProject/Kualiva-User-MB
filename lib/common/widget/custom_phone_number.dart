@@ -15,6 +15,8 @@ class CustomPhoneNumber extends StatelessWidget {
     this.textInputType,
     required this.onPressed,
     this.controller,
+    this.readOnly = false,
+    this.suffix,
   });
 
   final Country country;
@@ -23,6 +25,8 @@ class CustomPhoneNumber extends StatelessWidget {
   final TextInputType? textInputType;
   final Function(Country) onPressed;
   final TextEditingController? controller;
+  final bool readOnly;
+  final Widget? suffix;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +52,7 @@ class CustomPhoneNumber extends StatelessWidget {
               focusNode: focusNode,
               autofocus: false,
               controller: controller,
+              readOnly: readOnly,
               style: CustomTextStyles(context)
                   .bodyLargeOnPrimaryContainer_03
                   .copyWith(
@@ -77,6 +82,7 @@ class CustomPhoneNumber extends StatelessWidget {
                     .withOpacity(0.6),
                 isDense: false,
                 contentPadding: EdgeInsets.all(5.h),
+                suffixIcon: suffix,
               ),
             ),
           ),

@@ -5,7 +5,7 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.41
+Ver 0.0.42
 - 86eqeq7z1 [MB-USER] Slicing My Profile Page
 ```
 

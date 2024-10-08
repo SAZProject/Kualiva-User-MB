@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.40+02
-- Can guest login, change the app flow for V1
-- Add permission checking in splash screen
+Ver 0.0.41
+- 86eqeq7z1 [MB-USER] Slicing My Profile Page
 ```
 
 ## Getting Started

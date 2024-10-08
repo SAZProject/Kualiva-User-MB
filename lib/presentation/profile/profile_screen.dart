@@ -79,6 +79,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _profileMenuNavigate(BuildContext context, int index) {
     switch (index) {
+      case 1:
+        break;
       case 2:
         break;
       case 3:
@@ -107,6 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 11:
         break;
       default:
+        Navigator.pushNamed(context, AppRoutes.myProfileScreen);
         break;
     }
   }
@@ -257,7 +260,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
               buttonStyle: CustomButtonStyles.none,
               buttonTextStyle: theme(context).textTheme.bodyMedium,
-              onPressed: () {},
+              onPressed: () => _profileMenuNavigate(context, 0),
             ),
           ),
           SizedBox(width: 10.h),
@@ -279,7 +282,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
               buttonStyle: CustomButtonStyles.none,
               buttonTextStyle: theme(context).textTheme.bodyMedium,
-              onPressed: () {},
+              onPressed: () => _profileMenuNavigate(context, 1),
             ),
           ),
           SizedBox(width: 10.h),

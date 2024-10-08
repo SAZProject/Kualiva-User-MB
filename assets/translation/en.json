@@ -293,6 +293,18 @@
         "customer_support": "Customer Support",
         "about_us": "About Us"
     },
+    "my_profile": {
+        "title": "My Profile",
+        "nickname": "Nickname",
+        "nickname_edit": "Edit",
+        "nickname_hint": "You can only change your nickname once every 7 days",
+        "email": "Email",
+        "email_verify": "Verify",
+        "gender": "Gender",
+        "date_of_birth": "Date of Birth",
+
+        "save_btn": "Save"
+    },
     "add_place": {
         "title": "Add Place",
         "personal": "Personal Data",

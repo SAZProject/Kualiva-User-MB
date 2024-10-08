@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.42+02
-- Major Ui cahnges
-- Major Styling Changes
+Ver 0.0.42+03
+- Removed Unused Import
 ```
 
 ## Getting Started

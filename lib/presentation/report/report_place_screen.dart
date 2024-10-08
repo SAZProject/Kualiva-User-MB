@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/utility/image_utility.dart';
 import 'package:like_it/common/widget/custom_attach_media.dart';
 import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';

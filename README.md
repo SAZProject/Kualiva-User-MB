@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.47
-- Revised FnB Detail screen & FnB Menu Screen
+Ver 0.0.48
+- Revised Review Screen
+- Add review filter & verify modal bottom sheet
 ```
 
 ## Getting Started

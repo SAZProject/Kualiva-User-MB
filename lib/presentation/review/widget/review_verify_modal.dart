@@ -1,0 +1,153 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/style/custom_btn_style.dart';
+import 'package:like_it/common/utility/image_utility.dart';
+import 'package:like_it/common/widget/custom_attach_media.dart';
+import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
+import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:like_it/data/model/f_n_b_model.dart';
+
+class ReviewVerifyModal extends StatefulWidget {
+  const ReviewVerifyModal({super.key, required this.fnbData});
+
+  final FNBModel fnbData;
+
+  @override
+  State<ReviewVerifyModal> createState() => _ReviewVerifyModalState();
+}
+
+class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
+  final TextEditingController _transactionCtl = TextEditingController();
+
+  List<String> invoiceMedia = [];
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: _reviewVerifyAppBar(context),
+        body: SizedBox(
+          width: double.maxFinite,
+          height: Sizeutils.height,
+          child: _body(context),
+        ),
+      ),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return SafeArea(
+      child: SizedBox(
+        width: double.maxFinite,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 10.h),
+              CustomAttachMedia(
+                headerLabel: "review.attach_invoice",
+                listImages: invoiceMedia,
+                onPressedGallery: () {
+                  ImageUtility()
+                      .getMediaFromGallery(context, invoiceMedia)
+                      .then((value) => setState(() => invoiceMedia = value));
+                  Navigator.pop(context);
+                },
+                onPressedCamera: () {
+                  ImageUtility()
+                      .getMediaFromCamera(context, invoiceMedia)
+                      .then((value) => setState(() => invoiceMedia = value));
+                  Navigator.pop(context);
+                },
+                onCancelPressed: () => Navigator.pop(context),
+                onRemovePressed: (index) {
+                  setState(() {
+                    invoiceMedia.remove(invoiceMedia[index]);
+                  });
+                },
+              ),
+              SizedBox(height: 10.h),
+              _buildReason(context, _transactionCtl),
+              SizedBox(height: 10.h),
+              _buildWriteReviewBtn(context),
+              SizedBox(height: 10.h),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _reviewVerifyAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      toolbarHeight: 55.h,
+      leadingWidth: 50.h,
+      titleSpacing: 0.0,
+      automaticallyImplyLeading: false,
+      centerTitle: true,
+      title: Padding(
+        padding: EdgeInsets.only(left: 10.h),
+        child: Text(
+          context.tr("review.write_title_n_btn"),
+          style: theme(context).textTheme.headlineSmall,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildReason(BuildContext context, TextEditingController controller) {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.tr("review.input_transaction_number"),
+            textAlign: TextAlign.center,
+            style: theme(context).textTheme.titleMedium,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(height: 10.h),
+          CustomTextFormField(
+            controller: controller,
+            textInputAction: TextInputAction.done,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 8.h,
+              vertical: 14.h,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWriteReviewBtn(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 20.h),
+        child: CustomGradientOutlinedButton(
+          text: context.tr("review.confirm_btn"),
+          outerPadding: EdgeInsets.zero,
+          innerPadding: EdgeInsets.all(2.h),
+          strokeWidth: 2.h,
+          colors: [
+            appTheme.yellowA700,
+            theme(context).colorScheme.primary,
+          ],
+          buttonStyle:
+              CustomButtonStyles.fillOnSecondaryContainerNoBdr(context),
+          textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.reviewFormScreen,
+                arguments: widget.fnbData);
+          },
+        ),
+      ),
+    );
+  }
+}

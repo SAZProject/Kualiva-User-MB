@@ -28,6 +28,17 @@ class CustomButtonStyles {
     );
   }
 
+  static ButtonStyle fillOnSecondaryContainerNoBdr(BuildContext context) {
+    return ElevatedButton.styleFrom(
+      backgroundColor: theme(context).colorScheme.onSecondaryContainer,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.h),
+      ),
+      side: BorderSide.none,
+      elevation: 0.0,
+    );
+  }
+
   static ButtonStyle fillprimary(BuildContext context) {
     return ElevatedButton.styleFrom(
       backgroundColor: theme(context).colorScheme.primary.withOpacity(0.3),

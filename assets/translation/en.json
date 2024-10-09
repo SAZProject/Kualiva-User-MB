@@ -236,6 +236,7 @@
         "menu": "Menu",
         "menu_title": "Menu Title",
         "menu_description": "Menu Description",
+        "menu_price": "Price : RP{price}.00",
         "promo" : "Promo",
         "promo_title": "Title",
         "promo_publisher": "Publisher",

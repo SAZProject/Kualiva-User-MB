@@ -470,7 +470,7 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: isTitle ? 60.h : 120.h,
+            width: isTitle ? 80.h : 120.h,
             child: Text(
               "${DatetimeUtils.getDays(index)},",
               style: CustomTextStyles(context).bodySmall12,
@@ -565,40 +565,44 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
   }
 
   Widget _fnbPromo(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 5.h),
-      decoration:
-          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder10,
-              ),
-      child: Column(
-        children: [
-          CustomSectionHeader(
-            label: context.tr("f_n_b_detail.promo"),
-            onPressed: () {},
-            useIcon: false,
-          ),
-          Container(
-            height: 150.h,
-            margin: EdgeInsets.symmetric(horizontal: 5.h),
-            width: double.maxFinite,
-            child: listPromo.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    itemCount: listPromo.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      if (listPromo.isNotEmpty) {
-                        return _eventListItems(
-                            context, index, listPromo[index]);
-                      }
-                      return const CustomEmptyState();
-                    },
-                  ),
-          ),
-        ],
+    return Visibility(
+      visible: fnbData.isPromoExist,
+      replacement: const SizedBox(),
+      child: Container(
+        width: double.maxFinite,
+        margin: EdgeInsets.symmetric(horizontal: 5.h),
+        decoration:
+            CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+                  borderRadius: BorderRadiusStyle.roundedBorder10,
+                ),
+        child: Column(
+          children: [
+            CustomSectionHeader(
+              label: context.tr("f_n_b_detail.promo"),
+              onPressed: () {},
+              useIcon: false,
+            ),
+            Container(
+              height: 150.h,
+              margin: EdgeInsets.symmetric(horizontal: 5.h),
+              width: double.maxFinite,
+              child: listPromo.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: listPromo.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        if (listPromo.isNotEmpty) {
+                          return _eventListItems(
+                              context, index, listPromo[index]);
+                        }
+                        return const CustomEmptyState();
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -661,50 +665,54 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
   }
 
   Widget _fnbPlaceMenu(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 5.h),
-      decoration:
-          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder10,
-              ),
-      child: Column(
-        children: [
-          CustomSectionHeader(
-            label: context.tr("f_n_b_detail.menu"),
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
-                  arguments: fnbData.priceListMenuPicture);
-            },
-          ),
-          Container(
-            height: 150.h,
-            margin: EdgeInsets.symmetric(horizontal: 5.h),
-            width: double.maxFinite,
-            child: fnbData.priceListMenuPicture.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    itemCount: fnbData.priceListMenuPicture.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      if (fnbData.priceListMenuPicture.isNotEmpty) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 5.h, vertical: 8.h),
-                          child: CustomImageView(
-                            imagePath: fnbData.priceListMenuPicture[index],
-                            height: 130.h,
-                            width: 200.h,
-                            radius: BorderRadius.circular(10.h),
-                          ),
-                        );
-                      }
-                      return const CustomEmptyState();
-                    },
-                  ),
-          ),
-        ],
+    return Visibility(
+      visible: fnbData.isMenuExist,
+      replacement: const SizedBox(),
+      child: Container(
+        width: double.maxFinite,
+        margin: EdgeInsets.symmetric(horizontal: 5.h),
+        decoration:
+            CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+                  borderRadius: BorderRadiusStyle.roundedBorder10,
+                ),
+        child: Column(
+          children: [
+            CustomSectionHeader(
+              label: context.tr("f_n_b_detail.menu"),
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
+                    arguments: fnbData.priceListMenuPicture);
+              },
+            ),
+            Container(
+              height: 150.h,
+              margin: EdgeInsets.symmetric(horizontal: 5.h),
+              width: double.maxFinite,
+              child: fnbData.priceListMenuPicture.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: fnbData.priceListMenuPicture.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        if (fnbData.priceListMenuPicture.isNotEmpty) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5.h, vertical: 8.h),
+                            child: CustomImageView(
+                              imagePath: fnbData.priceListMenuPicture[index],
+                              height: 130.h,
+                              width: 200.h,
+                              radius: BorderRadius.circular(10.h),
+                            ),
+                          );
+                        }
+                        return const CustomEmptyState();
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -726,60 +734,67 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                   arguments: fnbData);
             },
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.h),
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
-            width: double.maxFinite,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.tr("f_n_b_detail.total_review", namedArgs: {
-                    "total": fnbData.totalReview.toString(),
-                  }),
-                  style: CustomTextStyles(context).bodySmall12,
-                  textAlign: TextAlign.center,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 100.h,
-                      height: 100.h,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            fnbData.avgRating.toString(),
-                            style: CustomTextStyles(context).titleLarge_22,
-                            textAlign: TextAlign.center,
-                          ),
-                          Text(
-                            context.tr("f_n_b_detail.avg_rating"),
-                            style:
-                                CustomTextStyles(context).bodySmall12.copyWith(
-                                      fontStyle: FontStyle.italic,
-                                    ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.reviewScreen,
+                  arguments: fnbData);
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.h),
+              width: double.maxFinite,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    context.tr("f_n_b_detail.total_review", namedArgs: {
+                      "total": fnbData.totalReview.toString(),
+                    }),
+                    style: CustomTextStyles(context).bodySmall12,
+                    textAlign: TextAlign.center,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 100.h,
+                        height: 100.h,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              fnbData.avgRating.toString(),
+                              style: CustomTextStyles(context).titleLarge_22,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              context.tr("f_n_b_detail.avg_rating"),
+                              style: CustomTextStyles(context)
+                                  .bodySmall12
+                                  .copyWith(
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: fnbData.totalRatingPerStar.length,
-                        shrinkWrap: true,
-                        reverse: true,
-                        itemBuilder: (context, index) {
-                          return _reviewIndicator(context, index,
-                              fnbData.totalRatingPerStar[index]);
-                        },
-                      ),
-                    )
-                  ],
-                )
-              ],
+                      Expanded(
+                        child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: fnbData.totalRatingPerStar.length,
+                          shrinkWrap: true,
+                          reverse: true,
+                          itemBuilder: (context, index) {
+                            return _reviewIndicator(context, index,
+                                fnbData.totalRatingPerStar[index]);
+                          },
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ],

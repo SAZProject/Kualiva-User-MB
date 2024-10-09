@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.46
-- Revised Fnb Cuisine&Beverage screen
+Ver 0.0.47
+- Revised FnB Detail screen & FnB Menu Screen
 ```
 
 ## Getting Started

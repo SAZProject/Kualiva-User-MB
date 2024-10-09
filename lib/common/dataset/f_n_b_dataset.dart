@@ -97,6 +97,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: true,
+          isPromoExist: true,
+          isMenuExist: true,
         ),
         FNBModel(
           id: "1",
@@ -156,6 +158,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: false,
+          isPromoExist: false,
+          isMenuExist: false,
         ),
         FNBModel(
           id: "2",
@@ -225,6 +229,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: true,
+          isPromoExist: true,
+          isMenuExist: true,
         ),
         FNBModel(
           id: "3",
@@ -288,6 +294,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: false,
+          isPromoExist: false,
+          isMenuExist: false,
         ),
         FNBModel(
           id: "4",
@@ -351,6 +359,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: false,
+          isPromoExist: false,
+          isMenuExist: false,
         ),
         FNBModel(
           id: "5",
@@ -419,6 +429,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: false,
+          isPromoExist: false,
+          isMenuExist: false,
         ),
         FNBModel(
           id: "6",
@@ -481,6 +493,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: false,
+          isPromoExist: false,
+          isMenuExist: false,
         ),
         FNBModel(
           id: "7",
@@ -546,6 +560,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: false,
+          isPromoExist: false,
+          isMenuExist: false,
         ),
         FNBModel(
           id: "8",
@@ -612,6 +628,8 @@ class FNBDataset {
             ),
           ],
           isClaimed: false,
+          isPromoExist: false,
+          isMenuExist: false,
         ),
         FNBModel(
           id: "9",
@@ -673,7 +691,9 @@ class FNBDataset {
               specialReview: false,
             ),
           ],
-          isClaimed: false,
+          isClaimed: true,
+          isPromoExist: false,
+          isMenuExist: true,
         ),
       ];
 }

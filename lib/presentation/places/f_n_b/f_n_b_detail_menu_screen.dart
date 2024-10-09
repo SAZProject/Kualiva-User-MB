@@ -83,6 +83,7 @@ class FNBDetailMenuScreen extends StatelessWidget {
               itemCount: listImageMenu.length,
               padding: EdgeInsets.zero,
               physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
               itemBuilder: (context, index) {
                 if (listImageMenu.isNotEmpty) {
                   return _listDetailMenuItem(context, listImageMenu[index]);
@@ -124,6 +125,17 @@ class FNBDetailMenuScreen extends StatelessWidget {
                 ),
                 Text(
                   context.tr("f_n_b_detail.menu_description"),
+                  textAlign: TextAlign.center,
+                  style: theme(context).textTheme.bodySmall,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 25.h),
+                Text(
+                  context.tr(
+                    "f_n_b_detail.menu_price",
+                    namedArgs: {"price": "10.000"},
+                  ),
                   textAlign: TextAlign.center,
                   style: theme(context).textTheme.bodySmall,
                   maxLines: 1,

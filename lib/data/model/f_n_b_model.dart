@@ -28,6 +28,8 @@ class FNBModel {
   final List<int> totalRatingPerStar;
   final List<ReviewModel> review;
   final bool isClaimed;
+  final bool isPromoExist;
+  final bool isMenuExist;
 
   FNBModel({
     required this.id,
@@ -52,6 +54,8 @@ class FNBModel {
     required this.totalRatingPerStar,
     required this.review,
     required this.isClaimed,
+    required this.isPromoExist,
+    required this.isMenuExist,
   });
 
   FNBModel copyWith({
@@ -77,6 +81,8 @@ class FNBModel {
     List<int>? totalRatingPerStar,
     List<ReviewModel>? review,
     bool? isClaimed,
+    bool? isPromoExist,
+    bool? isMenuExist,
   }) {
     return FNBModel(
       id: id ?? this.id,
@@ -101,6 +107,8 @@ class FNBModel {
       totalRatingPerStar: totalRatingPerStar ?? this.totalRatingPerStar,
       review: review ?? this.review,
       isClaimed: isClaimed ?? this.isClaimed,
+      isPromoExist: isPromoExist ?? this.isPromoExist,
+      isMenuExist: isMenuExist ?? this.isMenuExist,
     );
   }
 
@@ -130,6 +138,8 @@ class FNBModel {
       'totalRatingPerStar': totalRatingPerStar,
       'review': review.map((x) => x.toMap()).toList(),
       'isClaimed': isClaimed,
+      'isPromoExist': isPromoExist,
+      'isMenuExist': isMenuExist,
     };
   }
 
@@ -171,6 +181,8 @@ class FNBModel {
         ),
       ),
       isClaimed: map['isClaimed'] as bool,
+      isPromoExist: map['isPromoExist'] as bool,
+      isMenuExist: map['isMenuExist'] as bool,
     );
   }
 
@@ -181,7 +193,7 @@ class FNBModel {
 
   @override
   String toString() {
-    return 'FNBModel(id: $id, type: $type, placeName: $placeName, overallRating: $overallRating, tags: $tags, phoneNumber: $phoneNumber, city: $city, placeAddress: $placeAddress, latitude: $latitude, longitude: $longitude, operationalDay: $operationalDay, operationalTimeOpen: $operationalTimeOpen, operationalTimeClose: $operationalTimeClose, avgPrice: $avgPrice, listPriceFnB: $listPriceFnB, placePicture: $placePicture, priceListMenuPicture: $priceListMenuPicture, totalReview: $totalReview, avgRating: $avgRating, totalRatingPerStar: $totalRatingPerStar, review: $review, isClaimed: $isClaimed)';
+    return 'FNBModel(id: $id, type: $type, placeName: $placeName, overallRating: $overallRating, tags: $tags, phoneNumber: $phoneNumber, city: $city, placeAddress: $placeAddress, latitude: $latitude, longitude: $longitude, operationalDay: $operationalDay, operationalTimeOpen: $operationalTimeOpen, operationalTimeClose: $operationalTimeClose, avgPrice: $avgPrice, listPriceFnB: $listPriceFnB, placePicture: $placePicture, priceListMenuPicture: $priceListMenuPicture, totalReview: $totalReview, avgRating: $avgRating, totalRatingPerStar: $totalRatingPerStar, review: $review, isClaimed: $isClaimed, isPromoExist: $isPromoExist, isMenuExist: $isMenuExist)';
   }
 
   @override
@@ -209,7 +221,9 @@ class FNBModel {
         other.avgRating == avgRating &&
         listEquals(other.totalRatingPerStar, totalRatingPerStar) &&
         listEquals(other.review, review) &&
-        other.isClaimed == isClaimed;
+        other.isClaimed == isClaimed &&
+        other.isPromoExist == isPromoExist &&
+        other.isMenuExist == isMenuExist;
   }
 
   @override
@@ -235,6 +249,8 @@ class FNBModel {
         avgRating.hashCode ^
         totalRatingPerStar.hashCode ^
         review.hashCode ^
-        isClaimed.hashCode;
+        isClaimed.hashCode ^
+        isPromoExist.hashCode ^
+        isMenuExist.hashCode;
   }
 }

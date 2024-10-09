@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.48
-- Revised Review Screen
-- Add review filter & verify modal bottom sheet
+Ver 0.0.48+01
+- Minor change on dev got push to main
 ```
 
 ## Getting Started

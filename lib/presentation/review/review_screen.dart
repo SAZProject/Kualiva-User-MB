@@ -374,12 +374,12 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 ? const Center(child: CircularProgressIndicator())
                 : ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 5,
+                    itemCount: listReviewData.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
                       if (listReviewData.isNotEmpty) {
-                        ReviewModel reviewData = listReviewData[0];
+                        ReviewModel reviewData = listReviewData[index];
                         if (reviewData.specialReview) {
                           return SpecialReviewView(reviewData: reviewData);
                         }

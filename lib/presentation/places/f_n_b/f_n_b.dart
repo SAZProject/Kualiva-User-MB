@@ -447,9 +447,7 @@ class _FNBScreenState extends State<FNBScreen> {
         children: [
           CustomSectionHeader(
             label: context.tr("f_n_b.cuisine"),
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.fnbCuisineScreen);
-            },
+            useIcon: false,
           ),
           Container(
             height: 350.h,
@@ -477,6 +475,7 @@ class _FNBScreenState extends State<FNBScreen> {
                 }
                 return true;
               },
+              // Navigator.pushNamed(context, AppRoutes.fnbCuisineScreen);
               child: CustomSelectableStaggeredGrid(
                 controller: _childScrollController2,
                 totalItem: _dummyCuisineData.totalItem,
@@ -486,6 +485,10 @@ class _FNBScreenState extends State<FNBScreen> {
                     : _dummyCuisineData.listAssetDark,
                 labels: _dummyCuisineData.listTitle,
                 isEmpty: _dummyCuisineData.listTitle.isEmpty,
+                onSelected: (index) {
+                  Navigator.pushNamed(context, AppRoutes.fnbCuisineScreen,
+                      arguments: _dummyCuisineData.listTitle[index]);
+                },
               ),
             ),
           ),

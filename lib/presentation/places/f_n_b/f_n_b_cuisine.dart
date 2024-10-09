@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
@@ -10,7 +9,9 @@ import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item.dart';
 
 class FNBCuisine extends StatefulWidget {
-  const FNBCuisine({super.key});
+  const FNBCuisine({super.key, required this.cuisineTitle});
+
+  final String cuisineTitle;
 
   @override
   State<FNBCuisine> createState() => _FNBCuisineState();
@@ -99,7 +100,7 @@ class _FNBCuisineState extends State<FNBCuisine> {
       title: Padding(
         padding: EdgeInsets.zero,
         child: Text(
-          context.tr("cuisine.title"),
+          widget.cuisineTitle,
           style: theme(context).textTheme.headlineSmall,
         ),
       ),

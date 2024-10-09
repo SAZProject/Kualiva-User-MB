@@ -222,7 +222,8 @@
         "tags_more": "+{} More"
     },
     "cuisine": {
-        "title": "Cuisine"
+        "title_1": "Cuisine",
+        "title_2": "Beverage"
     },
     "f_n_b_detail": {
         "about": "About",

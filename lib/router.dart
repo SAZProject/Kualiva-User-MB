@@ -140,8 +140,9 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbCuisineScreen:
+      final cuisineTitle = routeSetting.arguments as String;
       return PageTransition(
-          child: const FNBCuisine(),
+          child: FNBCuisine(cuisineTitle: cuisineTitle),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbFilterScreen:

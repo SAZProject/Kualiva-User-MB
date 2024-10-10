@@ -604,11 +604,14 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
   Widget _buildAgreedTosPolicy(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.h),
+      width: double.maxFinite,
       child: CustomCheckboxButton(
         isRichtext: true,
         value: isAgreed,
         richTextWidget: RichText(
           textAlign: TextAlign.left,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           text: TextSpan(
             children: [
               TextSpan(

@@ -209,8 +209,12 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
             SizedBox(height: 10.h),
             FNBFiltersSlider(
               label: context.tr("filter.rating"),
-              minLabel: context.tr("filter.rating_min_value"),
-              maxLabel: context.tr("filter.rating_max_value"),
+              minLabel: ratingNotifier.value.start == 0.0
+                  ? context.tr("filter.rating_min_value")
+                  : ratingNotifier.value.start.toString(),
+              maxLabel: ratingNotifier.value.end == 5.0
+                  ? context.tr("filter.rating_max_value")
+                  : ratingNotifier.value.end.toString(),
               rangeValuesNotifier: ratingNotifier,
               slideMinVal: 0.0,
               slideMaxVal: 5.0,

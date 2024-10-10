@@ -255,6 +255,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
               controller: controller,
               focusNode: focusNode,
               readOnly: isReadOnly,
+              textInputType: TextInputType.phone,
               onPressed: (Country country) {
                 selectedCountry = country;
               },

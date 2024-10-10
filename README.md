@@ -5,8 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.49
-- Add language screen
+Ver 0.0.50
+- Add Indonesia language
+- Minor UI fix
 ```
 
 ## Getting Started

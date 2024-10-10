@@ -428,6 +428,8 @@ Syarat dan Ketentuan :
             Text(
               context.tr(gridMenu.label),
               style: CustomTextStyles(context).bodySmall12,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

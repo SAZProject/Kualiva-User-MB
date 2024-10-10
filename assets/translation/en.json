@@ -330,6 +330,12 @@
 
         "save_btn": "Save"
     },
+    "lang":{
+        "title": "Language",
+        "change_lang": "Change Language",
+        "indo": "Bahasa (Indonesia)",
+        "eng": "English (US)"
+    },
     "account_setting": {
         "title": "Account Setting",
         "account_creation_date": "Account Creation Date",

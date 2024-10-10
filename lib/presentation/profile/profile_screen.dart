@@ -98,6 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
 
       case 7:
+        Navigator.pushNamed(context, AppRoutes.languageScreen);
         break;
       case 8:
         Navigator.pushNamed(context, AppRoutes.addPlaceScreen);

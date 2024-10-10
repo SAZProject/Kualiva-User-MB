@@ -20,11 +20,11 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
 
   String selectedReason = "";
 
-  TextEditingController detailCtl = TextEditingController();
+  final TextEditingController _detailCtl = TextEditingController();
 
   @override
   void dispose() {
-    detailCtl.dispose();
+    _detailCtl.dispose();
     super.dispose();
   }
 
@@ -211,7 +211,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
           ),
           SizedBox(height: 10.h),
           CustomTextFormField(
-            controller: detailCtl,
+            controller: _detailCtl,
             textInputAction: TextInputAction.done,
             maxLines: 11,
             contentPadding: EdgeInsets.all(12.h),

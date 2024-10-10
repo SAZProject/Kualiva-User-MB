@@ -5,8 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.48+01
-- Minor change on dev got push to main
+Ver 0.0.48+02
+- Minor fix on controller to dispose and make private
 ```
 
 ## Getting Started

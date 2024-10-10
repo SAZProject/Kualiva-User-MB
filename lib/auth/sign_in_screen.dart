@@ -24,14 +24,15 @@ class SignInScreen extends StatefulWidget {
 class SignInScreenState extends State<SignInScreen> {
   bool passObscure = true;
 
-  TextEditingController phoneNumberOrUserNameCtl = TextEditingController();
-  TextEditingController passwordCtl = TextEditingController();
+  final TextEditingController _phoneNumberOrUserNameCtl =
+      TextEditingController();
+  final TextEditingController _passwordCtl = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    phoneNumberOrUserNameCtl.dispose();
-    passwordCtl.dispose();
+    _phoneNumberOrUserNameCtl.dispose();
+    _passwordCtl.dispose();
     super.dispose();
   }
 
@@ -200,7 +201,7 @@ class SignInScreenState extends State<SignInScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: CustomTextFormField(
-        controller: phoneNumberOrUserNameCtl,
+        controller: _phoneNumberOrUserNameCtl,
         hintText: context.tr("sign_in.phone_number_or_user_name"),
         textInputType: TextInputType.text,
       ),
@@ -211,7 +212,7 @@ class SignInScreenState extends State<SignInScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: CustomTextFormField(
-        controller: passwordCtl,
+        controller: _passwordCtl,
         hintText: context.tr("sign_in.password"),
         textInputType: TextInputType.text,
         obscureText: passObscure,

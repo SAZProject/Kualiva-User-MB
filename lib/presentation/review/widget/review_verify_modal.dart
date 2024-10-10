@@ -21,6 +21,13 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
   final TextEditingController _transactionCtl = TextEditingController();
 
   List<String> invoiceMedia = [];
+
+  @override
+  void dispose() {
+    _transactionCtl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

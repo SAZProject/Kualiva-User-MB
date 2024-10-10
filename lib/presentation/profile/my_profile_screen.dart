@@ -12,10 +12,19 @@ class MyProfileScreen extends StatefulWidget {
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
-  final TextEditingController nicknameCtl = TextEditingController();
-  final TextEditingController emailCtl = TextEditingController();
-  final TextEditingController genderCtl = TextEditingController();
-  final TextEditingController dateOfBirthCtl = TextEditingController();
+  final TextEditingController _nicknameCtl = TextEditingController();
+  final TextEditingController _emailCtl = TextEditingController();
+  final TextEditingController _genderCtl = TextEditingController();
+  final TextEditingController _dateOfBirthCtl = TextEditingController();
+
+  @override
+  void dispose() {
+    _nicknameCtl.dispose();
+    _emailCtl.dispose();
+    _genderCtl.dispose();
+    _dateOfBirthCtl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +54,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               _buildTextField(
                 context,
                 headerLabel: context.tr("my_profile.nickname"),
-                controller: nicknameCtl,
+                controller: _nicknameCtl,
                 hintText: context.tr("my_profile.nickname_hint"),
                 suffix: context.tr("my_profile.edit"),
               ),
@@ -53,20 +62,20 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               _buildTextField(
                 context,
                 headerLabel: context.tr("my_profile.email"),
-                controller: emailCtl,
+                controller: _emailCtl,
                 suffix: context.tr("my_profile.verify"),
               ),
               SizedBox(height: 5.h),
               _buildTextField(
                 context,
                 headerLabel: context.tr("my_profile.gender"),
-                controller: genderCtl,
+                controller: _genderCtl,
               ),
               SizedBox(height: 5.h),
               _buildTextField(
                 context,
                 headerLabel: context.tr("my_profile.date_of_birth"),
-                controller: dateOfBirthCtl,
+                controller: _dateOfBirthCtl,
               ),
               SizedBox(height: 100.h),
               _saveBtn(context),

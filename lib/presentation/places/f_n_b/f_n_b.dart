@@ -59,11 +59,6 @@ class _FNBScreenState extends State<FNBScreen> {
   late UserCurrLocModel getUserCurrentLoc;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _parentScrollController.dispose();
     _childScrollController.dispose();

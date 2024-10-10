@@ -17,10 +17,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController userNameCtl = TextEditingController();
-  TextEditingController phoneNumberCtl = TextEditingController();
-  TextEditingController passwordCtl = TextEditingController();
-  TextEditingController confirmPassCtl = TextEditingController();
+  TextEditingController _userNameCtl = TextEditingController();
+  TextEditingController _phoneNumberCtl = TextEditingController();
+  TextEditingController _passwordCtl = TextEditingController();
+  TextEditingController _confirmPassCtl = TextEditingController();
 
   Country selectedCountry = CountryPickerUtils.getCountryByPhoneCode("62");
 
@@ -30,10 +30,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void dispose() {
-    userNameCtl.dispose();
-    phoneNumberCtl.dispose();
-    passwordCtl.dispose();
-    confirmPassCtl.dispose();
+    _userNameCtl.dispose();
+    _phoneNumberCtl.dispose();
+    _passwordCtl.dispose();
+    _confirmPassCtl.dispose();
     super.dispose();
   }
 
@@ -191,7 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _textFieldUserName(BuildContext context) {
     return CustomTextFormField(
-      controller: userNameCtl,
+      controller: _userNameCtl,
       hintText: context.tr("sign_up.username"),
       contentPadding: EdgeInsets.symmetric(
         horizontal: 10.h,
@@ -205,7 +205,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       width: double.maxFinite,
       child: CustomPhoneNumber(
         country: selectedCountry,
-        controller: phoneNumberCtl,
+        controller: _phoneNumberCtl,
         onPressed: (Country country) {
           selectedCountry = country;
         },
@@ -217,7 +217,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: CustomTextFormField(
-        controller: passwordCtl,
+        controller: _passwordCtl,
         hintText: context.tr("sign_up.password"),
         textInputType: TextInputType.text,
         obscureText: passObscure,
@@ -239,7 +239,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return SizedBox(
       width: double.maxFinite,
       child: CustomTextFormField(
-        controller: confirmPassCtl,
+        controller: _confirmPassCtl,
         hintText: context.tr("sign_up.re_enter_password"),
         textInputType: TextInputType.text,
         obscureText: confirmPassObscure,

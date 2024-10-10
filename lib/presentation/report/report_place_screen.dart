@@ -20,7 +20,7 @@ class ReportPlaceScreen extends StatefulWidget {
 class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
   FNBModel get fnbData => super.widget.fnbModel;
 
-  TextEditingController reasonCtl = TextEditingController();
+  final TextEditingController _reasonCtl = TextEditingController();
 
   String selectedReason = "";
 
@@ -28,7 +28,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
 
   @override
   void dispose() {
-    reasonCtl.dispose();
+    _reasonCtl.dispose();
     super.dispose();
   }
 
@@ -193,7 +193,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
           Visibility(
             visible: selectedReason == context.tr("report.reason_place_4"),
             child: CustomTextFormField(
-              controller: reasonCtl,
+              controller: _reasonCtl,
               textInputAction: TextInputAction.done,
               maxLines: 1,
               contentPadding: EdgeInsets.all(12.h),

@@ -21,7 +21,7 @@ class ReviewFormScreen extends StatefulWidget {
 class _ReviewFormScreenState extends State<ReviewFormScreen> {
   FNBModel get fnbData => super.widget.fnbModel;
 
-  TextEditingController reviewMsgCtl = TextEditingController();
+  TextEditingController _reviewMsgCtl = TextEditingController();
 
   List<String> reviewMedia = [];
 
@@ -31,7 +31,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
 
   @override
   void dispose() {
-    reviewMsgCtl.dispose();
+    _reviewMsgCtl.dispose();
     super.dispose();
   }
 
@@ -162,7 +162,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
           ),
           SizedBox(height: 10.h),
           CustomTextFormField(
-            controller: reviewMsgCtl,
+            controller: _reviewMsgCtl,
             textInputAction: TextInputAction.done,
             maxLines: 11,
             contentPadding: EdgeInsets.all(12.h),

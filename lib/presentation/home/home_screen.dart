@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
@@ -9,7 +7,6 @@ import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/data/model/ui_model/home_event_model.dart';
 import 'package:like_it/data/model/ui_model/home_grid_menu_model.dart';
 import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/home/widget/home_featured_item.dart';
@@ -63,42 +60,42 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
-  final List<HomeEventModel> _homeEventList = [
-    HomeEventModel(
-      imagePath: ImageConstant.event1,
-      eventTitle: "Peter Pan On Ice",
-      eventDate:
-          "14-15 December 2024, Planetary Hall Jakarta Convention Center",
-      eventHost: "By KONSERKITA",
-      eventDesc:
-          ''' The classic story of Peter Pan on ice will come back to Jakarta, Indonesia, the enchanting tale of adventure, imagination, and childhood nostalgia comes to life on ice for 6 Shows (3 shows each day) at Indonesia Arena, Senayan Jakarta.
-The world-renowned International Ice Stars brings to your theatre a new adaptation of this famous fantasy adventure by J.M. Barrie. This event offers a unique and unforgettable entertainment option for families celebrating Idul Fitri, allowing them to witness the skillful performances of The International Ice Stars as they bring to life the timeless characters of Peter Pan, Wendy, Captain Hook, and more.
+//   final List<HomeEventModel> _homeEventList = [
+//     HomeEventModel(
+//       imagePath: ImageConstant.event1,
+//       eventTitle: "Peter Pan On Ice",
+//       eventDate:
+//           "14-15 December 2024, Planetary Hall Jakarta Convention Center",
+//       eventHost: "By KONSERKITA",
+//       eventDesc:
+//           ''' The classic story of Peter Pan on ice will come back to Jakarta, Indonesia, the enchanting tale of adventure, imagination, and childhood nostalgia comes to life on ice for 6 Shows (3 shows each day) at Indonesia Arena, Senayan Jakarta.
+// The world-renowned International Ice Stars brings to your theatre a new adaptation of this famous fantasy adventure by J.M. Barrie. This event offers a unique and unforgettable entertainment option for families celebrating Idul Fitri, allowing them to witness the skillful performances of The International Ice Stars as they bring to life the timeless characters of Peter Pan, Wendy, Captain Hook, and more.
 
-Syarat dan Ketentuan :
-- Tiket yang sudah dibeli tidak dapat dikembalikan.
-- Penukaran Tiket harus menunjukan identitas diri ( Ktp/ Sim/ Paspor) apabila diwakilkan atau nama tidak sesuai dengan yang tertera di e-tiket harus membawa surat kuasa yang ditandatangani oleh pembeli tiket.
-- Tiket hanya berlaku untuk 1 (satu) orang dan 1 (satu) kali pertunjukan. Penggunaannya harus sesuai dengan tanggal dan jam yang tertera pada Tiket.
-- Tiket yang hilang karena kelalaian pembeli/ pemegang tiket tidak dapat dicetak ulang.
-- Anak berusia 2 (dua) tahun ke atas, wajib memiliki tiket masuk di bawah usia 2 (dua) tahun free dengan catatan harus duduk di pangkuan orang tua atau walinya saat menonton pertunjukan.
-- Semua anak dibawah usia 12 tahun harus didampingi orang tua atau wali 18 tahun keatas.
-- Seat Number akan diberikan pada saat melakukan penukaran tiket khusus untuk kategori Super VIP dan VIP sedangkan kategori Gold dan Silver bersifat free seating.
-- Penyelenggara acara berhak melarang pengunjung untuk memasuki lokasi acara apabila pengunjung tidak memiliki tiket yang sah.''',
-    ),
-    HomeEventModel(
-      imagePath: ImageConstant.event2,
-      eventTitle: "Event Title",
-      eventDate: "Date(dd/mm/yyyy), Place",
-      eventHost: "By Dummy",
-      eventDesc: "Event Desc",
-    ),
-    HomeEventModel(
-      imagePath: ImageConstant.event3,
-      eventTitle: "Event Title",
-      eventDate: "Date(dd/mm/yyyy), Place",
-      eventHost: "By Dummy",
-      eventDesc: "Event Desc",
-    ),
-  ];
+// Syarat dan Ketentuan :
+// - Tiket yang sudah dibeli tidak dapat dikembalikan.
+// - Penukaran Tiket harus menunjukan identitas diri ( Ktp/ Sim/ Paspor) apabila diwakilkan atau nama tidak sesuai dengan yang tertera di e-tiket harus membawa surat kuasa yang ditandatangani oleh pembeli tiket.
+// - Tiket hanya berlaku untuk 1 (satu) orang dan 1 (satu) kali pertunjukan. Penggunaannya harus sesuai dengan tanggal dan jam yang tertera pada Tiket.
+// - Tiket yang hilang karena kelalaian pembeli/ pemegang tiket tidak dapat dicetak ulang.
+// - Anak berusia 2 (dua) tahun ke atas, wajib memiliki tiket masuk di bawah usia 2 (dua) tahun free dengan catatan harus duduk di pangkuan orang tua atau walinya saat menonton pertunjukan.
+// - Semua anak dibawah usia 12 tahun harus didampingi orang tua atau wali 18 tahun keatas.
+// - Seat Number akan diberikan pada saat melakukan penukaran tiket khusus untuk kategori Super VIP dan VIP sedangkan kategori Gold dan Silver bersifat free seating.
+// - Penyelenggara acara berhak melarang pengunjung untuk memasuki lokasi acara apabila pengunjung tidak memiliki tiket yang sah.''',
+//     ),
+//     HomeEventModel(
+//       imagePath: ImageConstant.event2,
+//       eventTitle: "Event Title",
+//       eventDate: "Date(dd/mm/yyyy), Place",
+//       eventHost: "By Dummy",
+//       eventDesc: "Event Desc",
+//     ),
+//     HomeEventModel(
+//       imagePath: ImageConstant.event3,
+//       eventTitle: "Event Title",
+//       eventDate: "Date(dd/mm/yyyy), Place",
+//       eventHost: "By Dummy",
+//       eventDesc: "Event Desc",
+//     ),
+//   ];
 
   final List<String> _adBannerList = [
     ImageConstant.event1,
@@ -158,7 +155,7 @@ Syarat dan Ketentuan :
               _gridMenu(context),
               SizedBox(height: 5.h),
               _featured(context),
-              //TODO hide it for V1 version
+              // TODO hide it for V1 version
               // SizedBox(height: 5.h),
               // _eventList(context),
               SizedBox(height: 50.h),
@@ -187,14 +184,15 @@ Syarat dan Ketentuan :
       ),
       toolbarHeight: 100.h,
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.qr_code_scanner,
-            size: 30.h,
-            color: appTheme.black900,
-          ),
-        ),
+        // TODO dimatikan untuk V!
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(
+        //     Icons.qr_code_scanner,
+        //     size: 30.h,
+        //     color: appTheme.black900,
+        //   ),
+        // ),
         IconButton(
           onPressed: () {},
           icon: Icon(
@@ -246,9 +244,10 @@ Syarat dan Ketentuan :
 
   Widget _buildUserLoc(BuildContext context, String label) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, AppRoutes.locationScreen);
-      },
+      // TODO dimatikan untuk V1
+      // onTap: () {
+      //   Navigator.pushNamed(context, AppRoutes.locationScreen);
+      // },
       child: SizedBox(
         width: double.maxFinite,
         child: Text(
@@ -445,7 +444,9 @@ Syarat dan Ketentuan :
         children: [
           CustomSectionHeader(
             label: context.tr("home_screen.featured"),
-            onPressed: () {},
+            // TODO dimatikan masih belum jelas mau gimana, apakah akan dibataskan atau tampilkan list banyak
+            // onPressed: () {},
+            useIcon: false,
           ),
           SizedBox(height: 4.h),
           Padding(
@@ -475,133 +476,133 @@ Syarat dan Ketentuan :
     );
   }
 
-  Widget _eventList(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Container(
-        width: double.maxFinite,
-        margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-        padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 14.h),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomSectionHeader(
-              label: context.tr("home_screen.event", args: ["Jakarta"]),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.homeEventScreen);
-              },
-            ),
-            SizedBox(height: 4.h),
-            SizedBox(
-              width: double.maxFinite,
-              child: NotificationListener(
-                onNotification: (ScrollNotification notification) {
-                  if (notification is ScrollUpdateNotification) {
-                    if (notification.metrics.pixels ==
-                        notification.metrics.maxScrollExtent) {
-                      debugPrint('Reached the bottom');
-                      _parentScrollController.animateTo(
-                          _parentScrollController.position.maxScrollExtent,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeIn);
-                    } else if (notification.metrics.pixels ==
-                        notification.metrics.minScrollExtent) {
-                      debugPrint('Reached the top');
-                      _parentScrollController.animateTo(
-                          _parentScrollController.position.minScrollExtent,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeIn);
-                    }
-                  }
-                  return true;
-                },
-                child: _homeEventList.isEmpty
-                    ? const Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                        controller: _childScrollController,
-                        itemCount: _homeEventList.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          if (_homeEventList.isNotEmpty) {
-                            return _eventListItems(
-                                context, index, _homeEventList[index]);
-                          }
-                          return const CustomEmptyState();
-                        },
-                      ),
-              ),
-            ),
-            SizedBox(height: 4.h),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _eventList(BuildContext context) {
+  //   return SizedBox(
+  //     width: double.maxFinite,
+  //     child: Container(
+  //       width: double.maxFinite,
+  //       margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
+  //       padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 14.h),
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           CustomSectionHeader(
+  //             label: context.tr("home_screen.event", args: ["Jakarta"]),
+  //             onPressed: () {
+  //               Navigator.pushNamed(context, AppRoutes.homeEventScreen);
+  //             },
+  //           ),
+  //           SizedBox(height: 4.h),
+  //           SizedBox(
+  //             width: double.maxFinite,
+  //             child: NotificationListener(
+  //               onNotification: (ScrollNotification notification) {
+  //                 if (notification is ScrollUpdateNotification) {
+  //                   if (notification.metrics.pixels ==
+  //                       notification.metrics.maxScrollExtent) {
+  //                     debugPrint('Reached the bottom');
+  //                     _parentScrollController.animateTo(
+  //                         _parentScrollController.position.maxScrollExtent,
+  //                         duration: const Duration(seconds: 1),
+  //                         curve: Curves.easeIn);
+  //                   } else if (notification.metrics.pixels ==
+  //                       notification.metrics.minScrollExtent) {
+  //                     debugPrint('Reached the top');
+  //                     _parentScrollController.animateTo(
+  //                         _parentScrollController.position.minScrollExtent,
+  //                         duration: const Duration(seconds: 1),
+  //                         curve: Curves.easeIn);
+  //                   }
+  //                 }
+  //                 return true;
+  //               },
+  //               child: _homeEventList.isEmpty
+  //                   ? const Center(child: CircularProgressIndicator())
+  //                   : ListView.builder(
+  //                       controller: _childScrollController,
+  //                       itemCount: _homeEventList.length,
+  //                       shrinkWrap: true,
+  //                       itemBuilder: (context, index) {
+  //                         if (_homeEventList.isNotEmpty) {
+  //                           return _eventListItems(
+  //                               context, index, _homeEventList[index]);
+  //                         }
+  //                         return const CustomEmptyState();
+  //                       },
+  //                     ),
+  //             ),
+  //           ),
+  //           SizedBox(height: 4.h),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  Widget _eventListItems(
-      BuildContext context, int index, HomeEventModel homeEventModel) {
-    return Container(
-      height: 120.h,
-      margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 4.h),
-      padding: EdgeInsets.symmetric(horizontal: 4.h, vertical: 4.h),
-      decoration:
-          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder10,
-              ),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        borderRadius: BorderRadiusStyle.roundedBorder10,
-        onTap: () {
-          Navigator.pushNamed(context, AppRoutes.homeEventDetailScreen,
-              arguments: homeEventModel);
-        },
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 3.h, sigmaY: 3.h),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        homeEventModel.eventDate,
-                        style: CustomTextStyles(context).bodySmall10,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        homeEventModel.eventTitle,
-                        style: theme(context).textTheme.titleMedium,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        homeEventModel.eventDesc,
-                        style: CustomTextStyles(context).bodySmall12,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(width: 10.h),
-              CustomImageView(
-                imagePath: homeEventModel.imagePath,
-                height: double.maxFinite,
-                width: 100.h,
-                radius: BorderRadiusStyle.roundedBorder10,
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _eventListItems(
+  //     BuildContext context, int index, HomeEventModel homeEventModel) {
+  //   return Container(
+  //     height: 120.h,
+  //     margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 4.h),
+  //     padding: EdgeInsets.symmetric(horizontal: 4.h, vertical: 4.h),
+  //     decoration:
+  //         CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+  //               borderRadius: BorderRadiusStyle.roundedBorder10,
+  //             ),
+  //     clipBehavior: Clip.antiAlias,
+  //     child: InkWell(
+  //       borderRadius: BorderRadiusStyle.roundedBorder10,
+  //       onTap: () {
+  //         Navigator.pushNamed(context, AppRoutes.homeEventDetailScreen,
+  //             arguments: homeEventModel);
+  //       },
+  //       child: BackdropFilter(
+  //         filter: ImageFilter.blur(sigmaX: 3.h, sigmaY: 3.h),
+  //         child: Row(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             Expanded(
+  //               child: Align(
+  //                 alignment: Alignment.centerLeft,
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   children: [
+  //                     Text(
+  //                       homeEventModel.eventDate,
+  //                       style: CustomTextStyles(context).bodySmall10,
+  //                       maxLines: 1,
+  //                       overflow: TextOverflow.ellipsis,
+  //                     ),
+  //                     SizedBox(height: 4.h),
+  //                     Text(
+  //                       homeEventModel.eventTitle,
+  //                       style: theme(context).textTheme.titleMedium,
+  //                       maxLines: 1,
+  //                       overflow: TextOverflow.ellipsis,
+  //                     ),
+  //                     SizedBox(height: 4.h),
+  //                     Text(
+  //                       homeEventModel.eventDesc,
+  //                       style: CustomTextStyles(context).bodySmall12,
+  //                       maxLines: 3,
+  //                       overflow: TextOverflow.ellipsis,
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //             SizedBox(width: 10.h),
+  //             CustomImageView(
+  //               imagePath: homeEventModel.imagePath,
+  //               height: double.maxFinite,
+  //               width: 100.h,
+  //               radius: BorderRadiusStyle.roundedBorder10,
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

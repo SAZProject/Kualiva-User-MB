@@ -615,7 +615,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: context.tr("add_place.agreement"),
+                text: "${context.tr("add_place.agreement")}\n",
                 style: CustomTextStyles(context).bodySmallOnPrimaryContainer,
               ),
               TextSpan(

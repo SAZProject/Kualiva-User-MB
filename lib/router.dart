@@ -6,6 +6,7 @@ import 'package:like_it/auth/sign_up_screen.dart';
 import 'package:like_it/common/screen/location_screen.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
+import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/model/ui_model/home_event_model.dart';
 import 'package:like_it/onboarding_screen/onboarding_verifying_user.dart';
 import 'package:like_it/presentation/home/home_event_detail_screen.dart';
@@ -149,8 +150,9 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbFilterScreen:
+      final filterModel = routeSetting.arguments as FiltersModel;
       return PageTransition(
-          child: const FNBFiltersScreen(),
+          child: FNBFiltersScreen(getFilterModel: filterModel),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbDetailScreen:

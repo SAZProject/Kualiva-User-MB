@@ -58,7 +58,9 @@ class ImageUtility {
               (index) => getMedia[index].path,
             )
           ];
-        } else {}
+        } else {
+          return listImage;
+        }
       }
       return temp;
     } catch (e) {
@@ -94,7 +96,9 @@ class ImageUtility {
           } else {
             temp = [...listImage, getRawMedia.path];
           }
-        } else {}
+        } else {
+          return listImage;
+        }
       }
       return temp;
     } catch (e) {

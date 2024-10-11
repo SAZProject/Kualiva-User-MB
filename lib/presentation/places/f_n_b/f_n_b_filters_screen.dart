@@ -9,7 +9,9 @@ import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_slider.dart';
 
 class FNBFiltersScreen extends StatefulWidget {
-  const FNBFiltersScreen({super.key});
+  const FNBFiltersScreen({super.key, this.getFilterModel});
+
+  final FiltersModel? getFilterModel;
 
   @override
   State<FNBFiltersScreen> createState() => _FNBFiltersScreenState();
@@ -42,6 +44,10 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
   @override
   void initState() {
     super.initState();
+    if (widget.getFilterModel != null) {
+      debugPrint(widget.getFilterModel.toString());
+      filterModel = widget.getFilterModel!;
+    }
     radiusNotifier = ValueNotifier<RangeValues>(
       RangeValues(filterModel.radiusMin, filterModel.radiusMax),
     );
@@ -52,6 +58,8 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
       RangeValues(filterModel.ratingMin.ceil().toDouble(),
           filterModel.ratingMax.ceil().toDouble()),
     );
+    selectedFoodSubCateg.value = filterModel.foodSubCateg.toSet();
+    selectedBvgSubCateg.value = filterModel.bvgSubCateg.toSet();
   }
 
   @override
@@ -65,11 +73,13 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
   }
 
   void _resetValue() {
-    radiusNotifier.value = const RangeValues(0.0, 100.0);
-    priceRangeNotifier.value = const RangeValues(0.0, 1000000.0);
-    ratingNotifier.value = const RangeValues(0.0, 5.0);
-    selectedFoodSubCateg.value = {};
-    selectedBvgSubCateg.value = {};
+    setState(() {
+      radiusNotifier.value = const RangeValues(0.0, 100.0);
+      priceRangeNotifier.value = const RangeValues(0.0, 1000000.0);
+      ratingNotifier.value = const RangeValues(0.0, 5.0);
+      selectedFoodSubCateg.value = {};
+      selectedBvgSubCateg.value = {};
+    });
   }
 
   void _confirmFilter(BuildContext context) {
@@ -81,7 +91,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
       ratingMin: ratingNotifier.value.start,
       ratingMax: ratingNotifier.value.end,
       foodSubCateg: selectedFoodSubCateg.value.toList(),
-      bvgSubCateg: selectedFoodSubCateg.value.toList(),
+      bvgSubCateg: selectedBvgSubCateg.value.toList(),
     );
     Navigator.pop(context, filterModel);
   }

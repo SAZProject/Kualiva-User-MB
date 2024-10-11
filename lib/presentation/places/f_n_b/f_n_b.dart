@@ -51,7 +51,7 @@ class _FNBScreenState extends State<FNBScreen> {
   final List<String> _listTagsFilter = FNBFilterDataset.fnbFoodFilter;
 
   ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
-  late FiltersModel filtersModel;
+  FiltersModel? filtersModel;
 
   final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
   Set<int> dummySelectedCuisine = {};
@@ -191,9 +191,10 @@ class _FNBScreenState extends State<FNBScreen> {
 
   Widget _buildUserLoc(BuildContext context, String label) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, AppRoutes.locationScreen);
-      },
+      // TODO dimatikan untuk V1
+      // onTap: () {
+      //   Navigator.pushNamed(context, AppRoutes.locationScreen);
+      // },
       child: SizedBox(
         width: double.maxFinite,
         child: Text(
@@ -301,11 +302,14 @@ class _FNBScreenState extends State<FNBScreen> {
     return InkWell(
       borderRadius: BorderRadius.circular(50.h),
       onTap: () {
-        Navigator.pushNamed(context, AppRoutes.fnbFilterScreen).then(
+        Navigator.pushNamed(context, AppRoutes.fnbFilterScreen,
+                arguments: filtersModel)
+            .then(
           (value) {
             if (value == null) return;
             setState(() {
               filtersModel = value as FiltersModel;
+              debugPrint(filtersModel.toString());
             });
           },
         );
@@ -336,7 +340,8 @@ class _FNBScreenState extends State<FNBScreen> {
         children: [
           CustomSectionHeader(
             label: context.tr("f_n_b.nearest"),
-            onPressed: () {},
+            // onPressed: () {},
+            useIcon: false,
           ),
           SizedBox(height: 4.h),
           Padding(
@@ -397,9 +402,10 @@ class _FNBScreenState extends State<FNBScreen> {
         children: [
           CustomSectionHeader(
             label: context.tr("f_n_b.promo"),
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.locationScreen);
-            },
+            // TODO dimatikan untuk V1
+            // onPressed: () {
+            // },
+            useIcon: false,
           ),
           SizedBox(height: 4.h),
           Padding(

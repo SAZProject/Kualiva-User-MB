@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.50
-- Add Indonesia language
-- Minor UI fix
+Ver 0.0.51
+- Review all func that need to dectivate for V1
+- Fix FNB filter
 ```
 
 ## Getting Started
@@ -19,9 +19,9 @@ First put these into locale.properties at folder android
 flutter.buildMode=debug
 flutter.versionName=1.0.0
 flutter.versionCode=1
-flutter.compileSdkVersion = 34
+flutter.compileSdkVersion = 35
 flutter.minSdkVersion = 21
-flutter.targetSdkVersion = 34
+flutter.targetSdkVersion = 35
 ```
 
 Don't forget to do pub get packages on terminal

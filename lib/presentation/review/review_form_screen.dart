@@ -21,7 +21,7 @@ class ReviewFormScreen extends StatefulWidget {
 class _ReviewFormScreenState extends State<ReviewFormScreen> {
   FNBModel get fnbData => super.widget.fnbModel;
 
-  TextEditingController _reviewMsgCtl = TextEditingController();
+  final TextEditingController _reviewMsgCtl = TextEditingController();
 
   List<String> reviewMedia = [];
 

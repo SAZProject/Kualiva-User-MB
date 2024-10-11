@@ -1,10 +1,12 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/screen/save_to_collection.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
+import 'package:like_it/common/widget/custom_float_modal.dart';
 import 'package:like_it/common/widget/custom_map_bottom_sheet.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
@@ -22,6 +24,8 @@ class FNBDetailScreen extends StatefulWidget {
 
 class _FNBDetailScreenState extends State<FNBDetailScreen> {
   final GlobalKey _toolTipKey = GlobalKey();
+  OverlayEntry? _overlayEntry;
+  final LayerLink _layerLink = LayerLink();
 
   FNBModel get fnbData => super.widget.fnbModel;
   bool _hasCallSupport = false;
@@ -52,15 +56,16 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
       case 2:
         break;
       default:
-        showModalBottomSheet(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(25.h),
-            ),
-          ),
-          context: context,
-          builder: (BuildContext context) => const SaveToCollection(),
-        );
+      // TODO dimatikan untuk V!
+      // showModalBottomSheet(
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.vertical(
+      //       top: Radius.circular(25.h),
+      //     ),
+      //   ),
+      //   context: context,
+      //   builder: (BuildContext context) => const SaveToCollection(),
+      // );
     }
   }
 
@@ -78,6 +83,26 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
     tooltip?.ensureTooltipVisible();
     await Future.delayed(const Duration(seconds: 3));
     tooltip?.deactivate();
+  }
+
+  void _showModal(BuildContext context, String? imagePath) {
+    _overlayEntry = OverlayEntry(
+      builder: (context) => SizedBox(
+        width: double.maxFinite,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          child: CustomFloatModal(imagePath: imagePath ?? ""),
+        ),
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  void _dismissModal() {
+    if (_overlayEntry != null) {
+      _overlayEntry?.remove();
+      _overlayEntry = null;
+    }
   }
 
   @override
@@ -138,40 +163,43 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
                 alignment: Alignment.topCenter,
                 child: _fnbPlaceImages(context),
               ),
-              Column(
-                children: [
-                  SizedBox(height: 5.h),
-                  _fnbAppBar(context),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
-                    child: Container(
-                      width: double.maxFinite,
-                      decoration: CustomDecoration(context)
-                          .fillOnSecondaryContainer_06
-                          .copyWith(
-                            borderRadius: BorderRadiusStyle.roundedBorder10,
+              BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                child: Column(
+                  children: [
+                    SizedBox(height: 5.h),
+                    _fnbAppBar(context),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.h, vertical: 10.h),
+                      child: Container(
+                        width: double.maxFinite,
+                        decoration: CustomDecoration(context)
+                            .fillOnSecondaryContainer_06
+                            .copyWith(
+                              borderRadius: BorderRadiusStyle.roundedBorder10,
+                            ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              SizedBox(height: 5.h),
+                              _fnbPlaceName(context),
+                              SizedBox(height: 5.h),
+                              _fnbPlaceAbout(context),
+                              SizedBox(height: 5.h),
+                              _fnbPromo(context),
+                              SizedBox(height: 5.h),
+                              _fnbPlaceMenu(context),
+                              SizedBox(height: 5.h),
+                              _fnbPlaceReviews(context),
+                              SizedBox(height: 10.h),
+                            ],
                           ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 5.h),
-                            _fnbPlaceName(context),
-                            SizedBox(height: 5.h),
-                            _fnbPlaceAbout(context),
-                            SizedBox(height: 5.h),
-                            _fnbPromo(context),
-                            SizedBox(height: 5.h),
-                            _fnbPlaceMenu(context),
-                            SizedBox(height: 5.h),
-                            _fnbPlaceReviews(context),
-                            SizedBox(height: 10.h),
-                          ],
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -608,16 +636,26 @@ class _FNBDetailScreenState extends State<FNBDetailScreen> {
   }
 
   Widget _eventListItems(BuildContext context, int index, PromoModel promo) {
-    return Container(
-      width: 300.h,
-      margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
-      padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
-      decoration: CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder10,
-          ),
-      child: InkWell(
-        borderRadius: BorderRadiusStyle.roundedBorder10,
-        onTap: () {},
+    return GestureDetector(
+      onLongPressStart: (details) {
+        _showModal(context, promo.imagePath);
+      },
+      onLongPressMoveUpdate: (details) {
+        if (details.localOffsetFromOrigin.distance > 100) {
+          _dismissModal();
+        }
+      },
+      onLongPressEnd: (details) {
+        _dismissModal();
+      },
+      child: Container(
+        width: 300.h,
+        margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
+        decoration:
+            CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
+                  borderRadius: BorderRadiusStyle.roundedBorder10,
+                ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

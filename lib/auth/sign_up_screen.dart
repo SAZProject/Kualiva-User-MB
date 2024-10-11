@@ -17,10 +17,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController _userNameCtl = TextEditingController();
-  TextEditingController _phoneNumberCtl = TextEditingController();
-  TextEditingController _passwordCtl = TextEditingController();
-  TextEditingController _confirmPassCtl = TextEditingController();
+  final TextEditingController _userNameCtl = TextEditingController();
+  final TextEditingController _phoneNumberCtl = TextEditingController();
+  final TextEditingController _passwordCtl = TextEditingController();
+  final TextEditingController _confirmPassCtl = TextEditingController();
 
   Country selectedCountry = CountryPickerUtils.getCountryByPhoneCode("62");
 

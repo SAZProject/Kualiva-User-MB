@@ -74,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         label: "profile.about_us",
         imageUri: ImageConstant.appLogo,
         isRightIcon: false,
-        isCommingSoon: true),
+        isCommingSoon: false),
   ];
 
   void _profileMenuNavigate(BuildContext context, int index) {
@@ -109,11 +109,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 10:
         break;
       case 11:
+        _showLicensePage(context: context);
         break;
       default:
         Navigator.pushNamed(context, AppRoutes.myProfileScreen);
         break;
     }
+  }
+
+  void _showLicensePage({
+    required BuildContext context,
+    String? applicationName,
+    String? applicationVersion,
+    Widget? applicationIcon,
+    String? applicationLegalese,
+    bool useRootNavigator = false,
+  }) {
+    Navigator.of(context, rootNavigator: useRootNavigator)
+        .push(MaterialPageRoute<void>(
+      builder: (BuildContext context) => LicensePage(
+        applicationName: applicationName,
+        applicationVersion: applicationVersion,
+        applicationIcon: applicationIcon,
+        applicationLegalese: applicationLegalese,
+      ),
+    ));
   }
 
   @override

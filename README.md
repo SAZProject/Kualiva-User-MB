@@ -5,9 +5,9 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.51
-- Review all func that need to dectivate for V1
-- Fix FNB filter
+Ver 0.0.52
+- Add Show License, still attach on about me button
+- change package name from com.hoeis to com.prelion
 ```
 
 ## Getting Started

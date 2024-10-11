@@ -1,4 +1,4 @@
-package com.hoeis.like_it
+package com.prelion.like_it
 
 import io.flutter.embedding.android.FlutterActivity
 

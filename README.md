@@ -5,9 +5,8 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.52
-- Add Show License, still attach on about me button
-- change package name from com.hoeis to com.prelion
+Ver 0.0.52+01
+- Upgraded pubspec
 ```
 
 ## Getting Started

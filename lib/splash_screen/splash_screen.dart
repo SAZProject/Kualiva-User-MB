@@ -4,6 +4,7 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/check_permission.dart';
 import 'package:like_it/common/utility/video_constant.dart';
 import 'package:video_player/video_player.dart';
+import 'package:like_it/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

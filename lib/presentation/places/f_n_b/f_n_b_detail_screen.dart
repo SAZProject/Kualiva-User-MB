@@ -12,6 +12,7 @@ import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/promo_model.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:like_it/app_routes.dart';
 
 class FNBDetailScreen extends StatefulWidget {
   const FNBDetailScreen({super.key, required this.fnbModel});

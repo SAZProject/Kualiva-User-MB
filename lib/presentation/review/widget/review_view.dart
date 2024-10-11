@@ -3,6 +3,7 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_rating_bar.dart';
 import 'package:like_it/data/model/review_model.dart';
+import 'package:like_it/app_routes.dart';
 
 class ReviewView extends StatelessWidget {
   const ReviewView({super.key, required this.reviewData});

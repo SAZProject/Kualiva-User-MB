@@ -12,6 +12,7 @@ import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/ui_model/home_event_model.dart';
 import 'package:like_it/data/model/ui_model/loc_popular_city_model.dart';
+import 'package:like_it/app_routes.dart';
 
 class WhatGoingOnScreen extends StatefulWidget {
   const WhatGoingOnScreen({super.key});

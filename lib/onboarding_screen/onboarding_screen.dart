@@ -4,6 +4,7 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/data/model/ui_model/onboarding_model.dart';
+import 'package:like_it/app_routes.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});

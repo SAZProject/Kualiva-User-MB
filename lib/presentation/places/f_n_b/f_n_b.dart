@@ -14,6 +14,7 @@ import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_promo_item.dart';
+import 'package:like_it/app_routes.dart';
 
 class FNBScreen extends StatefulWidget {
   const FNBScreen({super.key});

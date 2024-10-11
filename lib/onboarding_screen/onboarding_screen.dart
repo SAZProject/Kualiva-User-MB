@@ -60,10 +60,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               end: const Alignment(1, 1),
               colors: [
                 _activePage == 0
-                    ? _pages[0].pageColor!
+                    ? _pages[0].pageColor
                     : _activePage == 1
-                        ? _pages[1].pageColor!
-                        : _pages[2].pageColor!,
+                        ? _pages[1].pageColor
+                        : _pages[2].pageColor,
                 theme(context).colorScheme.onSecondaryContainer,
               ],
             ),
@@ -126,7 +126,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         children: [
           SizedBox(height: 20.h),
           Image.asset(
-            onboardingModel.imageUri!,
+            onboardingModel.imageUri,
             height: 300.h,
             width: double.maxFinite,
             fit: BoxFit.cover,
@@ -142,7 +142,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           Opacity(
             opacity: 0.6,
             child: Text(
-              context.tr(onboardingModel.content!),
+              context.tr(onboardingModel.content),
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyLarge,

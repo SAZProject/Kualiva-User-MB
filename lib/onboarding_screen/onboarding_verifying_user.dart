@@ -5,6 +5,7 @@ import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/data/model/ui_model/onboarding_model.dart';
+import 'package:like_it/data/model/ui_model/onboarding_verifying_model.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
 import 'package:like_it/onboarding_screen/widget/onboarding_pick_birthdate.dart';
 import 'package:like_it/onboarding_screen/widget/onboarding_pick_notification.dart';
@@ -18,8 +19,8 @@ class OnboardingVerifyingUser extends StatefulWidget {
 }
 
 class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
-  final List<OnboardingModel> _pages = [
-    const OnboardingModel(
+  final List<OnboardingVerifyingModel> _pages = [
+    const OnboardingVerifyingModel(
       icon: Icons.calendar_month,
       pageTitle: "onboard.onboard_pick_birthdate",
     ),
@@ -27,7 +28,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
     //   icon: Icons.star,
     //   pageTitle: "onboard.onboard_pick_cuisine",
     // ),
-    const OnboardingModel(
+    const OnboardingVerifyingModel(
       icon: Icons.notifications,
       pageTitle: "onboard.onboard_pick_notif",
     ),
@@ -95,6 +96,8 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
     }
   }
 
+  // void _rangeSliderChange(Range)
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -146,7 +149,9 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
   }
 
   Widget _onBoardingHeader(
-      BuildContext context, OnboardingModel onboardingModel) {
+    BuildContext context,
+    OnboardingVerifyingModel onboardingModel,
+  ) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 5.h),
       child: Row(

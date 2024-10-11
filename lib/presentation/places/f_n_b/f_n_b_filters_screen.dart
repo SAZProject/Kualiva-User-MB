@@ -96,6 +96,15 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
     Navigator.pop(context, filterModel);
   }
 
+  void _onChangeFilterSlider(RangeValues value) {
+    setState(() {
+      filterModel.copyWith(
+        priceRangeMin: value.start,
+        priceRangeMax: value.end,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -171,12 +180,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
               slideMinVal: 0.0,
               slideMaxVal: 100.0,
               division: 10,
-              onChangeEnd: (value) {
-                setState(() {
-                  filterModel.radiusMin = value.start;
-                  filterModel.radiusMax = value.end;
-                });
-              },
+              onChangeEnd: _onChangeFilterSlider,
             ),
             SizedBox(height: 10.h),
             FNBFiltersSlider(
@@ -209,12 +213,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
               slideMinVal: 0.0,
               slideMaxVal: 1000000.0,
               division: 20,
-              onChangeEnd: (value) {
-                setState(() {
-                  filterModel.priceRangeMin = value.start;
-                  filterModel.priceRangeMin = value.end;
-                });
-              },
+              onChangeEnd: _onChangeFilterSlider,
             ),
             SizedBox(height: 10.h),
             FNBFiltersSlider(
@@ -229,12 +228,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
               slideMinVal: 0.0,
               slideMaxVal: 5.0,
               division: 5,
-              onChangeEnd: (value) {
-                setState(() {
-                  filterModel.ratingMin = value.start;
-                  filterModel.ratingMax = value.end;
-                });
-              },
+              onChangeEnd: _onChangeFilterSlider,
             ),
             SizedBox(height: 10.h),
             _buildSubCateg(

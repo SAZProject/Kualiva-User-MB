@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+@immutable
 class ProfileMenuModel {
   final IconData? icon;
   final String? imageUri;
@@ -10,7 +11,7 @@ class ProfileMenuModel {
   final bool isRightIcon;
   final bool isCommingSoon;
 
-  ProfileMenuModel({
+  const ProfileMenuModel({
     this.icon,
     this.imageUri,
     required this.label,

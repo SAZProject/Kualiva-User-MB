@@ -1,8 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
+@immutable
 class FNBAssetModel {
   final int totalItem;
   final List<String> listTitle;
@@ -10,7 +9,7 @@ class FNBAssetModel {
   final List<String> listAssetDark;
   final List<String>? listAssetBg;
 
-  FNBAssetModel({
+  const FNBAssetModel({
     required this.totalItem,
     required this.listTitle,
     required this.listAssetLight,

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:like_it/data/model/review_model.dart';
 
+@immutable
 class FNBModel {
   final String id;
   final String type;
@@ -31,7 +32,7 @@ class FNBModel {
   final bool isPromoExist;
   final bool isMenuExist;
 
-  FNBModel({
+  const FNBModel({
     required this.id,
     required this.type,
     required this.placeName,

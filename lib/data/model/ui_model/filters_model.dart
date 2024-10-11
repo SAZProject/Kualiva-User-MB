@@ -1,18 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
+@immutable
 class FiltersModel {
-  double radiusMin;
-  double radiusMax;
-  double priceRangeMin;
-  double priceRangeMax;
-  double ratingMin;
-  double ratingMax;
-  List<String> foodSubCateg;
-  List<String> bvgSubCateg;
-  FiltersModel({
+  final double radiusMin;
+  final double radiusMax;
+  final double priceRangeMin;
+  final double priceRangeMax;
+  final double ratingMin;
+  final double ratingMax;
+  final List<String> foodSubCateg;
+  final List<String> bvgSubCateg;
+
+  const FiltersModel({
     required this.radiusMin,
     required this.radiusMax,
     required this.priceRangeMin,

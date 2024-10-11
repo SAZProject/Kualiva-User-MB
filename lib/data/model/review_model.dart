@@ -1,8 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
 import 'package:like_it/data/model/ui_model/image_model.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 class ReviewModel {
   final String id;
   final String username;
@@ -12,7 +12,7 @@ class ReviewModel {
   final String content;
   final bool specialReview;
 
-  ReviewModel({
+  const ReviewModel({
     required this.id,
     required this.username,
     required this.userImage,

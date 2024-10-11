@@ -1,13 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
+@immutable
 class LocPopularCityModel {
   final String cityImagePath;
   final String cityName;
   final double latitude;
   final double longitude;
 
-  LocPopularCityModel({
+  const LocPopularCityModel({
     required this.cityImagePath,
     required this.cityName,
     required this.latitude,

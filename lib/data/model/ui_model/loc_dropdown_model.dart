@@ -1,6 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
+@immutable
 class LocDropdownModel {
   final String id;
   final String subdistrict;
@@ -8,7 +9,7 @@ class LocDropdownModel {
   final String latitude;
   final String longitude;
 
-  LocDropdownModel({
+  const LocDropdownModel({
     required this.id,
     required this.subdistrict,
     required this.city,

@@ -1,13 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
+@immutable
 class LocFullAddressModel {
   final String placeName;
   final String addressDetail;
   final double latitude;
   final double longitude;
 
-  LocFullAddressModel({
+  const LocFullAddressModel({
     required this.placeName,
     required this.addressDetail,
     required this.latitude,

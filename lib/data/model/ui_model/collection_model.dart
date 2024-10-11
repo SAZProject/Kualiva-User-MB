@@ -1,13 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
+@immutable
 class CollectionModel {
   final String id;
   final String thumbnail;
   final String label;
   final String content;
 
-  CollectionModel({
+  const CollectionModel({
     required this.id,
     required this.thumbnail,
     required this.label,

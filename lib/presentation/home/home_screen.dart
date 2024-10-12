@@ -1,7 +1,13 @@
+import 'dart:io';
+
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/utility/location_utility.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
@@ -11,6 +17,7 @@ import 'package:like_it/data/model/ui_model/home_grid_menu_model.dart';
 import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/home/widget/home_featured_item.dart';
 import 'package:like_it/app_routes.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -118,6 +125,44 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  late Dio dio;
+  late CookieJar cookieJar;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _init();
+  }
+
+  Future<void> _init() async {
+    Directory tempDir = await getTemporaryDirectory();
+
+    final tempPath = tempDir.path;
+    final cookieJar = PersistCookieJar(
+      // ignoreExpires: true,
+      // ignoreExpires: true,
+      storage: FileStorage(tempPath),
+    );
+    dio = Dio();
+    dio.interceptors.add(CookieManager(cookieJar));
+    // print(await cookieJar.loadForRequest(Uri.parse(
+    //     'https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/auth/login')));
+
+    var uri = Uri(
+        scheme: 'https',
+        host: 'kg1k4xc5-3300.asse.devtunnels.ms',
+        path: '/api/v1/auth/login',
+        queryParameters: {
+          'email': 'admin@admin.com',
+          'password': 'admin',
+        });
+
+    print(await cookieJar.loadForRequest(uri));
+    print('LeRucco');
+    return Future.delayed(Duration.zero);
+  }
+
   @override
   void dispose() {
     _parentScrollController.dispose();
@@ -150,6 +195,32 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              ElevatedButton(
+                  onPressed: () async {
+                    final login = await dio.post(
+                        "https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/auth/login",
+                        data: {
+                          'email': 'admin@admin.com',
+                          'password': 'admin',
+                        });
+
+                    LeLog.d(this, 'auth/login');
+                    LeLog.d(this, login.toString());
+
+                    // final users = await dio.get(
+                    //     'https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/users');
+                    // LeLog.d(this, 'users 1');
+                    // LeLog.d(this, users.toString());
+                  },
+                  child: Text('login')),
+              ElevatedButton(
+                  onPressed: () async {
+                    final users = await dio.get(
+                        'https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/users');
+                    LeLog.d(this, 'users 1');
+                    LeLog.d(this, users.toString());
+                  },
+                  child: Text('users')),
               SizedBox(height: 5.h),
               _adBanner(context),
               SizedBox(height: 5.h),
@@ -446,7 +517,32 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomSectionHeader(
             label: context.tr("home_screen.featured"),
             // TODO dimatikan masih belum jelas mau gimana, apakah akan dibataskan atau tampilkan list banyak
-            // onPressed: () {},
+            onPressed: () async {
+              // final login = await dio.post(
+              //     "https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/auth/login",
+              //     data: {
+              //       'email': 'admin@admin.com',
+              //       'password': 'admin',
+              //     });
+
+              // LeLog.d(this, 'auth/login');
+              // LeLog.d(this, login.toString());
+
+              // final users = await dio
+              //     .get('https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/users');
+              // LeLog.d(this, 'users 1');
+              // LeLog.d(this, users.toString());
+
+              // final logout = await dio.post(
+              //     'https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/auth/logout');
+              // LeLog.d(this, 'logout');
+              // LeLog.d(this, logout.toString());
+
+              // final users1 = await dio
+              //     .get('https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/users');
+              // LeLog.d(this, 'users 2');
+              // LeLog.d(this, users1.toString());
+            },
             useIcon: false,
           ),
           SizedBox(height: 4.h),

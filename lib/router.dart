@@ -97,7 +97,7 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbFilterScreen:
-      final filterModel = routeSetting.arguments as FiltersModel;
+      final filterModel = routeSetting.arguments as FiltersModel?;
       return PageTransition(
           child: FNBFiltersScreen(getFilterModel: filterModel),
           type: PageTransitionType.leftToRight,

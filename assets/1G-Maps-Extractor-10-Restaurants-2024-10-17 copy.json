@@ -1,0 +1,24 @@
+[
+    {
+        "name":"La Brasserie Restaurant",
+        "description":"Tempat makan yg bergaya casual menyajikan buffet hidangan international dan asia dan juga ala carte.","fulladdress":"Jl. Jenderal Sudirman No.Kav 18 20, RT.10/RW.11, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10220","street":"Jl. Jenderal Sudirman No.Kav 18 20",
+        "municipality":"RT.10/RW.11, Karet Tengsin",
+        "categories":"Restaurant",
+        "timeZone":"Asia/Jakarta",
+        "phones":"",
+        "claimed":"YES",
+        "reviewCount":1947,
+        "averageRating":4.8,
+        "reviewURL":"https://search.google.com/local/reviews?placeid=ChIJNx626AH0aS4RlQ5CSlPnxao&q=Restaurants&authuser=1&hl=en&gl=ID",
+        "googleMapsURL":"https://www.google.com/maps?cid=12305495901773893269",
+        "latitude":-6.213105,
+        "longitude":106.81872,
+        "website":"https://www.marriott.com/en-us/hotels/jktmd-le-meridien-jakarta/dining/?scid=feed67b0-9a2f-4de1-8df6-114544116108",
+        "domain":"marriott.com",
+        "openingHours":"Friday: [Open 24 hours], Saturday: [Open 24 hours], Sunday: [Open 24 hours], Monday: [Open 24 hours], Tuesday: [Open 24 hours], Wednesday: [Open 24 hours], Thursday: [Open 24 hours]",
+        "featuredImage":"https://lh5.googleusercontent.com/p/AF1QipOGEyxdmJFkxGEHhzv7_99cqYw-9vZz1khOVbuN=w163-h92-k-no",
+        "cid":"12305495901773893269",
+        "fid":"0x2e69f401e8b61e37:0xaac5e7534a420e95",
+        "placeId":"ChIJNx626AH0aS4RlQ5CSlPnxao"
+    }
+]

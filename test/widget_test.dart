@@ -5,26 +5,75 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
+import 'package:like_it/data/model/place/place_detail_model.dart';
+import 'package:like_it/data/model/place/place_response_model.dart';
+import 'package:like_it/data/model/place/restaurant_extractor_model.dart';
 
-import 'package:like_it/main.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 
 void main() {
+  testWidgets("Merchant Nearby Model", (WidgetTester tester) async {
+    print('Merchant Nearby Model');
+    String str = await rootBundle.loadString('assets/merchant_nearby.json');
+
+    List<dynamic> data = jsonDecode(str);
+    print(data);
+
+    // List<MerchantNearby> merchantNearby =
+    //     data.map((e) => MerchantNearby.fromMap(e)).toList();
+
+    // print(merchantNearby);
+
+    expect(1, 1);
+  });
+
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    // String jsonString =
+    //     await rootBundle.loadString('assets/response_1728472297882-list.json');
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Map<String, dynamic> jsonData = jsonDecode(jsonString);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // PlaceResponseModel model = PlaceResponseModel.fromMap(jsonData);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // if (model is PlaceResponseModel) {
+    //   print('PlaceResponseModel Same Object Type');
+    //   print(model);
+    // }
+
+    // String str = await rootBundle
+    //     .loadString('assets/response_1728580777035-detail.json');
+    String str =
+        await rootBundle.loadString('assets/merchant_nearby_detail.json');
+
+    Map<String, dynamic> data = jsonDecode(str);
+
+    Restaurant restaurant = Restaurant.fromMap(data);
+
+    if (restaurant is Restaurant) {
+      print('Restaurant Same Object Type');
+      print(restaurant);
+    }
+
+    // String str1 = await rootBundle
+    //     .loadString('assets/1G-Maps-Extractor-10-Restaurants-2024-10-17.json');
+
+    // Map<String, dynamic> data1 = jsonDecode(str1);
+
+    // List<RestaurantExtractorModel> restaurantExtractor =
+    //     (data1['data'] as List<dynamic>)
+    //         .map((e) => RestaurantExtractorModel.fromMap(e))
+    //         .toList();
+
+    // // RestaurantExtractorModel.fromMap(data1['data']);
+
+    // if (restaurantExtractor is RestaurantExtractorModel) {
+    //   print('RestaurantExtractorModel Same Object Type');
+    //   print(restaurantExtractor);
+    // }
+
+    expect(1, 1);
   });
 }

@@ -1,0 +1,493 @@
+{
+  "address_components": [
+    {
+      "long_name": "No.3",
+      "short_name": "No.3",
+      "types": [
+        "street_number"
+      ]
+    },
+    {
+      "long_name": "Jalan Gerbang Pemuda",
+      "short_name": "Jl. Gerbang Pemuda",
+      "types": [
+        "route"
+      ]
+    },
+    {
+      "long_name": "1",
+      "short_name": "1",
+      "types": [
+        "administrative_area_level_7",
+        "political"
+      ]
+    },
+    {
+      "long_name": "3",
+      "short_name": "3",
+      "types": [
+        "administrative_area_level_6",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Gelora",
+      "short_name": "Gelora",
+      "types": [
+        "administrative_area_level_4",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Kecamatan Tanah Abang",
+      "short_name": "Kecamatan Tanah Abang",
+      "types": [
+        "administrative_area_level_3",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Kota Jakarta Pusat",
+      "short_name": "Kota Jakarta Pusat",
+      "types": [
+        "administrative_area_level_2",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Daerah Khusus Ibukota Jakarta",
+      "short_name": "Daerah Khusus Ibukota Jakarta",
+      "types": [
+        "administrative_area_level_1",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Indonesia",
+      "short_name": "ID",
+      "types": [
+        "country",
+        "political"
+      ]
+    },
+    {
+      "long_name": "10270",
+      "short_name": "10270",
+      "types": [
+        "postal_code"
+      ]
+    }
+  ],
+  "current_opening_hours": {
+    "open_now": false,
+    "periods": [
+      {
+        "close": {
+          "date": "2024-10-21",
+          "day": 1,
+          "time": "0200",
+          "truncated": null
+        },
+        "open": {
+          "date": "2024-10-20",
+          "day": 0,
+          "time": "1100",
+          "truncated": null
+        }
+      },
+      {
+        "close": {
+          "date": "2024-10-22",
+          "day": 2,
+          "time": "0000",
+          "truncated": null
+        },
+        "open": {
+          "date": "2024-10-21",
+          "day": 1,
+          "time": "1100",
+          "truncated": null
+        }
+      },
+      {
+        "close": {
+          "date": "2024-10-23",
+          "day": 3,
+          "time": "0000",
+          "truncated": null
+        },
+        "open": {
+          "date": "2024-10-22",
+          "day": 2,
+          "time": "1100",
+          "truncated": null
+        }
+      },
+      {
+        "close": {
+          "date": "2024-10-24",
+          "day": 4,
+          "time": "0200",
+          "truncated": null
+        },
+        "open": {
+          "date": "2024-10-23",
+          "day": 3,
+          "time": "1100",
+          "truncated": null
+        }
+      },
+      {
+        "close": {
+          "date": "2024-10-24",
+          "day": 4,
+          "time": "2359",
+          "truncated": true
+        },
+        "open": {
+          "date": "2024-10-24",
+          "day": 4,
+          "time": "1100",
+          "truncated": null
+        }
+      },
+      {
+        "close": {
+          "date": "2024-10-18",
+          "day": 5,
+          "time": "0200",
+          "truncated": null
+        },
+        "open": {
+          "date": "2024-10-18",
+          "day": 5,
+          "time": "0000",
+          "truncated": true
+        }
+      },
+      {
+        "close": {
+          "date": "2024-10-19",
+          "day": 6,
+          "time": "0200",
+          "truncated": null
+        },
+        "open": {
+          "date": "2024-10-18",
+          "day": 5,
+          "time": "1100",
+          "truncated": null
+        }
+      },
+      {
+        "close": {
+          "date": "2024-10-20",
+          "day": 0,
+          "time": "0200",
+          "truncated": null
+        },
+        "open": {
+          "date": "2024-10-19",
+          "day": 6,
+          "time": "1100",
+          "truncated": null
+        }
+      }
+    ],
+    "weekday_text": [
+      "Monday: 11:00 AM – 12:00 AM",
+      "Tuesday: 11:00 AM – 12:00 AM",
+      "Wednesday: 11:00 AM – 2:00 AM",
+      "Thursday: 11:00 AM – 2:00 AM",
+      "Friday: 11:00 AM – 2:00 AM",
+      "Saturday: 11:00 AM – 2:00 AM",
+      "Sunday: 11:00 AM – 2:00 AM"
+    ]
+  },
+  "geometry": {
+    "location": {
+      "lat": -6.2116065,
+      "lng": 106.8056097
+    },
+    "viewport": {
+      "northeast": {
+        "lat": -6.210239719708499,
+        "lng": 106.8070158802915
+      },
+      "southwest": {
+        "lat": -6.212937680291503,
+        "lng": 106.8043179197085
+      }
+    }
+  },
+  "opening_hours": {
+    "open_now": false,
+    "periods": [
+      {
+        "close": {
+          "day": 1,
+          "time": "0200"
+        },
+        "open": {
+          "day": 0,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 2,
+          "time": "0000"
+        },
+        "open": {
+          "day": 1,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 3,
+          "time": "0000"
+        },
+        "open": {
+          "day": 2,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 4,
+          "time": "0200"
+        },
+        "open": {
+          "day": 3,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 5,
+          "time": "0200"
+        },
+        "open": {
+          "day": 4,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 6,
+          "time": "0200"
+        },
+        "open": {
+          "day": 5,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 0,
+          "time": "0200"
+        },
+        "open": {
+          "day": 6,
+          "time": "1100"
+        }
+      }
+    ],
+    "weekday_text": [
+      "Monday: 11:00 AM – 12:00 AM",
+      "Tuesday: 11:00 AM – 12:00 AM",
+      "Wednesday: 11:00 AM – 2:00 AM",
+      "Thursday: 11:00 AM – 2:00 AM",
+      "Friday: 11:00 AM – 2:00 AM",
+      "Saturday: 11:00 AM – 2:00 AM",
+      "Sunday: 11:00 AM – 2:00 AM"
+    ]
+  },
+  "photos": [
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/102614615697377762410\">Harry Anggie S. Tampubolon</a>"
+      ],
+      "photo_reference": "AdCG2DPW1reVGKd0n2mXOJdokfpwfzpsGGY46PCLXW_XuQcVWt5UlXa4MaBITURQSZKRXv59HUEds3zfpEZ6XvWzdVxnLCgT5Jbyo0N0R5dj8xaIDw7AOJgwIy7a4y9K7yDaYsIcAZS0wcc8L04K08-ieeveM8oy0iYua2y3rm8euwsP9z-5",
+      "width": 2268
+    },
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/103710467514266434211\">Raihanah Nur Syarifah</a>"
+      ],
+      "photo_reference": "AdCG2DN0sEb2-rvdUXtxP8K1IfQ7DxdFYpNsARszeF8BIN8mYoOhUiwW6084Rzjf1exHeTmn_fQSDQCOOKRsWivF-ZrDQb1q_Sgtljy_Cpa7WLcBfgk-UkCIZXb-KkNhHzO5sVmI1zQHrUKkjYDK9u7xCnC7UXfa9NlXHz3utOoHzPq1lQ60",
+      "width": 2268
+    },
+    {
+      "height": 12000,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/116605407316903900850\">Jesica Clara</a>"
+      ],
+      "photo_reference": "AdCG2DPM0EEnEN7BALA8QcYNYOECOJNU4BaDKXCJl_K4MzKPSaREodcuk5uv1X0GpBLbP_WOKKODBxSLiVMki1ubvwjYhnm-zwbljSv6H7vh1cJO3bdguCpJg0mVEI25CemansOBx8lXJQMNtHVBdtLyZpUVPSiK33KKwaop84dxT8cGBueD",
+      "width": 9000
+    },
+    {
+      "height": 2919,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/103045291058866352719\">I&#39;am Happy</a>"
+      ],
+      "photo_reference": "AdCG2DNZIql69yL7PR5CNmHS2BKc-fobwx45wSlU_20CIdJtubVZjMosbwWoE-CVuyZNhhCC7cwsIgA84LfL5pOi4IO4pqw4seB6uPD2Jg7RaIBJqOkaHkFFWMDy4dF7FNQSnVhVs36na-QZkW-CGCJIdhGoL-57I_8tKPPhLv8i3EzaWrcj",
+      "width": 4000
+    },
+    {
+      "height": 3000,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/118143172657470151728\">Liliana Yoko</a>"
+      ],
+      "photo_reference": "AdCG2DPkdLjCyvid7oXAtUTZcJvFGnO9PFeWyktB3_6-OHgneqmIYtZLmcy4I6wnvhoT5rjFCbAmq00jYDwE5KyzZePvkBB9GjoPdCnTK4rzcA7uLBFiPmttEchdZEMMrLHronsBB9urWK8feZD-4Md6MbdA7v0QPfuwvUQUO-XxIqUO_Q8N",
+      "width": 4000
+    },
+    {
+      "height": 2268,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/107575883946524099177\">S Saras</a>"
+      ],
+      "photo_reference": "AdCG2DMMcOSiSp9fCbuYMRnrlFEYqEg5cmN_sdrZDemiyAx4oiMqlD4-3X_U4V3j0re02YQ7qOTm8uL7BB-7Jb9qKMvUsxh_T8VKjKQDyONIg3oARNtZnJ3_CNS9Lj7kDYJrUeSKF8yYki3YJUrikGk_8zIDn1sKB6r1jv7lcdIWGd9MT8eW",
+      "width": 4032
+    },
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/114779649256302552140\">JunHwoa Lee</a>"
+      ],
+      "photo_reference": "AdCG2DMdHqG70M459saedIiKhwZdR52N7v6-QwdS7iirjcXAN9GNY6E-Z1gKSeo-UnxAnfoBKKTwx2eK2Yv0Q-Ft8YBpOPaOeZq2eMKCh03JhvyR-J_4dzZAFZPiDVOiKyZw6hTopp7l8NWE43qY6f_tjgMezXSEEP9tn17bSClJVZU5fnt8",
+      "width": 3024
+    },
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/114779649256302552140\">JunHwoa Lee</a>"
+      ],
+      "photo_reference": "AdCG2DM7AuGMsS1REPgHprb97CVNwb3MDedKogixcyrJXWcANkZ-Yyf_BNdmIHNflZP6c3gozk1RmWPwhfy8fnDVromF5dMN0H1Oz_jVsOpxTphqsA9mgcX9v9Saztot3a4m11MyZDzeyfXK-8f1wBAuWcwh1T6ikBMyMRvPFJifUj_TeAIm",
+      "width": 3024
+    },
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/114757932692369727418\">Claudy Putri</a>"
+      ],
+      "photo_reference": "AdCG2DOOlYLQJbSbPU3PqFBRKqzjHYy2lHpf3268dDkK9OoCLMpNnlwi4_S93FBwMiDCy4shpog4OEij0_rJAzJ9DLN6Y8i12sFljVLtnUGhotXv7Aj9LMPNidivnxIQH45-FqLNIqw000YML-C1lm6C2zHlQkoDQFCKw6rumZ5486YzSv7o",
+      "width": 3024
+    },
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/104123713046226147176\">Valeria Chaterina</a>"
+      ],
+      "photo_reference": "AdCG2DM4DYs0bCrlA7BbZlfjXYN4OMlh2TF40WabSZXjW1Bfbc75o9Vkl98aLR1SAYDP1jhFc8oQk5-9HG5JT3ub17DqwZIw9x8jzIrxvrZEmD-11Vcm2JIJs3Q-rJQ-JJ3MYMNreomJBlBfkww5_kBGZ7j6dWh-zKuC-ImpGKpmQvzAFCGe",
+      "width": 3024
+    }
+  ],
+  "plus_code": {
+    "compound_code": "QRQ4+96 Gelora, Central Jakarta City, Jakarta, Indonesia",
+    "global_code": "6P58QRQ4+96"
+  },
+  "reviews": [
+    {
+      "author_name": "Raihanah Nur Syarifah",
+      "author_url": "https://www.google.com/maps/contrib/103710467514266434211/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUV8l1tlFv-6qWIFfbSKFO1K-6R_OzzjCT5BHBG0oKfnyvcgWA=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relative_time_description": "2 weeks ago",
+      "text": "love the atmosphere. We came on the evening, the weather is good, ambience is perfect. Food also yummy. There’s a lot of spots for a good photo",
+      "time": 1727958150,
+      "translated": false
+    },
+    {
+      "author_name": "JunHwoa Lee",
+      "author_url": "https://www.google.com/maps/contrib/114779649256302552140/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIVNpmz0_uhBCxgjvpH0V_IkKkxgqWLyaBfeC5zolWCp0q2sw=s128-c0x00000000-cc-rp-mo-ba4",
+      "rating": 5,
+      "relative_time_description": "11 months ago",
+      "text": "A really great and beautifully designed restaurant! Went here for a friday lunch and was glad that there were not many people around,, and we can go around to take pictures with their beautiful interior. Their food was quite good, the A5 wagyu burger meat patty was delicious and full of flavour with a generous amount of bacon bits and pickled vegetables to balance it out. Loved the fries that came with the burger! They were crispy and well seasoned. The Aglio e Olio was good too, however a bit on the spicier side surprisingly. I would suggest to take out the spice if youre not a fan of spicy olio. The mushroom soup was splendid, and one of the best I’ve tried in Jakarta. The portions was generous and definitely worth the price. Our favourite was the tipsy tiramisu that was decadent and rich, but not too sweet! Loved the aftertaste of rum mixed with chocolate, definitely a good rich dessert to end with. Our main server that day and time (17 Nov, 11AM) was super nice and accommodating to us, props for giving us such good service. Even asked if he can help take pictures for us 😆 A wonderful place with beautiful interior, and a delicious lunch.",
+      "time": 1700220601,
+      "translated": false
+    },
+    {
+      "author_name": "byUrmo",
+      "author_url": "https://www.google.com/maps/contrib/115004602298533832111/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVTYDc4i3kctTrDCBfZR2rhLqIE_XRMLudsbQJ_VJowg59DdKXLXQ=s128-c0x00000000-cc-rp-mo-ba7",
+      "rating": 5,
+      "relative_time_description": "9 months ago",
+      "text": "Beautiful design and kinda romantic but I wish the music wasn't that loud (otherwise it would be perfect).\nLast time I visited it, the voice from the singer isn't great and that really kills the mood. Then I move to the indoor side but turns out they have speakers inside too so there wasn't a big difference.\n\nTbh the food is a bit overpriced also for that kind of taste but you paid for the cozy place and beautiful lake view.",
+      "time": 1705554846,
+      "translated": false
+    },
+    {
+      "author_name": "jane mein",
+      "author_url": "https://www.google.com/maps/contrib/103939158376961755557/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU0BnwQ9mxUu_yu_FzYSrz-yYGWMVBCA847cdHEH2WnFayna9IA=s128-c0x00000000-cc-rp-mo-ba4",
+      "rating": 5,
+      "relative_time_description": "10 months ago",
+      "text": "If you are looking for beautifully designed restaurant and stunning outdoor for chill in the afternoon, this is the place. Beside I really admire their creative art culinary from their dessert.....Totally awesome!! Food are good especially Nasi bali or duck confit fried rice. I didnot try their cocktails but I will give a try next visit. Thanks Mr. Crist and Pastry team.",
+      "time": 1702180247,
+      "translated": false
+    },
+    {
+      "author_name": "Michael J.",
+      "author_url": "https://www.google.com/maps/contrib/105800107444872323209/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWO6TmCqNWC2duDCcdp0xMGRkzKzu3R65al_6KgfYnbaL-lkyLe=s128-c0x00000000-cc-rp-mo-ba6",
+      "rating": 5,
+      "relative_time_description": "a year ago",
+      "text": "One of the recommended premium restaurants in Spark. The place is dominated by white-tone added with good ornaments and architecture.\n\nThere is also a big pond next to the restaurant and customers can enjoy the outdoor area by seeing the pond and Senayan Park.\n\nThe food and beverages are good and worth to try. The service is also good. Of course, the place is neat and clean.",
+      "time": 1694855607,
+      "translated": false
+    }
+  ],
+  "id": "ChIJcWQDB3X3aS4R6EUaNToQqno",
+  "adr_address": "<span class=\"street-address\">Jl. Gerbang Pemuda No.3, RT.1/RW.3</span>, <span class=\"extended-address\">Gelora, Kecamatan Tanah Abang</span>, <span class=\"locality\">Kota Jakarta Pusat</span>, <span class=\"region\">Daerah Khusus Ibukota Jakarta</span> <span class=\"postal-code\">10270</span>, <span class=\"country-name\">Indonesia</span>",
+  "business_status": "OPERATIONAL",
+  "curbside_pickup": false,
+  "delivery": true,
+  "dine_in": true,
+  "formatted_address": "Jl. Gerbang Pemuda No.3, RT.1/RW.3, Gelora, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10270, Indonesia",
+  "formatted_phone_number": "0878-1000-9119",
+  "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+  "icon_background_color": "#FF9E67",
+  "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+  "international_phone_number": "+62 878-1000-9119",
+  "name": "DION Senayan Park",
+  "place_id": "ChIJcWQDB3X3aS4R6EUaNToQqno",
+  "rating": 4.6,
+  "reference": "ChIJcWQDB3X3aS4R6EUaNToQqno",
+  "reservable": true,
+  "serves_beer": true,
+  "serves_breakfast": true,
+  "serves_brunch": true,
+  "serves_dinner": true,
+  "serves_lunch": true,
+  "serves_vegetarian_food": true,
+  "serves_wine": true,
+  "takeout": true,
+  "types": [
+    "restaurant",
+    "night_club",
+    "bar",
+    "food",
+    "point_of_interest",
+    "establishment"
+  ],
+  "url": "https://maps.google.com/?cid=8838895060853081576",
+  "user_ratings_total": 957,
+  "utc_offset": 420,
+  "vicinity": "Jalan Gerbang Pemuda No.3, RT.1/RW.3, Gelora",
+  "wheelchair_accessible_entrance": true
+}

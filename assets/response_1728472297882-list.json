@@ -1,0 +1,1067 @@
+{
+  "html_attributions": [],
+  "next_page_token": "AdCG2DMDnYFc2Ivtm0RD-_58kkqLsZZyAXMIB1HfA5SolFUAV5EUIQiSaq1BYIvrBpKCPg8XLc_OLMkQ6Yz4EfoVPS4aUpPlSicYXqpItiu0LNS9WsALi5SyELKEuElHfR1-bb4b8tf-4PvbpXeQClMqXYv_wyZI6D_iMkxqPzCBJSldaYUlvQ9Ka8KumXIz6LQJYVQQK02bcO6jvfFHx8olATdF2210TrORGDhgTB8QjBbpIygmtLMJzImL9PdI4jLl0CPUrfo03jO11otsjJx_YR8_RAqIedwgBBwr4kgQ0dSuZYeTpKprUQbhmg9Y-cJEXtFo29gTwTO0ZDw8h-IkxlSkrvOiTACngHkLrCfr-FO2RTniVSTPSgCwKBEBsuQ5DVLcYFnFnKAFa7nQtRDlfAniYek2cDtiP_du9gEY7FqwZoEjnbuw9smhfd36",
+  "results": [
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1956129,
+          "lng": 106.8223572
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.193960019708498,
+            "lng": 106.8237951302915
+          },
+          "southwest": {
+            "lat": -6.196657980291502,
+            "lng": 106.8210971697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+      "icon_background_color": "#909CE1",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet",
+      "name": "Hotel Indonesia Kempinski Jakarta",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 1080,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/106192246481746511926\">Hotel Indonesia Kempinski Jakarta</a>"
+          ],
+          "photo_reference": "AdCG2DNOJERtQ0Tazcy5B27MR_jpwBoxzhHPtEUcUzZ5k1xHHyTc7KbfA9KfhZ5WovDiehNwqEixOwyo97qVHMwJ_c9b4Zdg2XohSo0PlnHPrZf_YWPUUHNy3x_jmi3NtPz3nSO0oYWoMGpmebGXVgLUHNR4xWId5PW0wQoQ_WRksz7X5rXY",
+          "width": 1920
+        }
+      ],
+      "place_id": "ChIJB9Y8liH0aS4RemVuMOm5PFA",
+      "plus_code": {
+        "compound_code": "RR3C+QW Menteng, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR3C+QW"
+      },
+      "rating": 4.8,
+      "reference": "ChIJB9Y8liH0aS4RemVuMOm5PFA",
+      "scope": "GOOGLE",
+      "types": [
+        "spa",
+        "lodging",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 24873,
+      "vicinity": "Jalan M.H. Thamrin No.1"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.196727999999999,
+          "lng": 106.822582
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.195621019708497,
+            "lng": 106.8241508802915
+          },
+          "southwest": {
+            "lat": -6.198318980291501,
+            "lng": 106.8214529197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Skye",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 409,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/114950110407985936446\">SKYE Bar &amp; Restaurant</a>"
+          ],
+          "photo_reference": "AdCG2DPa4VjlSrNaCENFWtOvAALuQuO6A4fhaTxUkgbfgypIQSTs41XWubG95mb6OwLywGzvkZcHIcWCy_ngShNt7UBDKtw9A99qVvmH4TAFBGqrAjxm-NA9dcfpaKH2GqQehLOTwLzBTrTe7C03QATYgxHkVqbUZ20YwgvqU1jPLzExv_fu",
+          "width": 690
+        }
+      ],
+      "place_id": "ChIJM-uT5yH0aS4RJb8FLs-zz4Y",
+      "plus_code": {
+        "compound_code": "RR3F+82 Menteng, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR3F+82"
+      },
+      "price_level": 3,
+      "rating": 4.6,
+      "reference": "ChIJM-uT5yH0aS4RJb8FLs-zz4Y",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "bar",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 6167,
+      "vicinity": "BCA Tower Lt. 56, Jl. M.H. Thamrin No. 1, RT.001 / RW.005, Menteng, RT.1/RW.5, Menteng"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.20763,
+          "lng": 106.8178845
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.206218169708499,
+            "lng": 106.8191032302915
+          },
+          "southwest": {
+            "lat": -6.208916130291502,
+            "lng": 106.8164052697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Harum Manis Restaurant",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 445,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/116553128462046222324\">Harum Manis Restaurant</a>"
+          ],
+          "photo_reference": "AdCG2DP_J63v-z6Y5jSpkcFpoDjaMidZF1sqhRorXM_J5YotrdzAfMXBD-kdtSeVSeK_BM2gIyq_I0fTUPO7KLWhxj10Vi75tVTUVTo51JKc7ZIf4fQ1IR1mcZXYq8v0oR5d9hzm6fho-2iK4qxuOL-RT6L7DGHM5edWXK8bFRjkBW7qi0Rb",
+          "width": 684
+        }
+      ],
+      "place_id": "ChIJ4UnlqwL0aS4Rsx3kmKaRK8Y",
+      "plus_code": {
+        "compound_code": "QRR9+W5 Karet Tengsin, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58QRR9+W5"
+      },
+      "price_level": 3,
+      "rating": 4.7,
+      "reference": "ChIJ4UnlqwL0aS4Rsx3kmKaRK8Y",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 2076,
+      "vicinity": "Retail Arcade, Apartemen Pavilion, Jalan K.H. Mas Mansyur No.Kav 24 12, RT.12/RW.11, Karet Tengsin"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.195501399999999,
+          "lng": 106.8250395
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.194183319708498,
+            "lng": 106.8264340302915
+          },
+          "southwest": {
+            "lat": -6.196881280291502,
+            "lng": 106.8237360697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Seribu Rasa Menteng",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 938,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/104741890480148051433\">Seribu Rasa</a>"
+          ],
+          "photo_reference": "AdCG2DM0DUwJQHvZC5xlXWItBcoJYBXC1943fyT_Nky0xW-yNmEEOLGpwtVdXJNMKf7meWbiKtp-_YBXKWUxumtQv9boBqSxjnWd-zNmNZgZGS6yEbSqg1Dv_4Mmo2ciUWtp2VHtefow8-_xIfzwGCvh6tXLE0GVAPkSFWFya50Xrr0BfT87",
+          "width": 1500
+        }
+      ],
+      "place_id": "ChIJR2I0yCX0aS4RnsVGtM67WiI",
+      "plus_code": {
+        "compound_code": "RR3G+Q2 Menteng, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR3G+Q2"
+      },
+      "price_level": 3,
+      "rating": 4.6,
+      "reference": "ChIJR2I0yCX0aS4RnsVGtM67WiI",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 5957,
+      "vicinity": "Jalan Haji Agus Salim No.128, RT.1/RW.5, Menteng"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1992905,
+          "lng": 106.8223119
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.197983219708497,
+            "lng": 106.8236592302915
+          },
+          "southwest": {
+            "lat": -6.200681180291502,
+            "lng": 106.8209612697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Loving Hut Express",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 3000,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/108736365668669237524\">Tan Jun Zuo</a>"
+          ],
+          "photo_reference": "AdCG2DPWtY8iTuHqMtcmVhgA5WdkmY9l_ZGKyL37EAhRsEbzjORoSGaE7TBGMs8kbP4yxlhjbFc4EcitMzZuSGaKcRwe_mxe9Ol12lpRql8Yyd80N7bh5vse3gSKUzGayTb14F5mHROobWK9_5F-p_G5Ek21ghbhqe2Urz4a98EVCfwGS78N",
+          "width": 4000
+        }
+      ],
+      "place_id": "ChIJq-9eIh_0aS4R8ZlBeUiWUUw",
+      "plus_code": {
+        "compound_code": "RR2C+7W Kebon Melati, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR2C+7W"
+      },
+      "price_level": 2,
+      "rating": 3.5,
+      "reference": "ChIJq-9eIh_0aS4R8ZlBeUiWUUw",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 10,
+      "vicinity": "ANZ Square Podium, Thamrin Nine, Jalan M.H. Thamrin No.8-9 Lt. B1, RT.14/RW.20, Kebon Melati"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.195074399999999,
+          "lng": 106.8196774
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.193725419708498,
+            "lng": 106.8210263802915
+          },
+          "southwest": {
+            "lat": -6.196423380291503,
+            "lng": 106.8183284197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Fiesta Steak Grand Indonesia",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 3024,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/110135417660922657805\">Ankit Rihal</a>"
+          ],
+          "photo_reference": "AdCG2DPTTJLrQGru-1EYEufkWRoP_0OGHZv0X_c56zPcC58MMMVFuovz1hXTyvQ853eFCXMQX8_8WqHrIa40FlHS2ZBeKUqEn4sPNsINZNr8Hlznv_OBaUEmoIQf5JzUo9Jx9gTxAaw-R0LkHxFqrsQwt9HhHA8Zq87hT3J5muUsRCYLbPwO",
+          "width": 4032
+        }
+      ],
+      "place_id": "ChIJT3bDYCD0aS4R_SSn9cCElQE",
+      "plus_code": {
+        "compound_code": "RR39+XV Kebon Melati, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR39+XV"
+      },
+      "price_level": 2,
+      "rating": 4.3,
+      "reference": "ChIJT3bDYCD0aS4R_SSn9cCElQE",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 111,
+      "vicinity": "FoodPrint West Mall, Lt. 5 Grand Indonesia, Jalan M.H. Thamrin No.1, Kebon Melati"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1984439,
+          "lng": 106.8166535
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.197162519708498,
+            "lng": 106.8179930302915
+          },
+          "southwest": {
+            "lat": -6.199860480291503,
+            "lng": 106.8152950697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Nasi Bakar Dinda",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 640,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/101303144580949410243\">Nasi Bakar Dinda</a>"
+          ],
+          "photo_reference": "AdCG2DPVz2r2bC4h4loIcHwaMOa-Q_-hASH7zmGDoIluztfIq5oACtLRKbuuCE_nD0dnvJn1YwBLph4go-htkWE5C4lO3gfTrbSBXEC0ltQtiGQ4gMoiWxdmfqNtNszTxxfkTRu7ImUswc3ii3-V91aouvzYFQOd_RaG6ltZvVQ08r0ke3I1",
+          "width": 640
+        }
+      ],
+      "place_id": "ChIJKWTzMKD2aS4RQSRYTktOhX8",
+      "plus_code": {
+        "compound_code": "RR28+JM Kebon Melati, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR28+JM"
+      },
+      "rating": 4.7,
+      "reference": "ChIJKWTzMKD2aS4RQSRYTktOhX8",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 6,
+      "vicinity": "Jalan Dukuh Pinggir V No.5 7, RT.7/RW.6, Kebon Melati"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1948695,
+          "lng": 106.8160021
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.193567419708498,
+            "lng": 106.8173432302915
+          },
+          "southwest": {
+            "lat": -6.196265380291502,
+            "lng": 106.8146452697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Bakso Sehat Bakso Atom Thamrin City",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 3024,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/113115276059335733731\">mila fauziah</a>"
+          ],
+          "photo_reference": "AdCG2DNqk8pq7iCuXSQe-9HkHPOao67PpTt5_L-gAhc21zBGVUJTB_nZfO2xTNObH1DET2SG2ghwGn6TPqhFv5cvD3LMLnp3nv6r60OjIxkuKe6f68cqr0WkHGySYYTGuNTedj5lX28hnmMCoZtjV1zrHgMdIDi-FeXhSD8eHt5TJiM7d4yc",
+          "width": 4032
+        }
+      ],
+      "place_id": "ChIJMZJvtZ_2aS4R8wRd2k58C3U",
+      "plus_code": {
+        "compound_code": "RR48+3C Kebon Melati, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR48+3C"
+      },
+      "price_level": 2,
+      "rating": 4.2,
+      "reference": "ChIJMZJvtZ_2aS4R8wRd2k58C3U",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 712,
+      "vicinity": "Jl. Kebon Kacang Raya, Kebon Melati Tanah Abang Jakarta Pusat DKI, Thamrin City Lantai Dasar, RT.2/RW.8, Kebon Melati"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.194753,
+          "lng": 106.817529
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.193429519708497,
+            "lng": 106.8190759802915
+          },
+          "southwest": {
+            "lat": -6.196127480291501,
+            "lng": 106.8163780197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "D'Cost",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 1824,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/102029702517597115958\">AINUL YAKIN</a>"
+          ],
+          "photo_reference": "AdCG2DP3kd7YyuE5vU60h3dsKJXCCizwMiggT0ic7A6FWbVZhKS55uNBPW6XA2ZfYm0Tp1QdaxZawLKGYKeQNVr_kP3tclZ28h4hwm29rW5vwSoiAAf-xU8d2txv3rm81tb-ZWsJ4sUi0G8h3cT7NtDWValCJhgANxykiEZThwbBvUcgt9ZC",
+          "width": 4000
+        }
+      ],
+      "place_id": "ChIJMZJvtZ_2aS4RjJVd_lYOj9w",
+      "plus_code": {
+        "compound_code": "RR49+32 Kebon Melati, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR49+32"
+      },
+      "price_level": 2,
+      "rating": 4.2,
+      "reference": "ChIJMZJvtZ_2aS4RjJVd_lYOj9w",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 870,
+      "vicinity": "Jalan Kebon Kacang Raya No.3, Kebon Melati"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1925842,
+          "lng": 106.82187
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.191171269708497,
+            "lng": 106.8232355802915
+          },
+          "southwest": {
+            "lat": -6.193869230291502,
+            "lng": 106.8205376197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Pepper Lunch Plaza Indonesia",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 1960,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/109838196483064979106\">oki maulana</a>"
+          ],
+          "photo_reference": "AdCG2DOCNcYYeEYWZKxgZGyj1sAM2SmkVXZKKMjjaoejRHoXO3qpRi5YheXSzp-6Sp5d5QjKDKbkJUD_YuFZfhMmgwIlMPcMuWLDiwZ4RPRLVYiiyuCv0RdhJs-cKVaEkAdKWCp2tWKTMcO9jXz0uKwOGM7mVOJDQeGGAtX7woPCPCLzAUv8",
+          "width": 4032
+        }
+      ],
+      "place_id": "ChIJG6qaIiH0aS4R--MqMT_rrsc",
+      "plus_code": {
+        "compound_code": "RR4C+XP Gondangdia, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR4C+XP"
+      },
+      "price_level": 2,
+      "rating": 4.7,
+      "reference": "ChIJG6qaIiH0aS4R--MqMT_rrsc",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 588,
+      "vicinity": "Plaza Indonesia Level B No. 57, 58-58B, Jl. MH.Thamrin Kav 28-30, RT.9/RW.5, Gondangdia, Jalan M.H. Thamrin No.28-30 57, 58-58B, RT.9/RW.5, Gondangdia"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1939822,
+          "lng": 106.8219095
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.192890619708498,
+            "lng": 106.8235580302915
+          },
+          "southwest": {
+            "lat": -6.195588580291502,
+            "lng": 106.8208600697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Gyu-kaku Prime at Plaza Indonesia",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 1258,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/100355359895861178872\">Gyu-kaku Prime at Plaza Indonesia</a>"
+          ],
+          "photo_reference": "AdCG2DOX2C4y_3Sr_URz-WUzJvKAbSOdUDyRQ0w-4SpH0AFm-0_II9rCT_cEGK2dkqLtHQ9VMe3hcI9VVMYYDC-Ah503LuNVwVZHopBKJxT63AmB7XYAJih-CPr03B-sUMlcbI277QSVfxAJe3fxEbqJlqeYWCWUj5p4eDOR2tax4mxSKQdG",
+          "width": 932
+        }
+      ],
+      "place_id": "ChIJAaQtdCH0aS4RltcB9ddt1So",
+      "plus_code": {
+        "compound_code": "RR4C+CQ Gondangdia, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR4C+CQ"
+      },
+      "price_level": 3,
+      "rating": 4.7,
+      "reference": "ChIJAaQtdCH0aS4RltcB9ddt1So",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 745,
+      "vicinity": "Jalan M.H. Thamrin No.28 - 30, RT.9/RW.5, Gondangdia"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.196268799999999,
+          "lng": 106.8224528
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.195046269708498,
+            "lng": 106.8235792302915
+          },
+          "southwest": {
+            "lat": -6.197744230291502,
+            "lng": 106.8208812697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/shopping-71.png",
+      "icon_background_color": "#4B96F3",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/shopping_pinlet",
+      "name": "KempiDeli",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 1080,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/109911805747139674825\">Kempi Deli</a>"
+          ],
+          "photo_reference": "AdCG2DMo5vaiPMFAuuzhQVqFAnaKX4a8rbUE3yLYRVcuFDsoJzgqfFus8C5ywv2yhpFElAmDeawEsS0_gzBN8bTywDuOemhcRRKM2HdSlxEJHfXapdIul5JiScIvCGbkOJHvhxYVMpOAnS7_G2Krxi2fFq64vfeypu-BNgH6yXy94PnpKbCC",
+          "width": 1920
+        }
+      ],
+      "place_id": "ChIJUR-awCH0aS4RkXqaPPeVjiQ",
+      "plus_code": {
+        "compound_code": "RR3C+FX Menteng, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR3C+FX"
+      },
+      "rating": 4.6,
+      "reference": "ChIJUR-awCH0aS4RkXqaPPeVjiQ",
+      "scope": "GOOGLE",
+      "types": [
+        "cafe",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 436,
+      "vicinity": "Jalan M.H. Thamrin No.1 1A, RT.1/RW.5, Menteng"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.208829300000001,
+          "lng": 106.8188526
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.207477569708498,
+            "lng": 106.8202649802915
+          },
+          "southwest": {
+            "lat": -6.210175530291503,
+            "lng": 106.8175670197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Warung Leko Citywalk Sudirman",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 1334,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/113914752861073222611\">Abe Lie</a>"
+          ],
+          "photo_reference": "AdCG2DMop63VTK4vXoirljTwnlToTb7myhE6DSC_09t5o2MzkuG13Ly8mS-Ir2yOBGF1HAg_Mj6nYxkqdHs44XhIwkuM4m_xg1SH0PwyP9DVKEknJzXHirI1BrCgH6PpqYaNHy2S8q2THEoS5EY7jlR57ID8aELhPreDoNY30WB4FVNuT0dY",
+          "width": 2000
+        }
+      ],
+      "place_id": "ChIJC4AoegL0aS4Roi7hmMRTMro",
+      "plus_code": {
+        "compound_code": "QRR9+FG Karet Tengsin, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58QRR9+FG"
+      },
+      "rating": 4.4,
+      "reference": "ChIJC4AoegL0aS4Roi7hmMRTMro",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 274,
+      "vicinity": "Citylofts Sudirman, 10, Jalan K.H. Mas Mansyur No.121, RT.10/RW.11, Karet Tengsin"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1941666,
+          "lng": 106.8223591
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.192983169708498,
+            "lng": 106.8237931302915
+          },
+          "southwest": {
+            "lat": -6.195681130291502,
+            "lng": 106.8210951697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/bar-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/bar_pinlet",
+      "name": "CORK&SCREW Plaza Indonesia",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 5304,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/100189156644711941980\">Cork &amp; Screw</a>"
+          ],
+          "photo_reference": "AdCG2DPsekx41qixgDZTkn3zaiFe-Rh36nb1zJoIFyhsoACNv_zGLu7L6TKuDOVJndZije46ZM7SzqYXzVHCY_73C9mBRnB85Zg3dTYE5HBC7Bfkdw-s1BQCkxFLyIF71RqN5mTGJiReAeMUh54CTWlapyZZ_Wp3g_3eX7fjHLuv01dk7n81",
+          "width": 7952
+        }
+      ],
+      "place_id": "ChIJOdnYPCH0aS4R_ih5aIIyQJw",
+      "plus_code": {
+        "compound_code": "RR4C+8W Gondangdia, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR4C+8W"
+      },
+      "price_level": 3,
+      "rating": 4.6,
+      "reference": "ChIJOdnYPCH0aS4R_ih5aIIyQJw",
+      "scope": "GOOGLE",
+      "types": [
+        "bar",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 1221,
+      "vicinity": "Plaza Indonesia, Jalan M.H. Thamrin No.28-30, RT.9/RW.5, Gondangdia"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1936508,
+          "lng": 106.8221703
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.192541419708498,
+            "lng": 106.8237347802915
+          },
+          "southwest": {
+            "lat": -6.195239380291502,
+            "lng": 106.8210368197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Grand Café",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 750,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/117069505324934339521\">Grand Café</a>"
+          ],
+          "photo_reference": "AdCG2DNnn7CmGHmRIZAibBRkAN99R7C1iBqH3mc7QTbDrXY_5k3XmXnIOqGQAp5jcEyvNAPGLvsxKwtNTS3pbAuhlzZJqXj-QS1bziKhzL2eKk-FA5ZABOpeRKo5m0s6h9yAz3wNqj6LEEUu6uieYez-494pLMpebO-gXw4SkCmPIZc1R1ht",
+          "width": 1124
+        }
+      ],
+      "place_id": "ChIJm2jqESH0aS4RED227PWjD4M",
+      "plus_code": {
+        "compound_code": "RR4C+GV Gondangdia, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR4C+GV"
+      },
+      "rating": 4.4,
+      "reference": "ChIJm2jqESH0aS4RED227PWjD4M",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 327,
+      "vicinity": "Grand Hyatt Jakarta, Jalan M.H. Thamrin No.Kav. 28-30"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.195631499999999,
+          "lng": 106.8220099
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.194257719708497,
+            "lng": 106.8234657802915
+          },
+          "southwest": {
+            "lat": -6.196955680291501,
+            "lng": 106.8207678197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Palalada Restaurant Indonesian Food",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 2340,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/102870197881457287997\">Heriska Suthapa</a>"
+          ],
+          "photo_reference": "AdCG2DOQQLnIIKK9_FcoednE0s_uwayIQOidHq0f5BKogC-GJBj3cwJxjIWSd2DNfVLcFs_2ST2Si59sN34lWK_igrHMLl_Kx8weQ50uD6LqlJAL5o8RTis7vlYIUMK-g01bW3RM_57IQuFvaLg9N0zVGKNHChyYQRJRJXt7EX83hvMHAeMK",
+          "width": 4160
+        }
+      ],
+      "place_id": "ChIJUR-awCH0aS4R7MU7WQWfqmg",
+      "plus_code": {
+        "compound_code": "RR3C+PR Menteng, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR3C+PR"
+      },
+      "rating": 4.4,
+      "reference": "ChIJUR-awCH0aS4R7MU7WQWfqmg",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 49,
+      "vicinity": "Jl. MH Thamrin No. 1 Grand Indonesia West Mall Level 3, Jakarta, RT.1/RW.5, Menteng, RT.1/RW.5, Menteng"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.194064999999999,
+          "lng": 106.8223324
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.192690319708498,
+            "lng": 106.8237671302915
+          },
+          "southwest": {
+            "lat": -6.195388280291501,
+            "lng": 106.8210691697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Imperial Shanghai Lamian & Xiao Long Bao",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 3000,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/104460400907088489426\">Yuni Jong</a>"
+          ],
+          "photo_reference": "AdCG2DP6GOvS8ZVRrYW1SgKzOYCWiYcxh-LuwVwuuuv04fDwOcS7Xz0JAJXHZOQ8dyb3VnO0gZF8qPW0XIl-dNzoutv6yibb02vRurPvRiuDedw3CBOe7zv0CPeLtXtbq6mKZZLtDetpVVdKjMM-TzhuRwI8tn6l-vopBkytMWA--5uAOZ-d",
+          "width": 4000
+        }
+      ],
+      "place_id": "ChIJJ9mhEiH0aS4Ry4DpLVoc5Xc",
+      "plus_code": {
+        "compound_code": "RR4C+9W Gondangdia, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR4C+9W"
+      },
+      "price_level": 2,
+      "rating": 4.6,
+      "reference": "ChIJJ9mhEiH0aS4Ry4DpLVoc5Xc",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 789,
+      "vicinity": "Jalan M.H. Thamrin No.28-30 9, RT.9/RW.5, Gondangdia"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.1965848,
+          "lng": 106.8224882
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.195266069708498,
+            "lng": 106.8235853302915
+          },
+          "southwest": {
+            "lat": -6.197964030291502,
+            "lng": 106.8208873697085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Warung Leko Grand Indonesia",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 960,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/111666503649347711509\">Leko Grand Indonesia</a>"
+          ],
+          "photo_reference": "AdCG2DMHHuD3RPCb66g_dEnzhgzQ1IUnLiM2fN-lLDox2TiaGK6zLL0VCAg4QvHYMJ8Pz1W6AKUOAq2knkBTJ8fGixnan-tDbxzh5IMXE12L6cLWRWlf5Mu5lJtI-ZgJfWGq6JNymB3tOQKKuTDlHtre-2APOx_Schx05yn4mUW3Cece4dBh",
+          "width": 1280
+        }
+      ],
+      "place_id": "ChIJQwLPwCH0aS4R0uJxTtXMh9g",
+      "plus_code": {
+        "compound_code": "RR3C+9X Menteng, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR3C+9X"
+      },
+      "price_level": 2,
+      "rating": 4.5,
+      "reference": "ChIJQwLPwCH0aS4R0uJxTtXMh9g",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 602,
+      "vicinity": "Grand Indonesia East Mall Lt5, Kota, Jalan M.H. Thamrin No.1, RT.1/RW.5, Menteng"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.200703499999999,
+          "lng": 106.8213391
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.199369269708497,
+            "lng": 106.8226850802915
+          },
+          "southwest": {
+            "lat": -6.202067230291502,
+            "lng": 106.8199871197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Sop Kaki Kambing Bang Hasan",
+      "opening_hours": {
+        "open_now": false
+      },
+      "photos": [
+        {
+          "height": 3456,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/103185292140377455142\">Sop Kaki Kambing Bang Hasan</a>"
+          ],
+          "photo_reference": "AdCG2DPHhx6AYKnke0xDenoCJQzNvatN6ETZ1ZahetHYOVeLYte3V4hFbMPlKyjQR287DW4ByuS55ofITBjLcnCxMqKPt2OXlqhbLd1x6Qx3mUlajUZ_GKqakfZnIAiSxwUzr8PnMOhGB1bAs-qdsfj7ojdRJE9D1jommmijBQWS_e3rW2uV",
+          "width": 3456
+        }
+      ],
+      "place_id": "ChIJ5Rb4RyD0aS4Rj10BLLSu37M",
+      "plus_code": {
+        "compound_code": "QRXC+PG Kebon Melati, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58QRXC+PG"
+      },
+      "price_level": 2,
+      "rating": 4.6,
+      "reference": "ChIJ5Rb4RyD0aS4Rj10BLLSu37M",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 178,
+      "vicinity": "Jalan Plaju No.10, RT.10/RW.20, Kebon Melati"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": -6.195561700000001,
+          "lng": 106.8219569
+        },
+        "viewport": {
+          "northeast": {
+            "lat": -6.194208469708498,
+            "lng": 106.8234387802915
+          },
+          "southwest": {
+            "lat": -6.196906430291502,
+            "lng": 106.8207408197085
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+      "icon_background_color": "#FF9E67",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+      "name": "Signatures Restaurant",
+      "opening_hours": {
+        "open_now": true
+      },
+      "photos": [
+        {
+          "height": 1080,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/107264117583953054944\">Signatures Restaurant</a>"
+          ],
+          "photo_reference": "AdCG2DMfKxh2LoilfH3yNJhJY2pOCFjduS6IuHsH13cz9Y44SIZLqKLIwTbjAeiO0NdjoqV2xehOH4NAhEnz3CUoTzVhkx28Z2Spdsd3yJTK_Q8PGpWr5yJSF9r48XpaIlB3UWqRyjfFgP8piNCJ3PTTCkAtcsr77vqLl4_-spHWcYmmRT0p",
+          "width": 1920
+        }
+      ],
+      "place_id": "ChIJB9Y8liH0aS4R7Kogy_Nbpt4",
+      "plus_code": {
+        "compound_code": "RR3C+QQ Menteng, Central Jakarta City, Jakarta, Indonesia",
+        "global_code": "6P58RR3C+QQ"
+      },
+      "price_level": 3,
+      "rating": 4.6,
+      "reference": "ChIJB9Y8liH0aS4R7Kogy_Nbpt4",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 788,
+      "vicinity": "Hotel Indonesia Kempinski Jakarta, Jalan M.H. Thamrin No.1 1, RT.1/RW.5, Menteng"
+    }
+  ],
+  "status": "OK"
+}

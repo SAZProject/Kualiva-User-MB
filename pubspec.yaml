@@ -81,6 +81,11 @@ flutter:
         - assets/images/f_n_b/10/A/
         - assets/images/f_n_b/10/B/
         - assets/translation/
+        - assets/response_1728472297882-list.json
+        - assets/response_1728580777035-detail.json
+        - assets/1G-Maps-Extractor-10-Restaurants-2024-10-17.json
+        - assets/merchant_nearby.json
+        - assets/merchant_nearby_detail.json
     fonts:
         - family: K2D
           fonts:

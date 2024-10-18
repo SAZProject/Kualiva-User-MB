@@ -1,14 +1,8 @@
-// import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/check_permission.dart';
-import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/utility/video_constant.dart';
 import 'package:video_player/video_player.dart';
-import 'package:like_it/app_routes.dart';
-import 'package:dio/dio.dart';
-import 'package:cookie_jar/cookie_jar.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

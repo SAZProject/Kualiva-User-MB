@@ -7,7 +7,6 @@ import 'package:like_it/common/widget/custom_attach_media.dart';
 import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/app_routes.dart';
 
 class ReviewVerifyModal extends StatefulWidget {
   const ReviewVerifyModal({super.key, required this.fnbData});

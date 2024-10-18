@@ -5,7 +5,6 @@ import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/utility/check_device.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:like_it/app_routes.dart';
 
 class DevicePermissionScreen extends StatefulWidget {
   const DevicePermissionScreen({super.key});

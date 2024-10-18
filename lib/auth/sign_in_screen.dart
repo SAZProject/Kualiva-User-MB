@@ -12,7 +12,7 @@ import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_image_view.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
-import 'package:like_it/app_routes.dart';
+import 'package:like_it/router.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

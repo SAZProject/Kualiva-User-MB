@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/place/place_model.dart';
 
 class FNBPlaceItemDummy extends StatelessWidget {

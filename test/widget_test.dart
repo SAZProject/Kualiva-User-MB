@@ -6,10 +6,7 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
 import 'package:like_it/data/model/place/place_detail_model.dart';
-import 'package:like_it/data/model/place/place_response_model.dart';
-import 'package:like_it/data/model/place/restaurant_extractor_model.dart';
 
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -52,11 +49,9 @@ void main() {
 
     Restaurant restaurant = Restaurant.fromMap(data);
 
-    if (restaurant is Restaurant) {
-      print('Restaurant Same Object Type');
-      print(restaurant);
-    }
-
+    print('Restaurant Same Object Type');
+    print(restaurant);
+  
     // String str1 = await rootBundle
     //     .loadString('assets/1G-Maps-Extractor-10-Restaurants-2024-10-17.json');
 

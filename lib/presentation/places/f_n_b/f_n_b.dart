@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
-import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/utility/location_utility.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
@@ -18,13 +17,8 @@ import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
 import 'package:like_it/presentation/places/f_n_b/f_n_b_detail_nearby_screen.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item_dummy.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item_nearby.dart';
 import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_promo_item.dart';
-import 'package:like_it/app_routes.dart';
-
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 
 class FNBScreen extends StatefulWidget {
   const FNBScreen({super.key});

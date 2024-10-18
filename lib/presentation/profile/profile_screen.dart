@@ -5,7 +5,6 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
-import 'package:like_it/app_routes.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

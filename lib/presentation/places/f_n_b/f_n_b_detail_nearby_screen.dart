@@ -14,7 +14,6 @@ import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/place/place_detail_model.dart';
 import 'package:like_it/data/model/ui_model/promo_model.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:like_it/app_routes.dart';
 
 class FNBDetailNearbyScreen extends StatefulWidget {
   const FNBDetailNearbyScreen({

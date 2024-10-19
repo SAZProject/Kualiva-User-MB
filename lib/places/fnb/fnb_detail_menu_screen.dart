@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
 
-class FNBDetailMenuScreen extends StatelessWidget {
-  const FNBDetailMenuScreen({super.key, required this.listImageMenu});
+class FnbDetailMenuScreen extends StatelessWidget {
+  const FnbDetailMenuScreen({super.key, required this.listImageMenu});
 
   final List<String> listImageMenu;
 

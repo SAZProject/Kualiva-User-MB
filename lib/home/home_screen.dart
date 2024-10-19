@@ -15,7 +15,7 @@ import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/home_grid_menu_model.dart';
 import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
-import 'package:like_it/presentation/home/widget/home_featured_item.dart';
+import 'package:like_it/home/widget/home_featured_item.dart';
 import 'package:path_provider/path_provider.dart';
 
 class HomeScreen extends StatefulWidget {

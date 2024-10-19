@@ -6,8 +6,8 @@ import 'package:like_it/common/utility/datetime_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/data/model/ui_model/onboarding_verifying_model.dart';
 import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
-import 'package:like_it/onboarding_screen/widget/onboarding_pick_birthdate.dart';
-import 'package:like_it/onboarding_screen/widget/onboarding_pick_notification.dart';
+import 'package:like_it/onboarding/widget/onboarding_pick_birthdate.dart';
+import 'package:like_it/onboarding/widget/onboarding_pick_notification.dart';
 
 class OnboardingVerifyingUser extends StatefulWidget {
   const OnboardingVerifyingUser({super.key});

@@ -5,19 +5,19 @@ import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_slider.dart';
+import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
+import 'package:like_it/places/fnb/widget/fnb_filters_slider.dart';
 
-class FNBFiltersScreen extends StatefulWidget {
-  const FNBFiltersScreen({super.key, this.getFilterModel});
+class FnbFiltersScreen extends StatefulWidget {
+  const FnbFiltersScreen({super.key, this.getFilterModel});
 
   final FiltersModel? getFilterModel;
 
   @override
-  State<FNBFiltersScreen> createState() => _FNBFiltersScreenState();
+  State<FnbFiltersScreen> createState() => _FNBFiltersScreenState();
 }
 
-class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
+class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
   List<String> foodsCateg = FNBFilterDataset.fnbSubCategFoods;
   List<String> bvgsCateg = FNBFilterDataset.fnbSubCategBvg;
 
@@ -168,7 +168,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 10.h),
-            FNBFiltersSlider(
+            FnbFiltersSlider(
               label: context.tr("filter.radius"),
               minLabel: context.tr("filter.radius_value", namedArgs: {
                 "radius": radiusNotifier.value.start.ceil().toString()
@@ -183,7 +183,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
               onChangeEnd: _onChangeFilterSlider,
             ),
             SizedBox(height: 10.h),
-            FNBFiltersSlider(
+            FnbFiltersSlider(
               label: context.tr("filter.price_range"),
               minLabel: context.tr("filter.price_range_value", namedArgs: {
                 "price":
@@ -216,7 +216,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
               onChangeEnd: _onChangeFilterSlider,
             ),
             SizedBox(height: 10.h),
-            FNBFiltersSlider(
+            FnbFiltersSlider(
               label: context.tr("filter.rating"),
               minLabel: ratingNotifier.value.start == 0.0
                   ? context.tr("filter.rating_min_value")
@@ -294,7 +294,7 @@ class _FNBFiltersScreenState extends State<FNBFiltersScreen> {
               children: List<Widget>.generate(
                 listFilter.length,
                 (index) {
-                  return FNBFiltersItem(
+                  return FnbFiltersItem(
                     label: listFilter[index],
                     multiSelect: true,
                     multiSelectedChoices: selectedCateg,

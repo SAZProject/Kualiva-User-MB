@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
@@ -11,31 +10,24 @@ import 'package:like_it/common/widget/custom_float_modal.dart';
 import 'package:like_it/common/widget/custom_map_bottom_sheet.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/data/model/place/place_detail_model.dart';
 import 'package:like_it/data/model/ui_model/promo_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FNBDetailNearbyScreen extends StatefulWidget {
-  const FNBDetailNearbyScreen({
-    super.key,
-    required this.fnbModel,
-    required this.placeId,
-  });
+class FnbDetailScreen extends StatefulWidget {
+  const FnbDetailScreen({super.key, required this.fnbModel});
 
   final FNBModel fnbModel;
-  final String placeId;
 
   @override
-  State<FNBDetailNearbyScreen> createState() => _FNBDetailScreenState();
+  State<FnbDetailScreen> createState() => _FNBDetailScreenState();
 }
 
-class _FNBDetailScreenState extends State<FNBDetailNearbyScreen> {
+class _FNBDetailScreenState extends State<FnbDetailScreen> {
   final GlobalKey _toolTipKey = GlobalKey();
   OverlayEntry? _overlayEntry;
   final LayerLink _layerLink = LayerLink();
 
   FNBModel get fnbData => super.widget.fnbModel;
-  String get placeId => super.widget.placeId;
   bool _hasCallSupport = false;
 
   List<PromoModel> listPromo = [
@@ -131,24 +123,6 @@ class _FNBDetailScreenState extends State<FNBDetailNearbyScreen> {
       setState(() {
         _hasCallSupport = result;
       });
-    });
-    init();
-  }
-
-  Restaurant? restaurant;
-
-  void init() async {
-    Dio dio = Dio();
-    Response res = await dio.get(
-      "https://kg1k4xc5-3000.asse.devtunnels.ms/merchant/byPlaceId",
-      queryParameters: {
-        'placeId': placeId,
-      },
-    );
-
-    var temp1 = Restaurant.fromMap(res.data);
-    setState(() {
-      restaurant = temp1;
     });
   }
 
@@ -311,7 +285,7 @@ class _FNBDetailScreenState extends State<FNBDetailNearbyScreen> {
               child: SizedBox(
                 height: 30.h,
                 child: Text(
-                  restaurant?.name ?? '',
+                  fnbData.placeName,
                   textAlign: TextAlign.center,
                   style: theme(context).textTheme.headlineSmall,
                   maxLines: 1,

@@ -3,17 +3,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/screen/coming_soon.dart';
-import 'package:like_it/presentation/home/home_screen.dart';
-import 'package:like_it/presentation/profile/profile_screen.dart';
+import 'package:like_it/home/home_screen.dart';
+import 'package:like_it/profile/profile_screen.dart';
 
-class HomeNavigation extends StatefulWidget {
-  const HomeNavigation({super.key});
+class MainLayout extends StatefulWidget {
+  const MainLayout({super.key});
 
   @override
-  State<HomeNavigation> createState() => _HomeNavigationState();
+  State<MainLayout> createState() => _HomeNavigationState();
 }
 
-class _HomeNavigationState extends State<HomeNavigation> {
+class _HomeNavigationState extends State<MainLayout> {
   int _selectedPage = 0;
 
   @override
@@ -46,6 +46,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
 
   Widget _body(BuildContext context) {
     switch (_selectedPage) {
+      case 0:
+        return const HomeScreen();
       case 1:
         return const ComingSoon();
       case 2:

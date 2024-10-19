@@ -14,20 +14,20 @@ import 'package:like_it/data/model/place/place_response_model.dart';
 import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
-import 'package:like_it/presentation/places/f_n_b/f_n_b_detail_nearby_screen.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item_nearby.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_promo_item.dart';
+import 'package:like_it/places/fnb/fnb_detail_nearby_screen.dart';
+import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
+import 'package:like_it/places/fnb/widget/fnb_place_item.dart';
+import 'package:like_it/places/fnb/widget/fnb_place_item_nearby.dart';
+import 'package:like_it/places/fnb/widget/fnb_promo_item.dart';
 
-class FNBScreen extends StatefulWidget {
-  const FNBScreen({super.key});
+class FnbScreen extends StatefulWidget {
+  const FnbScreen({super.key});
 
   @override
-  State<FNBScreen> createState() => _FNBScreenState();
+  State<FnbScreen> createState() => _FnbScreenState();
 }
 
-class _FNBScreenState extends State<FNBScreen> {
+class _FnbScreenState extends State<FnbScreen> {
   final ScrollController _parentScrollController = ScrollController();
   final ScrollController _childScrollController = ScrollController();
   final ScrollController _childScrollController2 = ScrollController();
@@ -322,7 +322,7 @@ class _FNBScreenState extends State<FNBScreen> {
             //TODO add waiting, empty, error state in future
             if (index == 0) return _filterScreenBtn(context, index, label: "");
             if ((index - 1) == 0) {
-              return FNBFiltersItem(
+              return FnbFiltersItem(
                 label: _listTagsFilter[index - 1],
                 isWrap: false,
                 multiSelect: true,
@@ -330,7 +330,7 @@ class _FNBScreenState extends State<FNBScreen> {
                 multiSelectedChoices: selectedFilters,
               );
             }
-            return FNBFiltersItem(
+            return FnbFiltersItem(
               label: _listTagsFilter[index - 1],
               isWrap: false,
               multiSelect: true,
@@ -421,7 +421,7 @@ class _FNBScreenState extends State<FNBScreen> {
                   itemCount: 6,
                   itemBuilder: (context, index) {
                     if (merchantNearby.isEmpty) {
-                      return FNBPlaceItem(
+                      return FnbPlaceItem(
                         fnbModel: featuredListItems[index],
                         onPressed: () {
                           Navigator.pushNamed(
@@ -431,7 +431,7 @@ class _FNBScreenState extends State<FNBScreen> {
                       );
                     }
 
-                    return FNBPlaceItemNearby(
+                    return FnbPlaceItemNearby(
                       merchant: merchantNearby[index],
                       onPressed: () {
                         // Navigator.pushNamed(
@@ -444,7 +444,7 @@ class _FNBScreenState extends State<FNBScreen> {
                             DialogRoute(
                               context: context,
                               builder: (context) {
-                                return FNBDetailNearbyScreen(
+                                return FnbDetailNearbyScreen(
                                   fnbModel: featuredListItems[index],
                                   placeId: merchantNearby[index].placeId,
                                 );
@@ -455,7 +455,7 @@ class _FNBScreenState extends State<FNBScreen> {
 
                     //TODO add waiting, empty, error state in future
                     // if (placeResponseModel == null) {
-                    //   return FNBPlaceItem(
+                    //   return FnbPlaceItem(
                     //     fnbModel: featuredListItems[index],
                     //     onPressed: () {
                     //       Navigator.pushNamed(
@@ -464,7 +464,7 @@ class _FNBScreenState extends State<FNBScreen> {
                     //     },
                     //   );
                     // }
-                    // return FNBPlaceItemDummy(
+                    // return FnbPlaceItemDummy(
                     //   place: placeResponseModel!.results[index],
                     //   onPressed: () {
                     //     Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
@@ -506,7 +506,7 @@ class _FNBScreenState extends State<FNBScreen> {
                 itemCount: 6,
                 itemBuilder: (context, index) {
                   //TODO add waiting, empty, error state in future
-                  return FNBPromoItem(
+                  return FnbPromoItem(
                     fnbModel: featuredListItems[index],
                     onPressed: () {
                       Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,

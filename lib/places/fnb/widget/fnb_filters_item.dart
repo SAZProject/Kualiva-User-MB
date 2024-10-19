@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 
-class FNBFiltersItem extends StatelessWidget {
-  const FNBFiltersItem({
+class FnbFiltersItem extends StatelessWidget {
+  const FnbFiltersItem({
     super.key,
     required this.label,
     this.onSelected,

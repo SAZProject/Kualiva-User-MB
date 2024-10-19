@@ -8,26 +8,26 @@ import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/model/ui_model/home_event_model.dart';
-import 'package:like_it/onboarding_screen/onboarding_verifying_user.dart';
-import 'package:like_it/presentation/home/home_event_detail_screen.dart';
-import 'package:like_it/presentation/home/home_event_screen.dart';
-import 'package:like_it/presentation/places/add_places_screen.dart';
-import 'package:like_it/presentation/places/f_n_b/f_n_b.dart';
-import 'package:like_it/presentation/places/f_n_b/f_n_b_cuisine.dart';
-import 'package:like_it/presentation/places/f_n_b/f_n_b_detail_menu_screen.dart';
-import 'package:like_it/presentation/places/f_n_b/f_n_b_detail_screen.dart';
-import 'package:like_it/presentation/home/home_navigation.dart';
-import 'package:like_it/presentation/places/f_n_b/f_n_b_filters_screen.dart';
-import 'package:like_it/presentation/profile/account_setting_screen.dart';
-import 'package:like_it/presentation/profile/language_screen.dart';
-import 'package:like_it/presentation/profile/my_profile_screen.dart';
-import 'package:like_it/presentation/profile/profile_screen.dart';
-import 'package:like_it/presentation/report/report_place_screen.dart';
-import 'package:like_it/presentation/report/report_review_screen.dart';
-import 'package:like_it/presentation/review/review_form_screen.dart';
-import 'package:like_it/presentation/review/review_screen.dart';
-import 'package:like_it/onboarding_screen/onboarding_screen.dart';
-import 'package:like_it/splash_screen/splash_screen.dart';
+import 'package:like_it/onboarding/onboarding_verifying_user.dart';
+import 'package:like_it/home/home_event_detail_screen.dart';
+import 'package:like_it/home/home_event_screen.dart';
+import 'package:like_it/places/add_places_screen.dart';
+import 'package:like_it/places/fnb/fnb_screen.dart';
+import 'package:like_it/places/fnb/fnb_cuisine_screen.dart';
+import 'package:like_it/places/fnb/fnb_detail_menu_screen.dart';
+import 'package:like_it/places/fnb/fnb_detail_screen.dart';
+import 'package:like_it/layout/main_layout.dart';
+import 'package:like_it/places/fnb/fnb_filters_screen.dart';
+import 'package:like_it/profile/account_setting_screen.dart';
+import 'package:like_it/profile/language_screen.dart';
+import 'package:like_it/profile/my_profile_screen.dart';
+import 'package:like_it/profile/profile_screen.dart';
+import 'package:like_it/report/report_place_screen.dart';
+import 'package:like_it/report/report_review_screen.dart';
+import 'package:like_it/review/review_form_screen.dart';
+import 'package:like_it/review/review_screen.dart';
+import 'package:like_it/onboarding/onboarding_screen.dart';
+import 'package:like_it/splash/splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AppRoutes {
@@ -124,7 +124,7 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
     case AppRoutes.homeNavigationScreen:
       return PageTransition(
-          child: const HomeNavigation(),
+          child: const MainLayout(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.homeEventScreen:
@@ -140,31 +140,31 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbScreen:
       return PageTransition(
-          child: const FNBScreen(),
+          child: const FnbScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbCuisineScreen:
       final cuisineTitle = routeSetting.arguments as String;
       return PageTransition(
-          child: FNBCuisine(cuisineTitle: cuisineTitle),
+          child: FnbCuisineScreen(cuisineTitle: cuisineTitle),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbFilterScreen:
       final filterModel = routeSetting.arguments as FiltersModel?;
       return PageTransition(
-          child: FNBFiltersScreen(getFilterModel: filterModel),
+          child: FnbFiltersScreen(getFilterModel: filterModel),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbDetailScreen:
       final fnbModel = routeSetting.arguments as FNBModel;
       return PageTransition(
-          child: FNBDetailScreen(fnbModel: fnbModel),
+          child: FnbDetailScreen(fnbModel: fnbModel),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.fnbDetailMenuScreen:
       final listImageMenu = routeSetting.arguments as List<String>;
       return PageTransition(
-          child: FNBDetailMenuScreen(listImageMenu: listImageMenu),
+          child: FnbDetailMenuScreen(listImageMenu: listImageMenu),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
     case AppRoutes.reviewScreen:

@@ -1,13 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:like_it/data/model/place/place_model.dart';
 
-class FNBPlaceItem extends StatelessWidget {
-  const FNBPlaceItem(
-      {super.key, required this.fnbModel, required this.onPressed});
+class FnbPlaceItemDummy extends StatelessWidget {
+  const FnbPlaceItemDummy({
+    super.key,
+    required this.place,
+    required this.onPressed,
+  });
 
-  final FNBModel fnbModel;
+  final Place place;
   final VoidCallback onPressed;
 
   @override
@@ -31,8 +34,11 @@ class FNBPlaceItem extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
+                  // https://lh5.googleusercontent.com/p/AF1QipNNTuC6HYtW4TGRybf5cfUi_Twx8cUyKhF08czq=w408-h408-k-no
+                  // https://lh5.googleusercontent.com/p/ChIJB9Y8liH0aS4RemVuMOm5PFA=w408-h408-k-no
                   CustomImageView(
-                    imagePath: fnbModel.placePicture[0],
+                    imagePath: place.icon,
+                    // imagePath: "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
                     radius: BorderRadius.horizontal(
@@ -63,7 +69,7 @@ class FNBPlaceItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            fnbModel.overallRating.toString(),
+                            '${place.rating}',
                             style: theme(context).textTheme.labelMedium,
                           ),
                         ],
@@ -81,7 +87,7 @@ class FNBPlaceItem extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 4.h),
                     child: Text(
-                      fnbModel.placeName,
+                      place.name,
                       style: theme(context).textTheme.titleSmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -90,7 +96,7 @@ class FNBPlaceItem extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 4.h),
                     child: Text(
-                      fnbModel.city,
+                      'jakarta',
                       style: theme(context).textTheme.bodySmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -127,25 +133,24 @@ class FNBPlaceItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: fnbModel.tags.length > 4 ? 4 : fnbModel.tags.length,
+        itemCount: place.types.length > 4 ? 4 : place.types.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          //TODO add waiting, empty, error state in future
           if (index == 3) {
-            if (fnbModel.tags.length > 4) {
+            if (place.types.length > 4) {
               return _tagView(
                 context,
                 context.tr(
                   "f_n_b.tags_more",
-                  args: [(fnbModel.tags.length - 3).toString()],
+                  args: [(place.types.length - 3).toString()],
                 ),
               );
             } else {
-              return _tagView(context, fnbModel.tags[index]);
+              return _tagView(context, place.types[index]);
             }
           }
-          return _tagView(context, fnbModel.tags[index]);
+          return _tagView(context, place.types[index]);
         },
       ),
     );

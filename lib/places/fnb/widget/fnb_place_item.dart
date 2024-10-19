@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 
-class FNBPromoItem extends StatelessWidget {
-  const FNBPromoItem(
+class FnbPlaceItem extends StatelessWidget {
+  const FnbPlaceItem(
       {super.key, required this.fnbModel, required this.onPressed});
 
   final FNBModel fnbModel;
@@ -13,32 +13,30 @@ class FNBPromoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150.h,
-      margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 5.h),
+      height: 100.h,
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 6.h),
       decoration: CustomDecoration(context)
           .outlineOnSecondaryContainer
           .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
         onTap: onPressed,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 100.h,
-              width: double.maxFinite,
+              width: 85.h,
               child: Stack(
-                alignment: Alignment.center,
+                alignment: Alignment.bottomRight,
                 children: [
                   CustomImageView(
-                    alignment: Alignment.center,
                     imagePath: fnbModel.placePicture[0],
                     height: 100.h,
                     width: double.maxFinite,
-                    radius: BorderRadius.vertical(
-                      top: Radius.circular(10.h),
+                    radius: BorderRadius.horizontal(
+                      left: Radius.circular(10.h),
                     ),
                   ),
                   Align(
@@ -71,109 +69,83 @@ class FNBPromoItem extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      width: double.maxFinite,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.h,
-                      ),
-                      decoration: CustomDecoration(context)
-                          .gradientPrimaryContainerToRedA,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.discount,
-                            size: 15.h,
-                          ),
-                          SizedBox(width: 4.h),
-                          Text(
-                            context.tr("f_n_b.promo_value", args: ["60"]),
-                            style: theme(context).textTheme.labelLarge,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 4.h),
-              child: Text(
-                fnbModel.placeName,
-                style: theme(context).textTheme.titleSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+            SizedBox(width: 5.h),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 4.h),
+                    child: Text(
+                      fnbModel.placeName,
+                      style: theme(context).textTheme.titleSmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 4.h),
+                    child: Text(
+                      fnbModel.city,
+                      style: theme(context).textTheme.bodySmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  SizedBox(
+                    height: 20.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.attach_money, size: 15.h),
+                        Icon(Icons.attach_money, size: 15.h),
+                        Icon(Icons.attach_money, size: 15.h),
+                        Icon(Icons.attach_money, size: 15.h),
+                        Icon(Icons.attach_money, size: 15.h),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  _tagList(context),
+                  SizedBox(height: 5.h),
+                ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 4.h),
-              child: Text(
-                fnbModel.city,
-                style: theme(context).textTheme.bodySmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            SizedBox(height: 5.h),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _firstTagRow(context),
-                SizedBox(height: 4.h),
-                fnbModel.tags.length > 2
-                    ? _secondTagRow(context)
-                    : const SizedBox(),
-              ],
-            )
           ],
         ),
       ),
     );
   }
 
-  Widget _firstTagRow(BuildContext context) {
+  Widget _tagList(BuildContext context) {
     return SizedBox(
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: fnbModel.tags.length >= 2 ? 2 : fnbModel.tags.length,
+        itemCount: fnbModel.tags.length > 4 ? 4 : fnbModel.tags.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return _tagView(context, fnbModel.tags[index]);
-        },
-      ),
-    );
-  }
-
-  Widget _secondTagRow(BuildContext context) {
-    return SizedBox(
-      height: 20.h,
-      width: double.maxFinite,
-      child: ListView.builder(
-        itemCount: fnbModel.tags.length > 4 ? 2 : 1,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          if (index == 1) {
+          //TODO add waiting, empty, error state in future
+          if (index == 3) {
             if (fnbModel.tags.length > 4) {
               return _tagView(
                 context,
                 context.tr(
-                  "home_screen.tags_more",
+                  "f_n_b.tags_more",
                   args: [(fnbModel.tags.length - 3).toString()],
                 ),
               );
             } else {
-              return _tagView(context, fnbModel.tags[index + 2]);
+              return _tagView(context, fnbModel.tags[index]);
             }
           }
-          return _tagView(context, fnbModel.tags[index + 2]);
+          return _tagView(context, fnbModel.tags[index]);
         },
       ),
     );

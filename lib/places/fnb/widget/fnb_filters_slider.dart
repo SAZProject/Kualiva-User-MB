@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 
-class FNBFiltersSlider extends StatelessWidget {
-  const FNBFiltersSlider({
+class FnbFiltersSlider extends StatelessWidget {
+  const FnbFiltersSlider({
     super.key,
     required this.label,
     required this.minLabel,

@@ -7,11 +7,11 @@ import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/review_model.dart';
-import 'package:like_it/presentation/review/widget/review_filters_item.dart';
-import 'package:like_it/presentation/review/widget/review_filters_modal.dart';
-import 'package:like_it/presentation/review/widget/review_verify_modal.dart';
-import 'package:like_it/presentation/review/widget/review_view.dart';
-import 'package:like_it/presentation/review/widget/special_review_view.dart';
+import 'package:like_it/review/widget/review_filters_item.dart';
+import 'package:like_it/review/widget/review_filters_modal.dart';
+import 'package:like_it/review/widget/review_verify_modal.dart';
+import 'package:like_it/review/widget/review_view.dart';
+import 'package:like_it/review/widget/special_review_view.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key, required this.fnbModel});

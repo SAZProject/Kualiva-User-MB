@@ -5,19 +5,19 @@ import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_filters_item.dart';
-import 'package:like_it/presentation/places/f_n_b/widget/f_n_b_place_item.dart';
+import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
+import 'package:like_it/places/fnb/widget/fnb_place_item.dart';
 
-class FNBCuisine extends StatefulWidget {
-  const FNBCuisine({super.key, required this.cuisineTitle});
+class FnbCuisineScreen extends StatefulWidget {
+  const FnbCuisineScreen({super.key, required this.cuisineTitle});
 
   final String cuisineTitle;
 
   @override
-  State<FNBCuisine> createState() => _FNBCuisineState();
+  State<FnbCuisineScreen> createState() => _FNBCuisineState();
 }
 
-class _FNBCuisineState extends State<FNBCuisine> {
+class _FNBCuisineState extends State<FnbCuisineScreen> {
   final ScrollController _parentScrollController = ScrollController();
   final ScrollController _childScrollController = ScrollController();
 
@@ -171,7 +171,7 @@ class _FNBCuisineState extends State<FNBCuisine> {
             //TODO add waiting, empty, error state in future
             if (index == 0) return _filterScreenBtn(context, index, label: "");
             if ((index - 1) == 0) {
-              return FNBFiltersItem(
+              return FnbFiltersItem(
                 label: _listTagsFilter[index - 1],
                 isWrap: false,
                 multiSelect: true,
@@ -179,7 +179,7 @@ class _FNBCuisineState extends State<FNBCuisine> {
                 multiSelectedChoices: selectedFilters,
               );
             }
-            return FNBFiltersItem(
+            return FnbFiltersItem(
               label: _listTagsFilter[index - 1],
               isWrap: false,
               multiSelect: true,
@@ -257,7 +257,7 @@ class _FNBCuisineState extends State<FNBCuisine> {
                   itemCount: featuredListItems.length,
                   itemBuilder: (context, index) {
                     if (featuredListItems.isNotEmpty) {
-                      return FNBPlaceItem(
+                      return FnbPlaceItem(
                         fnbModel: featuredListItems[index],
                         onPressed: () {
                           Navigator.pushNamed(

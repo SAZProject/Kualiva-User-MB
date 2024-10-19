@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/data/model/place/place_model.dart';
+import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
 
-class FNBPlaceItemDummy extends StatelessWidget {
-  const FNBPlaceItemDummy({
+class FnbPlaceItemNearby extends StatelessWidget {
+  const FnbPlaceItemNearby({
     super.key,
-    required this.place,
+    required this.merchant,
     required this.onPressed,
   });
 
-  final Place place;
+  final MerchantNearby merchant;
   final VoidCallback onPressed;
 
   @override
@@ -37,7 +37,7 @@ class FNBPlaceItemDummy extends StatelessWidget {
                   // https://lh5.googleusercontent.com/p/AF1QipNNTuC6HYtW4TGRybf5cfUi_Twx8cUyKhF08czq=w408-h408-k-no
                   // https://lh5.googleusercontent.com/p/ChIJB9Y8liH0aS4RemVuMOm5PFA=w408-h408-k-no
                   CustomImageView(
-                    imagePath: place.icon,
+                    imagePath: merchant.featuredImage,
                     // imagePath: "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
@@ -69,7 +69,7 @@ class FNBPlaceItemDummy extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            '${place.rating}',
+                            '${merchant.averageRating}',
                             style: theme(context).textTheme.labelMedium,
                           ),
                         ],
@@ -87,7 +87,7 @@ class FNBPlaceItemDummy extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 4.h),
                     child: Text(
-                      place.name,
+                      merchant.name,
                       style: theme(context).textTheme.titleSmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -133,24 +133,25 @@ class FNBPlaceItemDummy extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: place.types.length > 4 ? 4 : place.types.length,
+        itemCount:
+            merchant.categories.length > 4 ? 4 : merchant.categories.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index == 3) {
-            if (place.types.length > 4) {
+            if (merchant.categories.length > 4) {
               return _tagView(
                 context,
                 context.tr(
                   "f_n_b.tags_more",
-                  args: [(place.types.length - 3).toString()],
+                  args: [(merchant.categories.length - 3).toString()],
                 ),
               );
             } else {
-              return _tagView(context, place.types[index]);
+              return _tagView(context, merchant.categories[index]);
             }
           }
-          return _tagView(context, place.types[index]);
+          return _tagView(context, merchant.categories[index]);
         },
       ),
     );

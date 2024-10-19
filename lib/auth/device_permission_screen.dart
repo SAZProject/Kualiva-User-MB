@@ -92,7 +92,7 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
           children: [
             _imageTitleContentView(context),
             SizedBox(height: 4.h),
-            _allowBtn(context),
+            _allowButton(context),
             SizedBox(height: 4.h),
           ],
         ),
@@ -152,7 +152,7 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
     );
   }
 
-  Widget _allowBtn(BuildContext context) {
+  Widget _allowButton(BuildContext context) {
     return CustomElevatedButton(
       initialText: context.tr("permission.allow_btn"),
       margin: EdgeInsets.only(

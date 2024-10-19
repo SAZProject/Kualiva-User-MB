@@ -41,6 +41,7 @@ dependencies:
     dio: ^5.7.0
     dio_cookie_manager: ^3.1.1
     cookie_jar: ^4.0.8
+    flutter_dotenv: ^5.2.1
 
 dev_dependencies:
     flutter_test:
@@ -55,6 +56,7 @@ flutter_launcher_icons:
 flutter:
     uses-material-design: true
     assets:
+        - .env
         - assets/videos/
         - assets/images/
         - assets/images/cuisine_bg/

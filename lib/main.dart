@@ -1,8 +1,10 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'common/app_export.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,14 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
+
+  if (kReleaseMode) {
+    await dotenv.load(fileName: '.env');
+  } else if (kProfileMode) {
+    await dotenv.load(fileName: '.env.profile');
+  } else {
+    await dotenv.load(fileName: '.env.dev');
+  }
 
   runApp(
     EasyLocalization(

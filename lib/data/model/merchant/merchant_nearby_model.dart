@@ -18,12 +18,12 @@ class MerchantNearby {
   final String claimed;
   final int reviewCount;
   final double averageRating;
-  final String reviewUrl;
+  final String? reviewUrl;
   final String googleMapsUrl;
   final double latitude;
   final double longitude;
   final String openingHours;
-  final String featuredImage;
+  final String? featuredImage;
   final String cid;
   final String fid;
   final String placeId;
@@ -143,14 +143,14 @@ class MerchantNearby {
       phone: map['phone'] as String?,
       phones: (map['phones'] as String).split(','),
       claimed: map['claimed'] as String,
-      reviewCount: map['reviewCount'] as int,
-      averageRating: map['averageRating'].toDouble(),
-      reviewUrl: map['reviewURL'] as String,
+      reviewCount: int.parse(map['reviewCount'].toString()),
+      averageRating: double.parse(map['averageRating'].toString()),
+      reviewUrl: map['reviewURL'] as String?,
       googleMapsUrl: map['googleMapsURL'] as String,
-      latitude: map['latitude'] as double,
-      longitude: map['longitude'] as double,
+      latitude: double.parse(map['latitude'].toString()),
+      longitude: double.parse(map['longitude'].toString()),
       openingHours: map['openingHours'] as String,
-      featuredImage: map['featuredImage'] as String,
+      featuredImage: map['featuredImage'] as String?,
       cid: map['cid'] as String,
       fid: map['fid'] as String,
       placeId: map['placeId'] as String,

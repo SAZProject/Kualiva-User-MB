@@ -49,6 +49,7 @@ class _HomeNavigationState extends State<MainLayout> {
   Widget _body(BuildContext context) {
     dotenv.env['FOO'];
     final foo = dotenv.get('FOO', fallback: "Error dotenv");
+
     LeLog.d(this, foo);
 
     switch (_selectedPage) {

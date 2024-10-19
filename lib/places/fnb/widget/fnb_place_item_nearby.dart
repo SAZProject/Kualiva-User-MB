@@ -37,7 +37,8 @@ class FnbPlaceItemNearby extends StatelessWidget {
                   // https://lh5.googleusercontent.com/p/AF1QipNNTuC6HYtW4TGRybf5cfUi_Twx8cUyKhF08czq=w408-h408-k-no
                   // https://lh5.googleusercontent.com/p/ChIJB9Y8liH0aS4RemVuMOm5PFA=w408-h408-k-no
                   CustomImageView(
-                    imagePath: merchant.featuredImage,
+                    imagePath: merchant.featuredImage ??
+                        "${ImageConstant.fnb1Path}/A/2.jpg",
                     // imagePath: "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,

@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/utility/location_utility.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
@@ -19,6 +21,7 @@ import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
 import 'package:like_it/places/fnb/widget/fnb_place_item.dart';
 import 'package:like_it/places/fnb/widget/fnb_place_item_nearby.dart';
 import 'package:like_it/places/fnb/widget/fnb_promo_item.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class FnbScreen extends StatefulWidget {
   const FnbScreen({super.key});
@@ -84,6 +87,15 @@ class _FnbScreenState extends State<FnbScreen> {
     // });
 
     Dio dio = Dio();
+    if (kDebugMode) {
+      dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+        maxWidth: 90,
+      ));
+    }
     Response res = await dio.get(
         "https://kg1k4xc5-3000.asse.devtunnels.ms/merchant/nearby",
         queryParameters: {
@@ -98,8 +110,10 @@ class _FnbScreenState extends State<FnbScreen> {
     setState(() {
       merchantNearby = temp1;
     });
-
-    print(merchantNearby);
+    LeLog.d(this, merchantNearby.length.toString());
+    for (var i in merchantNearby) {
+      LeLog.pd(this, init, i.toString());
+    }
   }
 
   @override
@@ -418,7 +432,7 @@ class _FnbScreenState extends State<FnbScreen> {
                   controller: _childScrollController,
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  itemCount: 6,
+                  itemCount: merchantNearby.isEmpty ? 6 : merchantNearby.length,
                   itemBuilder: (context, index) {
                     if (merchantNearby.isEmpty) {
                       return FnbPlaceItem(

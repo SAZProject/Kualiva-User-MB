@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -138,8 +139,9 @@ class LocationUtility {
         userCurrCity: getCurrPlacemark.locality ?? "-",
         userCurrSubDistrict: getCurrPlacemark.subLocality ?? "-",
         userFullPLacemark: getCurrPlacemark,
-        latitude: currPos.latitude,
-        longitude: currPos.longitude,
+        // TODO Remove
+        latitude: (kDebugMode) ? -6.213683336779805 : currPos.latitude,
+        longitude: (kDebugMode) ? 106.80867612698492 : currPos.longitude,
       );
     } catch (e) {
       return Future.error(e);

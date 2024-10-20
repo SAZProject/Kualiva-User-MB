@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
+import 'package:like_it/places/fnb/model/fnb_nearest_model.dart';
 
 class FnbPlaceItemNearby extends StatelessWidget {
   const FnbPlaceItemNearby({
@@ -10,7 +10,7 @@ class FnbPlaceItemNearby extends StatelessWidget {
     required this.onPressed,
   });
 
-  final MerchantNearby merchant;
+  final FnbNearestModel merchant;
   final VoidCallback onPressed;
 
   @override

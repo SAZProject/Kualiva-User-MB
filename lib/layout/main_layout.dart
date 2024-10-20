@@ -1,10 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/screen/coming_soon.dart';
-import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/home/home_screen.dart';
 import 'package:like_it/profile/profile_screen.dart';
 
@@ -47,11 +45,6 @@ class _HomeNavigationState extends State<MainLayout> {
   }
 
   Widget _body(BuildContext context) {
-    dotenv.env['FOO'];
-    final foo = dotenv.get('FOO', fallback: "Error dotenv");
-
-    LeLog.d(this, foo);
-
     switch (_selectedPage) {
       case 0:
         return const HomeScreen();

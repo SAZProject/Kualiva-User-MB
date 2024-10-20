@@ -1,0 +1,22 @@
+part of 'fnb_nearest_bloc.dart';
+
+@immutable
+sealed class FnbNearestState {}
+
+final class FnbNearestInitial extends FnbNearestState {
+  final List<FnbNearestModel> nearest;
+
+  FnbNearestInitial({this.nearest = const []});
+}
+
+final class FnbNearestLoading extends FnbNearestState {}
+
+final class FnbNearestSuccess extends FnbNearestState {
+  final List<FnbNearestModel> nearest;
+
+  FnbNearestSuccess({required this.nearest});
+}
+
+final class FnbNearestFailure extends FnbNearestState {}
+
+final class FnbNearestRefresh extends FnbNearestState {}

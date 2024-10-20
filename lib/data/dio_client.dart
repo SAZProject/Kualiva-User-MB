@@ -14,11 +14,11 @@ class DioClient {
       throw Exception("Dotenv is not set");
     }
     _dio = Dio(BaseOptions(
-      baseUrl: '',
-      connectTimeout: Duration(seconds: 10),
-      receiveTimeout: Duration(seconds: 10),
+      baseUrl: baseUrl,
+      connectTimeout: Duration(seconds: 60),
+      receiveTimeout: Duration(seconds: 60),
       headers: Map.from({
-        'Accept': 'application/vnd.api+json',
+        'Accept': 'application/json',
       }),
     ));
 

@@ -1,15 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:like_it/auth/repository/token_manager.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioClient {
-  late final Dio _dio;
+  DioClient(this._tokenManager);
 
-  Dio get dio => _dio;
+  Dio? _dio;
+  final TokenManager _tokenManager;
 
-  DioClient() {
-    final String baseUrl = dotenv.get("BASE_URL", fallback: "");
+  Future<Dio> dio() async {
+    if (_dio != null) return _dio!;
+
+    String? token = _tokenManager.accessToken;
+
+    final String baseUrl = dotenv.get("BASE_URL", fallback: null);
     if (baseUrl.isEmpty) {
       throw Exception("Dotenv is not set");
     }
@@ -22,7 +28,20 @@ class DioClient {
       }),
     ));
 
-    _dio.interceptors.add(PrettyDioLogger(
+    _dio!.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        options.headers['Authorization'] = 'Bearer ${token ?? ''}';
+        return handler.next(options);
+      },
+      onError: (error, handler) {
+        return handler.next(error);
+      },
+      onResponse: (response, handler) {
+        return handler.next(response);
+      },
+    ));
+
+    _dio!.interceptors.add(PrettyDioLogger(
       compact: true,
       requestHeader: true,
       requestBody: true,
@@ -31,5 +50,10 @@ class DioClient {
       maxWidth: 100,
       enabled: kDebugMode,
     ));
+    return _dio!;
+  }
+
+  void clear() {
+    _dio = null;
   }
 }

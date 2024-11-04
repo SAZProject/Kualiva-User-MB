@@ -25,6 +25,7 @@ class FnbNearestFeature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // BlocProvider.of<FnbNearestBloc>(context).add(FnbNearestStarted());
+    context.read<FnbNearestBloc>().add(FnbNearestStarted());
     final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
     final List<MerchantNearby> merchantNearby = [];
     return SizedBox(
@@ -80,10 +81,10 @@ class FnbNearestFeature extends StatelessWidget {
     return BlocBuilder<FnbNearestBloc, FnbNearestState>(
       builder: (context, state) {
         if (state is FnbNearestFailure) {
-          return Text('ERROR MASZEEHHH');
+          return Text('ERROR MASZEEHHH'); // TODO Winky Help UI
         }
         if (state is! FnbNearestSuccess) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
 
         return ListView.builder(

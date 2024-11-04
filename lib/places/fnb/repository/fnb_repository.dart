@@ -19,6 +19,8 @@ class FnbRepository {
   }) async {
     if (_fnbNearest.isNotEmpty) return _fnbNearest;
 
+    // return [];
+
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
         '/merchant/nearby',

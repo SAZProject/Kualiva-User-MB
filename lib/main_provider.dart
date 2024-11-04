@@ -20,20 +20,20 @@ class MainProvider extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          lazy: false,
-          create: (_) async {
+          // lazy: false,
+          create: (_) {
             final tokenManager = TokenManager(const FlutterSecureStorage(
               /// TODO For ios need more configuration
               /// https://pub.dev/packages/flutter_secure_storage
               aOptions: AndroidOptions(encryptedSharedPreferences: true),
             ));
-            await tokenManager.readAccessToken();
-            await tokenManager.readRefreshToken();
+            // await tokenManager.readAccessToken();
+            // await tokenManager.readRefreshToken();
             return tokenManager;
           },
         ),
         RepositoryProvider(
-          lazy: false,
+          // lazy: false,
           create: (context) {
             return DioClient(context.read<TokenManager>());
           },

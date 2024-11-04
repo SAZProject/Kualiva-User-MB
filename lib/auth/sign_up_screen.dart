@@ -3,11 +3,13 @@ import 'package:country_pickers/country_pickers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:like_it/auth/bloc/auth_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/common/widget/custom_phone_number.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -17,10 +19,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _userNameCtl = TextEditingController();
-  final TextEditingController _phoneNumberCtl = TextEditingController();
-  final TextEditingController _passwordCtl = TextEditingController();
-  final TextEditingController _confirmPassCtl = TextEditingController();
+  final _userNameCtl = TextEditingController();
+  final _phoneNumberCtl = TextEditingController();
+  final _passwordCtl = TextEditingController();
+  final _confirmPassCtl = TextEditingController();
 
   Country selectedCountry = CountryPickerUtils.getCountryByPhoneCode("62");
 
@@ -37,16 +39,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  void _onPressedSignUp(BuildContext context) {}
+  void _onPressedSignUp(BuildContext context) {
+    if (_passwordCtl.text.trim() != _confirmPassCtl.text.trim()) {
+      // TODO Winky, mau diapain kalo password dan confirm password tidak sama ?
+    }
+
+    // context.read<AuthBloc>().add(
+    //       AuthRegistered(
+    //         username: "lerrr",
+    //         phoneNumber: "321111",
+    //         password: "321321",
+    //       ),
+    //     );
+
+    context.read<AuthBloc>().add(
+          AuthRegistered(
+            username: _userNameCtl.text.trim(),
+            phoneNumber: _phoneNumberCtl.text.trim(),
+            password: _passwordCtl.text.trim(),
+          ),
+        );
+  }
 
   void _alreadyhaveAccount(BuildContext context) => Navigator.pop(context);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: _body(context),
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        debugPrint(state.runtimeType.toString());
+        if (state is AuthRegisterSuccess) {
+          Navigator.pop(context);
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: _body(context),
+        ),
       ),
     );
   }

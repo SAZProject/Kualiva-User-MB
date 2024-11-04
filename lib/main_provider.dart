@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:like_it/auth/bloc/auth_bloc.dart';
+import 'package:like_it/auth/repository/auth_repository.dart';
 import 'package:like_it/auth/repository/token_manager.dart';
 import 'package:like_it/data/dio_client.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
@@ -21,7 +23,7 @@ class MainProvider extends StatelessWidget {
       providers: [
         RepositoryProvider(
           // lazy: false,
-          create: (_) {
+          create: (context) {
             final tokenManager = TokenManager(const FlutterSecureStorage(
               /// TODO For ios need more configuration
               /// https://pub.dev/packages/flutter_secure_storage
@@ -40,7 +42,12 @@ class MainProvider extends StatelessWidget {
         ),
         RepositoryProvider(create: (context) {
           return FnbRepository(context.read<DioClient>());
-        })
+        }),
+        RepositoryProvider(
+          create: (context) {
+            return AuthRepository(context.read<DioClient>());
+          },
+        )
       ],
       child: child,
     );
@@ -49,6 +56,11 @@ class MainProvider extends StatelessWidget {
   Widget _multiBloc(Widget child) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) {
+            return AuthBloc(context.read<AuthRepository>());
+          },
+        ),
         BlocProvider(create: (context) {
           return FnbNearestBloc(context.read<FnbRepository>());
         })

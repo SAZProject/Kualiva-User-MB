@@ -30,7 +30,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       imageUri: ImageConstant.onBoarding3,
       pageTitle: "onboard.onboard_3_title",
       content: "onboard.onboard_3_content",
-      pageColor: const Color(0xFFFFDD00),
+      pageColor: const Color(0xFFFFAE00),
     ),
   ];
 

@@ -12,3 +12,15 @@ final class AuthLoggedIn extends AuthEvent {
     required this.password,
   });
 }
+
+final class AuthRegistered extends AuthEvent {
+  final String username;
+  final String phoneNumber;
+  final String password;
+
+  AuthRegistered({
+    required this.username,
+    required this.phoneNumber,
+    required this.password,
+  });
+}

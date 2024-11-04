@@ -22,3 +22,9 @@ final class AuthToken extends AuthState {
 }
 
 final class AuthRefreshToken extends AuthState {}
+
+final class AuthRegisterSuccess extends AuthState {
+  final UserModel userModel;
+
+  AuthRegisterSuccess({required this.userModel});
+}

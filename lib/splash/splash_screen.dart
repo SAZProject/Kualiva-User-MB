@@ -47,6 +47,9 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_videoPlayerController.value.position ==
         _videoPlayerController.value.duration) {
       LeLog.pd(this, _videoListener, "Video Ended");
+      Navigator.pushNamedAndRemoveUntil(
+          context, AppRoutes.onBoardingScreen, (route) => false);
+      return;
       if (await CheckPermission.checkDevicePermission()) {
         if (!mounted) return;
         Navigator.pushNamedAndRemoveUntil(

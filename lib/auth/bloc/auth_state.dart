@@ -28,3 +28,5 @@ final class AuthRegisterSuccess extends AuthState {
 
   AuthRegisterSuccess({required this.userModel});
 }
+
+final class AuthRegisterFailure extends AuthState {}

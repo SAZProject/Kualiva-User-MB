@@ -45,7 +45,10 @@ class MainProvider extends StatelessWidget {
         }),
         RepositoryProvider(
           create: (context) {
-            return AuthRepository(context.read<DioClient>());
+            return AuthRepository(
+              context.read<TokenManager>(),
+              context.read<DioClient>(),
+            );
           },
         )
       ],

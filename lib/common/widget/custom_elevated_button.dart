@@ -18,7 +18,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.decoration,
     this.leftIcon,
     this.rightIcon,
-    this.isLoading,
+    this.isLoading = false,
   });
 
   final String initialText;
@@ -34,7 +34,7 @@ class CustomElevatedButton extends StatelessWidget {
   final BoxDecoration? decoration;
   final Widget? leftIcon;
   final Widget? rightIcon;
-  final bool? isLoading;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class CustomElevatedButton extends StatelessWidget {
         child: ElevatedButton(
           style: buttonStyle,
           onPressed: isDisabled ?? false ? null : onPressed ?? () {},
-          child: isLoading != null && isLoading!
+          child: isLoading
               ? const CircularProgressIndicator()
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,

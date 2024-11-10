@@ -13,27 +13,38 @@ class DioClient {
   Future<Dio> dio() async {
     if (_dio != null) return _dio!;
 
-    String? token = _tokenManager.accessToken;
+    // String? token = _tokenManager.accessToken;
 
     final String baseUrl = dotenv.get("BASE_URL", fallback: null);
     if (baseUrl.isEmpty) {
       throw Exception("Dotenv is not set");
     }
+
     _dio = Dio(BaseOptions(
       baseUrl: baseUrl,
-      connectTimeout: Duration(seconds: 10),
-      receiveTimeout: Duration(seconds: 10),
+      connectTimeout: Duration(
+          seconds: dotenv.getInt(
+        "CONNECT_TIMEOUT",
+        fallback: 10,
+      )),
+      receiveTimeout: Duration(
+          seconds: dotenv.getInt(
+        "CONNECT_TIMEOUT",
+        fallback: 10,
+      )),
       headers: Map.from({
         'Accept': 'application/json',
       }),
     ));
 
     _dio!.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
+      onRequest: (options, handler) async {
+        final String? token = await _tokenManager.readAccessToken();
         options.headers['Authorization'] = 'Bearer ${token ?? ''}';
         return handler.next(options);
       },
       onError: (error, handler) {
+        if (error.response?.statusCode == 401) {}
         return handler.next(error);
       },
       onResponse: (response, handler) {
@@ -53,7 +64,7 @@ class DioClient {
     return _dio!;
   }
 
-  void clear() {
+  void reset() {
     _dio = null;
   }
 }

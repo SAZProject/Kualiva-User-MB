@@ -252,40 +252,45 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
             SizedBox(height: 5.h),
             CustomPhoneNumber(
               country: selectedCountry,
-              controller: controller,
-              focusNode: focusNode,
-              readOnly: isReadOnly,
-              textInputType: TextInputType.phone,
+              // controller: controller,
+              // textInputType: TextInputType.phone,
               onPressed: (Country country) {
                 selectedCountry = country;
               },
-              suffix: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 10.h),
-                      child: InkWell(
-                        onTap: onEditPressed,
-                        child: Text(
-                          context.tr(
-                            isReadOnly
-                                ? "account_setting.edit"
-                                : "common.cancel",
+              textFormField: CustomTextFormField(
+                controller: controller,
+                focusNode: focusNode,
+                readOnly: isReadOnly,
+                textInputType: TextInputType.phone,
+                suffix: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 10.h),
+                        child: InkWell(
+                          onTap: onEditPressed,
+                          child: Text(
+                            context.tr(
+                              isReadOnly
+                                  ? "account_setting.edit"
+                                  : "common.cancel",
+                            ),
+                            style:
+                                CustomTextStyles(context).bodySmall12.copyWith(
+                                      color: isReadOnly
+                                          ? theme(context).colorScheme.primary
+                                          : theme(context)
+                                              .colorScheme
+                                              .primaryContainer,
+                                    ),
                           ),
-                          style: CustomTextStyles(context).bodySmall12.copyWith(
-                                color: isReadOnly
-                                    ? theme(context).colorScheme.primary
-                                    : theme(context)
-                                        .colorScheme
-                                        .primaryContainer,
-                              ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

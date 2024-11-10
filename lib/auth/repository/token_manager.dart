@@ -9,12 +9,12 @@ class TokenManager {
 
   final FlutterSecureStorage _storage;
 
-  String? _accessToken;
-  String? _refreshToken;
+  // String? _accessToken;
+  // String? _refreshToken;
 
-  String? get accessToken => _accessToken;
+  // String? get accessToken => _accessToken;
 
-  String? get refreshToken => _refreshToken;
+  // String? get refreshToken => _refreshToken;
 
   String _getAccessKey() {
     return dotenv.get("ACCESS_TOKEN_KEY", fallback: null);
@@ -24,23 +24,36 @@ class TokenManager {
     return dotenv.get("REFRESH_TOKEN_KEY", fallback: null);
   }
 
-  Future<String?> readAccessToken() async {
-    _accessToken = await _storage.read(key: _getAccessKey());
-    return _accessToken;
+  Future<String?> readToken() async {
+    return await readAccessToken() ?? await readRefreshToken();
   }
 
-  Future<String?> readRefreshToken() async {
-    _refreshToken = await _storage.read(key: _getRefreshKey());
-    return _refreshToken;
+  /// Logout
+  Future<List<String>> deleteToken() async {
+    return Future.wait([deleteAccessToken(), deleteRefreshToken()]);
+  }
+
+  Future<String?> readAccessToken() {
+    // _accessToken = await _storage.read(key: _getAccessKey());
+    // return _accessToken;
+
+    return _storage.read(key: _getAccessKey());
+  }
+
+  Future<String?> readRefreshToken() {
+    // _refreshToken = await _storage.read(key: _getRefreshKey());
+    // return _refreshToken;
+
+    return _storage.read(key: _getRefreshKey());
   }
 
   Future<void> writeAccessToken(String accessToken) async {
-    _accessToken = accessToken;
+    // _accessToken = accessToken;
     await _storage.write(key: _getAccessKey(), value: accessToken);
   }
 
   Future<void> writeRefreshToken(String refreshToken) async {
-    _refreshToken = refreshToken;
+    // _refreshToken = refreshToken;
     await _storage.write(key: _getRefreshKey(), value: refreshToken);
   }
 

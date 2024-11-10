@@ -20,10 +20,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthLoggedIn event,
     Emitter<AuthState> emit,
   ) {
-    emit(AuthLoading());
     try {
       final _ = _authRepository.login(
-        email: event.email,
+        username: event.username,
+        phoneNumber: event.phoneNumber,
         password: event.password,
       );
       emit(AuthLoginSuccess());
@@ -36,8 +36,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthRegistered event,
     Emitter<AuthState> emit,
   ) async {
-    debugPrint("_onRegistered");
-    debugPrint(event.toString());
     final userModel = await _authRepository.register(
       username: event.username,
       phoneNumber: event.phoneNumber,

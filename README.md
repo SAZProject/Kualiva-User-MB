@@ -5,8 +5,13 @@ This is a LIKE IT App for Hoeis corporation.
 ## Changelog
 
 ```text
-Ver 0.0.52+01
-- Upgraded pubspec
+Ver 0.0.57
+- BLoC Register Page
+- BLoC Login Page
+- Register Page Validator Form
+- Login Page Validator Form
+- FormValidationUtil Class
+- Separated CustomPhoneNumber using CustomTextFormField as Parameter
 ```
 
 ## Getting Started

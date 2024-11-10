@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:like_it/auth/bloc/auth_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
+import 'package:like_it/common/utility/form_validation_util.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
 import 'package:like_it/common/widget/custom_phone_number.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
@@ -23,12 +24,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _phoneNumberCtl = TextEditingController();
   final _passwordCtl = TextEditingController();
   final _confirmPassCtl = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   Country selectedCountry = CountryPickerUtils.getCountryByPhoneCode("62");
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool passObscure = true;
-  bool confirmPassObscure = true;
+  final _passwordObscure = ValueNotifier<bool>(true);
+  final _confirmPasswordObscure = ValueNotifier<bool>(true);
+  final _password = ValueNotifier<String>("");
 
   @override
   void dispose() {
@@ -36,27 +38,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _phoneNumberCtl.dispose();
     _passwordCtl.dispose();
     _confirmPassCtl.dispose();
+    _passwordObscure.dispose();
     super.dispose();
   }
 
   void _onPressedSignUp(BuildContext context) {
-    if (_passwordCtl.text.trim() != _confirmPassCtl.text.trim()) {
-      // TODO Winky, mau diapain kalo password dan confirm password tidak sama ?
-    }
-
-    // context.read<AuthBloc>().add(
-    //       AuthRegistered(
-    //         username: "lerrr",
-    //         phoneNumber: "321111",
-    //         password: "321321",
-    //       ),
-    //     );
+    if (_formKey.currentState!.validate() == false) return;
 
     context.read<AuthBloc>().add(
           AuthRegistered(
             username: _userNameCtl.text.trim(),
-            phoneNumber: _phoneNumberCtl.text.trim(),
+            phoneNumber:
+                '${selectedCountry.phoneCode}${_phoneNumberCtl.text.trim()}',
             password: _passwordCtl.text.trim(),
+            confirmPassword: _confirmPassCtl.text.trim(),
           ),
         );
   }
@@ -70,6 +65,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         debugPrint(state.runtimeType.toString());
         if (state is AuthRegisterSuccess) {
           Navigator.pop(context);
+        }
+        if (state is AuthRegisterFailure) {
+          // TODO Error hit from API, Show popup
         }
       },
       child: SafeArea(
@@ -89,6 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         height: Sizeutils.height,
         child: Form(
           key: _formKey,
+          // autovalidateMode: AutovalidateMode.always,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 6.h),
             child: SizedBox(
@@ -220,6 +219,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _textFieldUserName(BuildContext context) {
+    /// TODO Winky, saran dari mas Zaki, maksimal input username itu 255 karakter
+    /// Update "6 - 10 Characters" nya
     return CustomTextFormField(
       controller: _userNameCtl,
       hintText: context.tr("sign_up.username"),
@@ -227,6 +228,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         horizontal: 10.h,
         vertical: 16.h,
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) return "Please enter some text";
+
+        if (!FormValidationUtil.username(value)) {
+          return "Baca lagi ketentuan nya yyaakkk wahai customer";
+        }
+        return null;
+      },
     );
   }
 
@@ -235,32 +244,64 @@ class _SignUpScreenState extends State<SignUpScreen> {
       width: double.maxFinite,
       child: CustomPhoneNumber(
         country: selectedCountry,
-        controller: _phoneNumberCtl,
         onPressed: (Country country) {
           selectedCountry = country;
         },
+        textFormField: CustomTextFormField(
+          controller: _phoneNumberCtl,
+          textInputType: TextInputType.phone,
+          validator: (value) {
+            if (value == null || value.isEmpty) return 'Please enter some text';
+
+            if (value[0] == '0') return 'Cannot input 0 at the start';
+
+            if (!FormValidationUtil.phoneNumber(value)) {
+              return "Baca lagi ketentuan nya yyaakkk wahai customer";
+            }
+
+            return null;
+          },
+        ),
       ),
     );
   }
 
   Widget _textFieldPassword(BuildContext context) {
+    /// TODO Winky, saran dari mas Zaki, maksimal input username itu 255 karakter
+    /// Update "6 - 10 Characters" nya
     return SizedBox(
       width: double.maxFinite,
-      child: CustomTextFormField(
-        controller: _passwordCtl,
-        hintText: context.tr("sign_up.password"),
-        textInputType: TextInputType.text,
-        obscureText: passObscure,
-        suffix: IconButton(
-          onPressed: () {
-            setState(() {
-              passObscure = !passObscure;
-            });
-          },
-          icon: Icon(
-            passObscure ? Icons.visibility : Icons.visibility_off,
-          ),
-        ),
+      child: ValueListenableBuilder(
+        valueListenable: _passwordObscure,
+        builder: (context, value, child) {
+          return CustomTextFormField(
+            controller: _passwordCtl,
+            hintText: context.tr("sign_up.password"),
+            textInputType: TextInputType.text,
+            obscureText: value,
+            suffix: IconButton(
+              onPressed: () {
+                _passwordObscure.value = !_passwordObscure.value;
+              },
+              icon: Icon(
+                value ? Icons.visibility : Icons.visibility_off,
+              ),
+            ),
+            onChange: (value) {
+              _password.value = value;
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please enter some text";
+              }
+
+              if (!FormValidationUtil.password(value)) {
+                return "Baca lagi ketentuan nya yyaakkk wahai customer";
+              }
+              return null;
+            },
+          );
+        },
       ),
     );
   }
@@ -268,33 +309,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _textFieldConfirmPassword(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: CustomTextFormField(
-        controller: _confirmPassCtl,
-        hintText: context.tr("sign_up.re_enter_password"),
-        textInputType: TextInputType.text,
-        obscureText: confirmPassObscure,
-        suffix: IconButton(
-          onPressed: () {
-            setState(() {
-              confirmPassObscure = !confirmPassObscure;
-            });
-          },
-          icon: Icon(
-            confirmPassObscure ? Icons.visibility : Icons.visibility_off,
-          ),
-        ),
+      child: ValueListenableBuilder(
+        valueListenable: _confirmPasswordObscure,
+        builder: (context, value, child) {
+          return CustomTextFormField(
+            controller: _confirmPassCtl,
+            hintText: context.tr("sign_up.re_enter_password"),
+            textInputType: TextInputType.text,
+            obscureText: value,
+            suffix: IconButton(
+              onPressed: () {
+                _confirmPasswordObscure.value = !_confirmPasswordObscure.value;
+              },
+              icon: Icon(
+                value ? Icons.visibility : Icons.visibility_off,
+              ),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please enter some text";
+              }
+
+              if (value != _password.value) {
+                return "Confirm Password do not match";
+              }
+
+              return null;
+            },
+          );
+        },
       ),
     );
   }
 
   Widget _signUpButton(BuildContext context) {
-    return CustomElevatedButton(
-      initialText: context.tr("sign_up.sign_up_btn"),
-      buttonStyle: CustomButtonStyles.none,
-      decoration:
-          CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
-      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-      onPressed: () => _onPressedSignUp(context),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return CustomElevatedButton(
+          isLoading: state is AuthLoading,
+          initialText: context.tr("sign_up.sign_up_btn"),
+          buttonStyle: CustomButtonStyles.none,
+          decoration:
+              CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
+          buttonTextStyle:
+              CustomTextStyles(context).titleMediumOnPrimaryContainer,
+          onPressed: () => _onPressedSignUp(context),
+        );
+      },
     );
   }
 

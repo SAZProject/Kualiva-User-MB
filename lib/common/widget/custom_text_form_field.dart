@@ -25,33 +25,35 @@ extension TextFormFieldStyleHelper on CustomTextFormField {
 }
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {super.key,
-      this.alignment,
-      this.width,
-      this.boxDecoration,
-      this.scrollPadding,
-      this.controller,
-      this.focusNode,
-      this.autoFocus = false,
-      this.textStyle,
-      this.obscureText = false,
-      this.readOnly = false,
-      this.onPressed,
-      this.textInputAction = TextInputAction.next,
-      this.textInputType = TextInputType.text,
-      this.maxLines,
-      this.hintText,
-      this.hintStyle,
-      this.prefix,
-      this.prefixConstraints,
-      this.suffix,
-      this.suffixConstraints,
-      this.contentPadding,
-      this.inputBorder,
-      this.fillColor,
-      this.filled = true,
-      this.validator});
+  const CustomTextFormField({
+    super.key,
+    this.alignment,
+    this.width,
+    this.boxDecoration,
+    this.scrollPadding,
+    this.controller,
+    this.focusNode,
+    this.autoFocus = false,
+    this.textStyle,
+    this.obscureText = false,
+    this.readOnly = false,
+    this.onPressed,
+    this.onChange,
+    this.textInputAction = TextInputAction.next,
+    this.textInputType = TextInputType.text,
+    this.maxLines,
+    this.hintText,
+    this.hintStyle,
+    this.prefix,
+    this.prefixConstraints,
+    this.suffix,
+    this.suffixConstraints,
+    this.contentPadding,
+    this.inputBorder,
+    this.fillColor,
+    this.filled = true,
+    this.validator,
+  });
 
   final Alignment? alignment;
   final double? width;
@@ -64,6 +66,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? obscureText;
   final bool? readOnly;
   final VoidCallback? onPressed;
+  final Function(String value)? onChange;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
   final int? maxLines;
@@ -89,66 +92,92 @@ class CustomTextFormField extends StatelessWidget {
         : textFormFieldWidget(context);
   }
 
-  Widget textFormFieldWidget(BuildContext context) => Container(
-        width: width ?? double.maxFinite,
-        decoration: boxDecoration,
-        child: TextFormField(
-          scrollPadding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          controller: controller,
-          focusNode: focusNode,
-          onTapOutside: (event) {
-            if (focusNode != null) {
-              focusNode?.unfocus();
-            } else {
-              FocusManager.instance.primaryFocus?.unfocus();
-            }
-          },
-          autofocus: autoFocus!,
-          style: textStyle ??
-              CustomTextStyles(context)
-                  .bodyMediumOnPrimaryContainer_06
-                  .copyWith(
-                    color: theme(context).colorScheme.onPrimaryContainer,
-                  ),
-          obscureText: obscureText!,
-          readOnly: readOnly!,
-          onTap: onPressed,
-          textInputAction: textInputAction,
-          keyboardType: textInputType,
-          maxLines: maxLines ?? 1,
-          decoration: decoration(context),
-          validator: validator,
-        ),
-      );
+  Widget textFormFieldWidget(BuildContext context) {
+    return Container(
+      width: width ?? double.maxFinite,
+      decoration: boxDecoration,
+      child: TextFormField(
+        scrollPadding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        controller: controller,
+        focusNode: focusNode,
+        onTapOutside: (event) {
+          if (focusNode != null) {
+            focusNode?.unfocus();
+          } else {
+            FocusManager.instance.primaryFocus?.unfocus();
+          }
+        },
+        autofocus: autoFocus!,
+        style: textStyle ??
+            CustomTextStyles(context).bodyMediumOnPrimaryContainer_06.copyWith(
+                  color: theme(context).colorScheme.onPrimaryContainer,
+                ),
+        obscureText: obscureText!,
+        readOnly: readOnly!,
+        onTap: onPressed,
+        textInputAction: textInputAction,
+        keyboardType: textInputType,
+        maxLines: maxLines ?? 1,
+        decoration: decoration(context),
+        validator: validator,
+        onChanged: onChange,
+      ),
+    );
+  }
 
-  InputDecoration decoration(BuildContext context) => InputDecoration(
-        hintText: hintText ?? "",
-        hintStyle: hintStyle ??
-            CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
-        prefixIcon: prefix,
-        prefixIconConstraints: prefixConstraints,
-        suffixIcon: suffix,
-        suffixIconConstraints: suffixConstraints,
-        isDense: true,
-        contentPadding: contentPadding ??
-            EdgeInsets.symmetric(
-              horizontal: 10.h,
-              vertical: 16.h,
-            ),
-        fillColor: fillColor ?? theme(context).colorScheme.onSecondaryContainer,
-        filled: filled,
-        border: inputBorder ?? _defaultOutlinedInputBorder(context),
-        enabledBorder: inputBorder ?? _defaultOutlinedInputBorder(context),
-        focusedBorder: inputBorder ?? _defaultOutlinedInputBorder(context),
-      );
+  InputDecoration decoration(BuildContext context) {
+    // return InputDecoration(
+    //   labelText: 'Enter Text',
+    //   labelStyle: TextStyle(color: Colors.blue),
+    //   hintText: 'e.g., Hello123',
+    //   hintStyle: TextStyle(color: Colors.grey),
+    //   enabledBorder: OutlineInputBorder(
+    //     borderSide: BorderSide(color: Colors.blue),
+    //     borderRadius: BorderRadius.circular(10),
+    //   ),
+    //   focusedBorder: OutlineInputBorder(
+    //     borderSide: BorderSide(color: Colors.green, width: 2),
+    //     borderRadius: BorderRadius.circular(10),
+    //   ),
+    //   errorBorder: OutlineInputBorder(
+    //     borderSide: BorderSide(color: Colors.red, width: 2),
+    //     borderRadius: BorderRadius.circular(10),
+    //   ),
+    //   focusedErrorBorder: OutlineInputBorder(
+    //     borderSide: BorderSide(color: Colors.red, width: 2),
+    //     borderRadius: BorderRadius.circular(10),
+    //   ),
+    // );
+    return InputDecoration(
+      hintText: hintText ?? "",
+      hintStyle:
+          hintStyle ?? CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
+      prefixIcon: prefix,
+      prefixIconConstraints: prefixConstraints,
+      suffixIcon: suffix,
+      suffixIconConstraints: suffixConstraints,
+      isDense: true,
+      contentPadding: contentPadding ??
+          EdgeInsets.symmetric(
+            horizontal: 10.h,
+            vertical: 16.h,
+          ),
+      fillColor: fillColor ?? theme(context).colorScheme.onSecondaryContainer,
+      filled: filled,
+      border: inputBorder ?? _defaultOutlinedInputBorder(context),
+      enabledBorder: inputBorder ?? _defaultOutlinedInputBorder(context),
+      focusedBorder: inputBorder ?? _defaultOutlinedInputBorder(context),
+    );
+  }
 
-  OutlineInputBorder _defaultOutlinedInputBorder(BuildContext context) =>
-      OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.h),
-        borderSide: BorderSide(
-          color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
-          width: 1,
-        ),
-      );
+  OutlineInputBorder _defaultOutlinedInputBorder(BuildContext context) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10.h),
+      borderSide: BorderSide(
+        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+        width: 1,
+      ),
+    );
+  }
 }

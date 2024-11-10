@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:like_it/auth/bloc/auth_bloc.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/style/custom_decoration.dart';
 import 'package:like_it/common/style/custom_text_style.dart';
 import 'package:like_it/common/style/theme_helper.dart';
+import 'package:like_it/common/utility/form_validation_util.dart';
 import 'package:like_it/common/utility/image_constant.dart';
 import 'package:like_it/common/utility/sized_utils.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
@@ -13,6 +15,7 @@ import 'package:like_it/common/widget/custom_image_view.dart';
 import 'package:like_it/common/widget/custom_outlined_button.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
 import 'package:like_it/router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -22,12 +25,11 @@ class SignInScreen extends StatefulWidget {
 }
 
 class SignInScreenState extends State<SignInScreen> {
-  bool passObscure = true;
+  final _phoneNumberOrUserNameCtl = TextEditingController();
+  final _passwordCtl = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _phoneNumberOrUserNameCtl =
-      TextEditingController();
-  final TextEditingController _passwordCtl = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _passwordObscure = ValueNotifier<bool>(true);
 
   @override
   void dispose() {
@@ -37,7 +39,29 @@ class SignInScreenState extends State<SignInScreen> {
   }
 
   void _onPressedSignIn(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.otpScreen);
+    if (_formKey.currentState!.validate() == false) return;
+
+    String phoneOrUsername = _phoneNumberOrUserNameCtl.text.trim();
+    final String password = _passwordCtl.text.trim();
+
+    late AuthLoggedIn authEvent;
+
+    if (phoneOrUsername[0] == '+') {
+      phoneOrUsername = phoneOrUsername.substring(1);
+    }
+    if (phoneOrUsername[0] == '0') {
+      phoneOrUsername = "62${phoneOrUsername.substring(1)}";
+    }
+
+    if (FormValidationUtil.isNumeric(phoneOrUsername)) {
+      authEvent =
+          AuthLoggedIn(phoneNumber: phoneOrUsername, password: password);
+    } else {
+      authEvent = AuthLoggedIn(username: phoneOrUsername, password: password);
+    }
+    debugPrint(phoneOrUsername);
+
+    context.read<AuthBloc>().add(authEvent);
   }
 
   void _onPressedSignUp(BuildContext context) {
@@ -46,9 +70,16 @@ class SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: _body(context),
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthLoginSuccess) {
+          Navigator.of(context).pushNamed(AppRoutes.otpScreen);
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          body: _body(context),
+        ),
       ),
     );
   }
@@ -204,6 +235,13 @@ class SignInScreenState extends State<SignInScreen> {
         controller: _phoneNumberOrUserNameCtl,
         hintText: context.tr("sign_in.phone_number_or_user_name"),
         textInputType: TextInputType.text,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Please enter some text";
+          }
+
+          return null;
+        },
       ),
     );
   }
@@ -211,33 +249,52 @@ class SignInScreenState extends State<SignInScreen> {
   Widget _textFieldPassword(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: CustomTextFormField(
-        controller: _passwordCtl,
-        hintText: context.tr("sign_in.password"),
-        textInputType: TextInputType.text,
-        obscureText: passObscure,
-        suffix: IconButton(
-          onPressed: () {
-            setState(() {
-              passObscure = !passObscure;
-            });
-          },
-          icon: Icon(
-            passObscure ? Icons.visibility : Icons.visibility_off,
-          ),
-        ),
+      child: ValueListenableBuilder(
+        valueListenable: _passwordObscure,
+        builder: (context, value, child) {
+          return CustomTextFormField(
+            controller: _passwordCtl,
+            hintText: context.tr("sign_in.password"),
+            textInputType: TextInputType.text,
+            obscureText: value,
+            suffix: IconButton(
+              onPressed: () {
+                _passwordObscure.value = !_passwordObscure.value;
+              },
+              icon: Icon(
+                value ? Icons.visibility : Icons.visibility_off,
+              ),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please enter some text";
+              }
+
+              // if (!FormValidationUtil.password(value)) {
+              //   return "Baca lagi ketentuan nya yyaakkk wahai customer";
+              // }
+              return null;
+            },
+          );
+        },
       ),
     );
   }
 
   Widget _signInButton(BuildContext context) {
-    return CustomElevatedButton(
-      initialText: context.tr("sign_in.sign_in_btn"),
-      buttonStyle: CustomButtonStyles.none,
-      decoration:
-          CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
-      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-      onPressed: () => _onPressedSignIn(context),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return CustomElevatedButton(
+          isLoading: state is AuthLoading,
+          initialText: context.tr("sign_in.sign_in_btn"),
+          buttonStyle: CustomButtonStyles.none,
+          decoration:
+              CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
+          buttonTextStyle:
+              CustomTextStyles(context).titleMediumOnPrimaryContainer,
+          onPressed: () => _onPressedSignIn(context),
+        );
+      },
     );
   }
 

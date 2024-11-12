@@ -1,12 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
-import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/utility/location_utility.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
@@ -21,7 +18,6 @@ import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:like_it/places/fnb/feature/fnb_nearest_feature.dart';
 import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
 import 'package:like_it/places/fnb/widget/fnb_promo_item.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class FnbScreen extends StatefulWidget {
   const FnbScreen({super.key});
@@ -36,23 +32,6 @@ class _FnbScreenState extends State<FnbScreen> {
   final ScrollController _childScrollController2 = ScrollController();
 
   bool _locIsInitialized = false;
-
-  // final List<LocDropdownModel> _dummyLoc = [
-  //   LocDropdownModel(
-  //     id: "0",
-  //     subdistrict: "Tanah Abang",
-  //     city: "Jakarta Pusat",
-  //     latitude: "-6.186486",
-  //     longitude: "106.834091",
-  //   ),
-  //   LocDropdownModel(
-  //     id: "1",
-  //     subdistrict: "Pondok Gede",
-  //     city: "Bekasi",
-  //     latitude: "-6.241586",
-  //     longitude: "106.992416",
-  //   ),
-  // ];
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 

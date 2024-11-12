@@ -7,6 +7,10 @@ final class AuthInitial extends AuthState {}
 
 final class AuthLoading extends AuthState {}
 
+final class AuthTokenExist extends AuthState {}
+
+final class AuthTokenNotExist extends AuthState {}
+
 final class AuthLoginSuccess extends AuthState {}
 
 final class AuthLoginFailure extends AuthState {}
@@ -21,12 +25,6 @@ final class AuthToken extends AuthState {
   });
 }
 
-final class AuthRefreshToken extends AuthState {}
-
-final class AuthRegisterSuccess extends AuthState {
-  final UserModel userModel;
-
-  AuthRegisterSuccess({required this.userModel});
-}
+final class AuthRegisterSuccess extends AuthState {}
 
 final class AuthRegisterFailure extends AuthState {}

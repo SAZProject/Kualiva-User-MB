@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:like_it/auth/bloc/auth_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/check_permission.dart';
 import 'package:like_it/common/utility/lelog.dart';
@@ -47,29 +49,41 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_videoPlayerController.value.position ==
         _videoPlayerController.value.duration) {
       LeLog.pd(this, _videoListener, "Video Ended");
-      Navigator.pushNamedAndRemoveUntil(
-          context, AppRoutes.onBoardingScreen, (route) => false);
-      return;
+
+      if (!mounted) return;
+
       if (await CheckPermission.checkDevicePermission()) {
         if (!mounted) return;
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.homeNavigationScreen, (route) => false);
-      } else {
-        if (!mounted) return;
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.devicePermissionScreen, (route) => false);
+        context.read<AuthBloc>().add(AuthStarted());
+        return;
       }
+      if (!mounted) return;
+      Navigator.pushNamedAndRemoveUntil(
+          context, AppRoutes.devicePermissionScreen, (route) => false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Theme(
-        data: ThemeData.light(),
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          body: _body(),
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthTokenExist) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRoutes.homeNavigationScreen, (route) => false);
+        }
+
+        if (state is AuthTokenNotExist) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRoutes.signInScreen, (route) => false);
+        }
+      },
+      child: SafeArea(
+        child: Theme(
+          data: ThemeData.light(),
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            body: _body(),
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
 
 class TokenManager {
   TokenManager(this._storage) {
@@ -33,18 +34,24 @@ class TokenManager {
     return Future.wait([deleteAccessToken(), deleteRefreshToken()]);
   }
 
-  Future<String?> readAccessToken() {
+  Future<String?> readAccessToken() async {
     // _accessToken = await _storage.read(key: _getAccessKey());
     // return _accessToken;
-
-    return _storage.read(key: _getAccessKey());
+    String? token = await _storage.read(key: _getAccessKey());
+    print('readAccessToken');
+    print(this);
+    print(token);
+    return token;
   }
 
-  Future<String?> readRefreshToken() {
+  Future<String?> readRefreshToken() async {
     // _refreshToken = await _storage.read(key: _getRefreshKey());
     // return _refreshToken;
-
-    return _storage.read(key: _getRefreshKey());
+    String? token = await _storage.read(key: _getRefreshKey());
+    print('readRefreshToken');
+    print(this);
+    print(token);
+    return token;
   }
 
   Future<void> writeAccessToken(String accessToken) async {

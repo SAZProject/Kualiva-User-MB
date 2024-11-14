@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
-import 'package:like_it/common/utility/location_utility.dart';
+import 'package:like_it/common/utility/location_util.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
@@ -13,7 +13,7 @@ import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
 import 'package:like_it/data/model/place/place_response_model.dart';
 import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
-import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
+import 'package:like_it/data/current_location/current_location_model.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:like_it/places/fnb/feature/fnb_nearest_feature.dart';
 import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
@@ -27,9 +27,9 @@ class FnbScreen extends StatefulWidget {
 }
 
 class _FnbScreenState extends State<FnbScreen> {
-  final ScrollController _parentScrollController = ScrollController();
-  final ScrollController _childScrollController = ScrollController();
-  final ScrollController _childScrollController2 = ScrollController();
+  final _parentScrollController = ScrollController();
+  final _childScrollController = ScrollController();
+  final _childScrollController2 = ScrollController();
 
   bool _locIsInitialized = false;
 
@@ -43,7 +43,7 @@ class _FnbScreenState extends State<FnbScreen> {
   final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
   Set<int> dummySelectedCuisine = {};
 
-  late UserCurrLocModel getUserCurrentLoc;
+  late CurrentLocationModel getUserCurrentLoc;
   PlaceResponseModel? placeResponseModel;
   List<MerchantNearby> merchantNearby = [];
 
@@ -153,20 +153,20 @@ class _FnbScreenState extends State<FnbScreen> {
   }
 
   Widget _currentUserLocation(BuildContext context) {
-    return FutureBuilder<UserCurrLocModel>(
-      future: Future<UserCurrLocModel>(
+    return FutureBuilder<CurrentLocationModel>(
+      future: Future<CurrentLocationModel>(
         () async {
           if (!context.mounted) return Future.error("No context mounted");
           if (_locIsInitialized == false) {
             //TODO after user go to open setting and allow permission, refresh page to get user loc
             final permissionGranted =
-                await LocationUtility.checkPermission(context);
+                await LocationUtil.checkPermission(context);
             if (!permissionGranted) {
               return Future.error("No Connection or error on locator");
             }
 
             try {
-              final res = await LocationUtility.getUserCurrLoc();
+              final res = await LocationUtil.getUserCurrentLocation();
 
               // TODO Rucci refactor "getUserCurrentLoc" variable into BLoC and Repository Layer
               setState(() {

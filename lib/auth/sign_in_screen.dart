@@ -73,7 +73,7 @@ class SignInScreenState extends State<SignInScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthLoginSuccess) {
-          Navigator.of(context).pushNamed(AppRoutes.otpScreen);
+          Navigator.of(context).pushNamed(AppRoutes.homeNavigationScreen);
         }
       },
       child: SafeArea(

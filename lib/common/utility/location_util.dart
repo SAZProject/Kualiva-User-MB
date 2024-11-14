@@ -9,7 +9,7 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/widget/custom_alert_dialog.dart';
 import 'package:like_it/data/model/ui_model/loc_dropdown_model.dart';
 import 'package:like_it/data/model/util_model/distance_checking_result_model.dart';
-import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
+import 'package:like_it/data/current_location/current_location_model.dart';
 
 void showAlertDialog({
   required BuildContext context,
@@ -41,7 +41,7 @@ void showAlertDialog({
   );
 }
 
-class LocationUtility {
+class LocationUtil {
   static Future<bool> checkPermission(context) async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -98,7 +98,7 @@ class LocationUtility {
     return true;
   }
 
-  static Future<Position> getCurrentPosition() async {
+  static Future<Position> _getCurrentPosition() async {
     late LocationSettings locationSettings = const LocationSettings(
       accuracy: LocationAccuracy.high,
       distanceFilter: 100,
@@ -108,7 +108,9 @@ class LocationUtility {
         locationSettings: locationSettings);
   }
 
-  static Future<Placemark> getPlacemarkFromCoord(Position position) async {
+  static Future<Placemark> _getPlacemarkFromCoordinate(
+    Position position,
+  ) async {
     final List<Placemark> placemarks = await placemarkFromCoordinates(
       position.latitude,
       position.longitude,
@@ -122,29 +124,33 @@ class LocationUtility {
     return locationAddress;
   }
 
-  static String getAddress(Placemark place) {
+  static String _getAddress(Placemark place) {
     String locationAddress =
         '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
     return locationAddress;
   }
 
-  static Future<UserCurrLocModel> getUserCurrLoc() async {
+  static Future<CurrentLocationModel> getUserCurrentLocation() async {
     try {
-      Position currPos = await getCurrentPosition();
-      Placemark getCurrPlacemark = await getPlacemarkFromCoord(currPos);
-      String fullUserCurrLocAddress = getAddress(getCurrPlacemark);
+      Position currentPosition = await _getCurrentPosition();
+      Placemark currentPlacemark =
+          await _getPlacemarkFromCoordinate(currentPosition);
+      String fullUserCurrLocAddress = _getAddress(currentPlacemark);
 
-      return UserCurrLocModel(
+      return CurrentLocationModel(
         userCurrLoc: fullUserCurrLocAddress,
-        userCurrCity: getCurrPlacemark.locality ?? "-",
-        userCurrSubDistrict: getCurrPlacemark.subLocality ?? "-",
-        userFullPLacemark: getCurrPlacemark,
+        userCurrCity: currentPlacemark.locality ?? "-",
+        userCurrSubDistrict: currentPlacemark.subLocality ?? "-",
+        userFullPLacemark: currentPlacemark,
+        latitude: currentPosition.latitude,
+        longitude: currentPosition.longitude,
         // TODO Remove
-        latitude: (kDebugMode) ? -6.213683336779805 : currPos.latitude,
-        longitude: (kDebugMode) ? 106.80867612698492 : currPos.longitude,
+        // latitude: (kDebugMode) ? -6.213683336779805 : currentPosition.latitude,
+        // longitude:
+        //     (kDebugMode) ? 106.80867612698492 : currentPosition.longitude,
       );
     } catch (e) {
-      return Future.error(e);
+      rethrow;
     }
   }
 

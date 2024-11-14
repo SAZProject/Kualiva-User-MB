@@ -1,22 +1,16 @@
-import 'dart:io';
-
-import 'package:cookie_jar/cookie_jar.dart';
-import 'package:dio/dio.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
-import 'package:like_it/common/utility/lelog.dart';
-import 'package:like_it/common/utility/location_utility.dart';
+import 'package:like_it/common/utility/location_util.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/data/model/ui_model/home_grid_menu_model.dart';
-import 'package:like_it/data/model/util_model/user_curr_loc_model.dart';
+import 'package:like_it/home/feature/home_app_bar_feature.dart';
+import 'package:like_it/home/model/home_grid_menu_model.dart';
+import 'package:like_it/data/current_location/current_location_model.dart';
 import 'package:like_it/home/widget/home_featured_item.dart';
-import 'package:path_provider/path_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,25 +20,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final ScrollController _parentScrollController = ScrollController();
-  final ScrollController _childScrollController = ScrollController();
+  final _parentScrollController = ScrollController();
+  final _childScrollController = ScrollController();
   bool _locIsInitialized = false;
-  // final List<LocDropdownModel> _dummyLoc = [
-  //   LocDropdownModel(
-  //     id: "0",
-  //     subdistrict: "Tanah Abang",
-  //     city: "Jakarta Pusat",
-  //     latitude: "-6.186486",
-  //     longitude: "106.834091",
-  //   ),
-  //   LocDropdownModel(
-  //     id: "1",
-  //     subdistrict: "Pondok Gede",
-  //     city: "Bekasi",
-  //     latitude: "-6.241586",
-  //     longitude: "106.992416",
-  //   ),
-  // ];
 
   final List<HomeGridMenuModel> _homeGridMenu = [
     HomeGridMenuModel(
@@ -112,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ImageConstant.event3,
   ];
 
-  late UserCurrLocModel getUserCurrentLoc;
+  late CurrentLocationModel getUserCurrentLoc;
 
   void _gridMenuAction(int index) {
     switch (index) {
@@ -124,42 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  late Dio dio;
-  late CookieJar cookieJar;
-
   @override
   void initState() {
     super.initState();
-
-    _init();
-  }
-
-  Future<void> _init() async {
-    Directory tempDir = await getTemporaryDirectory();
-
-    final tempPath = tempDir.path;
-    final cookieJar = PersistCookieJar(
-      // ignoreExpires: true,
-      // ignoreExpires: true,
-      storage: FileStorage(tempPath),
-    );
-    dio = Dio();
-    dio.interceptors.add(CookieManager(cookieJar));
-    // print(await cookieJar.loadForRequest(Uri.parse(
-    //     'https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/auth/login')));
-
-    var uri = Uri(
-        scheme: 'https',
-        host: 'kg1k4xc5-3300.asse.devtunnels.ms',
-        path: '/api/v1/auth/login',
-        queryParameters: {
-          'email': 'admin@admin.com',
-          'password': 'admin',
-        });
-
-    print(await cookieJar.loadForRequest(uri));
-    print('LeRucco');
-    return Future.delayed(Duration.zero);
   }
 
   @override
@@ -187,39 +132,13 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _parentScrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            _homeAppBar(context),
+            HomeAppBarFeature(),
             _searchBar(context),
           ];
         },
         body: SingleChildScrollView(
           child: Column(
             children: [
-              ElevatedButton(
-                  onPressed: () async {
-                    final login = await dio.post(
-                        "https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/auth/login",
-                        data: {
-                          'email': 'admin@admin.com',
-                          'password': 'admin',
-                        });
-
-                    LeLog.d(this, 'auth/login');
-                    LeLog.d(this, login.toString());
-
-                    // final users = await dio.get(
-                    //     'https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/users');
-                    // LeLog.d(this, 'users 1');
-                    // LeLog.d(this, users.toString());
-                  },
-                  child: Text('login')),
-              ElevatedButton(
-                  onPressed: () async {
-                    final users = await dio.get(
-                        'https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/users');
-                    LeLog.d(this, 'users 1');
-                    LeLog.d(this, users.toString());
-                  },
-                  child: Text('users')),
               SizedBox(height: 5.h),
               _adBanner(context),
               SizedBox(height: 5.h),
@@ -232,100 +151,6 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 50.h),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _homeAppBar(BuildContext context) {
-    return SliverAppBar(
-      backgroundColor: Colors.transparent,
-      centerTitle: false,
-      automaticallyImplyLeading: false,
-      title: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.tr("common.current_location"),
-            style: CustomTextStyles(context).titleLargeOnPrimaryContainer,
-          ),
-          _currentUserLocation(context),
-        ],
-      ),
-      toolbarHeight: 100.h,
-      actions: [
-        // TODO dimatikan untuk V!
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: Icon(
-        //     Icons.qr_code_scanner,
-        //     size: 30.h,
-        //     color: appTheme.black900,
-        //   ),
-        // ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.notifications,
-            size: 30.h,
-            color: appTheme.black900,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _currentUserLocation(BuildContext context) {
-    return FutureBuilder<UserCurrLocModel>(
-      future: Future<UserCurrLocModel>(
-        () async {
-          if (!context.mounted) return Future.error("No context mounted");
-          if (_locIsInitialized == false) {
-            //TODO after user go to open setting and allow permission, refresh page to get user loc
-            if (await LocationUtility.checkPermission(context)) {
-              try {
-                final res = await LocationUtility.getUserCurrLoc();
-                setState(() {
-                  getUserCurrentLoc = res;
-                  _locIsInitialized = true;
-                });
-              } catch (e) {
-                return Future.error(e);
-              }
-            } else {
-              return Future.error("No Connection or error on locator");
-            }
-          }
-          return getUserCurrentLoc;
-        },
-      ),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return _buildUserLoc(context, context.tr("common.error"));
-        }
-        if (snapshot.hasData) {
-          return _buildUserLoc(context,
-              "${getUserCurrentLoc.userCurrSubDistrict}, ${getUserCurrentLoc.userCurrCity}");
-        }
-        return const Center(child: CircularProgressIndicator());
-      },
-    );
-  }
-
-  Widget _buildUserLoc(BuildContext context, String label) {
-    return InkWell(
-      // TODO dimatikan untuk V1
-      // onTap: () {
-      //   Navigator.pushNamed(context, AppRoutes.locationScreen);
-      // },
-      child: SizedBox(
-        width: double.maxFinite,
-        child: Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: theme(context).textTheme.bodyMedium,
         ),
       ),
     );
@@ -353,9 +178,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   controller.openView();
                 },
                 onSubmitted: (value) {
-                  setState(() {
-                    controller.closeView(value);
-                  });
+                  // setState(() {
+                  controller.closeView(value);
+                  // });
                 },
                 onTapOutside: (event) {
                   FocusScopeNode focusNode = FocusScope.of(context);
@@ -375,9 +200,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   return ListTile(
                     title: Text(item),
                     onTap: () {
-                      setState(() {
-                        controller.closeView(item);
-                      });
+                      // setState(() {
+                      controller.closeView(item);
+                      // });
                     },
                   );
                 },
@@ -516,32 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomSectionHeader(
             label: context.tr("home_screen.featured"),
             // TODO dimatikan masih belum jelas mau gimana, apakah akan dibataskan atau tampilkan list banyak
-            onPressed: () async {
-              // final login = await dio.post(
-              //     "https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/auth/login",
-              //     data: {
-              //       'email': 'admin@admin.com',
-              //       'password': 'admin',
-              //     });
-
-              // LeLog.d(this, 'auth/login');
-              // LeLog.d(this, login.toString());
-
-              // final users = await dio
-              //     .get('https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/users');
-              // LeLog.d(this, 'users 1');
-              // LeLog.d(this, users.toString());
-
-              // final logout = await dio.post(
-              //     'https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/auth/logout');
-              // LeLog.d(this, 'logout');
-              // LeLog.d(this, logout.toString());
-
-              // final users1 = await dio
-              //     .get('https://kg1k4xc5-3300.asse.devtunnels.ms/api/v1/users');
-              // LeLog.d(this, 'users 2');
-              // LeLog.d(this, users1.toString());
-            },
+            onPressed: () {},
             useIcon: false,
           ),
           SizedBox(height: 4.h),

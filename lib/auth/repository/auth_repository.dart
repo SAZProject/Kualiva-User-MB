@@ -36,7 +36,7 @@ class AuthRepository {
     await Future.wait([
       _tokenManager.writeAccessToken(accessToken),
       _tokenManager.writeRefreshToken(refreshToken),
-    ]);
+    ], eagerError: true);
 
     return;
   }

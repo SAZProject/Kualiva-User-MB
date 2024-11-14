@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:like_it/auth/bloc/auth_bloc.dart';
 import 'package:like_it/auth/repository/auth_repository.dart';
 import 'package:like_it/auth/repository/token_manager.dart';
+import 'package:like_it/data/current_location/current_location_bloc.dart';
 import 'package:like_it/data/dio_client.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:like_it/places/fnb/repository/fnb_repository.dart';
@@ -64,6 +65,9 @@ class MainProvider extends StatelessWidget {
         ),
         BlocProvider(create: (context) {
           return FnbNearestBloc(context.read<FnbRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return CurrentLocationBloc();
         })
       ],
       child: child,

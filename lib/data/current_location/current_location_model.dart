@@ -3,7 +3,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-class UserCurrLocModel {
+class CurrentLocationModel {
   final String userCurrLoc;
   final String userCurrCity;
   final String userCurrSubDistrict;
@@ -11,7 +11,7 @@ class UserCurrLocModel {
   final double latitude;
   final double longitude;
 
-  const UserCurrLocModel({
+  const CurrentLocationModel({
     required this.userCurrLoc,
     required this.userCurrCity,
     required this.userCurrSubDistrict,
@@ -20,7 +20,7 @@ class UserCurrLocModel {
     required this.longitude,
   });
 
-  UserCurrLocModel copyWith({
+  CurrentLocationModel copyWith({
     String? userCurrLoc,
     String? userCurrCity,
     String? userCurrSubDistrict,
@@ -28,7 +28,7 @@ class UserCurrLocModel {
     double? latitude,
     double? longitude,
   }) {
-    return UserCurrLocModel(
+    return CurrentLocationModel(
       userCurrLoc: userCurrLoc ?? this.userCurrLoc,
       userCurrCity: userCurrCity ?? this.userCurrCity,
       userCurrSubDistrict: userCurrSubDistrict ?? this.userCurrSubDistrict,
@@ -49,8 +49,8 @@ class UserCurrLocModel {
     };
   }
 
-  factory UserCurrLocModel.fromMap(Map<String, dynamic> map) {
-    return UserCurrLocModel(
+  factory CurrentLocationModel.fromMap(Map<String, dynamic> map) {
+    return CurrentLocationModel(
       userCurrLoc: map['userCurrLoc'] as String,
       userCurrCity: map['userCurrCity'] as String,
       userCurrSubDistrict: map['userCurrSubDistrict'] as String,
@@ -63,16 +63,16 @@ class UserCurrLocModel {
 
   String toJson() => json.encode(toMap());
 
-  factory UserCurrLocModel.fromJson(String source) =>
-      UserCurrLocModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CurrentLocationModel.fromJson(String source) =>
+      CurrentLocationModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'UserCurrLocModel(userCurrLoc: $userCurrLoc, userCurrCity: $userCurrCity, userCurrSubDistrict: $userCurrSubDistrict, userFullPLacemark: $userFullPLacemark, latitude: $latitude, longitude: $longitude)';
+    return 'CurrentLocationModel(userCurrLoc: $userCurrLoc, userCurrCity: $userCurrCity, userCurrSubDistrict: $userCurrSubDistrict, userFullPLacemark: $userFullPLacemark, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
-  bool operator ==(covariant UserCurrLocModel other) {
+  bool operator ==(covariant CurrentLocationModel other) {
     if (identical(this, other)) return true;
 
     return other.userCurrLoc == userCurrLoc &&

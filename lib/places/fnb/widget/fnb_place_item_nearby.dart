@@ -97,7 +97,7 @@ class FnbPlaceItemNearby extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 4.h),
                     child: Text(
-                      'jakarta',
+                      merchant.fullAddress,
                       style: theme(context).textTheme.bodySmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -108,13 +108,10 @@ class FnbPlaceItemNearby extends StatelessWidget {
                     height: 20.h,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(Icons.attach_money, size: 15.h),
-                        Icon(Icons.attach_money, size: 15.h),
-                        Icon(Icons.attach_money, size: 15.h),
-                        Icon(Icons.attach_money, size: 15.h),
-                        Icon(Icons.attach_money, size: 15.h),
-                      ],
+                      children:
+                          List.generate(merchant.averageRating.floor(), (_) {
+                        return Icon(Icons.attach_money, size: 15.h);
+                      }),
                     ),
                   ),
                   SizedBox(height: 5.h),

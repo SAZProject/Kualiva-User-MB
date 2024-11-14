@@ -6,8 +6,8 @@ import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
+import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
-import 'package:like_it/places/fnb/fnb_detail_nearby_screen.dart';
 import 'package:like_it/places/fnb/widget/fnb_place_item_nearby.dart';
 
 class FnbNearestFeature extends StatelessWidget {
@@ -25,7 +25,7 @@ class FnbNearestFeature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // BlocProvider.of<FnbNearestBloc>(context).add(FnbNearestStarted());
-    context.read<FnbNearestBloc>().add(FnbNearestStarted());
+    // context.read<FnbNearestBloc>().add(FnbNearestStarted());
     final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
     final List<MerchantNearby> merchantNearby = [];
     return SizedBox(
@@ -96,17 +96,26 @@ class FnbNearestFeature extends StatelessWidget {
             return FnbPlaceItemNearby(
               merchant: state.nearest[index],
               onPressed: () {
-                Navigator.push(
-                    context,
-                    DialogRoute(
-                      context: context,
-                      builder: (context) {
-                        return FnbDetailNearbyScreen(
-                          fnbModel: featuredListItems[index],
-                          placeId: merchantNearby[index].placeId,
-                        );
-                      },
+                context.read<FnbDetailBloc>().add(FnbDetailFetched(
+                      placeId: state.nearest[index].placeId,
                     ));
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.fnbDetailScreen,
+                  arguments: state.nearest[index].placeId,
+                );
+                // Navigator.push(
+                //   context,
+                //   DialogRoute(
+                //     context: context,
+                //     builder: (context) {
+                //       return FnbDetailNearbyScreen(
+                //         fnbModel: featuredListItems[index],
+                //         placeId: merchantNearby[index].placeId,
+                //       );
+                //     },
+                //   ),
+                // );
               },
             );
           },

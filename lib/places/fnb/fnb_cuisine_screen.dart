@@ -261,8 +261,10 @@ class _FNBCuisineState extends State<FnbCuisineScreen> {
                         fnbModel: featuredListItems[index],
                         onPressed: () {
                           Navigator.pushNamed(
-                              context, AppRoutes.fnbDetailScreen,
-                              arguments: featuredListItems[index]);
+                            context,
+                            AppRoutes.fnbDetailScreen,
+                            arguments: "placeId", // TODO
+                          );
                         },
                       );
                     }

@@ -13,27 +13,21 @@ import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/ui_model/promo_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FnbDetailNearbyScreen extends StatefulWidget {
-  const FnbDetailNearbyScreen({
-    super.key,
-    required this.fnbModel,
-    required this.placeId,
-  });
+class CopyFnbDetailScreen extends StatefulWidget {
+  const CopyFnbDetailScreen({super.key, required this.fnbModel});
 
   final FNBModel fnbModel;
-  final String placeId;
 
   @override
-  State<FnbDetailNearbyScreen> createState() => _FNBDetailScreenState();
+  State<CopyFnbDetailScreen> createState() => _FNBDetailScreenState();
 }
 
-class _FNBDetailScreenState extends State<FnbDetailNearbyScreen> {
+class _FNBDetailScreenState extends State<CopyFnbDetailScreen> {
   final GlobalKey _toolTipKey = GlobalKey();
   OverlayEntry? _overlayEntry;
   final LayerLink _layerLink = LayerLink();
 
   FNBModel get fnbData => super.widget.fnbModel;
-  String get placeId => super.widget.placeId;
   bool _hasCallSupport = false;
 
   List<PromoModel> listPromo = [
@@ -291,8 +285,7 @@ class _FNBDetailScreenState extends State<FnbDetailNearbyScreen> {
               child: SizedBox(
                 height: 30.h,
                 child: Text(
-                  // restaurant?.name ?? '',
-                  'a',
+                  fnbData.placeName,
                   textAlign: TextAlign.center,
                   style: theme(context).textTheme.headlineSmall,
                   maxLines: 1,
@@ -775,8 +768,11 @@ class _FNBDetailScreenState extends State<FnbDetailNearbyScreen> {
           CustomSectionHeader(
             label: context.tr("f_n_b_detail.review"),
             onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.reviewScreen,
-                  arguments: fnbData);
+              Navigator.pushNamed(
+                context,
+                AppRoutes.reviewScreen,
+                arguments: fnbData,
+              );
             },
           ),
           InkWell(

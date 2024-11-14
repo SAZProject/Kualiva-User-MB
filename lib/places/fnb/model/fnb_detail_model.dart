@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-// Define the main model class for the restaurant
+// Define the main model class for the FnbDetailModel
 @immutable
-class Restaurant {
+class FnbDetailModel {
   final List<AddressComponent> addressComponents;
   final String formattedAddress;
   final String formattedPhoneNumber;
@@ -30,7 +30,7 @@ class Restaurant {
   final Geometry geometry;
   final CurrentOpeningHours currentOpeningHours;
 
-  const Restaurant({
+  const FnbDetailModel({
     required this.addressComponents,
     required this.formattedAddress,
     required this.formattedPhoneNumber,
@@ -57,8 +57,8 @@ class Restaurant {
   });
 
   // Factory constructor to create an instance from a Map
-  factory Restaurant.fromMap(Map<String, dynamic> map) {
-    return Restaurant(
+  factory FnbDetailModel.fromMap(Map<String, dynamic> map) {
+    return FnbDetailModel(
       addressComponents: (map['address_components'] as List<dynamic>)
           .map((e) => AddressComponent.fromMap(e))
           .toList(),
@@ -92,11 +92,11 @@ class Restaurant {
   }
   @override
   String toString() {
-    return 'Restaurant(addressComponents: $addressComponents, formattedAddress: $formattedAddress, formattedPhoneNumber: $formattedPhoneNumber, icon: $icon, iconBackgroundColor: $iconBackgroundColor, iconMaskBaseUri: $iconMaskBaseUri, internationalPhoneNumber: $internationalPhoneNumber, name: $name, photos: $photos, placeId: $placeId, priceLevel: $priceLevel, reference: $reference, businessStatus: $businessStatus, openNow: $openNow, delivery: $delivery, dineIn: $dineIn, rating: $rating, website: $website, url: $url, reviews: $reviews, types: $types, geometry: $geometry, currentOpeningHours: $currentOpeningHours)';
+    return 'FnbDetailModel(addressComponents: $addressComponents, formattedAddress: $formattedAddress, formattedPhoneNumber: $formattedPhoneNumber, icon: $icon, iconBackgroundColor: $iconBackgroundColor, iconMaskBaseUri: $iconMaskBaseUri, internationalPhoneNumber: $internationalPhoneNumber, name: $name, photos: $photos, placeId: $placeId, priceLevel: $priceLevel, reference: $reference, businessStatus: $businessStatus, openNow: $openNow, delivery: $delivery, dineIn: $dineIn, rating: $rating, website: $website, url: $url, reviews: $reviews, types: $types, geometry: $geometry, currentOpeningHours: $currentOpeningHours)';
   }
 
   @override
-  bool operator ==(covariant Restaurant other) {
+  bool operator ==(covariant FnbDetailModel other) {
     if (identical(this, other)) return true;
 
     return listEquals(other.addressComponents, addressComponents) &&

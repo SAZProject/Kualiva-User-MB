@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
-import 'package:like_it/common/utility/location_util.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
 import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
+import 'package:like_it/data/current_location/current_location_bloc.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
 import 'package:like_it/data/model/place/place_response_model.dart';
@@ -31,8 +31,6 @@ class _FnbScreenState extends State<FnbScreen> {
   final _parentScrollController = ScrollController();
   final _childScrollController = ScrollController();
   final _childScrollController2 = ScrollController();
-
-  bool _locIsInitialized = false;
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
@@ -65,27 +63,37 @@ class _FnbScreenState extends State<FnbScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        children: [
-          // Align(
-          //   alignment: Alignment.topCenter,
-          //   child: Container(
-          //     width: double.maxFinite,
-          //     decoration: BoxDecoration(
-          //       color: theme(context).scaffoldBackgroundColor,
-          //       image: DecorationImage(
-          //         image: AssetImage(ImageConstant.background2),
-          //         fit: BoxFit.cover,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          Scaffold(
-            // backgroundColor: Colors.transparent,
-            body: _body(context),
-          ),
-        ],
+    return BlocListener<CurrentLocationBloc, CurrentLocationState>(
+      listener: (context, state) {
+        if (state is! CurrentLocationSuccess) return;
+
+        context.read<FnbNearestBloc>().add(FnbNearestFetched(
+              latitude: state.currentLocationModel.latitude,
+              longitude: state.currentLocationModel.longitude,
+            ));
+      },
+      child: SafeArea(
+        child: Stack(
+          children: [
+            // Align(
+            //   alignment: Alignment.topCenter,
+            //   child: Container(
+            //     width: double.maxFinite,
+            //     decoration: BoxDecoration(
+            //       color: theme(context).scaffoldBackgroundColor,
+            //       image: DecorationImage(
+            //         image: AssetImage(ImageConstant.background2),
+            //         fit: BoxFit.cover,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            Scaffold(
+              // backgroundColor: Colors.transparent,
+              body: _body(context),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -251,111 +259,6 @@ class _FnbScreenState extends State<FnbScreen> {
     );
   }
 
-  // Widget _nearestList(BuildContext context) {
-  //   return SizedBox(
-  //     width: double.maxFinite,
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         CustomSectionHeader(
-  //           label: context.tr("f_n_b.nearest"),
-  //           // onPressed: () {},
-  //           useIcon: false,
-  //         ),
-  //         SizedBox(height: 4.h),
-  //         Padding(
-  //           padding: EdgeInsets.symmetric(horizontal: 6.h),
-  //           child: SizedBox(
-  //             height: 450.h,
-  //             width: double.maxFinite,
-  //             child: NotificationListener(
-  //               onNotification: (ScrollNotification notification) {
-  //                 if (notification is ScrollUpdateNotification) {
-  //                   if (notification.metrics.pixels ==
-  //                       notification.metrics.maxScrollExtent) {
-  //                     debugPrint('Reached the bottom');
-  //                     _parentScrollController.animateTo(
-  //                         _parentScrollController.position.maxScrollExtent,
-  //                         duration: const Duration(seconds: 1),
-  //                         curve: Curves.easeIn);
-  //                   } else if (notification.metrics.pixels ==
-  //                       notification.metrics.minScrollExtent) {
-  //                     debugPrint('Reached the top');
-  //                     _parentScrollController.animateTo(
-  //                         _parentScrollController.position.minScrollExtent,
-  //                         duration: const Duration(seconds: 1),
-  //                         curve: Curves.easeIn);
-  //                   }
-  //                 }
-  //                 return true;
-  //               },
-  //               child: ListView.builder(
-  //                 controller: _childScrollController,
-  //                 shrinkWrap: true,
-  //                 scrollDirection: Axis.vertical,
-  //                 itemCount: merchantNearby.isEmpty ? 6 : merchantNearby.length,
-  //                 itemBuilder: (context, index) {
-  //                   if (merchantNearby.isEmpty) {
-  //                     return FnbPlaceItem(
-  //                       fnbModel: featuredListItems[index],
-  //                       onPressed: () {
-  //                         Navigator.pushNamed(
-  //                             context, AppRoutes.fnbDetailScreen,
-  //                             arguments: featuredListItems[index]);
-  //                       },
-  //                     );
-  //                   }
-
-  //                   return FnbPlaceItemNearby(
-  //                     merchant: merchantNearby[index],
-  //                     onPressed: () {
-  //                       // Navigator.pushNamed(
-  //                       //   context,
-  //                       //   AppRoutes.fnbDetailScreen,
-  //                       //   arguments: featuredListItems[index],
-  //                       // );
-  //                       Navigator.push(
-  //                           context,
-  //                           DialogRoute(
-  //                             context: context,
-  //                             builder: (context) {
-  //                               return FnbDetailNearbyScreen(
-  //                                 fnbModel: featuredListItems[index],
-  //                                 placeId: merchantNearby[index].placeId,
-  //                               );
-  //                             },
-  //                           ));
-  //                     },
-  //                   );
-
-  //                   //TODO add waiting, empty, error state in future
-  //                   // if (placeResponseModel == null) {
-  //                   //   return FnbPlaceItem(
-  //                   //     fnbModel: featuredListItems[index],
-  //                   //     onPressed: () {
-  //                   //       Navigator.pushNamed(
-  //                   //           context, AppRoutes.fnbDetailScreen,
-  //                   //           arguments: featuredListItems[index]);
-  //                   //     },
-  //                   //   );
-  //                   // }
-  //                   // return FnbPlaceItemDummy(
-  //                   //   place: placeResponseModel!.results[index],
-  //                   //   onPressed: () {
-  //                   //     Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-  //                   //         arguments: featuredListItems[index]);
-  //                   //   },
-  //                   // );
-  //                 },
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget _promoList(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
@@ -384,8 +287,11 @@ class _FnbScreenState extends State<FnbScreen> {
                   return FnbPromoItem(
                     fnbModel: featuredListItems[index],
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-                          arguments: featuredListItems[index]);
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.fnbDetailScreen,
+                        arguments: "placeId", // TODO
+                      );
                     },
                   );
                 },

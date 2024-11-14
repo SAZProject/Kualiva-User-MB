@@ -9,7 +9,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:like_it/auth/repository/token_manager.dart';
-import 'package:like_it/data/model/place/place_detail_model.dart';
 import 'package:flutter/foundation.dart';
 
 import 'dart:convert';
@@ -62,15 +61,15 @@ void main() {
 
     // String str = await rootBundle
     //     .loadString('assets/response_1728580777035-detail.json');
-    String str =
-        await rootBundle.loadString('assets/merchant_nearby_detail.json');
+    // String str =
+    //     await rootBundle.loadString('assets/merchant_nearby_detail.json');
 
-    Map<String, dynamic> data = jsonDecode(str);
+    // Map<String, dynamic> data = jsonDecode(str);
 
-    Restaurant restaurant = Restaurant.fromMap(data);
+    // Restaurant restaurant = Restaurant.fromMap(data);
 
-    debugPrint('Restaurant Same Object Type');
-    debugPrint(restaurant.toString());
+    // debugPrint('Restaurant Same Object Type');
+    // debugPrint(restaurant.toString());
 
     // String str1 = await rootBundle
     //     .loadString('assets/1G-Maps-Extractor-10-Restaurants-2024-10-17.json');

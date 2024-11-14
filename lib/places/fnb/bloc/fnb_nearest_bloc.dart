@@ -10,32 +10,29 @@ part 'fnb_nearest_state.dart';
 class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
   final FnbRepository _fnbRepository;
   FnbNearestBloc(this._fnbRepository) : super(FnbNearestInitial()) {
-    // on<FnbNearestEvent>((event, emit) {});
-    on<FnbNearestStarted>(_started);
-    on<FnbNearestFetched>(_fetched);
+    on<FnbNearestEvent>((event, emit) => emit(FnbNearestLoading()));
+    on<FnbNearestStarted>(_onStarted);
+    on<FnbNearestFetched>(_onFetched);
   }
 
-  void _started(
+  void _onStarted(
     FnbNearestStarted event,
     Emitter<FnbNearestState> emit,
   ) {
     emit(FnbNearestInitial());
   }
 
-  void _fetched(
+  void _onFetched(
     FnbNearestFetched event,
     Emitter<FnbNearestState> emit,
   ) async {
-    LeLog.d(this, "loading");
-    emit(FnbNearestLoading());
+    LeLog.d(this, "_fetched");
     try {
-      LeLog.d(this, "try");
       final List<FnbNearestModel> nearest =
           await _fnbRepository.getMerchantNearest(
         latitude: event.latitude,
         longitude: event.longitude,
       );
-      LeLog.d(this, "aaaa");
       debugPrint(nearest.toString());
       emit(FnbNearestSuccess(nearest: nearest));
     } catch (e) {

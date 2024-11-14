@@ -358,8 +358,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   return HomeFeaturedItem(
                     fnbModel: featuredListItems[index],
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.fnbDetailScreen,
-                          arguments: featuredListItems[index]);
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.fnbDetailScreen,
+                        arguments: "placeId", // TODO
+                      );
                     },
                   );
                 },

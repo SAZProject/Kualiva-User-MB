@@ -38,9 +38,6 @@ class TokenManager {
     // _accessToken = await _storage.read(key: _getAccessKey());
     // return _accessToken;
     String? token = await _storage.read(key: _getAccessKey());
-    print('readAccessToken');
-    print(this);
-    print(token);
     return token;
   }
 
@@ -48,9 +45,6 @@ class TokenManager {
     // _refreshToken = await _storage.read(key: _getRefreshKey());
     // return _refreshToken;
     String? token = await _storage.read(key: _getRefreshKey());
-    print('readRefreshToken');
-    print(this);
-    print(token);
     return token;
   }
 

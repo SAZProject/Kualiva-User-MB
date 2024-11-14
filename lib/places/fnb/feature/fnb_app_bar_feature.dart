@@ -1,26 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/common/style/custom_text_style.dart';
-import 'package:like_it/common/style/theme_helper.dart';
+import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/location_util.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
 import 'package:like_it/data/current_location/current_location_bloc.dart';
 import 'package:like_it/data/current_location/current_location_feature.dart';
 
-class HomeAppBarFeature extends StatefulWidget {
-  const HomeAppBarFeature({
-    super.key,
-    this.automaticallyImplyLeading = false,
-  });
-
-  final bool automaticallyImplyLeading;
+class FnbAppBarFeature extends StatefulWidget {
+  const FnbAppBarFeature({super.key});
 
   @override
-  State<HomeAppBarFeature> createState() => _HomeAppBarFeatureState();
+  State<FnbAppBarFeature> createState() => _FnbAppBarFeatureState();
 }
 
-class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
+class _FnbAppBarFeatureState extends State<FnbAppBarFeature> {
   @override
   void initState() {
     super.initState();
@@ -42,8 +35,11 @@ class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
   Widget build(BuildContext context) {
     return SliverAppBar(
       backgroundColor: Colors.transparent,
-      centerTitle: false,
-      automaticallyImplyLeading: widget.automaticallyImplyLeading,
+      automaticallyImplyLeading: true,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios_new),
+        onPressed: () => Navigator.pop(context),
+      ),
       title: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,25 +52,6 @@ class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
         ],
       ),
       toolbarHeight: 100.h,
-      actions: [
-        // TODO dimatikan untuk V!
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: Icon(
-        //     Icons.qr_code_scanner,
-        //     size: 30.h,
-        //     color: appTheme.black900,
-        //   ),
-        // ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.notifications,
-            size: 30.h,
-            color: appTheme.black900,
-          ),
-        ),
-      ],
     );
   }
 }

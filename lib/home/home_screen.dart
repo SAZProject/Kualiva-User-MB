@@ -22,7 +22,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _parentScrollController = ScrollController();
   final _childScrollController = ScrollController();
-  bool _locIsInitialized = false;
 
   final List<HomeGridMenuModel> _homeGridMenu = [
     HomeGridMenuModel(

@@ -15,6 +15,7 @@ import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/current_location/current_location_model.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:like_it/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:like_it/places/fnb/feature/fnb_nearest_feature.dart';
 import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
 import 'package:like_it/places/fnb/widget/fnb_promo_item.dart';
@@ -97,7 +98,7 @@ class _FnbScreenState extends State<FnbScreen> {
         controller: _parentScrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            _homeAppBar(context),
+            FnbAppBarFeature(),
             _searchBar(context),
           ];
         },
@@ -120,101 +121,6 @@ class _FnbScreenState extends State<FnbScreen> {
               SizedBox(height: 5.h),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _homeAppBar(BuildContext context) {
-    return SliverAppBar(
-      backgroundColor: Colors.transparent,
-      centerTitle: false,
-      automaticallyImplyLeading: true,
-      pinned: false,
-      snap: false,
-      floating: false,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new),
-        onPressed: () => Navigator.pop(context),
-      ),
-      title: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.tr("common.current_location"),
-            style: CustomTextStyles(context).titleLargeOnPrimaryContainer,
-          ),
-          _currentUserLocation(context),
-        ],
-      ),
-      toolbarHeight: 100.h,
-    );
-  }
-
-  Widget _currentUserLocation(BuildContext context) {
-    return FutureBuilder<CurrentLocationModel>(
-      future: Future<CurrentLocationModel>(
-        () async {
-          if (!context.mounted) return Future.error("No context mounted");
-          if (_locIsInitialized == false) {
-            //TODO after user go to open setting and allow permission, refresh page to get user loc
-            final permissionGranted =
-                await LocationUtil.checkPermission(context);
-            if (!permissionGranted) {
-              return Future.error("No Connection or error on locator");
-            }
-
-            try {
-              final res = await LocationUtil.getUserCurrentLocation();
-
-              // TODO Rucci refactor "getUserCurrentLoc" variable into BLoC and Repository Layer
-              setState(() {
-                getUserCurrentLoc = res;
-                _locIsInitialized = true;
-              });
-
-              // Trigger the BLoC event outside the async function
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (!mounted) return;
-                context.read<FnbNearestBloc>().add(FnbNearestFetched(
-                      latitude: res.latitude,
-                      longitude: res.longitude,
-                    ));
-              });
-            } catch (e) {
-              return Future.error(e);
-            }
-          }
-          return getUserCurrentLoc;
-        },
-      ),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return _buildUserLoc(context, context.tr("common.error"));
-        }
-        if (snapshot.hasData) {
-          return _buildUserLoc(context,
-              "${getUserCurrentLoc.userCurrSubDistrict}, ${getUserCurrentLoc.userCurrCity}");
-        }
-        return const Center(child: CircularProgressIndicator());
-      },
-    );
-  }
-
-  Widget _buildUserLoc(BuildContext context, String label) {
-    return InkWell(
-      // TODO dimatikan untuk V1
-      // onTap: () {
-      //   Navigator.pushNamed(context, AppRoutes.locationScreen);
-      // },
-      child: SizedBox(
-        width: double.maxFinite,
-        child: Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: theme(context).textTheme.bodyMedium,
         ),
       ),
     );

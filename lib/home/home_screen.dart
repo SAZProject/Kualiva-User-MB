@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:like_it/auth/bloc/auth_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/utility/location_util.dart';
@@ -11,6 +13,8 @@ import 'package:like_it/home/feature/home_app_bar_feature.dart';
 import 'package:like_it/home/model/home_grid_menu_model.dart';
 import 'package:like_it/data/current_location/current_location_model.dart';
 import 'package:like_it/home/widget/home_featured_item.dart';
+import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -83,13 +87,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<String> _adBannerList = [
     ImageConstant.event1,
-    ImageConstant.foodSugarSpice,
     ImageConstant.event2,
+    ImageConstant.foodSugarSpice,
     ImageConstant.foodTable8,
     ImageConstant.event3,
   ];
 
   late CurrentLocationModel getUserCurrentLoc;
+
+  Future<void> _launchWeb(String url) async {
+    final Uri launchUri = Uri(
+      scheme: 'https:',
+      path: url,
+    );
+    await launchUrl(launchUri);
+  }
 
   void _gridMenuAction(int index) {
     switch (index) {
@@ -226,8 +238,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: _childScrollController,
                 itemCount: _adBannerList.length,
                 itemBuilder: (context, index) {
+                  String url = '';
+                  if (index == 0) {
+                    url = '';
+                  }
+                  if (index == 1) {
+                    url = '';
+                  }
                   if (_adBannerList.isNotEmpty) {
-                    return _adBannerListItem(context, _adBannerList[index]);
+                    return _adBannerListItem(
+                      context,
+                      index,
+                      _adBannerList[index],
+                      url,
+                    );
                   }
                   return const CustomEmptyState();
                 },
@@ -236,7 +260,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _adBannerListItem(BuildContext context, String imgUrl) {
+  Widget _adBannerListItem(
+      BuildContext context, int index, String imgUrl, String url) {
     return Container(
       height: 180.h,
       margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 4.h),
@@ -248,7 +273,22 @@ class _HomeScreenState extends State<HomeScreen> {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
-        onTap: () {},
+        onTap: () {
+          // _launchWeb(url);
+          // context.read<FnbDetail();
+          if (index == 1) {
+            context.read<FnbDetailBloc>().add(FnbDetailFetched(
+                  // placeId: "ChIJlUYNUs3xaS4RRs0Mrh_empk",
+                  placeId: "ChIJ5Ts2IiHyaS4R67B-PvQGtxY",
+                ));
+            Navigator.pushNamed(
+              context,
+              AppRoutes.fnbDetailScreen,
+              // arguments: "ChIJlUYNUs3xaS4RRs0Mrh_empk",
+              arguments: "ChIJ5Ts2IiHyaS4R67B-PvQGtxY",
+            );
+          }
+        },
         child: CustomImageView(
           imagePath: imgUrl,
           height: 180.h,

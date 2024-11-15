@@ -245,8 +245,12 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
                   prefs.setString("date", DateTime.now().toString()),
                 ]).then(
                   (value) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, AppRoutes.reviewScreen, (route) => false);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    // Navigator.pushReplacementNamed(
+                    //     context, AppRoutes.reviewScreen);
                   },
                 );
               },

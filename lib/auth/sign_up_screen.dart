@@ -234,7 +234,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if (value == null || value.isEmpty) return "Please enter some text";
 
         if (!FormValidationUtil.username(value)) {
-          return "Baca lagi ketentuan nya yyaakkk wahai customer";
+          return "Tidak sesuai ketentuan";
         }
         return null;
       },
@@ -258,7 +258,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             if (value[0] == '0') return 'Cannot input 0 at the start';
 
             if (!FormValidationUtil.phoneNumber(value)) {
-              return "Baca lagi ketentuan nya yyaakkk wahai customer";
+              return "Tidak sesuai ketentuan";
             }
 
             return null;
@@ -298,7 +298,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               }
 
               if (!FormValidationUtil.password(value)) {
-                return "Baca lagi ketentuan nya yyaakkk wahai customer";
+                return "Tidak sesuai ketentuan";
               }
               return null;
             },

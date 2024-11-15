@@ -154,7 +154,9 @@ class _ReviewScreenState extends State<ReviewScreen> {
         child: IconButton(
           iconSize: 25.h,
           icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       title: Padding(

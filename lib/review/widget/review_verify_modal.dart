@@ -18,7 +18,7 @@ class ReviewVerifyModal extends StatefulWidget {
 }
 
 class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
-  final TextEditingController _transactionCtl = TextEditingController();
+  final _transactionCtl = TextEditingController();
 
   List<String> invoiceMedia = [];
 
@@ -151,7 +151,7 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
           textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
           onPressed: () {
             Navigator.pushNamed(context, AppRoutes.reviewFormScreen,
-                arguments: widget.fnbData);
+                arguments: _transactionCtl.text.trim());
           },
         ),
       ),

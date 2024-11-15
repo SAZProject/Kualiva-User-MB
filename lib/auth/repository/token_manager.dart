@@ -26,6 +26,7 @@ class TokenManager {
   }
 
   Future<String?> readToken() async {
+    // deleteToken();
     return await readAccessToken() ?? await readRefreshToken();
   }
 

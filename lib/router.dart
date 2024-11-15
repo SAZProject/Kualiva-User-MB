@@ -184,16 +184,16 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reviewScreen:
-      final fnbModel = routeSetting.arguments as FNBModel;
       return PageTransition(
-          child: ReviewScreen(fnbModel: fnbModel),
+          child: const ReviewScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reviewFormScreen:
-      final fnbModel = routeSetting.arguments as FNBModel;
+      // final fnbModel = routeSetting.arguments as FNBModel;
+      final transaction = routeSetting.arguments as String;
       return PageTransition(
-          child: ReviewFormScreen(fnbModel: fnbModel),
+          child: ReviewFormScreen(transaction: transaction),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

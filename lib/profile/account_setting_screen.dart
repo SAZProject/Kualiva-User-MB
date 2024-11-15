@@ -2,6 +2,9 @@ import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:like_it/auth/bloc/auth_bloc.dart';
+import 'package:like_it/auth/repository/token_manager.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_elevated_button.dart';
@@ -423,11 +426,18 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                 SizedBox(height: 10.h),
                 CustomElevatedButton(
                   isLoading: logoutLoading,
-                  onPressed: () {
+                  onPressed: () async {
+                    final tokenManager = context.read<TokenManager>();
+                    tokenManager.deleteToken().then(
+                      (value) {
+                        setState(() {
+                          logoutLoading = true;
+                        });
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, AppRoutes.signInScreen, (route) => false);
+                      },
+                    );
                     //TODO loading masih perlu dibenerin mungkin pas pake BLoc
-                    setState(() {
-                      logoutLoading = true;
-                    });
                   },
                   initialText: context.tr("common.yes"),
                   buttonStyle: CustomButtonStyles.none,

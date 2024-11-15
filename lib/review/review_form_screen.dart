@@ -2,26 +2,29 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/image_utility.dart';
+import 'package:like_it/common/widget/custom_alert_dialog.dart';
 import 'package:like_it/common/widget/custom_attach_media.dart';
 import 'package:like_it/common/widget/custom_checkbox_button.dart';
 import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
 import 'package:like_it/common/widget/custom_rating_bar.dart';
 import 'package:like_it/common/widget/custom_text_form_field.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ReviewFormScreen extends StatefulWidget {
-  const ReviewFormScreen({super.key, required this.fnbModel});
+  const ReviewFormScreen({super.key, required this.transaction});
 
-  final FNBModel fnbModel;
+  // final FNBModel fnbModel;
+  final String transaction;
 
   @override
   State<ReviewFormScreen> createState() => _ReviewFormScreenState();
 }
 
 class _ReviewFormScreenState extends State<ReviewFormScreen> {
-  FNBModel get fnbData => super.widget.fnbModel;
+  // FNBModel get fnbData => super.widget.fnbModel;
+  String get transaction => super.widget.transaction;
 
-  final TextEditingController _reviewMsgCtl = TextEditingController();
+  final _reviewMsgCtl = TextEditingController();
 
   List<String> reviewMedia = [];
 
@@ -208,6 +211,47 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
             theme(context).colorScheme.primary,
           ],
           textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+          onPressed: () async {
+            customAlertDialog(
+              context: context,
+              dismissable: true,
+              title: Text(
+                "Conratulation!",
+              ),
+              content: Text(
+                "You get 10 points",
+              ),
+              icon: Icon(
+                Icons.generating_tokens_outlined,
+              ),
+            );
+            debugPrint('LeRucco Review Form Screen');
+            debugPrint(transaction);
+            debugPrint(_reviewMsgCtl.text.trim());
+            debugPrint(ratingStar.toString());
+            // final SharedPreferences prefs =
+            //     await SharedPreferences.getInstance();
+            // await prefs.setString('transaction', transaction);
+            // await prefs.setString('message', _reviewMsgCtl.text.trim());
+            // await prefs.setDouble('rating', ratingStar);
+            // await prefs.setString("date", DateTime.now().toString());
+            await Future.delayed(const Duration(seconds: 3));
+            SharedPreferences.getInstance().then(
+              (prefs) {
+                Future.wait([
+                  prefs.setString('transaction', transaction),
+                  prefs.setString('message', _reviewMsgCtl.text.trim()),
+                  prefs.setDouble('rating', ratingStar),
+                  prefs.setString("date", DateTime.now().toString()),
+                ]).then(
+                  (value) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, AppRoutes.reviewScreen, (route) => false);
+                  },
+                );
+              },
+            );
+          },
         ),
       ),
     );

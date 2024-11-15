@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
+import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/style/custom_btn_style.dart';
 import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
@@ -12,19 +13,24 @@ import 'package:like_it/review/widget/review_filters_modal.dart';
 import 'package:like_it/review/widget/review_verify_modal.dart';
 import 'package:like_it/review/widget/review_view.dart';
 import 'package:like_it/review/widget/special_review_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ReviewScreen extends StatefulWidget {
-  const ReviewScreen({super.key, required this.fnbModel});
+  const ReviewScreen({super.key});
 
-  final FNBModel fnbModel;
+  // final FNBModel fnbModel;
 
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
-  FNBModel get fnbData => super.widget.fnbModel;
-  List<ReviewModel> get listReviewData => super.widget.fnbModel.review;
+  // FNBModel get fnbData => super.widget.fnbModel;
+  // List<ReviewModel> get listReviewData => super.widget.fnbModel.review;
+
+  FNBModel get fnbData => FNBDataset().featuredItemsDataset[0];
+  List<ReviewModel> get listReviewData =>
+      FNBDataset().featuredItemsDataset[0].review;
 
   List<String> filterByCategory = [
     "review.filter_user",
@@ -42,11 +48,33 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   ValueNotifier<String> selectedStar = ValueNotifier<String>("");
 
+  String? transaction;
+  String? message;
+  double? rating;
+  String? date;
+
   @override
   void dispose() {
     selectedCategory.dispose();
     selectedStar.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dummyData();
+  }
+
+  void dummyData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      transaction = prefs.getString('transaction');
+      message = prefs.getString('message');
+      date = prefs.getString('date');
+      rating = prefs.getDouble('rating');
+    });
   }
 
   @override
@@ -74,6 +102,18 @@ class _ReviewScreenState extends State<ReviewScreen> {
   }
 
   Widget _body(BuildContext context) {
+    List<Widget> myReview = [SizedBox()];
+    debugPrint('LeRucco Add Review');
+    debugPrint('transaction $transaction');
+    debugPrint('message $message');
+    debugPrint('date $date');
+    debugPrint('rating $rating');
+    if (transaction != null &&
+        message != null &&
+        date != null &&
+        rating != null) {
+      myReview = [_myReview(context), SizedBox(height: 5.h)];
+    }
     return Stack(
       children: [
         SizedBox(
@@ -85,9 +125,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 _searchBar(context),
                 SizedBox(height: 5.h),
                 _reviewFilter(context),
-                // SizedBox(height: 5.h),
-                // _myReview(context),
                 SizedBox(height: 5.h),
+                ...myReview,
+                // _myReview(context),
+                // SizedBox(height: 5.h),
                 _otherReview(context),
                 SizedBox(height: 5.h),
               ],
@@ -143,7 +184,23 @@ class _ReviewScreenState extends State<ReviewScreen> {
           buttonStyle:
               CustomButtonStyles.fillOnSecondaryContainerNoBdr(context),
           textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-          onPressed: () {
+          onPressed: () async {
+            // final SharedPreferences prefs =
+            //     await SharedPreferences.getInstance();
+            // await prefs.remove('transaction');
+            // await prefs.remove('message');
+            // await prefs.remove('rating');
+            // await prefs.remove('date');
+            SharedPreferences.getInstance().then((prefs) {
+              Future.wait([
+                prefs.remove('transaction'),
+                prefs.remove('message'),
+                prefs.remove('rating'),
+                prefs.remove('date'),
+              ]).then(
+                (value) {},
+              );
+            });
             showModalBottomSheet(
               context: context,
               builder: (BuildContext context) =>
@@ -311,47 +368,67 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  // Widget _myReview(BuildContext context) {
-  //   return Container(
-  //     width: double.maxFinite,
-  //     margin: EdgeInsets.symmetric(horizontal: 5.h),
-  //     decoration: CustomDecoration(context).fillOnSecondaryContainer.copyWith(
-  //           color: theme(context)
-  //               .colorScheme
-  //               .onSecondaryContainer
-  //               .withOpacity(0.6),
-  //           borderRadius: BorderRadiusStyle.roundedBorder10,
-  //         ),
-  //     child: Column(
-  //       children: [
-  //         CustomSectionHeader(
-  //           label: context.tr("review.my_review"),
-  //           useIcon: false,
-  //         ),
-  //         InkWell(
-  //           onTap: () {
-  //             // Navigator.pushNamed(context, AppRoutes.reviewFormScreen,
-  //             //     arguments: fnbData);
-  //           },
-  //           child: Container(
-  //             height: 150.h,
-  //             margin: EdgeInsets.symmetric(horizontal: 5.h),
-  //             width: double.maxFinite,
-  //             child: Center(
-  //               child: Text(
-  //                 context.tr("review.no_review"),
-  //                 textAlign: TextAlign.center,
-  //                 style: theme(context).textTheme.headlineSmall,
-  //                 maxLines: 1,
-  //                 overflow: TextOverflow.ellipsis,
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _myReview(BuildContext context) {
+    ReviewModel review = FNBDataset().featuredItemsDataset[1].review[0];
+    if (transaction != null &&
+        message != null &&
+        date != null &&
+        rating != null) {
+      review = review.copyWith(
+          rating: rating,
+          reviewDate: date == null ? DateTime.now() : DateTime.parse(date!),
+          content: message);
+    }
+    debugPrint('_myReview');
+    debugPrint(review.toString());
+
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 5.h),
+      decoration: CustomDecoration(context).fillOnSecondaryContainer.copyWith(
+            color: theme(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withOpacity(0.6),
+            borderRadius: BorderRadiusStyle.roundedBorder10,
+          ),
+      child: Column(
+        children: [
+          CustomSectionHeader(
+            label: context.tr("review.my_review"),
+            useIcon: false,
+          ),
+          InkWell(
+            onTap: () {
+              // Navigator.pushNamed(context, AppRoutes.reviewFormScreen,
+              //     arguments: fnbData);
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 5.h),
+              child: ReviewView(
+                reviewData: review,
+              ),
+            ),
+
+            // Container(
+            //   height: 150.h,
+            //   margin: EdgeInsets.symmetric(horizontal: 5.h),
+            //   width: double.maxFinite,
+            //   child: Center(
+            //     child: Text(
+            //       context.tr("review.no_review"),
+            //       textAlign: TextAlign.center,
+            //       style: theme(context).textTheme.headlineSmall,
+            //       maxLines: 1,
+            //       overflow: TextOverflow.ellipsis,
+            //     ),
+            //   ),
+            // ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _otherReview(BuildContext context) {
     return Container(

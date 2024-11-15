@@ -71,7 +71,7 @@ class ReviewView extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 CustomRatingBar(
-                                  initialRating: 5.0,
+                                  initialRating: reviewData.rating,
                                   color: theme(context).colorScheme.primary,
                                 ),
                               ],

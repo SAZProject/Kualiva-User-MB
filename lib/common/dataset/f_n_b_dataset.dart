@@ -149,7 +149,7 @@ class FNBDataset {
           review: [
             ReviewModel(
               id: "0",
-              username: "Adelia",
+              username: "Edward",
               userImage: defaultUserImage,
               reviewDate: DateTime(2020, 3, 26, 0, 0, 0),
               rating: 5.0,

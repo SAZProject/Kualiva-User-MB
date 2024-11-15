@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:like_it/data/dio_client.dart';
 
+// AuthorId
+// cm3d0h52q0000qtfl1aoq65b8
+
 class ReviewRepository {
   ReviewRepository(this._dioClient);
 
@@ -9,26 +12,26 @@ class ReviewRepository {
   /// Add Reviews by Place
   Future<void> create({
     required String placeId,
-    required String transactionNumber,
-    required int rating,
-    required String description,
-    required List<String> invoiceMedia,
+    // required String transactionNumber,
+    // required int rating,
+    // required String description,
+    // required List<String> invoiceMedia,
   }) async {
     FormData formData = FormData.fromMap({
       /// TODO Here
     });
 
-    formData.files.addAll(await Future.wait(invoiceMedia.map((file) async {
-      return MapEntry('media[]', await MultipartFile.fromFile(file));
-    })));
+    // formData.files.addAll(await Future.wait(invoiceMedia.map((file) async {
+    //   return MapEntry('media[]', await MultipartFile.fromFile(file));
+    // })));
 
-    final res = await _dioClient.dio().then((dio) {
+    final _ = await _dioClient.dio().then((dio) {
       return dio.post(
         'review/place',
-        queryParameters: Map.from({
-          'place-id': placeId,
-        }),
-        data: formData,
+        // queryParameters: Map.from({
+        //   'place-id': placeId,
+        // }),
+        data: Map.from({}),
         options: Options(contentType: Headers.multipartFormDataContentType),
       );
     });
@@ -45,7 +48,7 @@ class ReviewRepository {
     required bool isHighest,
     required int rating,
   }) async {
-    final res = await _dioClient.dio().then((dio) {
+    final _ = await _dioClient.dio().then((dio) {
       return dio.get(
         '/review/place',
         queryParameters: Map.from(

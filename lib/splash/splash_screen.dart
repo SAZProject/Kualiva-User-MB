@@ -52,6 +52,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
       if (!mounted) return;
 
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, AppRoutes.reviewScreen, (route) => false);
+      // return;
+
       if (await CheckPermission.checkDevicePermission()) {
         if (!mounted) return;
         context.read<AuthBloc>().add(AuthStarted());

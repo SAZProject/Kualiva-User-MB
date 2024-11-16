@@ -7,19 +7,20 @@ import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/image_utility.dart';
 
 class CustomImageView extends StatelessWidget {
-  const CustomImageView(
-      {super.key,
-      required this.imagePath,
-      this.height,
-      this.width,
-      this.color,
-      this.boxFit,
-      this.placeHolder = Icons.image_not_supported_outlined,
-      this.alignment,
-      this.onPressed,
-      this.margin,
-      this.radius,
-      this.border});
+  const CustomImageView({
+    super.key,
+    required this.imagePath,
+    this.height,
+    this.width,
+    this.color,
+    this.boxFit,
+    this.placeHolder = Icons.image_not_supported_outlined,
+    this.alignment,
+    this.onPressed,
+    this.margin,
+    this.radius,
+    this.border,
+  });
 
   final String imagePath;
   final double? height;

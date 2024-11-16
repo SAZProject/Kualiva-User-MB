@@ -16,7 +16,6 @@ import 'package:like_it/places/fnb/fnb_detail_screen.dart';
 import 'package:like_it/places/fnb/fnb_screen.dart';
 import 'package:like_it/places/fnb/fnb_cuisine_screen.dart';
 import 'package:like_it/places/fnb/fnb_detail_menu_screen.dart';
-import 'package:like_it/places/fnb/copy_fnb_detail_screen.dart';
 import 'package:like_it/layout/main_layout.dart';
 import 'package:like_it/places/fnb/fnb_filters_screen.dart';
 import 'package:like_it/profile/account_setting_screen.dart';

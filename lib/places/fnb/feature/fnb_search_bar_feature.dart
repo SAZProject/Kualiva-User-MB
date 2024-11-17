@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/data/search_bar/my_search_bar_widget.dart';
-import 'package:like_it/home/cubit/home_search_bar_cubit.dart';
+import 'package:like_it/places/fnb/cubit/fnb_search_bar_cubit.dart';
 
-class HomeSearchBarFeature extends StatelessWidget {
-  const HomeSearchBarFeature({super.key});
+class FnbSearchBarFeature extends StatelessWidget {
+  const FnbSearchBarFeature({super.key});
 
   @override
   Widget build(BuildContext context) {
-    context.read<HomeSearchBarCubit>().loadSuggestion();
+    context.read<FnbSearchBarCubit>().loadSuggestion();
 
-    return BlocBuilder<HomeSearchBarCubit, HomeSearchBarState>(
+    return BlocBuilder<FnbSearchBarCubit, FnbSearchBarState>(
       builder: (context, state) {
-        if (state is! HomeSearchBarSuccess) {
+        if (state is! FnbSearchBarSuccess) {
           return MySearchBarWidget(
             suggestionsBuilder: (context, searchController) async {
               return [].map((suggest) {
@@ -29,7 +29,7 @@ class HomeSearchBarFeature extends StatelessWidget {
 
         return MySearchBarWidget(
           suggestionsBuilder: (context, searchController) async {
-            return state.homeSuggestion.map((suggest) {
+            return state.fnbSuggestion.map((suggest) {
               return ListTile(
                 title: Text(suggest),
                 onTap: () {

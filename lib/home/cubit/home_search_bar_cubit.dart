@@ -5,14 +5,14 @@ import 'package:like_it/data/search_bar/suggestion_repository.dart';
 part 'home_search_bar_state.dart';
 
 class HomeSearchBarCubit extends Cubit<HomeSearchBarState> {
-  final SuggestionRepository _searchRepository;
+  final SuggestionRepository _suggestionRepository;
 
-  HomeSearchBarCubit(this._searchRepository) : super(HomeSearchBarInitial());
+  HomeSearchBarCubit(this._suggestionRepository)
+      : super(HomeSearchBarInitial());
 
-  void getSuggestion() async {
+  void loadSuggestion() async {
     debugPrint("getSuggestion");
-    // emit(HomeSearchBarLoading());
-    final homeSuggestion = await _searchRepository.getHomeSuggestion();
+    final homeSuggestion = await _suggestionRepository.getHomeSuggestion();
     emit(HomeSearchBarSuccess(homeSuggestion: homeSuggestion));
   }
 }

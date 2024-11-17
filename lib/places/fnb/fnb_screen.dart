@@ -17,6 +17,7 @@ import 'package:like_it/data/current_location/current_location_model.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:like_it/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:like_it/places/fnb/feature/fnb_nearest_feature.dart';
+import 'package:like_it/places/fnb/feature/fnb_search_bar_feature.dart';
 import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
 import 'package:like_it/places/fnb/widget/fnb_promo_item.dart';
 
@@ -107,7 +108,8 @@ class _FnbScreenState extends State<FnbScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             FnbAppBarFeature(),
-            _searchBar(context),
+            FnbSearchBarFeature(),
+            // _searchBar(context),
           ];
         },
         body: SingleChildScrollView(

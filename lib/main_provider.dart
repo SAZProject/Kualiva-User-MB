@@ -12,6 +12,7 @@ import 'package:like_it/home/cubit/home_search_bar_cubit.dart';
 import 'package:like_it/home/repository/promotion_repository.dart';
 import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:like_it/places/fnb/cubit/fnb_search_bar_cubit.dart';
 import 'package:like_it/places/fnb/repository/fnb_repository.dart';
 
 class MainProvider extends StatelessWidget {
@@ -86,6 +87,9 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return HomeSearchBarCubit(context.read<SuggestionRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return FnbSearchBarCubit(context.read<SuggestionRepository>());
         })
       ],
       child: child,

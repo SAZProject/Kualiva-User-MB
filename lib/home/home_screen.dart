@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/data/search_bar/my_sliver_app_bar_delegate.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
 import 'package:like_it/home/feature/home_ad_banner_feature.dart';
@@ -144,62 +143,6 @@ class _HomeScreenState extends State<HomeScreen> {
               // _eventList(context),
               SizedBox(height: 50.h),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _searchBar(BuildContext context) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: MySliverAppBarDelegate(
-        minHeight: 60.h,
-        maxHeight: 60.h,
-        child: Padding(
-          padding: EdgeInsets.all(8.h),
-          child: SearchAnchor(
-            builder: (BuildContext context, SearchController controller) {
-              return SearchBar(
-                controller: controller,
-                focusNode: FocusNode(),
-                padding: WidgetStatePropertyAll<EdgeInsets>(
-                    EdgeInsets.symmetric(horizontal: 16.h)),
-                onTap: () {
-                  controller.openView();
-                },
-                onChanged: (_) {
-                  controller.openView();
-                },
-                onSubmitted: (value) {
-                  controller.closeView(value);
-                },
-                onTapOutside: (event) {
-                  FocusScopeNode focusNode = FocusScope.of(context);
-                  if (focusNode.hasPrimaryFocus) {
-                    focusNode.unfocus();
-                  }
-                },
-                leading: const Icon(Icons.search),
-              );
-            },
-            suggestionsBuilder: (
-              BuildContext context,
-              SearchController controller,
-            ) {
-              return List<ListTile>.generate(
-                5,
-                (int index) {
-                  final String item = 'item $index';
-                  return ListTile(
-                    title: Text(item),
-                    onTap: () {
-                      controller.closeView(item);
-                    },
-                  );
-                },
-              );
-            },
           ),
         ),
       ),

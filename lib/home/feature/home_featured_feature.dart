@@ -5,7 +5,6 @@ import 'package:like_it/common/utility/sized_utils.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/home/bloc/home_featured_bloc.dart';
 import 'package:like_it/home/widget/home_featured_item.dart';
-import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:like_it/router.dart';
 
 class HomeFeaturedFeature extends StatelessWidget {

@@ -17,9 +17,9 @@ class ReviewRepository {
     // required String description,
     // required List<String> invoiceMedia,
   }) async {
-    FormData formData = FormData.fromMap({
-      /// TODO Here
-    });
+    // FormData formData = FormData.fromMap({
+    //   /// TODO Here
+    // });
 
     // formData.files.addAll(await Future.wait(invoiceMedia.map((file) async {
     //   return MapEntry('media[]', await MultipartFile.fromFile(file));
@@ -31,7 +31,7 @@ class ReviewRepository {
         // queryParameters: Map.from({
         //   'place-id': placeId,
         // }),
-        data: Map.from({}),
+        // data: formData,
         options: Options(contentType: Headers.multipartFormDataContentType),
       );
     });
@@ -63,7 +63,7 @@ class ReviewRepository {
 
   /// Review Place Search Text
   Future<void> getBySearchText({required String text}) async {
-    final res = await _dioClient.dio().then((dio) {
+    final _ = await _dioClient.dio().then((dio) {
       return dio.get(
         '/',
         queryParameters: Map.from(

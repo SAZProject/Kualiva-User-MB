@@ -49,7 +49,6 @@ class _FnbScreenState extends State<FnbScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<FnbNearestBloc>().add(FnbNearestStarted());
   }
 
   @override

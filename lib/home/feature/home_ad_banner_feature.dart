@@ -6,7 +6,6 @@ import 'package:like_it/common/widget/custom_empty_state.dart';
 import 'package:like_it/common/widget/custom_image_view.dart';
 import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
 import 'package:like_it/home/model/home_ad_banner_model.dart';
-import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:like_it/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 

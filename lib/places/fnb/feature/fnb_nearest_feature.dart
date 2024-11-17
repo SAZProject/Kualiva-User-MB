@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:like_it/places/fnb/widget/fnb_place_item_nearby.dart';
 
@@ -21,8 +20,7 @@ class FnbNearestFeature extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // BlocProvider.of<FnbNearestBloc>(context).add(FnbNearestStarted());
-    // context.read<FnbNearestBloc>().add(FnbNearestStarted());
+    context.read<FnbNearestBloc>().add(FnbNearestStarted());
     return SizedBox(
       width: double.maxFinite,
       child: Column(

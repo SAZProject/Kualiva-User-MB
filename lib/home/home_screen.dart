@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
-import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
 import 'package:like_it/home/bloc/home_featured_bloc.dart';
@@ -12,7 +11,6 @@ import 'package:like_it/home/feature/home_app_bar_feature.dart';
 import 'package:like_it/home/feature/home_featured_feature.dart';
 import 'package:like_it/home/feature/home_search_bar_feature.dart';
 import 'package:like_it/home/model/home_grid_menu_model.dart';
-import 'package:like_it/home/widget/copy_home_featured_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

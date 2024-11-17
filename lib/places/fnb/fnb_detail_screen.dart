@@ -22,6 +22,8 @@ import 'package:url_launcher/url_launcher.dart';
 class FnbDetailScreen extends StatelessWidget {
   FnbDetailScreen({
     super.key,
+
+    /// TODO Rucci First Remove
     required this.placeId,
   });
 

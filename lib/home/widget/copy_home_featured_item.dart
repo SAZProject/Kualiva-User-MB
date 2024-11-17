@@ -1,22 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/style/custom_decoration.dart';
-import 'package:like_it/common/style/custom_text_style.dart';
-import 'package:like_it/common/style/theme_helper.dart';
-import 'package:like_it/common/utility/image_constant.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
-import 'package:like_it/common/widget/custom_image_view.dart';
-import 'package:like_it/home/model/home_featured_model.dart';
+import 'package:like_it/common/app_export.dart';
+import 'package:like_it/data/model/f_n_b_model.dart';
 
-class HomeFeaturedItem extends StatelessWidget {
-  const HomeFeaturedItem({
-    super.key,
-    required this.homeFeatured,
-    required this.onPressed,
-  });
+class CopyHomeFeaturedItem extends StatelessWidget {
+  const CopyHomeFeaturedItem(
+      {super.key, required this.fnbModel, required this.onPressed});
 
-  final HomeFeaturedModel homeFeatured;
-  final void Function() onPressed;
+  final FNBModel fnbModel;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +33,7 @@ class HomeFeaturedItem extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 children: [
                   CustomImageView(
-                    imagePath: homeFeatured.featuredImage ??
-                        "${ImageConstant.fnb1Path}/A/2.jpg",
+                    imagePath: fnbModel.placePicture[0],
                     height: 100.h,
                     width: double.maxFinite,
                     radius: BorderRadius.vertical(
@@ -73,7 +64,7 @@ class HomeFeaturedItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            homeFeatured.averageRating.toString(),
+                            fnbModel.overallRating.toString(),
                             style: theme(context).textTheme.labelMedium,
                           ),
                         ],
@@ -86,7 +77,7 @@ class HomeFeaturedItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 4.h),
               child: Text(
-                homeFeatured.name,
+                fnbModel.placeName,
                 style: theme(context).textTheme.titleSmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -95,7 +86,7 @@ class HomeFeaturedItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 4.h),
               child: Text(
-                homeFeatured.fullAddress,
+                fnbModel.city,
                 style: theme(context).textTheme.bodySmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -106,7 +97,7 @@ class HomeFeaturedItem extends StatelessWidget {
               children: [
                 _firstTagRow(context),
                 SizedBox(height: 4.h),
-                homeFeatured.categories.length > 2
+                fnbModel.tags.length > 2
                     ? _secondTagRow(context)
                     : const SizedBox(),
               ],
@@ -122,13 +113,11 @@ class HomeFeaturedItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: homeFeatured.categories.length >= 2
-            ? 2
-            : homeFeatured.categories.length,
+        itemCount: fnbModel.tags.length >= 2 ? 2 : fnbModel.tags.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return _tagView(context, homeFeatured.categories[index]);
+          return _tagView(context, fnbModel.tags[index]);
         },
       ),
     );
@@ -139,24 +128,24 @@ class HomeFeaturedItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: homeFeatured.categories.length > 4 ? 2 : 1,
+        itemCount: fnbModel.tags.length > 4 ? 2 : 1,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index == 1) {
-            if (homeFeatured.categories.length > 4) {
+            if (fnbModel.tags.length > 4) {
               return _tagView(
                 context,
                 context.tr(
                   "home_screen.tags_more",
-                  args: [(homeFeatured.categories.length - 3).toString()],
+                  args: [(fnbModel.tags.length - 3).toString()],
                 ),
               );
             } else {
-              return _tagView(context, homeFeatured.categories[index + 2]);
+              return _tagView(context, fnbModel.tags[index + 2]);
             }
           }
-          return _tagView(context, homeFeatured.categories[index + 2]);
+          return _tagView(context, fnbModel.tags[index + 2]);
         },
       ),
     );

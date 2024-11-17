@@ -6,11 +6,13 @@ import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
+import 'package:like_it/home/bloc/home_featured_bloc.dart';
 import 'package:like_it/home/feature/home_ad_banner_feature.dart';
 import 'package:like_it/home/feature/home_app_bar_feature.dart';
+import 'package:like_it/home/feature/home_featured_feature.dart';
 import 'package:like_it/home/feature/home_search_bar_feature.dart';
 import 'package:like_it/home/model/home_grid_menu_model.dart';
-import 'package:like_it/home/widget/home_featured_item.dart';
+import 'package:like_it/home/widget/copy_home_featured_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -95,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     context.read<HomeAdBannerBloc>().add(HomeAdBannerFetched());
+    context.read<HomeFeaturedBloc>().add(HomeFeaturedFethed());
   }
 
   @override
@@ -124,7 +127,6 @@ class _HomeScreenState extends State<HomeScreen> {
           return [
             HomeAppBarFeature(),
             HomeSearchBarFeature(),
-            // _searchBar(context),
           ];
         },
         body: SingleChildScrollView(
@@ -137,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 5.h),
               _gridMenu(context),
               SizedBox(height: 5.h),
-              _featured(context),
+              HomeFeaturedFeature(),
               // TODO hide it for V1 version
               // SizedBox(height: 5.h),
               // _eventList(context),
@@ -245,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: 6,
                 itemBuilder: (context, index) {
                   //TODO add waiting, empty, error state in future
-                  return HomeFeaturedItem(
+                  return CopyHomeFeaturedItem(
                     fnbModel: featuredListItems[index],
                     onPressed: () {
                       Navigator.pushNamed(

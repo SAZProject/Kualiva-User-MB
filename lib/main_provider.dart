@@ -8,6 +8,7 @@ import 'package:like_it/data/current_location/current_location_bloc.dart';
 import 'package:like_it/data/dio_client.dart';
 import 'package:like_it/data/search_bar/suggestion_repository.dart';
 import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
+import 'package:like_it/home/bloc/home_featured_bloc.dart';
 import 'package:like_it/home/cubit/home_search_bar_cubit.dart';
 import 'package:like_it/home/repository/promotion_repository.dart';
 import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
@@ -66,22 +67,18 @@ class MainProvider extends StatelessWidget {
   Widget _multiBloc(Widget child) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) {
-            return AuthBloc(context.read<AuthRepository>());
-          },
-        ),
+        BlocProvider(create: (context) {
+          return AuthBloc(context.read<AuthRepository>());
+        }),
         BlocProvider(create: (context) {
           return FnbNearestBloc(context.read<FnbRepository>());
         }),
         BlocProvider(create: (context) {
           return CurrentLocationBloc();
         }),
-        BlocProvider(
-          create: (context) {
-            return FnbDetailBloc(context.read<FnbRepository>());
-          },
-        ),
+        BlocProvider(create: (context) {
+          return FnbDetailBloc(context.read<FnbRepository>());
+        }),
         BlocProvider(create: (context) {
           return HomeAdBannerBloc(context.read<PromotionRepository>());
         }),
@@ -90,6 +87,9 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return FnbSearchBarCubit(context.read<SuggestionRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return HomeFeaturedBloc(context.read<PromotionRepository>());
         })
       ],
       child: child,

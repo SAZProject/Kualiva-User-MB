@@ -2,10 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
 import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:like_it/places/fnb/widget/fnb_place_item_nearby.dart';
@@ -26,8 +23,6 @@ class FnbNearestFeature extends StatelessWidget {
   Widget build(BuildContext context) {
     // BlocProvider.of<FnbNearestBloc>(context).add(FnbNearestStarted());
     // context.read<FnbNearestBloc>().add(FnbNearestStarted());
-    final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
-    final List<MerchantNearby> merchantNearby = [];
     return SizedBox(
       width: double.maxFinite,
       child: Column(
@@ -65,7 +60,7 @@ class FnbNearestFeature extends StatelessWidget {
                   }
                   return true;
                 },
-                child: _list(featuredListItems, merchantNearby),
+                child: _list(),
               ),
             ),
           ),
@@ -74,10 +69,7 @@ class FnbNearestFeature extends StatelessWidget {
     );
   }
 
-  Widget _list(
-    List<FNBModel> featuredListItems,
-    List<MerchantNearby> merchantNearby,
-  ) {
+  Widget _list() {
     return BlocBuilder<FnbNearestBloc, FnbNearestState>(
       builder: (context, state) {
         if (state is FnbNearestFailure) {

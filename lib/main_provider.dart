@@ -6,7 +6,9 @@ import 'package:like_it/auth/repository/auth_repository.dart';
 import 'package:like_it/auth/repository/token_manager.dart';
 import 'package:like_it/data/current_location/current_location_bloc.dart';
 import 'package:like_it/data/dio_client.dart';
+import 'package:like_it/data/search_bar/suggestion_repository.dart';
 import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
+import 'package:like_it/home/cubit/home_search_bar_cubit.dart';
 import 'package:like_it/home/repository/promotion_repository.dart';
 import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
@@ -25,39 +27,34 @@ class MainProvider extends StatelessWidget {
   Widget _multiRepository(Widget child) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(
-          // lazy: false,
-          create: (context) {
-            final tokenManager = TokenManager(const FlutterSecureStorage(
-              /// TODO For ios need more configuration
-              /// https://pub.dev/packages/flutter_secure_storage
-              aOptions: AndroidOptions(encryptedSharedPreferences: true),
-            ));
-            return tokenManager;
-          },
-        ),
-        RepositoryProvider(
-          // lazy: false,
-          create: (context) {
-            return DioClient(context.read<TokenManager>());
-          },
-        ),
+        RepositoryProvider(create: (context) {
+          final tokenManager = TokenManager(const FlutterSecureStorage(
+            /// TODO For ios need more configuration
+            /// https://pub.dev/packages/flutter_secure_storage
+            aOptions: AndroidOptions(encryptedSharedPreferences: true),
+          ));
+          return tokenManager;
+        }),
+        RepositoryProvider(create: (context) {
+          return DioClient(context.read<TokenManager>());
+        }),
         RepositoryProvider(create: (context) {
           return FnbRepository(context.read<DioClient>());
         }),
+        RepositoryProvider(create: (context) {
+          return AuthRepository(
+            context.read<TokenManager>(),
+            context.read<DioClient>(),
+          );
+        }),
+        RepositoryProvider(create: (context) {
+          return PromotionRepository(
+            context.read<DioClient>(),
+          );
+        }),
         RepositoryProvider(
           create: (context) {
-            return AuthRepository(
-              context.read<TokenManager>(),
-              context.read<DioClient>(),
-            );
-          },
-        ),
-        RepositoryProvider(
-          create: (context) {
-            return PromotionRepository(
-              context.read<DioClient>(),
-            );
+            return SuggestionRepository();
           },
         )
       ],
@@ -84,11 +81,12 @@ class MainProvider extends StatelessWidget {
             return FnbDetailBloc(context.read<FnbRepository>());
           },
         ),
-        BlocProvider(
-          create: (context) {
-            return HomeAdBannerBloc(context.read<PromotionRepository>());
-          },
-        )
+        BlocProvider(create: (context) {
+          return HomeAdBannerBloc(context.read<PromotionRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return HomeSearchBarCubit(context.read<SuggestionRepository>());
+        })
       ],
       child: child,
     );

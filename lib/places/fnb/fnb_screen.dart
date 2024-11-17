@@ -6,7 +6,7 @@ import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
-import 'package:like_it/common/widget/sliver_app_bar_delegate.dart';
+import 'package:like_it/data/search_bar/my_sliver_app_bar_delegate.dart';
 import 'package:like_it/data/current_location/current_location_bloc.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
 import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
@@ -137,7 +137,7 @@ class _FnbScreenState extends State<FnbScreen> {
   Widget _searchBar(BuildContext context) {
     return SliverPersistentHeader(
       pinned: true,
-      delegate: SliverAppBarDelegate(
+      delegate: MySliverAppBarDelegate(
         minHeight: 60.h,
         maxHeight: 60.h,
         child: Padding(
@@ -169,8 +169,10 @@ class _FnbScreenState extends State<FnbScreen> {
                 leading: const Icon(Icons.search),
               );
             },
-            suggestionsBuilder:
-                (BuildContext context, SearchController controller) {
+            suggestionsBuilder: (
+              BuildContext context,
+              SearchController controller,
+            ) {
               return List<ListTile>.generate(
                 5,
                 (int index) {

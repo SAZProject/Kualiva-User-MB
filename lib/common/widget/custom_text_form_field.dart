@@ -66,7 +66,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? obscureText;
   final bool? readOnly;
   final VoidCallback? onPressed;
-  final Function(String value)? onChange;
+  final void Function(String value)? onChange;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
   final int? maxLines;

@@ -88,9 +88,9 @@ class FnbNearestFeature extends StatelessWidget {
             return FnbPlaceItemNearby(
               merchant: state.nearest[index],
               onPressed: () {
-                context.read<FnbDetailBloc>().add(FnbDetailFetched(
-                      placeId: state.nearest[index].placeId,
-                    ));
+                // context.read<FnbDetailBloc>().add(FnbDetailFetched(
+                //       placeId: state.nearest[index].placeId,
+                //     ));
                 Navigator.pushNamed(
                   context,
                   AppRoutes.fnbDetailScreen,

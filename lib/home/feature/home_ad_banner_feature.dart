@@ -89,9 +89,9 @@ class HomeAdBannerFeature extends StatelessWidget {
           if (adBanner.placeId == null && adBanner.urlWeb == null) return;
 
           if (adBanner.placeId != null) {
-            context.read<FnbDetailBloc>().add(FnbDetailFetched(
-                  placeId: adBanner.placeId!,
-                ));
+            // context.read<FnbDetailBloc>().add(FnbDetailFetched(
+            //       placeId: adBanner.placeId!,
+            //     ));
             Navigator.pushNamed(
               context,
               AppRoutes.fnbDetailScreen,

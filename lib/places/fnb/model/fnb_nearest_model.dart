@@ -15,6 +15,8 @@ class FnbNearestModel {
   final String timezone;
   final String? phone;
   final List<String> phones;
+
+  /// google claimed
   final String claimed;
   final int reviewCount;
   final double averageRating;

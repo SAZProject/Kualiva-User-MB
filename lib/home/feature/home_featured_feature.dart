@@ -57,9 +57,9 @@ class HomeFeaturedFeature extends StatelessWidget {
             return HomeFeaturedItem(
               homeFeatured: state.homeFeatured[index],
               onPressed: () {
-                context.read<FnbDetailBloc>().add(FnbDetailFetched(
-                      placeId: state.homeFeatured[index].placeId,
-                    ));
+                // context.read<FnbDetailBloc>().add(FnbDetailFetched(
+                //       placeId: state.homeFeatured[index].placeId,
+                //     ));
                 Navigator.pushNamed(
                   context,
                   AppRoutes.fnbDetailScreen,

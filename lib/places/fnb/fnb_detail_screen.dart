@@ -22,13 +22,11 @@ import 'package:url_launcher/url_launcher.dart';
 class FnbDetailScreen extends StatelessWidget {
   FnbDetailScreen({
     super.key,
-
-    /// TODO Rucci First Remove
     required this.placeId,
   });
 
   final GlobalKey _toolTipKey = GlobalKey();
-  OverlayEntry? _overlayEntry;
+  late OverlayEntry _overlayEntry;
   final LayerLink _layerLink = LayerLink();
 
   final String placeId;
@@ -76,18 +74,20 @@ class FnbDetailScreen extends StatelessWidget {
         ),
       ),
     );
-    Overlay.of(context).insert(_overlayEntry!);
+    Overlay.of(context).insert(_overlayEntry);
   }
 
   void _dismissModal() {
-    if (_overlayEntry != null) {
-      _overlayEntry?.remove();
-      _overlayEntry = null;
-    }
+    // if (_overlayEntry != null) {
+    //   _overlayEntry?.remove();
+    //   _overlayEntry = null;
+    // }
+    _overlayEntry.remove();
   }
 
   @override
   Widget build(BuildContext context) {
+    context.read<FnbDetailBloc>().add(FnbDetailFetched(placeId: placeId));
     return BlocConsumer<FnbDetailBloc, FnbDetailState>(
       listener: (context, state) {
         debugPrint('Le Rucco');
@@ -135,7 +135,10 @@ class FnbDetailScreen extends StatelessWidget {
   }
 
   Widget _body(
-      BuildContext context, FnbDetailModel fnbDetail, bool hasCallSupport) {
+    BuildContext context,
+    FnbDetailModel fnbDetail,
+    bool hasCallSupport,
+  ) {
     return SizedBox(
       width: double.maxFinite,
       height: MediaQuery.of(context).size.height,
@@ -622,7 +625,8 @@ class FnbDetailScreen extends StatelessWidget {
 
   Widget _fnbPromo(BuildContext context) {
     return Visibility(
-      visible: Random().nextBool(),
+      // visible: Random().nextBool(),
+      visible: true,
       replacement: const SizedBox(),
       child: Container(
         width: double.maxFinite,

@@ -223,49 +223,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _featured(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomSectionHeader(
-            label: context.tr("home_screen.featured"),
-            // TODO dimatikan masih belum jelas mau gimana, apakah akan dibataskan atau tampilkan list banyak
-            onPressed: () {},
-            useIcon: false,
-          ),
-          SizedBox(height: 4.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.h),
-            child: SizedBox(
-              height: 200.h,
-              width: double.maxFinite,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  //TODO add waiting, empty, error state in future
-                  return CopyHomeFeaturedItem(
-                    fnbModel: featuredListItems[index],
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        AppRoutes.fnbDetailScreen,
-                        arguments: "placeId", // TODO
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   // Widget _eventList(BuildContext context) {
   //   return SizedBox(
   //     width: double.maxFinite,

@@ -2,33 +2,81 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+
+part 'fnb_nearest_model.g.dart';
 
 @immutable
+@HiveType(typeId: 1)
 class FnbNearestModel {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final Location location;
+
+  @HiveField(2)
   final String name;
+
+  @HiveField(3)
   final String fullAddress;
+
+  @HiveField(4)
   final String street;
+
+  @HiveField(5)
   final String municipality;
+
+  @HiveField(6)
   final List<String> categories;
+
+  @HiveField(7)
   final String timezone;
+
+  @HiveField(8)
   final String? phone;
+
+  @HiveField(9)
   final List<String> phones;
 
   /// google claimed
+  @HiveField(10)
   final String claimed;
+
+  @HiveField(11)
   final int reviewCount;
+
+  @HiveField(12)
   final double averageRating;
+
+  @HiveField(13)
   final String? reviewUrl;
+
+  @HiveField(14)
   final String googleMapsUrl;
+
+  @HiveField(15)
   final double latitude;
+
+  @HiveField(16)
   final double longitude;
+
+  @HiveField(17)
   final String website;
+
+  @HiveField(18)
   final String openingHours;
+
+  @HiveField(19)
   final String? featuredImage;
+
+  @HiveField(20)
   final String cid;
+
+  @HiveField(21)
   final String fid;
+
+  @HiveField(22)
   final String placeId;
 
   const FnbNearestModel({
@@ -230,8 +278,12 @@ class FnbNearestModel {
 }
 
 @immutable
+@HiveType(typeId: 0)
 class Location {
+  @HiveField(0)
   final String type;
+
+  @HiveField(1)
   final List<double> coordinates;
 
   const Location({

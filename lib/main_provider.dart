@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hive/hive.dart';
 import 'package:like_it/auth/bloc/auth_bloc.dart';
 import 'package:like_it/auth/repository/auth_repository.dart';
 import 'package:like_it/auth/repository/token_manager.dart';
@@ -14,6 +15,7 @@ import 'package:like_it/home/repository/promotion_repository.dart';
 import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:like_it/places/fnb/cubit/fnb_search_bar_cubit.dart';
+import 'package:like_it/places/fnb/model/fnb_nearest_model.dart';
 import 'package:like_it/places/fnb/repository/fnb_repository.dart';
 
 class MainProvider extends StatelessWidget {

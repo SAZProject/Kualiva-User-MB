@@ -1,12 +1,16 @@
+import 'package:hive/hive.dart';
 import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/data/dio_client.dart';
 import 'package:like_it/places/fnb/model/fnb_detail_model.dart';
 import 'package:like_it/places/fnb/model/fnb_nearest_model.dart';
 
 class FnbRepository {
-  FnbRepository(this._dioClient);
+  FnbRepository(this._dioClient) {
+    _fnbNearestBoxFuture = Hive.openBox<FnbNearestModel>('fnb_nearest');
+  }
 
   final DioClient _dioClient;
+  late Future<Box<FnbNearestModel>> _fnbNearestBoxFuture;
 
   List<FnbNearestModel> _fnbNearest = [];
 
@@ -18,7 +22,17 @@ class FnbRepository {
     required double latitude,
     required double longitude,
   }) async {
-    if (_fnbNearest.isNotEmpty) return _fnbNearest;
+    final fnbNearestBox = await _fnbNearestBoxFuture;
+
+    /// TODO Check Internet Connection
+    if (fnbNearestBox.values.toList().isNotEmpty) {
+      LeLog.sd(
+          this, getMerchantNearest, '_fnbNearestBox.values NOT EMPTY AAAAA');
+      print("_fnbNearestBox.values NOT EMPTY");
+      return fnbNearestBox.values.toList();
+    }
+
+    print("_fnbNearestBox.values KOSONG");
 
     final res = await _dioClient.dio().then((dio) {
       dio.options.baseUrl = 'https://kg1k4xc5-3001.asse.devtunnels.ms/api/v1';
@@ -31,9 +45,13 @@ class FnbRepository {
       );
     });
     LeLog.sd(this, getMerchantNearest, res.data.toString());
-    final data = (res.data as List<dynamic>)
-        .map((e) => FnbNearestModel.fromMap(e))
-        .toList();
+    final data = (res.data as List<dynamic>).map((e) {
+      final temp = FnbNearestModel.fromMap(e);
+      final key = fnbNearestBox.add(temp);
+      print('key ${key}');
+      return temp;
+    }).toList();
+    fnbNearestBox.addAll(data);
     return data;
   }
 

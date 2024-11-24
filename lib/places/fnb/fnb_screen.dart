@@ -64,6 +64,9 @@ class _FnbScreenState extends State<FnbScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
+        context
+            .read<FnbNearestBloc>()
+            .add(FnbNearestFetched(latitude: 0.0, longitude: 0.0));
         if (state is! CurrentLocationSuccess) return;
 
         context.read<FnbNearestBloc>().add(FnbNearestFetched(

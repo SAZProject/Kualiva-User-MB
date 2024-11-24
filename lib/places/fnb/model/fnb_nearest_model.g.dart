@@ -18,7 +18,7 @@ class FnbNearestModelAdapter extends TypeAdapter<FnbNearestModel> {
     };
     return FnbNearestModel(
       id: fields[0] as String,
-      location: fields[1] as Location,
+      location: fields[1] as FnbNearestLocation,
       name: fields[2] as String,
       fullAddress: fields[3] as String,
       street: fields[4] as String,
@@ -106,24 +106,24 @@ class FnbNearestModelAdapter extends TypeAdapter<FnbNearestModel> {
           typeId == other.typeId;
 }
 
-class LocationAdapter extends TypeAdapter<Location> {
+class FnbNearestLocationAdapter extends TypeAdapter<FnbNearestLocation> {
   @override
   final int typeId = 0;
 
   @override
-  Location read(BinaryReader reader) {
+  FnbNearestLocation read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Location(
+    return FnbNearestLocation(
       type: fields[0] as String,
       coordinates: (fields[1] as List).cast<double>(),
     );
   }
 
   @override
-  void write(BinaryWriter writer, Location obj) {
+  void write(BinaryWriter writer, FnbNearestLocation obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
@@ -138,7 +138,7 @@ class LocationAdapter extends TypeAdapter<Location> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LocationAdapter &&
+      other is FnbNearestLocationAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

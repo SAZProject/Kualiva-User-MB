@@ -143,10 +143,6 @@ class LocationUtil {
         userFullPLacemark: currentPlacemark,
         latitude: currentPosition.latitude,
         longitude: currentPosition.longitude,
-        // TODO Remove
-        // latitude: (kDebugMode) ? -6.213683336779805 : currentPosition.latitude,
-        // longitude:
-        //     (kDebugMode) ? 106.80867612698492 : currentPosition.longitude,
       );
     } catch (e) {
       rethrow;

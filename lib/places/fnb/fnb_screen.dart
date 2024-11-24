@@ -8,8 +8,6 @@ import 'package:like_it/common/widget/custom_section_header.dart';
 import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
 import 'package:like_it/data/current_location/current_location_bloc.dart';
 import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/data/model/merchant/merchant_nearby_model.dart';
-import 'package:like_it/data/model/place/place_response_model.dart';
 import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:like_it/data/model/ui_model/filters_model.dart';
 import 'package:like_it/data/current_location/current_location_model.dart';
@@ -43,8 +41,6 @@ class _FnbScreenState extends State<FnbScreen> {
   Set<int> dummySelectedCuisine = {};
 
   late CurrentLocationModel getUserCurrentLoc;
-  PlaceResponseModel? placeResponseModel;
-  List<MerchantNearby> merchantNearby = [];
 
   @override
   void initState() {

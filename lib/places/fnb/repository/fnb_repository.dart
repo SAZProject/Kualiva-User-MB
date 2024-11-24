@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/data/dio_client.dart';
+import 'package:like_it/main_hive.dart';
 import 'package:like_it/places/fnb/model/fnb_detail_model.dart';
 import 'package:like_it/places/fnb/model/fnb_nearest_model.dart';
 
@@ -12,17 +13,14 @@ class FnbRepository {
   final DioClient _dioClient;
   late Future<Box<FnbNearestModel>> _fnbNearestBoxFuture;
 
-  List<FnbNearestModel> _fnbNearest = [];
-
-  void invalidate() {
-    _fnbNearest = [];
-  }
+  void invalidate() {}
 
   Future<List<FnbNearestModel>> getMerchantNearest({
     required double latitude,
     required double longitude,
   }) async {
-    final fnbNearestBox = await _fnbNearestBoxFuture;
+    // final fnbNearestBox = await _fnbNearestBoxFuture;
+    final fnbNearestBox = Hive.box<FnbNearestModel>('fnb_nearest');
 
     /// TODO Check Internet Connection
     if (fnbNearestBox.values.toList().isNotEmpty) {

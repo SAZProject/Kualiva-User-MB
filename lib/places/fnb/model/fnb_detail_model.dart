@@ -282,7 +282,7 @@ class Review {
 // Define the Geometry model class
 @immutable
 class Geometry {
-  final Location location;
+  final FnbDetailLocation location;
 
   // Constructor
   const Geometry({required this.location});
@@ -290,23 +290,23 @@ class Geometry {
   // Factory constructor to create an instance from a Map
   factory Geometry.fromMap(Map<String, dynamic> map) {
     return Geometry(
-      location: Location.fromMap(map['location']),
+      location: FnbDetailLocation.fromMap(map['location']),
     );
   }
 }
 
-// Define the Location model class
+// Define the FnbDetailLocation model class
 @immutable
-class Location {
+class FnbDetailLocation {
   final double lat;
   final double lng;
 
   // Constructor
-  const Location({required this.lat, required this.lng});
+  const FnbDetailLocation({required this.lat, required this.lng});
 
   // Factory constructor to create an instance from a Map
-  factory Location.fromMap(Map<String, dynamic> map) {
-    return Location(
+  factory FnbDetailLocation.fromMap(Map<String, dynamic> map) {
+    return FnbDetailLocation(
       lat: (map['lat'] as num).toDouble(),
       lng: (map['lng'] as num).toDouble(),
     );

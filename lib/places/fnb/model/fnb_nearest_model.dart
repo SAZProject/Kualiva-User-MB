@@ -13,7 +13,7 @@ class FnbNearestModel {
   final String id;
 
   @HiveField(1)
-  final Location location;
+  final FnbNearestLocation location;
 
   @HiveField(2)
   final String name;
@@ -107,7 +107,7 @@ class FnbNearestModel {
 
   FnbNearestModel copyWith({
     String? id,
-    Location? location,
+    FnbNearestLocation? location,
     String? name,
     String? fullAddress,
     String? street,
@@ -187,7 +187,8 @@ class FnbNearestModel {
   factory FnbNearestModel.fromMap(Map<String, dynamic> map) {
     return FnbNearestModel(
       id: map['_id'] as String,
-      location: Location.fromMap(map['location'] as Map<String, dynamic>),
+      location:
+          FnbNearestLocation.fromMap(map['location'] as Map<String, dynamic>),
       name: map['name'] as String,
       fullAddress: map['fullAddress'] as String,
       street: map['street'] as String,
@@ -279,23 +280,23 @@ class FnbNearestModel {
 
 @immutable
 @HiveType(typeId: 0)
-class Location {
+class FnbNearestLocation {
   @HiveField(0)
   final String type;
 
   @HiveField(1)
   final List<double> coordinates;
 
-  const Location({
+  const FnbNearestLocation({
     required this.type,
     required this.coordinates,
   });
 
-  Location copyWith({
+  FnbNearestLocation copyWith({
     String? type,
     List<double>? coordinates,
   }) {
-    return Location(
+    return FnbNearestLocation(
       type: type ?? this.type,
       coordinates: coordinates ?? this.coordinates,
     );
@@ -308,8 +309,8 @@ class Location {
     };
   }
 
-  factory Location.fromMap(Map<String, dynamic> map) {
-    return Location(
+  factory FnbNearestLocation.fromMap(Map<String, dynamic> map) {
+    return FnbNearestLocation(
       type: map['type'] as String,
       coordinates: (map['coordinates'] as List<dynamic>)
           .map((e) => e as double)
@@ -319,14 +320,15 @@ class Location {
 
   String toJson() => json.encode(toMap());
 
-  factory Location.fromJson(String source) =>
-      Location.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory FnbNearestLocation.fromJson(String source) =>
+      FnbNearestLocation.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Location(type: $type, coordinates: $coordinates)';
+  String toString() =>
+      'FnbNearestLocation(type: $type, coordinates: $coordinates)';
 
   @override
-  bool operator ==(covariant Location other) {
+  bool operator ==(covariant FnbNearestLocation other) {
     if (identical(this, other)) return true;
 
     return other.type == type && listEquals(other.coordinates, coordinates);

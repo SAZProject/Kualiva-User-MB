@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:like_it/main_hive.dart';
 import 'package:like_it/main_provider.dart';
 import 'common/app_export.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -19,17 +20,23 @@ void main() async {
     SystemChrome.restoreSystemUIOverlays();
   });
 
-  await EasyLocalization.ensureInitialized();
-
-  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  String dotenvFileName = '';
 
   if (kReleaseMode) {
-    await dotenv.load(fileName: '.env');
+    dotenvFileName = '.env';
   } else if (kProfileMode) {
-    await dotenv.load(fileName: '.env.profile');
+    dotenvFileName = '.env.profile';
   } else {
-    await dotenv.load(fileName: '.env.dev');
+    dotenvFileName = '.env.dev';
   }
+
+  await Future.wait([
+    dotenv.load(fileName: dotenvFileName),
+    EasyLocalization.ensureInitialized(),
+    MainHive.registerAdapter(),
+  ]);
+
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
 
   runApp(
     EasyLocalization(

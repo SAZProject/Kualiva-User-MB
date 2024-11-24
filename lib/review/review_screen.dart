@@ -62,7 +62,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     dummyData();
   }
@@ -103,11 +102,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   Widget _body(BuildContext context) {
     List<Widget> myReview = [SizedBox()];
-    debugPrint('LeRucco Add Review');
-    debugPrint('transaction $transaction');
-    debugPrint('message $message');
-    debugPrint('date $date');
-    debugPrint('rating $rating');
+
     if (transaction != null &&
         message != null &&
         date != null &&
@@ -308,7 +303,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     ).then(
                       (value) {
                         if (value == null) return;
-                        debugPrint(value.toString());
+
                         List<String?> resVal = value as List<String?>;
                         for (int i = 0; i < resVal.length; i++) {
                           if (resVal[i] != null) {
@@ -381,8 +376,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
           reviewDate: date == null ? DateTime.now() : DateTime.parse(date!),
           content: message);
     }
-    debugPrint('_myReview');
-    debugPrint(review.toString());
 
     return Container(
       width: double.maxFinite,

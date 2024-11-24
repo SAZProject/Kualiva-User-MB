@@ -45,7 +45,6 @@ class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
   void initState() {
     super.initState();
     if (widget.getFilterModel != null) {
-      debugPrint(widget.getFilterModel.toString());
       filterModel = widget.getFilterModel!;
     }
     radiusNotifier = ValueNotifier<RangeValues>(

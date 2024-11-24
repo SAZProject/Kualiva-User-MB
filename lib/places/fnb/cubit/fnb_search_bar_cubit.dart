@@ -10,7 +10,6 @@ class FnbSearchBarCubit extends Cubit<FnbSearchBarState> {
   FnbSearchBarCubit(this._suggestionRepository) : super(FnbSearchBarInitial());
 
   void loadSuggestion() async {
-    debugPrint("getSuggestion");
     final fnbSuggestion = await _suggestionRepository.getFnbSuggestion();
     emit(FnbSearchBarSuccess(fnbSuggestion: fnbSuggestion));
   }

@@ -42,14 +42,12 @@ class FnbNearestFeature extends StatelessWidget {
                   if (notification is ScrollUpdateNotification) {
                     if (notification.metrics.pixels ==
                         notification.metrics.maxScrollExtent) {
-                      debugPrint('Reached the bottom');
                       parentScrollController.animateTo(
                           parentScrollController.position.maxScrollExtent,
                           duration: const Duration(seconds: 1),
                           curve: Curves.easeIn);
                     } else if (notification.metrics.pixels ==
                         notification.metrics.minScrollExtent) {
-                      debugPrint('Reached the top');
                       parentScrollController.animateTo(
                           parentScrollController.position.minScrollExtent,
                           duration: const Duration(seconds: 1),

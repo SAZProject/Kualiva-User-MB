@@ -90,11 +90,7 @@ class FnbDetailScreen extends StatelessWidget {
     context.read<FnbDetailBloc>().add(FnbDetailFetched(placeId: placeId));
     return BlocConsumer<FnbDetailBloc, FnbDetailState>(
       listener: (context, state) {
-        debugPrint('Le Rucco');
-        if (state is FnbDetailSuccess) {
-          debugPrint(state.fnbDetail.toString());
-        }
-        debugPrint(state.toString());
+        if (state is FnbDetailSuccess) {}
       },
       builder: (context, state) {
         if (state is FnbDetailSuccess) {

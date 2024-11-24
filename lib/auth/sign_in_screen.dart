@@ -59,7 +59,6 @@ class SignInScreenState extends State<SignInScreen> {
     } else {
       authEvent = AuthLoggedIn(username: phoneOrUsername, password: password);
     }
-    debugPrint(phoneOrUsername);
 
     context.read<AuthBloc>().add(authEvent);
   }

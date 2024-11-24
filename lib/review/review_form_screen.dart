@@ -225,10 +225,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
                 Icons.generating_tokens_outlined,
               ),
             );
-            debugPrint('LeRucco Review Form Screen');
-            debugPrint(transaction);
-            debugPrint(_reviewMsgCtl.text.trim());
-            debugPrint(ratingStar.toString());
+
             // final SharedPreferences prefs =
             //     await SharedPreferences.getInstance();
             // await prefs.setString('transaction', transaction);

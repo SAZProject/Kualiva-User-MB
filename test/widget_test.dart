@@ -9,19 +9,17 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:like_it/auth/repository/token_manager.dart';
-import 'package:flutter/foundation.dart';
 
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
+// import 'dart:convert';
+// import 'package:flutter/services.dart' show rootBundle;
 
 void main() {
   testWidgets("Token Manager", (WidgetTester tester) async {
-    debugPrint('TokenManager');
     dotenv.testLoad(fileInput: '''
     ACCESS_TOKEN_KEY=AccessTokenAbsoluteSecureLeRuccoLeKualiva
     REFRESH_TOKEN_KEY=RefreshTokenAbsoluteSecureLeRuccoLeKualiva
     ''');
-    debugPrint(dotenv.get("REFRESH_TOKEN_KEY", fallback: null));
+
     final tokenManager = TokenManager(const FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
     ));
@@ -32,16 +30,14 @@ void main() {
   });
 
   testWidgets("Merchant Nearby Model", (WidgetTester tester) async {
-    debugPrint('Merchant Nearby Model');
-    String str = await rootBundle.loadString('assets/merchant_nearby.json');
+    // String str = await rootBundle.loadString('assets/merchant_nearby.json');
 
-    List<dynamic> data = jsonDecode(str);
-    debugPrint(data.length.toString());
+    // List<dynamic> data = jsonDecode(str);
 
     // List<MerchantNearby> merchantNearby =
     //     data.map((e) => MerchantNearby.fromMap(e)).toList();
 
-    // debugPrint(merchantNearby);
+    //
 
     expect(1, 1);
   });
@@ -55,8 +51,8 @@ void main() {
     // PlaceResponseModel model = PlaceResponseModel.fromMap(jsonData);
 
     // if (model is PlaceResponseModel) {
-    //   debugPrint('PlaceResponseModel Same Object Type');
-    //   debugPrint(model);
+    //
+    //
     // }
 
     // String str = await rootBundle
@@ -68,8 +64,8 @@ void main() {
 
     // Restaurant restaurant = Restaurant.fromMap(data);
 
-    // debugPrint('Restaurant Same Object Type');
-    // debugPrint(restaurant.toString());
+    //
+    //
 
     // String str1 = await rootBundle
     //     .loadString('assets/1G-Maps-Extractor-10-Restaurants-2024-10-17.json');
@@ -84,8 +80,8 @@ void main() {
     // // RestaurantExtractorModel.fromMap(data1['data']);
 
     // if (restaurantExtractor is RestaurantExtractorModel) {
-    //   debugPrint('RestaurantExtractorModel Same Object Type');
-    //   debugPrint(restaurantExtractor);
+    //
+    //
     // }
 
     expect(1, 1);

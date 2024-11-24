@@ -311,14 +311,12 @@ Syarat dan Ketentuan :
                   if (notification is ScrollUpdateNotification) {
                     if (notification.metrics.pixels ==
                         notification.metrics.maxScrollExtent) {
-                      debugPrint('Reached the bottom');
                       _parentScrollController.animateTo(
                           _parentScrollController.position.maxScrollExtent,
                           duration: const Duration(seconds: 1),
                           curve: Curves.easeIn);
                     } else if (notification.metrics.pixels ==
                         notification.metrics.minScrollExtent) {
-                      debugPrint('Reached the top');
                       _parentScrollController.animateTo(
                           _parentScrollController.position.minScrollExtent,
                           duration: const Duration(seconds: 1),

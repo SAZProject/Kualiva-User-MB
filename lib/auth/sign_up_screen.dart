@@ -62,7 +62,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        debugPrint(state.runtimeType.toString());
         if (state is AuthRegisterSuccess) {
           /// TODO Habis register harusnya ke OTP screen, tapi bypass langsung ke Birthday screen dan firstname lastname screen
           /// Tunggu API Update profile sudah ready

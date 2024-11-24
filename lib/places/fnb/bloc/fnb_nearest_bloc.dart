@@ -33,7 +33,7 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
         latitude: event.latitude,
         longitude: event.longitude,
       );
-      debugPrint(nearest.toString());
+
       emit(FnbNearestSuccess(nearest: nearest));
     } catch (e) {
       emit(FnbNearestFailure());

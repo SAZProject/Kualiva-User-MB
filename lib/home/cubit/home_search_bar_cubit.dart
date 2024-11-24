@@ -11,7 +11,6 @@ class HomeSearchBarCubit extends Cubit<HomeSearchBarState> {
       : super(HomeSearchBarInitial());
 
   void loadSuggestion() async {
-    debugPrint("getSuggestion");
     final homeSuggestion = await _suggestionRepository.getHomeSuggestion();
     emit(HomeSearchBarSuccess(homeSuggestion: homeSuggestion));
   }

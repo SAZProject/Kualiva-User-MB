@@ -177,7 +177,6 @@ class _FnbScreenState extends State<FnbScreen> {
             if (value == null) return;
             setState(() {
               filtersModel = value as FiltersModel;
-              debugPrint(filtersModel.toString());
             });
           },
         );
@@ -268,7 +267,6 @@ class _FnbScreenState extends State<FnbScreen> {
                 if (notification is ScrollUpdateNotification) {
                   if (notification.metrics.pixels ==
                       notification.metrics.maxScrollExtent) {
-                    debugPrint('Reached the bottom');
                     if (_parentScrollController.position.atEdge) return true;
                     _parentScrollController.animateTo(
                         _parentScrollController.position.minScrollExtent,
@@ -276,7 +274,6 @@ class _FnbScreenState extends State<FnbScreen> {
                         curve: Curves.easeIn);
                   } else if (notification.metrics.pixels ==
                       notification.metrics.minScrollExtent) {
-                    debugPrint('Reached the top');
                     _parentScrollController.animateTo(
                         _parentScrollController.position.minScrollExtent,
                         duration: const Duration(seconds: 1),

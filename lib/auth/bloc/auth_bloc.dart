@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:like_it/auth/repository/auth_repository.dart';
+import 'package:like_it/common/utility/lelog.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -22,6 +23,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     final bool tokenExist = await _authRepository.checkToken();
+
+    LeLog.bd(this, _onStarted, 'Token Exist $tokenExist');
     if (tokenExist) {
       emit(AuthTokenExist());
     } else {
@@ -39,8 +42,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         phoneNumber: event.phoneNumber,
         password: event.password,
       );
+      LeLog.bd(this, _onLoggedIn, 'Login Success');
       emit(AuthLoginSuccess());
     } catch (e) {
+      LeLog.bd(this, _onLoggedIn, e.toString());
       emit(AuthLoginFailure());
     }
   }
@@ -55,9 +60,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         phoneNumber: event.phoneNumber,
         password: event.password,
       );
-
+      LeLog.bd(this, _onRegistered, 'Register Success');
       emit(AuthRegisterSuccess());
     } catch (e) {
+      LeLog.bd(this, _onRegistered, e.toString());
       emit(AuthRegisterFailure());
     }
   }

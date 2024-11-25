@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/places/fnb/model/fnb_detail_model.dart';
 import 'package:like_it/places/fnb/repository/fnb_repository.dart';
 
@@ -21,8 +22,10 @@ class FnbDetailBloc extends Bloc<FnbDetailEvent, FnbDetailState> {
       final FnbDetailModel fnbDetail = await _fnbRepository.getMerchantDetail(
         placeId: event.placeId,
       );
+      LeLog.bd(this, _onFetched, fnbDetail.toString());
       emit(FnbDetailSuccess(fnbDetail: fnbDetail));
     } catch (e) {
+      LeLog.be(this, _onFetched, e.toString());
       emit(FnbDetailFailure());
     }
   }

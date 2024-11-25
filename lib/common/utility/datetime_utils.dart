@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:intl/intl.dart';
-import 'package:like_it/common/utility/lelog.dart';
 
 /*
 Based on dart default
@@ -37,9 +36,7 @@ class DatetimeUtils {
   static int getTodayOperationalTime() {
     List<String> days =
         DateFormat.EEEE(Platform.localeName).dateSymbols.WEEKDAYS;
-    LeLog.d(getTodayOperationalTime, days.toString());
     int day = days.indexOf(days[DateTime.now().weekday - 1]);
-    LeLog.d(getTodayOperationalTime, day.toString());
     return day;
   }
 }

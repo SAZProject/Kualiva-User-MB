@@ -19,6 +19,7 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
     FnbNearestStarted event,
     Emitter<FnbNearestState> emit,
   ) {
+    LeLog.bd(this, _onStarted, 'On Started');
     emit(FnbNearestInitial());
   }
 
@@ -26,16 +27,16 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
     FnbNearestFetched event,
     Emitter<FnbNearestState> emit,
   ) async {
-    LeLog.d(this, "_fetched");
     try {
       final List<FnbNearestModel> nearest =
           await _fnbRepository.getMerchantNearest(
         latitude: event.latitude,
         longitude: event.longitude,
       );
-
+      LeLog.bd(this, _onFetched, nearest.toString());
       emit(FnbNearestSuccess(nearest: nearest));
     } catch (e) {
+      LeLog.be(this, _onFetched, e.toString());
       emit(FnbNearestFailure());
     }
   }

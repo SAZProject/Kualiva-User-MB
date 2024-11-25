@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_it/auth/bloc/auth_bloc.dart';
 import 'package:like_it/common/app_export.dart';
 import 'package:like_it/common/utility/check_permission.dart';
-import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/utility/video_constant.dart';
 import 'package:video_player/video_player.dart';
 
@@ -42,14 +41,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _videoListener() async {
     if (_videoPlayerController.value.position ==
-        const Duration(seconds: 0, minutes: 0, hours: 0)) {
-      LeLog.pd(this, _videoListener, "Video Started");
-    }
+        const Duration(seconds: 0, minutes: 0, hours: 0)) {}
 
     if (_videoPlayerController.value.position ==
         _videoPlayerController.value.duration) {
-      LeLog.pd(this, _videoListener, "Video Ended");
-
       if (!mounted) return;
 
       // Navigator.pushNamedAndRemoveUntil(

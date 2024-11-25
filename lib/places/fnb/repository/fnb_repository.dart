@@ -15,14 +15,12 @@ class FnbRepository {
     required double latitude,
     required double longitude,
   }) async {
-    // final fnbNearestBox = await _fnbNearestBoxFuture;
     final fnbNearestBox = Hive.box<FnbNearestModel>('fnb_nearest');
 
-    /// TODO Check Internet Connection
     if (fnbNearestBox.values.toList().isNotEmpty) {
-      LeLog.sd(
-          this, getMerchantNearest, '_fnbNearestBox.values NOT EMPTY AAAAA');
-      return fnbNearestBox.values.toList();
+      final fnbNearestList = fnbNearestBox.values.toList();
+      LeLog.rd(this, getMerchantNearest, fnbNearestList.toString());
+      return fnbNearestList;
     }
 
     final res = await _dioClient.dio().then((dio) {
@@ -35,11 +33,11 @@ class FnbRepository {
         },
       );
     });
-    LeLog.sd(this, getMerchantNearest, res.data.toString());
     final data = (res.data as List<dynamic>)
         .map((e) => FnbNearestModel.fromMap(e))
         .toList();
     fnbNearestBox.addAll(data);
+    LeLog.rd(this, getMerchantNearest, data.toString());
     return data;
   }
 
@@ -53,9 +51,8 @@ class FnbRepository {
         queryParameters: {'placeId': placeId},
       );
     });
-    LeLog.sd(this, getMerchantDetail, res.data.toString());
     final data = FnbDetailModel.fromMap(res.data);
-    LeLog.sd(this, getMerchantDetail, data.toString());
+    LeLog.rd(this, getMerchantDetail, data.toString());
     return data;
   }
 }

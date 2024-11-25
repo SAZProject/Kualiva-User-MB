@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/home/model/home_ad_banner_model.dart';
 import 'package:like_it/home/repository/promotion_repository.dart';
 
@@ -21,8 +22,10 @@ class HomeAdBannerBloc extends Bloc<HomeAdBannerEvent, HomeAdBannerState> {
     try {
       final List<HomeAdBannerModel> adBanners =
           await _promotionRepository.getAdvertisementBanner();
+      LeLog.bd(this, _onFetched, adBanners.toString());
       emit(HomeAdBannerSuccess(adBanners: adBanners));
     } catch (e) {
+      LeLog.be(this, _onFetched, e.toString());
       emit(HomeAdBannerFailure());
     }
   }

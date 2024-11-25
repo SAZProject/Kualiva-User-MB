@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/home/model/home_featured_model.dart';
 import 'package:like_it/home/repository/promotion_repository.dart';
 
@@ -12,18 +13,19 @@ class HomeFeaturedBloc extends Bloc<HomeFeaturedEvent, HomeFeaturedState> {
   HomeFeaturedBloc(this._promotionRepository) : super(HomeFeaturedInitial()) {
     on<HomeFeaturedEvent>((event, emit) => emit(HomeFeaturedLoading()));
 
-    on<HomeFeaturedFethed>(_onFecthed);
+    on<HomeFeaturedFetched>(_onFetched);
   }
 
-  void _onFecthed(
-    HomeFeaturedFethed event,
+  void _onFetched(
+    HomeFeaturedFetched event,
     Emitter<HomeFeaturedState> emit,
   ) async {
     try {
       final homeFeatured = await _promotionRepository.getFeatured();
-
+      LeLog.bd(this, _onFetched, homeFeatured.toString());
       emit(HomeFeaturedSuccess(homeFeatured: homeFeatured));
     } catch (e) {
+      LeLog.be(this, _onFetched, e.toString());
       emit(HomeFeaturedFailure());
     }
   }

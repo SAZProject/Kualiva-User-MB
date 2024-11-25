@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/data/search_bar/suggestion_repository.dart';
 
 part 'home_search_bar_state.dart';
@@ -12,6 +13,7 @@ class HomeSearchBarCubit extends Cubit<HomeSearchBarState> {
 
   void loadSuggestion() async {
     final homeSuggestion = await _suggestionRepository.getHomeSuggestion();
+    LeLog.bd(this, loadSuggestion, homeSuggestion.toString());
     emit(HomeSearchBarSuccess(homeSuggestion: homeSuggestion));
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/utility/lelog.dart';
 import 'package:map_launcher/map_launcher.dart';
 
 customMapBottomSheet(BuildContext context, double latitude, double longitude,
@@ -39,6 +38,5 @@ customMapBottomSheet(BuildContext context, double latitude, double longitude,
     );
   } catch (e) {
     if (!context.mounted) return;
-    LeLog.pe(context, customMapBottomSheet, e.toString());
   }
 }

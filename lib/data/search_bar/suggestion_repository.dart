@@ -1,3 +1,5 @@
+import 'package:like_it/common/utility/lelog.dart';
+
 class SuggestionRepository {
   final List<String> _homeSuggestionDummy = [
     "Hari Kemerdekaan",
@@ -15,10 +17,16 @@ class SuggestionRepository {
     "Jus buah",
   ];
   Future<List<String>> getHomeSuggestion() async {
-    return _homeSuggestionDummy;
+    final data = _homeSuggestionDummy;
+
+    LeLog.rd(this, getHomeSuggestion, data.toString());
+    return data;
   }
 
   Future<List<String>> getFnbSuggestion() async {
-    return _fnbSuggestionDummy;
+    final data = _fnbSuggestionDummy;
+
+    LeLog.rd(this, getFnbSuggestion, data.toString());
+    return data;
   }
 }

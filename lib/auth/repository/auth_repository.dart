@@ -1,4 +1,5 @@
 import 'package:like_it/auth/repository/token_manager.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/data/dio_client.dart';
 
 class AuthRepository {
@@ -37,8 +38,7 @@ class AuthRepository {
       _tokenManager.writeAccessToken(accessToken),
       _tokenManager.writeRefreshToken(refreshToken),
     ], eagerError: true);
-
-    return;
+    LeLog.rd(this, login, 'Login Success');
   }
 
   Future<void> register({
@@ -55,6 +55,6 @@ class AuthRepository {
       });
     });
 
-    return;
+    LeLog.rd(this, register, 'Register Success');
   }
 }

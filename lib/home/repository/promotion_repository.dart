@@ -1,5 +1,6 @@
 import 'package:like_it/common/dataset/f_n_b_dataset.dart';
 import 'package:like_it/common/utility/image_constant.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/data/dio_client.dart';
 import 'package:like_it/home/model/home_ad_banner_model.dart';
 import 'package:like_it/home/model/home_featured_model.dart';
@@ -80,7 +81,11 @@ class PromotionRepository {
     //     .map((e) => HomeAdBannerModel.fromMap(e))
     //     .toList();
 
-    return _homeAdBannerDummy;
+    final data = _homeAdBannerDummy;
+
+    LeLog.rd(this, getAdvertisementBanner, data.toString());
+
+    return data;
   }
 
   Future<List<HomeFeaturedModel>> getFeatured(
@@ -102,6 +107,10 @@ class PromotionRepository {
     // final _ = (res.data as List<dynamic>)
     //     .map((e) => HomeFeaturedModel.fromMap(e))
     //     .toList();
+
+    final data = _homeFeaturedDummy;
+
+    LeLog.rd(this, getFeatured, data.toString());
 
     return _homeFeaturedDummy;
   }

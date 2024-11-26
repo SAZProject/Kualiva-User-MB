@@ -1,6 +1,6 @@
-# LIKE IT APP
+# Kualiva APP
 
-This is a LIKE IT App for Hoeis corporation.
+This is a LIKE IT App for Prilion corporation.
 
 ## Changelog
 

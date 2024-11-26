@@ -36,6 +36,8 @@ void main() async {
     MainHive.registerAdapter(),
   ]);
 
+  await MainHive.openBox();
+
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
 
   runApp(

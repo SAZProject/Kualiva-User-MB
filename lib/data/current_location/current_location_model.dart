@@ -1,14 +1,29 @@
 import 'dart:convert';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+
+part 'current_location_model.g.dart';
 
 @immutable
+@HiveType(typeId: 2)
 class CurrentLocationModel {
+  @HiveField(0)
   final String userCurrLoc;
+
+  @HiveField(1)
   final String userCurrCity;
+
+  @HiveField(3)
   final String userCurrSubDistrict;
+
+  @HiveField(4)
   final Placemark userFullPLacemark;
+
+  @HiveField(5)
   final double latitude;
+
+  @HiveField(6)
   final double longitude;
 
   const CurrentLocationModel({

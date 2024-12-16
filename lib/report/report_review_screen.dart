@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
-import 'package:like_it/common/widget/custom_radio_button.dart';
-import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:like_it/common/widget/custom_app_bar.dart';
 import 'package:like_it/data/model/review_model.dart';
+import 'package:like_it/report/feature/report_review_reason.dart';
+import 'package:like_it/report/widget/report_review_detail.dart';
+import 'package:like_it/review/feature/review_form_submit_button.dart';
 
 class ReportReviewScreen extends StatefulWidget {
   const ReportReviewScreen({super.key, required this.reviewData});
@@ -36,16 +37,6 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
         body: SizedBox(
           width: double.maxFinite,
           height: Sizeutils.height,
-          // decoration: BoxDecoration(
-          //   color: theme(context)
-          //       .colorScheme
-          //       .onSecondaryContainer
-          //       .withOpacity(0.6),
-          //   image: DecorationImage(
-          //     image: AssetImage(ImageConstant.background2),
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
           child: _body(context),
         ),
       ),
@@ -59,11 +50,14 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
         child: Column(
           children: [
             SizedBox(height: 10.h),
-            _buildReason(context),
+            ReportReviewReason(
+              selectedReason: selectedReason,
+              onChange: (value) => setState(() => selectedReason = value),
+            ),
             SizedBox(height: 10.h),
-            _buildDetail(context),
+            ReportReviewDetail(detailCtl: _detailCtl),
             SizedBox(height: 25.h),
-            _buildSubmitButton(context),
+            ReportReviewSubmitButton(),
             SizedBox(height: 25.h),
           ],
         ),
@@ -72,175 +66,9 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
   }
 
   PreferredSizeWidget _reportPlaceAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0.0,
-      toolbarHeight: 55.h,
-      leadingWidth: 50.h,
-      titleSpacing: 0.0,
-      automaticallyImplyLeading: true,
-      centerTitle: true,
-      leading: Container(
-        margin: EdgeInsets.only(left: 5.h),
-        child: IconButton(
-          iconSize: 25.h,
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      title: Padding(
-        padding: EdgeInsets.zero,
-        child: Text(
-          context.tr("report.title"),
-          style: theme(context).textTheme.headlineSmall,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildReason(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 10.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.tr("report.reason"),
-            textAlign: TextAlign.center,
-            style: theme(context).textTheme.titleMedium,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: 10.h),
-          CustomRadioButton(
-            text: context.tr("report.reason_review_1"),
-            value: context.tr("report.reason_review_1"),
-            groupValue: selectedReason,
-            padding: EdgeInsets.all(10.h),
-            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
-            onChange: (value) {
-              setState(() {
-                selectedReason = value;
-              });
-            },
-          ),
-          SizedBox(height: 4.h),
-          CustomRadioButton(
-            text: context.tr("report.reason_review_2"),
-            value: context.tr("report.reason_review_2"),
-            groupValue: selectedReason,
-            padding: EdgeInsets.all(10.h),
-            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
-            onChange: (value) {
-              setState(() {
-                selectedReason = value;
-              });
-            },
-          ),
-          SizedBox(height: 4.h),
-          CustomRadioButton(
-            text: context.tr("report.reason_review_3"),
-            value: context.tr("report.reason_review_3"),
-            groupValue: selectedReason,
-            padding: EdgeInsets.all(10.h),
-            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
-            onChange: (value) {
-              setState(() {
-                selectedReason = value;
-              });
-            },
-          ),
-          SizedBox(height: 4.h),
-          CustomRadioButton(
-            text: context.tr("report.reason_review_4"),
-            value: context.tr("report.reason_review_4"),
-            groupValue: selectedReason,
-            padding: EdgeInsets.all(10.h),
-            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
-            onChange: (value) {
-              setState(() {
-                selectedReason = value;
-              });
-            },
-          ),
-          SizedBox(height: 4.h),
-          CustomRadioButton(
-            text: context.tr("report.reason_review_5"),
-            value: context.tr("report.reason_review_5"),
-            groupValue: selectedReason,
-            padding: EdgeInsets.all(10.h),
-            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
-            onChange: (value) {
-              setState(() {
-                selectedReason = value;
-              });
-            },
-          ),
-          SizedBox(height: 4.h),
-          CustomRadioButton(
-            text: context.tr("report.reason_review_6"),
-            value: context.tr("report.reason_review_6"),
-            groupValue: selectedReason,
-            padding: EdgeInsets.all(10.h),
-            boxDecoration: RadioStyleHelper.fillOnSecondaryContainer(context),
-            onChange: (value) {
-              setState(() {
-                selectedReason = value;
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDetail(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 10.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.tr("report.detail"),
-            textAlign: TextAlign.center,
-            style: theme(context).textTheme.titleMedium,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: 10.h),
-          CustomTextFormField(
-            controller: _detailCtl,
-            textInputAction: TextInputAction.done,
-            maxLines: 11,
-            contentPadding: EdgeInsets.all(12.h),
-            fillColor: theme(context)
-                .colorScheme
-                .onSecondaryContainer
-                .withOpacity(0.6),
-            inputBorder: TextFormFieldStyleHelper.fillOnSecondaryContainer,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSubmitButton(BuildContext context) {
-    return SizedBox(
-      height: 60.h,
-      width: double.maxFinite,
-      child: CustomGradientOutlinedButton(
-        text: context.tr("report.submit_btn"),
-        outerPadding: EdgeInsets.symmetric(horizontal: 30.h),
-        innerPadding: EdgeInsets.all(2.h),
-        strokeWidth: 2.h,
-        colors: [
-          appTheme.yellowA700,
-          theme(context).colorScheme.primary,
-        ],
-        textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-      ),
+    return CustomAppBar(
+      title: context.tr("report.title"),
+      onBackPressed: () => Navigator.pop(context),
     );
   }
 }

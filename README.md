@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.61
-- Report place Screen modularized
+Ver 0.0.62
+- Report review Screen modularized
 ```
 
 ## Getting Started

@@ -184,7 +184,7 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
 
     case AppRoutes.reviewScreen:
       return PageTransition(
-          child: const ReviewScreen(),
+          child: ReviewScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

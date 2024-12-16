@@ -28,7 +28,7 @@ class AuthRepository {
       body.addAll({'phone': phoneNumber});
     }
     final res = await _dioClient.dio().then((dio) {
-      dio.options.baseUrl = "https://kg1k4xc5-3000.asse.devtunnels.ms/api/v1";
+      dio.options.baseUrl = "http://192.168.1.89:3000/api/v1";
       return dio.post('/auth/login', data: body);
     });
     final accessToken = res.data['accessToken'].toString();
@@ -47,7 +47,7 @@ class AuthRepository {
     required String password,
   }) async {
     final _ = await _dioClient.dio().then((dio) {
-      dio.options.baseUrl = "https://kg1k4xc5-3000.asse.devtunnels.ms/api/v1";
+      dio.options.baseUrl = "http://192.168.1.89:3000/api/v1";
       return dio.post('/auth/register', data: {
         'username': username,
         'phone': phoneNumber,

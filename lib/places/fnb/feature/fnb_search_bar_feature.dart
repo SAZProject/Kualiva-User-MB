@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/data/search_bar/my_search_bar_widget.dart';
+import 'package:like_it/data/search_bar/my_sliver_search_bar_widget.dart';
 import 'package:like_it/places/fnb/cubit/fnb_search_bar_cubit.dart';
 
 class FnbSearchBarFeature extends StatelessWidget {
@@ -13,7 +13,7 @@ class FnbSearchBarFeature extends StatelessWidget {
     return BlocBuilder<FnbSearchBarCubit, FnbSearchBarState>(
       builder: (context, state) {
         if (state is! FnbSearchBarSuccess) {
-          return MySearchBarWidget(
+          return MySliverSearchBarWidget(
             suggestionsBuilder: (context, searchController) async {
               return [].map((suggest) {
                 return ListTile(
@@ -27,7 +27,7 @@ class FnbSearchBarFeature extends StatelessWidget {
           );
         }
 
-        return MySearchBarWidget(
+        return MySliverSearchBarWidget(
           suggestionsBuilder: (context, searchController) async {
             return state.fnbSuggestion.map((suggest) {
               return ListTile(

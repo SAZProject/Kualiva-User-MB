@@ -24,7 +24,7 @@ class FnbRepository {
     }
 
     final res = await _dioClient.dio().then((dio) {
-      dio.options.baseUrl = 'https://kg1k4xc5-3001.asse.devtunnels.ms/api/v1';
+      dio.options.baseUrl = 'http://192.168.1.89:3001/api/v1';
       return dio.get(
         '/places/nearby',
         queryParameters: {
@@ -45,7 +45,7 @@ class FnbRepository {
     required String placeId,
   }) async {
     final res = await _dioClient.dio().then((dio) {
-      dio.options.baseUrl = 'https://kg1k4xc5-3001.asse.devtunnels.ms/api/v1';
+      dio.options.baseUrl = 'http://192.168.1.89:3001/api/v1';
       return dio.get(
         '/places/byPlaceId',
         queryParameters: {'placeId': placeId},

@@ -16,6 +16,14 @@ class SuggestionRepository {
     "Mie",
     "Jus buah",
   ];
+
+  final List<String> _reviewSuggestionDummy = [
+    "Service",
+    "place",
+    "clean",
+    "food",
+  ];
+
   Future<List<String>> getHomeSuggestion() async {
     final data = _homeSuggestionDummy;
 
@@ -27,6 +35,13 @@ class SuggestionRepository {
     final data = _fnbSuggestionDummy;
 
     LeLog.rd(this, getFnbSuggestion, data.toString());
+    return data;
+  }
+
+  Future<List<String>> getReviewSuggestion() async {
+    final data = _reviewSuggestionDummy;
+
+    LeLog.rd(this, getReviewSuggestion, data.toString());
     return data;
   }
 }

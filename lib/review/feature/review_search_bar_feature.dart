@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/data/search_bar/my_sliver_search_bar_widget.dart';
-import 'package:like_it/home/cubit/home_search_bar_cubit.dart';
+import 'package:like_it/data/search_bar/my_fixed_search_bar_widget.dart';
+import 'package:like_it/review/cubit/review_search_bar_cubit.dart';
 
-class HomeSearchBarFeature extends StatelessWidget {
-  const HomeSearchBarFeature({super.key});
+class ReviewSearchBarFeature extends StatelessWidget {
+  const ReviewSearchBarFeature({super.key});
 
   @override
   Widget build(BuildContext context) {
-    context.read<HomeSearchBarCubit>().loadSuggestion();
+    context.read<ReviewSearchBarCubit>().loadSuggestion();
 
-    return BlocBuilder<HomeSearchBarCubit, HomeSearchBarState>(
+    return BlocBuilder<ReviewSearchBarCubit, ReviewSearchBarState>(
       builder: (context, state) {
-        if (state is! HomeSearchBarSuccess) {
-          return MySliverSearchBarWidget(
+        if (state is! ReviewSearchBarSuccess) {
+          return MyFixedSearchBarWidget(
             suggestionsBuilder: (context, searchController) async {
               return [].map((suggest) {
                 return ListTile(
@@ -27,9 +27,9 @@ class HomeSearchBarFeature extends StatelessWidget {
           );
         }
 
-        return MySliverSearchBarWidget(
+        return MyFixedSearchBarWidget(
           suggestionsBuilder: (context, searchController) async {
-            return state.homeSuggestion.map((suggest) {
+            return state.reviewSuggestion.map((suggest) {
               return ListTile(
                 title: Text(suggest),
                 onTap: () {

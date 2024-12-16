@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.58
-- FnB detail screen dummy for presentation
+Ver 0.0.59
+- Review Screen Modularized
 ```
 
 ## Getting Started

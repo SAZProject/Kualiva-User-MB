@@ -1,0 +1,19 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:like_it/common/utility/lelog.dart';
+import 'package:like_it/data/search_bar/suggestion_repository.dart';
+
+part 'review_search_bar_state.dart';
+
+class ReviewSearchBarCubit extends Cubit<ReviewSearchBarState> {
+  final SuggestionRepository _suggestionRepository;
+
+  ReviewSearchBarCubit(this._suggestionRepository)
+      : super(ReviewSearchBarInitial());
+
+  void loadSuggestion() async {
+    final reviewSuggestion = await _suggestionRepository.getReviewSuggestion();
+    LeLog.bd(this, loadSuggestion, reviewSuggestion.toString());
+    emit(ReviewSearchBarSuccess(reviewSuggestion: reviewSuggestion));
+  }
+}

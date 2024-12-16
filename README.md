@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.60
-- Review form Screen Modularized
+Ver 0.0.60+01
+- Review form Screen rating bar allow half rating
 ```
 
 ## Getting Started

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
-import 'package:like_it/data/search_bar/my_sliver_app_bar_delegate.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:kualiva/data/search_bar/my_sliver_app_bar_delegate.dart';
 
 class MySliverSearchBarWidget extends StatelessWidget {
   const MySliverSearchBarWidget({

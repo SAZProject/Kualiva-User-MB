@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/data/model/ui_model/loc_popular_city_model.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/data/model/ui_model/loc_popular_city_model.dart';
 
 class LocationPopularCityItems extends StatelessWidget {
   const LocationPopularCityItems({

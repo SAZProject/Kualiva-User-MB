@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/common/widget/custom_empty_state.dart';
-import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
+import 'package:kualiva/data/model/ui_model/profile_menu_model.dart';
 
 class OnboardingPickNotification extends StatelessWidget {
   const OnboardingPickNotification({

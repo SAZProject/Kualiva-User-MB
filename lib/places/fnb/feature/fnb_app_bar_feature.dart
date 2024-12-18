@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/utility/location_util.dart';
-import 'package:like_it/data/current_location/current_location_bloc.dart';
-import 'package:like_it/data/current_location/current_location_feature.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/utility/location_util.dart';
+import 'package:kualiva/data/current_location/current_location_bloc.dart';
+import 'package:kualiva/data/current_location/current_location_feature.dart';
 
 class FnbAppBarFeature extends StatefulWidget {
   const FnbAppBarFeature({super.key});

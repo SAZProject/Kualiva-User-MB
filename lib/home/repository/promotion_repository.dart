@@ -1,9 +1,9 @@
-import 'package:like_it/common/dataset/f_n_b_dataset.dart';
-import 'package:like_it/common/utility/image_constant.dart';
-import 'package:like_it/common/utility/lelog.dart';
-import 'package:like_it/data/dio_client.dart';
-import 'package:like_it/home/model/home_ad_banner_model.dart';
-import 'package:like_it/home/model/home_featured_model.dart';
+import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
+import 'package:kualiva/common/utility/image_constant.dart';
+import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/data/dio_client.dart';
+import 'package:kualiva/home/model/home_ad_banner_model.dart';
+import 'package:kualiva/home/model/home_featured_model.dart';
 
 class PromotionRepository {
   PromotionRepository(this._dioClient);

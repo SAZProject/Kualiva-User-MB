@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/utility/image_utility.dart';
-import 'package:like_it/common/widget/custom_attach_media.dart';
-import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
-import 'package:like_it/common/widget/custom_text_form_field.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/utility/image_utility.dart';
+import 'package:kualiva/common/widget/custom_attach_media.dart';
+import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_text_form_field.dart';
+import 'package:kualiva/data/model/f_n_b_model.dart';
 
 class ReviewVerifyModal extends StatefulWidget {
   const ReviewVerifyModal({super.key, required this.fnbData});

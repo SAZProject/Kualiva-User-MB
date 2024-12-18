@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_section_header.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_section_header.dart';
 
 class FnbFiltersSlider extends StatelessWidget {
   const FnbFiltersSlider({

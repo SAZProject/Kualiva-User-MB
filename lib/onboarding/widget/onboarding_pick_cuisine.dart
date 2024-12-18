@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_selectable_staggered_grid.dart';
-import 'package:like_it/data/model/ui_model/f_n_b_asset_model.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_selectable_staggered_grid.dart';
+import 'package:kualiva/data/model/ui_model/f_n_b_asset_model.dart';
 
 class OnboardingPickCuisine extends StatelessWidget {
   const OnboardingPickCuisine({

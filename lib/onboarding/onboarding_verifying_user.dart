@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/utility/datetime_utils.dart';
-import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/data/model/ui_model/onboarding_verifying_model.dart';
-import 'package:like_it/data/model/ui_model/profile_menu_model.dart';
-import 'package:like_it/onboarding/widget/onboarding_pick_birthdate.dart';
-import 'package:like_it/onboarding/widget/onboarding_pick_notification.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/utility/datetime_utils.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/data/model/ui_model/onboarding_verifying_model.dart';
+import 'package:kualiva/data/model/ui_model/profile_menu_model.dart';
+import 'package:kualiva/onboarding/widget/onboarding_pick_birthdate.dart';
+import 'package:kualiva/onboarding/widget/onboarding_pick_notification.dart';
 
 class OnboardingVerifyingUser extends StatefulWidget {
   const OnboardingVerifyingUser({super.key});

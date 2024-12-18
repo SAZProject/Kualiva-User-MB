@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/utility/image_utility.dart';
-import 'package:like_it/common/widget/custom_app_bar.dart';
-import 'package:like_it/common/widget/custom_attach_media.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/report/feature/report_place_reason.dart';
-import 'package:like_it/report/feature/report_place_submit_button.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/utility/image_utility.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
+import 'package:kualiva/common/widget/custom_attach_media.dart';
+import 'package:kualiva/data/model/f_n_b_model.dart';
+import 'package:kualiva/report/feature/report_place_reason.dart';
+import 'package:kualiva/report/feature/report_place_submit_button.dart';
 
 class ReportPlaceScreen extends StatefulWidget {
   const ReportPlaceScreen({super.key, required this.fnbModel});

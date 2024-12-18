@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import "package:flutter/foundation.dart";
 
-import "package:like_it/data/model/ui_model/loc_dropdown_model.dart";
+import "package:kualiva/data/model/ui_model/loc_dropdown_model.dart";
 
 @immutable
 class DistanceCheckingResultModel {

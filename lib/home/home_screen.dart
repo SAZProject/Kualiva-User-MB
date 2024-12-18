@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/dataset/f_n_b_dataset.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
-import 'package:like_it/home/bloc/home_featured_bloc.dart';
-import 'package:like_it/home/feature/home_ad_banner_feature.dart';
-import 'package:like_it/home/feature/home_app_bar_feature.dart';
-import 'package:like_it/home/feature/home_featured_feature.dart';
-import 'package:like_it/home/feature/home_search_bar_feature.dart';
-import 'package:like_it/home/model/home_grid_menu_model.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
+import 'package:kualiva/data/model/f_n_b_model.dart';
+import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
+import 'package:kualiva/home/bloc/home_featured_bloc.dart';
+import 'package:kualiva/home/feature/home_ad_banner_feature.dart';
+import 'package:kualiva/home/feature/home_app_bar_feature.dart';
+import 'package:kualiva/home/feature/home_featured_feature.dart';
+import 'package:kualiva/home/feature/home_search_bar_feature.dart';
+import 'package:kualiva/home/model/home_grid_menu_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

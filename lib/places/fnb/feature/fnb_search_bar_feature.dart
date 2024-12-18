@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/data/search_bar/my_sliver_search_bar_widget.dart';
-import 'package:like_it/places/fnb/cubit/fnb_search_bar_cubit.dart';
+import 'package:kualiva/data/search_bar/my_sliver_search_bar_widget.dart';
+import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
 
 class FnbSearchBarFeature extends StatelessWidget {
   const FnbSearchBarFeature({super.key});

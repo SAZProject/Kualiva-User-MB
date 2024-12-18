@@ -1,4 +1,4 @@
-import 'package:like_it/common/utility/check_device.dart';
+import 'package:kualiva/common/utility/check_device.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CheckPermission {

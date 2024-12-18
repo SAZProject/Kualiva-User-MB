@@ -1,17 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/dataset/f_n_b_dataset.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_app_bar.dart';
-import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
-import 'package:like_it/data/model/review_model.dart';
-import 'package:like_it/review/feature/review_filter_feature.dart';
-import 'package:like_it/review/feature/review_my_review_feature.dart';
-import 'package:like_it/review/feature/review_other_review_feature.dart';
-import 'package:like_it/review/feature/review_search_bar_feature.dart';
-import 'package:like_it/review/widget/review_verify_modal.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
+import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/data/model/f_n_b_model.dart';
+import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/review/feature/review_filter_feature.dart';
+import 'package:kualiva/review/feature/review_my_review_feature.dart';
+import 'package:kualiva/review/feature/review_other_review_feature.dart';
+import 'package:kualiva/review/feature/review_search_bar_feature.dart';
+import 'package:kualiva/review/widget/review_verify_modal.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key});
@@ -27,7 +27,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   List<String> filterByCategory = [
     "review.filter_user",
-    "review.filter_like_it",
+    "review.filter_kualiva",
     "review.filter_google",
   ];
 

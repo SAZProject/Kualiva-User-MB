@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_section_header.dart';
+import 'package:kualiva/data/model/f_n_b_model.dart';
 
 class ReviewMyReviewFeature extends StatelessWidget {
   const ReviewMyReviewFeature({super.key, required this.fnbData});

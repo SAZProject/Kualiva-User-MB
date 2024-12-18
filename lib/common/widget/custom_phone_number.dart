@@ -2,9 +2,9 @@ import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/style/custom_text_style.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
-import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:kualiva/common/style/custom_text_style.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:kualiva/common/widget/custom_text_form_field.dart';
 
 class CustomPhoneNumber extends StatelessWidget {
   const CustomPhoneNumber({

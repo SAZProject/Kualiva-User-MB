@@ -3,13 +3,13 @@ import 'package:country_pickers/country_pickers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/auth/repository/token_manager.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
-import 'package:like_it/common/widget/custom_phone_number.dart';
-import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:kualiva/auth/repository/token_manager.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_phone_number.dart';
+import 'package:kualiva/common/widget/custom_text_form_field.dart';
 
 class AccountSettingScreen extends StatefulWidget {
   const AccountSettingScreen({super.key});

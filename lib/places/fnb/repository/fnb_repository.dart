@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
-import 'package:like_it/common/utility/lelog.dart';
-import 'package:like_it/data/dio_client.dart';
-import 'package:like_it/places/fnb/model/fnb_detail_model.dart';
-import 'package:like_it/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/data/dio_client.dart';
+import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 
 class FnbRepository {
   FnbRepository(this._dioClient);

@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/utility/datetime_utils.dart';
-import 'package:like_it/common/utility/image_utility.dart';
-import 'package:like_it/common/widget/custom_attach_media.dart';
-import 'package:like_it/common/widget/custom_checkbox_button.dart';
-import 'package:like_it/common/widget/custom_drop_down.dart';
-import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/utility/datetime_utils.dart';
+import 'package:kualiva/common/utility/image_utility.dart';
+import 'package:kualiva/common/widget/custom_attach_media.dart';
+import 'package:kualiva/common/widget/custom_checkbox_button.dart';
+import 'package:kualiva/common/widget/custom_drop_down.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/common/widget/custom_section_header.dart';
+import 'package:kualiva/common/widget/custom_text_form_field.dart';
 
 class AddPlacesScreen extends StatefulWidget {
   const AddPlacesScreen({super.key});

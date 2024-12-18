@@ -1,20 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/auth/bloc/auth_bloc.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/style/custom_decoration.dart';
-import 'package:like_it/common/style/custom_text_style.dart';
-import 'package:like_it/common/style/theme_helper.dart';
-import 'package:like_it/common/utility/form_validation_util.dart';
-import 'package:like_it/common/utility/image_constant.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
-import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
-import 'package:like_it/common/widget/custom_image_view.dart';
-import 'package:like_it/common/widget/custom_outlined_button.dart';
-import 'package:like_it/common/widget/custom_text_form_field.dart';
-import 'package:like_it/router.dart';
+import 'package:kualiva/auth/bloc/auth_bloc.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/style/custom_decoration.dart';
+import 'package:kualiva/common/style/custom_text_style.dart';
+import 'package:kualiva/common/style/theme_helper.dart';
+import 'package:kualiva/common/utility/form_validation_util.dart';
+import 'package:kualiva/common/utility/image_constant.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_image_view.dart';
+import 'package:kualiva/common/widget/custom_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_text_form_field.dart';
+import 'package:kualiva/router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -174,7 +174,7 @@ class SignInScreenState extends State<SignInScreen> {
           _signInWithGoogle(context),
           SizedBox(height: 10.h),
           Text(
-            context.tr("sign_in.like_it_acc"),
+            context.tr("sign_in.kualiva_acc"),
             style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
           ),
           SizedBox(height: 10.h),

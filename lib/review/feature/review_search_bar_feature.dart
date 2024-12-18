@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/data/search_bar/my_fixed_search_bar_widget.dart';
-import 'package:like_it/review/cubit/review_search_bar_cubit.dart';
+import 'package:kualiva/data/search_bar/my_fixed_search_bar_widget.dart';
+import 'package:kualiva/review/cubit/review_search_bar_cubit.dart';
 
 class ReviewSearchBarFeature extends StatelessWidget {
   const ReviewSearchBarFeature({super.key});

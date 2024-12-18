@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:like_it/data/model/review_model.dart';
+import 'package:kualiva/data/model/review_model.dart';
 
 @immutable
 class FNBModel {

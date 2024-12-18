@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
 
 class OnboardingPickBirthdate extends StatelessWidget {
   const OnboardingPickBirthdate({

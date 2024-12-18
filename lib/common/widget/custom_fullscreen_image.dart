@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/utility/image_utility.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/utility/image_utility.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 

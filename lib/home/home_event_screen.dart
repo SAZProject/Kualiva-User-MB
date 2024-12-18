@@ -4,14 +4,14 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/screen/widget/location_popular_city_items.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/custom_elevated_button.dart';
-import 'package:like_it/common/widget/custom_empty_state.dart';
-import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/data/model/ui_model/home_event_model.dart';
-import 'package:like_it/data/model/ui_model/loc_popular_city_model.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/screen/widget/location_popular_city_items.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
+import 'package:kualiva/common/widget/custom_section_header.dart';
+import 'package:kualiva/data/model/ui_model/home_event_model.dart';
+import 'package:kualiva/data/model/ui_model/loc_popular_city_model.dart';
 
 class WhatGoingOnScreen extends StatefulWidget {
   const WhatGoingOnScreen({super.key});

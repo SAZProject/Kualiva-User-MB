@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:like_it/data/current_location/current_location_model.dart';
+import 'package:kualiva/data/current_location/current_location_model.dart';
 
-import 'package:like_it/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 
 class MainHive {
   static Future<void> registerAdapter() async {

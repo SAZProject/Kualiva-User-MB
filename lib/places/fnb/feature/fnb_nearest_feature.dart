@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
-import 'package:like_it/places/fnb/widget/fnb_place_item_nearby.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_section_header.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:kualiva/places/fnb/widget/fnb_place_item_nearby.dart';
 
 class FnbNearestFeature extends StatelessWidget {
   const FnbNearestFeature({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
+import 'package:kualiva/common/app_export.dart';
 
 class CustomFloatModal extends StatelessWidget {
   const CustomFloatModal({super.key, required this.imagePath});

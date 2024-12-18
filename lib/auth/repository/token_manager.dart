@@ -1,6 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:like_it/common/utility/lelog.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 
 class TokenManager {
   TokenManager(this._storage) {

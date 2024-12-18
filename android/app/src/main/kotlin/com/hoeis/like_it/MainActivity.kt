@@ -1,4 +1,4 @@
-package com.prelion.like_it
+package com.prelion.kualiva
 
 import io.flutter.embedding.android.FlutterActivity
 

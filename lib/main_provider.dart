@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:like_it/auth/bloc/auth_bloc.dart';
-import 'package:like_it/auth/repository/auth_repository.dart';
-import 'package:like_it/auth/repository/token_manager.dart';
-import 'package:like_it/data/current_location/current_location_bloc.dart';
-import 'package:like_it/data/dio_client.dart';
-import 'package:like_it/data/search_bar/suggestion_repository.dart';
-import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
-import 'package:like_it/home/bloc/home_featured_bloc.dart';
-import 'package:like_it/home/cubit/home_search_bar_cubit.dart';
-import 'package:like_it/home/repository/promotion_repository.dart';
-import 'package:like_it/places/fnb/bloc/fnb_detail_bloc.dart';
-import 'package:like_it/places/fnb/bloc/fnb_nearest_bloc.dart';
-import 'package:like_it/places/fnb/cubit/fnb_search_bar_cubit.dart';
-import 'package:like_it/places/fnb/repository/fnb_repository.dart';
+import 'package:kualiva/auth/bloc/auth_bloc.dart';
+import 'package:kualiva/auth/repository/auth_repository.dart';
+import 'package:kualiva/auth/repository/token_manager.dart';
+import 'package:kualiva/data/current_location/current_location_bloc.dart';
+import 'package:kualiva/data/dio_client.dart';
+import 'package:kualiva/data/search_bar/suggestion_repository.dart';
+import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
+import 'package:kualiva/home/bloc/home_featured_bloc.dart';
+import 'package:kualiva/home/cubit/home_search_bar_cubit.dart';
+import 'package:kualiva/home/repository/promotion_repository.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
+import 'package:kualiva/places/fnb/repository/fnb_repository.dart';
 
 class MainProvider extends StatelessWidget {
   const MainProvider({super.key, required this.mainChild});

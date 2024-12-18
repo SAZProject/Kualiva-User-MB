@@ -19,7 +19,7 @@ class FnbDetailBloc extends Bloc<FnbDetailEvent, FnbDetailState> {
     Emitter<FnbDetailState> emit,
   ) async {
     try {
-      final FnbDetailModel fnbDetail = await _fnbRepository.getMerchantDetail(
+      final FnbDetailModel fnbDetail = await _fnbRepository.getPlaceDetail(
         placeId: event.placeId,
       );
       LeLog.bd(this, _onFetched, fnbDetail.toString());

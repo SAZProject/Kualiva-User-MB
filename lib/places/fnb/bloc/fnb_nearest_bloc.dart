@@ -29,7 +29,7 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
   ) async {
     try {
       final List<FnbNearestModel> nearest =
-          await _fnbRepository.getMerchantNearest(
+          await _fnbRepository.getPlacesNearest(
         latitude: event.latitude,
         longitude: event.longitude,
       );

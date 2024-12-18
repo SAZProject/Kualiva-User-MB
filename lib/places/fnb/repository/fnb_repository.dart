@@ -11,7 +11,7 @@ class FnbRepository {
 
   void invalidate() {}
 
-  Future<List<FnbNearestModel>> getMerchantNearest({
+  Future<List<FnbNearestModel>> getPlacesNearest({
     required double latitude,
     required double longitude,
   }) async {
@@ -19,7 +19,7 @@ class FnbRepository {
 
     if (fnbNearestBox.values.toList().isNotEmpty) {
       final fnbNearestList = fnbNearestBox.values.toList();
-      LeLog.rd(this, getMerchantNearest, fnbNearestList.toString());
+      LeLog.rd(this, getPlacesNearest, fnbNearestList.toString());
       return fnbNearestList;
     }
 
@@ -29,6 +29,7 @@ class FnbRepository {
         queryParameters: {
           'latitude': latitude,
           'longitude': longitude,
+          'type': 'ALL',
         },
       );
     });
@@ -36,21 +37,21 @@ class FnbRepository {
         .map((e) => FnbNearestModel.fromMap(e))
         .toList();
     fnbNearestBox.addAll(data);
-    LeLog.rd(this, getMerchantNearest, data.toString());
+    LeLog.rd(this, getPlacesNearest, data.toString());
     return data;
   }
 
-  Future<FnbDetailModel> getMerchantDetail({
+  Future<FnbDetailModel> getPlaceDetail({
     required String placeId,
   }) async {
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
         '/places/byPlaceId',
-        queryParameters: {'placeId': placeId},
+        queryParameters: {'placeUniqueId': placeId},
       );
     });
     final data = FnbDetailModel.fromMap(res.data);
-    LeLog.rd(this, getMerchantDetail, data.toString());
+    LeLog.rd(this, getPlaceDetail, data.toString());
     return data;
   }
 }

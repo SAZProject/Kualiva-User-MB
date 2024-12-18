@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/data/model/f_n_b_model.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/data/model/f_n_b_model.dart';
 
 class FnbPromoItem extends StatelessWidget {
   const FnbPromoItem(

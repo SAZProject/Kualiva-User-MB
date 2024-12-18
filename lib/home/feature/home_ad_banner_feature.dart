@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/common/style/custom_decoration.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
-import 'package:like_it/common/widget/custom_empty_state.dart';
-import 'package:like_it/common/widget/custom_image_view.dart';
-import 'package:like_it/home/bloc/home_ad_banner_bloc.dart';
-import 'package:like_it/home/model/home_ad_banner_model.dart';
-import 'package:like_it/router.dart';
+import 'package:kualiva/common/style/custom_decoration.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
+import 'package:kualiva/common/widget/custom_image_view.dart';
+import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
+import 'package:kualiva/home/model/home_ad_banner_model.dart';
+import 'package:kualiva/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeAdBannerFeature extends StatelessWidget {

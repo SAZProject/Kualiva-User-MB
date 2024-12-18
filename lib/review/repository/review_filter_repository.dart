@@ -1,7 +1,7 @@
 class ReviewFilterRepository {
   List<String> filterByCategory = [
     "review.filter_user",
-    "review.filter_like_it",
+    "review.filter_kualiva",
     "review.filter_google",
   ];
 

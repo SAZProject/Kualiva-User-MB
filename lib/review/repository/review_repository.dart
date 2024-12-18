@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
-import 'package:like_it/common/utility/lelog.dart';
-import 'package:like_it/data/dio_client.dart';
-import 'package:like_it/main_hive.dart';
-import 'package:like_it/review/model/review_place_model.dart';
+import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/data/dio_client.dart';
+import 'package:kualiva/main_hive.dart';
+import 'package:kualiva/review/model/review_place_model.dart';
 
 // AuthorId
 // cm3d0h52q0000qtfl1aoq65b8

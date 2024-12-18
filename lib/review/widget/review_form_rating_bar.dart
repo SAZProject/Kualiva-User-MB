@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_rating_bar.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_rating_bar.dart';
 
 class ReportReviewRatingBar extends StatelessWidget {
   const ReportReviewRatingBar(

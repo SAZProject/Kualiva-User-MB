@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/style/custom_text_style.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
-import 'package:like_it/common/widget/base_button.dart';
+import 'package:kualiva/common/style/custom_text_style.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:kualiva/common/widget/base_button.dart';
 
 class CustomOutlinedButton extends BaseButton {
   const CustomOutlinedButton(

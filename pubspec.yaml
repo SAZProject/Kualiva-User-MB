@@ -1,4 +1,4 @@
-name: like_it
+name: kualiva
 description: "A new Flutter project."
 publish_to: "none"
 
@@ -46,6 +46,8 @@ dependencies:
     shared_preferences: ^2.3.3
     hive: ^2.2.3
     hive_flutter: ^1.1.0
+    motion: ^2.0.1
+    bounce: ^1.0.2
 
 dev_dependencies:
     flutter_test:
@@ -57,7 +59,7 @@ dev_dependencies:
 flutter_launcher_icons:
     android: true
     ios: true
-    image_path: "assets/images/like_it_icon.png"
+    image_path: "assets/images/kualiva_icon.png"
 
 flutter:
     uses-material-design: true

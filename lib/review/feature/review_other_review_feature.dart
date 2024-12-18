@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_empty_state.dart';
-import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/data/model/review_model.dart';
-import 'package:like_it/review/widget/review_view.dart';
-import 'package:like_it/review/widget/special_review_view.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
+import 'package:kualiva/common/widget/custom_section_header.dart';
+import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/review/widget/review_view.dart';
+import 'package:kualiva/review/widget/special_review_view.dart';
 
 class ReviewOtherReviewFeature extends StatelessWidget {
   const ReviewOtherReviewFeature({super.key, required this.listReviewData});

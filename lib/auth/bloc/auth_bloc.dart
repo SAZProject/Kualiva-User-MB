@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:like_it/auth/repository/auth_repository.dart';
-import 'package:like_it/common/utility/lelog.dart';
+import 'package:kualiva/auth/repository/auth_repository.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

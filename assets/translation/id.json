@@ -82,7 +82,7 @@
         "phone_number": "Nomor telepon"
     },
     "splash": {
-        "app_title": "Like it"
+        "app_title": "KUALIVA"
     },
     "onboard": {
         "onboard_1_title": "Mulai Perjalanan\nMilikmu",
@@ -112,7 +112,7 @@
     "sign_in": {
         "welcome": "Selamat datang di Like it",
         "sign_in_with": "Masuk dengan",
-        "like_it_acc": "Akun Like it",
+        "kualiva_acc": "Akun Like it",
         "sign_in_with_saz": "Masuk dengan SAZ",
         "sign_in_with_google": "Masuk dengan Google",
         "phone_number_or_user_name": "Nomor Telepon atau Nama Pengguna",
@@ -247,7 +247,7 @@
         "title": "Tinjauan",
         "filter": "Filter Tinjau",
         "filter_user": "User",
-        "filter_like_it": "Like it",
+        "filter_kualiva": "Like it",
         "filter_google": "Google",
         "filter_time": "Waktu",
         "filter_time_1": "Terbaru",

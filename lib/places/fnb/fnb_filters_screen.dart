@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/dataset/f_n_b_filter_dataset.dart';
-import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
-import 'package:like_it/common/widget/custom_section_header.dart';
-import 'package:like_it/data/model/ui_model/filters_model.dart';
-import 'package:like_it/places/fnb/widget/fnb_filters_item.dart';
-import 'package:like_it/places/fnb/widget/fnb_filters_slider.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_section_header.dart';
+import 'package:kualiva/data/model/ui_model/filters_model.dart';
+import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
+import 'package:kualiva/places/fnb/widget/fnb_filters_slider.dart';
 
 class FnbFiltersScreen extends StatefulWidget {
   const FnbFiltersScreen({super.key, this.getFilterModel});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/widget/base_button.dart';
-import 'package:like_it/common/widget/custom_outlined_button.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/widget/base_button.dart';
+import 'package:kualiva/common/widget/custom_outlined_button.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class CustomGradientOutlinedButton extends BaseButton {

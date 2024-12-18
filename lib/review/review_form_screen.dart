@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/utility/image_utility.dart';
-import 'package:like_it/common/widget/custom_app_bar.dart';
-import 'package:like_it/common/widget/custom_attach_media.dart';
-import 'package:like_it/common/widget/custom_checkbox_button.dart';
-import 'package:like_it/review/feature/review_form_submit_button.dart';
-import 'package:like_it/review/widget/review_form_message.dart';
-import 'package:like_it/review/widget/review_form_rating_bar.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/utility/image_utility.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
+import 'package:kualiva/common/widget/custom_attach_media.dart';
+import 'package:kualiva/common/widget/custom_checkbox_button.dart';
+import 'package:kualiva/review/feature/review_form_submit_button.dart';
+import 'package:kualiva/review/widget/review_form_message.dart';
+import 'package:kualiva/review/widget/review_form_rating_bar.dart';
 
 class ReviewFormScreen extends StatefulWidget {
   const ReviewFormScreen({super.key, required this.transaction});

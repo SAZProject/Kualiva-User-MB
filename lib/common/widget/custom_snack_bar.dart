@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
 
 void showSnackBar(BuildContext context, IconData? icon, Color? iconColor,
     String? message, Color? messageColor) {

@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_gradient_outlined_button.dart';
-import 'package:like_it/common/widget/custom_text_form_field.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_text_form_field.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});

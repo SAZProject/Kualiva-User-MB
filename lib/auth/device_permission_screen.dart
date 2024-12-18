@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/style/custom_btn_style.dart';
-import 'package:like_it/common/utility/check_device.dart';
-import 'package:like_it/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/utility/check_device.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class DevicePermissionScreen extends StatefulWidget {

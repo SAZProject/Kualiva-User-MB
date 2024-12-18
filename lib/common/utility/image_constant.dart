@@ -1,7 +1,7 @@
 class ImageConstant {
   static String imagePath = "assets/images";
 
-  static String appLogo = "$imagePath/like_it_icon.png";
+  static String appLogo = "$imagePath/kualiva_icon.png";
 
   static String onBoarding1 = "$imagePath/onboard-1.gif";
   static String onBoarding2 = "$imagePath/onboard-2.gif";

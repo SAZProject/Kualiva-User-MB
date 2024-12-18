@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/review/widget/review_filters_item.dart';
-import 'package:like_it/review/widget/review_filters_modal.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/review/widget/review_filters_item.dart';
+import 'package:kualiva/review/widget/review_filters_modal.dart';
 
 class ReviewFilterFeature extends StatelessWidget {
   const ReviewFilterFeature({

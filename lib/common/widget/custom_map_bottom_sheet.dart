@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:like_it/common/app_export.dart';
+import 'package:kualiva/common/app_export.dart';
 import 'package:map_launcher/map_launcher.dart';
 
 customMapBottomSheet(BuildContext context, double latitude, double longitude,

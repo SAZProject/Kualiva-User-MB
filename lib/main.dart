@@ -3,8 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:like_it/main_hive.dart';
-import 'package:like_it/main_provider.dart';
+import 'package:kualiva/main_hive.dart';
+import 'package:kualiva/main_provider.dart';
+import 'package:motion/motion.dart';
 import 'common/app_export.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -39,6 +40,8 @@ void main() async {
   await MainHive.openBox();
 
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
+
+  await Motion.instance.initialize();
 
   runApp(
     EasyLocalization(

@@ -1,4 +1,4 @@
-import 'package:like_it/common/utility/lelog.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 
 class SuggestionRepository {
   final List<String> _homeSuggestionDummy = [

@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
+import 'package:kualiva/common/app_export.dart';
 
 Future<void> customImageDialog({
   required BuildContext context,

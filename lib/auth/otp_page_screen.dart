@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/app_export.dart';
-import 'package:like_it/common/widget/custom_alert_dialog.dart';
-import 'package:like_it/common/widget/custom_pin_code_text_field.dart';
+import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_alert_dialog.dart';
+import 'package:kualiva/common/widget/custom_pin_code_text_field.dart';
 
 class OtpPageScreen extends StatefulWidget {
   const OtpPageScreen({super.key});

@@ -82,7 +82,7 @@
         "phone_number": "Phone Number"
     },
     "splash": {
-        "app_title": "Like It"
+        "app_title": "KUALIVA"
     },
     "onboard": {
         "onboard_1_title": "Start your\nJourney",
@@ -112,7 +112,7 @@
     "sign_in": {
         "welcome": "Welcome to Like It",
         "sign_in_with": "Sign In with",
-        "like_it_acc": "Like It Account",
+        "kualiva_acc": "Like It Account",
         "sign_in_with_saz": "Sign In with SAZ",
         "sign_in_with_google": "Sign In with Google",
         "phone_number_or_user_name": "Phone Number or UserName",
@@ -249,7 +249,7 @@
         "title": "Review",
         "filter": "Review Filter",
         "filter_user": "User",
-        "filter_like_it": "Like it",
+        "filter_kualiva": "Like it",
         "filter_google": "Google",
         "filter_time": "Time",
         "filter_time_1": "Latest",

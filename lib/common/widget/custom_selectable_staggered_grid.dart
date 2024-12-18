@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:like_it/common/app_export.dart';
+import 'package:kualiva/common/app_export.dart';
 
 class CustomSelectableStaggeredGrid extends StatelessWidget {
   const CustomSelectableStaggeredGrid({

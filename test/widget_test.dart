@@ -8,7 +8,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:like_it/auth/repository/token_manager.dart';
+import 'package:kualiva/auth/repository/token_manager.dart';
 
 // import 'dart:convert';
 // import 'package:flutter/services.dart' show rootBundle;

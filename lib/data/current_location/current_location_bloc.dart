@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:like_it/common/utility/lelog.dart';
-import 'package:like_it/common/utility/location_util.dart';
-import 'package:like_it/data/current_location/current_location_model.dart';
+import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/common/utility/location_util.dart';
+import 'package:kualiva/data/current_location/current_location_model.dart';
 
 part 'current_location_event.dart';
 part 'current_location_state.dart';

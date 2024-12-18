@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:like_it/common/style/custom_decoration.dart';
-import 'package:like_it/common/style/custom_text_style.dart';
-import 'package:like_it/common/style/theme_helper.dart';
-import 'package:like_it/common/utility/image_constant.dart';
-import 'package:like_it/common/utility/sized_utils.dart';
-import 'package:like_it/common/widget/custom_image_view.dart';
-import 'package:like_it/home/model/home_featured_model.dart';
+import 'package:kualiva/common/style/custom_decoration.dart';
+import 'package:kualiva/common/style/custom_text_style.dart';
+import 'package:kualiva/common/style/theme_helper.dart';
+import 'package:kualiva/common/utility/image_constant.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:kualiva/common/widget/custom_image_view.dart';
+import 'package:kualiva/home/model/home_featured_model.dart';
 
 class HomeFeaturedItem extends StatelessWidget {
   const HomeFeaturedItem({

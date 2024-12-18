@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_it/common/style/theme_helper.dart';
-import 'package:like_it/data/current_location/current_location_bloc.dart';
+import 'package:kualiva/common/style/theme_helper.dart';
+import 'package:kualiva/data/current_location/current_location_bloc.dart';
 
 class CurrentLocationFeature extends StatelessWidget {
   const CurrentLocationFeature({super.key});

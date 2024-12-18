@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:hive/hive.dart';
+import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/data/dio_client.dart';
+import 'package:like_it/review/model/review_place_model.dart';
 
 // AuthorId
 // cm3d0h52q0000qtfl1aoq65b8
@@ -28,6 +31,7 @@ class ReviewRepository {
     final _ = await _dioClient.dio().then((dio) {
       return dio.post(
         'review/place',
+
         // queryParameters: Map.from({
         //   'place-id': placeId,
         // }),
@@ -40,25 +44,27 @@ class ReviewRepository {
   }
 
   /// Reviews by Place
-  Future<void> getByPlace({
+  Future<List<ReviewPlaceModel>> getByPlace({
     required String placeId,
-    required bool isFromUser,
-    required bool isLatest,
-    required bool withPhoto,
-    required bool isHighest,
-    required int rating,
   }) async {
-    final _ = await _dioClient.dio().then((dio) {
-      return dio.get(
-        '/review/place',
-        queryParameters: Map.from(
-          {
-            'place-id': placeId,
-          },
-        ),
-      );
+    final reviewPlaceBox = Hive.box<ReviewPlaceModel>('review_place');
+
+    if (reviewPlaceBox.values.toList().isNotEmpty) {
+      final reviewPlaceList = reviewPlaceBox.values.toList();
+      LeLog.rd(this, getByPlace, reviewPlaceList.toString());
+      return reviewPlaceList;
+    }
+
+    final res = await _dioClient.dio().then((dio) {
+      return dio.get('http://192.168.1.89:3000/api/v1/reviews/$placeId/place');
     });
-    return;
+
+    final data = (res.data as List<dynamic>)
+        .map((e) => ReviewPlaceModel.fromMap(e))
+        .toList();
+    reviewPlaceBox.addAll(data);
+    LeLog.rd(this, getByPlace, data.toString());
+    return data;
   }
 
   /// Review Place Search Text

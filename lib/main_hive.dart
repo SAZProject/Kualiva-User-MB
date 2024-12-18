@@ -30,7 +30,8 @@ class MainHive {
 enum MyHive {
   fnbNearestLocation(0, ''),
   fnbNearestModel(1, 'fnb_nearest'),
-  currentLocationModel(2, 'current_location');
+  currentLocationModel(2, 'current_location'),
+  reviewPlaceModel(3, 'review_place');
 
   final int typeId;
   final String name;

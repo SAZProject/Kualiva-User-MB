@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/review/model/review_place_model.dart';
 import 'package:kualiva/review/widget/review_view.dart';
-import 'package:kualiva/review/widget/special_review_view.dart';
+// import 'package:kualiva/review/widget/special_review_view.dart';
 
 class ReviewOtherReviewFeature extends StatelessWidget {
   const ReviewOtherReviewFeature({super.key, required this.listReviewData});
 
-  final List<ReviewModel> listReviewData;
+  final List<ReviewPlaceModel> listReviewData;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,10 @@ class ReviewOtherReviewFeature extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
                       if (listReviewData.isNotEmpty) {
-                        ReviewModel reviewData = listReviewData[index];
-                        if (reviewData.specialReview) {
-                          return SpecialReviewView(reviewData: reviewData);
-                        }
+                        ReviewPlaceModel reviewData = listReviewData[index];
+                        // if (reviewData.specialReview) {
+                        //   return SpecialReviewView(reviewData: reviewData);
+                        // }
                         return Container(
                           margin: EdgeInsets.symmetric(vertical: 5.h),
                           child: ReviewView(reviewData: reviewData),

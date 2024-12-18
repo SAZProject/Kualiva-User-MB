@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/review/model/review_place_model.dart';
 import 'package:kualiva/review/widget/review_view.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class SpecialReviewView extends StatelessWidget {
   const SpecialReviewView({super.key, required this.reviewData});
 
-  final ReviewModel reviewData;
+  final ReviewPlaceModel reviewData;
 
   @override
   Widget build(BuildContext context) {

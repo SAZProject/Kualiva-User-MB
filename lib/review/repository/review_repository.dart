@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:hive/hive.dart';
+// import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/data/dio_client.dart';
-import 'package:kualiva/main_hive.dart';
+// import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 
 // AuthorId
@@ -16,30 +16,33 @@ class ReviewRepository {
   /// Add Reviews by Place
   Future<void> create({
     required String placeId,
-    // required String transactionNumber,
-    // required int rating,
-    // required String description,
-    // required List<String> invoiceMedia,
+    required String placeCategory,
+    required String invoice,
+    required String description,
+    required String invoiceFile,
+    required int rating,
+    required List<String> photoFiles,
   }) async {
-    // FormData formData = FormData.fromMap({
-    //   /// TODO Here
-    // });
-
-    // formData.files.addAll(await Future.wait(invoiceMedia.map((file) async {
-    //   return MapEntry('media[]', await MultipartFile.fromFile(file));
-    // })));
+    FormData formData = FormData.fromMap({
+      "placeUniqueId": placeId,
+      "placeCategory": placeCategory,
+      "invoice": invoice,
+      "description": description,
+      "invoiceFile": invoiceFile,
+      "rating": rating,
+      "photoFiles": photoFiles,
+    });
 
     final _ = await _dioClient.dio().then((dio) {
       return dio.post(
-        'review/place',
-
-        // queryParameters: Map.from({
-        //   'place-id': placeId,
-        // }),
-        // data: formData,
-        options: Options(contentType: Headers.multipartFormDataContentType),
+        '/api/v1/reviews',
+        data: formData,
       );
     });
+
+    // final data = (res.data as List<dynamic>)
+    //     .map((e) => ReviewPlaceModel.fromMap(e))
+    //     .toList();
 
     return;
   }
@@ -48,23 +51,23 @@ class ReviewRepository {
   Future<List<ReviewPlaceModel>> getByPlace({
     required String placeId,
   }) async {
-    final reviewPlaceBox =
-        Hive.box<ReviewPlaceModel>(MyHive.reviewPlaceModel.name);
+    // final reviewPlaceBox =
+    //     Hive.box<ReviewPlaceModel>(MyHive.reviewPlaceModel.name);
 
-    if (reviewPlaceBox.values.toList().isNotEmpty) {
-      final reviewPlaceList = reviewPlaceBox.values.toList();
-      LeLog.rd(this, getByPlace, reviewPlaceList.toString());
-      return reviewPlaceList;
-    }
+    // if (reviewPlaceBox.values.toList().isNotEmpty) {
+    //   final reviewPlaceList = reviewPlaceBox.values.toList();
+    //   LeLog.rd(this, getByPlace, reviewPlaceList.toString());
+    //   return reviewPlaceList;
+    // }
 
     final res = await _dioClient.dio().then((dio) {
-      return dio.get('http://192.168.1.89:3000/api/v1/reviews/$placeId/place');
+      return dio.get('/api/v1/reviews/$placeId/place');
     });
 
     final data = (res.data as List<dynamic>)
         .map((e) => ReviewPlaceModel.fromMap(e))
         .toList();
-    reviewPlaceBox.addAll(data);
+    // reviewPlaceBox.addAll(data);
     LeLog.rd(this, getByPlace, data.toString());
     return data;
   }

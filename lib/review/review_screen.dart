@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/data/model/f_n_b_model.dart';
 import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
 import 'package:kualiva/review/feature/review_filter_feature.dart';
 import 'package:kualiva/review/feature/review_my_review_feature.dart';
 import 'package:kualiva/review/feature/review_other_review_feature.dart';
 import 'package:kualiva/review/feature/review_search_bar_feature.dart';
 import 'package:kualiva/review/widget/review_verify_modal.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key});
@@ -40,6 +43,14 @@ class _ReviewScreenState extends State<ReviewScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    context
+        .read<ReviewPlaceReadBloc>()
+        .add(ReviewPlaceReadFetched(placeId: fnbData.id));
+  }
+
+  @override
   void dispose() {
     selectedCategory.dispose();
     super.dispose();
@@ -60,32 +71,53 @@ class _ReviewScreenState extends State<ReviewScreen> {
   }
 
   Widget _body(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(
-          width: double.maxFinite,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 5.h),
-                ReviewSearchBarFeature(),
-                SizedBox(height: 5.h),
-                ReviewFilterFeature(
-                  filterByCategory: filterByCategory,
-                  menuFilter: menuFilter,
-                  selectedCategory: selectedCategory,
-                ),
-                SizedBox(height: 5.h),
-                ReviewMyReviewFeature(fnbData: fnbData),
-                SizedBox(height: 5.h),
-                ReviewOtherReviewFeature(listReviewData: listReviewData),
-                SizedBox(height: 5.h),
-              ],
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<ReviewPlaceReadBloc, ReviewPlaceReadState>(
+          listener: (context, state) {
+            LeLog.sd(this, _body, state.toString());
+            context
+                .read<ReviewPlaceReadBloc>()
+                .add(ReviewPlaceReadFetched(placeId: fnbData.id));
+            if (state is! ReviewPlaceReadSuccess) return;
+          },
+        ),
+      ],
+      child: Stack(
+        children: [
+          SizedBox(
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 5.h),
+                  ReviewSearchBarFeature(),
+                  SizedBox(height: 5.h),
+                  ReviewFilterFeature(
+                    filterByCategory: filterByCategory,
+                    menuFilter: menuFilter,
+                    selectedCategory: selectedCategory,
+                  ),
+                  SizedBox(height: 5.h),
+                  ReviewMyReviewFeature(fnbData: fnbData),
+                  SizedBox(height: 5.h),
+                  BlocBuilder<ReviewPlaceReadBloc, ReviewPlaceReadState>(
+                    builder: (_, state) {
+                      if (state is ReviewPlaceReadSuccess) {
+                        return ReviewOtherReviewFeature(
+                            listReviewData: state.reviewPlaceRead);
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                  SizedBox(height: 5.h),
+                ],
+              ),
             ),
           ),
-        ),
-        _buildWriteReviewBtn(context),
-      ],
+          _buildWriteReviewBtn(context),
+        ],
+      ),
     );
   }
 

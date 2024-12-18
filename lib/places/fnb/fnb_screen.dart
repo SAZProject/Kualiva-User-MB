@@ -17,6 +17,7 @@ import 'package:kualiva/places/fnb/feature/fnb_nearest_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_search_bar_feature.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
+import 'package:path/path.dart';
 
 class FnbScreen extends StatefulWidget {
   const FnbScreen({super.key});

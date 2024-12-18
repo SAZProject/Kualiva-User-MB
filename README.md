@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.64+01
-- Fix Splash screen image path
+Ver 0.0.64+02
+- Fix Splash screen image center
 ```
 
 ## Getting Started

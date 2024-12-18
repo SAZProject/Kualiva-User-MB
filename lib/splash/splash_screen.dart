@@ -129,16 +129,16 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: AnimatedContainer(
-              duration: Duration(milliseconds: 500),
-              curve: Curves.bounceOut,
-              width: 200.h,
-              height: _logoHeight.h,
-              child: Motion(
-                shadow: ShadowConfiguration(color: Colors.transparent),
-                glare: GlareConfiguration.fromElevation(50),
-                child: Bounce(
+          AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.bounceOut,
+            width: 200.h,
+            height: _logoHeight.h,
+            child: Motion(
+              shadow: ShadowConfiguration(color: Colors.transparent),
+              glare: GlareConfiguration.fromElevation(50),
+              child: Bounce(
+                child: Center(
                   child: Image.asset(
                     ImageConstant.appLogo,
                   ),

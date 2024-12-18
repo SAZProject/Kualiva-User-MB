@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/common/widget/custom_snack_bar.dart';
 
 extension ImageTypeExtension on String {

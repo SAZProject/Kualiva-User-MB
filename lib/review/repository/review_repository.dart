@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 import 'package:like_it/common/utility/lelog.dart';
 import 'package:like_it/data/dio_client.dart';
+import 'package:like_it/main_hive.dart';
 import 'package:like_it/review/model/review_place_model.dart';
 
 // AuthorId
@@ -43,11 +44,12 @@ class ReviewRepository {
     return;
   }
 
-  /// Reviews by Place
+  /// Reviews by Place / Merchant
   Future<List<ReviewPlaceModel>> getByPlace({
     required String placeId,
   }) async {
-    final reviewPlaceBox = Hive.box<ReviewPlaceModel>('review_place');
+    final reviewPlaceBox =
+        Hive.box<ReviewPlaceModel>(MyHive.reviewPlaceModel.name);
 
     if (reviewPlaceBox.values.toList().isNotEmpty) {
       final reviewPlaceList = reviewPlaceBox.values.toList();

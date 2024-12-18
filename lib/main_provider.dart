@@ -6,6 +6,7 @@ import 'package:kualiva/auth/repository/auth_repository.dart';
 import 'package:kualiva/auth/repository/token_manager.dart';
 import 'package:kualiva/data/current_location/current_location_bloc.dart';
 import 'package:kualiva/data/dio_client.dart';
+import 'package:kualiva/data/dio_client_minio.dart';
 import 'package:kualiva/data/search_bar/suggestion_repository.dart';
 import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
 import 'package:kualiva/home/bloc/home_featured_bloc.dart';
@@ -15,6 +16,8 @@ import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
 import 'package:kualiva/places/fnb/repository/fnb_repository.dart';
+import 'package:kualiva/report/bloc/report_place_bloc.dart';
+import 'package:kualiva/report/repository/report_repository.dart';
 
 class MainProvider extends StatelessWidget {
   const MainProvider({super.key, required this.mainChild});
@@ -41,6 +44,9 @@ class MainProvider extends StatelessWidget {
           return DioClient(context.read<TokenManager>());
         }),
         RepositoryProvider(create: (context) {
+          return DioClientMinio(context.read<TokenManager>());
+        }),
+        RepositoryProvider(create: (context) {
           return FnbRepository(context.read<DioClient>());
         }),
         RepositoryProvider(create: (context) {
@@ -57,6 +63,12 @@ class MainProvider extends StatelessWidget {
         RepositoryProvider(
           create: (context) {
             return SuggestionRepository();
+          },
+        ),
+        RepositoryProvider(
+          create: (context) {
+            return ReportRepository(
+                context.read<DioClient>(), context.read<DioClientMinio>());
           },
         )
       ],
@@ -90,6 +102,9 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return HomeFeaturedBloc(context.read<PromotionRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return ReportPlaceBloc(context.read<ReportRepository>());
         })
       ],
       child: child,

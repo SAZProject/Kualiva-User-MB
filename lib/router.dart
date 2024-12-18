@@ -197,9 +197,9 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reportPlaceScreen:
-      final fnbModel = routeSetting.arguments as FNBModel;
+      final String placeId = routeSetting.arguments as String;
       return PageTransition(
-          child: ReportPlaceScreen(fnbModel: fnbModel),
+          child: ReportPlaceScreen(placeId: placeId),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

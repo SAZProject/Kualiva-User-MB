@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_float_modal.dart';
 import 'package:kualiva/common/widget/custom_map_bottom_sheet.dart';
@@ -16,6 +17,7 @@ import 'package:kualiva/data/model/ui_model/promo_model.dart';
 
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
+import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
@@ -87,6 +89,7 @@ class FnbDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ReportPlaceBloc>().add(ReportPlaceFetched());
     context.read<FnbDetailBloc>().add(FnbDetailFetched(placeId: placeId));
     return BlocConsumer<FnbDetailBloc, FnbDetailState>(
       listener: (context, state) {
@@ -259,10 +262,11 @@ class FnbDetailScreen extends StatelessWidget {
   void _popUpMenuAction(BuildContext context, int index) {
     switch (index) {
       case 1:
+        LeLog.sd(this, _popUpMenuAction, '');
         Navigator.pushNamed(
           context,
           AppRoutes.reportPlaceScreen,
-          // arguments: fnbData, // TODO
+          arguments: placeId,
         );
         break;
       case 2:

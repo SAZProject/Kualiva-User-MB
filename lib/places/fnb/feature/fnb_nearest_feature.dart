@@ -69,7 +69,7 @@ class FnbNearestFeature extends StatelessWidget {
     return BlocBuilder<FnbNearestBloc, FnbNearestState>(
       builder: (context, state) {
         if (state is FnbNearestFailure) {
-          return Text('ERROR MASZEEHHH'); // TODO Winky Help UI
+          return Text('ERROR '); // TODO Winky Help UI
         }
         if (state is! FnbNearestSuccess) {
           return Center(child: CircularProgressIndicator());

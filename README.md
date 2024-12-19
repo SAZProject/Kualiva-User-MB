@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.65
-- Unfinished Review Screen
+Ver 0.0.65+01
+- using dummy Review Screen
 ```
 
 ## Getting Started

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/widget/custom_rating_bar.dart';
-import 'package:kualiva/data/model/review_model.dart';
-// import 'package:kualiva/review/model/review_place_model.dart';
+// import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/review/model/review_place_model.dart';
 
 class ReviewView extends StatelessWidget {
   const ReviewView({super.key, required this.reviewData});
 
-  // final ReviewPlaceModel reviewData;
-  final ReviewModel reviewData;
+  final ReviewPlaceModel reviewData;
+  // final ReviewModel reviewData;
 
   void _popUpMenuAction(BuildContext context, int index) {
     switch (index) {
@@ -57,8 +57,8 @@ class ReviewView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            // reviewData.author.username,
-                            reviewData.username,
+                            reviewData.author.username,
+                            // reviewData.username,
                             style: theme(context).textTheme.titleMedium,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -125,16 +125,16 @@ class ReviewView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  // DatetimeUtils.dmy(DateTime.parse(reviewData.createdAt)),
-                  DatetimeUtils.dmy(reviewData.reviewDate),
+                  DatetimeUtils.dmy(DateTime.parse(reviewData.createdAt)),
+                  // DatetimeUtils.dmy(reviewData.reviewDate),
                   style: theme(context).textTheme.bodySmall,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  // reviewData.description,
-                  reviewData.content,
+                  reviewData.description,
+                  // reviewData.content,
                   style: CustomTextStyles(context).bodySmall12,
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,

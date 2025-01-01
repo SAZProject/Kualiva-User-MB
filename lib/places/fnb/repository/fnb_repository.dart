@@ -25,7 +25,7 @@ class FnbRepository {
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
-        '/places/nearby',
+        '/places/nearest',
         queryParameters: {
           'latitude': latitude,
           'longitude': longitude,

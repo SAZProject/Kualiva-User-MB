@@ -14,16 +14,7 @@ class ReviewPlaceCreateBloc
       : super(ReviewPlaceCreateInitial()) {
     on<ReviewPlaceCreateEvent>(
         (event, emit) => emit(ReviewPlaceCreateLoading()));
-    on<ReviewPlaceCreateStarted>(_onStarted);
     on<ReviewPlaceCreate>(_onCreated);
-  }
-
-  void _onStarted(
-    ReviewPlaceCreateStarted event,
-    Emitter<ReviewPlaceCreateState> emit,
-  ) {
-    LeLog.bd(this, _onStarted, 'On Started');
-    emit(ReviewPlaceCreateInitial());
   }
 
   void _onCreated(

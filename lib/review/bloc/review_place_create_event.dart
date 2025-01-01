@@ -3,8 +3,6 @@ part of 'review_place_create_bloc.dart';
 @immutable
 sealed class ReviewPlaceCreateEvent {}
 
-final class ReviewPlaceCreateStarted extends ReviewPlaceCreateEvent {}
-
 final class ReviewPlaceCreate extends ReviewPlaceCreateEvent {
   final String placeId;
   final String placeCategory;

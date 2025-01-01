@@ -35,7 +35,7 @@ class ReviewRepository {
 
     final _ = await _dioClient.dio().then((dio) {
       return dio.post(
-        '/api/v1/reviews',
+        '/reviews',
         data: formData,
       );
     });
@@ -61,7 +61,7 @@ class ReviewRepository {
     // }
 
     final res = await _dioClient.dio().then((dio) {
-      return dio.get('/api/v1/reviews/$placeId/place');
+      return dio.get('/reviews/$placeId/place');
     });
 
     final data = (res.data as List<dynamic>)

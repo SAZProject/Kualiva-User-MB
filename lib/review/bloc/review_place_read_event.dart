@@ -3,8 +3,6 @@ part of 'review_place_read_bloc.dart';
 @immutable
 sealed class ReviewPlaceReadEvent {}
 
-final class ReviewPlaceReadStarted extends ReviewPlaceReadEvent {}
-
 final class ReviewPlaceReadFetched extends ReviewPlaceReadEvent {
   final String placeId;
 

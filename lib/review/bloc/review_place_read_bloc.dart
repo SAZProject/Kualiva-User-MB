@@ -12,16 +12,7 @@ class ReviewPlaceReadBloc
   ReviewPlaceReadBloc(this._reviewRepository)
       : super(ReviewPlaceReadInitial()) {
     on<ReviewPlaceReadEvent>((event, emit) => emit(ReviewPlaceReadLoading()));
-    on<ReviewPlaceReadStarted>(_onStarted);
     on<ReviewPlaceReadFetched>(_onFetched);
-  }
-
-  void _onStarted(
-    ReviewPlaceReadStarted event,
-    Emitter<ReviewPlaceReadState> emit,
-  ) {
-    LeLog.bd(this, _onStarted, 'On Started');
-    emit(ReviewPlaceReadInitial());
   }
 
   void _onFetched(

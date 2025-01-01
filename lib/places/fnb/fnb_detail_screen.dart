@@ -828,14 +828,14 @@ class FnbDetailScreen extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 AppRoutes.reviewScreen,
-                arguments: fnbDetail,
+                arguments: fnbDetail.placeId,
               );
             },
           ),
           InkWell(
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.reviewScreen,
-                  arguments: fnbDetail);
+                  arguments: fnbDetail.placeId);
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 10.h),

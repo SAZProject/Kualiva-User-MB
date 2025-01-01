@@ -4,29 +4,36 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
+import 'package:kualiva/review/model/author_model.dart';
+
+part 'review_place_model.g.dart';
+
 @immutable
-@HiveType(typeId: 3)
+@HiveType(typeId: 4)
 class ReviewPlaceModel {
   @HiveField(0)
   final int id;
+
   @HiveField(1)
-  final String invoice;
-  @HiveField(2)
   final String description;
-  @HiveField(3)
+
+  @HiveField(2)
   final double rating;
-  @HiveField(4)
+
+  @HiveField(3)
   final List<String> photoFiles;
+
+  @HiveField(4)
+  final DateTime createdAt;
+
   @HiveField(5)
-  final String createdAt;
+  final DateTime updatedAt;
+
   @HiveField(6)
-  final String updatedAt;
-  @HiveField(7)
-  final Author author;
+  final AuthorModel author;
 
   const ReviewPlaceModel({
     required this.id,
-    required this.invoice,
     required this.description,
     required this.rating,
     required this.photoFiles,
@@ -37,17 +44,15 @@ class ReviewPlaceModel {
 
   ReviewPlaceModel copyWith({
     int? id,
-    String? invoice,
     String? description,
     double? rating,
     List<String>? photoFiles,
-    String? createdAt,
-    String? updatedAt,
-    Author? author,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    AuthorModel? author,
   }) {
     return ReviewPlaceModel(
       id: id ?? this.id,
-      invoice: invoice ?? this.invoice,
       description: description ?? this.description,
       rating: rating ?? this.rating,
       photoFiles: photoFiles ?? this.photoFiles,
@@ -60,12 +65,11 @@ class ReviewPlaceModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'invoice': invoice,
       'description': description,
       'rating': rating,
       'photoFiles': photoFiles,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
+      'createdAt': createdAt.millisecondsSinceEpoch,
+      'updatedAt': updatedAt.millisecondsSinceEpoch,
       'author': author.toMap(),
     };
   }
@@ -73,13 +77,14 @@ class ReviewPlaceModel {
   factory ReviewPlaceModel.fromMap(Map<String, dynamic> map) {
     return ReviewPlaceModel(
       id: map['id'] as int,
-      invoice: map['invoice'] as String,
       description: map['description'] as String,
-      rating: map['rating'] as double,
-      photoFiles: List<String>.from((map['photoFiles'] as List<String>)),
-      createdAt: map['createdAt'] as String,
-      updatedAt: map['updatedAt'] as String,
-      author: Author.fromMap(map['author'] as Map<String, dynamic>),
+      rating: (map['rating']).toDouble(),
+      photoFiles: (map['photoFiles'] as List<dynamic>)
+          .map((e) => e.toString())
+          .toList(),
+      createdAt: DateTime.parse(map['createdAt']),
+      updatedAt: DateTime.parse(map['updatedAt']),
+      author: AuthorModel.fromMap(map['author'] as Map<String, dynamic>),
     );
   }
 
@@ -90,7 +95,7 @@ class ReviewPlaceModel {
 
   @override
   String toString() {
-    return 'ReviewPlaceModel(id: $id, invoice: $invoice, description: $description, rating: $rating, photoFiles: $photoFiles, createdAt: $createdAt, updatedAt: $updatedAt, author: $author)';
+    return 'ReviewPlaceModel(id: $id, description: $description, rating: $rating, photoFiles: $photoFiles, createdAt: $createdAt, updatedAt: $updatedAt, author: $author)';
   }
 
   @override
@@ -98,7 +103,6 @@ class ReviewPlaceModel {
     if (identical(this, other)) return true;
 
     return other.id == id &&
-        other.invoice == invoice &&
         other.description == description &&
         other.rating == rating &&
         listEquals(other.photoFiles, photoFiles) &&
@@ -110,7 +114,6 @@ class ReviewPlaceModel {
   @override
   int get hashCode {
     return id.hashCode ^
-        invoice.hashCode ^
         description.hashCode ^
         rating.hashCode ^
         photoFiles.hashCode ^
@@ -118,65 +121,4 @@ class ReviewPlaceModel {
         updatedAt.hashCode ^
         author.hashCode;
   }
-}
-
-class Author {
-  final String userId;
-  final String username;
-  final String? photoFile;
-
-  Author({
-    required this.userId,
-    required this.username,
-    this.photoFile,
-  });
-
-  Author copyWith({
-    String? userId,
-    String? username,
-    String? photoFile,
-  }) {
-    return Author(
-      userId: userId ?? this.userId,
-      username: username ?? this.username,
-      photoFile: photoFile ?? this.photoFile,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'userId': userId,
-      'username': username,
-      'photoFile': photoFile,
-    };
-  }
-
-  factory Author.fromMap(Map<String, dynamic> map) {
-    return Author(
-      userId: map['userId'] as String,
-      username: map['username'] as String,
-      photoFile: map['photoFile'] != null ? map['photoFile'] as String : null,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Author.fromJson(String source) =>
-      Author.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() =>
-      'Author(userId: $userId, username: $username, photoFile: $photoFile)';
-
-  @override
-  bool operator ==(covariant Author other) {
-    if (identical(this, other)) return true;
-
-    return other.userId == userId &&
-        other.username == username &&
-        other.photoFile == photoFile;
-  }
-
-  @override
-  int get hashCode => userId.hashCode ^ username.hashCode ^ photoFile.hashCode;
 }

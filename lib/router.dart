@@ -183,8 +183,9 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reviewScreen:
+      final placeId = routeSetting.arguments as String;
       return PageTransition(
-          child: ReviewScreen(),
+          child: ReviewScreen(placeId: placeId),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

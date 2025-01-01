@@ -6,7 +6,6 @@ import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
-import 'package:kualiva/data/model/f_n_b_model.dart';
 import 'package:kualiva/data/model/review_model.dart';
 import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
 import 'package:kualiva/review/feature/review_filter_feature.dart';
@@ -17,14 +16,16 @@ import 'package:kualiva/review/widget/review_verify_modal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReviewScreen extends StatefulWidget {
-  const ReviewScreen({super.key});
+  const ReviewScreen({super.key, required this.placeId});
+
+  final String placeId;
 
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
-  FNBModel get fnbData => FNBDataset().featuredItemsDataset[0];
+  String get placeId => widget.placeId;
   List<ReviewModel> get listReviewData =>
       FNBDataset().featuredItemsDataset[0].review;
 
@@ -47,7 +48,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     super.initState();
     context
         .read<ReviewPlaceReadBloc>()
-        .add(ReviewPlaceReadFetched(placeId: fnbData.id));
+        .add(ReviewPlaceReadFetched(placeId: placeId));
   }
 
   @override
@@ -97,21 +98,9 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     selectedCategory: selectedCategory,
                   ),
                   SizedBox(height: 5.h),
-                  ReviewMyReviewFeature(fnbData: fnbData),
+                  // ReviewMyReviewFeature(fnbData: fnbData), // TODO First
                   SizedBox(height: 5.h),
-                  BlocBuilder<ReviewPlaceReadBloc, ReviewPlaceReadState>(
-                    builder: (_, state) {
-                      LeLog.sd(this, _body, state.toString());
-                      if (state is ReviewPlaceReadSuccess) {
-                        return ReviewOtherReviewFeature(
-                            listReviewData: state.reviewPlaceRead);
-                      }
-                      if (state is ReviewPlaceReadLoading) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      return SizedBox();
-                    },
-                  ),
+                  ReviewOtherReviewFeature(),
                   SizedBox(height: 5.h),
                 ],
               ),
@@ -148,11 +137,12 @@ class _ReviewScreenState extends State<ReviewScreen> {
               CustomButtonStyles.fillOnSecondaryContainerNoBdr(context),
           textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
           onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) =>
-                  ReviewVerifyModal(fnbData: fnbData),
-            );
+            // TODO First
+            // showModalBottomSheet(
+            //   context: context,
+            //   builder: (BuildContext context) =>
+            //       ReviewVerifyModal(fnbData: fnbData),
+            // );
           },
         ),
       ),

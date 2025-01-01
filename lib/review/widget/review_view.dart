@@ -125,7 +125,7 @@ class ReviewView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  DatetimeUtils.dmy(DateTime.parse(reviewData.createdAt)),
+                  DatetimeUtils.dmy(reviewData.createdAt),
                   // DatetimeUtils.dmy(reviewData.reviewDate),
                   style: theme(context).textTheme.bodySmall,
                   maxLines: 1,

@@ -20,10 +20,10 @@ class ReviewPlaceReadBloc
     Emitter<ReviewPlaceReadState> emit,
   ) async {
     try {
-      final List<ReviewPlaceModel> reviewPlace =
+      final List<ReviewPlaceModel> reviewsPlace =
           await _reviewRepository.getByPlace(placeId: event.placeId);
-      LeLog.bd(this, _onFetched, reviewPlace.toString());
-      emit(ReviewPlaceReadSuccess(reviewPlaceRead: reviewPlace));
+      LeLog.bd(this, _onFetched, reviewsPlace.toString());
+      emit(ReviewPlaceReadSuccess(reviewsPlace: reviewsPlace));
     } catch (e) {
       LeLog.be(this, _onFetched, e.toString());
       emit(ReviewPlaceReadFailure());

@@ -1,17 +1,24 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/image_utility.dart';
 import 'package:kualiva/common/widget/custom_attach_media.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
-import 'package:kualiva/data/model/f_n_b_model.dart';
+import 'package:kualiva/data/place_category_enum.dart';
+import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
 
 class ReviewVerifyModal extends StatefulWidget {
-  const ReviewVerifyModal({super.key, required this.fnbData});
+  const ReviewVerifyModal({
+    super.key,
+    required this.placeUniqueId,
+    required this.placeCategory,
+  });
 
-  final FNBModel fnbData;
+  final String placeUniqueId;
+  final PlaceCategoryEnum placeCategory;
 
   @override
   State<ReviewVerifyModal> createState() => _ReviewVerifyModalState();
@@ -150,8 +157,13 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
               CustomButtonStyles.fillOnSecondaryContainerNoBdr(context),
           textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
           onPressed: () {
-            Navigator.pushNamed(context, AppRoutes.reviewFormScreen,
-                arguments: _transactionCtl.text.trim());
+            context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceTempCreated(
+                  placeUniqueId: widget.placeUniqueId,
+                  placeCategory: widget.placeCategory,
+                  invoice: _transactionCtl.text.trim(),
+                  invoiceFile: invoiceMedia[0],
+                ));
+            Navigator.pushNamed(context, AppRoutes.reviewFormScreen);
           },
         ),
       ),

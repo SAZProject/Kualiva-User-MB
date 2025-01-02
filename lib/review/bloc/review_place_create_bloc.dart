@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/review/model/review_place_model.dart';
+import 'package:kualiva/data/place_category_enum.dart';
 import 'package:kualiva/review/repository/review_repository.dart';
 
 part 'review_place_create_event.dart';
@@ -14,20 +14,29 @@ class ReviewPlaceCreateBloc
       : super(ReviewPlaceCreateInitial()) {
     on<ReviewPlaceCreateEvent>(
         (event, emit) => emit(ReviewPlaceCreateLoading()));
-    on<ReviewPlaceCreate>(_onCreated);
+    on<ReviewPlaceTempCreated>(_onTempCreated);
+    on<ReviewPlaceCreated>(_onCreated);
+  }
+
+  void _onTempCreated(
+    ReviewPlaceTempCreated event,
+    Emitter<ReviewPlaceCreateState> emit,
+  ) {
+    _reviewRepository.tempCreate(
+      event.placeUniqueId,
+      event.placeCategory,
+      event.invoice,
+      event.invoiceFile,
+    );
   }
 
   void _onCreated(
-    ReviewPlaceCreate event,
+    ReviewPlaceCreated event,
     Emitter<ReviewPlaceCreateState> emit,
   ) async {
     try {
       final _ = await _reviewRepository.create(
-        placeId: event.placeId,
-        placeCategory: event.placeCategory,
-        invoice: event.invoice,
         description: event.description,
-        invoiceFile: event.invoiceFile,
         rating: event.rating,
         photoFiles: event.photoFiles,
       );

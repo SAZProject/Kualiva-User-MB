@@ -1,28 +1,25 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/image_utility.dart';
+import 'package:kualiva/common/widget/custom_alert_dialog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_attach_media.dart';
 import 'package:kualiva/common/widget/custom_checkbox_button.dart';
-import 'package:kualiva/review/feature/review_form_submit_button.dart';
+import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
 import 'package:kualiva/review/widget/review_form_message.dart';
 import 'package:kualiva/review/widget/review_form_rating_bar.dart';
 
 class ReviewFormScreen extends StatefulWidget {
-  const ReviewFormScreen({super.key, required this.transaction});
-
-  // final FNBModel fnbModel;
-  final String transaction;
+  const ReviewFormScreen({super.key});
 
   @override
   State<ReviewFormScreen> createState() => _ReviewFormScreenState();
 }
 
 class _ReviewFormScreenState extends State<ReviewFormScreen> {
-  // FNBModel get fnbData => super.widget.fnbModel;
-  String get transaction => super.widget.transaction;
-
   final _reviewMsgCtl = TextEditingController();
 
   List<String> reviewMedia = [];
@@ -92,7 +89,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
             SizedBox(height: 10.h),
             _buildHideUsername(context),
             SizedBox(height: 25.h),
-            ReportReviewSubmitButton(),
+            _reviewSubmitBtn(),
             SizedBox(height: 10.h),
           ],
         ),
@@ -118,6 +115,49 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
             isHideUsername = value;
           });
         },
+      ),
+    );
+  }
+
+  Widget _reviewSubmitBtn() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30.h),
+      child: SizedBox(
+        height: 60.h,
+        width: double.maxFinite,
+        child: CustomGradientOutlinedButton(
+          text: context.tr("review.submit_btn"),
+          outerPadding: EdgeInsets.symmetric(horizontal: 30.h),
+          innerPadding: EdgeInsets.all(2.h),
+          strokeWidth: 2.h,
+          colors: [
+            appTheme.yellowA700,
+            theme(context).colorScheme.primary,
+          ],
+          textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+          onPressed: () {
+            // TODO fix ui for loading, success and error
+            context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceCreated(
+                  description: _reviewMsgCtl.text.trim(),
+                  rating: ratingStar,
+                  photoFiles: reviewMedia,
+                ));
+            customAlertDialog(
+              context: context,
+              dismissable: true,
+              title: Text(
+                "Conratulation!",
+              ),
+              content: Text(
+                "You get 10 points",
+              ),
+              icon: Icon(
+                Icons.generating_tokens_outlined,
+              ),
+            );
+            Navigator.pop(context);
+          },
+        ),
       ),
     );
   }

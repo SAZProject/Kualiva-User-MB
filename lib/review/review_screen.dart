@@ -7,18 +7,23 @@ import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/data/place_category_enum.dart';
 import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
 import 'package:kualiva/review/feature/review_filter_feature.dart';
-import 'package:kualiva/review/feature/review_my_review_feature.dart';
 import 'package:kualiva/review/feature/review_other_review_feature.dart';
 import 'package:kualiva/review/feature/review_search_bar_feature.dart';
 import 'package:kualiva/review/widget/review_verify_modal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReviewScreen extends StatefulWidget {
-  const ReviewScreen({super.key, required this.placeId});
+  const ReviewScreen({
+    super.key,
+    required this.placeId,
+    required this.placeCategory,
+  });
 
   final String placeId;
+  final PlaceCategoryEnum placeCategory;
 
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
@@ -26,6 +31,7 @@ class ReviewScreen extends StatefulWidget {
 
 class _ReviewScreenState extends State<ReviewScreen> {
   String get placeId => widget.placeId;
+  PlaceCategoryEnum get placeCategory => widget.placeCategory;
   List<ReviewModel> get listReviewData =>
       FNBDataset().featuredItemsDataset[0].review;
 
@@ -137,12 +143,13 @@ class _ReviewScreenState extends State<ReviewScreen> {
               CustomButtonStyles.fillOnSecondaryContainerNoBdr(context),
           textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
           onPressed: () {
-            // TODO First
-            // showModalBottomSheet(
-            //   context: context,
-            //   builder: (BuildContext context) =>
-            //       ReviewVerifyModal(fnbData: fnbData),
-            // );
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) => ReviewVerifyModal(
+                placeUniqueId: placeId,
+                placeCategory: placeCategory,
+              ),
+            );
           },
         ),
       ),

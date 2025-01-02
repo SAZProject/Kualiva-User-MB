@@ -18,6 +18,8 @@ import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
 import 'package:kualiva/places/fnb/repository/fnb_repository.dart';
+import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
+import 'package:kualiva/profile/repository/profile_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:kualiva/report/repository/report_repository.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
@@ -57,9 +59,7 @@ class MainProvider extends StatelessWidget {
         }),
         RepositoryProvider(create: (context) {
           return AuthRepository(
-            context.read<TokenManager>(),
-            context.read<DioClient>(),
-          );
+              context.read<TokenManager>(), context.read<DioClient>());
         }),
         RepositoryProvider(create: (context) {
           return PromotionRepository(
@@ -86,7 +86,12 @@ class MainProvider extends StatelessWidget {
           create: (context) {
             return ReviewRepository(context.read<DioClient>());
           },
-        )
+        ),
+        RepositoryProvider(
+          create: (context) {
+            return ProfileRepository(context.read<DioClient>());
+          },
+        ),
       ],
       child: child,
     );
@@ -133,7 +138,12 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return ReviewPlaceCreateBloc(context.read<ReviewRepository>());
-        })
+        }),
+        BlocProvider(
+          create: (context) {
+            return UserProfileBloc(context.read<ProfileRepository>());
+          },
+        )
       ],
       child: child,
     );

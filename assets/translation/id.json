@@ -318,8 +318,10 @@
     },
     "my_profile": {
         "title": "Profil Saya",
-        "nickname": "Nama panggilan",
-        "nickname_hint": "Anda hanya dapat mengubah nama panggilan Anda setiap 7 hari sekali",
+        "firstname": "Nama Depan",
+        "lastname": "Nama Belakang",
+        "username": "Username",
+        "username_hint": "Anda hanya dapat mengubah username Anda setiap 7 hari sekali",
         "email": "E-mail",
         "edit": "Sunting",
         "verify": "Memeriksa",

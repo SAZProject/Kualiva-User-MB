@@ -1,10 +1,13 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/screen/coming_soon.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/home/home_screen.dart';
 import 'package:kualiva/profile/profile_screen.dart';
+import 'package:kualiva/profile/repository/profile_repository.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -15,6 +18,14 @@ class MainLayout extends StatefulWidget {
 
 class _HomeNavigationState extends State<MainLayout> {
   int _selectedPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    LeLog.d(this, 'LeRucco');
+    context.read<ProfileRepository>().me();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/review/model/review_place_model.dart';
 import 'package:kualiva/review/repository/review_repository.dart';
 
 part 'review_place_create_event.dart';

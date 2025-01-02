@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/data/dio_client.dart';
+import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 
@@ -15,7 +16,7 @@ class FnbRepository {
     required double latitude,
     required double longitude,
   }) async {
-    final fnbNearestBox = Hive.box<FnbNearestModel>('fnb_nearest');
+    final fnbNearestBox = Hive.box<FnbNearestModel>(MyHive.fnbNearest.name);
 
     if (fnbNearestBox.values.toList().isNotEmpty) {
       final fnbNearestList = fnbNearestBox.values.toList();

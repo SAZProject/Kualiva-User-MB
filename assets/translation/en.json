@@ -320,8 +320,10 @@
     },
     "my_profile": {
         "title": "My Profile",
-        "nickname": "Nickname",
-        "nickname_hint": "You can only change your nickname once every 7 days",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "username": "Username",
+        "username_hint": "You can only change your username once every 7 days",
         "email": "Email",
         "edit": "Edit",
         "verify": "Verify",

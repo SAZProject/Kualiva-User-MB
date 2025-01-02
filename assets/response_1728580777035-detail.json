@@ -1,333 +1,330 @@
 {
-  "html_attributions": [],
-  "result": {
-    "address_components": [
-      {
-        "long_name": "No.55B",
-        "short_name": "No.55B",
-        "types": [
-          "street_number"
-        ]
-      },
-      {
-        "long_name": "Jalan Professor Doktor Soepomo",
-        "short_name": "Jl. Prof. DR. Soepomo",
-        "types": [
-          "route"
-        ]
-      },
-      {
-        "long_name": "13",
-        "short_name": "13",
-        "types": [
-          "administrative_area_level_7",
-          "political"
-        ]
-      },
-      {
-        "long_name": "2",
-        "short_name": "2",
-        "types": [
-          "administrative_area_level_6",
-          "political"
-        ]
-      },
-      {
-        "long_name": "Tebet Barat",
-        "short_name": "Tebet Bar.",
-        "types": [
-          "administrative_area_level_4",
-          "political"
-        ]
-      },
-      {
-        "long_name": "Kecamatan Tebet",
-        "short_name": "Kec. Tebet",
-        "types": [
-          "administrative_area_level_3",
-          "political"
-        ]
-      },
-      {
-        "long_name": "Kota Jakarta Selatan",
-        "short_name": "Kota Jakarta Selatan",
-        "types": [
-          "administrative_area_level_2",
-          "political"
-        ]
-      },
-      {
-        "long_name": "Daerah Khusus Ibukota Jakarta",
-        "short_name": "Daerah Khusus Ibukota Jakarta",
-        "types": [
-          "administrative_area_level_1",
-          "political"
-        ]
-      },
-      {
-        "long_name": "Indonesia",
-        "short_name": "ID",
-        "types": [
-          "country",
-          "political"
-        ]
-      },
-      {
-        "long_name": "12810",
-        "short_name": "12810",
-        "types": [
-          "postal_code"
-        ]
-      }
-    ],
-    "adr_address": "<span class=\"street-address\">Jl. Prof. DR. Soepomo No.55B, RT.13/RW.2</span>, <span class=\"extended-address\">Tebet Bar., Kec. Tebet</span>, <span class=\"locality\">Kota Jakarta Selatan</span>, <span class=\"region\">Daerah Khusus Ibukota Jakarta</span> <span class=\"postal-code\">12810</span>, <span class=\"country-name\">Indonesia</span>",
-    "business_status": "OPERATIONAL",
-    "current_opening_hours": {
-      "open_now": true,
-      "periods": [
-        {
-          "close": {
-            "date": "2024-10-17",
-            "day": 4,
-            "time": "2359",
-            "truncated": true
-          },
-          "open": {
-            "date": "2024-10-11",
-            "day": 5,
-            "time": "0000",
-            "truncated": true
-          }
-        }
-      ],
-      "weekday_text": [
-        "Monday: Open 24 hours",
-        "Tuesday: Open 24 hours",
-        "Wednesday: Open 24 hours",
-        "Thursday: Open 24 hours",
-        "Friday: Open 24 hours",
-        "Saturday: Open 24 hours",
-        "Sunday: Open 24 hours"
+  "_id": "ChIJhY1IdJTzaS4RCliiU3D4Z9I",
+  "address_components": [
+    {
+      "long_name": "No.55B",
+      "short_name": "No.55B",
+      "types": [
+        "street_number"
       ]
     },
-    "delivery": true,
-    "dine_in": true,
-    "editorial_summary": {
-      "language": "en",
-      "overview": "Classic, long-running fast-food chain known for its burgers & fries."
+    {
+      "long_name": "Jalan Professor Doktor Soepomo",
+      "short_name": "Jl. Prof. DR. Soepomo",
+      "types": [
+        "route"
+      ]
     },
-    "formatted_address": "Jl. Prof. DR. Soepomo No.55B, RT.13/RW.2, Tebet Bar., Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12810, Indonesia",
-    "formatted_phone_number": "0857-1561-8156",
-    "geometry": {
-      "location": {
-        "lat": -6.232144,
-        "lng": 106.8456271
-      },
-      "viewport": {
-        "northeast": {
-          "lat": -6.230679869708498,
-          "lng": 106.8468522302915
+    {
+      "long_name": "13",
+      "short_name": "13",
+      "types": [
+        "administrative_area_level_7",
+        "political"
+      ]
+    },
+    {
+      "long_name": "2",
+      "short_name": "2",
+      "types": [
+        "administrative_area_level_6",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Tebet Barat",
+      "short_name": "Tebet Bar.",
+      "types": [
+        "administrative_area_level_4",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Kecamatan Tebet",
+      "short_name": "Kec. Tebet",
+      "types": [
+        "administrative_area_level_3",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Kota Jakarta Selatan",
+      "short_name": "Kota Jakarta Selatan",
+      "types": [
+        "administrative_area_level_2",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Daerah Khusus Ibukota Jakarta",
+      "short_name": "Daerah Khusus Ibukota Jakarta",
+      "types": [
+        "administrative_area_level_1",
+        "political"
+      ]
+    },
+    {
+      "long_name": "Indonesia",
+      "short_name": "ID",
+      "types": [
+        "country",
+        "political"
+      ]
+    },
+    {
+      "long_name": "12810",
+      "short_name": "12810",
+      "types": [
+        "postal_code"
+      ]
+    }
+  ],
+  "adr_address": "<span class=\"street-address\">Jl. Prof. DR. Soepomo No.55B, RT.13/RW.2</span>, <span class=\"extended-address\">Tebet Bar., Kec. Tebet</span>, <span class=\"locality\">Kota Jakarta Selatan</span>, <span class=\"region\">Daerah Khusus Ibukota Jakarta</span> <span class=\"postal-code\">12810</span>, <span class=\"country-name\">Indonesia</span>",
+  "business_status": "OPERATIONAL",
+  "current_opening_hours": {
+    "open_now": true,
+    "periods": [
+      {
+        "close": {
+          "date": "2024-10-17",
+          "day": 4,
+          "time": "2359",
+          "truncated": true
         },
-        "southwest": {
-          "lat": -6.233377830291502,
-          "lng": 106.8441542697085
+        "open": {
+          "date": "2024-10-11",
+          "day": 5,
+          "time": "0000",
+          "truncated": true
         }
       }
-    },
-    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
-    "icon_background_color": "#FF9E67",
-    "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
-    "international_phone_number": "+62 857-1561-8156",
-    "name": "McDonald’s Tebet",
-    "opening_hours": {
-      "open_now": true,
-      "periods": [
-        {
-          "open": {
-            "day": 0,
-            "time": "0000"
-          }
-        }
-      ],
-      "weekday_text": [
-        "Monday: Open 24 hours",
-        "Tuesday: Open 24 hours",
-        "Wednesday: Open 24 hours",
-        "Thursday: Open 24 hours",
-        "Friday: Open 24 hours",
-        "Saturday: Open 24 hours",
-        "Sunday: Open 24 hours"
-      ]
-    },
-    "photos": [
-      {
-        "height": 3472,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/111424777288934810921\">Hasyim Adnan</a>"
-        ],
-        "photo_reference": "AdCG2DMkj2nlygfJLWQMfVVtlyKX8RRR0IP_qzD9nFEKyWdEN5KhoTo2_wNdiipDfi9qeH5CGB--CTfiR4k1ej_3U6sOUgIsU4tzuUrG3lBiYf8nyKZIMPxBlssktrC2GmHEBMzg7ZQVkjAW3wtcSTxGCPdz05iNyOvgCWC3aJkiEMIqJWHo",
-        "width": 4624
-      },
-      {
-        "height": 3472,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/111424777288934810921\">Hasyim Adnan</a>"
-        ],
-        "photo_reference": "AdCG2DM81Lvf5XZ_R6rq5OjqVvUFVUGnyn6jki7Rgr0U--vmBmldEcQlQYwcVYRofvTaZk2hijTLHYpR1-VHvxEOLVh0mUY4cc6uP2FNDvpBEpdqRa__VC9RoywaKrJ6HhiOlRCVBLJBXi12GTBDbH1kyDomQmAA8EY3vL5iAdKS2l4aMv48",
-        "width": 4624
-      },
-      {
-        "height": 4032,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/110057464919003973432\">Alifian Windi Prakoso</a>"
-        ],
-        "photo_reference": "AdCG2DMSMy-W7EyPWbg7Ng1sCrqo-hMLan3wHIYcxcrCixkchu1xHjgsu69-WKuc4tceOR6LPNGccPSkRxwkOgrB6YLkoj8z-Jenbw7BUjwYzs4EvUprVHio_cfkkmo4dx0fOL9tm2GgyarfUZXA_J6wkOpAd7WYbc_vj2G9rwK1KP3jt6ZK",
-        "width": 3024
-      },
-      {
-        "height": 3024,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/113463946697790816422\">Daniel Judah</a>"
-        ],
-        "photo_reference": "AdCG2DOax51ywyJjzuN2rnU-4Z4FLUz7Y1Y9CEQCedfIKkzp30IVlYGbTa2GbHqAZ66fAWgpjvn6ocaYsFIXOiX4CuJ9B0goqVdmJ3rAok_5pmtNDo5RT08eJbIaHR3dzjADTO8nnLlh6J5PISN1IPGLqIGOdXLgz4tLlVBSOxK3P5Ua1WXm",
-        "width": 4032
-      },
-      {
-        "height": 3456,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/105671893348049109705\">Citta Chitatos</a>"
-        ],
-        "photo_reference": "AdCG2DNzzTnU9MdgGec349yUIdXEThQzSR2kwY6JZY4b6HvVYxhdqTmM915V8hyKaqu2awqSQrmv9kPNm5133AGuXy22-mll42QjHAQfN2-3fvr49PyzyyzA2GdiT5rtK23JArz-ytMbiD8qyFHJ5il9VyXIyTmsSYFqcKCw8v59NZ2m0sR3",
-        "width": 4608
-      },
-      {
-        "height": 2592,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/115247427592248214885\">Raffi Pambudi</a>"
-        ],
-        "photo_reference": "AdCG2DPIJzyHKDlDdDhtX1y4neylxNT_KcF9wOK7pepstYnfniZVA0BeweFQgS59pQiPQYBuvcx6WWAF1iL-Z-VsrGHl_wulglwJbNgdjpheNgX63CEwlxwoCimDQWtziiZ7RuNLhzXcmG3Skwe7byi8ZdQbL_7VZ62JZW7yf8ahiPyWqKsu",
-        "width": 4608
-      },
-      {
-        "height": 4032,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/109146743487056397271\">Rezaryano Muhammad</a>"
-        ],
-        "photo_reference": "AdCG2DNM6FnGy9tzCxEbsUrtuFrevRzv4MpLd76m47GmbGWgafiNHuPOP3V7BrxU53rjt8j8e-2h7DSd-4x2x3fYLH-a-UCdqGmnCIRN3-RmhonTSKe3qaE387GIYdF6j4MiWHNhcYXkJyjpDSUrvmZUto5qzFPLzhld1dNmvWvohVLWGoLq",
-        "width": 2268
-      },
-      {
-        "height": 3264,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/101359767576729144706\">Ambarwati</a>"
-        ],
-        "photo_reference": "AdCG2DPfYlpCzX3QLXQ-snKY7c-BmUn0McPKLydBhIsd24hRlPuBh6CVd6o-9OY8nK4T23CvHaALJZ9BX7BqRnCYhpG2YViZY3pSQ5K6Tdr_Cep2gkcj7oGLgK3Pf1_4bRvIFfdeN4jJ10k831mAqIGcczW7uzrVGyGz5JHUAE5UvJqL0N1F",
-        "width": 2448
-      },
-      {
-        "height": 4032,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/110057464919003973432\">Alifian Windi Prakoso</a>"
-        ],
-        "photo_reference": "AdCG2DPZ5rPYJN5jqH0jTiks0kjQq3tokTVeJnTZV7EDfSUrPSeIKYMAmsPTRPfays-WsKv116ynzQRRhlRveM8-bIZnDe7P02eHUQVsHx0qIgf84hYNL3TuuIwBB5nXzjM9K9nqQUldG_Kx_AELy4Js_hd6p-_o0JS6S6HpGa-jVUonuecB",
-        "width": 3024
-      },
-      {
-        "height": 3120,
-        "html_attributions": [
-          "<a href=\"https://maps.google.com/maps/contrib/115965595168203101801\">rizqi fallah</a>"
-        ],
-        "photo_reference": "AdCG2DMBUpweNFN9SqbAreWC-8oj9O5AnVDrPdAIEgc_kbFGKTsOyOv7fKsfx8IqlnnJ9I5EKRorRr_qd2v6WpaDzPvaPXYcHbqofdvXq-km2hpiyCHIu0DbO4MNzTiEUGXSiJqgiupWOcMfJa4z2hPtfb7gAzWgIxcN1gREIh0xFqr5k0aa",
-        "width": 4160
-      }
     ],
-    "place_id": "ChIJhY1IdJTzaS4RCliiU3D4Z9I",
-    "plus_code": {
-      "compound_code": "QR9W+47 West Tebet, South Jakarta City, Jakarta, Indonesia",
-      "global_code": "6P58QR9W+47"
-    },
-    "price_level": 2,
-    "rating": 4.5,
-    "reference": "ChIJhY1IdJTzaS4RCliiU3D4Z9I",
-    "reviews": [
-      {
-        "author_name": "Daniel Judah",
-        "author_url": "https://www.google.com/maps/contrib/113463946697790816422/reviews",
-        "language": "en",
-        "original_language": "en",
-        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjV_16yN_U7eS5-gxpdrgb4C1WklsPLcNcUrReZnsh-Rq6T2XUIK=s128-c0x00000000-cc-rp-mo-ba7",
-        "rating": 5,
-        "relative_time_description": "a year ago",
-        "text": "The place is clean and well maintained. The restaurant is well lit. The food is your standard McDonalds. The second floor have more seating, and the design of the place is good. The place also have outdoor seating.\n\nParking space is a bit difficult as the lot is quite small.",
-        "time": 1686165036,
-        "translated": false
-      },
-      {
-        "author_name": "Kuriezi Katyusha",
-        "author_url": "https://www.google.com/maps/contrib/111798516766264565412/reviews",
-        "language": "en",
-        "original_language": "en",
-        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUmbFpmS-cvdlJG87rKlhF3Km7IsMFtlCZZnR_9bDFElwAHljO4=s128-c0x00000000-cc-rp-mo-ba3",
-        "rating": 4,
-        "relative_time_description": "a year ago",
-        "text": "Recommended for Breakfast, Lunch, or Dinner. The Menus Variety is Great.\n\nbut you need to prepare your wallet",
-        "time": 1688597366,
-        "translated": false
-      },
-      {
-        "author_name": "Raffi Pambudi",
-        "author_url": "https://www.google.com/maps/contrib/115247427592248214885/reviews",
-        "language": "en",
-        "original_language": "en",
-        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUEJMXJAL2VlrXxBvp3jMKQusj5hEqoLCfnjhWvHNzj13VF-_U=s128-c0x00000000-cc-rp-mo-ba4",
-        "rating": 5,
-        "relative_time_description": "12 months ago",
-        "text": "Standard pelayanan McDonald's all good",
-        "time": 1697206190,
-        "translated": false
-      },
-      {
-        "author_name": "Makka Jafar",
-        "author_url": "https://www.google.com/maps/contrib/101054388923195262179/reviews",
-        "language": "en",
-        "original_language": "en",
-        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXq_NZzZ6WP1XoFIGuaiCgapP6M5Xcxldm-xWtrSlfgb_6dGCN9=s128-c0x00000000-cc-rp-mo-ba5",
-        "rating": 5,
-        "relative_time_description": "a year ago",
-        "text": "I recently had the pleasure of visiting McDonald's Tebet and was impressed by the overall experience. Their 24/7 availability is such a convenient option for anyone, whether you're a busy professional in need of a quick meal or just someone who loves a late-night snack.\n\nThe restaurant was clean, well-lit, and had a friendly atmosphere, with staff who were always happy to help. The menu had all my favorite items and the food was hot, fresh, and delicious. I especially loved their Big Macs and McChicken sandwiches.\n\nI was also pleasantly surprised by the speed and efficiency of the service, despite the late hour and steady stream of customers. The staff handled the rush with ease and made sure everyone got their food in a timely manner.\n\nOverall, I would highly recommend McDonald's Tebet to anyone looking for a quick, convenient, and satisfying meal, any time of day or night. Their 24/7 availability and quality food make them a standout in the fast food industry.",
-        "time": 1675927074,
-        "translated": false
-      },
-      {
-        "author_name": "Triyanto Prabowo",
-        "author_url": "https://www.google.com/maps/contrib/117894696833429892324/reviews",
-        "language": "en",
-        "original_language": "en",
-        "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKzIH3BG1th17W3aX4IMSqiko3XFNb7jzFByo-s2_x-hBzxzoQX=s128-c0x00000000-cc-rp-mo",
-        "rating": 4,
-        "relative_time_description": "6 years ago",
-        "text": "Cheap breakfast, spacious place in the 2nd floor and like the other Mcd I'm junkfood fans.",
-        "time": 1513984029,
-        "translated": false
-      }
-    ],
-    "serves_beer": false,
-    "serves_breakfast": true,
-    "serves_dinner": true,
-    "serves_lunch": true,
-    "serves_wine": false,
-    "takeout": true,
-    "types": [
-      "restaurant",
-      "food",
-      "point_of_interest",
-      "establishment"
-    ],
-    "url": "https://maps.google.com/?cid=15161359831889238026",
-    "user_ratings_total": 4585,
-    "utc_offset": 420,
-    "vicinity": "Jalan Professor Doktor Soepomo No.55B, RT.13/RW.2, Tebet Barat",
-    "website": "http://mcdonalds.co.id/"
+    "weekday_text": [
+      "Monday: Open 24 hours",
+      "Tuesday: Open 24 hours",
+      "Wednesday: Open 24 hours",
+      "Thursday: Open 24 hours",
+      "Friday: Open 24 hours",
+      "Saturday: Open 24 hours",
+      "Sunday: Open 24 hours"
+    ]
   },
-  "status": "OK"
+  "delivery": true,
+  "dine_in": true,
+  "editorial_summary": {
+    "language": "en",
+    "overview": "Classic, long-running fast-food chain known for its burgers & fries."
+  },
+  "formatted_address": "Jl. Prof. DR. Soepomo No.55B, RT.13/RW.2, Tebet Bar., Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12810, Indonesia",
+  "formatted_phone_number": "0857-1561-8156",
+  "geometry": {
+    "location": {
+      "lat": -6.232144,
+      "lng": 106.8456271
+    },
+    "viewport": {
+      "northeast": {
+        "lat": -6.230679869708498,
+        "lng": 106.8468522302915
+      },
+      "southwest": {
+        "lat": -6.233377830291502,
+        "lng": 106.8441542697085
+      }
+    }
+  },
+  "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+  "icon_background_color": "#FF9E67",
+  "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+  "international_phone_number": "+62 857-1561-8156",
+  "name": "McDonald’s Tebet",
+  "opening_hours": {
+    "open_now": true,
+    "periods": [
+      {
+        "open": {
+          "day": 0,
+          "time": "0000"
+        }
+      }
+    ],
+    "weekday_text": [
+      "Monday: Open 24 hours",
+      "Tuesday: Open 24 hours",
+      "Wednesday: Open 24 hours",
+      "Thursday: Open 24 hours",
+      "Friday: Open 24 hours",
+      "Saturday: Open 24 hours",
+      "Sunday: Open 24 hours"
+    ]
+  },
+  "photos": [
+    {
+      "height": 3472,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/111424777288934810921\">Hasyim Adnan</a>"
+      ],
+      "photo_reference": "AdCG2DMkj2nlygfJLWQMfVVtlyKX8RRR0IP_qzD9nFEKyWdEN5KhoTo2_wNdiipDfi9qeH5CGB--CTfiR4k1ej_3U6sOUgIsU4tzuUrG3lBiYf8nyKZIMPxBlssktrC2GmHEBMzg7ZQVkjAW3wtcSTxGCPdz05iNyOvgCWC3aJkiEMIqJWHo",
+      "width": 4624
+    },
+    {
+      "height": 3472,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/111424777288934810921\">Hasyim Adnan</a>"
+      ],
+      "photo_reference": "AdCG2DM81Lvf5XZ_R6rq5OjqVvUFVUGnyn6jki7Rgr0U--vmBmldEcQlQYwcVYRofvTaZk2hijTLHYpR1-VHvxEOLVh0mUY4cc6uP2FNDvpBEpdqRa__VC9RoywaKrJ6HhiOlRCVBLJBXi12GTBDbH1kyDomQmAA8EY3vL5iAdKS2l4aMv48",
+      "width": 4624
+    },
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/110057464919003973432\">Alifian Windi Prakoso</a>"
+      ],
+      "photo_reference": "AdCG2DMSMy-W7EyPWbg7Ng1sCrqo-hMLan3wHIYcxcrCixkchu1xHjgsu69-WKuc4tceOR6LPNGccPSkRxwkOgrB6YLkoj8z-Jenbw7BUjwYzs4EvUprVHio_cfkkmo4dx0fOL9tm2GgyarfUZXA_J6wkOpAd7WYbc_vj2G9rwK1KP3jt6ZK",
+      "width": 3024
+    },
+    {
+      "height": 3024,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/113463946697790816422\">Daniel Judah</a>"
+      ],
+      "photo_reference": "AdCG2DOax51ywyJjzuN2rnU-4Z4FLUz7Y1Y9CEQCedfIKkzp30IVlYGbTa2GbHqAZ66fAWgpjvn6ocaYsFIXOiX4CuJ9B0goqVdmJ3rAok_5pmtNDo5RT08eJbIaHR3dzjADTO8nnLlh6J5PISN1IPGLqIGOdXLgz4tLlVBSOxK3P5Ua1WXm",
+      "width": 4032
+    },
+    {
+      "height": 3456,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/105671893348049109705\">Citta Chitatos</a>"
+      ],
+      "photo_reference": "AdCG2DNzzTnU9MdgGec349yUIdXEThQzSR2kwY6JZY4b6HvVYxhdqTmM915V8hyKaqu2awqSQrmv9kPNm5133AGuXy22-mll42QjHAQfN2-3fvr49PyzyyzA2GdiT5rtK23JArz-ytMbiD8qyFHJ5il9VyXIyTmsSYFqcKCw8v59NZ2m0sR3",
+      "width": 4608
+    },
+    {
+      "height": 2592,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/115247427592248214885\">Raffi Pambudi</a>"
+      ],
+      "photo_reference": "AdCG2DPIJzyHKDlDdDhtX1y4neylxNT_KcF9wOK7pepstYnfniZVA0BeweFQgS59pQiPQYBuvcx6WWAF1iL-Z-VsrGHl_wulglwJbNgdjpheNgX63CEwlxwoCimDQWtziiZ7RuNLhzXcmG3Skwe7byi8ZdQbL_7VZ62JZW7yf8ahiPyWqKsu",
+      "width": 4608
+    },
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/109146743487056397271\">Rezaryano Muhammad</a>"
+      ],
+      "photo_reference": "AdCG2DNM6FnGy9tzCxEbsUrtuFrevRzv4MpLd76m47GmbGWgafiNHuPOP3V7BrxU53rjt8j8e-2h7DSd-4x2x3fYLH-a-UCdqGmnCIRN3-RmhonTSKe3qaE387GIYdF6j4MiWHNhcYXkJyjpDSUrvmZUto5qzFPLzhld1dNmvWvohVLWGoLq",
+      "width": 2268
+    },
+    {
+      "height": 3264,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/101359767576729144706\">Ambarwati</a>"
+      ],
+      "photo_reference": "AdCG2DPfYlpCzX3QLXQ-snKY7c-BmUn0McPKLydBhIsd24hRlPuBh6CVd6o-9OY8nK4T23CvHaALJZ9BX7BqRnCYhpG2YViZY3pSQ5K6Tdr_Cep2gkcj7oGLgK3Pf1_4bRvIFfdeN4jJ10k831mAqIGcczW7uzrVGyGz5JHUAE5UvJqL0N1F",
+      "width": 2448
+    },
+    {
+      "height": 4032,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/110057464919003973432\">Alifian Windi Prakoso</a>"
+      ],
+      "photo_reference": "AdCG2DPZ5rPYJN5jqH0jTiks0kjQq3tokTVeJnTZV7EDfSUrPSeIKYMAmsPTRPfays-WsKv116ynzQRRhlRveM8-bIZnDe7P02eHUQVsHx0qIgf84hYNL3TuuIwBB5nXzjM9K9nqQUldG_Kx_AELy4Js_hd6p-_o0JS6S6HpGa-jVUonuecB",
+      "width": 3024
+    },
+    {
+      "height": 3120,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/115965595168203101801\">rizqi fallah</a>"
+      ],
+      "photo_reference": "AdCG2DMBUpweNFN9SqbAreWC-8oj9O5AnVDrPdAIEgc_kbFGKTsOyOv7fKsfx8IqlnnJ9I5EKRorRr_qd2v6WpaDzPvaPXYcHbqofdvXq-km2hpiyCHIu0DbO4MNzTiEUGXSiJqgiupWOcMfJa4z2hPtfb7gAzWgIxcN1gREIh0xFqr5k0aa",
+      "width": 4160
+    }
+  ],
+  "place_id": "ChIJhY1IdJTzaS4RCliiU3D4Z9I",
+  "plus_code": {
+    "compound_code": "QR9W+47 West Tebet, South Jakarta City, Jakarta, Indonesia",
+    "global_code": "6P58QR9W+47"
+  },
+  "price_level": 2,
+  "rating": 4.5,
+  "reference": "ChIJhY1IdJTzaS4RCliiU3D4Z9I",
+  "reviews": [
+    {
+      "author_name": "Daniel Judah",
+      "author_url": "https://www.google.com/maps/contrib/113463946697790816422/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjV_16yN_U7eS5-gxpdrgb4C1WklsPLcNcUrReZnsh-Rq6T2XUIK=s128-c0x00000000-cc-rp-mo-ba7",
+      "rating": 5,
+      "relative_time_description": "a year ago",
+      "text": "The place is clean and well maintained. The restaurant is well lit. The food is your standard McDonalds. The second floor have more seating, and the design of the place is good. The place also have outdoor seating.\n\nParking space is a bit difficult as the lot is quite small.",
+      "time": 1686165036,
+      "translated": false
+    },
+    {
+      "author_name": "Kuriezi Katyusha",
+      "author_url": "https://www.google.com/maps/contrib/111798516766264565412/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUmbFpmS-cvdlJG87rKlhF3Km7IsMFtlCZZnR_9bDFElwAHljO4=s128-c0x00000000-cc-rp-mo-ba3",
+      "rating": 4,
+      "relative_time_description": "a year ago",
+      "text": "Recommended for Breakfast, Lunch, or Dinner. The Menus Variety is Great.\n\nbut you need to prepare your wallet",
+      "time": 1688597366,
+      "translated": false
+    },
+    {
+      "author_name": "Raffi Pambudi",
+      "author_url": "https://www.google.com/maps/contrib/115247427592248214885/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUEJMXJAL2VlrXxBvp3jMKQusj5hEqoLCfnjhWvHNzj13VF-_U=s128-c0x00000000-cc-rp-mo-ba4",
+      "rating": 5,
+      "relative_time_description": "12 months ago",
+      "text": "Standard pelayanan McDonald's all good",
+      "time": 1697206190,
+      "translated": false
+    },
+    {
+      "author_name": "Makka Jafar",
+      "author_url": "https://www.google.com/maps/contrib/101054388923195262179/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXq_NZzZ6WP1XoFIGuaiCgapP6M5Xcxldm-xWtrSlfgb_6dGCN9=s128-c0x00000000-cc-rp-mo-ba5",
+      "rating": 5,
+      "relative_time_description": "a year ago",
+      "text": "I recently had the pleasure of visiting McDonald's Tebet and was impressed by the overall experience. Their 24/7 availability is such a convenient option for anyone, whether you're a busy professional in need of a quick meal or just someone who loves a late-night snack.\n\nThe restaurant was clean, well-lit, and had a friendly atmosphere, with staff who were always happy to help. The menu had all my favorite items and the food was hot, fresh, and delicious. I especially loved their Big Macs and McChicken sandwiches.\n\nI was also pleasantly surprised by the speed and efficiency of the service, despite the late hour and steady stream of customers. The staff handled the rush with ease and made sure everyone got their food in a timely manner.\n\nOverall, I would highly recommend McDonald's Tebet to anyone looking for a quick, convenient, and satisfying meal, any time of day or night. Their 24/7 availability and quality food make them a standout in the fast food industry.",
+      "time": 1675927074,
+      "translated": false
+    },
+    {
+      "author_name": "Triyanto Prabowo",
+      "author_url": "https://www.google.com/maps/contrib/117894696833429892324/reviews",
+      "language": "en",
+      "original_language": "en",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKzIH3BG1th17W3aX4IMSqiko3XFNb7jzFByo-s2_x-hBzxzoQX=s128-c0x00000000-cc-rp-mo",
+      "rating": 4,
+      "relative_time_description": "6 years ago",
+      "text": "Cheap breakfast, spacious place in the 2nd floor and like the other Mcd I'm junkfood fans.",
+      "time": 1513984029,
+      "translated": false
+    }
+  ],
+  "serves_beer": false,
+  "serves_breakfast": true,
+  "serves_dinner": true,
+  "serves_lunch": true,
+  "serves_wine": false,
+  "takeout": true,
+  "types": [
+    "restaurant",
+    "food",
+    "point_of_interest",
+    "establishment"
+  ],
+  "url": "https://maps.google.com/?cid=15161359831889238026",
+  "user_ratings_total": 4585,
+  "utc_offset": 420,
+  "vicinity": "Jalan Professor Doktor Soepomo No.55B, RT.13/RW.2, Tebet Barat",
+  "website": "http://mcdonalds.co.id/"
 }

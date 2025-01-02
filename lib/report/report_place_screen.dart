@@ -26,7 +26,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
 
   String get placeId => widget.placeId;
 
-  String selectedReason = "";
+  final selectedReason = ValueNotifier<String>('');
 
   final reportMedia = ValueNotifier<List<String>>([]);
 
@@ -54,8 +54,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
   }
 
   void _submit() {
-    debugPrint(selectedReason);
-    final [reasonCode, reasonSequence] = selectedReason.split('#');
+    final [reasonCode, reasonSequence] = selectedReason.value.split('#');
     context.read<ReportPlaceBloc>().add(
           ReportPlaceCreated(
             placeId: placeId,
@@ -93,13 +92,15 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
         child: Column(
           children: [
             SizedBox(height: 10.h),
-            ReportPlaceReasonFeature(
-              reasonCtl: _reasonCtl,
-              selectedReason: selectedReason,
-              onChange: (value) => setState(() {
-                selectedReason = value;
-                debugPrint(value);
-              }),
+            ValueListenableBuilder(
+              valueListenable: selectedReason,
+              builder: (context, reason, child) {
+                return ReportPlaceReasonFeature(
+                  reasonCtl: _reasonCtl,
+                  selectedReason: reason,
+                  onChange: (value) => selectedReason.value = value,
+                );
+              },
             ),
             SizedBox(height: 10.h),
             ValueListenableBuilder(

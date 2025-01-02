@@ -5,9 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.66
-- Review Screen with bloc (tested)
-- stll stuck on loading
+Ver 0.0.67
+- Create review & tested (no ui representation)
 ```
 
 ## Getting Started

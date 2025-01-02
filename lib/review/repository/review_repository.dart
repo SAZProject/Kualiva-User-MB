@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 // import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/data/dio_client.dart';
+import 'package:kualiva/data/place_category_enum.dart';
 // import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 
@@ -13,30 +14,43 @@ class ReviewRepository {
 
   final DioClient _dioClient;
 
+  String? placeUniqueId;
+  PlaceCategoryEnum? placeCategory;
+  String? invoice;
+  String? invoiceFile;
+
+  void tempCreate(
+    String placeUniqueId,
+    PlaceCategoryEnum placeCategory,
+    String invoice,
+    String invoiceFile,
+  ) {
+    this.placeUniqueId = placeUniqueId;
+    this.placeCategory = placeCategory;
+    this.invoice = invoice;
+    this.invoiceFile = invoiceFile;
+    LeLog.rd(this, tempCreate,
+        "$placeUniqueId | $placeCategory | $invoice | $invoiceFile");
+  }
+
   /// Add Reviews by Place
   Future<void> create({
-    required String placeId,
-    required String placeCategory,
-    required String invoice,
     required String description,
-    required String invoiceFile,
-    required int rating,
+    required double rating,
     required List<String> photoFiles,
   }) async {
-    FormData formData = FormData.fromMap({
-      "placeUniqueId": placeId,
-      "placeCategory": placeCategory,
-      "invoice": invoice,
-      "description": description,
-      "invoiceFile": invoiceFile,
-      "rating": rating,
-      "photoFiles": photoFiles,
-    });
-
     final _ = await _dioClient.dio().then((dio) {
       return dio.post(
         '/reviews',
-        data: formData,
+        data: {
+          "placeUniqueId": placeUniqueId,
+          "placeCategory": placeCategory!.name,
+          "invoice": invoice,
+          "description": description,
+          "invoiceFile": invoiceFile,
+          "rating": rating,
+          "photoFiles": photoFiles,
+        },
       );
     });
 

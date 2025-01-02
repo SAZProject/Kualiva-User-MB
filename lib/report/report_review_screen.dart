@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_alert_dialog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
+import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/data/model/review_model.dart';
 import 'package:kualiva/report/feature/report_review_reason.dart';
 import 'package:kualiva/report/widget/report_review_detail.dart';
-import 'package:kualiva/review/feature/review_form_submit_button.dart';
 
 class ReportReviewScreen extends StatefulWidget {
   const ReportReviewScreen({super.key, required this.reviewData});
@@ -62,7 +63,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
             SizedBox(height: 10.h),
             ReportReviewDetail(detailCtl: _detailCtl),
             SizedBox(height: 25.h),
-            ReportReviewSubmitButton(),
+            _reportReviewSubmitBtn(),
             SizedBox(height: 25.h),
           ],
         ),
@@ -74,6 +75,43 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
     return CustomAppBar(
       title: context.tr("report.title"),
       onBackPressed: () => Navigator.pop(context),
+    );
+  }
+
+  Widget _reportReviewSubmitBtn() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30.h),
+      child: SizedBox(
+        height: 60.h,
+        width: double.maxFinite,
+        child: CustomGradientOutlinedButton(
+          text: context.tr("review.submit_btn"),
+          outerPadding: EdgeInsets.symmetric(horizontal: 30.h),
+          innerPadding: EdgeInsets.all(2.h),
+          strokeWidth: 2.h,
+          colors: [
+            appTheme.yellowA700,
+            theme(context).colorScheme.primary,
+          ],
+          textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+          onPressed: () {
+            customAlertDialog(
+              context: context,
+              dismissable: true,
+              title: Text(
+                "Conratulation!",
+              ),
+              content: Text(
+                "You get 10 points",
+              ),
+              icon: Icon(
+                Icons.generating_tokens_outlined,
+              ),
+            );
+            Navigator.pop(context);
+          },
+        ),
+      ),
     );
   }
 }

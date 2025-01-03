@@ -1,4 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:kualiva/auth/model/user_model.dart';
+import 'package:kualiva/auth/model/user_profile_model.dart';
 import 'package:kualiva/data/current_location/current_location_model.dart';
 
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
@@ -13,30 +15,36 @@ class MainHive {
     Hive.registerAdapter(CurrentLocationModelAdapter());
     Hive.registerAdapter(AuthorModelAdapter());
     Hive.registerAdapter(ReviewPlaceModelAdapter());
+    Hive.registerAdapter(UserProfileModelAdapter());
+    Hive.registerAdapter(UserModelAdapter());
   }
 
   static Future<void> openBox() async {
     await Future.wait([
-      Hive.openBox<FnbNearestModel>('fnb_nearest'),
+      Hive.openBox<FnbNearestModel>(MyHive.fnbNearest.name),
+      // Hive.openBox(MyHive.userProfile.name),
+      Hive.openBox<UserModel>(MyHive.user.name),
     ]);
   }
 
   static bool checkOpenBox() {
-    for (var e in MyHive.values) {
-      if (!Hive.isAdapterRegistered(e.typeId)) {
-        return false;
-      }
-    }
+    // for (var e in MyHive.values) {
+    //   if (!Hive.isAdapterRegistered(e.typeId)) {
+    //     return false;
+    //   }
+    // }
     return true;
   }
 }
 
 enum MyHive {
   fnbNearestLocation(0, ''),
-  fnbNearestModel(1, 'fnb_nearest'),
-  currentLocationModel(2, 'current_location'),
+  fnbNearest(1, 'fnb_nearest'),
+  currentLocation(2, 'current_location'),
   author(3, 'author'),
-  reviewPlaceModel(4, 'review_place');
+  reviewPlace(4, 'review_place'),
+  userProfile(5, 'profile'),
+  user(6, 'user');
 
   final int typeId;
   final String name;

@@ -6,10 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/auth/repository/token_manager.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_phone_number.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
+import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 
 class AccountSettingScreen extends StatefulWidget {
   const AccountSettingScreen({super.key});
@@ -20,10 +22,10 @@ class AccountSettingScreen extends StatefulWidget {
 
 class _AccountSettingScreenState extends State<AccountSettingScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _accCreationCtl = TextEditingController();
-  final TextEditingController _phoneNumberCtl = TextEditingController();
-  final TextEditingController _passwordCtl = TextEditingController();
-  final TextEditingController _pinCtl = TextEditingController();
+  final _accCreationCtl = TextEditingController();
+  final _phoneNumberCtl = TextEditingController();
+  final _passwordCtl = TextEditingController();
+  final _pinCtl = TextEditingController();
 
   Country selectedCountry = CountryPickerUtils.getCountryByPhoneCode("62");
   final FocusNode _phoneFocus = FocusNode();
@@ -37,6 +39,14 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
 
   bool logoutLoading = false;
 
+  bool firstOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserProfileBloc>().add(UserProfileFetched());
+  }
+
   @override
   void dispose() {
     _accCreationCtl.dispose();
@@ -48,13 +58,24 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _accSettingAppBar(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          height: Sizeutils.height,
-          child: _body(context),
+    return BlocListener<UserProfileBloc, UserProfileState>(
+      listener: (context, state) {
+        if (state is UserProfileSuccess && firstOpen == false) {
+          firstOpen = true;
+          final user = state.user;
+
+          _accCreationCtl.text = DatetimeUtils.dmy(user.createdAt);
+          _phoneNumberCtl.text = user.phone;
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: _accSettingAppBar(context),
+          body: SizedBox(
+            width: double.maxFinite,
+            height: Sizeutils.height,
+            child: _body(context),
+          ),
         ),
       ),
     );

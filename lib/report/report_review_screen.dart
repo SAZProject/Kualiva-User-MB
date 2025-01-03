@@ -20,7 +20,7 @@ class ReportReviewScreen extends StatefulWidget {
 class _ReportReviewScreenState extends State<ReportReviewScreen> {
   ReviewModel get reviewData => super.widget.reviewData;
 
-  String selectedReason = "";
+  final selectedReason = ValueNotifier<String>("");
 
   final TextEditingController _detailCtl = TextEditingController();
 
@@ -51,9 +51,14 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
         child: Column(
           children: [
             SizedBox(height: 10.h),
-            ReportReviewReason(
-              selectedReason: selectedReason,
-              onChange: (value) => setState(() => selectedReason = value),
+            ValueListenableBuilder(
+              valueListenable: selectedReason,
+              builder: (context, reason, child) {
+                return ReportReviewReason(
+                  selectedReason: reason,
+                  onChange: (value) => selectedReason.value = value,
+                );
+              },
             ),
             SizedBox(height: 10.h),
             ReportReviewDetail(detailCtl: _detailCtl),

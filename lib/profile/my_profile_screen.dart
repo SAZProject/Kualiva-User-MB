@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
@@ -12,14 +15,26 @@ class MyProfileScreen extends StatefulWidget {
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
-  final TextEditingController _nicknameCtl = TextEditingController();
-  final TextEditingController _emailCtl = TextEditingController();
-  final TextEditingController _genderCtl = TextEditingController();
-  final TextEditingController _dateOfBirthCtl = TextEditingController();
+  final _usernameCtl = TextEditingController();
+  final _firstnameCtl = TextEditingController();
+  final _lastnameCtl = TextEditingController();
+  final _emailCtl = TextEditingController();
+  final _genderCtl = TextEditingController();
+  final _dateOfBirthCtl = TextEditingController();
+
+  bool firstOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserProfileBloc>().add(UserProfileFetched());
+  }
 
   @override
   void dispose() {
-    _nicknameCtl.dispose();
+    _usernameCtl.dispose();
+    _firstnameCtl.dispose();
+    _lastnameCtl.dispose();
     _emailCtl.dispose();
     _genderCtl.dispose();
     _dateOfBirthCtl.dispose();
@@ -28,13 +43,28 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _myProfileAppBar(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          height: Sizeutils.height,
-          child: _body(context),
+    return BlocListener<UserProfileBloc, UserProfileState>(
+      listener: (context, state) {
+        if (state is UserProfileSuccess && firstOpen == false) {
+          firstOpen = true;
+          final user = state.user;
+
+          _usernameCtl.text = user.username;
+          _firstnameCtl.text = user.profile.firstname;
+          _lastnameCtl.text = user.profile.lastname;
+          _emailCtl.text = user.email;
+          _genderCtl.text = user.profile.gender;
+          _dateOfBirthCtl.text = DatetimeUtils.dmy(user.profile.birthDate);
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: _myProfileAppBar(context),
+          body: SizedBox(
+            width: double.maxFinite,
+            height: Sizeutils.height,
+            child: _body(context),
+          ),
         ),
       ),
     );
@@ -53,17 +83,29 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               SizedBox(height: 5.h),
               _buildTextField(
                 context,
-                headerLabel: context.tr("my_profile.nickname"),
-                controller: _nicknameCtl,
-                hintText: context.tr("my_profile.nickname_hint"),
-                suffix: context.tr("my_profile.edit"),
+                headerLabel: context.tr("my_profile.username"),
+                controller: _usernameCtl,
+                // hintText: context.tr("my_profile.username_hint"),
+                // suffix: context.tr("my_profile.edit"),
+              ),
+              SizedBox(height: 5.h),
+              _buildTextField(
+                context,
+                headerLabel: context.tr("my_profile.firstname"),
+                controller: _firstnameCtl,
+              ),
+              SizedBox(height: 5.h),
+              _buildTextField(
+                context,
+                headerLabel: context.tr("my_profile.lastname"),
+                controller: _lastnameCtl,
               ),
               SizedBox(height: 5.h),
               _buildTextField(
                 context,
                 headerLabel: context.tr("my_profile.email"),
                 controller: _emailCtl,
-                suffix: context.tr("my_profile.verify"),
+                // suffix: context.tr("my_profile.verify"),
               ),
               SizedBox(height: 5.h),
               _buildTextField(

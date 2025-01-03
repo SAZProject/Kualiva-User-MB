@@ -13,20 +13,36 @@ class ReviewPlaceMyReadBloc
       : super(ReviewPlaceMyReadInitial()) {
     on<ReviewPlaceMyReadEvent>(
         (event, emit) => emit(ReviewPlaceMyReadLoading()));
-    on<ReviewPlaceMyReadFetched>(_onMyReviewFetched);
+    on<ReviewPlaceMyReadFetched>(_onFetched);
+    on<ReviewPlaceMyReadRefreshed>(_onRefreshed);
   }
 
-  void _onMyReviewFetched(
+  void _onFetched(
     ReviewPlaceMyReadFetched event,
     Emitter<ReviewPlaceMyReadState> emit,
   ) async {
     try {
-      final List<ReviewPlaceModel> reviewsPlace =
+      final ReviewPlaceModel reviewPlace =
           await _reviewRepository.myReviewGetByPlace(placeId: event.placeId);
-      LeLog.bd(this, _onMyReviewFetched, reviewsPlace.toString());
-      emit(ReviewPlaceMyReadSuccess(reviewsPlace: reviewsPlace));
+      LeLog.bd(this, _onFetched, reviewPlace.toString());
+      emit(ReviewPlaceMyReadSuccess(reviewPlace: reviewPlace));
     } catch (e) {
-      LeLog.be(this, _onMyReviewFetched, e.toString());
+      LeLog.be(this, _onFetched, e.toString());
+      emit(ReviewPlaceMyReadFailure());
+    }
+  }
+
+  void _onRefreshed(
+    ReviewPlaceMyReadRefreshed event,
+    Emitter<ReviewPlaceMyReadState> emit,
+  ) async {
+    try {
+      final ReviewPlaceModel reviewPlace =
+          await _reviewRepository.myReviewGetByPlace(placeId: event.placeId);
+      LeLog.bd(this, _onRefreshed, reviewPlace.toString());
+      emit(ReviewPlaceMyReadSuccess(reviewPlace: reviewPlace));
+    } catch (e) {
+      LeLog.be(this, _onRefreshed, e.toString());
       emit(ReviewPlaceMyReadFailure());
     }
   }

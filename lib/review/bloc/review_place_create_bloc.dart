@@ -35,13 +35,13 @@ class ReviewPlaceCreateBloc
     Emitter<ReviewPlaceCreateState> emit,
   ) async {
     try {
-      final _ = await _reviewRepository.create(
+      final placeId = await _reviewRepository.create(
         description: event.description,
         rating: event.rating,
         photoFiles: event.photoFiles,
       );
       LeLog.bd(this, _onCreated, "success");
-      emit(ReviewPlaceCreateSuccess());
+      emit(ReviewPlaceCreateSuccess(placeId: placeId));
     } catch (e) {
       LeLog.be(this, _onCreated, e.toString());
       emit(ReviewPlaceCreateFailure());

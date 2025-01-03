@@ -9,6 +9,7 @@ import 'package:kualiva/common/widget/custom_attach_media.dart';
 import 'package:kualiva/common/widget/custom_checkbox_button.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
+import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/widget/review_form_message.dart';
 import 'package:kualiva/review/widget/review_form_rating_bar.dart';
 
@@ -28,6 +29,28 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
 
   bool isHideUsername = false;
 
+  void _submit() {
+    // TODO fix ui for loading, success and error
+    context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceCreated(
+          description: _reviewMsgCtl.text.trim(),
+          rating: ratingStar,
+          photoFiles: reviewMedia,
+        ));
+    customAlertDialog(
+      context: context,
+      dismissable: true,
+      title: Text(
+        "Conratulation!",
+      ),
+      content: Text(
+        "You get 10 points",
+      ),
+      icon: Icon(
+        Icons.generating_tokens_outlined,
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _reviewMsgCtl.dispose();
@@ -36,13 +59,25 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _reviewFormAppBar(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          height: Sizeutils.height,
-          child: _body(context),
+    return BlocListener<ReviewPlaceCreateBloc, ReviewPlaceCreateState>(
+      listener: (context, state) {
+        if (state is ReviewPlaceCreateSuccess) {
+          context
+              .read<ReviewPlaceMyReadBloc>()
+              .add(ReviewPlaceMyReadRefreshed(placeId: state.placeId));
+
+          Navigator.pop(context); // Pop this screen
+          Navigator.pop(context); // Pop verify modal
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: _reviewFormAppBar(context),
+          body: SizedBox(
+            width: double.maxFinite,
+            height: Sizeutils.height,
+            child: _body(context),
+          ),
         ),
       ),
     );
@@ -135,28 +170,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
             theme(context).colorScheme.primary,
           ],
           textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-          onPressed: () {
-            // TODO fix ui for loading, success and error
-            context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceCreated(
-                  description: _reviewMsgCtl.text.trim(),
-                  rating: ratingStar,
-                  photoFiles: reviewMedia,
-                ));
-            customAlertDialog(
-              context: context,
-              dismissable: true,
-              title: Text(
-                "Conratulation!",
-              ),
-              content: Text(
-                "You get 10 points",
-              ),
-              icon: Icon(
-                Icons.generating_tokens_outlined,
-              ),
-            );
-            Navigator.pop(context);
-          },
+          onPressed: _submit,
         ),
       ),
     );

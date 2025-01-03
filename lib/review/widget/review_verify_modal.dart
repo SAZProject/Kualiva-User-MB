@@ -29,6 +29,16 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
 
   List<String> invoiceMedia = [];
 
+  void _submit() {
+    context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceTempCreated(
+          placeUniqueId: widget.placeUniqueId,
+          placeCategory: widget.placeCategory,
+          invoice: _transactionCtl.text.trim(),
+          invoiceFile: '', // invoiceMedia[0], TODO Harusnya cuma 1 gambar saja
+        ));
+    Navigator.pushNamed(context, AppRoutes.reviewFormScreen);
+  }
+
   @override
   void dispose() {
     _transactionCtl.dispose();
@@ -156,15 +166,7 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
           buttonStyle:
               CustomButtonStyles.fillOnSecondaryContainerNoBdr(context),
           textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-          onPressed: () {
-            context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceTempCreated(
-                  placeUniqueId: widget.placeUniqueId,
-                  placeCategory: widget.placeCategory,
-                  invoice: _transactionCtl.text.trim(),
-                  invoiceFile: invoiceMedia[0],
-                ));
-            Navigator.pushNamed(context, AppRoutes.reviewFormScreen);
-          },
+          onPressed: _submit,
         ),
       ),
     );

@@ -8,9 +8,9 @@ final class ReviewPlaceMyReadInitial extends ReviewPlaceMyReadState {}
 final class ReviewPlaceMyReadLoading extends ReviewPlaceMyReadState {}
 
 final class ReviewPlaceMyReadSuccess extends ReviewPlaceMyReadState {
-  final List<ReviewPlaceModel> reviewsPlace;
+  final ReviewPlaceModel reviewPlace;
 
-  ReviewPlaceMyReadSuccess({required this.reviewsPlace});
+  ReviewPlaceMyReadSuccess({required this.reviewPlace});
 }
 
 final class ReviewPlaceMyReadFailure extends ReviewPlaceMyReadState {}

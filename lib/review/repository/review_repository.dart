@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 // import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/data/dio_client.dart';
@@ -34,7 +35,7 @@ class ReviewRepository {
   }
 
   /// Add Reviews by Place
-  Future<void> create({
+  Future<String> create({
     required String description,
     required double rating,
     required List<String> photoFiles,
@@ -58,7 +59,7 @@ class ReviewRepository {
     //     .map((e) => ReviewPlaceModel.fromMap(e))
     //     .toList();
 
-    return;
+    return placeUniqueId!;
   }
 
   /// get other Reviews by Place / Merchant
@@ -87,7 +88,7 @@ class ReviewRepository {
   }
 
   /// get my Reviews by Place / Merchant
-  Future<List<ReviewPlaceModel>> myReviewGetByPlace({
+  Future<ReviewPlaceModel> myReviewGetByPlace({
     required String placeId,
   }) async {
     // final reviewPlaceBox =
@@ -98,15 +99,14 @@ class ReviewRepository {
     //   LeLog.rd(this, getByPlace, reviewPlaceList.toString());
     //   return reviewPlaceList;
     // }
+    debugPrint('LeRucco');
+    debugPrint(placeId); // ChIJb59oH_P1aS4RePRpX6xEoP0
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get('/reviews/$placeId/place/me');
     });
 
-    final data = (res.data as List<dynamic>)
-        .map((e) => ReviewPlaceModel.fromMap(e))
-        .toList();
-    // reviewPlaceBox.addAll(data);
+    final data = ReviewPlaceModel.fromMap(res.data);
     LeLog.rd(this, myReviewGetByPlace, data.toString());
     return data;
   }

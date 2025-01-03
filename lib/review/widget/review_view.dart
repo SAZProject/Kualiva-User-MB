@@ -5,17 +5,24 @@ import 'package:kualiva/common/widget/custom_rating_bar.dart';
 // import 'package:kualiva/data/model/review_model.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 
-class ReviewView extends StatelessWidget {
+class ReviewView extends StatefulWidget {
   const ReviewView({super.key, required this.reviewData});
 
   final ReviewPlaceModel reviewData;
-  // final ReviewModel reviewData;
 
+  @override
+  State<ReviewView> createState() => _ReviewViewState();
+}
+
+class _ReviewViewState extends State<ReviewView> {
+  bool isLiked = false;
+
+  // final ReviewModel reviewData;
   void _popUpMenuAction(BuildContext context, int index) {
     switch (index) {
       default:
         Navigator.pushNamed(context, AppRoutes.reportReviewScreen,
-            arguments: reviewData);
+            arguments: widget.reviewData);
         break;
     }
   }
@@ -57,7 +64,7 @@ class ReviewView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            reviewData.author.username,
+                            widget.reviewData.author.username,
                             // reviewData.username,
                             style: theme(context).textTheme.titleMedium,
                             maxLines: 1,
@@ -68,13 +75,13 @@ class ReviewView extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  reviewData.rating.toString(),
+                                  widget.reviewData.rating.toString(),
                                   style: theme(context).textTheme.bodySmall,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 CustomRatingBar(
-                                  initialRating: reviewData.rating,
+                                  initialRating: widget.reviewData.rating,
                                   color: theme(context).colorScheme.primary,
                                 ),
                               ],
@@ -96,9 +103,15 @@ class ReviewView extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 4.h),
-                  child: Icon(
-                    Icons.favorite,
-                    size: 20.h,
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isLiked = !isLiked;
+                      });
+                    },
+                    icon: Icon(Icons.favorite,
+                        size: 20.h,
+                        color: isLiked ? Colors.redAccent : Colors.grey),
                   ),
                 ),
                 PopupMenuButton(
@@ -125,7 +138,7 @@ class ReviewView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  DatetimeUtils.dmy(reviewData.createdAt),
+                  DatetimeUtils.dmy(widget.reviewData.createdAt),
                   // DatetimeUtils.dmy(reviewData.reviewDate),
                   style: theme(context).textTheme.bodySmall,
                   maxLines: 1,
@@ -133,7 +146,7 @@ class ReviewView extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  reviewData.description,
+                  widget.reviewData.description,
                   // reviewData.content,
                   style: CustomTextStyles(context).bodySmall12,
                   maxLines: 4,

@@ -1,18 +1,18 @@
 part of 'review_place_read_bloc.dart';
 
 @immutable
-sealed class ReviewPlaceReadState {}
+sealed class ReviewPlaceOtherReadState {}
 
-final class ReviewPlaceReadInitial extends ReviewPlaceReadState {}
+final class ReviewPlaceOtherReadInitial extends ReviewPlaceOtherReadState {}
 
-final class ReviewPlaceReadLoading extends ReviewPlaceReadState {}
+final class ReviewPlaceOtherReadLoading extends ReviewPlaceOtherReadState {}
 
-final class ReviewPlaceReadSuccess extends ReviewPlaceReadState {
+final class ReviewPlaceOtherReadSuccess extends ReviewPlaceOtherReadState {
   final List<ReviewPlaceModel> reviewsPlace;
 
-  ReviewPlaceReadSuccess({required this.reviewsPlace});
+  ReviewPlaceOtherReadSuccess({required this.reviewsPlace});
 }
 
-final class ReviewPlaceReadFailure extends ReviewPlaceReadState {}
+final class ReviewPlaceOtherReadFailure extends ReviewPlaceOtherReadState {}
 
-final class ReviewPlaceReadRefresh extends ReviewPlaceReadState {}
+final class ReviewPlaceOtherReadRefresh extends ReviewPlaceOtherReadState {}

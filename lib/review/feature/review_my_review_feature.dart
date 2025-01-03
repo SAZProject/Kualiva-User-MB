@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/data/model/f_n_b_model.dart';
+import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
+import 'package:kualiva/review/widget/review_view.dart';
 
 class ReviewMyReviewFeature extends StatelessWidget {
-  const ReviewMyReviewFeature({super.key, required this.fnbData});
-
-  final FNBModel fnbData;
+  const ReviewMyReviewFeature({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,26 +28,25 @@ class ReviewMyReviewFeature extends StatelessWidget {
             label: context.tr("review.my_review"),
             useIcon: false,
           ),
-          InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, AppRoutes.reviewFormScreen,
-                  arguments: fnbData);
-            },
-            child: Container(
+          BlocBuilder<ReviewPlaceMyReadBloc, ReviewPlaceMyReadState>(
+              builder: (context, state) {
+            if (state is! ReviewPlaceMyReadSuccess) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            if (state.reviewsPlace.isEmpty) {
+              return CustomEmptyState();
+            }
+
+            return Container(
               height: 150.h,
               margin: EdgeInsets.symmetric(horizontal: 5.h),
               width: double.maxFinite,
               child: Center(
-                child: Text(
-                  context.tr("review.no_review"),
-                  textAlign: TextAlign.center,
-                  style: theme(context).textTheme.headlineSmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                child: ReviewView(reviewData: state.reviewsPlace[0]),
               ),
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

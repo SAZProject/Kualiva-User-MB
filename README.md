@@ -5,8 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.67
-- Create review & tested (no ui representation)
+Ver 0.0.68
+- Add my review connect with bloc and db (untested)
+- Add review dummy like (still not connect to db)
 ```
 
 ## Getting Started

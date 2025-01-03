@@ -6,27 +6,28 @@ import 'package:kualiva/review/repository/review_repository.dart';
 part 'review_place_read_event.dart';
 part 'review_place_read_state.dart';
 
-class ReviewPlaceReadBloc
-    extends Bloc<ReviewPlaceReadEvent, ReviewPlaceReadState> {
+class ReviewPlaceOtherReadBloc
+    extends Bloc<ReviewPlaceOtherReadEvent, ReviewPlaceOtherReadState> {
   final ReviewRepository _reviewRepository;
-  ReviewPlaceReadBloc(this._reviewRepository)
-      : super(ReviewPlaceReadInitial()) {
-    on<ReviewPlaceReadEvent>((event, emit) => emit(ReviewPlaceReadLoading()));
-    on<ReviewPlaceReadFetched>(_onFetched);
+  ReviewPlaceOtherReadBloc(this._reviewRepository)
+      : super(ReviewPlaceOtherReadInitial()) {
+    on<ReviewPlaceOtherReadEvent>(
+        (event, emit) => emit(ReviewPlaceOtherReadLoading()));
+    on<ReviewPlaceOtherReadFetched>(_onOtherReviewFetched);
   }
 
-  void _onFetched(
-    ReviewPlaceReadFetched event,
-    Emitter<ReviewPlaceReadState> emit,
+  void _onOtherReviewFetched(
+    ReviewPlaceOtherReadFetched event,
+    Emitter<ReviewPlaceOtherReadState> emit,
   ) async {
     try {
       final List<ReviewPlaceModel> reviewsPlace =
-          await _reviewRepository.getByPlace(placeId: event.placeId);
-      LeLog.bd(this, _onFetched, reviewsPlace.toString());
-      emit(ReviewPlaceReadSuccess(reviewsPlace: reviewsPlace));
+          await _reviewRepository.otherReviewGetByPlace(placeId: event.placeId);
+      LeLog.bd(this, _onOtherReviewFetched, reviewsPlace.toString());
+      emit(ReviewPlaceOtherReadSuccess(reviewsPlace: reviewsPlace));
     } catch (e) {
-      LeLog.be(this, _onFetched, e.toString());
-      emit(ReviewPlaceReadFailure());
+      LeLog.be(this, _onOtherReviewFetched, e.toString());
+      emit(ReviewPlaceOtherReadFailure());
     }
   }
 }

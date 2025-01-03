@@ -8,8 +8,10 @@ import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/data/model/review_model.dart';
 import 'package:kualiva/data/place_category_enum.dart';
+import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
 import 'package:kualiva/review/feature/review_filter_feature.dart';
+import 'package:kualiva/review/feature/review_my_review_feature.dart';
 import 'package:kualiva/review/feature/review_other_review_feature.dart';
 import 'package:kualiva/review/feature/review_search_bar_feature.dart';
 import 'package:kualiva/review/widget/review_verify_modal.dart';
@@ -53,8 +55,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
   void initState() {
     super.initState();
     context
-        .read<ReviewPlaceReadBloc>()
-        .add(ReviewPlaceReadFetched(placeId: placeId));
+        .read<ReviewPlaceOtherReadBloc>()
+        .add(ReviewPlaceOtherReadFetched(placeId: placeId));
+    context
+        .read<ReviewPlaceMyReadBloc>()
+        .add(ReviewPlaceMyReadFetched(placeId: placeId));
   }
 
   @override
@@ -80,11 +85,18 @@ class _ReviewScreenState extends State<ReviewScreen> {
   Widget _body(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<ReviewPlaceReadBloc, ReviewPlaceReadState>(
+        BlocListener<ReviewPlaceOtherReadBloc, ReviewPlaceOtherReadState>(
           listener: (context, state) {
             LeLog.sd(this, _body, state.toString());
-            if (state is! ReviewPlaceReadSuccess) return;
-            if (state is! ReviewPlaceReadLoading) return;
+            if (state is! ReviewPlaceOtherReadSuccess) return;
+            if (state is! ReviewPlaceOtherReadLoading) return;
+          },
+        ),
+        BlocListener<ReviewPlaceMyReadBloc, ReviewPlaceMyReadState>(
+          listener: (context, state) {
+            LeLog.sd(this, _body, state.toString());
+            if (state is! ReviewPlaceMyReadSuccess) return;
+            if (state is! ReviewPlaceMyReadLoading) return;
           },
         ),
       ],
@@ -104,7 +116,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     selectedCategory: selectedCategory,
                   ),
                   SizedBox(height: 5.h),
-                  // ReviewMyReviewFeature(fnbData: fnbData), // TODO First
+                  ReviewMyReviewFeature(),
                   SizedBox(height: 5.h),
                   ReviewOtherReviewFeature(),
                   SizedBox(height: 5.h),

@@ -61,8 +61,8 @@ class ReviewRepository {
     return;
   }
 
-  /// Reviews by Place / Merchant
-  Future<List<ReviewPlaceModel>> getByPlace({
+  /// get other Reviews by Place / Merchant
+  Future<List<ReviewPlaceModel>> otherReviewGetByPlace({
     required String placeId,
   }) async {
     // final reviewPlaceBox =
@@ -82,7 +82,32 @@ class ReviewRepository {
         .map((e) => ReviewPlaceModel.fromMap(e))
         .toList();
     // reviewPlaceBox.addAll(data);
-    LeLog.rd(this, getByPlace, data.toString());
+    LeLog.rd(this, otherReviewGetByPlace, data.toString());
+    return data;
+  }
+
+  /// get my Reviews by Place / Merchant
+  Future<List<ReviewPlaceModel>> myReviewGetByPlace({
+    required String placeId,
+  }) async {
+    // final reviewPlaceBox =
+    //     Hive.box<ReviewPlaceModel>(MyHive.reviewPlaceModel.name);
+
+    // if (reviewPlaceBox.values.toList().isNotEmpty) {
+    //   final reviewPlaceList = reviewPlaceBox.values.toList();
+    //   LeLog.rd(this, getByPlace, reviewPlaceList.toString());
+    //   return reviewPlaceList;
+    // }
+
+    final res = await _dioClient.dio().then((dio) {
+      return dio.get('/reviews/$placeId/place/me');
+    });
+
+    final data = (res.data as List<dynamic>)
+        .map((e) => ReviewPlaceModel.fromMap(e))
+        .toList();
+    // reviewPlaceBox.addAll(data);
+    LeLog.rd(this, myReviewGetByPlace, data.toString());
     return data;
   }
 

@@ -1,20 +1,20 @@
 part of 'review_place_read_bloc.dart';
 
 @immutable
-sealed class ReviewPlaceReadEvent {}
+sealed class ReviewPlaceOtherReadEvent {}
 
-final class ReviewPlaceReadFetched extends ReviewPlaceReadEvent {
+final class ReviewPlaceOtherReadFetched extends ReviewPlaceOtherReadEvent {
   final String placeId;
 
-  ReviewPlaceReadFetched({
+  ReviewPlaceOtherReadFetched({
     required this.placeId,
   });
 }
 
-final class ReviewPlaceReadRefreshed extends ReviewPlaceReadEvent {
+final class ReviewPlaceOtherReadRefreshed extends ReviewPlaceOtherReadEvent {
   final String placeId;
 
-  ReviewPlaceReadRefreshed({
+  ReviewPlaceOtherReadRefreshed({
     required this.placeId,
   });
 }

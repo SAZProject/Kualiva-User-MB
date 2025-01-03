@@ -36,9 +36,9 @@ class ReviewOtherReviewFeature extends StatelessWidget {
   }
 
   Widget _list(BuildContext context) {
-    return BlocBuilder<ReviewPlaceReadBloc, ReviewPlaceReadState>(
+    return BlocBuilder<ReviewPlaceOtherReadBloc, ReviewPlaceOtherReadState>(
       builder: (context, state) {
-        if (state is! ReviewPlaceReadSuccess) {
+        if (state is! ReviewPlaceOtherReadSuccess) {
           return Center(child: CircularProgressIndicator());
         }
 

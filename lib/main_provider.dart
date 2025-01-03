@@ -21,6 +21,7 @@ import 'package:kualiva/places/fnb/repository/fnb_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:kualiva/report/repository/report_repository.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
+import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
 import 'package:kualiva/review/cubit/review_search_bar_cubit.dart';
 import 'package:kualiva/review/repository/review_repository.dart';
@@ -129,7 +130,10 @@ class MainProvider extends StatelessWidget {
           return UploadFileBloc(context.read<UploadFileRepository>());
         }),
         BlocProvider(create: (context) {
-          return ReviewPlaceReadBloc(context.read<ReviewRepository>());
+          return ReviewPlaceOtherReadBloc(context.read<ReviewRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return ReviewPlaceMyReadBloc(context.read<ReviewRepository>());
         }),
         BlocProvider(create: (context) {
           return ReviewPlaceCreateBloc(context.read<ReviewRepository>());

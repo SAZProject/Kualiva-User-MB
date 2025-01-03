@@ -86,6 +86,9 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         Navigator.pushNamed(context, AppRoutes.fnbScreen);
         break;
+      case 1:
+        Navigator.pushNamed(context, AppRoutes.hostelryScreen);
+        break;
       default:
         break;
     }
@@ -184,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
       BuildContext context, int index, HomeGridMenuModel gridMenu) {
     return InkWell(
       borderRadius: BorderRadiusStyle.roundedBorder10,
-      onTap: index == 0 ? () => _gridMenuAction(index) : null,
+      onTap: index == 0 || index == 1 ? () => _gridMenuAction(index) : null,
       child: Container(
         width: double.maxFinite,
         padding: EdgeInsets.symmetric(horizontal: 4.h),
@@ -192,8 +195,9 @@ class _HomeScreenState extends State<HomeScreen> {
             CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder10,
                 ),
-        foregroundDecoration:
-            index == 0 ? null : CustomDecoration(context).foregroundBlur,
+        foregroundDecoration: index == 0 || index == 1
+            ? null
+            : CustomDecoration(context).foregroundBlur,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

@@ -42,6 +42,27 @@ class FnbRepository {
     return data;
   }
 
+  Future<List<FnbNearestModel>> getPlacesNearestHotel({
+    required double latitude,
+    required double longitude,
+  }) async {
+    final res = await _dioClient.dio().then((dio) {
+      return dio.get(
+        '/places/nearest-hotel',
+        queryParameters: {
+          'latitude': latitude,
+          'longitude': longitude,
+          'type': 'ALL',
+        },
+      );
+    });
+    final data = (res.data as List<dynamic>)
+        .map((e) => FnbNearestModel.fromMap(e))
+        .toList();
+    LeLog.rd(this, getPlacesNearest, data.toString());
+    return data;
+  }
+
   Future<FnbDetailModel> getPlaceDetail({
     required String placeId,
   }) async {

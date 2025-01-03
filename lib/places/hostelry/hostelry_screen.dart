@@ -11,21 +11,21 @@ import 'package:kualiva/data/model/f_n_b_model.dart';
 import 'package:kualiva/data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:kualiva/data/model/ui_model/filters_model.dart';
 import 'package:kualiva/data/current_location/current_location_model.dart';
-import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
-import 'package:kualiva/places/fnb/feature/fnb_nearest_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_search_bar_feature.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
+import 'package:kualiva/places/hostelry/bloc/hotel_nearest_bloc.dart';
+import 'package:kualiva/places/hostelry/feature/hotel_nearest_feature.dart';
 
-class FnbScreen extends StatefulWidget {
-  const FnbScreen({super.key});
+class HostelryScreen extends StatefulWidget {
+  const HostelryScreen({super.key});
 
   @override
-  State<FnbScreen> createState() => _FnbScreenState();
+  State<HostelryScreen> createState() => _HostelryScreenState();
 }
 
-class _FnbScreenState extends State<FnbScreen> {
+class _HostelryScreenState extends State<HostelryScreen> {
   final _parentScrollController = ScrollController();
   final _childScrollController = ScrollController();
   final _childScrollController2 = ScrollController();
@@ -60,12 +60,12 @@ class _FnbScreenState extends State<FnbScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
-        context
-            .read<FnbNearestBloc>()
-            .add(FnbNearestFetched(latitude: 0.0, longitude: 0.0));
+        // context
+        //     .read<HotelNearestBloc>()
+        //     .add(HotelNearestFetched(latitude: 0.0, longitude: 0.0));
         if (state is! CurrentLocationSuccess) return;
 
-        context.read<FnbNearestBloc>().add(FnbNearestFetched(
+        context.read<HotelNearestBloc>().add(HotelNearestFetched(
               latitude: state.currentLocationModel.latitude,
               longitude: state.currentLocationModel.longitude,
             ));
@@ -116,7 +116,7 @@ class _FnbScreenState extends State<FnbScreen> {
               _tagsFilter(context),
               SizedBox(height: 5.h),
               // _nearestList(context),
-              FnbNearestFeature(
+              HotelNearestFeature(
                 parentContext: context,
                 parentScrollController: _parentScrollController,
                 childScrollController: _childScrollController,

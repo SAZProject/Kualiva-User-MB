@@ -62,10 +62,10 @@ class FnbNearestModel {
   final double longitude;
 
   @HiveField(17)
-  final String website;
+  final String? website;
 
   @HiveField(18)
-  final String openingHours;
+  final String? openingHours;
 
   @HiveField(19)
   final String? featuredImage;
@@ -204,9 +204,9 @@ class FnbNearestModel {
       googleMapsUrl: map['googleMapsURL'] as String,
       latitude: double.parse(map['latitude'].toString()),
       longitude: double.parse(map['longitude'].toString()),
-      website: map['website'] as String,
-      openingHours: map['openingHours'] as String,
-      featuredImage: map['featuredImage'] as String?,
+      website: map['website'],
+      openingHours: map['openingHours'] as String?,
+      featuredImage: map['featuredImage'],
       cid: (map['cid']).toString(), //double.parse(map['cid']).toString(),
       fid: map['fid'] as String,
       placeId: map['placeId'] as String,

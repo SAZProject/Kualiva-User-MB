@@ -18,6 +18,7 @@ import 'package:kualiva/places/fnb/fnb_cuisine_screen.dart';
 import 'package:kualiva/places/fnb/fnb_detail_menu_screen.dart';
 import 'package:kualiva/layout/main_layout.dart';
 import 'package:kualiva/places/fnb/fnb_filters_screen.dart';
+import 'package:kualiva/places/hostelry/hostelry_screen.dart';
 import 'package:kualiva/profile/account_setting_screen.dart';
 import 'package:kualiva/profile/language_screen.dart';
 import 'package:kualiva/profile/my_profile_screen.dart';
@@ -54,6 +55,8 @@ class AppRoutes {
   static const String homeEventDetailScreen = "/home_event_detail_screen";
 
   static const String fnbScreen = "/f_n_b_screen";
+
+  static const String hostelryScreen = "/hostel_screen";
 
   static const String fnbCuisineScreen = "/f_n_b_cuisine_screen";
 
@@ -151,6 +154,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.fnbScreen:
       return PageTransition(
           child: const FnbScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.hostelryScreen:
+      return PageTransition(
+          child: const HostelryScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

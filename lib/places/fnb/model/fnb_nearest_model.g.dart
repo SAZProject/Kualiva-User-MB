@@ -34,7 +34,7 @@ class FnbNearestModelAdapter extends TypeAdapter<FnbNearestModel> {
       googleMapsUrl: fields[14] as String,
       latitude: fields[15] as double,
       longitude: fields[16] as double,
-      website: fields[17] as String,
+      website: fields[17] as String?,
       openingHours: fields[18] as String,
       featuredImage: fields[19] as String?,
       cid: fields[20] as String,

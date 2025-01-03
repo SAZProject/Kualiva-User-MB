@@ -1,15 +1,10 @@
 import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
 import 'package:kualiva/common/utility/image_constant.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/data/dio_client.dart';
 import 'package:kualiva/home/model/home_ad_banner_model.dart';
 import 'package:kualiva/home/model/home_featured_model.dart';
 
 class PromotionRepository {
-  PromotionRepository(this._dioClient);
-
-  final DioClient _dioClient;
-
   final List<HomeAdBannerModel> _homeAdBannerDummy = [
     HomeAdBannerModel(
       urlImage: ImageConstant.event1,

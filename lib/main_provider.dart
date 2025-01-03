@@ -18,6 +18,7 @@ import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
 import 'package:kualiva/places/fnb/repository/fnb_repository.dart';
+import 'package:kualiva/places/hostelry/bloc/hotel_nearest_bloc.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 import 'package:kualiva/profile/repository/profile_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
@@ -63,9 +64,7 @@ class MainProvider extends StatelessWidget {
               context.read<TokenManager>(), context.read<DioClient>());
         }),
         RepositoryProvider(create: (context) {
-          return PromotionRepository(
-            context.read<DioClient>(),
-          );
+          return PromotionRepository();
         }),
         RepositoryProvider(
           create: (context) {
@@ -106,6 +105,9 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return FnbNearestBloc(context.read<FnbRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return HotelNearestBloc(context.read<FnbRepository>());
         }),
         BlocProvider(create: (context) {
           return CurrentLocationBloc();

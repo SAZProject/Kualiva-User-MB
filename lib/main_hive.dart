@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/auth/model/user_profile_model.dart';
-import 'package:kualiva/common/feature/current_location/current_location_model.dart';
+import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
 
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 import 'package:kualiva/review/model/author_model.dart';
@@ -38,7 +38,7 @@ class MainHive {
 }
 
 enum MyHive {
-  fnbNearestLocation(0, ''),
+  fnbNearestLocation(0, 'fnbNearestLocation'),
   fnbNearest(1, 'fnb_nearest'),
   currentLocation(2, 'current_location'),
   author(3, 'author'),

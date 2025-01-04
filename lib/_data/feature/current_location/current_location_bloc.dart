@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/utility/location_util.dart';
-import 'package:kualiva/common/feature/current_location/current_location_model.dart';
+import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
 
 part 'current_location_event.dart';
 part 'current_location_state.dart';

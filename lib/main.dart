@@ -35,13 +35,12 @@ void main() async {
     dotenv.load(fileName: dotenvFileName),
     EasyLocalization.ensureInitialized(),
     MainHive.registerAdapter(),
+    Motion.instance.initialize(),
   ]);
 
   await MainHive.openBox();
 
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
-
-  await Motion.instance.initialize();
 
   runApp(
     EasyLocalization(

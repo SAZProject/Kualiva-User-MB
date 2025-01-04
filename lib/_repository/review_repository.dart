@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/data/dio_client.dart';
-import 'package:kualiva/data/place_category_enum.dart';
+import 'package:kualiva/_data/dio_client.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 // import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 

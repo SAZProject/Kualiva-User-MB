@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/data/model/ui_model/collection_model.dart';
+import 'package:kualiva/_data/model/ui_model/collection_model.dart';
 
 class SaveToCollection extends StatefulWidget {
   const SaveToCollection({super.key});

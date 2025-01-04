@@ -7,7 +7,7 @@ import 'package:kualiva/common/utility/image_utility.dart';
 import 'package:kualiva/common/widget/custom_attach_media.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
-import 'package:kualiva/data/place_category_enum.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
 
 class ReviewVerifyModal extends StatefulWidget {

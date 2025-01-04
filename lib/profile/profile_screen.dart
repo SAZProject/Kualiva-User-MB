@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/widget/custom_outlined_button.dart';
-import 'package:kualiva/data/model/ui_model/profile_menu_model.dart';
+import 'package:kualiva/_data/model/ui_model/profile_menu_model.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

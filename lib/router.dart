@@ -4,10 +4,10 @@ import 'package:kualiva/auth/otp_page_screen.dart';
 import 'package:kualiva/auth/sign_in_screen.dart';
 import 'package:kualiva/auth/sign_up_screen.dart';
 import 'package:kualiva/common/screen/location_screen.dart';
-import 'package:kualiva/data/model/review_model.dart';
-import 'package:kualiva/data/model/ui_model/filters_model.dart';
-import 'package:kualiva/data/model/ui_model/home_event_model.dart';
-import 'package:kualiva/data/screen_arguments/place_argument.dart';
+import 'package:kualiva/_data/model/review_model.dart';
+import 'package:kualiva/_data/model/ui_model/filters_model.dart';
+import 'package:kualiva/_data/model/ui_model/home_event_model.dart';
+import 'package:kualiva/places/fnb/argument/fnb_detail_argument.dart';
 import 'package:kualiva/onboarding/onboarding_verifying_user.dart';
 import 'package:kualiva/home/home_event_detail_screen.dart';
 import 'package:kualiva/home/home_event_screen.dart';
@@ -192,7 +192,7 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reviewScreen:
-      final placeArg = routeSetting.arguments as PlaceArgument;
+      final placeArg = routeSetting.arguments as FnbDetailScreenArgument;
       return PageTransition(
           child: ReviewScreen(
             placeId: placeArg.placeUniqueId,

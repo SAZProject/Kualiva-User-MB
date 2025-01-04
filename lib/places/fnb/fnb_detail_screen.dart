@@ -13,9 +13,9 @@ import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_float_modal.dart';
 import 'package:kualiva/common/widget/custom_map_bottom_sheet.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/data/model/ui_model/promo_model.dart';
-import 'package:kualiva/data/place_category_enum.dart';
-import 'package:kualiva/data/screen_arguments/place_argument.dart';
+import 'package:kualiva/_data/model/ui_model/promo_model.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
+import 'package:kualiva/places/fnb/argument/fnb_detail_argument.dart';
 
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
@@ -830,7 +830,7 @@ class FnbDetailScreen extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 AppRoutes.reviewScreen,
-                arguments: PlaceArgument(
+                arguments: FnbDetailScreenArgument(
                   placeUniqueId: fnbDetail.placeId,
                   placeCategory: PlaceCategoryEnum.fnb,
                 ),
@@ -842,7 +842,7 @@ class FnbDetailScreen extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 AppRoutes.reviewScreen,
-                arguments: PlaceArgument(
+                arguments: FnbDetailScreenArgument(
                   placeUniqueId: fnbDetail.placeId,
                   placeCategory: PlaceCategoryEnum.fnb,
                 ),

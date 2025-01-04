@@ -2,8 +2,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/data/dio_client.dart';
-import 'package:kualiva/data/model/upload_file_model.dart';
+import 'package:kualiva/_data/dio_client.dart';
+import 'package:kualiva/_data/model/upload_file_model.dart';
 
 class UploadFileRepository {
   UploadFileRepository(this._dioClient);

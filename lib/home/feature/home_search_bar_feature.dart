@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/data/search_bar/my_sliver_search_bar_widget.dart';
+import 'package:kualiva/common/feature/search_bar/my_sliver_search_bar_widget.dart';
 import 'package:kualiva/home/cubit/home_search_bar_cubit.dart';
 
 class HomeSearchBarFeature extends StatelessWidget {

@@ -10,8 +10,8 @@ import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/data/model/ui_model/home_event_model.dart';
-import 'package:kualiva/data/model/ui_model/loc_popular_city_model.dart';
+import 'package:kualiva/_data/model/ui_model/home_event_model.dart';
+import 'package:kualiva/_data/model/ui_model/loc_popular_city_model.dart';
 
 class WhatGoingOnScreen extends StatefulWidget {
   const WhatGoingOnScreen({super.key});

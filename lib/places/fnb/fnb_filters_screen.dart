@@ -4,7 +4,7 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/data/model/ui_model/filters_model.dart';
+import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_slider.dart';
 

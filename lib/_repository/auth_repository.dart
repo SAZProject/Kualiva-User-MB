@@ -1,6 +1,6 @@
 import 'package:kualiva/_repository/token_manager.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/data/dio_client.dart';
+import 'package:kualiva/_data/dio_client.dart';
 
 class AuthRepository {
   AuthRepository(this._tokenManager, this._dioClient);

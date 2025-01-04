@@ -4,7 +4,7 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_alert_dialog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
-import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/_data/model/review_model.dart';
 import 'package:kualiva/report/feature/report_review_reason.dart';
 import 'package:kualiva/report/widget/report_review_detail.dart';
 

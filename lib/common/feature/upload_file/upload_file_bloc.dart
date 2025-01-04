@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/data/model/upload_file_model.dart';
-import 'package:kualiva/data/upload_file/upload_file_repository.dart';
+import 'package:kualiva/_data/model/upload_file_model.dart';
+import 'package:kualiva/_repository/upload_file_repository.dart';
 part 'upload_file_event.dart';
 part 'upload_file_state.dart';
 

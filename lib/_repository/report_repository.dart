@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/data/dio_client.dart';
-import 'package:kualiva/data/dio_client_minio.dart';
+import 'package:kualiva/_data/dio_client.dart';
+import 'package:kualiva/_data/dio_client_minio.dart';
 import 'package:kualiva/report/model/parameter_model.dart';
 import 'package:mime/mime.dart';
 import 'package:http_parser/http_parser.dart';

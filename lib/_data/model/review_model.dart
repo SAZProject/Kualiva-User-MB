@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:kualiva/data/model/ui_model/image_model.dart';
+import 'package:kualiva/_data/model/ui_model/image_model.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable

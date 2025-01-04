@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/data/place_category_enum.dart';
-import 'package:kualiva/repository/review_repository.dart';
+import 'package:kualiva/_repository/review_repository.dart';
 
 part 'review_place_create_event.dart';
 part 'review_place_create_state.dart';

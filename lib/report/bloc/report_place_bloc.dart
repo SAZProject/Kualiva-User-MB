@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/report/model/parameter_model.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kualiva/repository/report_repository.dart';
+import 'package:kualiva/_repository/report_repository.dart';
 
 part 'report_place_event.dart';
 part 'report_place_state.dart';

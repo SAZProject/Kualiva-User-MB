@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kualiva/repository/auth_repository.dart';
+import 'package:kualiva/_repository/auth_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 
 part 'auth_event.dart';

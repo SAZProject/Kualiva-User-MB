@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/repository/profile_repository.dart';
+import 'package:kualiva/_repository/profile_repository.dart';
 
 part 'user_profile_event.dart';
 part 'user_profile_state.dart';

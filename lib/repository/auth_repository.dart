@@ -1,4 +1,4 @@
-import 'package:kualiva/auth/repository/token_manager.dart';
+import 'package:kualiva/repository/token_manager.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/data/dio_client.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/home/model/home_ad_banner_model.dart';
-import 'package:kualiva/home/repository/promotion_repository.dart';
+import 'package:kualiva/repository/promotion_repository.dart';
 
 part 'home_ad_banner_event.dart';
 part 'home_ad_banner_state.dart';

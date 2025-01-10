@@ -13,10 +13,10 @@ class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
 
   @override
-  State<MainLayout> createState() => _HomeNavigationState();
+  State<MainLayout> createState() => _MainNavigationState();
 }
 
-class _HomeNavigationState extends State<MainLayout> {
+class _MainNavigationState extends State<MainLayout> {
   int _selectedPage = 0;
 
   @override

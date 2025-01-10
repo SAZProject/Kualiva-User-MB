@@ -175,4 +175,21 @@ class LocationUtil {
       closestPlace: locationsGeoPoint[distance.indexOf(min)],
     );
   }
+
+  /// Calculate distance location based latitude and longitude.
+  /// Distance in Meters.
+  static double calculateDistance({
+    required double oldLatitude,
+    required double oldLongitude,
+    required double newLatitude,
+    required double newLongitude,
+  }) {
+    final distance = Geolocator.distanceBetween(
+      oldLatitude,
+      oldLongitude,
+      newLatitude,
+      newLongitude,
+    );
+    return distance.abs();
+  }
 }

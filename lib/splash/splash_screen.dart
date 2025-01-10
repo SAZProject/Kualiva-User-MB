@@ -98,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen> {
       listener: (context, state) {
         if (state is AuthTokenExist) {
           Navigator.pushNamedAndRemoveUntil(
-              context, AppRoutes.homeNavigationScreen, (route) => false);
+              context, AppRoutes.mainNavigationLayout, (route) => false);
         }
 
         if (state is AuthTokenNotExist) {

@@ -24,6 +24,7 @@ class MainHive {
       Hive.openBox<FnbNearestModel>(MyHive.fnbNearest.name),
       // Hive.openBox(MyHive.userProfile.name),
       Hive.openBox<UserModel>(MyHive.user.name),
+      Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name),
     ]);
   }
 

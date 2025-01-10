@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:kualiva/_repository/location_repository.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/_repository/auth_repository.dart';
 import 'package:kualiva/_repository/token_manager.dart';
@@ -92,6 +93,11 @@ class MainProvider extends StatelessWidget {
             return ProfileRepository(context.read<DioClient>());
           },
         ),
+        RepositoryProvider(
+          create: (context) {
+            return LocationRepository();
+          },
+        )
       ],
       child: child,
     );
@@ -110,7 +116,7 @@ class MainProvider extends StatelessWidget {
           return HotelNearestBloc(context.read<FnbRepository>());
         }),
         BlocProvider(create: (context) {
-          return CurrentLocationBloc();
+          return CurrentLocationBloc(context.read<LocationRepository>());
         }),
         BlocProvider(create: (context) {
           return FnbDetailBloc(context.read<FnbRepository>());

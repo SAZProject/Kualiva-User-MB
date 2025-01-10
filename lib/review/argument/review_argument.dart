@@ -1,10 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
 
-class FnbDetailScreenArgument {
+@immutable
+class ReviewArgument {
   final String placeUniqueId;
   final PlaceCategoryEnum placeCategory;
 
-  FnbDetailScreenArgument({
+  const ReviewArgument({
     required this.placeUniqueId,
     required this.placeCategory,
   });

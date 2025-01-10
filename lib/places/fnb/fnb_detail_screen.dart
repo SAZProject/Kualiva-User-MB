@@ -15,11 +15,11 @@ import 'package:kualiva/common/widget/custom_map_bottom_sheet.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/_data/model/ui_model/promo_model.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
-import 'package:kualiva/places/fnb/argument/fnb_detail_argument.dart';
 
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
+import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
@@ -28,6 +28,8 @@ class FnbDetailScreen extends StatelessWidget {
     super.key,
     required this.placeId,
   });
+
+  static const PlaceCategoryEnum placeCategory = PlaceCategoryEnum.fnb;
 
   final GlobalKey _toolTipKey = GlobalKey();
   late OverlayEntry _overlayEntry;
@@ -830,9 +832,9 @@ class FnbDetailScreen extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 AppRoutes.reviewScreen,
-                arguments: FnbDetailScreenArgument(
+                arguments: ReviewArgument(
                   placeUniqueId: fnbDetail.placeId,
-                  placeCategory: PlaceCategoryEnum.fnb,
+                  placeCategory: placeCategory,
                 ),
               );
             },
@@ -842,9 +844,9 @@ class FnbDetailScreen extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 AppRoutes.reviewScreen,
-                arguments: FnbDetailScreenArgument(
+                arguments: ReviewArgument(
                   placeUniqueId: fnbDetail.placeId,
-                  placeCategory: PlaceCategoryEnum.fnb,
+                  placeCategory: placeCategory,
                 ),
               );
             },

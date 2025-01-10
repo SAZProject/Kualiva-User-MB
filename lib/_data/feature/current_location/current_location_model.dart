@@ -18,7 +18,7 @@ class CurrentLocationModel {
   final String userCurrSubDistrict;
 
   @HiveField(4)
-  final Placemark userFullPLacemark;
+  final Placemark userFullPLacemark; // TODO Hive
 
   @HiveField(5)
   final double latitude;

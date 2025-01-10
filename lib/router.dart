@@ -7,7 +7,6 @@ import 'package:kualiva/common/screen/location_screen.dart';
 import 'package:kualiva/_data/model/review_model.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/_data/model/ui_model/home_event_model.dart';
-import 'package:kualiva/places/fnb/argument/fnb_detail_argument.dart';
 import 'package:kualiva/onboarding/onboarding_verifying_user.dart';
 import 'package:kualiva/home/home_event_detail_screen.dart';
 import 'package:kualiva/home/home_event_screen.dart';
@@ -25,6 +24,7 @@ import 'package:kualiva/profile/my_profile_screen.dart';
 import 'package:kualiva/profile/profile_screen.dart';
 import 'package:kualiva/report/report_place_screen.dart';
 import 'package:kualiva/report/report_review_screen.dart';
+import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:kualiva/review/review_form_screen.dart';
 import 'package:kualiva/review/review_screen.dart';
 import 'package:kualiva/onboarding/onboarding_screen.dart';
@@ -48,7 +48,7 @@ class AppRoutes {
 
   static const String devicePermissionScreen = "/device_permission_screen";
 
-  static const String homeNavigationScreen = "/home_nav_screen";
+  static const String mainNavigationLayout = "/main_navigation_screen";
 
   static const String homeEventScreen = "/home_event_screen";
 
@@ -132,7 +132,7 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 
-    case AppRoutes.homeNavigationScreen:
+    case AppRoutes.mainNavigationLayout:
       return PageTransition(
           child: const MainLayout(),
           type: PageTransitionType.leftToRight,
@@ -192,11 +192,11 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reviewScreen:
-      final placeArg = routeSetting.arguments as FnbDetailScreenArgument;
+      final argument = routeSetting.arguments as ReviewArgument;
       return PageTransition(
           child: ReviewScreen(
-            placeId: placeArg.placeUniqueId,
-            placeCategory: placeArg.placeCategory,
+            placeId: argument.placeUniqueId,
+            placeCategory: argument.placeCategory,
           ),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));

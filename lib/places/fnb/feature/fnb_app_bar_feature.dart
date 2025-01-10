@@ -23,12 +23,10 @@ class _FnbAppBarFeatureState extends State<FnbAppBarFeature> {
   void _checkPermissionLocation() async {
     if (!await LocationUtil.checkPermission(context)) {
       if (!mounted) return;
-      context.read<CurrentLocationBloc>().add(CurrentLocationNoPermission(
-            message: 'No Connection or error on locator',
-          ));
+      context.read<CurrentLocationBloc>().add(CurrentLocationNoPermission());
     }
     if (!mounted) return;
-    context.read<CurrentLocationBloc>().add(CurrentLocationStarted());
+    context.read<CurrentLocationBloc>().add(CurrentLocationFetched());
   }
 
   @override

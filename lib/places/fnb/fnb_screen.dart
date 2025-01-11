@@ -40,8 +40,6 @@ class _FnbScreenState extends State<FnbScreen> {
   final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
   Set<int> dummySelectedCuisine = {};
 
-  late CurrentLocationModel getUserCurrentLoc;
-
   @override
   void initState() {
     super.initState();

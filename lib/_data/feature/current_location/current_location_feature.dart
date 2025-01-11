@@ -16,7 +16,7 @@ class CurrentLocationFeature extends StatelessWidget {
         }
         if (state is CurrentLocationSuccess) {
           return _buildUserLoc(context,
-              "${state.currentLocationModel.userCurrSubDistrict}, ${state.currentLocationModel.userCurrCity}");
+              "${state.currentLocationModel.subLocality}, ${state.currentLocationModel.locality}");
         }
         // CurrentLocationLoading
         return const Center(child: CircularProgressIndicator());

@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_alert_dialog.dart';
 import 'package:kualiva/_data/model/ui_model/loc_dropdown_model.dart';
@@ -137,10 +138,11 @@ class LocationUtil {
       String fullUserCurrLocAddress = _getAddress(currentPlacemark);
 
       return CurrentLocationModel(
-        userCurrLoc: fullUserCurrLocAddress,
-        userCurrCity: currentPlacemark.locality ?? "-",
-        userCurrSubDistrict: currentPlacemark.subLocality ?? "-",
-        userFullPLacemark: currentPlacemark,
+        locationAddress: fullUserCurrLocAddress,
+        locality: currentPlacemark.locality ?? "-",
+        subLocality: currentPlacemark.subLocality ?? "-",
+        placemark:
+            CurrentLocationPlacemarkModel.fromMap(currentPlacemark.toJson()),
         latitude: currentPosition.latitude,
         longitude: currentPosition.longitude,
       );

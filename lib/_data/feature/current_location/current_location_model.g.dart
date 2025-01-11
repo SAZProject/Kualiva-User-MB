@@ -17,12 +17,12 @@ class CurrentLocationModelAdapter extends TypeAdapter<CurrentLocationModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CurrentLocationModel(
-      userCurrLoc: fields[0] as String,
-      userCurrCity: fields[1] as String,
-      userCurrSubDistrict: fields[3] as String,
-      userFullPLacemark: fields[4] as Placemark,
-      latitude: fields[5] as double,
-      longitude: fields[6] as double,
+      locationAddress: fields[0] as String,
+      locality: fields[1] as String,
+      subLocality: fields[2] as String,
+      placemark: fields[3] as CurrentLocationPlacemarkModel,
+      latitude: fields[4] as double,
+      longitude: fields[5] as double,
     );
   }
 
@@ -31,16 +31,16 @@ class CurrentLocationModelAdapter extends TypeAdapter<CurrentLocationModel> {
     writer
       ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.userCurrLoc)
+      ..write(obj.locationAddress)
       ..writeByte(1)
-      ..write(obj.userCurrCity)
+      ..write(obj.locality)
+      ..writeByte(2)
+      ..write(obj.subLocality)
       ..writeByte(3)
-      ..write(obj.userCurrSubDistrict)
+      ..write(obj.placemark)
       ..writeByte(4)
-      ..write(obj.userFullPLacemark)
-      ..writeByte(5)
       ..write(obj.latitude)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.longitude);
   }
 

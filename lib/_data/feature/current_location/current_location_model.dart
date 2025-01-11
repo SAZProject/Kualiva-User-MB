@@ -1,7 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'package:geocoding/geocoding.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+
+import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
 
 part 'current_location_model.g.dart';
 
@@ -9,45 +12,47 @@ part 'current_location_model.g.dart';
 @HiveType(typeId: 2)
 class CurrentLocationModel {
   @HiveField(0)
-  final String userCurrLoc;
+  final String locationAddress;
 
+  /// The name of the city associated with the placemark.
   @HiveField(1)
-  final String userCurrCity;
+  final String locality;
+
+  /// Additional city-level information for the placemark.
+  @HiveField(2)
+  final String subLocality;
 
   @HiveField(3)
-  final String userCurrSubDistrict;
+  final CurrentLocationPlacemarkModel placemark;
 
   @HiveField(4)
-  final Placemark userFullPLacemark; // TODO Hive
-
-  @HiveField(5)
   final double latitude;
 
-  @HiveField(6)
+  @HiveField(5)
   final double longitude;
 
   const CurrentLocationModel({
-    required this.userCurrLoc,
-    required this.userCurrCity,
-    required this.userCurrSubDistrict,
-    required this.userFullPLacemark,
+    required this.locationAddress,
+    required this.locality,
+    required this.subLocality,
+    required this.placemark,
     required this.latitude,
     required this.longitude,
   });
 
   CurrentLocationModel copyWith({
-    String? userCurrLoc,
-    String? userCurrCity,
-    String? userCurrSubDistrict,
-    Placemark? userFullPLacemark,
+    String? locationAddress,
+    String? locality,
+    String? subLocality,
+    CurrentLocationPlacemarkModel? placemark,
     double? latitude,
     double? longitude,
   }) {
     return CurrentLocationModel(
-      userCurrLoc: userCurrLoc ?? this.userCurrLoc,
-      userCurrCity: userCurrCity ?? this.userCurrCity,
-      userCurrSubDistrict: userCurrSubDistrict ?? this.userCurrSubDistrict,
-      userFullPLacemark: userFullPLacemark ?? this.userFullPLacemark,
+      locationAddress: locationAddress ?? this.locationAddress,
+      locality: locality ?? this.locality,
+      subLocality: subLocality ?? this.subLocality,
+      placemark: placemark ?? this.placemark,
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
     );
@@ -55,10 +60,10 @@ class CurrentLocationModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'userCurrLoc': userCurrLoc,
-      'userCurrCity': userCurrCity,
-      'userCurrSubDistrict': userCurrSubDistrict,
-      'userFullPLacemark': userFullPLacemark,
+      'locationAddress': locationAddress,
+      'locality': locality,
+      'subLocality': subLocality,
+      'placemark': placemark.toMap(),
       'latitude': latitude,
       'longitude': longitude,
     };
@@ -66,11 +71,11 @@ class CurrentLocationModel {
 
   factory CurrentLocationModel.fromMap(Map<String, dynamic> map) {
     return CurrentLocationModel(
-      userCurrLoc: map['userCurrLoc'] as String,
-      userCurrCity: map['userCurrCity'] as String,
-      userCurrSubDistrict: map['userCurrSubDistrict'] as String,
-      userFullPLacemark:
-          Placemark.fromMap(map['userFullPLacemark'] as Map<String, dynamic>),
+      locationAddress: map['locationAddress'] as String,
+      locality: map['locality'] as String,
+      subLocality: map['subLocality'] as String,
+      placemark: CurrentLocationPlacemarkModel.fromMap(
+          map['placemark'] as Map<String, dynamic>),
       latitude: map['latitude'] as double,
       longitude: map['longitude'] as double,
     );
@@ -83,27 +88,27 @@ class CurrentLocationModel {
 
   @override
   String toString() {
-    return 'CurrentLocationModel(userCurrLoc: $userCurrLoc, userCurrCity: $userCurrCity, userCurrSubDistrict: $userCurrSubDistrict, userFullPLacemark: $userFullPLacemark, latitude: $latitude, longitude: $longitude)';
+    return 'CurrentLocationModel(locationAddress: $locationAddress, locality: $locality, subLocality: $subLocality, placemark: $placemark, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
   bool operator ==(covariant CurrentLocationModel other) {
     if (identical(this, other)) return true;
 
-    return other.userCurrLoc == userCurrLoc &&
-        other.userCurrCity == userCurrCity &&
-        other.userCurrSubDistrict == userCurrSubDistrict &&
-        other.userFullPLacemark == userFullPLacemark &&
+    return other.locationAddress == locationAddress &&
+        other.locality == locality &&
+        other.subLocality == subLocality &&
+        other.placemark == placemark &&
         other.latitude == latitude &&
         other.longitude == longitude;
   }
 
   @override
   int get hashCode {
-    return userCurrLoc.hashCode ^
-        userCurrCity.hashCode ^
-        userCurrSubDistrict.hashCode ^
-        userFullPLacemark.hashCode ^
+    return locationAddress.hashCode ^
+        locality.hashCode ^
+        subLocality.hashCode ^
+        placemark.hashCode ^
         latitude.hashCode ^
         longitude.hashCode;
   }

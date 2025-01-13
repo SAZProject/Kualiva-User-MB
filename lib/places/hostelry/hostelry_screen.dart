@@ -10,7 +10,6 @@ import 'package:kualiva/_data/feature/current_location/current_location_bloc.dar
 import 'package:kualiva/_data/model/f_n_b_model.dart';
 import 'package:kualiva/_data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_search_bar_feature.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';

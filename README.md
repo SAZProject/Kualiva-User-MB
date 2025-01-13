@@ -5,8 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.69
-- Activate Hostelry 
+Ver 0.0.70 (KUA-41)
+- change splash screen logo
+- remove unnecessary import
 ```
 
 ## Getting Started

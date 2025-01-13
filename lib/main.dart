@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/main_provider.dart';
-import 'package:motion/motion.dart';
 import 'common/app_export.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -35,7 +34,6 @@ void main() async {
     dotenv.load(fileName: dotenvFileName),
     EasyLocalization.ensureInitialized(),
     MainHive.registerAdapter(),
-    Motion.instance.initialize(),
   ]);
 
   await MainHive.openBox();

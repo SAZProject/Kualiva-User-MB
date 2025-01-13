@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/check_permission.dart';
-import 'package:motion/motion.dart';
 // import 'package:kualiva/common/utility/video_constant.dart';
 // import 'package:video_player/video_player.dart';
 
@@ -82,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _startBounceAnimation() {
     setState(() {
-      _logoHeight = 100.h; // Set the target height for the bounce animation
+      _logoHeight = 50.h; // Set the target height for the bounce animation
     });
 
     Future.delayed(Duration(milliseconds: 500), () {
@@ -134,14 +133,10 @@ class _SplashScreenState extends State<SplashScreen> {
             curve: Curves.bounceOut,
             width: 200.h,
             height: _logoHeight.h,
-            child: Motion(
-              shadow: ShadowConfiguration(color: Colors.transparent),
-              glare: GlareConfiguration.fromElevation(50),
-              child: Bounce(
-                child: Center(
-                  child: Image.asset(
-                    ImageConstant.appLogo,
-                  ),
+            child: Bounce(
+              child: Center(
+                child: Image.asset(
+                  ImageConstant.appLogo2,
                 ),
               ),
             ),

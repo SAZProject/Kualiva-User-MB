@@ -99,7 +99,7 @@ class SignInScreenState extends State<SignInScreen> {
                 children: [
                   SizedBox(height: 25.h),
                   CustomImageView(
-                    imagePath: ImageConstant.appLogo,
+                    imagePath: ImageConstant.appLogo2,
                     height: 100.h,
                     width: 100.h,
                   ),

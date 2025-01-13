@@ -5,9 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.70 (KUA-41)
-- change splash screen logo
-- remove unnecessary import
+Ver 0.0.71 (KUA-35)
+- change Sign In logo
 ```
 
 ## Getting Started

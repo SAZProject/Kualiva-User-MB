@@ -4,6 +4,7 @@
         "no": "TIDAK",
         "confirm": "Mengonfirmasi",
         "pending": "Tertunda",
+        "agree": "Setuju",
         "approve": "Menyetujui",
         "reject": "Menolak",
         "warning": "Peringatan",
@@ -108,6 +109,9 @@
         "onboard_save_btn": "Menyimpan",
         "onboard_next_btn": "Berikutnya",
         "onboard_start_btn": "Ayo Mulai"
+    },
+    "tos" : {
+        "title": "Syarat & Ketentuan"
     },
     "sign_in": {
         "welcome": "Selamat datang di Like it",

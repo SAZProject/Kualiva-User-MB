@@ -5,6 +5,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     this.height,
+    this.useLeading = false,
     this.leadingWidth,
     this.leadingIconColor,
     this.title,
@@ -13,6 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   final double? height;
+  final bool useLeading;
   final double? leadingWidth;
   final Color? leadingIconColor;
   final String? title;
@@ -28,18 +30,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: leadingWidth ?? 50.h,
       titleSpacing: 0.0,
       automaticallyImplyLeading: true,
-      centerTitle: true,
-      leading: Container(
-        margin: EdgeInsets.only(left: 5.h),
-        child: IconButton(
-          iconSize: 25.h,
-          icon: Icon(
-            Icons.arrow_back_ios_new,
-            color: leadingIconColor,
-          ),
-          onPressed: onBackPressed,
-        ),
-      ),
+      centerTitle: useLeading,
+      leading: useLeading
+          ? Container(
+              margin: EdgeInsets.only(left: 5.h),
+              child: IconButton(
+                iconSize: 25.h,
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: leadingIconColor,
+                ),
+                onPressed: onBackPressed,
+              ),
+            )
+          : null,
       title: title == null
           ? null
           : Padding(

@@ -7,6 +7,7 @@ import 'package:kualiva/common/screen/location_screen.dart';
 import 'package:kualiva/_data/model/review_model.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/_data/model/ui_model/home_event_model.dart';
+import 'package:kualiva/common/screen/term_of_service_screen.dart';
 import 'package:kualiva/onboarding/onboarding_verifying_user.dart';
 import 'package:kualiva/home/home_event_detail_screen.dart';
 import 'package:kualiva/home/home_event_screen.dart';
@@ -41,6 +42,8 @@ class AppRoutes {
   static const String signInScreen = "/sign_in_screen";
 
   static const String signUpScreen = "/sign_up_screen";
+
+  static const String tosScreen = "/tos_screen";
 
   static const String otpScreen = "/otp_screen";
 
@@ -117,6 +120,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.signUpScreen:
       return PageTransition(
           child: const SignUpScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.tosScreen:
+      return PageTransition(
+          child: TermOfServiceScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

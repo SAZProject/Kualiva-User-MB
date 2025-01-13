@@ -32,6 +32,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _confirmPasswordObscure = ValueNotifier<bool>(true);
   final _password = ValueNotifier<String>("");
 
+  bool tosAgreement = false;
+
   @override
   void dispose() {
     _userNameCtl.dispose();
@@ -97,51 +99,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   SizedBox(height: 26.h),
                   CustomImageView(
-                    imagePath: ImageConstant.appLogo,
+                    imagePath: ImageConstant.appLogo2,
                     height: 100.h,
                     width: 100.h,
                   ),
                   SizedBox(height: 34.h),
                   _signUpMenu(context),
                   const Spacer(),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: context.tr("sign_in.tos_statement"),
-                          style: CustomTextStyles(context)
-                              .bodySmallOnPrimaryContainer,
-                        ),
-                        TextSpan(
-                          text: context.tr("sign_in.tos"),
-                          style: theme(context).textTheme.labelMedium!.copyWith(
-                                color: appTheme.yellowA700,
-                                decorationColor: appTheme.yellowA700,
-                                decoration: TextDecoration.underline,
-                              ),
-                          recognizer: TapGestureRecognizer()..onTap = () {},
-                        ),
-                        TextSpan(
-                            text: " ",
-                            style: theme(context).textTheme.labelMedium),
-                        TextSpan(
-                          text: context.tr("sign_in.policy_statement"),
-                          style: CustomTextStyles(context)
-                              .bodySmallOnPrimaryContainer,
-                        ),
-                        TextSpan(
-                          text: context.tr("sign_in.policy"),
-                          style: theme(context).textTheme.labelMedium!.copyWith(
-                                color: appTheme.yellowA700,
-                                decorationColor: appTheme.yellowA700,
-                                decoration: TextDecoration.underline,
-                              ),
-                          recognizer: TapGestureRecognizer()..onTap = () {},
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildTos(context),
                 ],
               ),
             ),
@@ -402,6 +367,88 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
         ),
       ],
+    );
+  }
+
+  Widget _buildTos(BuildContext context) {
+    return SizedBox(
+      width: Sizeutils.width,
+      child: Row(
+        children: [
+          Checkbox(
+            value: tosAgreement,
+            onChanged: (value) {
+              Navigator.pushNamed(context, AppRoutes.tosScreen).then(
+                (value) {
+                  if (value == null) return;
+                  setState(() {
+                    tosAgreement = value as bool;
+                  });
+                },
+              );
+            },
+          ),
+          Flexible(
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: context.tr("tos.tos_statement"),
+                    style:
+                        CustomTextStyles(context).bodySmallOnPrimaryContainer,
+                  ),
+                  TextSpan(
+                    text: context.tr("tos.tos"),
+                    style: theme(context).textTheme.labelMedium!.copyWith(
+                          color: appTheme.yellowA700,
+                          decorationColor: appTheme.yellowA700,
+                          decoration: TextDecoration.underline,
+                        ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, AppRoutes.tosScreen).then(
+                          (value) {
+                            if (value == null) return;
+                            setState(() {
+                              tosAgreement = value as bool;
+                            });
+                          },
+                        );
+                      },
+                  ),
+                  TextSpan(
+                      text: " ", style: theme(context).textTheme.labelMedium),
+                  TextSpan(
+                    text: context.tr("tos.and"),
+                    style:
+                        CustomTextStyles(context).bodySmallOnPrimaryContainer,
+                  ),
+                  TextSpan(
+                    text: context.tr("tos.policy"),
+                    style: theme(context).textTheme.labelMedium!.copyWith(
+                          color: appTheme.yellowA700,
+                          decorationColor: appTheme.yellowA700,
+                          decoration: TextDecoration.underline,
+                        ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, AppRoutes.tosScreen).then(
+                          (value) {
+                            if (value == null) return;
+                            setState(() {
+                              tosAgreement = value as bool;
+                            });
+                          },
+                        );
+                      },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

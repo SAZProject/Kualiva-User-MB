@@ -31,6 +31,8 @@ class SignInScreenState extends State<SignInScreen> {
 
   final _passwordObscure = ValueNotifier<bool>(true);
 
+  bool tosAgreement = false;
+
   @override
   void dispose() {
     _phoneNumberOrUserNameCtl.dispose();
@@ -60,7 +62,18 @@ class SignInScreenState extends State<SignInScreen> {
       authEvent = AuthLoggedIn(username: phoneOrUsername, password: password);
     }
 
-    context.read<AuthBloc>().add(authEvent);
+    if (!tosAgreement) {
+      Navigator.pushNamed(context, AppRoutes.tosScreen).then(
+        (value) {
+          if (value == null) return;
+          setState(() {
+            tosAgreement = value as bool;
+          });
+          if (!context.mounted) return;
+          context.read<AuthBloc>().add(authEvent);
+        },
+      );
+    }
   }
 
   void _onPressedSignUp(BuildContext context) {
@@ -106,44 +119,7 @@ class SignInScreenState extends State<SignInScreen> {
                   SizedBox(height: 25.h),
                   _signInMenu(context),
                   const Spacer(),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: context.tr("sign_in.tos_statement"),
-                          style: CustomTextStyles(context)
-                              .bodySmallOnPrimaryContainer,
-                        ),
-                        TextSpan(
-                          text: context.tr("sign_in.tos"),
-                          style: theme(context).textTheme.labelMedium!.copyWith(
-                                color: appTheme.yellowA700,
-                                decorationColor: appTheme.yellowA700,
-                                decoration: TextDecoration.underline,
-                              ),
-                          recognizer: TapGestureRecognizer()..onTap = () {},
-                        ),
-                        TextSpan(
-                            text: " ",
-                            style: theme(context).textTheme.labelMedium),
-                        TextSpan(
-                          text: context.tr("sign_in.policy_statement"),
-                          style: CustomTextStyles(context)
-                              .bodySmallOnPrimaryContainer,
-                        ),
-                        TextSpan(
-                          text: context.tr("sign_in.policy"),
-                          style: theme(context).textTheme.labelMedium!.copyWith(
-                                color: appTheme.yellowA700,
-                                decorationColor: appTheme.yellowA700,
-                                decoration: TextDecoration.underline,
-                              ),
-                          recognizer: TapGestureRecognizer()..onTap = () {},
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildTos(context),
                 ],
               ),
             ),
@@ -309,6 +285,88 @@ class SignInScreenState extends State<SignInScreen> {
       ],
       textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
       onPressed: () => _onPressedSignUp(context),
+    );
+  }
+
+  Widget _buildTos(BuildContext context) {
+    return SizedBox(
+      width: Sizeutils.width,
+      child: Row(
+        children: [
+          Checkbox(
+            value: tosAgreement,
+            onChanged: (value) {
+              Navigator.pushNamed(context, AppRoutes.tosScreen).then(
+                (value) {
+                  if (value == null) return;
+                  setState(() {
+                    tosAgreement = value as bool;
+                  });
+                },
+              );
+            },
+          ),
+          Flexible(
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: context.tr("tos.tos_statement"),
+                    style:
+                        CustomTextStyles(context).bodySmallOnPrimaryContainer,
+                  ),
+                  TextSpan(
+                    text: context.tr("tos.tos"),
+                    style: theme(context).textTheme.labelMedium!.copyWith(
+                          color: appTheme.yellowA700,
+                          decorationColor: appTheme.yellowA700,
+                          decoration: TextDecoration.underline,
+                        ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, AppRoutes.tosScreen).then(
+                          (value) {
+                            if (value == null) return;
+                            setState(() {
+                              tosAgreement = value as bool;
+                            });
+                          },
+                        );
+                      },
+                  ),
+                  TextSpan(
+                      text: " ", style: theme(context).textTheme.labelMedium),
+                  TextSpan(
+                    text: context.tr("tos.and"),
+                    style:
+                        CustomTextStyles(context).bodySmallOnPrimaryContainer,
+                  ),
+                  TextSpan(
+                    text: context.tr("tos.policy"),
+                    style: theme(context).textTheme.labelMedium!.copyWith(
+                          color: appTheme.yellowA700,
+                          decorationColor: appTheme.yellowA700,
+                          decoration: TextDecoration.underline,
+                        ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, AppRoutes.tosScreen).then(
+                          (value) {
+                            if (value == null) return;
+                            setState(() {
+                              tosAgreement = value as bool;
+                            });
+                          },
+                        );
+                      },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.77 (KUA-22)
-- Add Logo in coming soon screen
+Ver 0.0.78 (KUA-23)
+- Change bottom navbar color & icon
 ```
 
 ## Getting Started

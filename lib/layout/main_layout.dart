@@ -76,7 +76,7 @@ class _MainNavigationState extends State<MainLayout> {
     return CurvedNavigationBar(
       index: _selectedPage,
       backgroundColor: Colors.transparent,
-      color: theme(context).colorScheme.onSecondaryContainer,
+      color: theme(context).colorScheme.primary.withOpacity(0.6),
       buttonBackgroundColor: appTheme.amber700,
       items: [
         // Icon(
@@ -138,8 +138,8 @@ class _MainNavigationState extends State<MainLayout> {
           context,
           index: 3,
           label: context.tr("home_nav_bar.nav_4"),
-          selectedIcon: Icons.mail,
-          unselectedIcon: Icons.mail_outline,
+          selectedIcon: Icons.leaderboard,
+          unselectedIcon: Icons.leaderboard_outlined,
         ),
         _bottomNavBarItems(
           context,

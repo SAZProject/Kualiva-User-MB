@@ -30,7 +30,7 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
         child: Column(
           children: [
             CustomImageView(
-              imagePath: ImageConstant.appLogo,
+              imagePath: ImageConstant.appLogo2,
               height: 100.h,
               width: 100.h,
             ),

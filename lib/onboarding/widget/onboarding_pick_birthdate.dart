@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
+import 'package:kualiva/common/widget/custom_text_form_field.dart';
 
 class OnboardingPickBirthdate extends StatelessWidget {
   const OnboardingPickBirthdate({
     super.key,
+    required this.fullNameCtl,
+    required this.fullNameHint,
     this.leftIcon,
     required this.label,
     required this.hintText,
@@ -13,6 +16,8 @@ class OnboardingPickBirthdate extends StatelessWidget {
     this.onPressed,
   });
 
+  final TextEditingController fullNameCtl;
+  final String fullNameHint;
   final IconData? leftIcon;
   final String label;
   final String hintText;
@@ -26,6 +31,8 @@ class OnboardingPickBirthdate extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          _textFieldFullname(context),
+          SizedBox(height: 10.h),
           CustomElevatedButton(
             alignment: Alignment.center,
             leftIcon: Icon(
@@ -50,6 +57,24 @@ class OnboardingPickBirthdate extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _textFieldFullname(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: CustomTextFormField(
+        controller: fullNameCtl,
+        hintText: fullNameHint,
+        textInputType: TextInputType.text,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Please enter some text";
+          }
+
+          return null;
+        },
       ),
     );
   }

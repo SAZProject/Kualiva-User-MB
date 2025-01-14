@@ -37,7 +37,8 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   int _activePage = 0;
 
-  DateTime? selectedDate;
+  final _fullnameCtl = TextEditingController();
+  DateTime? _selectedDate;
 
   // final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
   // Set<int> dummySelectedCuisine = {};
@@ -84,16 +85,17 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
         if (selectedNotifChoice.isEmpty) return false;
         return true;
       default:
-        if (selectedDate == null) return false;
+        if (_selectedDate == null || _fullnameCtl.text.trim().isEmpty) {
+          return false;
+        }
         return true;
     }
   }
 
-  // void _rangeSliderChange(Range)
-
   @override
   void dispose() {
     _pageController.dispose();
+    _fullnameCtl.dispose();
     super.dispose();
   }
 
@@ -217,9 +219,11 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
         );
       default:
         return OnboardingPickBirthdate(
-          leftIcon: selectedDate != null ? null : Icons.calendar_month,
-          label: selectedDate != null
-              ? DatetimeUtils.dmy(selectedDate!)
+          fullNameCtl: _fullnameCtl,
+          fullNameHint: context.tr("onboard.onboard_fullname"),
+          leftIcon: _selectedDate != null ? null : Icons.calendar_month,
+          label: _selectedDate != null
+              ? DatetimeUtils.dmy(_selectedDate!)
               : context.tr("onboard.onboard_pick_birthdate_btn_date"),
           hintText: context.tr("onboard.onboard_pick_birthdate_hint"),
           onHintPressed: () {},
@@ -248,13 +252,13 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
   _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
+      initialDate: _selectedDate,
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != _selectedDate) {
       setState(() {
-        selectedDate = picked;
+        _selectedDate = picked;
       });
     }
   }

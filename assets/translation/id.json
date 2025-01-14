@@ -16,7 +16,7 @@
         "loading": "Memuat...",
         "error": "Kesalahan",
         "connection_error": "Kesalahan Koneksi",
-        "connection_error_content": "Silakan periksa koneksi internet Anda!",
+        "connection_error_content": "Silahkan periksa koneksi internet Anda!",
         "page_not_found": "Halaman Tidak Ditemukan!",
         "data_not_found": "Datanya kosong atau tidak memiliki data yang valid!",
         "user_not_found": "Pengguna Tidak Ditemukan!",
@@ -93,7 +93,8 @@
         "onboard_3_title": "Bagikan Kenangan\nAnda",
         "onboard_3_content": "Biarkan dunia tahu tentang perjalanan Anda!\nTinggalkan review disetiap perjalananmu",
 
-        "onboard_pick_birthdate": "Silakan masukkan\ntanggal lahir anda",
+        "onboard_fullname": "Silahkan masukkan nama lengkap anda",
+        "onboard_pick_birthdate": "Silahkan masukkan\ntanggal lahir anda",
         "onboard_pick_birthdate_hint": "Mengapa kami menanyakan tanggal lahir Anda?",
         "onboard_pick_birthdate_btn_date": "Pilih Tanggal",
         "onboard_pick_cuisine": "Pilih tipe\nmakanan favoritmu",

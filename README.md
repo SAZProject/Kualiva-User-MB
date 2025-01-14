@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.74 (KUA-24)
-- Change Logo for otp screen
+Ver 0.0.75 (KUA-30)
+- Add fullname textfield in onboarding
 ```
 
 ## Getting Started

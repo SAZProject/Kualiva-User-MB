@@ -152,6 +152,7 @@ class ImageConstant {
   static String homeSpa = "$imagePath/home_spa.png";
   static String homeMall = "$imagePath/home_mall.png";
   static String homeRecreation = "$imagePath/home_recreation.png";
+  static String homeMore = "";
 
   static String event1 = "$imagePath/event_news_1.jpeg";
   static String event2 = "$imagePath/event_news_2.jpeg";

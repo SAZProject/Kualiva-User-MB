@@ -23,21 +23,37 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<HomeGridMenuModel> _homeGridMenu = [
     HomeGridMenuModel(
-        imageUrl: ImageConstant.homeFood, label: "home_screen.grid_1"),
+        imageUrl: ImageConstant.homeFood,
+        label: "home_screen.grid_1",
+        isActive: true),
+    // HomeGridMenuModel(
+    //     imageUrl: ImageConstant.homeHotel,
+    //     label: "home_screen.grid_2",
+    //     isActive: false),
+    // HomeGridMenuModel(
+    //     imageUrl: ImageConstant.homeGroceries,
+    //     label: "home_screen.grid_3",
+    //     isActive: false),
     HomeGridMenuModel(
-        imageUrl: ImageConstant.homeHotel, label: "home_screen.grid_2"),
+        imageUrl: ImageConstant.homeLounge,
+        label: "home_screen.grid_4",
+        isActive: false),
     HomeGridMenuModel(
-        imageUrl: ImageConstant.homeGroceries, label: "home_screen.grid_3"),
+        imageUrl: ImageConstant.homeSpa,
+        label: "home_screen.grid_5",
+        isActive: false),
+    // HomeGridMenuModel(
+    //     imageUrl: ImageConstant.homeMall,
+    //     label: "home_screen.grid_6",
+    //     isActive: false),
+    // HomeGridMenuModel(
+    //     imageUrl: ImageConstant.homeRecreation,
+    //     label: "home_screen.grid_7",
+    //     isActive: false),
     HomeGridMenuModel(
-        imageUrl: ImageConstant.homeLounge, label: "home_screen.grid_4"),
-    HomeGridMenuModel(
-        imageUrl: ImageConstant.homeSpa, label: "home_screen.grid_5"),
-    HomeGridMenuModel(
-        imageUrl: ImageConstant.homeMall, label: "home_screen.grid_6"),
-    HomeGridMenuModel(
-        imageUrl: ImageConstant.homeRecreation, label: "home_screen.grid_7"),
-    HomeGridMenuModel(
-        imageUrl: ImageConstant.homeBar, label: "home_screen.grid_8"),
+        imageUrl: ImageConstant.homeMore,
+        label: "common.coming_soon",
+        isActive: false),
   ];
 
 //   final List<HomeEventModel> _homeEventList = [
@@ -169,9 +185,14 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisSpacing: 10.h,
             ),
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 8,
+            itemCount: _homeGridMenu.length,
             itemBuilder: (context, index) {
-              return _gridMenuItem(context, index, _homeGridMenu[index]);
+              return _gridMenuItem(
+                context,
+                index,
+                _homeGridMenu[index],
+                index == (_homeGridMenu.length - 1),
+              );
             },
           ),
         ],
@@ -179,11 +200,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _gridMenuItem(
-      BuildContext context, int index, HomeGridMenuModel gridMenu) {
+  Widget _gridMenuItem(BuildContext context, int index,
+      HomeGridMenuModel gridMenu, bool isLastItem) {
     return InkWell(
       borderRadius: BorderRadiusStyle.roundedBorder10,
-      onTap: index == 0 || index == 1 ? () => _gridMenuAction(index) : null,
+      onTap: gridMenu.isActive ? () => _gridMenuAction(index) : null,
       child: Container(
         width: double.maxFinite,
         padding: EdgeInsets.symmetric(horizontal: 4.h),
@@ -191,15 +212,14 @@ class _HomeScreenState extends State<HomeScreen> {
             CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder10,
                 ),
-        foregroundDecoration: index == 0 || index == 1
-            ? null
-            : CustomDecoration(context).foregroundBlur,
+        foregroundDecoration:
+            gridMenu.isActive ? null : CustomDecoration(context).foregroundBlur,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 2.h),
-            index == 7
+            isLastItem
                 ? Center(
                     child: Icon(Icons.add, size: 60.h),
                   )

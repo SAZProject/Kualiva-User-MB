@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.75 (KUA-30)
-- Add fullname textfield in onboarding
+Ver 0.0.76 (KUA-28)
+- Change Home Screen Main category only active 3 items
 ```
 
 ## Getting Started

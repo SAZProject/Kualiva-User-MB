@@ -5,12 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.72 (KUA-31, 32, 33, 34)
-- change Sign up logo
-- add sign up term of service
-- add term of service screen
-- add sign in term of service
-- 
+Ver 0.0.73 (KUA-29)
+- Remove message notification selection in onBoarding
 ```
 
 ## Getting Started

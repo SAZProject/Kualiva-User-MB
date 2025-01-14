@@ -56,14 +56,8 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
       isCommingSoon: false,
     ),
     ProfileMenuModel(
-      icon: Icons.sms,
-      label: "onboard.onboard_pick_notif_item_3",
-      isRightIcon: false,
-      isCommingSoon: false,
-    ),
-    ProfileMenuModel(
       icon: Icons.email,
-      label: "onboard.onboard_pick_notif_item_4",
+      label: "onboard.onboard_pick_notif_item_3",
       isRightIcon: false,
       isCommingSoon: false,
     ),

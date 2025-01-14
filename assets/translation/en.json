@@ -101,8 +101,7 @@
         "onboard_pick_notif": "How would you\nlike to recieve our\nnotifications?",
         "onboard_pick_notif_item_1": "Like it",
         "onboard_pick_notif_item_2": "WhatsApp",
-        "onboard_pick_notif_item_3": "Message",
-        "onboard_pick_notif_item_4": "Email",
+        "onboard_pick_notif_item_3": "Email",
         "onboard_pick_notif_btn_select": "Select All",
 
         "onboard_confirm_btn": "Confirm",

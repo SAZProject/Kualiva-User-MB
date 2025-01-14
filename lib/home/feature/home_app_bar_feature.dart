@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/style/custom_text_style.dart';
 import 'package:kualiva/common/style/theme_helper.dart';
+import 'package:kualiva/common/utility/image_utility.dart';
 import 'package:kualiva/common/utility/location_util.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
@@ -55,21 +56,22 @@ class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
       ),
       toolbarHeight: 100.h,
       actions: [
-        // TODO dimatikan untuk V!
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: Icon(
-        //     Icons.qr_code_scanner,
-        //     size: 30.h,
-        //     color: appTheme.black900,
-        //   ),
-        // ),
+        IconButton(
+          onPressed: () {
+            ImageUtility().getMediaFromCamera(context, []);
+          },
+          icon: Icon(
+            Icons.qr_code_scanner,
+            size: 25.h,
+            color: theme(context).colorScheme.onPrimaryContainer,
+          ),
+        ),
         IconButton(
           onPressed: () {},
           icon: Icon(
             Icons.notifications,
-            size: 30.h,
-            color: appTheme.black900,
+            size: 25.h,
+            color: theme(context).colorScheme.onPrimaryContainer,
           ),
         ),
       ],

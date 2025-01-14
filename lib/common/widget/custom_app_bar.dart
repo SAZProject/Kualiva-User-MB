@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: leadingWidth ?? 50.h,
       titleSpacing: 0.0,
       automaticallyImplyLeading: true,
-      centerTitle: useLeading,
+      centerTitle: true,
       leading: useLeading
           ? Container(
               margin: EdgeInsets.only(left: 5.h),

@@ -60,11 +60,11 @@ class _MainNavigationState extends State<MainLayout> {
       case 0:
         return const HomeScreen();
       case 1:
-        return const ComingSoon();
+        return ComingSoon(pageTitle: context.tr("home_nav_bar.nav_2"));
       case 2:
-        return const ComingSoon();
+        return ComingSoon(pageTitle: context.tr("home_nav_bar.nav_3"));
       case 3:
-        return const ComingSoon();
+        return ComingSoon(pageTitle: context.tr("home_nav_bar.nav_4"));
       case 4:
         return const ProfileScreen();
       default:

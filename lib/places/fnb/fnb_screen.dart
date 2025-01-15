@@ -13,7 +13,6 @@ import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_nearest_feature.dart';
-import 'package:kualiva/places/fnb/feature/fnb_search_bar_feature.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
 
@@ -102,8 +101,6 @@ class _FnbScreenState extends State<FnbScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             FnbAppBarFeature(),
-            FnbSearchBarFeature(),
-            // _searchBar(context),
           ];
         },
         body: SingleChildScrollView(

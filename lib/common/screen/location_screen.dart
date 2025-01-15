@@ -5,8 +5,6 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/screen/widget/location_popular_city_items.dart';
-import 'package:kualiva/common/style/custom_btn_style.dart';
-import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/_data/model/ui_model/loc_full_address_model.dart';
@@ -127,10 +125,6 @@ class _LocationScreenState extends State<LocationScreen> {
         child: Column(
           children: [
             SizedBox(height: 5.h),
-            _searchBar(context),
-            SizedBox(height: 5.h),
-            _userCurrLocBtn(context),
-            SizedBox(height: 5.h),
             _popularCity(context),
             SizedBox(height: 5.h),
             _recentLoc(context),
@@ -166,72 +160,6 @@ class _LocationScreenState extends State<LocationScreen> {
           context.tr("location.title"),
           style: theme(context).textTheme.headlineSmall,
         ),
-      ),
-    );
-  }
-
-  Widget _searchBar(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.h),
-      child: SearchAnchor(
-        builder: (BuildContext context, SearchController controller) {
-          return SearchBar(
-            controller: controller,
-            focusNode: FocusNode(),
-            padding: WidgetStatePropertyAll<EdgeInsets>(
-                EdgeInsets.symmetric(horizontal: 16.h)),
-            onTap: () {
-              controller.openView();
-            },
-            onChanged: (_) {
-              controller.openView();
-            },
-            onSubmitted: (value) {
-              setState(() {
-                controller.closeView(value);
-              });
-            },
-            onTapOutside: (event) {
-              FocusScopeNode focusNode = FocusScope.of(context);
-              if (focusNode.hasPrimaryFocus) {
-                focusNode.unfocus();
-              }
-            },
-            leading: const Icon(Icons.search),
-          );
-        },
-        suggestionsBuilder:
-            (BuildContext context, SearchController controller) {
-          return List<ListTile>.generate(
-            5,
-            (int index) {
-              final String item = 'item $index';
-              return ListTile(
-                title: Text(item),
-                onTap: () {
-                  setState(() {
-                    controller.closeView(item);
-                  });
-                },
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _userCurrLocBtn(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.h),
-      child: CustomElevatedButton(
-        initialText: context.tr("location.current_loc_btn"),
-        buttonStyle: CustomButtonStyles.none,
-        decoration:
-            CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
-        buttonTextStyle:
-            CustomTextStyles(context).titleMediumOnPrimaryContainer,
-        onPressed: () {},
       ),
     );
   }

@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.79 (KUA-12)
-- Add scan QR code screen (dummy open system camera)
+Ver 0.0.80 (KUA-27)
+- Remove search bar from location, FNB,  what's going on page
 ```
 
 ## Getting Started

@@ -5,6 +5,8 @@ import 'package:kualiva/common/utility/location_util.dart';
 import 'package:kualiva/main_hive.dart';
 
 class LocationRepository {
+  bool firstTimeOpenApp = false;
+
   CurrentLocationModel? oldLocation() {
     final currentLocationBox =
         Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
@@ -29,6 +31,7 @@ class LocationRepository {
     required CurrentLocationModel? oldLocation,
     required CurrentLocationModel newLocation,
   }) async {
+    //TODO get data on offline mode
     final currentLocationBox =
         Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
 
@@ -36,6 +39,7 @@ class LocationRepository {
     if (oldLocation == null) {
       currentLocationBox.clear();
       currentLocationBox.add(newLocation);
+      firstTimeOpenApp = true;
       return true;
     }
 
@@ -45,6 +49,13 @@ class LocationRepository {
       newLatitude: newLocation.latitude,
       newLongitude: newLocation.longitude,
     );
+
+    if (!firstTimeOpenApp) {
+      firstTimeOpenApp = true;
+      currentLocationBox.clear();
+      currentLocationBox.add(newLocation);
+      return true;
+    }
 
     /// 22.5 meters
     if (distance >= 22.5) {

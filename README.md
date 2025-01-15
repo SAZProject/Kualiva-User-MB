@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.80 (KUA-27)
-- Remove search bar from location, FNB,  what's going on page
+Ver 0.0.81 (KUA-50)
+- CurrentLocation BLoC first time
 ```
 
 ## Getting Started

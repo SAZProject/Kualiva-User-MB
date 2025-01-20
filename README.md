@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.82 (KUA-26)
-- Change FNB Filter Screen items
+Ver 0.0.83 (KUA-16)
+- Combine my profile and acc setting screen
 ```
 
 ## Getting Started

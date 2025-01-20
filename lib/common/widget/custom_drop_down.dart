@@ -14,6 +14,7 @@ class CustomDropDown extends StatelessWidget {
     this.textStyle,
     this.hintText,
     this.hintStyle,
+    this.value = "",
     this.items,
     this.prefix,
     this.prefixConstraint,
@@ -35,6 +36,7 @@ class CustomDropDown extends StatelessWidget {
   final TextStyle? textStyle;
   final String? hintText;
   final TextStyle? hintStyle;
+  final String value;
   final List<String>? items;
   final Widget? prefix;
   final BoxConstraints? prefixConstraint;
@@ -68,6 +70,7 @@ class CustomDropDown extends StatelessWidget {
             hintText ?? "",
             style: hintStyle ?? theme(context).textTheme.bodyMedium,
           ),
+          value: value,
           items: items?.map<DropdownMenuItem<String>>(
             (String value) {
               return DropdownMenuItem<String>(

@@ -325,16 +325,26 @@
     },
     "my_profile": {
         "title": "My Profile",
+        "fullname": "Full Name",
         "firstname": "First Name",
         "lastname": "Last Name",
         "username": "Username",
         "username_hint": "You can only change your username once every 7 days",
         "email": "Email",
+        "gender": "Gender",
+        "gender_hint": "Please choose your gender",
+        "male": "MALE",
+        "female": "FEMALE",
+        "date_of_birth": "Date of Birth",
+        "account_creation_date": "Account Creation Date",
+        "phone_number": "Phone Number",
+        "password": "Password",
+        "pin": "Pin",
         "edit": "Edit",
         "verify": "Verify",
-        "gender": "Gender",
-        "date_of_birth": "Date of Birth",
 
+        "logout_confirmation": "Are you sure want to log out?",
+        "log_out_btn": "Log Out",
         "save_btn": "Save"
     },
     "lang":{

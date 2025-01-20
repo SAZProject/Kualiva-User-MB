@@ -7,17 +7,21 @@ class CustomSectionHeader extends StatelessWidget {
     required this.label,
     this.onPressed,
     this.useIcon = true,
+    this.margin,
+    this.padding,
   });
 
   final String label;
   final Function()? onPressed;
   final bool useIcon;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-      padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
+      margin: margin ?? EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
       width: double.maxFinite,
       child: InkWell(
         onTap: onPressed,

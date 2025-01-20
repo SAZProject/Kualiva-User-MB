@@ -5,8 +5,11 @@ import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_filter_toggle_model.dart';
+import 'package:kualiva/places/fnb/widget/fnb_filters_grid_facilities.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
-import 'package:kualiva/places/fnb/widget/fnb_filters_slider.dart';
+import 'package:kualiva/places/fnb/widget/fnb_filters_price_range.dart';
+import 'package:kualiva/places/fnb/widget/fnb_filters_rating.dart';
 
 class FnbFiltersScreen extends StatefulWidget {
   const FnbFiltersScreen({super.key, this.getFilterModel});
@@ -18,28 +21,25 @@ class FnbFiltersScreen extends StatefulWidget {
 }
 
 class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
-  List<String> foodsCateg = FNBFilterDataset.fnbSubCategFoods;
-  List<String> bvgsCateg = FNBFilterDataset.fnbSubCategBvg;
+  List<FnbFilterToggleModel> facilitesDataset =
+      FNBFilterDataset.facilitiesDataset;
+  List<FnbFilterToggleModel> categoriesDataset =
+      FNBFilterDataset.categoriesDataset;
 
   FiltersModel filterModel = FiltersModel(
-    radiusMin: 0.0,
-    radiusMax: 100.0,
-    priceRangeMin: 0.0,
-    priceRangeMax: 1000000.0,
-    ratingMin: 0.0,
-    ratingMax: 5.0,
-    foodSubCateg: [],
-    bvgSubCateg: [],
+    rating: 0.0,
+    priceRange: "",
+    facilities: [],
+    categories: [],
   );
 
-  ValueNotifier<Set<String>> selectedFoodSubCateg =
-      ValueNotifier<Set<String>>({});
-  ValueNotifier<Set<String>> selectedBvgSubCateg =
-      ValueNotifier<Set<String>>({});
+  late ValueNotifier<double> ratingNotifier;
+  late ValueNotifier<String> priceRangeNotifier;
 
-  late ValueNotifier<RangeValues> radiusNotifier;
-  late ValueNotifier<RangeValues> priceRangeNotifier;
-  late ValueNotifier<RangeValues> ratingNotifier;
+  ValueNotifier<Set<String>> selectedFacilities =
+      ValueNotifier<Set<String>>({"Open Now"});
+  ValueNotifier<Set<String>> selectedCategories =
+      ValueNotifier<Set<String>>({});
 
   @override
   void initState() {
@@ -47,61 +47,36 @@ class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
     if (widget.getFilterModel != null) {
       filterModel = widget.getFilterModel!;
     }
-    radiusNotifier = ValueNotifier<RangeValues>(
-      RangeValues(filterModel.radiusMin, filterModel.radiusMax),
-    );
-    priceRangeNotifier = ValueNotifier<RangeValues>(
-      RangeValues(filterModel.priceRangeMin, filterModel.priceRangeMax),
-    );
-    ratingNotifier = ValueNotifier<RangeValues>(
-      RangeValues(filterModel.ratingMin.ceil().toDouble(),
-          filterModel.ratingMax.ceil().toDouble()),
-    );
-    selectedFoodSubCateg.value = filterModel.foodSubCateg.toSet();
-    selectedBvgSubCateg.value = filterModel.bvgSubCateg.toSet();
+    ratingNotifier = ValueNotifier<double>(filterModel.rating);
+    priceRangeNotifier = ValueNotifier<String>(filterModel.priceRange);
   }
 
   @override
   void dispose() {
-    radiusNotifier.dispose();
-    priceRangeNotifier.dispose();
     ratingNotifier.dispose();
-    selectedFoodSubCateg.dispose();
-    selectedBvgSubCateg.dispose();
+    priceRangeNotifier.dispose();
+    selectedFacilities.dispose();
+    selectedCategories.dispose();
     super.dispose();
   }
 
   void _resetValue() {
     setState(() {
-      radiusNotifier.value = const RangeValues(0.0, 100.0);
-      priceRangeNotifier.value = const RangeValues(0.0, 1000000.0);
-      ratingNotifier.value = const RangeValues(0.0, 5.0);
-      selectedFoodSubCateg.value = {};
-      selectedBvgSubCateg.value = {};
+      ratingNotifier.value = 0.0;
+      priceRangeNotifier.value = "";
+      selectedFacilities.value = {"Open Now"};
+      selectedCategories.value = {};
     });
   }
 
   void _confirmFilter(BuildContext context) {
     filterModel = FiltersModel(
-      radiusMin: radiusNotifier.value.start,
-      radiusMax: radiusNotifier.value.end,
-      priceRangeMin: priceRangeNotifier.value.start,
-      priceRangeMax: priceRangeNotifier.value.end,
-      ratingMin: ratingNotifier.value.start,
-      ratingMax: ratingNotifier.value.end,
-      foodSubCateg: selectedFoodSubCateg.value.toList(),
-      bvgSubCateg: selectedBvgSubCateg.value.toList(),
+      rating: ratingNotifier.value,
+      priceRange: priceRangeNotifier.value,
+      facilities: selectedFacilities.value.toList(),
+      categories: selectedCategories.value.toList(),
     );
     Navigator.pop(context, filterModel);
-  }
-
-  void _onChangeFilterSlider(RangeValues value) {
-    setState(() {
-      filterModel.copyWith(
-        priceRangeMin: value.start,
-        priceRangeMax: value.end,
-      );
-    });
   }
 
   @override
@@ -167,81 +142,34 @@ class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 10.h),
-            FnbFiltersSlider(
-              label: context.tr("filter.radius"),
-              minLabel: context.tr("filter.radius_value", namedArgs: {
-                "radius": radiusNotifier.value.start.ceil().toString()
-              }),
-              maxLabel: context.tr("filter.radius_value", namedArgs: {
-                "radius": radiusNotifier.value.end.ceil().toString()
-              }),
-              rangeValuesNotifier: radiusNotifier,
-              slideMinVal: 0.0,
-              slideMaxVal: 100.0,
-              division: 10,
-              onChangeEnd: _onChangeFilterSlider,
-            ),
-            SizedBox(height: 10.h),
-            FnbFiltersSlider(
-              label: context.tr("filter.price_range"),
-              minLabel: context.tr("filter.price_range_value", namedArgs: {
-                "price":
-                    priceRangeNotifier.value.start.ceil().toString().length >= 3
-                        ? (priceRangeNotifier.value.start / 1000)
-                            .ceil()
-                            .toString()
-                        : priceRangeNotifier.value.start.ceil().toString(),
-                "prefix":
-                    priceRangeNotifier.value.start.ceil().toString().length >= 3
-                        ? "K"
-                        : ""
-              }),
-              maxLabel: context.tr("filter.price_range_value", namedArgs: {
-                "price":
-                    priceRangeNotifier.value.end.ceil().toString().length >= 3
-                        ? (priceRangeNotifier.value.end / 1000)
-                            .ceil()
-                            .toString()
-                        : priceRangeNotifier.value.end.ceil().toString(),
-                "prefix":
-                    priceRangeNotifier.value.end.ceil().toString().length >= 3
-                        ? "K"
-                        : ""
-              }),
-              rangeValuesNotifier: priceRangeNotifier,
-              slideMinVal: 0.0,
-              slideMaxVal: 1000000.0,
-              division: 20,
-              onChangeEnd: _onChangeFilterSlider,
-            ),
-            SizedBox(height: 10.h),
-            FnbFiltersSlider(
+            FnbFiltersRating(
               label: context.tr("filter.rating"),
-              minLabel: ratingNotifier.value.start == 0.0
-                  ? context.tr("filter.rating_min_value")
-                  : ratingNotifier.value.start.toString(),
-              maxLabel: ratingNotifier.value.end == 5.0
-                  ? context.tr("filter.rating_max_value")
-                  : ratingNotifier.value.end.toString(),
-              rangeValuesNotifier: ratingNotifier,
-              slideMinVal: 0.0,
-              slideMaxVal: 5.0,
-              division: 5,
-              onChangeEnd: _onChangeFilterSlider,
+              ratingStar: ratingNotifier.value,
+              onRatingUpdate: (value) => ratingNotifier.value = value,
+            ),
+            SizedBox(height: 10.h),
+            ValueListenableBuilder(
+              valueListenable: priceRangeNotifier,
+              builder: (context, value, child) {
+                return FnbFiltersPriceRange(
+                  label: context.tr("filter.price_range"),
+                  selectedPrice: priceRangeNotifier.value,
+                  onChange: (value) => priceRangeNotifier.value = value,
+                );
+              },
+            ),
+            SizedBox(height: 10.h),
+            FnbFiltersGridFacilities(
+              label: context.tr("filter.facilities"),
+              facilitiesDataset: facilitesDataset,
+              selectedFacilities: selectedFacilities,
             ),
             SizedBox(height: 10.h),
             _buildSubCateg(
               context,
-              "filter.foods",
-              foodsCateg,
-              selectedFoodSubCateg,
-            ),
-            SizedBox(height: 10.h),
-            _buildSubCateg(
-              context,
-              "filter.beverages",
-              bvgsCateg,
-              selectedBvgSubCateg,
+              "filter.categories",
+              categoriesDataset,
+              selectedCategories,
             ),
             SizedBox(height: 25.h),
             SizedBox(
@@ -265,8 +193,11 @@ class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
     );
   }
 
-  Widget _buildSubCateg(BuildContext context, String label,
-      List<String> listFilter, ValueNotifier<Set<String>> selectedCateg) {
+  Widget _buildSubCateg(
+      BuildContext context,
+      String label,
+      List<FnbFilterToggleModel> listFilter,
+      ValueNotifier<Set<String>> selectedCateg) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 5.h),
@@ -294,7 +225,7 @@ class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
                 listFilter.length,
                 (index) {
                   return FnbFiltersItem(
-                    label: listFilter[index],
+                    label: listFilter[index].label,
                     multiSelect: true,
                     multiSelectedChoices: selectedCateg,
                     isWrap: true,

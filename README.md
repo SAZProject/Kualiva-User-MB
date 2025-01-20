@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.81 (KUA-50)
-- CurrentLocation BLoC first time
+Ver 0.0.82 (KUA-26)
+- Change FNB Filter Screen items
 ```
 
 ## Getting Started

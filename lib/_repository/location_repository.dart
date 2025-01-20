@@ -32,38 +32,39 @@ class LocationRepository {
     required CurrentLocationModel newLocation,
   }) async {
     //TODO get data on offline mode
-    final currentLocationBox =
-        Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
+    // final currentLocationBox =
+    //     Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
 
-    /// First time get current location
-    if (oldLocation == null) {
-      currentLocationBox.clear();
-      currentLocationBox.add(newLocation);
-      firstTimeOpenApp = true;
-      return true;
-    }
+    // /// First time get current location
+    // if (oldLocation == null) {
+    //   currentLocationBox.clear();
+    //   currentLocationBox.add(newLocation);
+    //   firstTimeOpenApp = true;
+    //   return true;
+    // }
 
-    final distance = LocationUtil.calculateDistance(
-      oldLatitude: oldLocation.latitude,
-      oldLongitude: oldLocation.longitude,
-      newLatitude: newLocation.latitude,
-      newLongitude: newLocation.longitude,
-    );
+    // final distance = LocationUtil.calculateDistance(
+    //   oldLatitude: oldLocation.latitude,
+    //   oldLongitude: oldLocation.longitude,
+    //   newLatitude: newLocation.latitude,
+    //   newLongitude: newLocation.longitude,
+    // );
 
-    if (!firstTimeOpenApp) {
-      firstTimeOpenApp = true;
-      currentLocationBox.clear();
-      currentLocationBox.add(newLocation);
-      return true;
-    }
+    // if (!firstTimeOpenApp) {
+    //   firstTimeOpenApp = true;
+    //   currentLocationBox.clear();
+    //   currentLocationBox.add(newLocation);
+    //   return true;
+    // }
 
-    /// 22.5 meters
-    if (distance >= 22.5) {
-      currentLocationBox.clear();
-      currentLocationBox.add(newLocation);
-      return true;
-    }
+    // /// 22.5 meters
+    // if (distance >= 22.5) {
+    //   currentLocationBox.clear();
+    //   currentLocationBox.add(newLocation);
+    //   return true;
+    // }
 
-    return false;
+    // return false;
+    return true;
   }
 }

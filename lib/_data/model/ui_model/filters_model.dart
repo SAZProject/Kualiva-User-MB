@@ -1,73 +1,51 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 @immutable
 class FiltersModel {
-  final double radiusMin;
-  final double radiusMax;
-  final double priceRangeMin;
-  final double priceRangeMax;
-  final double ratingMin;
-  final double ratingMax;
-  final List<String> foodSubCateg;
-  final List<String> bvgSubCateg;
+  final double rating;
+  final String priceRange;
+  final List<String> facilities;
+  final List<String> categories;
 
   const FiltersModel({
-    required this.radiusMin,
-    required this.radiusMax,
-    required this.priceRangeMin,
-    required this.priceRangeMax,
-    required this.ratingMin,
-    required this.ratingMax,
-    required this.foodSubCateg,
-    required this.bvgSubCateg,
+    required this.rating,
+    required this.priceRange,
+    required this.facilities,
+    required this.categories,
   });
 
   FiltersModel copyWith({
-    double? radiusMin,
-    double? radiusMax,
-    double? priceRangeMin,
-    double? priceRangeMax,
-    double? ratingMin,
-    double? ratingMax,
-    List<String>? foodSubCateg,
-    List<String>? bvgSubCateg,
+    double? rating,
+    String? priceRange,
+    List<String>? facilities,
+    List<String>? categories,
   }) {
     return FiltersModel(
-      radiusMin: radiusMin ?? this.radiusMin,
-      radiusMax: radiusMax ?? this.radiusMax,
-      priceRangeMin: priceRangeMin ?? this.priceRangeMin,
-      priceRangeMax: priceRangeMax ?? this.priceRangeMax,
-      ratingMin: ratingMin ?? this.ratingMin,
-      ratingMax: ratingMax ?? this.ratingMax,
-      foodSubCateg: foodSubCateg ?? this.foodSubCateg,
-      bvgSubCateg: bvgSubCateg ?? this.bvgSubCateg,
+      rating: rating ?? this.rating,
+      priceRange: priceRange ?? this.priceRange,
+      facilities: facilities ?? this.facilities,
+      categories: categories ?? this.categories,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'radiusMin': radiusMin,
-      'radiusMax': radiusMax,
-      'priceRangeMin': priceRangeMin,
-      'priceRangeMax': priceRangeMax,
-      'ratingMin': ratingMin,
-      'ratingMax': ratingMax,
-      'foodSubCateg': foodSubCateg,
-      'bvgSubCateg': bvgSubCateg,
+      'rating': rating,
+      'priceRange': priceRange,
+      'facilities': facilities,
+      'categories': categories,
     };
   }
 
   factory FiltersModel.fromMap(Map<String, dynamic> map) {
     return FiltersModel(
-      radiusMin: map['radiusMin'] as double,
-      radiusMax: map['radiusMax'] as double,
-      priceRangeMin: map['priceRangeMin'] as double,
-      priceRangeMax: map['priceRangeMax'] as double,
-      ratingMin: map['ratingMin'] as double,
-      ratingMax: map['ratingMax'] as double,
-      foodSubCateg: List<String>.from((map['foodSubCateg'] as List<String>)),
-      bvgSubCateg: List<String>.from((map['bvgSubCateg'] as List<String>)),
+      rating: map['rating'] as double,
+      priceRange: map['priceRange'] as String,
+      facilities: List<String>.from((map['facilities'] as List<String>)),
+      categories: List<String>.from((map['categories'] as List<String>)),
     );
   }
 
@@ -78,32 +56,24 @@ class FiltersModel {
 
   @override
   String toString() {
-    return 'FiltersModel(radiusMin: $radiusMin, radiusMax: $radiusMax, priceRangeMin: $priceRangeMin, priceRangeMax: $priceRangeMax, ratingMin: $ratingMin, ratingMax: $ratingMax, foodSubCateg: $foodSubCateg, bvgSubCateg: $bvgSubCateg)';
+    return 'FiltersModel(rating: $rating, priceRange: $priceRange, facilities: $facilities, categories: $categories)';
   }
 
   @override
   bool operator ==(covariant FiltersModel other) {
     if (identical(this, other)) return true;
 
-    return other.radiusMin == radiusMin &&
-        other.radiusMax == radiusMax &&
-        other.priceRangeMin == priceRangeMin &&
-        other.priceRangeMax == priceRangeMax &&
-        other.ratingMin == ratingMin &&
-        other.ratingMax == ratingMax &&
-        listEquals(other.foodSubCateg, foodSubCateg) &&
-        listEquals(other.bvgSubCateg, bvgSubCateg);
+    return other.rating == rating &&
+        other.priceRange == priceRange &&
+        listEquals(other.facilities, facilities) &&
+        listEquals(other.categories, categories);
   }
 
   @override
   int get hashCode {
-    return radiusMin.hashCode ^
-        radiusMax.hashCode ^
-        priceRangeMin.hashCode ^
-        priceRangeMax.hashCode ^
-        ratingMin.hashCode ^
-        ratingMax.hashCode ^
-        foodSubCateg.hashCode ^
-        bvgSubCateg.hashCode;
+    return rating.hashCode ^
+        priceRange.hashCode ^
+        facilities.hashCode ^
+        categories.hashCode;
   }
 }

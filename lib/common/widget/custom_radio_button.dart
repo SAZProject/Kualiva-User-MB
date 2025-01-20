@@ -30,6 +30,8 @@ class CustomRadioButton extends StatelessWidget {
     this.padding,
     this.textStyle,
     this.textAlignment,
+    this.preWidget,
+    this.postWidget,
   });
 
   final BoxDecoration? boxDecoration;
@@ -44,6 +46,8 @@ class CustomRadioButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final TextStyle? textStyle;
   final TextAlign? textAlignment;
+  final Widget? preWidget;
+  final Widget? postWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +77,7 @@ class CustomRadioButton extends StatelessWidget {
             padding: EdgeInsets.only(right: 8.h),
             child: radioButtonWidget(context),
           ),
+          preWidget ?? SizedBox(),
           textWidget(context),
         ],
       );
@@ -80,6 +85,7 @@ class CustomRadioButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           textWidget(context),
+          postWidget ?? SizedBox(),
           Padding(
             padding: EdgeInsets.only(left: 8.h),
             child: radioButtonWidget(context),

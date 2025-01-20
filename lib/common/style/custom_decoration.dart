@@ -191,13 +191,22 @@ class CustomDecoration {
         color: theme(context).colorScheme.primary.withOpacity(0.3),
       );
 
+  BoxDecoration get outlinePrimary => BoxDecoration(
+        color: theme(context).colorScheme.primary.withOpacity(0.3),
+        border: Border.all(
+          color: theme(context).colorScheme.primary,
+          width: 1.h,
+        ),
+        borderRadius: BorderRadiusStyle.roundedBorder20,
+      );
+
   static BoxDecoration get outlineBlack => const BoxDecoration();
 
   BoxDecoration get outlineOnPrimaryContainer => BoxDecoration(
         color: theme(context).colorScheme.onSecondaryContainer,
         border: Border.all(
           color: theme(context).colorScheme.onPrimaryContainer,
-          width: 2.h,
+          width: 1.h,
         ),
         borderRadius: BorderRadiusStyle.roundedBorder20,
       );

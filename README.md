@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.85 (KUA-20)
-- Change review filter
+Ver 0.0.86 (KUA-62)
+- Review form fix loading, error, success state UI
 ```
 
 ## Getting Started

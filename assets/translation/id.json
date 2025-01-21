@@ -15,6 +15,7 @@
         "progress": "Kemajuan",
         "loading": "Memuat...",
         "error": "Kesalahan",
+        "error_try_again": "Kesalahan, mohon coba kembali!",
         "connection_error": "Kesalahan Koneksi",
         "connection_error_content": "Silahkan periksa koneksi internet Anda!",
         "page_not_found": "Halaman Tidak Ditemukan!",

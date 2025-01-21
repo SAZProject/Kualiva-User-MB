@@ -15,6 +15,7 @@
         "progress": "Progress",
         "loading": "Loading...",
         "error": "Error",
+        "error_try_again": "Error, please try again!",
         "connection_error": "Connection Error",
         "connection_error_content": "Please check your internet connection!",
         "page_not_found": "Page Not Found!",

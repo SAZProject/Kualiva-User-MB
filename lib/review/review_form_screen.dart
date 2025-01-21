@@ -7,7 +7,9 @@ import 'package:kualiva/common/widget/custom_alert_dialog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_attach_media.dart';
 import 'package:kualiva/common/widget/custom_checkbox_button.dart';
+import 'package:kualiva/common/widget/custom_error_dialog.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_loading_dialog.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/widget/review_form_message.dart';
@@ -30,25 +32,11 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
   bool isHideUsername = false;
 
   void _submit() {
-    // TODO fix ui for loading, success and error
     context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceCreated(
           description: _reviewMsgCtl.text.trim(),
           rating: ratingStar,
           photoFiles: reviewMedia,
         ));
-    customAlertDialog(
-      context: context,
-      dismissable: true,
-      title: Text(
-        "Conratulation!",
-      ),
-      content: Text(
-        "You get 10 points",
-      ),
-      icon: Icon(
-        Icons.generating_tokens_outlined,
-      ),
-    );
   }
 
   @override
@@ -65,9 +53,36 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
           context
               .read<ReviewPlaceMyReadBloc>()
               .add(ReviewPlaceMyReadRefreshed(placeId: state.placeId));
+          customAlertDialog(
+            context: context,
+            dismissable: true,
+            title: Text(
+              "Conratulation!",
+            ),
+            content: Text(
+              "You get 10 points",
+            ),
+            icon: Icon(
+              Icons.generating_tokens_outlined,
+            ),
+          );
 
-          Navigator.pop(context); // Pop this screen
-          Navigator.pop(context); // Pop verify modal
+          Future.delayed(
+            Duration(seconds: 3),
+            () {
+              if (!context.mounted) return;
+              Navigator.pop(context); // pop loading dialog
+              Navigator.pop(context); // Pop this screen
+              Navigator.pop(context); // Pop verify modal
+            },
+          );
+        }
+        if (state is ReviewPlaceCreateLoading) {
+          customLoadingDialog(context: context);
+        }
+        if (state is ReviewPlaceCreateFailure) {
+          Navigator.pop(context); // pop loading dialog
+          customErrorDialog(context: context);
         }
       },
       child: SafeArea(

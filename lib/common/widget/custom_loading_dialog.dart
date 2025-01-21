@@ -1,19 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 
-void customAlertDialog({
+void customLoadingDialog({
   required BuildContext context,
-  required bool dismissable,
   AlignmentGeometry? dialogGeometry,
-  Widget? title,
-  Widget? content,
-  Widget? icon,
-  List<Widget>? actionBtn,
   MainAxisAlignment? actionsAlignment,
 }) {
   showDialog(
     context: context,
-    barrierDismissible: dismissable,
+    barrierDismissible: false,
     useSafeArea: true,
     builder: (context) {
       return AlertDialog(
@@ -26,11 +22,9 @@ void customAlertDialog({
             width: 1.h,
           ),
         ),
-        title: title,
+        title: Text(context.tr("common.loading")),
         titleTextStyle: CustomTextStyles(context).titleLarge_22,
-        content: content,
-        icon: icon,
-        actions: actionBtn,
+        icon: Center(child: CircularProgressIndicator()),
         alignment: dialogGeometry,
         actionsAlignment: actionsAlignment,
       );

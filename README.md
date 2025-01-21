@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.83 (KUA-16)
-- Combine my profile and acc setting screen
+Ver 0.0.84 (KUA-25)
+- Change layout for fnb detail screen
 ```
 
 ## Getting Started

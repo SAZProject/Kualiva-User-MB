@@ -180,7 +180,7 @@ class _FnbFiltersGridFacilitiesState extends State<FnbFiltersGridFacilities> {
         padding: EdgeInsets.symmetric(horizontal: 5.h),
         decoration:
             widget.selectedFacilities.value.contains(facilitiesData.label)
-                ? CustomDecoration(context).outlinePrimary
+                ? CustomDecoration(context).outlinePrimary_03
                 : CustomDecoration(context).outlineOnPrimaryContainer,
         child: Column(
           mainAxisSize: MainAxisSize.min,

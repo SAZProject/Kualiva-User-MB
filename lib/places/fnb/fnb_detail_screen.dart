@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -7,8 +6,11 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_float_modal.dart';
 import 'package:kualiva/common/widget/custom_map_bottom_sheet.dart';
@@ -18,6 +20,7 @@ import 'package:kualiva/_data/enum/place_category_enum.dart';
 
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_filter_toggle_model.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,7 +34,7 @@ class FnbDetailScreen extends StatelessWidget {
 
   static const PlaceCategoryEnum placeCategory = PlaceCategoryEnum.fnb;
 
-  final GlobalKey _toolTipKey = GlobalKey();
+  // final GlobalKey _toolTipKey = GlobalKey();
   late OverlayEntry _overlayEntry;
   final LayerLink _layerLink = LayerLink();
 
@@ -54,13 +57,13 @@ class FnbDetailScreen extends StatelessWidget {
     ),
   ];
 
-  Future showAndCloseTooltip() async {
-    await Future.delayed(const Duration(milliseconds: 10));
-    final dynamic tooltip = _toolTipKey.currentState;
-    tooltip?.ensureTooltipVisible();
-    await Future.delayed(const Duration(seconds: 3));
-    tooltip?.deactivate();
-  }
+  // Future showAndCloseTooltip() async {
+  //   await Future.delayed(const Duration(milliseconds: 10));
+  //   final dynamic tooltip = _toolTipKey.currentState;
+  //   tooltip?.ensureTooltipVisible();
+  //   await Future.delayed(const Duration(seconds: 3));
+  //   tooltip?.deactivate();
+  // }
 
   Future<void> _launchContact(String phoneNumber) async {
     final Uri launchUri = Uri(
@@ -102,7 +105,7 @@ class FnbDetailScreen extends StatelessWidget {
       builder: (context, state) {
         if (state is FnbDetailSuccess) {
           bool hasCallSupport = true;
-          showAndCloseTooltip();
+          // showAndCloseTooltip();
           canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
             hasCallSupport = result;
           });
@@ -154,44 +157,50 @@ class FnbDetailScreen extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: _fnbPlaceImages(context),
               ),
-              BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                child: Column(
-                  children: [
-                    SizedBox(height: 5.h),
-                    _fnbAppBar(context),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.h, vertical: 10.h),
-                      child: Container(
-                        width: double.maxFinite,
-                        decoration: CustomDecoration(context)
-                            .fillOnSecondaryContainer_06
-                            .copyWith(
-                              borderRadius: BorderRadiusStyle.roundedBorder10,
+              Column(
+                children: [
+                  SizedBox(height: 5.h),
+                  _fnbAppBar(context),
+                  SizedBox(height: 100.h),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
+                    child: ClipRRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                        child: Container(
+                          width: double.maxFinite,
+                          decoration: fnbDetail.businessStatus
+                              ? CustomDecoration(context).outlinePrimary_06
+                              : CustomDecoration(context)
+                                  .fillOnSecondaryContainer
+                                  .copyWith(
+                                    borderRadius:
+                                        BorderRadiusStyle.roundedBorder10,
+                                  ),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 5.h),
+                                _fnbPlaceName(context, fnbDetail),
+                                SizedBox(height: 5.h),
+                                _fnbPlaceAbout(
+                                    context, fnbDetail, hasCallSupport),
+                                SizedBox(height: 5.h),
+                                _fnbPromo(context, fnbDetail),
+                                SizedBox(height: 5.h),
+                                _fnbPlaceMenu(context, fnbDetail),
+                                SizedBox(height: 5.h),
+                                _fnbPlaceReviews(context, fnbDetail),
+                                SizedBox(height: 10.h),
+                              ],
                             ),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              SizedBox(height: 5.h),
-                              _fnbPlaceName(context, fnbDetail),
-                              SizedBox(height: 5.h),
-                              _fnbPlaceAbout(
-                                  context, fnbDetail, hasCallSupport),
-                              SizedBox(height: 5.h),
-                              _fnbPromo(context),
-                              SizedBox(height: 5.h),
-                              _fnbPlaceMenu(context, fnbDetail),
-                              SizedBox(height: 5.h),
-                              _fnbPlaceReviews(context, fnbDetail),
-                              SizedBox(height: 10.h),
-                            ],
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -290,17 +299,20 @@ class FnbDetailScreen extends StatelessWidget {
   }
 
   Widget _fnbPlaceName(BuildContext context, FnbDetailModel fnbDetail) {
-    var brightness = Theme.of(context).brightness;
+    // var brightness = Theme.of(context).brightness;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.h),
       child: SizedBox(
         width: double.maxFinite,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
+        child:
+            // Stack(
+            //   alignment: Alignment.center,
+            //   children: [
             Align(
-              alignment: Alignment.center,
-              child: SizedBox(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              SizedBox(
                 height: 30.h,
                 child: Text(
                   fnbDetail.name,
@@ -310,28 +322,46 @@ class FnbDetailScreen extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Tooltip(
-                key: _toolTipKey,
-                triggerMode: TooltipTriggerMode.manual,
-                message: fnbDetail.businessStatus
-                    ? context.tr("f_n_b_detail.place_claimed")
-                    : context.tr("f_n_b_detail.place_not_claimed"),
-                child: CustomImageView(
-                  width: 20.h,
-                  height: 20.h,
-                  imagePath: fnbDetail.businessStatus
-                      ? ImageConstant.placeVerify
-                      : brightness == Brightness.light
-                          ? ImageConstant.placeVerifyLight
-                          : ImageConstant.placeVerifyDark,
+              Visibility(
+                visible: !fnbDetail.businessStatus,
+                child: CustomElevatedButton(
+                  initialText: context.tr("f_n_b_detail.claim_btn"),
+                  height: 30.0,
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                  buttonStyle: CustomButtonStyles.none,
+                  decoration:
+                      CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(
+                          context),
+                  buttonTextStyle:
+                      CustomTextStyles(context).titleMediumOnPrimaryContainer,
+                  onPressed: () {},
                 ),
-              ),
-            ),
-          ],
+              )
+            ],
+          ),
         ),
+        // Align(
+        //   alignment: Alignment.centerLeft,
+        //   child: Tooltip(
+        //     key: _toolTipKey,
+        //     triggerMode: TooltipTriggerMode.manual,
+        //     message: fnbDetail.businessStatus
+        //         ? context.tr("f_n_b_detail.place_claimed")
+        //         : context.tr("f_n_b_detail.place_not_claimed"),
+        //     child: CustomImageView(
+        //       width: 20.h,
+        //       height: 20.h,
+        //       imagePath: fnbDetail.businessStatus
+        //           ? ImageConstant.placeVerify
+        //           : brightness == Brightness.light
+        //               ? ImageConstant.placeVerifyLight
+        //               : ImageConstant.placeVerifyDark,
+        //     ),
+        //   ),
+        // ),
+        // ],
+        // ),
       ),
     );
   }
@@ -370,6 +400,13 @@ class FnbDetailScreen extends StatelessWidget {
                 icon: Icons.timer,
                 label: "",
                 trailingWidget: _aboutOperationalTime(context, fnbDetail),
+              ),
+              SizedBox(height: 8.h),
+              _buildAboutContent(
+                context,
+                icon: Icons.table_bar_outlined,
+                label: "",
+                trailingWidget: _aboutFacilities(context, fnbDetail),
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -424,7 +461,7 @@ class FnbDetailScreen extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          leadingWidget ?? Icon(icon, size: 20.h),
+          leadingWidget ?? Icon(icon, size: 25.h),
           Flexible(
             child: Padding(
               padding: EdgeInsets.only(left: 10.h),
@@ -455,25 +492,38 @@ class FnbDetailScreen extends StatelessWidget {
       child: Wrap(
         children: List<Widget>.generate(
           fnbDetail.types.length,
-          (index) => _tagView(context, label: fnbDetail.types[index]),
+          (index) => _tagView(
+            context,
+            label: fnbDetail.types[index],
+            businessStatus: fnbDetail.businessStatus,
+          ),
         ),
       ),
     );
   }
 
-  Widget _tagView(BuildContext context, {required String label}) {
+  Widget _tagView(BuildContext context,
+      {required String label, required bool businessStatus}) {
     return FittedBox(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 2.h),
+        margin: EdgeInsets.symmetric(horizontal: 2.h, vertical: 2.5.h),
         padding: EdgeInsets.symmetric(horizontal: 4.h),
-        decoration: CustomDecoration(context).fillPrimary.copyWith(
-              borderRadius: BorderRadiusStyle.roundedBorder5,
-            ),
+        decoration: businessStatus
+            ? CustomDecoration.fillBlack900_06.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder5,
+              )
+            : CustomDecoration(context).fillPrimary.copyWith(
+                  borderRadius: BorderRadiusStyle.roundedBorder5,
+                ),
         child: Center(
           child: Text(
             label,
             textAlign: TextAlign.center,
-            style: CustomTextStyles(context).bodyMedium_13,
+            style: businessStatus
+                ? CustomTextStyles(context)
+                    .bodyMedium_13
+                    .copyWith(color: theme(context).colorScheme.primary)
+                : CustomTextStyles(context).bodyMedium_13,
           ),
         ),
       ),
@@ -491,10 +541,10 @@ class FnbDetailScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              context.tr("f_n_b_detail.about_open"),
-              style: CustomTextStyles(context).bodyMedium_13,
-            ),
+            // Text(
+            //   context.tr("f_n_b_detail.about_open"),
+            //   style: CustomTextStyles(context).bodyMedium_13,
+            // ),
             _operationalDayHourView(context,
                 DatetimeUtils.getTodayOperationalTime(), true, fnbDetail),
           ],
@@ -579,6 +629,53 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
+  Widget _aboutFacilities(BuildContext context, FnbDetailModel fnbDetail) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: ExpansionTile(
+        childrenPadding: EdgeInsets.only(bottom: 10.h),
+        dense: true,
+        tilePadding: const EdgeInsets.symmetric(horizontal: 0.0),
+        title: _facilitiesView(context, null, true, fnbDetail),
+        children: FNBFilterDataset.facilitiesDataset.map(
+          (filterData) {
+            return _facilitiesView(context, filterData, false, fnbDetail);
+          },
+        ).toList(),
+      ),
+    );
+  }
+
+  Widget _facilitiesView(BuildContext context, FnbFilterToggleModel? filterData,
+      bool isTitle, FnbDetailModel fnbDetail) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Visibility(
+            visible: !isTitle,
+            child: Icon(
+              filterData == null ? Icons.abc : filterData.icon,
+              size: 15.h,
+            ),
+          ),
+          SizedBox(width: isTitle ? 0.0 : 10.h),
+          SizedBox(
+            width: isTitle ? 80.h : 120.h,
+            child: Text(
+              isTitle
+                  ? context.tr("f_n_b_detail.facilities")
+                  : filterData!.label,
+              style: CustomTextStyles(context).bodySmall12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _aboutPrice(BuildContext context, FnbDetailModel fnbDetail) {
     return SizedBox(
       width: double.maxFinite,
@@ -627,18 +724,13 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbPromo(BuildContext context) {
+  Widget _fnbPromo(BuildContext context, FnbDetailModel fnbDetail) {
     return Visibility(
-      // visible: Random().nextBool(),
-      visible: true,
+      visible: fnbDetail.businessStatus,
       replacement: const SizedBox(),
       child: Container(
         width: double.maxFinite,
         margin: EdgeInsets.symmetric(horizontal: 5.h),
-        decoration:
-            CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder10,
-                ),
         child: Column(
           children: [
             CustomSectionHeader(
@@ -689,7 +781,7 @@ class FnbDetailScreen extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
         padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
         decoration:
-            CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
+            CustomDecoration(context).orangeColorBackgroundBlur.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder10,
                 ),
         child: Column(
@@ -740,15 +832,11 @@ class FnbDetailScreen extends StatelessWidget {
 
   Widget _fnbPlaceMenu(BuildContext context, FnbDetailModel fnbDetail) {
     return Visibility(
-      visible: Random().nextBool(),
+      visible: fnbDetail.businessStatus,
       replacement: const SizedBox(),
       child: Container(
         width: double.maxFinite,
         margin: EdgeInsets.symmetric(horizontal: 5.h),
-        decoration:
-            CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder10,
-                ),
         child: Column(
           children: [
             CustomSectionHeader(
@@ -820,10 +908,6 @@ class FnbDetailScreen extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 5.h),
-      decoration:
-          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder10,
-              ),
       child: Column(
         children: [
           CustomSectionHeader(

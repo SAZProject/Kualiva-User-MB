@@ -52,6 +52,9 @@ class CustomDecoration {
   static BoxDecoration get fillGray => BoxDecoration(
         color: appTheme.gray800,
       );
+  static BoxDecoration get fillWhite => BoxDecoration(
+        color: appTheme.white,
+      );
   static BoxDecoration get fillBlack900_06 => BoxDecoration(
         color: appTheme.black900.withOpacity(0.6),
       );
@@ -72,6 +75,9 @@ class CustomDecoration {
       );
   BoxDecoration get fillOnPrimaryContainerOpacity_03 => BoxDecoration(
         color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+      );
+  BoxDecoration get fillOnPrimaryContainerOpacity_06 => BoxDecoration(
+        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
       );
   BoxDecoration get fillOnSecondaryContainer => BoxDecoration(
         color: theme(context).colorScheme.onSecondaryContainer,
@@ -191,7 +197,16 @@ class CustomDecoration {
         color: theme(context).colorScheme.primary.withOpacity(0.3),
       );
 
-  BoxDecoration get outlinePrimary => BoxDecoration(
+  BoxDecoration get outlinePrimary_06 => BoxDecoration(
+        color: theme(context).colorScheme.primary.withOpacity(0.8),
+        border: Border.all(
+          color: theme(context).colorScheme.primary,
+          width: 1.h,
+        ),
+        borderRadius: BorderRadiusStyle.roundedBorder20,
+      );
+
+  BoxDecoration get outlinePrimary_03 => BoxDecoration(
         color: theme(context).colorScheme.primary.withOpacity(0.3),
         border: Border.all(
           color: theme(context).colorScheme.primary,

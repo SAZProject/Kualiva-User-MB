@@ -326,6 +326,9 @@
         "customer_support": "Customer Support",
         "about_us": "About Us"
     },
+    "user_level": {
+        "title": "Level"
+    },
     "my_profile": {
         "title": "My Profile",
         "fullname": "Full Name",

@@ -154,8 +154,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             SizedBox(height: 10.h),
-            // _userLevel(context),
-            // SizedBox(height: 10.h),
+            _userLevel(context),
+            SizedBox(height: 10.h),
             _buildMyProfileVoucher(context),
             SizedBox(height: 10.h),
             _buildProfileMenuList(),
@@ -184,78 +184,79 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // Widget _userLevel(BuildContext context) {
-  //   return Container(
-  //     margin: EdgeInsets.symmetric(horizontal: 10.h),
-  //     padding: EdgeInsets.symmetric(
-  //       horizontal: 8.h,
-  //       vertical: 6.h,
-  //     ),
-  //     decoration: CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
-  //           borderRadius: BorderRadiusStyle.roundedBorder14,
-  //         ),
-  //     width: double.maxFinite,
-  //     child: Row(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Align(
-  //           alignment: Alignment.center,
-  //           child: CircleAvatar(
-  //             minRadius: 25.h,
-  //             maxRadius: 25.h,
-  //             child: Center(
-  //               child: Icon(Icons.person, size: 50.h),
-  //             ),
-  //           ),
-  //         ),
-  //         SizedBox(width: 10.h),
-  //         Expanded(
-  //           child: Column(
-  //             children: [
-  //               SizedBox(
-  //                 width: double.maxFinite,
-  //                 child: InkWell(
-  //                   onTap: () {},
-  //                   child: Row(
-  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                     children: [
-  //                       Text(
-  //                         "Bronze",
-  //                         style: theme(context).textTheme.bodyLarge,
-  //                       ),
-  //                       Icon(Icons.arrow_forward_ios, size: 20.h)
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ),
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 crossAxisAlignment: CrossAxisAlignment.center,
-  //                 children: [
-  //                   Text(
-  //                     "Level 0",
-  //                     style: theme(context).textTheme.bodySmall,
-  //                   ),
-  //                   Text(
-  //                     "0/10",
-  //                     style: theme(context).textTheme.bodySmall,
-  //                   ),
-  //                 ],
-  //               ),
-  //               LinearProgressIndicator(
-  //                 value: 0.6,
-  //                 color: theme(context).colorScheme.onPrimary.withOpacity(0.8),
-  //                 backgroundColor:
-  //                     theme(context).colorScheme.secondaryContainer,
-  //                 borderRadius: BorderRadius.circular(1.h),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _userLevel(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      padding: EdgeInsets.symmetric(
+        horizontal: 8.h,
+        vertical: 6.h,
+      ),
+      decoration: CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder14,
+          ),
+      width: double.maxFinite,
+      child: InkWell(
+        onTap: () => Navigator.pushNamed(context, AppRoutes.userLevelScreen),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: CircleAvatar(
+                minRadius: 25.h,
+                maxRadius: 25.h,
+                child: Center(
+                  child: Icon(Icons.person, size: 50.h),
+                ),
+              ),
+            ),
+            SizedBox(width: 10.h),
+            Expanded(
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Bronze",
+                          style: theme(context).textTheme.bodyLarge,
+                        ),
+                        Icon(Icons.arrow_forward_ios, size: 20.h)
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Level 0",
+                        style: theme(context).textTheme.bodySmall,
+                      ),
+                      Text(
+                        "0/10",
+                        style: theme(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                  LinearProgressIndicator(
+                    value: 0.6,
+                    color:
+                        theme(context).colorScheme.onPrimary.withOpacity(0.8),
+                    backgroundColor:
+                        theme(context).colorScheme.secondaryContainer,
+                    borderRadius: BorderRadius.circular(1.h),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _buildMyProfileVoucher(BuildContext context) {
     return SizedBox(

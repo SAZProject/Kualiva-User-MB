@@ -5,9 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.87
-- Report place data integration UI (unfinished)
-- disable file upload in report repository
+Ver 0.0.88 (KUA-17)
+-  Add user level/rank screen
 ```
 
 ## Getting Started

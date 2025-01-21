@@ -327,6 +327,9 @@
         "customer_support": "Dukungan Pelanggan",
         "about_us": "Tentang Kami"
     },
+    "user_level": {
+        "title": "Level"
+    },
     "my_profile": {
         "title": "Profil Saya",
         "fullname": "Nama Lengkap",

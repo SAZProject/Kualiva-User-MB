@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_radio_button.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
@@ -34,14 +35,18 @@ class ReportPlaceReasonFeature extends StatelessWidget {
       child: BlocBuilder<ReportPlaceBloc, ReportPlaceState>(
         builder: (context, state) {
           if (state is ReportPlaceFetchFailure) {
-            return Text('ERROR '); // TODO Winky Help UI
+            return CustomErrorState(
+              errorMessage: context.tr("common.error"),
+              onRetry: () =>
+                  context.read<ReportPlaceBloc>().add(ReportPlaceFetched()),
+            );
           }
 
-          if (state is! ReportPlaceFetchSuccess) {
-            return Center(child: CircularProgressIndicator());
+          if (state is ReportPlaceFetchSuccess) {
+            return _list(context, state.parameter);
           }
 
-          return _list(context, state.parameter);
+          return Center(child: CircularProgressIndicator());
         },
       ),
     );

@@ -5,8 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.86 (KUA-62)
-- Review form fix loading, error, success state UI
+Ver 0.0.87
+- Report place data integration UI (unfinished)
+- disable file upload in report repository
 ```
 
 ## Getting Started

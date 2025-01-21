@@ -4,6 +4,7 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/image_utility.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_attach_media.dart';
+import 'package:kualiva/common/widget/custom_error_dialog.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:kualiva/report/feature/report_place_reason_feature.dart';
@@ -70,6 +71,10 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
       listener: (context, state) {
         if (state is ReportPlaceCreatedSuccess) {
           Navigator.pop(context);
+        }
+        if (state is ReportPlaceCreatedFailure) {
+          Navigator.pop(context); // pop loading dialog
+          customErrorDialog(context: context);
         }
       },
       child: SafeArea(

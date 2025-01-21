@@ -14,7 +14,7 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
     on<ReportPlaceEvent>((event, emit) => emit(ReportPlaceLoading()));
     on<ReportPlaceFetched>(_onFetched);
     on<ReportPlaceCreated>(_onCreated);
-    on<ReportPlaceFileUploaded>(_onFileUploaded);
+    // on<ReportPlaceFileUploaded>(_onFileUploaded);
   }
 
   void _onFetched(
@@ -50,22 +50,22 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
     }
   }
 
-  void _onFileUploaded(
-    ReportPlaceFileUploaded event,
-    Emitter<ReportPlaceState> emit,
-  ) async {
-    try {
-      // final path = await _reportRepository.uploadPhoto(
-      //   imagePath: event.imagePath,
-      // );
-      final parameter = await _reportRepository.uploadPhoto(
-        imagePath: event.imagePath,
-      );
-      LeLog.bd(this, _onFileUploaded, parameter.toString());
-      emit(ReportPlaceFetchSuccess(parameter: parameter));
-    } catch (e) {
-      LeLog.be(this, _onFileUploaded, e.toString());
-      emit(ReportPlaceFetchFailure());
-    }
-  }
+  // void _onFileUploaded(
+  //   ReportPlaceFileUploaded event,
+  //   Emitter<ReportPlaceState> emit,
+  // ) async {
+  //   try {
+  //     // final path = await _reportRepository.uploadPhoto(
+  //     //   imagePath: event.imagePath,
+  //     // );
+  //     final parameter = await _reportRepository.uploadPhoto(
+  //       imagePath: event.imagePath,
+  //     );
+  //     LeLog.bd(this, _onFileUploaded, parameter.toString());
+  //     emit(ReportPlaceFetchSuccess(parameter: parameter));
+  //   } catch (e) {
+  //     LeLog.be(this, _onFileUploaded, e.toString());
+  //     emit(ReportPlaceFetchFailure());
+  //   }
+  // }
 }

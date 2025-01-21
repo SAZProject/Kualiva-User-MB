@@ -100,7 +100,7 @@
         "onboard_pick_cuisine": "Pilih tipe\nmakanan favoritmu",
         "onboard_pick_cuisine_hint": "Anda dapat memilih hingga 5 masakan",
         "onboard_pick_notif": "Bagaimana kamu ingin\nmendapatkan notifikasi",
-        "onboard_pick_notif_item_1": "Like it",
+        "onboard_pick_notif_item_1": "Kualiva",
         "onboard_pick_notif_item_2": "WhatsApp",
         "onboard_pick_notif_item_3": "E-mail",
         "onboard_pick_notif_btn_select": "Pilih Semua",
@@ -114,9 +114,9 @@
         "title": "Syarat & Ketentuan"
     },
     "sign_in": {
-        "welcome": "Selamat datang di Like it",
+        "welcome": "Selamat datang di Kualiva",
         "sign_in_with": "Masuk dengan",
-        "kualiva_acc": "Akun Like it",
+        "kualiva_acc": "Akun Kualiva",
         "sign_in_with_saz": "Masuk dengan SAZ",
         "sign_in_with_google": "Masuk dengan Google",
         "phone_number_or_user_name": "Nomor Telepon atau Nama Pengguna",
@@ -153,7 +153,7 @@
     },
     "permission": {
         "permission_title": "Pengalaman Lebih\nBaik Untukmu",
-        "permission_content": "Mohon berikan beberapa izin pada perangkat Anda untuk mendapatkan pengalaman terbaik di Like it",
+        "permission_content": "Mohon berikan beberapa izin pada perangkat Anda untuk mendapatkan pengalaman terbaik di Kualiva",
         "allow_btn": "Mengizinkan"
     },
     "home_nav_bar": {
@@ -257,7 +257,7 @@
         "title": "Tinjauan",
         "filter": "Filter Tinjau",
         "filter_user": "User",
-        "filter_kualiva": "Like it",
+        "filter_kualiva": "Kualiva",
         "filter_google": "Google",
         "filter_time": "Waktu",
         "filter_time_1": "Terbaru",

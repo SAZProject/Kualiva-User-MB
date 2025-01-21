@@ -40,7 +40,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
   List<String> filterByCategory = [
     "review.filter_user",
     "review.filter_kualiva",
-    "review.filter_google",
   ];
 
   ValueNotifier<Set<String>> selectedCategory = ValueNotifier<Set<String>>({});

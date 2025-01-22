@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 @immutable
@@ -7,12 +9,16 @@ class PromoModel {
   final String title;
   final String publisher;
   final DateTime date;
+  final DateTime from;
+  final DateTime to;
 
   const PromoModel({
     required this.imagePath,
     required this.title,
     required this.publisher,
     required this.date,
+    required this.from,
+    required this.to,
   });
 
   PromoModel copyWith({
@@ -20,12 +26,16 @@ class PromoModel {
     String? title,
     String? publisher,
     DateTime? date,
+    DateTime? from,
+    DateTime? to,
   }) {
     return PromoModel(
       imagePath: imagePath ?? this.imagePath,
       title: title ?? this.title,
       publisher: publisher ?? this.publisher,
       date: date ?? this.date,
+      from: from ?? this.from,
+      to: to ?? this.to,
     );
   }
 
@@ -35,6 +45,8 @@ class PromoModel {
       'title': title,
       'publisher': publisher,
       'date': date.millisecondsSinceEpoch,
+      'from': from.millisecondsSinceEpoch,
+      'to': to.millisecondsSinceEpoch,
     };
   }
 
@@ -44,6 +56,8 @@ class PromoModel {
       title: map['title'] as String,
       publisher: map['publisher'] as String,
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      from: DateTime.fromMillisecondsSinceEpoch(map['from'] as int),
+      to: DateTime.fromMillisecondsSinceEpoch(map['to'] as int),
     );
   }
 
@@ -54,7 +68,7 @@ class PromoModel {
 
   @override
   String toString() {
-    return 'PromoModel(imagePath: $imagePath, title: $title, publisher: $publisher, date: $date)';
+    return 'PromoModel(imagePath: $imagePath, title: $title, publisher: $publisher, date: $date, from: $from, to: $to)';
   }
 
   @override
@@ -64,7 +78,9 @@ class PromoModel {
     return other.imagePath == imagePath &&
         other.title == title &&
         other.publisher == publisher &&
-        other.date == date;
+        other.date == date &&
+        other.from == from &&
+        other.to == to;
   }
 
   @override
@@ -72,6 +88,8 @@ class PromoModel {
     return imagePath.hashCode ^
         title.hashCode ^
         publisher.hashCode ^
-        date.hashCode;
+        date.hashCode ^
+        from.hashCode ^
+        to.hashCode;
   }
 }

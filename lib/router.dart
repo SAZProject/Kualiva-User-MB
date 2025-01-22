@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kualiva/_data/model/ui_model/promo_model.dart';
 import 'package:kualiva/auth/device_permission_screen.dart';
 import 'package:kualiva/auth/otp_page_screen.dart';
 import 'package:kualiva/auth/sign_in_screen.dart';
@@ -25,6 +26,8 @@ import 'package:kualiva/profile/my_profile_screen.dart';
 import 'package:kualiva/profile/my_review_screen.dart';
 import 'package:kualiva/profile/profile_screen.dart';
 import 'package:kualiva/profile/user_level_screen.dart';
+import 'package:kualiva/promo/promo_place_detail.dart';
+import 'package:kualiva/promo/promo_place_screen.dart';
 import 'package:kualiva/report/report_place_screen.dart';
 import 'package:kualiva/report/report_review_screen.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
@@ -68,6 +71,10 @@ class AppRoutes {
   static const String fnbFilterScreen = "/f_n_b_filter_screen";
 
   static const String fnbDetailScreen = "/f_n_b_detail_screen";
+
+  static const String promoPlaceScreen = "/promo_place_screen";
+
+  static const String promoDetailScreen = "/promo_detail_screen";
 
   static const String fnbDetailMenuScreen = "/f_n_b_detail_menu_screen";
 
@@ -196,6 +203,20 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
       final placeId = routeSetting.arguments as String;
       return PageTransition(
           child: FnbDetailScreen(placeId: placeId),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.promoPlaceScreen:
+      final listPromo = routeSetting.arguments as List<PromoModel>;
+      return PageTransition(
+          child: PromoPlaceScreen(listPromo: listPromo),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.promoDetailScreen:
+      final promo = routeSetting.arguments as PromoModel;
+      return PageTransition(
+          child: PromoPlaceDetail(promo: promo),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

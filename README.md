@@ -5,9 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.89 (KUA-66, 14)
-- Flutter Migration to > 3.27, fix bug and deprecated function
-- Add my reviews screen
+Ver 0.0.90 (KUA-18, 19)
+- Add Promo Screen
+- Add Promo Detail Screen
 ```
 
 ## Getting Started

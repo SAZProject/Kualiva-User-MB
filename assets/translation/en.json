@@ -253,6 +253,12 @@
         "total_review": "Total Reviews: {total}",
         "avg_rating": "Average Rating\nAccumulated"
     },
+    "promo" : {
+        "title": "Promo",
+        "promo_date": "Available until {date}",
+        "from": "From {date}",
+        "to": "to {date}"
+    },
     "review": {
         "title": "Review",
         "filter": "Review Filter",

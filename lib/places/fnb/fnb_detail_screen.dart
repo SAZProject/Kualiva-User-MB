@@ -45,15 +45,27 @@ class FnbDetailScreen extends StatelessWidget {
   List<PromoModel> listPromo = [
     PromoModel(
       imagePath: ImageConstant.arasaka,
-      title: "Discount 10%\n(Max Rp20.000)",
+      title: "Discount 10% (Max Rp20.000)",
       publisher: "Arasaka Corp",
       date: DateTime.now(),
+      from: Faker()
+          .date
+          .dateTimeBetween(DateTime(2025, 1, 1), DateTime(2025, 1, 14)),
+      to: Faker()
+          .date
+          .dateTimeBetween(DateTime(2025, 1, 15), DateTime(2025, 1, 31)),
     ),
     PromoModel(
       imagePath: ImageConstant.arasaka,
       title: "Discount 100%",
       publisher: "Arasaka Corp",
       date: DateTime.now(),
+      from: Faker()
+          .date
+          .dateTimeBetween(DateTime(2025, 1, 1), DateTime(2025, 1, 14)),
+      to: Faker()
+          .date
+          .dateTimeBetween(DateTime(2025, 1, 15), DateTime(2025, 1, 31)),
     ),
   ];
 
@@ -738,8 +750,11 @@ class FnbDetailScreen extends StatelessWidget {
           children: [
             CustomSectionHeader(
               label: context.tr("f_n_b_detail.promo"),
-              onPressed: () {},
-              useIcon: false,
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.promoPlaceScreen,
+                    arguments: listPromo);
+              },
+              useIcon: true,
             ),
             Container(
               height: 150.h,
@@ -768,6 +783,10 @@ class FnbDetailScreen extends StatelessWidget {
 
   Widget _eventListItems(BuildContext context, int index, PromoModel promo) {
     return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.promoDetailScreen,
+            arguments: promo);
+      },
       onLongPressStart: (details) {
         _showModal(context, promo.imagePath);
       },

@@ -254,6 +254,12 @@
         "total_review": "Total Ulasan: {total}",
         "avg_rating": "Peringkat Rata-Rata\nyang terkumpul"
     },
+    "promo" : {
+        "title": "Promo",
+        "promo_date": "Tersedia hingga tanggal {date}",
+        "from": "dari {date}",
+        "to": "sampai {date}"
+    },
     "review": {
         "title": "Ulasan",
         "filter": "Filter Ulasan",

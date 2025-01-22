@@ -151,6 +151,11 @@
         "resend": "resend Code",
         "otp_verified": "Verified\nSuccessfully"
     },
+    "search": {
+        "title": "Search Screen",
+        "trending": "Trending",
+        "recent": "Recent"
+    },
     "permission": {
         "permission_title": "Better Experience\nFor You",
         "permission_content": "Allow some permissions on your device\nto have the best experience in LikeIt",

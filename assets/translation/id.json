@@ -152,6 +152,11 @@
         "resend": "kirim ulang Kode",
         "otp_verified": "Sukses\nTerverifikasi"
     },
+    "search": {
+        "title": "Halaman Pencarian",
+        "trending": "Pencarian Tren",
+        "recent": "Terkini"
+    },
     "permission": {
         "permission_title": "Pengalaman Lebih\nBaik Untukmu",
         "permission_content": "Mohon berikan beberapa izin pada perangkat Anda untuk mendapatkan pengalaman terbaik di Kualiva",

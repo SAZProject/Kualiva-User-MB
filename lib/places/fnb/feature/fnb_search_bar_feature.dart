@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/feature/search_bar/my_sliver_search_bar_widget.dart';
 import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
+import 'package:kualiva/router.dart';
 
 class FnbSearchBarFeature extends StatelessWidget {
   const FnbSearchBarFeature({super.key});
@@ -20,6 +21,7 @@ class FnbSearchBarFeature extends StatelessWidget {
                   title: Text(suggest),
                   onTap: () {
                     searchController.closeView(suggest);
+                    Navigator.pushNamed(context, AppRoutes.searchScreen);
                   },
                 );
               }).toList();
@@ -34,6 +36,7 @@ class FnbSearchBarFeature extends StatelessWidget {
                 title: Text(suggest),
                 onTap: () {
                   searchController.closeView(suggest);
+                  Navigator.pushNamed(context, AppRoutes.searchScreen);
                 },
               );
             }).toList();

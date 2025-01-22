@@ -31,7 +31,7 @@ class _FnbFiltersGridFacilitiesState extends State<FnbFiltersGridFacilities> {
             color: theme(context)
                 .colorScheme
                 .onSecondaryContainer
-                .withOpacity(0.6),
+                .withValues(alpha: 0.6),
             borderRadius: BorderRadiusStyle.roundedBorder10,
           ),
       child: Column(

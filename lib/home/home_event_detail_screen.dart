@@ -22,7 +22,7 @@ class HomeEventDetailScreen extends StatelessWidget {
           //   color: theme(context)
           //       .colorScheme
           //       .onSecondaryContainer
-          //       .withOpacity(0.6),
+          //       .withValues(0.6),
           //   image: DecorationImage(
           //     image: AssetImage(ImageConstant.background2),
           //     fit: BoxFit.cover,
@@ -58,8 +58,10 @@ class HomeEventDetailScreen extends StatelessWidget {
       leading: Container(
         margin: EdgeInsets.only(left: 5.h),
         decoration: BoxDecoration(
-          color:
-              theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+          color: theme(context)
+              .colorScheme
+              .onSecondaryContainer
+              .withValues(alpha: 0.6),
           shape: BoxShape.circle,
         ),
         child: IconButton(

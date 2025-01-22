@@ -22,6 +22,7 @@ import 'package:kualiva/places/hostelry/hostelry_screen.dart';
 import 'package:kualiva/profile/account_setting_screen.dart';
 import 'package:kualiva/profile/language_screen.dart';
 import 'package:kualiva/profile/my_profile_screen.dart';
+import 'package:kualiva/profile/my_review_screen.dart';
 import 'package:kualiva/profile/profile_screen.dart';
 import 'package:kualiva/profile/user_level_screen.dart';
 import 'package:kualiva/report/report_place_screen.dart';
@@ -83,6 +84,8 @@ class AppRoutes {
   static const String userLevelScreen = "/user_level_screen";
 
   static const String myProfileScreen = "my_profile_screen";
+
+  static const String myReviewScreen = "my_review_screen";
 
   static const String languageScreen = "language_screen";
 
@@ -248,6 +251,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.myProfileScreen:
       return PageTransition(
           child: const MyProfileScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.myReviewScreen:
+      return PageTransition(
+          child: const MyReviewScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

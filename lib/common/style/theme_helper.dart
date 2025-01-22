@@ -47,7 +47,7 @@ class ThemeHelper {
           style: OutlinedButton.styleFrom(
             backgroundColor: Colors.transparent,
             side: BorderSide(
-              color: appTheme.black900.withOpacity(0.6),
+              color: appTheme.black900.withValues(alpha: 0.6),
               width: 1,
             ),
             shape: RoundedRectangleBorder(
@@ -74,7 +74,7 @@ class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) {
     Color color = appTheme.black900;
     if (colorScheme == ColorSchemes.darkModeScheme) {
-      color = colorScheme.onPrimaryContainer.withOpacity(1);
+      color = colorScheme.onPrimaryContainer.withValues(alpha: 1);
     } else {
       color = appTheme.black900;
     }

@@ -4,13 +4,19 @@ import 'package:kualiva/common/app_export.dart';
 extension RadioStyleHelper on CustomRadioButton {
   static BoxDecoration fillOnPrimaryContainer(BuildContext context) =>
       BoxDecoration(
-        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+        color: theme(context)
+            .colorScheme
+            .onPrimaryContainer
+            .withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(10.h),
       );
 
   static BoxDecoration fillOnSecondaryContainer(BuildContext context) =>
       BoxDecoration(
-        color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.3),
+        color: theme(context)
+            .colorScheme
+            .onSecondaryContainer
+            .withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(10.h),
       );
 }

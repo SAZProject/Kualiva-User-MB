@@ -44,11 +44,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   ValueNotifier<Set<String>> selectedCategory = ValueNotifier<Set<String>>({});
 
-  List<String> menuFilter = [
+  ValueNotifier<List<String>> menuFilter = ValueNotifier<List<String>>([
     "review.filter_time",
     "review.filter_media",
     "review.filter_rating",
-  ];
+  ]);
 
   @override
   void initState() {

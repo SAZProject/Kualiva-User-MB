@@ -41,7 +41,8 @@ class CustomButtonStyles {
 
   static ButtonStyle fillprimary(BuildContext context) {
     return ElevatedButton.styleFrom(
-      backgroundColor: theme(context).colorScheme.primary.withOpacity(0.3),
+      backgroundColor:
+          theme(context).colorScheme.primary.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.h),
       ),
@@ -104,20 +105,24 @@ class CustomButtonStyles {
 
   static ButtonStyle outlineTL10(BuildContext context) {
     return OutlinedButton.styleFrom(
-      backgroundColor:
-          theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+      backgroundColor: theme(context)
+          .colorScheme
+          .onSecondaryContainer
+          .withValues(alpha: 0.6),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.h),
       ),
-      shadowColor: appTheme.black900.withOpacity(0.25),
+      shadowColor: appTheme.black900.withValues(alpha: 0.25),
       elevation: 4,
     );
   }
 
   static ButtonStyle outlineTL25(BuildContext context) {
     return OutlinedButton.styleFrom(
-      backgroundColor:
-          theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+      backgroundColor: theme(context)
+          .colorScheme
+          .onSecondaryContainer
+          .withValues(alpha: 0.6),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.h),
       ),
@@ -128,7 +133,10 @@ class CustomButtonStyles {
     return OutlinedButton.styleFrom(
       backgroundColor: theme(context).colorScheme.primary,
       side: BorderSide(
-        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+        color: theme(context)
+            .colorScheme
+            .onPrimaryContainer
+            .withValues(alpha: 0.3),
         width: 1.h,
       ),
       shape: RoundedRectangleBorder(
@@ -140,7 +148,7 @@ class CustomButtonStyles {
   static ButtonStyle outlinePrimaryContainer(BuildContext context) {
     return OutlinedButton.styleFrom(
       backgroundColor:
-          theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+          theme(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.3),
       side: BorderSide(
         color: theme(context).colorScheme.primaryContainer,
         width: 1.0,

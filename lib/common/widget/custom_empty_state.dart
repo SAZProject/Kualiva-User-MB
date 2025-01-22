@@ -7,13 +7,16 @@ class CustomEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        elevation: 10.h,
-        child: Text(
-          context.tr("common.data_not_found"),
-          style: CustomTextStyles(context).bodyMediumOnPrimaryContainer_06,
-          textAlign: TextAlign.center,
+    return Card(
+      elevation: 10.h,
+      child: SizedBox(
+        height: 75.h,
+        child: Center(
+          child: Text(
+            context.tr("common.data_not_found"),
+            style: CustomTextStyles(context).bodyMediumOnPrimaryContainer_06,
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

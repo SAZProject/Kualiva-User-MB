@@ -34,7 +34,7 @@ class LevelListModel {
     return <String, dynamic>{
       'levelIcon': levelIcon.codePoint,
       'levelLabel': levelLabel,
-      'levelColor': levelColor.value,
+      'levelColor': levelColor,
       'isActive': isActive,
     };
   }

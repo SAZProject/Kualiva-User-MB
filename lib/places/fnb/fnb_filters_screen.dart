@@ -93,7 +93,7 @@ class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
           //   color: theme(context)
           //       .colorScheme
           //       .onSecondaryContainer
-          //       .withOpacity(0.6),
+          //       .withValues(0.6),
           //   image: DecorationImage(
           //     image: AssetImage(ImageConstant.background2),
           //     fit: BoxFit.cover,
@@ -206,7 +206,7 @@ class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
             color: theme(context)
                 .colorScheme
                 .onSecondaryContainer
-                .withOpacity(0.6),
+                .withValues(alpha: 0.6),
             borderRadius: BorderRadiusStyle.roundedBorder10,
           ),
       child: Column(

@@ -72,12 +72,12 @@ class MainProvider extends StatelessWidget {
             return SuggestionRepository();
           },
         ),
-        // RepositoryProvider(
-        //   create: (context) {
-        //     return ReportRepository(
-        //         context.read<DioClient>(), context.read<DioClientMinio>());
-        //   },
-        // ),
+        RepositoryProvider(
+          create: (context) {
+            return ReportRepository(
+                context.read<DioClient>(), context.read<DioClientMinio>());
+          },
+        ),
         RepositoryProvider(
           create: (context) {
             return UploadFileRepository(context.read<DioClient>());

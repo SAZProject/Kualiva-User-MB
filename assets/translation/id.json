@@ -255,8 +255,8 @@
         "avg_rating": "Peringkat Rata-Rata\nyang terkumpul"
     },
     "review": {
-        "title": "Tinjauan",
-        "filter": "Filter Tinjau",
+        "title": "Ulasan",
+        "filter": "Filter Ulasan",
         "filter_user": "User",
         "filter_kualiva": "Kualiva",
         "filter_google": "Google",
@@ -276,7 +276,7 @@
         "my_review": "Ulasan Saya",
         "other_review": "Ulasan Lainnya",
         "no_review": "Tidak Ada Ulasan",
-        "review_msg": "Tinjauan :",
+        "review_msg": "Ulasan :",
         "attach_media": "Lampirkan foto (opsional):",
         "hide_username": "Sembunyikan namaku",
         "write_title_n_btn": "Tulis Ulasan",
@@ -353,6 +353,25 @@
         "logout_confirmation": "Apakah Anda yakin ingin logout?",
         "log_out_btn": "Keluar",
         "save_btn": "Menyimpan"
+    },
+    "my_review":{
+        "title": "Ulasan Saya",
+        "filter": "Filter Ulasan",
+        "filter_time": "Waktu",
+        "filter_time_1": "Terbaru",
+        "filter_time_2": "Terkini",
+        "filter_media": "Media",
+        "filter_media_1": "Foto",
+        "filter_rating": "Peringkat",
+        "filter_rating_1": "Tertinggi",
+        "filter_rating_2": "Terendah",
+        "filter_rating_3": "5",
+        "filter_rating_4": "4",
+        "filter_rating_5": "3",
+        "filter_rating_6": "2",
+        "filter_rating_7": "1",
+        "save_btn": "Menyimpan",
+        "reset_btn": "Ulangi"
     },
     "lang": {
         "title": "Bahasa",

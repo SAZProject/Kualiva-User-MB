@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         label: "profile.my_reviews",
         icon: Icons.star,
         isRightIcon: false,
-        isCommingSoon: true),
+        isCommingSoon: false),
     ProfileMenuModel(
         label: "profile.notif",
         icon: Icons.notifications,
@@ -86,6 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 3:
         break;
       case 4:
+        Navigator.pushNamed(context, AppRoutes.myReviewScreen);
         break;
       case 5:
         break;
@@ -243,8 +244,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   LinearProgressIndicator(
                     value: 0.6,
-                    color:
-                        theme(context).colorScheme.onPrimary.withOpacity(0.8),
+                    color: theme(context)
+                        .colorScheme
+                        .onPrimary
+                        .withValues(alpha: 0.8),
                     backgroundColor:
                         theme(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(1.h),

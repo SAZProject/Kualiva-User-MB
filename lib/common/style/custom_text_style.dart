@@ -8,7 +8,10 @@ class CustomTextStyles {
   CustomTextStyles(this.context);
 
   TextStyle get onPrimaryContainer => TextStyle(
-        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(1.0),
+        color: theme(context)
+            .colorScheme
+            .onPrimaryContainer
+            .withValues(alpha: 1.0),
       );
   TextStyle get onSecondaryContainer => TextStyle(
         color: theme(context).colorScheme.onSecondaryContainer,
@@ -24,13 +27,17 @@ class CustomTextStyles {
           );
   TextStyle get bodyLargeOnPrimaryContainer_06 =>
       theme(context).textTheme.bodyLarge!.copyWith(
-            color:
-                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+            color: theme(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withValues(alpha: 0.6),
           );
   TextStyle get bodyLargeOnPrimaryContainer_03 =>
       theme(context).textTheme.bodyLarge!.copyWith(
-            color:
-                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+            color: theme(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withValues(alpha: 0.3),
           );
   TextStyle get bodyLargeBlack900 =>
       theme(context).textTheme.bodyLarge!.copyWith(
@@ -53,14 +60,18 @@ class CustomTextStyles {
           );
   TextStyle get bodyMediumOnPrimaryContainer_03 =>
       theme(context).textTheme.bodyMedium!.copyWith(
-            color:
-                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.3),
+            color: theme(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withValues(alpha: 0.3),
             fontSize: 13.fontSize,
           );
   TextStyle get bodyMediumOnPrimaryContainer_06 =>
       theme(context).textTheme.bodyMedium!.copyWith(
-            color:
-                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+            color: theme(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withValues(alpha: 0.6),
             fontSize: 13.fontSize,
           );
   TextStyle get bodyMediumGray200 =>
@@ -111,8 +122,10 @@ class CustomTextStyles {
           );
   TextStyle get bodySmallOnPrimaryContainer06 =>
       theme(context).textTheme.bodySmall!.copyWith(
-            color:
-                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+            color: theme(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withValues(alpha: 0.6),
             fontSize: 10.fontSize,
           );
   TextStyle get bodySmallPrimary12 =>
@@ -129,7 +142,10 @@ class CustomTextStyles {
   // Headline Medium
   TextStyle get headlineMediumOnPrimaryContainer =>
       theme(context).textTheme.headlineMedium!.copyWith(
-            color: theme(context).colorScheme.onPrimaryContainer.withOpacity(1),
+            color: theme(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withValues(alpha: 1),
             fontWeight: FontWeight.w700,
           );
   // Headline Small
@@ -152,8 +168,10 @@ class CustomTextStyles {
           );
   TextStyle get labelLargeOnPrimaryContainer_06 =>
       theme(context).textTheme.labelLarge!.copyWith(
-            color:
-                theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+            color: theme(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withValues(alpha: 0.6),
           );
   TextStyle get labelLargeYellowA700 =>
       theme(context).textTheme.labelLarge!.copyWith(

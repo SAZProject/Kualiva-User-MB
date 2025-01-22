@@ -9,8 +9,10 @@ class CustomFloatModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+      backgroundColor: theme(context)
+          .colorScheme
+          .onSecondaryContainer
+          .withValues(alpha: 0.6),
       body: _body(context),
     );
   }

@@ -7,7 +7,7 @@ extension TextFormFieldStyleHelper on CustomTextFormField {
   static OutlineInputBorder get outlineBlackTL24 => OutlineInputBorder(
         borderRadius: BorderRadius.circular(24.h),
         borderSide: BorderSide(
-          color: appTheme.black900.withOpacity(0.6),
+          color: appTheme.black900.withValues(alpha: 0.6),
           width: 1,
         ),
       );
@@ -175,7 +175,10 @@ class CustomTextFormField extends StatelessWidget {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(10.h),
       borderSide: BorderSide(
-        color: theme(context).colorScheme.onPrimaryContainer.withOpacity(0.6),
+        color: theme(context)
+            .colorScheme
+            .onPrimaryContainer
+            .withValues(alpha: 0.6),
         width: 1,
       ),
     );

@@ -235,7 +235,7 @@ class FnbDetailScreen extends StatelessWidget {
               color: theme(context)
                   .colorScheme
                   .onSecondaryContainer
-                  .withOpacity(0.6),
+                  .withValues(alpha: 0.6),
               shape: BoxShape.circle,
             ),
             child: IconButton(
@@ -262,7 +262,10 @@ class FnbDetailScreen extends StatelessWidget {
   Widget _buildPopupMenuItem(BuildContext context, int index, IconData icon) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: theme(context).colorScheme.onSecondaryContainer.withOpacity(0.6),
+        color: theme(context)
+            .colorScheme
+            .onSecondaryContainer
+            .withValues(alpha: 0.6),
         shape: BoxShape.circle,
       ),
       child: IconButton(

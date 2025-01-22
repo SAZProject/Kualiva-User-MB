@@ -453,6 +453,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                         setState(() {
                           logoutLoading = true;
                         });
+                        if (!context.mounted) return;
                         Navigator.pushNamedAndRemoveUntil(
                             context, AppRoutes.signInScreen, (route) => false);
                       },

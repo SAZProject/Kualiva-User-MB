@@ -97,7 +97,10 @@ class CustomDropDown extends StatelessWidget {
         contentPadding:
             contentPadding ?? EdgeInsets.fromLTRB(10.h, 10.h, 8.h, 10.h),
         fillColor: fillColor ??
-            theme(context).colorScheme.onSecondaryContainer.withOpacity(0.3),
+            theme(context)
+                .colorScheme
+                .onSecondaryContainer
+                .withValues(alpha: 0.3),
         filled: filled,
         border: inputBorder ??
             OutlineInputBorder(
@@ -106,7 +109,7 @@ class CustomDropDown extends StatelessWidget {
                 color: theme(context)
                     .colorScheme
                     .onPrimaryContainer
-                    .withOpacity(0.6),
+                    .withValues(alpha: 0.6),
                 width: 1.0,
               ),
             ),

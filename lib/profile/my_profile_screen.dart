@@ -585,6 +585,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         setState(() {
                           logoutLoading = true;
                         });
+                        if (!context.mounted) return;
                         Navigator.pushNamedAndRemoveUntil(
                             context, AppRoutes.signInScreen, (route) => false);
                       },

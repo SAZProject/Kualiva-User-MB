@@ -1,16 +1,23 @@
 // import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:kualiva/_data/dio_client_minio.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 // import 'package:kualiva/_data/dio_client_minio.dart';
 import 'package:kualiva/report/model/parameter_model.dart';
+import 'package:mime/mime.dart';
 // import 'package:mime/mime.dart';
 // import 'package:http_parser/http_parser.dart';
 
 class ReportRepository {
-  ReportRepository(this._dioClient);
+  ReportRepository(
+    this._dioClient,
+    this._dioClientMinio,
+  );
 
   final DioClient _dioClient;
-  // final DioClientMinio _dioClientMinio;
+  final DioClientMinio _dioClientMinio;
 
   final List<String> _photoFiles = [];
 
@@ -54,38 +61,38 @@ class ReportRepository {
     return;
   }
 
-  // Future<ParameterModel> uploadPhoto({
-  //   required final String imagePath,
-  // }) async {
-  //   final mimeTypeData =
-  //       lookupMimeType(imagePath, headerBytes: [0xFF, 0xDB])?.split('/');
-  //   var formData = FormData.fromMap({
-  //     'image': [
-  //       await MultipartFile.fromFile(
-  //         imagePath,
-  //         contentType: MediaType(mimeTypeData![0], mimeTypeData[1]),
-  //       )
-  //     ]
-  //   });
-  //   // FormData formData =
-  //   //     FormData.fromMap({"image": MultipartFile.fromFileSync(imagePath)});
-  //   // formData.files
-  //   //     .addAll([MapEntry('image', MultipartFile.fromFileSync(imagePath))]);
-  //   final res = await _dioClientMinio.dio().then((dio) {
-  //     return dio.post(
-  //       "/file-upload/single",
-  //       data: formData,
-  //       options: Options(contentType: Headers.multipartFormDataContentType),
-  //     );
-  //   });
-  //   final path = res.data['pathUrl'] as String;
+  Future<ParameterModel> uploadPhoto({
+    required final String imagePath,
+  }) async {
+    final mimeTypeData =
+        lookupMimeType(imagePath, headerBytes: [0xFF, 0xDB])?.split('/');
+    var formData = FormData.fromMap({
+      'image': [
+        await MultipartFile.fromFile(
+          imagePath,
+          contentType: MediaType(mimeTypeData![0], mimeTypeData[1]),
+        )
+      ]
+    });
+    // FormData formData =
+    //     FormData.fromMap({"image": MultipartFile.fromFileSync(imagePath)});
+    // formData.files
+    //     .addAll([MapEntry('image', MultipartFile.fromFileSync(imagePath))]);
+    final res = await _dioClientMinio.dio().then((dio) {
+      return dio.post(
+        "/file-upload/single",
+        data: formData,
+        options: Options(contentType: Headers.multipartFormDataContentType),
+      );
+    });
+    final path = res.data['pathUrl'] as String;
 
-  //   _photoFiles.add(path);
+    _photoFiles.add(path);
 
-  //   LeLog.rd(this, uploadPhoto, _photoFiles.toString());
-  //   // return res.data['pathUrl'] as String;
-  //   return parameter!;
-  // }
+    LeLog.rd(this, uploadPhoto, _photoFiles.toString());
+    // return res.data['pathUrl'] as String;
+    return parameter!;
+  }
 }
 
 // I/flutter ( 8968): ╔ Headers

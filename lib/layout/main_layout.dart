@@ -76,7 +76,7 @@ class _MainNavigationState extends State<MainLayout> {
     return CurvedNavigationBar(
       index: _selectedPage,
       backgroundColor: Colors.transparent,
-      color: theme(context).colorScheme.primary.withOpacity(0.6),
+      color: theme(context).colorScheme.primary.withValues(alpha: 0.6),
       buttonBackgroundColor: appTheme.amber700,
       items: [
         // Icon(

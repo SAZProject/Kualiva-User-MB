@@ -340,7 +340,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 color: theme(context)
                     .colorScheme
                     .onPrimaryContainer
-                    .withOpacity(0.6),
+                    .withValues(alpha: 0.6),
               ),
         ),
         SizedBox(height: 2.h),
@@ -352,7 +352,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   color: theme(context)
                       .colorScheme
                       .onPrimaryContainer
-                      .withOpacity(0.6),
+                      .withValues(alpha: 0.6),
                 ),
           ),
         ),
@@ -363,7 +363,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 color: theme(context)
                     .colorScheme
                     .onPrimaryContainer
-                    .withOpacity(0.6),
+                    .withValues(alpha: 0.6),
               ),
         ),
       ],

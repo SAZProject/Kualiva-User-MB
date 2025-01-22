@@ -38,11 +38,11 @@ class UserLevelSliderItem extends StatelessWidget {
                 color: userLevel.levelColor,
                 shadows: [
                   Shadow(
-                    color: userLevel.levelColor.withOpacity(0.8),
+                    color: userLevel.levelColor.withValues(alpha: 0.8),
                     blurRadius: 50.0,
                   ),
                   Shadow(
-                    color: userLevel.levelColor.withOpacity(0.4),
+                    color: userLevel.levelColor.withValues(alpha: 0.4),
                     blurRadius: 75.0,
                   ),
                 ],

@@ -4,46 +4,43 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_radio_button.dart';
 
-class ReviewFiltersModal extends StatefulWidget {
-  const ReviewFiltersModal({
-    super.key,
-    required this.menuFilter,
-  });
+class MyReviewModal extends StatefulWidget {
+  const MyReviewModal({super.key, required this.menuFilter});
 
   final ValueNotifier<List<String>> menuFilter;
 
   @override
-  State<ReviewFiltersModal> createState() => _ReviewFiltersModalState();
+  State<MyReviewModal> createState() => _MyReviewModalState();
 }
 
-class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
+class _MyReviewModalState extends State<MyReviewModal> {
   List<String> listFilterTime = [
-    "review.filter_time_1",
-    "review.filter_time_2",
+    "my_review.filter_time_1",
+    "my_review.filter_time_2",
   ];
   String? selectedFilterTime;
 
   List<String> listFilterMedia = [
-    "review.filter_media_1",
+    "my_review.filter_media_1",
   ];
   String? selectedFilterMedia;
 
   List<String> listFilterRating = [
-    "review.filter_rating_1",
-    "review.filter_rating_2",
-    "review.filter_rating_3",
-    "review.filter_rating_4",
-    "review.filter_rating_5",
-    "review.filter_rating_6",
-    "review.filter_rating_7",
+    "my_review.filter_rating_1",
+    "my_review.filter_rating_2",
+    "my_review.filter_rating_3",
+    "my_review.filter_rating_4",
+    "my_review.filter_rating_5",
+    "my_review.filter_rating_6",
+    "my_review.filter_rating_7",
   ];
   String? selectedFilterRating;
 
   void _resetValue() {
     List<String> filterResult = [
-      "review.filter_time",
-      "review.filter_media",
-      "review.filter_rating",
+      "my_review.filter_time",
+      "my_review.filter_media",
+      "my_review.filter_rating",
     ];
 
     widget.menuFilter.value.clear();
@@ -52,9 +49,9 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
 
   void _saveButton() {
     List<String> filterResult = [
-      selectedFilterTime ?? "review.filter_time",
-      selectedFilterMedia ?? "review.filter_media",
-      selectedFilterRating ?? "review.filter_rating",
+      selectedFilterTime ?? "my_review.filter_time",
+      selectedFilterMedia ?? "my_review.filter_media",
+      selectedFilterRating ?? "my_review.filter_rating",
     ];
 
     widget.menuFilter.value.clear();
@@ -67,7 +64,7 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: _reviewFilterAppBar(context),
+        appBar: _myReviewFilterAppBar(context),
         body: SizedBox(
           width: double.maxFinite,
           height: Sizeutils.height,
@@ -94,7 +91,7 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
     );
   }
 
-  PreferredSizeWidget _reviewFilterAppBar(BuildContext context) {
+  PreferredSizeWidget _myReviewFilterAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
@@ -106,7 +103,7 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
       title: Padding(
         padding: EdgeInsets.only(left: 10.h),
         child: Text(
-          context.tr("review.filter"),
+          context.tr("my_review.filter"),
           style: theme(context).textTheme.headlineSmall,
         ),
       ),
@@ -137,7 +134,7 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        context.tr("review.filter_time"),
+                        context.tr("my_review.filter_time"),
                         textAlign: TextAlign.center,
                         style: theme(context).textTheme.titleSmall,
                         maxLines: 1,
@@ -169,7 +166,7 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        context.tr("review.filter_media"),
+                        context.tr("my_review.filter_media"),
                         textAlign: TextAlign.center,
                         style: theme(context).textTheme.titleSmall,
                         maxLines: 1,
@@ -201,7 +198,7 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        context.tr("review.filter_rating"),
+                        context.tr("my_review.filter_rating"),
                         textAlign: TextAlign.center,
                         style: theme(context).textTheme.titleSmall,
                         maxLines: 1,
@@ -238,10 +235,10 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
                 children: [
                   Flexible(
                       child: _buildSaveResetButton(
-                          context, "review.reset_btn", () => _resetValue())),
+                          context, "my_review.reset_btn", () => _resetValue())),
                   Flexible(
                       child: _buildSaveResetButton(
-                          context, "review.save_btn", () => _saveButton())),
+                          context, "my_review.save_btn", () => _saveButton())),
                 ],
               ),
             ),

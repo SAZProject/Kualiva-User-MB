@@ -27,11 +27,14 @@ class AuthRepository {
     if (phoneNumber != null) {
       body.addAll({'phone': phoneNumber});
     }
-    final res = await _dioClient.dio().then((dio) {
-      return dio.post('/auth/login', data: body);
-    });
-    final accessToken = res.data['accessToken'].toString();
-    final refreshToken = res.data['refreshToken'].toString();
+    // final res = await _dioClient.dio().then((dio) {
+    //   return dio.post('/auth/login', data: body);
+    // });
+    // final accessToken = res.data['accessToken'].toString();
+    // final refreshToken = res.data['refreshToken'].toString();
+
+    final accessToken = 'accessToken';
+    final refreshToken = 'refreshToken';
 
     await Future.wait([
       _tokenManager.writeAccessToken(accessToken),
@@ -45,13 +48,13 @@ class AuthRepository {
     required String phoneNumber,
     required String password,
   }) async {
-    final _ = await _dioClient.dio().then((dio) {
-      return dio.post('/auth/register', data: {
-        'username': username,
-        'phone': phoneNumber,
-        'password': password,
-      });
-    });
+    // final _ = await _dioClient.dio().then((dio) {
+    //   return dio.post('/auth/register', data: {
+    //     'username': username,
+    //     'phone': phoneNumber,
+    //     'password': password,
+    //   });
+    // });
 
     LeLog.rd(this, register, 'Register Success');
   }

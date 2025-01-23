@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kualiva/_faker/review_faker.dart';
 // import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
@@ -39,20 +40,20 @@ class ReviewRepository {
     required double rating,
     required List<String> photoFiles,
   }) async {
-    final _ = await _dioClient.dio().then((dio) {
-      return dio.post(
-        '/reviews',
-        data: {
-          "placeUniqueId": placeUniqueId,
-          "placeCategory": placeCategory!.name,
-          "invoice": invoice,
-          "description": description,
-          "invoiceFile": invoiceFile,
-          "rating": rating,
-          "photoFiles": photoFiles,
-        },
-      );
-    });
+    // final _ = await _dioClient.dio().then((dio) {
+    //   return dio.post(
+    //     '/reviews',
+    //     data: {
+    //       "placeUniqueId": placeUniqueId,
+    //       "placeCategory": placeCategory!.name,
+    //       "invoice": invoice,
+    //       "description": description,
+    //       "invoiceFile": invoiceFile,
+    //       "rating": rating,
+    //       "photoFiles": photoFiles,
+    //     },
+    //   );
+    // });
 
     // final data = (res.data as List<dynamic>)
     //     .map((e) => ReviewPlaceModel.fromMap(e))
@@ -74,13 +75,16 @@ class ReviewRepository {
     //   return reviewPlaceList;
     // }
 
-    final res = await _dioClient.dio().then((dio) {
-      return dio.get('/reviews/$placeId/place');
-    });
+    // final res = await _dioClient.dio().then((dio) {
+    //   return dio.get('/reviews/$placeId/place');
+    // });
 
-    final data = (res.data as List<dynamic>)
-        .map((e) => ReviewPlaceModel.fromMap(e))
-        .toList();
+    // final data = (res.data as List<dynamic>)
+    //     .map((e) => ReviewPlaceModel.fromMap(e))
+    //     .toList();
+
+    final data = ReviewFaker.otherReviewGetByPlace();
+
     // reviewPlaceBox.addAll(data);
     LeLog.rd(this, otherReviewGetByPlace, data.toString());
     return data;
@@ -101,25 +105,27 @@ class ReviewRepository {
     debugPrint('LeRucco');
     debugPrint(placeId); // ChIJb59oH_P1aS4RePRpX6xEoP0
 
-    final res = await _dioClient.dio().then((dio) {
-      return dio.get('/reviews/$placeId/place/me');
-    });
+    // final res = await _dioClient.dio().then((dio) {
+    //   return dio.get('/reviews/$placeId/place/me');
+    // });
 
-    final data = ReviewPlaceModel.fromMap(res.data);
+    // final data = ReviewPlaceModel.fromMap(res.data);
+
+    final data = ReviewFaker.myReviewGetByPlace();
     LeLog.rd(this, myReviewGetByPlace, data.toString());
     return data;
   }
 
   /// Review Place Search Text
   Future<void> getBySearchText({required String text}) async {
-    final _ = await _dioClient.dio().then((dio) {
-      return dio.get(
-        '/',
-        queryParameters: Map.from(
-          {'text': text},
-        ),
-      );
-    });
+    // final _ = await _dioClient.dio().then((dio) {
+    //   return dio.get(
+    //     '/',
+    //     queryParameters: Map.from(
+    //       {'text': text},
+    //     ),
+    //   );
+    // });
     return;
   }
 }

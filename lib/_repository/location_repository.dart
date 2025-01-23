@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
+import 'package:kualiva/_faker/location_faker.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/utility/location_util.dart';
 import 'package:kualiva/main_hive.dart';
@@ -19,8 +20,11 @@ class LocationRepository {
   }
 
   Future<CurrentLocationModel> newLocation() async {
+    // final CurrentLocationModel newCurrentLocation =
+    //     await LocationUtil.getUserCurrentLocation();
+
     final CurrentLocationModel newCurrentLocation =
-        await LocationUtil.getUserCurrentLocation();
+        await LocationFaker.getUserCurrentLocation();
 
     return newCurrentLocation;
   }

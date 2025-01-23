@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:kualiva/_faker/profile_faker.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
@@ -19,11 +20,12 @@ class ProfileRepository {
       return user;
     }
 
-    final res = await _dioClient.dio().then((dio) {
-      return dio.get('/profiles/me');
-    });
+    // final res = await _dioClient.dio().then((dio) {
+    //   return dio.get('/profiles/me');
+    // });
 
-    final data = UserModel.fromMap(res.data);
+    // final data = UserModel.fromMap(res.data);
+    final data = ProfileFaker.me();
     await userBox.clear();
     await userBox.add(data);
     LeLog.rd(this, me, data.toString());

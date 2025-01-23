@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:kualiva/_data/dio_client_minio.dart';
+import 'package:kualiva/_faker/report_faker.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 // import 'package:kualiva/_data/dio_client_minio.dart';
@@ -24,17 +25,18 @@ class ReportRepository {
   ParameterModel? parameter;
 
   Future<ParameterModel> getPlaceReasons() async {
-    final res = await _dioClient.dio().then((dio) {
-      return dio.get(
-        '/parameters/code',
-        queryParameters: {
-          'bizCode': 'FNB',
-          'groupCode': '001',
-        },
-      );
-    });
+    // final res = await _dioClient.dio().then((dio) {
+    //   return dio.get(
+    //     '/parameters/code',
+    //     queryParameters: {
+    //       'bizCode': 'FNB',
+    //       'groupCode': '001',
+    //     },
+    //   );
+    // });
 
-    final data = ParameterModel.fromMap(res.data);
+    // final data = ParameterModel.fromMap(res.data);
+    final data = ReportFaker.getPlaceReasons();
     parameter = data;
     LeLog.rd(this, getPlaceReasons, data.toString());
     return data;
@@ -45,17 +47,17 @@ class ReportRepository {
     required String reasonCode,
     required int reasonSequence,
   }) async {
-    final _ = await _dioClient.dio().then((dio) {
-      return dio.post(
-        '/places/report',
-        data: {
-          'placeUniqueId': placeId,
-          'reasonCode': reasonCode,
-          'reasonSequence': reasonSequence,
-          'photoFiles': _photoFiles,
-        },
-      );
-    });
+    // final _ = await _dioClient.dio().then((dio) {
+    //   return dio.post(
+    //     '/places/report',
+    //     data: {
+    //       'placeUniqueId': placeId,
+    //       'reasonCode': reasonCode,
+    //       'reasonSequence': reasonSequence,
+    //       'photoFiles': _photoFiles,
+    //     },
+    //   );
+    // });
 
     _photoFiles.clear();
     return;
@@ -64,28 +66,30 @@ class ReportRepository {
   Future<ParameterModel> uploadPhoto({
     required final String imagePath,
   }) async {
-    final mimeTypeData =
-        lookupMimeType(imagePath, headerBytes: [0xFF, 0xDB])?.split('/');
-    var formData = FormData.fromMap({
-      'image': [
-        await MultipartFile.fromFile(
-          imagePath,
-          contentType: MediaType(mimeTypeData![0], mimeTypeData[1]),
-        )
-      ]
-    });
+    // final mimeTypeData =
+    //     lookupMimeType(imagePath, headerBytes: [0xFF, 0xDB])?.split('/');
+    // var formData = FormData.fromMap({
+    //   'image': [
+    //     await MultipartFile.fromFile(
+    //       imagePath,
+    //       contentType: MediaType(mimeTypeData![0], mimeTypeData[1]),
+    //     )
+    //   ]
+    // });
     // FormData formData =
     //     FormData.fromMap({"image": MultipartFile.fromFileSync(imagePath)});
     // formData.files
     //     .addAll([MapEntry('image', MultipartFile.fromFileSync(imagePath))]);
-    final res = await _dioClientMinio.dio().then((dio) {
-      return dio.post(
-        "/file-upload/single",
-        data: formData,
-        options: Options(contentType: Headers.multipartFormDataContentType),
-      );
-    });
-    final path = res.data['pathUrl'] as String;
+    // final res = await _dioClientMinio.dio().then((dio) {
+    //   return dio.post(
+    //     "/file-upload/single",
+    //     data: formData,
+    //     options: Options(contentType: Headers.multipartFormDataContentType),
+    //   );
+    // });
+    // final path = res.data['pathUrl'] as String;
+
+    final path = 'path-to-minio-service';
 
     _photoFiles.add(path);
 

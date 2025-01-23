@@ -56,16 +56,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         isRightIcon: false,
         isCommingSoon: false),
     ProfileMenuModel(
-        label: "profile.add_place",
-        icon: Icons.add,
-        isRightIcon: false,
-        isCommingSoon: false),
-    ProfileMenuModel(
-        label: "profile.acc_setting",
-        icon: Icons.lock_person,
-        isRightIcon: false,
-        isCommingSoon: false),
-    ProfileMenuModel(
         label: "profile.customer_support",
         icon: Icons.support_agent,
         isRightIcon: false,
@@ -103,14 +93,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Navigator.pushNamed(context, AppRoutes.languageScreen);
         break;
       case 8:
-        Navigator.pushNamed(context, AppRoutes.addPlaceScreen);
         break;
       case 9:
-        Navigator.pushNamed(context, AppRoutes.accSettingScreen);
-        break;
-      case 10:
-        break;
-      case 11:
         _showLicensePage(context: context);
         break;
       default:
@@ -431,24 +415,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 _profileMenuModel[9].imageUri,
                 _profileMenuModel[9].isRightIcon,
                 _profileMenuModel[9].isCommingSoon,
-              ),
-              _buildProfileMenuListItem(
-                context,
-                10,
-                _profileMenuModel[10].label,
-                _profileMenuModel[10].icon,
-                _profileMenuModel[10].imageUri,
-                _profileMenuModel[10].isRightIcon,
-                _profileMenuModel[10].isCommingSoon,
-              ),
-              _buildProfileMenuListItem(
-                context,
-                11,
-                _profileMenuModel[11].label,
-                _profileMenuModel[11].icon,
-                _profileMenuModel[11].imageUri,
-                _profileMenuModel[11].isRightIcon,
-                _profileMenuModel[11].isCommingSoon,
               ),
             ],
           ),

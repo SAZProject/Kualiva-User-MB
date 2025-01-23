@@ -244,6 +244,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             "50",
           ),
           SizedBox(height: 10.h),
+          //TODO there is erro in this dropdown
           _buildDropDownComponent(
             context,
             context.tr("add_place.type"),

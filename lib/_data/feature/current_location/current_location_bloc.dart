@@ -25,16 +25,19 @@ class CurrentLocationBloc
       final oldLocation = _locationRepository.oldLocation();
       final newLocation = await _locationRepository.newLocation();
 
-      final isTriggerEmit =
+      final (isTriggerEmit, distance) =
           await _locationRepository.isDistanceTooFarOrFirstTime(
         oldLocation: oldLocation,
         newLocation: newLocation,
       );
       LeLog.bd(this, _onFetched, isTriggerEmit.toString());
-      if (isTriggerEmit) {
-        LeLog.bd(this, _onFetched, newLocation.toString());
-        emit(CurrentLocationSuccess(currentLocationModel: newLocation));
-      }
+      LeLog.bd(this, _onFetched, newLocation.toString());
+
+      emit(CurrentLocationSuccess(
+        currentLocationModel: newLocation,
+        isDistanceTooFarOrFirstTime: isTriggerEmit,
+        distance: distance,
+      ));
     } catch (e) {
       LeLog.be(this, _onFetched, e.toString());
       emit(CurrentLocationFailure(message: e.toString()));

@@ -5,8 +5,6 @@ import 'package:kualiva/common/utility/location_util.dart';
 import 'package:kualiva/main_hive.dart';
 
 class LocationRepository {
-  bool firstTimeOpenApp = false;
-
   CurrentLocationModel? oldLocation() {
     final currentLocationBox =
         Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
@@ -27,44 +25,34 @@ class LocationRepository {
     return newCurrentLocation;
   }
 
-  Future<bool> isDistanceTooFarOrFirstTime({
+  Future<(bool, double)> isDistanceTooFarOrFirstTime({
     required CurrentLocationModel? oldLocation,
     required CurrentLocationModel newLocation,
   }) async {
-    //TODO get data on offline mode
-    // final currentLocationBox =
-    //     Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
+    final currentLocationBox =
+        Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
 
-    // /// First time get current location
-    // if (oldLocation == null) {
-    //   currentLocationBox.clear();
-    //   currentLocationBox.add(newLocation);
-    //   firstTimeOpenApp = true;
-    //   return true;
-    // }
+    /// First time get current location
+    if (oldLocation == null) {
+      currentLocationBox.clear();
+      currentLocationBox.add(newLocation);
+      return (true, 0.0);
+    }
 
-    // final distance = LocationUtil.calculateDistance(
-    //   oldLatitude: oldLocation.latitude,
-    //   oldLongitude: oldLocation.longitude,
-    //   newLatitude: newLocation.latitude,
-    //   newLongitude: newLocation.longitude,
-    // );
+    final distance = LocationUtil.calculateDistance(
+      oldLatitude: oldLocation.latitude,
+      oldLongitude: oldLocation.longitude,
+      newLatitude: newLocation.latitude,
+      newLongitude: newLocation.longitude,
+    );
 
-    // if (!firstTimeOpenApp) {
-    //   firstTimeOpenApp = true;
-    //   currentLocationBox.clear();
-    //   currentLocationBox.add(newLocation);
-    //   return true;
-    // }
+    /// 22.5 meters
+    if (distance >= 22.5) {
+      currentLocationBox.clear();
+      currentLocationBox.add(newLocation);
+      return (true, distance);
+    }
 
-    // /// 22.5 meters
-    // if (distance >= 22.5) {
-    //   currentLocationBox.clear();
-    //   currentLocationBox.add(newLocation);
-    //   return true;
-    // }
-
-    // return false;
-    return true;
+    return (false, distance);
   }
 }

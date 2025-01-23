@@ -9,9 +9,13 @@ final class CurrentLocationLoading extends CurrentLocationState {}
 
 final class CurrentLocationSuccess extends CurrentLocationState {
   final CurrentLocationModel currentLocationModel;
+  final bool isDistanceTooFarOrFirstTime;
+  final double distance;
 
   CurrentLocationSuccess({
     required this.currentLocationModel,
+    required this.isDistanceTooFarOrFirstTime,
+    required this.distance,
   });
 }
 

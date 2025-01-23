@@ -383,6 +383,22 @@
         "save_btn": "Save",
         "reset_btn": "Reset"
     },
+    "notif": {
+        "title": "Notification",
+        "kualiva": "Kualiva",
+        "kualiva_1": "Updates",
+        "kualiva_2": "News",
+        "kualiva_3": "Events",
+        "wgo": "What's Going On",
+        "wgo_1": "Current Location",
+        "my_voucher": "My Voucher",
+        "my_voucher_1": "Expiration Reminder",
+        "review": "Review",
+        "review_1": "Likes",
+        "customer_support": "Customer Support",
+        "customer_support_1": "Replies",
+        "customer_support_2": "Status"
+    },
     "lang":{
         "title": "Language",
         "change_lang": "Change Language",

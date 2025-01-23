@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.91 (KUA-21)
-- Add Search Screen
+Ver 0.0.92 (KUA-15)
+- Add Notification Screen
 ```
 
 ## Getting Started

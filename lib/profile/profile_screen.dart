@@ -44,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         label: "profile.notif",
         icon: Icons.notifications,
         isRightIcon: false,
-        isCommingSoon: true),
+        isCommingSoon: false),
     ProfileMenuModel(
         label: "profile.theme",
         icon: Icons.brightness_4_outlined,
@@ -89,6 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Navigator.pushNamed(context, AppRoutes.myReviewScreen);
         break;
       case 5:
+        Navigator.pushNamed(context, AppRoutes.notificationScreen);
         break;
       case 6:
         final brightness = theme(context).brightness;

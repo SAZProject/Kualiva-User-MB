@@ -384,6 +384,22 @@
         "save_btn": "Menyimpan",
         "reset_btn": "Ulangi"
     },
+    "notif": {
+        "title": "Notifikasi",
+        "kualiva": "Kualiva",
+        "kualiva_1": "Pembaharuan",
+        "kualiva_2": "Berita",
+        "kualiva_3": "Acara",
+        "wgo": "What's Going On",
+        "wgo_1": "Lokasi Terkini",
+        "my_voucher": "Kupon Saya",
+        "my_voucher_1": "Peringatan Kadaluwarsa",
+        "review": "Ulasan",
+        "review_1": "Suka",
+        "customer_support": "Bantuan Pelanggan",
+        "customer_support_1": "Balasan",
+        "customer_support_2": "Status"
+    },
     "lang": {
         "title": "Bahasa",
         "change_lang": "Ubah Bahasa",

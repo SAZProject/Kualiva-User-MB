@@ -1,12 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
-import 'package:kualiva/_data/model/review_model.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
@@ -34,8 +32,6 @@ class ReviewScreen extends StatefulWidget {
 class _ReviewScreenState extends State<ReviewScreen> {
   String get placeId => widget.placeId;
   PlaceCategoryEnum get placeCategory => widget.placeCategory;
-  List<ReviewModel> get listReviewData =>
-      FNBDataset().featuredItemsDataset[0].review;
 
   List<String> filterByCategory = [
     "review.filter_user",

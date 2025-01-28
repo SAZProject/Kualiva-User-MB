@@ -4,8 +4,11 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/_data/model/f_n_b_model.dart';
 
 class FnbPromoItem extends StatelessWidget {
-  const FnbPromoItem(
-      {super.key, required this.fnbModel, required this.onPressed});
+  const FnbPromoItem({
+    super.key,
+    required this.fnbModel,
+    required this.onPressed,
+  });
 
   final FNBModel fnbModel;
   final VoidCallback onPressed;

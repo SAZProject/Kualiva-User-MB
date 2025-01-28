@@ -5,7 +5,6 @@ import 'package:kualiva/auth/otp_page_screen.dart';
 import 'package:kualiva/auth/sign_in_screen.dart';
 import 'package:kualiva/auth/sign_up_screen.dart';
 import 'package:kualiva/common/screen/location_screen.dart';
-import 'package:kualiva/_data/model/review_model.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/_data/model/ui_model/home_event_model.dart';
 import 'package:kualiva/common/screen/search_screen.dart';
@@ -263,9 +262,8 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reportReviewScreen:
-      final reviewData = routeSetting.arguments as ReviewModel;
       return PageTransition(
-          child: ReportReviewScreen(reviewData: reviewData),
+          child: ReportReviewScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

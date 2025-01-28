@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_rating_bar.dart';
-// import 'package:kualiva/data/model/review_model.dart';
+import 'package:kualiva/review/bloc/review_like_bloc.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 
 class ReviewView extends StatefulWidget {
@@ -15,16 +17,48 @@ class ReviewView extends StatefulWidget {
 }
 
 class _ReviewViewState extends State<ReviewView> {
-  bool isLiked = false;
+  ReviewPlaceModel get reviewData => widget.reviewData;
+  final _isLiked = ValueNotifier<bool>(false);
+  final _countLiked = ValueNotifier<int>(0);
 
-  // final ReviewModel reviewData;
   void _popUpMenuAction(BuildContext context, int index) {
     switch (index) {
       default:
-        Navigator.pushNamed(context, AppRoutes.reportReviewScreen,
-            arguments: widget.reviewData);
+        Navigator.pushNamed(context, AppRoutes.reportReviewScreen);
         break;
     }
+  }
+
+  void _toggleLikedIcon() {
+    LeLog.sd(this, _toggleLikedIcon, 'Kepencet Ooeee');
+    LeLog.sd(this, _toggleLikedIcon, _isLiked.value.toString());
+    if (_isLiked.value) {
+      context
+          .read<ReviewLikeBloc>()
+          .add(ReviewLikeAdded(reviewId: reviewData.id));
+      _countLiked.value = _countLiked.value + 1;
+    } else {
+      context
+          .read<ReviewLikeBloc>()
+          .add(ReviewLikeRemoved(reviewId: reviewData.id));
+      _countLiked.value = _countLiked.value == 0 ? 0 : _countLiked.value - 1;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _countLiked.value = reviewData.count ?? 0;
+    _isLiked.value = reviewData.isLikedByMe ?? false;
+    _isLiked.addListener(_toggleLikedIcon);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _isLiked.removeListener(_toggleLikedIcon);
+    _isLiked.dispose();
+    _countLiked.dispose();
   }
 
   @override
@@ -64,8 +98,7 @@ class _ReviewViewState extends State<ReviewView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.reviewData.author.username,
-                            // reviewData.username,
+                            reviewData.author.username,
                             style: theme(context).textTheme.titleMedium,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -75,13 +108,13 @@ class _ReviewViewState extends State<ReviewView> {
                             child: Row(
                               children: [
                                 Text(
-                                  widget.reviewData.rating.toString(),
+                                  reviewData.rating.toString(),
                                   style: theme(context).textTheme.bodySmall,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 CustomRatingBar(
-                                  initialRating: widget.reviewData.rating,
+                                  initialRating: reviewData.rating,
                                   color: theme(context).colorScheme.primary,
                                 ),
                               ],
@@ -92,27 +125,37 @@ class _ReviewViewState extends State<ReviewView> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 4.h),
-                  child: Text(
-                    "???",
-                    style: theme(context).textTheme.bodySmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: _countLiked,
+                  builder: (context, value, child) {
+                    return Padding(
+                      padding: EdgeInsets.only(left: 4.h),
+                      child: Text(
+                        "$value",
+                        style: theme(context).textTheme.bodySmall,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    );
+                  },
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 4.h),
-                  child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isLiked = !isLiked;
-                      });
-                    },
-                    icon: Icon(Icons.favorite,
-                        size: 20.h,
-                        color: isLiked ? Colors.redAccent : Colors.grey),
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: _isLiked,
+                  builder: (context, value, child) {
+                    return Container(
+                      margin: EdgeInsets.only(left: 4.h),
+                      child: IconButton(
+                        onPressed: () {
+                          _isLiked.value = !_isLiked.value;
+                        },
+                        icon: Icon(
+                          Icons.favorite,
+                          size: 20.h,
+                          color: value ? Colors.redAccent : Colors.grey,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 PopupMenuButton(
                   position: PopupMenuPosition.under,
@@ -138,7 +181,7 @@ class _ReviewViewState extends State<ReviewView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  DatetimeUtils.dmy(widget.reviewData.createdAt),
+                  DatetimeUtils.dmy(reviewData.createdAt),
                   // DatetimeUtils.dmy(reviewData.reviewDate),
                   style: theme(context).textTheme.bodySmall,
                   maxLines: 1,
@@ -146,8 +189,7 @@ class _ReviewViewState extends State<ReviewView> {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  widget.reviewData.description,
-                  // reviewData.content,
+                  reviewData.description,
                   style: CustomTextStyles(context).bodySmall12,
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,

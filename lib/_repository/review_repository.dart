@@ -122,8 +122,20 @@ class ReviewRepository {
     });
     return;
   }
+
+  /// Review Add Like
+  Future<void> addLike({required int reviewId}) async {
+    final _ = await _dioClient.dio().then((dio) {
+      return dio.post('/reviews/$reviewId/like/add');
+    });
+    return;
+  }
+
+  /// Review Remove Like
+  Future<void> removeLike({required int reviewId}) async {
+    final _ = await _dioClient.dio().then((dio) {
+      return dio.delete('/reviews/$reviewId/like/remove');
+    });
+    return;
+  }
 }
-/// 3000 auth
-/// 3001 places
-/// 3002 review
-/// abc1230 

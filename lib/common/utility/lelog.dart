@@ -23,7 +23,7 @@ class LeLog {
   }
 
   static String _blocFnToStr(Function fn) {
-    return fn.toString().split('\'')[1].trim();
+    return fn.toString().split('\'')[1].trim().split("@")[0].trim();
   }
 
   /// BLoC Debug Log

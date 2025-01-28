@@ -24,6 +24,7 @@ import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 import 'package:kualiva/_repository/profile_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:kualiva/_repository/report_repository.dart';
+import 'package:kualiva/review/bloc/review_like_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
@@ -151,11 +152,12 @@ class MainProvider extends StatelessWidget {
         BlocProvider(create: (context) {
           return ReviewPlaceCreateBloc(context.read<ReviewRepository>());
         }),
-        BlocProvider(
-          create: (context) {
-            return UserProfileBloc(context.read<ProfileRepository>());
-          },
-        )
+        BlocProvider(create: (context) {
+          return UserProfileBloc(context.read<ProfileRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return ReviewLikeBloc(context.read<ReviewRepository>());
+        })
       ],
       child: child,
     );

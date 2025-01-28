@@ -31,7 +31,7 @@ class FnbNearestModel {
   final List<String> categories;
 
   @HiveField(7)
-  final String timezone;
+  final String? timeZone;
 
   @HiveField(8)
   final String? phone;
@@ -77,7 +77,7 @@ class FnbNearestModel {
   final String fid;
 
   @HiveField(22)
-  final String placeId;
+  final String? placeId;
 
   const FnbNearestModel({
     required this.id,
@@ -87,7 +87,7 @@ class FnbNearestModel {
     required this.street,
     required this.municipality,
     required this.categories,
-    required this.timezone,
+    required this.timeZone,
     required this.phone,
     required this.phones,
     required this.claimed,
@@ -113,7 +113,7 @@ class FnbNearestModel {
     String? street,
     String? municipality,
     List<String>? categories,
-    String? timezone,
+    String? timeZone,
     String? phone,
     List<String>? phones,
     String? claimed,
@@ -138,7 +138,7 @@ class FnbNearestModel {
       street: street ?? this.street,
       municipality: municipality ?? this.municipality,
       categories: categories ?? this.categories,
-      timezone: timezone ?? this.timezone,
+      timeZone: timeZone ?? this.timeZone,
       phone: phone ?? this.phone,
       phones: phones ?? this.phones,
       claimed: claimed ?? this.claimed,
@@ -166,7 +166,7 @@ class FnbNearestModel {
       'street': street,
       'municipality': municipality,
       'categories': categories,
-      'timeZone': timezone,
+      'timeZone': timeZone,
       'phone': phone,
       'phones': phones,
       'claimed': claimed,
@@ -186,7 +186,7 @@ class FnbNearestModel {
 
   factory FnbNearestModel.fromMap(Map<String, dynamic> map) {
     return FnbNearestModel(
-      id: map['_id'] as String,
+      id: map['_id']['\$oid'],
       location:
           FnbNearestLocation.fromMap(map['location'] as Map<String, dynamic>),
       name: map['name'] as String,
@@ -194,12 +194,12 @@ class FnbNearestModel {
       street: map['street'] as String,
       municipality: map['municipality'] as String,
       categories: (map['categories'] as String).split(','),
-      timezone: map['timezone'] as String,
+      timeZone: map['timeZone'] as String?,
       phone: map['phone'] as String?,
-      phones: (map['phones'] as String).split(','),
+      phones: ((map['phones'] as String?) ?? '').split(','),
       claimed: map['claimed'] as String,
-      reviewCount: int.parse(map['reviewCount'].toString()),
-      averageRating: double.parse(map['averageRating'].toString()),
+      reviewCount: int.tryParse(map['reviewCount'].toString()) ?? 0,
+      averageRating: double.tryParse(map['averageRating'].toString()) ?? 0.0,
       reviewUrl: map['reviewURL'] as String?,
       googleMapsUrl: map['googleMapsURL'] as String,
       latitude: double.parse(map['latitude'].toString()),
@@ -209,7 +209,7 @@ class FnbNearestModel {
       featuredImage: map['featuredImage'],
       cid: (map['cid']).toString(), //double.parse(map['cid']).toString(),
       fid: map['fid'] as String,
-      placeId: map['placeId'] as String,
+      placeId: map['placeId'] as String?,
     );
   }
 
@@ -220,7 +220,7 @@ class FnbNearestModel {
 
   @override
   String toString() {
-    return 'FnbNearestModel(id: $id, location: $location, name: $name, fullAddress: $fullAddress, street: $street, municipality: $municipality, categories: $categories, timezone: $timezone, phone: $phone, phones: $phones, claimed: $claimed, reviewCount: $reviewCount, averageRating: $averageRating, reviewUrl: $reviewUrl, googleMapsUrl: $googleMapsUrl, latitude: $latitude, longitude: $longitude, openingHours: $openingHours, featuredImage: $featuredImage, cid: $cid, fid: $fid, placeId: $placeId)';
+    return 'FnbNearestModel(id: $id, location: $location, name: $name, fullAddress: $fullAddress, street: $street, municipality: $municipality, categories: $categories, timeZone: $timeZone, phone: $phone, phones: $phones, claimed: $claimed, reviewCount: $reviewCount, averageRating: $averageRating, reviewUrl: $reviewUrl, googleMapsUrl: $googleMapsUrl, latitude: $latitude, longitude: $longitude, openingHours: $openingHours, featuredImage: $featuredImage, cid: $cid, fid: $fid, placeId: $placeId)';
   }
 
   @override
@@ -234,7 +234,7 @@ class FnbNearestModel {
         other.street == street &&
         other.municipality == municipality &&
         listEquals(other.categories, categories) &&
-        other.timezone == timezone &&
+        other.timeZone == timeZone &&
         other.phone == phone &&
         listEquals(other.phones, phones) &&
         other.claimed == claimed &&
@@ -260,7 +260,7 @@ class FnbNearestModel {
         street.hashCode ^
         municipality.hashCode ^
         categories.hashCode ^
-        timezone.hashCode ^
+        timeZone.hashCode ^
         phone.hashCode ^
         phones.hashCode ^
         claimed.hashCode ^

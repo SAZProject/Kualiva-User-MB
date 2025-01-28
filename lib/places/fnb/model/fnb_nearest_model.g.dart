@@ -24,7 +24,7 @@ class FnbNearestModelAdapter extends TypeAdapter<FnbNearestModel> {
       street: fields[4] as String,
       municipality: fields[5] as String,
       categories: (fields[6] as List).cast<String>(),
-      timezone: fields[7] as String,
+      timeZone: fields[7] as String?,
       phone: fields[8] as String?,
       phones: (fields[9] as List).cast<String>(),
       claimed: fields[10] as String,
@@ -39,7 +39,7 @@ class FnbNearestModelAdapter extends TypeAdapter<FnbNearestModel> {
       featuredImage: fields[19] as String?,
       cid: fields[20] as String,
       fid: fields[21] as String,
-      placeId: fields[22] as String,
+      placeId: fields[22] as String?,
     );
   }
 
@@ -62,7 +62,7 @@ class FnbNearestModelAdapter extends TypeAdapter<FnbNearestModel> {
       ..writeByte(6)
       ..write(obj.categories)
       ..writeByte(7)
-      ..write(obj.timezone)
+      ..write(obj.timeZone)
       ..writeByte(8)
       ..write(obj.phone)
       ..writeByte(9)

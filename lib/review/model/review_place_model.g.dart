@@ -18,32 +18,38 @@ class ReviewPlaceModelAdapter extends TypeAdapter<ReviewPlaceModel> {
     };
     return ReviewPlaceModel(
       id: fields[0] as int,
-      description: fields[1] as String,
-      rating: fields[2] as double,
-      photoFiles: (fields[3] as List).cast<String>(),
-      createdAt: fields[4] as DateTime,
-      updatedAt: fields[5] as DateTime,
-      author: fields[6] as AuthorModel,
+      count: fields[1] as int?,
+      isLikedByMe: fields[2] as bool?,
+      description: fields[3] as String,
+      rating: fields[4] as double,
+      photoFiles: (fields[5] as List).cast<String>(),
+      createdAt: fields[6] as DateTime,
+      updatedAt: fields[7] as DateTime,
+      author: fields[8] as AuthorModel,
     );
   }
 
   @override
   void write(BinaryWriter writer, ReviewPlaceModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.description)
+      ..write(obj.count)
       ..writeByte(2)
-      ..write(obj.rating)
+      ..write(obj.isLikedByMe)
       ..writeByte(3)
-      ..write(obj.photoFiles)
+      ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.createdAt)
+      ..write(obj.rating)
       ..writeByte(5)
-      ..write(obj.updatedAt)
+      ..write(obj.photoFiles)
       ..writeByte(6)
+      ..write(obj.createdAt)
+      ..writeByte(7)
+      ..write(obj.updatedAt)
+      ..writeByte(8)
       ..write(obj.author);
   }
 

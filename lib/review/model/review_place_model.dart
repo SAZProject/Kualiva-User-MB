@@ -15,25 +15,33 @@ class ReviewPlaceModel {
   final int id;
 
   @HiveField(1)
-  final String description;
+  final int? count;
 
   @HiveField(2)
-  final double rating;
+  final bool? isLikedByMe;
 
   @HiveField(3)
-  final List<String> photoFiles;
+  final String description;
 
   @HiveField(4)
-  final DateTime createdAt;
+  final double rating;
 
   @HiveField(5)
-  final DateTime updatedAt;
+  final List<String> photoFiles;
 
   @HiveField(6)
+  final DateTime createdAt;
+
+  @HiveField(7)
+  final DateTime updatedAt;
+
+  @HiveField(8)
   final AuthorModel author;
 
   const ReviewPlaceModel({
     required this.id,
+    this.count,
+    this.isLikedByMe,
     required this.description,
     required this.rating,
     required this.photoFiles,
@@ -44,6 +52,8 @@ class ReviewPlaceModel {
 
   ReviewPlaceModel copyWith({
     int? id,
+    int? count,
+    bool? isLikedByMe,
     String? description,
     double? rating,
     List<String>? photoFiles,
@@ -53,6 +63,8 @@ class ReviewPlaceModel {
   }) {
     return ReviewPlaceModel(
       id: id ?? this.id,
+      count: count ?? this.count,
+      isLikedByMe: isLikedByMe ?? this.isLikedByMe,
       description: description ?? this.description,
       rating: rating ?? this.rating,
       photoFiles: photoFiles ?? this.photoFiles,
@@ -65,6 +77,8 @@ class ReviewPlaceModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'count': count,
+      'isLikedByMe': isLikedByMe,
       'description': description,
       'rating': rating,
       'photoFiles': photoFiles,
@@ -77,11 +91,12 @@ class ReviewPlaceModel {
   factory ReviewPlaceModel.fromMap(Map<String, dynamic> map) {
     return ReviewPlaceModel(
       id: map['id'] as int,
+      count: map['count'] != null ? map['count'] as int : null,
+      isLikedByMe:
+          map['isLikedByMe'] != null ? map['isLikedByMe'] as bool : null,
       description: map['description'] as String,
       rating: (map['rating']).toDouble(),
-      photoFiles: (map['photoFiles'] as List<dynamic>)
-          .map((e) => e.toString())
-          .toList(),
+      photoFiles: List<String>.from((map['photoFiles'] as List<dynamic>)),
       createdAt: DateTime.parse(map['createdAt']),
       updatedAt: DateTime.parse(map['updatedAt']),
       author: AuthorModel.fromMap(map['author'] as Map<String, dynamic>),
@@ -95,7 +110,7 @@ class ReviewPlaceModel {
 
   @override
   String toString() {
-    return 'ReviewPlaceModel(id: $id, description: $description, rating: $rating, photoFiles: $photoFiles, createdAt: $createdAt, updatedAt: $updatedAt, author: $author)';
+    return 'ReviewPlaceModel(id: $id, count: $count, isLikedByMe: $isLikedByMe, description: $description, rating: $rating, photoFiles: $photoFiles, createdAt: $createdAt, updatedAt: $updatedAt, author: $author)';
   }
 
   @override
@@ -103,6 +118,8 @@ class ReviewPlaceModel {
     if (identical(this, other)) return true;
 
     return other.id == id &&
+        other.count == count &&
+        other.isLikedByMe == isLikedByMe &&
         other.description == description &&
         other.rating == rating &&
         listEquals(other.photoFiles, photoFiles) &&
@@ -114,6 +131,8 @@ class ReviewPlaceModel {
   @override
   int get hashCode {
     return id.hashCode ^
+        count.hashCode ^
+        isLikedByMe.hashCode ^
         description.hashCode ^
         rating.hashCode ^
         photoFiles.hashCode ^

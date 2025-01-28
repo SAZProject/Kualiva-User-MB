@@ -27,7 +27,7 @@ import 'package:kualiva/_repository/report_repository.dart';
 import 'package:kualiva/review/bloc/review_like_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
-import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
+import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
 import 'package:kualiva/review/cubit/review_search_bar_cubit.dart';
 import 'package:kualiva/_repository/review_repository.dart';
 

@@ -290,6 +290,7 @@
         "attach_media": "Attach photo (optional) :",
         "hide_username": "Hide my name",
         "write_title_n_btn": "Write a Review",
+        "update_title_n_btn": "Update a Review",
         "attach_invoice": "Attach your invoice",
         "input_transaction_number": "Input your transaction number",
 

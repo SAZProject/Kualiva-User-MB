@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/review/bloc/review_place_read_bloc.dart';
+import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
 import 'package:kualiva/review/widget/review_view.dart';
 
 class ReviewOtherReviewFeature extends StatelessWidget {

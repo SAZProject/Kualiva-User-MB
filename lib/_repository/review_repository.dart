@@ -19,7 +19,7 @@ class ReviewRepository {
   String? invoice;
   String? invoiceFile;
 
-  void tempCreate(
+  void tempCreateOrUpdate(
     String placeUniqueId,
     PlaceCategoryEnum placeCategory,
     String invoice,
@@ -29,36 +29,40 @@ class ReviewRepository {
     this.placeCategory = placeCategory;
     this.invoice = invoice;
     this.invoiceFile = invoiceFile;
-    LeLog.rd(this, tempCreate,
+    LeLog.rd(this, tempCreateOrUpdate,
         "$placeUniqueId | $placeCategory | $invoice | $invoiceFile");
   }
 
   /// Add Reviews by Place
-  Future<String> create({
+  Future<String> createOrUpdate({
+    int? reviewId,
+    required bool isCreated,
     required String description,
     required double rating,
     required List<String> photoFiles,
   }) async {
-    final _ = await _dioClient.dio().then((dio) {
-      return dio.post(
-        '/reviews',
-        data: {
-          "placeUniqueId": placeUniqueId,
-          "placeCategory": placeCategory!.name,
-          "invoice": invoice,
-          "description": description,
-          "invoiceFile": invoiceFile,
-          "rating": rating,
-          "photoFiles": photoFiles,
-        },
-      );
+    Map<String, dynamic> body = Map.from({
+      "placeUniqueId": placeUniqueId,
+      "placeCategory": placeCategory!.name,
+      "invoice": invoice,
+      "description": description,
+      "invoiceFile": invoiceFile,
+      "rating": rating,
+      "photoFiles": photoFiles,
     });
+    if (isCreated == true) {
+      final _ = await _dioClient.dio().then((dio) {
+        return dio.post('/reviews', data: body);
+      });
+    } else {
+      final _ = await _dioClient.dio().then((dio) {
+        return dio.patch('/reviews/${reviewId!}', data: body);
+      });
+    }
+    final temp = placeUniqueId ?? '';
+    placeUniqueId = placeCategory = invoice = invoiceFile = null;
 
-    // final data = (res.data as List<dynamic>)
-    //     .map((e) => ReviewPlaceModel.fromMap(e))
-    //     .toList();
-
-    return placeUniqueId!;
+    return temp;
   }
 
   /// get other Reviews by Place / Merchant

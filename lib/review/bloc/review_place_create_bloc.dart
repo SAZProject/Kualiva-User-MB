@@ -15,14 +15,14 @@ class ReviewPlaceCreateBloc
     on<ReviewPlaceCreateEvent>(
         (event, emit) => emit(ReviewPlaceCreateLoading()));
     on<ReviewPlaceTempCreated>(_onTempCreated);
-    on<ReviewPlaceCreated>(_onCreated);
+    on<ReviewPlaceCreatedOrUpdated>(_onCreatedOrUpdated);
   }
 
   void _onTempCreated(
     ReviewPlaceTempCreated event,
     Emitter<ReviewPlaceCreateState> emit,
   ) {
-    _reviewRepository.tempCreate(
+    _reviewRepository.tempCreateOrUpdate(
       event.placeUniqueId,
       event.placeCategory,
       event.invoice,
@@ -30,20 +30,22 @@ class ReviewPlaceCreateBloc
     );
   }
 
-  void _onCreated(
-    ReviewPlaceCreated event,
+  void _onCreatedOrUpdated(
+    ReviewPlaceCreatedOrUpdated event,
     Emitter<ReviewPlaceCreateState> emit,
   ) async {
     try {
-      final placeId = await _reviewRepository.create(
+      final placeId = await _reviewRepository.createOrUpdate(
+        reviewId: event.reviewId,
+        isCreated: event.isCreated,
         description: event.description,
         rating: event.rating,
         photoFiles: event.photoFiles,
       );
-      LeLog.bd(this, _onCreated, "success");
+      LeLog.bd(this, _onCreatedOrUpdated, "success");
       emit(ReviewPlaceCreateSuccess(placeId: placeId));
     } catch (e) {
-      LeLog.be(this, _onCreated, e.toString());
+      LeLog.be(this, _onCreatedOrUpdated, e.toString());
       emit(ReviewPlaceCreateFailure());
     }
   }

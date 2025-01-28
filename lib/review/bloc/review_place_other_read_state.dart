@@ -1,4 +1,4 @@
-part of 'review_place_read_bloc.dart';
+part of 'review_place_other_read_bloc.dart';
 
 @immutable
 sealed class ReviewPlaceOtherReadState {}

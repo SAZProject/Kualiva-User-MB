@@ -9,6 +9,7 @@ import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
+import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 
 class ReviewVerifyModal extends StatefulWidget {
   const ReviewVerifyModal({
@@ -27,16 +28,30 @@ class ReviewVerifyModal extends StatefulWidget {
 class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
   final _transactionCtl = TextEditingController();
 
-  List<String> invoiceMedia = [];
+  final _invoiceMedia = ValueNotifier<List<String>>([]);
 
   void _submit() {
     context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceTempCreated(
           placeUniqueId: widget.placeUniqueId,
           placeCategory: widget.placeCategory,
           invoice: _transactionCtl.text.trim(),
-          invoiceFile: '', // invoiceMedia[0], TODO Harusnya cuma 1 gambar saja
+          invoiceFile: '', // _invoiceMedia[0], TODO Harusnya cuma 1 gambar saja
         ));
     Navigator.pushNamed(context, AppRoutes.reviewFormScreen);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final reviewPlaceMyReadBloc = context.read<ReviewPlaceMyReadBloc>();
+    if (reviewPlaceMyReadBloc.state is ReviewPlaceMyReadSuccess) {
+      final reviewPlace =
+          (reviewPlaceMyReadBloc.state as ReviewPlaceMyReadSuccess).reviewPlace;
+      _transactionCtl.text = reviewPlace.invoice ?? '';
+      if (reviewPlace.invoiceFile != null) {
+        _invoiceMedia.value = [reviewPlace.invoiceFile!];
+      }
+    }
   }
 
   @override
@@ -68,26 +83,35 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
           child: Column(
             children: [
               SizedBox(height: 10.h),
-              CustomAttachMedia(
-                headerLabel: "review.attach_invoice",
-                listImages: invoiceMedia,
-                onPressedGallery: () {
-                  ImageUtility()
-                      .getMediaFromGallery(context, invoiceMedia)
-                      .then((value) => setState(() => invoiceMedia = value));
-                  Navigator.pop(context);
-                },
-                onPressedCamera: () {
-                  ImageUtility()
-                      .getMediaFromCamera(context, invoiceMedia)
-                      .then((value) => setState(() => invoiceMedia = value));
-                  Navigator.pop(context);
-                },
-                onCancelPressed: () => Navigator.pop(context),
-                onRemovePressed: (index) {
-                  setState(() {
-                    invoiceMedia.remove(invoiceMedia[index]);
-                  });
+              ValueListenableBuilder(
+                valueListenable: _invoiceMedia,
+                builder: (context, medias, child) {
+                  return CustomAttachMedia(
+                    headerLabel: "review.attach_invoice",
+                    listImages: medias,
+                    onPressedGallery: () {
+                      ImageUtility()
+                          .getMediaFromGallery(context, medias)
+                          .then((value) {
+                        _invoiceMedia.value = value;
+                      });
+                      Navigator.pop(context);
+                    },
+                    onPressedCamera: () {
+                      ImageUtility()
+                          .getMediaFromCamera(context, medias)
+                          .then((value) {
+                        _invoiceMedia.value = value;
+                      });
+                      Navigator.pop(context);
+                    },
+                    onCancelPressed: () => Navigator.pop(context),
+                    onRemovePressed: (index) {
+                      final temp = [..._invoiceMedia.value];
+                      temp.removeAt(index);
+                      _invoiceMedia.value = temp;
+                    },
+                  );
                 },
               ),
               SizedBox(height: 10.h),

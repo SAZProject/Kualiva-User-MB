@@ -15,31 +15,38 @@ class ReviewPlaceModel {
   final int id;
 
   @HiveField(1)
-  final int? count;
+  final String? invoice;
 
   @HiveField(2)
-  final bool? isLikedByMe;
+  final String? invoiceFile;
 
   @HiveField(3)
-  final String description;
+  final int? count;
 
   @HiveField(4)
-  final double rating;
+  final bool? isLikedByMe;
 
   @HiveField(5)
-  final List<String> photoFiles;
+  final String description;
 
   @HiveField(6)
-  final DateTime createdAt;
+  final double rating;
 
   @HiveField(7)
-  final DateTime updatedAt;
+  final List<String> photoFiles;
 
   @HiveField(8)
-  final AuthorModel author;
+  final DateTime createdAt;
 
-  const ReviewPlaceModel({
+  @HiveField(9)
+  final DateTime updatedAt;
+
+  @HiveField(10)
+  final AuthorModel author;
+  ReviewPlaceModel({
     required this.id,
+    this.invoice,
+    this.invoiceFile,
     this.count,
     this.isLikedByMe,
     required this.description,
@@ -52,6 +59,8 @@ class ReviewPlaceModel {
 
   ReviewPlaceModel copyWith({
     int? id,
+    String? invoice,
+    String? invoiceFile,
     int? count,
     bool? isLikedByMe,
     String? description,
@@ -63,6 +72,8 @@ class ReviewPlaceModel {
   }) {
     return ReviewPlaceModel(
       id: id ?? this.id,
+      invoice: invoice ?? this.invoice,
+      invoiceFile: invoiceFile ?? this.invoiceFile,
       count: count ?? this.count,
       isLikedByMe: isLikedByMe ?? this.isLikedByMe,
       description: description ?? this.description,
@@ -77,6 +88,8 @@ class ReviewPlaceModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'invoice': invoice,
+      'invoiceFile': invoiceFile,
       'count': count,
       'isLikedByMe': isLikedByMe,
       'description': description,
@@ -91,6 +104,9 @@ class ReviewPlaceModel {
   factory ReviewPlaceModel.fromMap(Map<String, dynamic> map) {
     return ReviewPlaceModel(
       id: map['id'] as int,
+      invoice: map['invoice'] != null ? map['invoice'] as String : null,
+      invoiceFile:
+          map['invoiceFile'] != null ? map['invoiceFile'] as String : null,
       count: map['count'] != null ? map['count'] as int : null,
       isLikedByMe:
           map['isLikedByMe'] != null ? map['isLikedByMe'] as bool : null,
@@ -110,7 +126,7 @@ class ReviewPlaceModel {
 
   @override
   String toString() {
-    return 'ReviewPlaceModel(id: $id, count: $count, isLikedByMe: $isLikedByMe, description: $description, rating: $rating, photoFiles: $photoFiles, createdAt: $createdAt, updatedAt: $updatedAt, author: $author)';
+    return 'ReviewPlaceModel(id: $id, invoice: $invoice, invoiceFile: $invoiceFile, count: $count, isLikedByMe: $isLikedByMe, description: $description, rating: $rating, photoFiles: $photoFiles, createdAt: $createdAt, updatedAt: $updatedAt, author: $author)';
   }
 
   @override
@@ -118,6 +134,8 @@ class ReviewPlaceModel {
     if (identical(this, other)) return true;
 
     return other.id == id &&
+        other.invoice == invoice &&
+        other.invoiceFile == invoiceFile &&
         other.count == count &&
         other.isLikedByMe == isLikedByMe &&
         other.description == description &&
@@ -131,6 +149,8 @@ class ReviewPlaceModel {
   @override
   int get hashCode {
     return id.hashCode ^
+        invoice.hashCode ^
+        invoiceFile.hashCode ^
         count.hashCode ^
         isLikedByMe.hashCode ^
         description.hashCode ^

@@ -25,18 +25,35 @@ class ReviewFormScreen extends StatefulWidget {
 class _ReviewFormScreenState extends State<ReviewFormScreen> {
   final _reviewMsgCtl = TextEditingController();
 
-  List<String> reviewMedia = [];
-
-  double ratingStar = 0.0;
-
+  final _reviewMedias = ValueNotifier<List<String>>([]);
+  double _ratingStar = 0.0;
   bool isHideUsername = false;
+  bool _isCreated = true;
+  int? _reviewId;
 
   void _submit() {
-    context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceCreated(
+    context.read<ReviewPlaceCreateBloc>().add(ReviewPlaceCreatedOrUpdated(
+          reviewId: _reviewId,
+          isCreated: _isCreated,
           description: _reviewMsgCtl.text.trim(),
-          rating: ratingStar,
-          photoFiles: reviewMedia,
+          rating: _ratingStar,
+          photoFiles: _reviewMedias.value,
         ));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final reviewPlaceMyReadBloc = context.read<ReviewPlaceMyReadBloc>();
+    if (reviewPlaceMyReadBloc.state is ReviewPlaceMyReadSuccess) {
+      final reviewPlace =
+          (reviewPlaceMyReadBloc.state as ReviewPlaceMyReadSuccess).reviewPlace;
+      _reviewMsgCtl.text = reviewPlace.description;
+      _reviewMedias.value = reviewPlace.photoFiles;
+      _ratingStar = reviewPlace.rating;
+      _isCreated = false; // It means for update review
+      _reviewId = reviewPlace.id;
+    }
   }
 
   @override
@@ -106,34 +123,39 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
           children: [
             SizedBox(height: 10.h),
             ReportReviewRatingBar(
-              ratingStar: ratingStar,
+              ratingStar: _ratingStar,
               onRatingUpdate: (value) {
-                ratingStar = value;
+                _ratingStar = value;
               },
             ),
             SizedBox(height: 20.h),
             ReportReviewMessage(reviewMsgCtl: _reviewMsgCtl),
             SizedBox(height: 10.h),
-            CustomAttachMedia(
-              headerLabel: "review.attach_media",
-              listImages: reviewMedia,
-              onPressedGallery: () {
-                ImageUtility()
-                    .getMediaFromGallery(context, reviewMedia)
-                    .then((value) => setState(() => reviewMedia = value));
-                Navigator.pop(context);
-              },
-              onPressedCamera: () {
-                ImageUtility()
-                    .getMediaFromCamera(context, reviewMedia)
-                    .then((value) => setState(() => reviewMedia = value));
-                Navigator.pop(context);
-              },
-              onCancelPressed: () => Navigator.pop(context),
-              onRemovePressed: (index) {
-                setState(() {
-                  reviewMedia.remove(reviewMedia[index]);
-                });
+            ValueListenableBuilder(
+              valueListenable: _reviewMedias,
+              builder: (context, medias, child) {
+                return CustomAttachMedia(
+                  headerLabel: "review.attach_media",
+                  listImages: medias,
+                  onPressedGallery: () {
+                    ImageUtility()
+                        .getMediaFromGallery(context, medias)
+                        .then((value) => _reviewMedias.value = value);
+                    Navigator.pop(context);
+                  },
+                  onPressedCamera: () {
+                    ImageUtility()
+                        .getMediaFromCamera(context, medias)
+                        .then((value) => _reviewMedias.value = value);
+                    Navigator.pop(context);
+                  },
+                  onCancelPressed: () => Navigator.pop(context),
+                  onRemovePressed: (index) {
+                    final temp = [..._reviewMedias.value];
+                    temp.removeAt(index);
+                    _reviewMedias.value = temp;
+                  },
+                );
               },
             ),
             SizedBox(height: 10.h),
@@ -161,9 +183,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
         text: context.tr("review.hide_username"),
         value: isHideUsername,
         onChange: (value) {
-          setState(() {
-            isHideUsername = value;
-          });
+          isHideUsername = value;
         },
       ),
     );

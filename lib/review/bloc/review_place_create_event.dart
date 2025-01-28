@@ -17,12 +17,16 @@ final class ReviewPlaceTempCreated extends ReviewPlaceCreateEvent {
   });
 }
 
-final class ReviewPlaceCreated extends ReviewPlaceCreateEvent {
+final class ReviewPlaceCreatedOrUpdated extends ReviewPlaceCreateEvent {
+  final int? reviewId;
+  final bool isCreated;
   final String description;
   final double rating;
   final List<String> photoFiles;
 
-  ReviewPlaceCreated({
+  ReviewPlaceCreatedOrUpdated({
+    this.reviewId,
+    required this.isCreated,
     required this.description,
     required this.rating,
     required this.photoFiles,

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 import 'package:kualiva/_repository/review_repository.dart';
-part 'review_place_read_event.dart';
-part 'review_place_read_state.dart';
+part 'review_place_other_read_event.dart';
+part 'review_place_other_read_state.dart';
 
 class ReviewPlaceOtherReadBloc
     extends Bloc<ReviewPlaceOtherReadEvent, ReviewPlaceOtherReadState> {

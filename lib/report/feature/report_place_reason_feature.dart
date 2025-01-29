@@ -43,7 +43,7 @@ class ReportPlaceReasonFeature extends StatelessWidget {
           }
 
           if (state is ReportPlaceFetchSuccess) {
-            return _list(context, state.parameter);
+            return _buildPlaceReasonlist(context, state.parameter);
           }
 
           return Center(child: CircularProgressIndicator());
@@ -52,7 +52,7 @@ class ReportPlaceReasonFeature extends StatelessWidget {
     );
   }
 
-  Widget _list(BuildContext context, ParameterModel parameter) {
+  Widget _buildPlaceReasonlist(BuildContext context, ParameterModel parameter) {
     List<Widget> reasonWidgetList = [];
     final parameterDetails = parameter.parameterDetails;
     for (int i = 0; i < parameterDetails.length; i++) {

@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.93
-- Remove add place and acc setting in profile screen
+Ver UI Only Mode v2
+- UI Only Mode v2
 ```
 
 ## Getting Started

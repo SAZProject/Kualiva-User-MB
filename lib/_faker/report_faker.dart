@@ -12,7 +12,7 @@ class ReportFaker {
       {'en': 'Others', 'id': 'Lainnya'},
     ];
 
-    final parameterDetailModels = List<ParameterDetailModel>.empty();
+    final List<ParameterDetailModel> parameterDetailModels = [];
 
     for (int i = 0; i < details.length; i++) {
       parameterDetailModels.add(

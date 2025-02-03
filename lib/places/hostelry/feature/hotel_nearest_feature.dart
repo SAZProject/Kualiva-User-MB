@@ -91,18 +91,6 @@ class HotelNearestFeature extends StatelessWidget {
                   AppRoutes.fnbDetailScreen,
                   arguments: state.nearest[index].placeId,
                 );
-                // Navigator.push(
-                //   context,
-                //   DialogRoute(
-                //     context: context,
-                //     builder: (context) {
-                //       return FnbDetailNearbyScreen(
-                //         fnbModel: featuredListItems[index],
-                //         placeId: merchantNearby[index].placeId,
-                //       );
-                //     },
-                //   ),
-                // );
               },
             );
           },

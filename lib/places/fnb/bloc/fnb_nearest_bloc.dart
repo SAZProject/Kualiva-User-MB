@@ -11,16 +11,7 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
   final FnbRepository _fnbRepository;
   FnbNearestBloc(this._fnbRepository) : super(FnbNearestInitial()) {
     on<FnbNearestEvent>((event, emit) => emit(FnbNearestLoading()));
-    on<FnbNearestStarted>(_onStarted);
     on<FnbNearestFetched>(_onFetched);
-  }
-
-  void _onStarted(
-    FnbNearestStarted event,
-    Emitter<FnbNearestState> emit,
-  ) {
-    LeLog.bd(this, _onStarted, 'On Started');
-    emit(FnbNearestInitial());
   }
 
   void _onFetched(

@@ -32,7 +32,7 @@ class _FnbScreenState extends State<FnbScreen> {
 
   final List<String> _listTagsFilter = FNBFilterDataset.fnbFoodFilter;
 
-  ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
+  final selectedFilters = ValueNotifier<Set<String>>({});
   FiltersModel? filtersModel;
 
   final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;

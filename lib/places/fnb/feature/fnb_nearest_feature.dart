@@ -20,7 +20,6 @@ class FnbNearestFeature extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<FnbNearestBloc>().add(FnbNearestStarted());
     return SizedBox(
       width: double.maxFinite,
       child: Column(
@@ -84,26 +83,11 @@ class FnbNearestFeature extends StatelessWidget {
             return FnbPlaceItemNearby(
               merchant: state.nearest[index],
               onPressed: () {
-                // context.read<FnbDetailBloc>().add(FnbDetailFetched(
-                //       placeId: state.nearest[index].placeId,
-                //     ));
                 Navigator.pushNamed(
                   context,
                   AppRoutes.fnbDetailScreen,
                   arguments: state.nearest[index].placeId,
                 );
-                // Navigator.push(
-                //   context,
-                //   DialogRoute(
-                //     context: context,
-                //     builder: (context) {
-                //       return FnbDetailNearbyScreen(
-                //         fnbModel: featuredListItems[index],
-                //         placeId: merchantNearby[index].placeId,
-                //       );
-                //     },
-                //   ),
-                // );
               },
             );
           },

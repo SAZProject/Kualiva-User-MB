@@ -3,11 +3,7 @@ part of 'fnb_nearest_bloc.dart';
 @immutable
 sealed class FnbNearestState {}
 
-final class FnbNearestInitial extends FnbNearestState {
-  final List<FnbNearestModel> nearest;
-
-  FnbNearestInitial({this.nearest = const []});
-}
+final class FnbNearestInitial extends FnbNearestState {}
 
 final class FnbNearestLoading extends FnbNearestState {}
 

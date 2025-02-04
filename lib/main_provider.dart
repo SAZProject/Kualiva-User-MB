@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kualiva/_repository/location_repository.dart';
+import 'package:kualiva/_repository/parameter_repository.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/_repository/auth_repository.dart';
 import 'package:kualiva/_repository/token_manager.dart';
@@ -63,8 +64,15 @@ class MainProvider extends StatelessWidget {
         }),
         RepositoryProvider(create: (context) {
           return AuthRepository(
-              context.read<TokenManager>(), context.read<DioClient>());
+            context.read<TokenManager>(),
+            context.read<DioClient>(),
+          );
         }),
+        RepositoryProvider(
+          create: (context) {
+            return ParameterRepository(context.read<DioClient>());
+          },
+        ),
         RepositoryProvider(create: (context) {
           return PromotionRepository();
         }),
@@ -76,7 +84,10 @@ class MainProvider extends StatelessWidget {
         RepositoryProvider(
           create: (context) {
             return ReportRepository(
-                context.read<DioClient>(), context.read<DioClientMinio>());
+              context.read<DioClient>(),
+              context.read<DioClientMinio>(),
+              context.read<ParameterRepository>(),
+            );
           },
         ),
         RepositoryProvider(

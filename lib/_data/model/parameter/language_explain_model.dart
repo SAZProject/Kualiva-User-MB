@@ -2,11 +2,20 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+
+part 'language_explain_model.g.dart';
 
 @immutable
+@HiveType(typeId: 8)
 class LanguageExplainModel {
+  @HiveField(0)
   final String languageCode;
+
+  @HiveField(1)
   final String? en;
+
+  @HiveField(2)
   final String? id;
 
   const LanguageExplainModel({

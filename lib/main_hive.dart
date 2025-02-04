@@ -1,5 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
+import 'package:kualiva/_data/model/parameter/language_explain_model.dart';
+import 'package:kualiva/_data/model/parameter/parameter_detail_model.dart';
+import 'package:kualiva/_data/model/parameter/parameter_model.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/auth/model/user_profile_model.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
@@ -19,6 +22,9 @@ class MainHive {
     Hive.registerAdapter(UserProfileModelAdapter());
     Hive.registerAdapter(UserModelAdapter());
     Hive.registerAdapter(CurrentLocationPlacemarkModelAdapter());
+    Hive.registerAdapter(LanguageExplainModelAdapter());
+    Hive.registerAdapter(ParameterDetailModelAdapter());
+    Hive.registerAdapter(ParameterModelAdapter());
   }
 
   static Future<void> openBox() async {
@@ -26,6 +32,7 @@ class MainHive {
       Hive.openBox<FnbNearestModel>(MyHive.fnbNearest.name),
       Hive.openBox<UserModel>(MyHive.user.name),
       Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name),
+      Hive.openBox<ParameterModel>(MyHive.parameter.name),
     ]);
   }
 
@@ -47,7 +54,10 @@ enum MyHive {
   reviewPlace(4, 'review_place'),
   userProfile(5, 'profile'),
   user(6, 'user'),
-  currentLocationPlacemark(7, 'current_location_placemark');
+  currentLocationPlacemark(7, 'current_location_placemark'),
+  languageExplain(8, 'language_explain'),
+  parameterDetail(9, 'parameter_detail'),
+  parameter(10, 'parameter');
 
   final int typeId;
   final String name;

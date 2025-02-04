@@ -7,13 +7,11 @@ final class ReportPlaceFetched extends ReportPlaceEvent {}
 
 final class ReportPlaceCreated extends ReportPlaceEvent {
   final String placeId;
-  final String reasonCode;
-  final int reasonSequence;
+  final int reasonId;
 
   ReportPlaceCreated({
     required this.placeId,
-    required this.reasonCode,
-    required this.reasonSequence,
+    required this.reasonId,
   });
 }
 

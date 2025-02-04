@@ -21,7 +21,6 @@ import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_filter_toggle_model.dart';
-import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -108,7 +107,6 @@ class FnbDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ReportPlaceBloc>().add(ReportPlaceFetched());
     context.read<FnbDetailBloc>().add(FnbDetailFetched(placeId: placeId));
     return BlocConsumer<FnbDetailBloc, FnbDetailState>(
       listener: (context, state) {

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/model/parameter/parameter_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/report/model/parameter_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kualiva/_repository/report_repository.dart';
 
@@ -39,8 +39,7 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
     try {
       final _ = await _reportRepository.create(
         placeId: event.placeId,
-        reasonCode: event.reasonCode,
-        reasonSequence: event.reasonSequence,
+        reasonId: event.reasonId,
       );
       LeLog.bd(this, _onCreated, 'Success Created PlaceReport');
       emit(ReportPlaceCreatedSuccess());

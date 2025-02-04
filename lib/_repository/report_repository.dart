@@ -1,57 +1,40 @@
-// import 'package:dio/dio.dart';
-import 'package:dio/dio.dart';
-import 'package:http_parser/http_parser.dart';
 import 'package:kualiva/_data/dio_client_minio.dart';
+import 'package:kualiva/_data/enum/parameter_enum.dart';
+import 'package:kualiva/_data/model/parameter/parameter_model.dart';
+import 'package:kualiva/_repository/parameter_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 // import 'package:kualiva/_data/dio_client_minio.dart';
-import 'package:kualiva/report/model/parameter_model.dart';
-import 'package:mime/mime.dart';
 // import 'package:mime/mime.dart';
 // import 'package:http_parser/http_parser.dart';
+//// import 'package:http_parser/http_parser.dart';
 
 class ReportRepository {
   ReportRepository(
     this._dioClient,
     this._dioClientMinio,
+    this._parameterRepository,
   );
 
   final DioClient _dioClient;
   final DioClientMinio _dioClientMinio;
+  final ParameterRepository _parameterRepository;
 
   final List<String> _photoFiles = [];
 
-  ParameterModel? parameter;
-
   Future<ParameterModel> getPlaceReasons() async {
-    final res = await _dioClient.dio().then((dio) {
-      return dio.get(
-        '/parameters/code',
-        queryParameters: {
-          'bizCode': 'FNB',
-          'groupCode': '001',
-        },
-      );
-    });
-
-    final data = ParameterModel.fromMap(res.data);
-    parameter = data;
+    final data = _parameterRepository.get(ParameterEnum.placeReport);
     LeLog.rd(this, getPlaceReasons, data.toString());
     return data;
   }
 
-  Future<void> create({
-    required String placeId,
-    required String reasonCode,
-    required int reasonSequence,
-  }) async {
+  Future<void> create({required String placeId, required int reasonId}) async {
     final _ = await _dioClient.dio().then((dio) {
       return dio.post(
         '/places/report',
         data: {
           'placeUniqueId': placeId,
-          'reasonCode': reasonCode,
-          'reasonSequence': reasonSequence,
+          'reasonId': reasonId,
           'photoFiles': _photoFiles,
         },
       );
@@ -61,38 +44,39 @@ class ReportRepository {
     return;
   }
 
-  Future<ParameterModel> uploadPhoto({
-    required final String imagePath,
-  }) async {
-    final mimeTypeData =
-        lookupMimeType(imagePath, headerBytes: [0xFF, 0xDB])?.split('/');
-    var formData = FormData.fromMap({
-      'image': [
-        await MultipartFile.fromFile(
-          imagePath,
-          contentType: MediaType(mimeTypeData![0], mimeTypeData[1]),
-        )
-      ]
-    });
-    // FormData formData =
-    //     FormData.fromMap({"image": MultipartFile.fromFileSync(imagePath)});
-    // formData.files
-    //     .addAll([MapEntry('image', MultipartFile.fromFileSync(imagePath))]);
-    final res = await _dioClientMinio.dio().then((dio) {
-      return dio.post(
-        "/file-upload/single",
-        data: formData,
-        options: Options(contentType: Headers.multipartFormDataContentType),
-      );
-    });
-    final path = res.data['pathUrl'] as String;
+  // TODO Cikal bakal MinioRepository, Upload File with Header of Image
+  // Future<ParameterModel> uploadPhoto({
+  //   required final String imagePath,
+  // }) async {
+  //   final mimeTypeData =
+  //       lookupMimeType(imagePath, headerBytes: [0xFF, 0xDB])?.split('/');
+  //   var formData = FormData.fromMap({
+  //     'image': [
+  //       await MultipartFile.fromFile(
+  //         imagePath,
+  //         contentType: MediaType(mimeTypeData![0], mimeTypeData[1]),
+  //       )
+  //     ]
+  //   });
+  //   // FormData formData =
+  //   //     FormData.fromMap({"image": MultipartFile.fromFileSync(imagePath)});
+  //   // formData.files
+  //   //     .addAll([MapEntry('image', MultipartFile.fromFileSync(imagePath))]);
+  //   final res = await _dioClientMinio.dio().then((dio) {
+  //     return dio.post(
+  //       "/file-upload/single",
+  //       data: formData,
+  //       options: Options(contentType: Headers.multipartFormDataContentType),
+  //     );
+  //   });
+  //   final path = res.data['pathUrl'] as String;
 
-    _photoFiles.add(path);
+  //   _photoFiles.add(path);
 
-    LeLog.rd(this, uploadPhoto, _photoFiles.toString());
-    // return res.data['pathUrl'] as String;
-    return parameter!;
-  }
+  //   LeLog.rd(this, uploadPhoto, _photoFiles.toString());
+  //   // return res.data['pathUrl'] as String;
+  //   return parameter!;
+  // }
 }
 
 // I/flutter ( 8968): ╔ Headers

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kualiva/_repository/location_repository.dart';
+import 'package:kualiva/_repository/minio_repository.dart';
 import 'package:kualiva/_repository/parameter_repository.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/_repository/auth_repository.dart';
@@ -59,6 +60,11 @@ class MainProvider extends StatelessWidget {
         RepositoryProvider(create: (context) {
           return DioClientMinio(context.read<TokenManager>());
         }),
+        RepositoryProvider(
+          create: (context) {
+            return MinioRepository(context.read<DioClientMinio>());
+          },
+        ),
         RepositoryProvider(create: (context) {
           return FnbRepository(context.read<DioClient>());
         }),

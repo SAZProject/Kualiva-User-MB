@@ -32,9 +32,6 @@ class DioClientMinio {
         "CONNECT_TIMEOUT",
         fallback: 10,
       )),
-      headers: Map.from({
-        'Accept': 'application/json',
-      }),
     ));
 
     _dio!.interceptors.add(InterceptorsWrapper(

@@ -43,7 +43,8 @@ class ReviewPlaceModel {
 
   @HiveField(10)
   final AuthorModel author;
-  ReviewPlaceModel({
+
+  const ReviewPlaceModel({
     required this.id,
     this.invoice,
     this.invoiceFile,

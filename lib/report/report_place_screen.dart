@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/image_utility.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_attach_media.dart';
 import 'package:kualiva/common/widget/custom_error_dialog.dart';
@@ -29,29 +30,31 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
 
   final _selectedReason = ValueNotifier<String>('');
 
-  final reportMedia = ValueNotifier<List<String>>([]);
+  final _reportMedia = ValueNotifier<List<String>>([]);
+
+  late ReportPlaceBloc _reportPlaceBloc;
 
   void reportMediaListener() {
-    debugPrint(reportMedia.value.toString());
-    for (int i = 0; i < reportMedia.value.length; i++) {
-      context
-          .read<ReportPlaceBloc>()
-          .add(ReportPlaceFileUploaded(imagePath: reportMedia.value[i]));
-    }
+    context
+        .read<ReportPlaceBloc>()
+        .add(ReportPlaceImageStored(imagePaths: _reportMedia.value));
   }
 
   @override
   void initState() {
     super.initState();
-    reportMedia.addListener(reportMediaListener);
-    context.read<ReportPlaceBloc>().add(ReportPlaceFetched());
+    _reportPlaceBloc = context.read<ReportPlaceBloc>();
+    _reportMedia.addListener(reportMediaListener);
+    _reportPlaceBloc.add(ReportPlaceFetched());
   }
 
   @override
   void dispose() {
     _reasonCtl.dispose();
-    reportMedia.removeListener(reportMediaListener);
-    reportMedia.dispose();
+    _reportMedia.removeListener(reportMediaListener);
+    _reportMedia.dispose();
+    _selectedReason.dispose();
+    _reportPlaceBloc.add(ReportPlaceImageDisposed());
     super.dispose();
   }
 
@@ -68,6 +71,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
   Widget build(BuildContext context) {
     return BlocListener<ReportPlaceBloc, ReportPlaceState>(
       listener: (context, state) {
+        LeLog.sd(this, build, state.toString());
         if (state is ReportPlaceCreatedSuccess) {
           Navigator.pop(context);
         }
@@ -108,7 +112,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
             ),
             SizedBox(height: 10.h),
             ValueListenableBuilder(
-              valueListenable: reportMedia,
+              valueListenable: _reportMedia,
               builder: (context, media, child) {
                 return CustomAttachMedia(
                   headerLabel: "report.attach_media",
@@ -117,7 +121,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
                     ImageUtility()
                         .getMediaFromGallery(context, media)
                         .then((value) {
-                      reportMedia.value = value;
+                      _reportMedia.value = value;
                     });
                     Navigator.pop(context);
                   },
@@ -125,26 +129,20 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
                     ImageUtility()
                         .getMediaFromCamera(context, media)
                         .then((value) {
-                      reportMedia.value = value;
+                      _reportMedia.value = value;
                     });
                     Navigator.pop(context);
                   },
                   onCancelPressed: () => Navigator.pop(context),
                   onRemovePressed: (index) {
                     debugPrint('onRemovePressed');
-                    // reportMedia.value.remove(reportMedia.value[index]);
-                    reportMedia.value.removeAt(index);
-                    reportMedia.value = [...reportMedia.value];
-
-                    // setState(() {
-                    //   reportMedia.value.removeAt(index);
-                    // });
+                    _reportMedia.value.removeAt(index);
+                    _reportMedia.value = [..._reportMedia.value];
                   },
                 );
               },
             ),
             SizedBox(height: 25.h),
-            // ReportPlaceSubmitButton(),
             SizedBox(
               height: 60.h,
               width: double.maxFinite,

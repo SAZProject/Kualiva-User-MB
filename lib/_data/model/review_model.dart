@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class ReviewModel {
   final String id;
   final String username;
-  final ImageModel userImage;
+  final UIImageModel userImage;
   final DateTime reviewDate;
   final double rating;
   final String content;
@@ -25,7 +25,7 @@ class ReviewModel {
   ReviewModel copyWith({
     String? id,
     String? username,
-    ImageModel? userImage,
+    UIImageModel? userImage,
     DateTime? reviewDate,
     double? rating,
     String? content,
@@ -58,7 +58,7 @@ class ReviewModel {
     return ReviewModel(
       id: map['id'] as String,
       username: map['username'] as String,
-      userImage: ImageModel.fromMap(map['userImage'] as Map<String, dynamic>),
+      userImage: UIImageModel.fromMap(map['userImage'] as Map<String, dynamic>),
       reviewDate: DateTime.fromMillisecondsSinceEpoch(map['reviewDate'] as int),
       rating: map['rating'] as double,
       content: map['content'] as String,

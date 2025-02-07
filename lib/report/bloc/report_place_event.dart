@@ -15,8 +15,10 @@ final class ReportPlaceCreated extends ReportPlaceEvent {
   });
 }
 
-final class ReportPlaceFileUploaded extends ReportPlaceEvent {
-  final String imagePath;
+final class ReportPlaceImageStored extends ReportPlaceEvent {
+  final List<String> imagePaths;
 
-  ReportPlaceFileUploaded({required this.imagePath});
+  ReportPlaceImageStored({required this.imagePaths});
 }
+
+final class ReportPlaceImageDisposed extends ReportPlaceEvent {}

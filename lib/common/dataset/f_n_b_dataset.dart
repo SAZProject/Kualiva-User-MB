@@ -6,7 +6,7 @@ import 'package:kualiva/_data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:kualiva/_data/model/ui_model/image_model.dart';
 
 class FNBDataset {
-  ImageModel defaultUserImage = ImageModel(
+  UIImageModel defaultUserImage = UIImageModel(
     id: "0",
     uuid: "1000001",
     name: "default-image",

@@ -11,16 +11,18 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
   final ReportRepository _reportRepository;
 
   ReportPlaceBloc(this._reportRepository) : super(ReportPlaceInitial()) {
-    on<ReportPlaceEvent>((event, emit) => emit(ReportPlaceLoading()));
+    on<ReportPlaceEvent>((event, emit) {});
     on<ReportPlaceFetched>(_onFetched);
     on<ReportPlaceCreated>(_onCreated);
-    // on<ReportPlaceFileUploaded>(_onFileUploaded);
+    on<ReportPlaceImageStored>(_onImageStored);
+    on<ReportPlaceImageDisposed>(_onImageDisposed);
   }
 
   void _onFetched(
     ReportPlaceFetched event,
     Emitter<ReportPlaceState> emit,
   ) async {
+    emit(ReportPlaceLoading());
     try {
       final ParameterModel parameter =
           await _reportRepository.getPlaceReasons();
@@ -36,6 +38,7 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
     ReportPlaceCreated event,
     Emitter<ReportPlaceState> emit,
   ) async {
+    emit(ReportPlaceLoading());
     try {
       final _ = await _reportRepository.create(
         placeId: event.placeId,
@@ -49,22 +52,17 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
     }
   }
 
-  // void _onFileUploaded(
-  //   ReportPlaceFileUploaded event,
-  //   Emitter<ReportPlaceState> emit,
-  // ) async {
-  //   try {
-  //     // final path = await _reportRepository.uploadPhoto(
-  //     //   imagePath: event.imagePath,
-  //     // );
-  //     final parameter = await _reportRepository.uploadPhoto(
-  //       imagePath: event.imagePath,
-  //     );
-  //     LeLog.bd(this, _onFileUploaded, parameter.toString());
-  //     emit(ReportPlaceFetchSuccess(parameter: parameter));
-  //   } catch (e) {
-  //     LeLog.be(this, _onFileUploaded, e.toString());
-  //     emit(ReportPlaceFetchFailure());
-  //   }
-  // }
+  void _onImageStored(
+    ReportPlaceImageStored event,
+    Emitter<ReportPlaceState> emit,
+  ) async {
+    _reportRepository.imageStore(imagePaths: event.imagePaths);
+  }
+
+  void _onImageDisposed(
+    ReportPlaceImageDisposed event,
+    Emitter<ReportPlaceState> emit,
+  ) {
+    _reportRepository.imageDispose();
+  }
 }

@@ -2,8 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
-import 'package:kualiva/_data/model/ui_model/image_model.dart';
+import 'package:kualiva/_data/model/minio/image_model.dart';
 
 @immutable
 class ImageUploadModel {

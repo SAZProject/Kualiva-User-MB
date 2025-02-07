@@ -91,8 +91,8 @@ class MainProvider extends StatelessWidget {
           create: (context) {
             return ReportRepository(
               context.read<DioClient>(),
-              context.read<DioClientMinio>(),
               context.read<ParameterRepository>(),
+              context.read<MinioRepository>(),
             );
           },
         ),

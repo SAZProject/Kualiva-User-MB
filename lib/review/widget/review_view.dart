@@ -4,6 +4,7 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_rating_bar.dart';
+import 'package:kualiva/report/argument/report_review_argument.dart';
 import 'package:kualiva/review/bloc/review_like_bloc.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 
@@ -24,13 +25,16 @@ class _ReviewViewState extends State<ReviewView> {
   void _popUpMenuAction(BuildContext context, int index) {
     switch (index) {
       default:
-        Navigator.pushNamed(context, AppRoutes.reportReviewScreen);
+        LeLog.sd(this, _popUpMenuAction, reviewData.toString());
+        Navigator.pushNamed(context, AppRoutes.reportReviewScreen,
+            arguments: ReportReviewArgument(
+              reviewId: reviewData.id,
+            ));
         break;
     }
   }
 
   void _toggleLikedIcon() {
-    LeLog.sd(this, _toggleLikedIcon, 'Kepencet Ooeee');
     LeLog.sd(this, _toggleLikedIcon, _isLiked.value.toString());
     if (_isLiked.value) {
       context

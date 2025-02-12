@@ -29,6 +29,7 @@ import 'package:kualiva/profile/profile_screen.dart';
 import 'package:kualiva/profile/user_level_screen.dart';
 import 'package:kualiva/promo/promo_place_detail.dart';
 import 'package:kualiva/promo/promo_place_screen.dart';
+import 'package:kualiva/report/argument/report_review_argument.dart';
 import 'package:kualiva/report/report_place_screen.dart';
 import 'package:kualiva/report/report_review_screen.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
@@ -241,10 +242,7 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.reviewScreen:
       final argument = routeSetting.arguments as ReviewArgument;
       return PageTransition(
-          child: ReviewScreen(
-            placeId: argument.placeUniqueId,
-            placeCategory: argument.placeCategory,
-          ),
+          child: ReviewScreen(reviewArgument: argument),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 
@@ -262,8 +260,9 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reportReviewScreen:
+      final argument = routeSetting.arguments as ReportReviewArgument;
       return PageTransition(
-          child: ReportReviewScreen(),
+          child: ReportReviewScreen(reportReviewArgument: argument),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

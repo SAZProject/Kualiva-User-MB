@@ -40,7 +40,7 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
   ) async {
     emit(ReportPlaceLoading());
     try {
-      final _ = await _reportRepository.create(
+      final _ = await _reportRepository.createPlaceReport(
         placeId: event.placeId,
         reasonId: event.reasonId,
       );

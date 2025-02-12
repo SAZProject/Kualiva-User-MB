@@ -5,18 +5,15 @@ import 'package:kualiva/_data/model/parameter/parameter_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_radio_button.dart';
-import 'package:kualiva/common/widget/custom_text_form_field.dart';
-import 'package:kualiva/report/bloc/report_place_bloc.dart';
+import 'package:kualiva/report/bloc/report_review_read_bloc.dart';
 
-class ReportPlaceReasonFeature extends StatelessWidget {
-  const ReportPlaceReasonFeature({
+class ReportReviewReasonFeature extends StatelessWidget {
+  const ReportReviewReasonFeature({
     super.key,
-    required this.reasonCtl,
     required this.selectedReason,
     required this.onChange,
   });
 
-  final TextEditingController reasonCtl;
   final String selectedReason;
   final Function(String) onChange;
 
@@ -25,17 +22,18 @@ class ReportPlaceReasonFeature extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 10.h),
-      child: BlocBuilder<ReportPlaceBloc, ReportPlaceState>(
+      child: BlocBuilder<ReportReviewReadBloc, ReportReviewReadState>(
         builder: (context, state) {
-          if (state is ReportPlaceFetchFailure) {
+          if (state is ReportReviewReadFailure) {
             return CustomErrorState(
               errorMessage: context.tr("common.error"),
-              onRetry: () =>
-                  context.read<ReportPlaceBloc>().add(ReportPlaceFetched()),
+              onRetry: () => context
+                  .read<ReportReviewReadBloc>()
+                  .add(ReportReviewReadRefreshed()),
             );
           }
 
-          if (state is ReportPlaceFetchSuccess) {
+          if (state is ReportReviewReadSuccess) {
             return _list(context, state.parameter);
           }
 
@@ -61,37 +59,23 @@ class ReportPlaceReasonFeature extends StatelessWidget {
       );
       reasonWidgetList.add(SizedBox(height: 4.h));
     }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          context.tr("report.reason"),
-          textAlign: TextAlign.center,
-          style: theme(context).textTheme.titleMedium,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        SizedBox(height: 10.h),
-        ...reasonWidgetList,
-        Visibility(
-          visible:
-              parameterDetails[0].explain.toLowerCase().contains('other') ||
-                  parameterDetails[0].explain.toLowerCase().contains('lainnya'),
-          child: CustomTextFormField(
-            controller: reasonCtl,
-            textInputAction: TextInputAction.done,
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.tr("report.reason"),
+            textAlign: TextAlign.center,
+            style: theme(context).textTheme.titleMedium,
             maxLines: 1,
-            contentPadding: EdgeInsets.all(12.h),
-            fillColor: theme(context).colorScheme.onSecondaryContainer,
-            boxDecoration:
-                CustomDecoration(context).outlineOnPrimaryContainer.copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder10,
-                    ),
-            inputBorder: TextFormFieldStyleHelper.fillOnSecondaryContainer,
+            overflow: TextOverflow.ellipsis,
           ),
-        ),
-      ],
+          SizedBox(height: 10.h),
+          ...reasonWidgetList,
+        ],
+      ),
     );
   }
 }

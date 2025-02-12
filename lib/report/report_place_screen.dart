@@ -28,7 +28,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
 
   String get placeId => widget.placeId;
 
-  final _selectedReason = ValueNotifier<String>('');
+  final _selectedReasonId = ValueNotifier<String>('');
 
   final _reportMedia = ValueNotifier<List<String>>([]);
 
@@ -53,7 +53,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
     _reasonCtl.dispose();
     _reportMedia.removeListener(reportMediaListener);
     _reportMedia.dispose();
-    _selectedReason.dispose();
+    _selectedReasonId.dispose();
     _reportPlaceBloc.add(ReportPlaceImageDisposed());
     super.dispose();
   }
@@ -62,7 +62,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
     context.read<ReportPlaceBloc>().add(
           ReportPlaceCreated(
             placeId: placeId,
-            reasonId: int.parse(_selectedReason.value),
+            reasonId: int.parse(_selectedReasonId.value),
           ),
         );
   }
@@ -101,12 +101,12 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
           children: [
             SizedBox(height: 10.h),
             ValueListenableBuilder(
-              valueListenable: _selectedReason,
+              valueListenable: _selectedReasonId,
               builder: (context, reason, child) {
                 return ReportPlaceReasonFeature(
                   reasonCtl: _reasonCtl,
                   selectedReason: reason,
-                  onChange: (value) => _selectedReason.value = value,
+                  onChange: (value) => _selectedReasonId.value = value,
                 );
               },
             ),

@@ -14,5 +14,3 @@ final class ReviewPlaceCreateSuccess extends ReviewPlaceCreateState {
 }
 
 final class ReviewPlaceCreateFailure extends ReviewPlaceCreateState {}
-
-final class ReviewPlaceCreateRefresh extends ReviewPlaceCreateState {}

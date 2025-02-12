@@ -17,14 +17,6 @@ class ReportRepository {
   final ParameterRepository _parameterRepository;
   final MinioRepository _minioRepository;
 
-  List<String> _localImagePaths = [];
-
-  Future<ParameterModel> getPlaceReasons() async {
-    final data = _parameterRepository.get(ParameterEnum.placeReport);
-    LeLog.rd(this, getPlaceReasons, data.toString());
-    return data;
-  }
-
   void imageStore({required List<String> imagePaths}) {
     _localImagePaths = imagePaths;
   }
@@ -33,7 +25,19 @@ class ReportRepository {
     _localImagePaths.clear();
   }
 
-  Future<void> create({required String placeId, required int reasonId}) async {
+  /// Report Place
+  List<String> _localImagePaths = [];
+
+  Future<ParameterModel> getPlaceReasons() async {
+    final data = _parameterRepository.get(ParameterEnum.placeReport);
+    LeLog.rd(this, getPlaceReasons, data.toString());
+    return data;
+  }
+
+  Future<void> createPlaceReport({
+    required String placeId,
+    required int reasonId,
+  }) async {
     final List<String> minioImagePaths = [];
 
     try {
@@ -61,5 +65,36 @@ class ReportRepository {
     } finally {
       imageDispose();
     }
+  }
+
+  Future<ParameterModel> getReviewReasons() async {
+    final data = _parameterRepository.get(ParameterEnum.reviewReport);
+    LeLog.rd(this, getReviewReasons, data.toString());
+    return data;
+  }
+
+  Future<int> createReviewReport({
+    required int reviewId,
+    required int reasonId,
+    required String description,
+  }) async {
+    LeLog.rd(this, createReviewReport, "LeRucco");
+    LeLog.rd(this, createReviewReport, reviewId.toString());
+    LeLog.rd(this, createReviewReport, reasonId.toString());
+    LeLog.rd(this, createReviewReport, description.toString());
+
+    final _ = _dioClient.dio().then((dio) {
+      return dio.post(
+        '/reviews/report',
+        data: {
+          'reviewId': reviewId,
+          'reasonId': reasonId,
+          'description': description,
+        },
+      );
+    });
+
+    // TODO Program Service Masz Zaki, get point on review report
+    return 10;
   }
 }

@@ -15,14 +15,6 @@ final class ReportPlaceFetchSuccess extends ReportPlaceState {
 
 final class ReportPlaceFetchFailure extends ReportPlaceState {}
 
-final class ReportPlaceFileUploadSuccess extends ReportPlaceState {
-  final String path;
-
-  ReportPlaceFileUploadSuccess({required this.path});
-}
-
-final class ReportPlaceFileUploadFailure extends ReportPlaceState {}
-
 final class ReportPlaceCreatedSuccess extends ReportPlaceState {}
 
 final class ReportPlaceCreatedFailure extends ReportPlaceState {}

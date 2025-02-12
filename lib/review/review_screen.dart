@@ -6,6 +6,7 @@ import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
+import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
 import 'package:kualiva/review/feature/review_filter_feature.dart';
@@ -16,22 +17,17 @@ import 'package:kualiva/review/widget/review_verify_modal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReviewScreen extends StatefulWidget {
-  const ReviewScreen({
-    super.key,
-    required this.placeId,
-    required this.placeCategory,
-  });
+  const ReviewScreen({super.key, required this.reviewArgument});
 
-  final String placeId;
-  final PlaceCategoryEnum placeCategory;
+  final ReviewArgument reviewArgument;
 
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
-  String get placeId => widget.placeId;
-  PlaceCategoryEnum get placeCategory => widget.placeCategory;
+  String get placeId => widget.reviewArgument.placeUniqueId;
+  PlaceCategoryEnum get placeCategory => widget.reviewArgument.placeCategory;
 
   List<String> filterByCategory = [
     "review.filter_user",

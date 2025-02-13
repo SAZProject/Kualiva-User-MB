@@ -26,7 +26,7 @@
 
         "attach_media_content": "Unggah (pdf, jpeg, jpg, png)",
         "attach_media_image": "Unggah (jpeg, jpg, png)",
-        "max_media": "Maks 5 Gambar",
+        "max_media": "Maks {index} Gambar",
         "gallery": "Galeri",
         "camera": "Kamera",
         "select_image_media": "Pilih Media",

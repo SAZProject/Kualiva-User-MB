@@ -5,8 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.0.93
-- Remove add place and acc setting in profile screen
+Ver 0.1.01
+- Image utility add limit and single picker
+- Review fix some bug and connect verification file
 ```
 
 ## Getting Started

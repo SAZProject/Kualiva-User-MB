@@ -70,6 +70,8 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
           context
               .read<ReviewPlaceMyReadBloc>()
               .add(ReviewPlaceMyReadRefreshed(placeId: state.placeId));
+          Navigator.pop(context); // pop loading dialog
+          Navigator.pop(context); // Pop this screen
           customAlertDialog(
             context: context,
             dismissable: true,
@@ -83,13 +85,10 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
               Icons.generating_tokens_outlined,
             ),
           );
-
           Future.delayed(
             Duration(seconds: 3),
             () {
               if (!context.mounted) return;
-              Navigator.pop(context); // pop loading dialog
-              Navigator.pop(context); // Pop this screen
               Navigator.pop(context); // Pop verify modal
             },
           );
@@ -139,7 +138,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
                   listImages: medias,
                   onPressedGallery: () {
                     ImageUtility()
-                        .getMediaFromGallery(context, medias)
+                        .getMultipleMediaFromGallery(context, medias)
                         .then((value) => _reviewMedias.value = value);
                     Navigator.pop(context);
                   },

@@ -119,7 +119,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
                   listImages: media,
                   onPressedGallery: () {
                     ImageUtility()
-                        .getMediaFromGallery(context, media)
+                        .getMultipleMediaFromGallery(context, media)
                         .then((value) {
                       _reportMedia.value = value;
                     });

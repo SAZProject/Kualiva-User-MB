@@ -35,7 +35,7 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
           placeUniqueId: widget.placeUniqueId,
           placeCategory: widget.placeCategory,
           invoice: _transactionCtl.text.trim(),
-          invoiceFile: '', // _invoiceMedia[0], TODO Harusnya cuma 1 gambar saja
+          invoiceFile: _invoiceMedia.value[0],
         ));
     Navigator.pushNamed(context, AppRoutes.reviewFormScreen);
   }
@@ -89,9 +89,10 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
                   return CustomAttachMedia(
                     headerLabel: "review.attach_invoice",
                     listImages: medias,
+                    limit: 1,
                     onPressedGallery: () {
                       ImageUtility()
-                          .getMediaFromGallery(context, medias)
+                          .getSingleMediaFromGallery(context, medias)
                           .then((value) {
                         _invoiceMedia.value = value;
                       });

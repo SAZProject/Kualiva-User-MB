@@ -12,6 +12,7 @@ class CustomAttachMedia extends StatelessWidget {
     required this.listImages,
     this.defaultContentType = "common.attach_media_image",
     this.defaultContentMax = "common.max_media",
+    this.limit = 5,
     this.hasRule = false,
     this.ruleContent = "",
     this.onPressedGallery,
@@ -24,6 +25,7 @@ class CustomAttachMedia extends StatelessWidget {
   final List<String> listImages;
   final String defaultContentType;
   final String defaultContentMax;
+  final int? limit;
   final bool hasRule;
   final String ruleContent;
   final void Function()? onPressedGallery;
@@ -83,39 +85,43 @@ class CustomAttachMedia extends StatelessWidget {
           onButtonPressed: onCancelPressed,
         );
       },
-      child: Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.symmetric(vertical: 22.h),
-        decoration:
-            CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                  borderRadius: BorderRadiusStyle.roundedBorder10,
-                ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.upload_file,
-              size: 16.h,
-            ),
-            SizedBox(height: 4.h),
-            Text(
-              context.tr(defaultContentType),
-              textAlign: TextAlign.center,
-              style: theme(context).textTheme.bodyMedium,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            SizedBox(height: 4.h),
-            Text(
-              context.tr(defaultContentMax),
-              textAlign: TextAlign.center,
-              style: theme(context).textTheme.bodySmall,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+      child: Card(
+        elevation: 5.h,
+        child: Container(
+          width: double.maxFinite,
+          margin: EdgeInsets.symmetric(vertical: 5.h),
+          padding: EdgeInsets.symmetric(vertical: 20.h),
+          decoration:
+              CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+                    borderRadius: BorderRadiusStyle.roundedBorder10,
+                  ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.upload_file,
+                size: 16.h,
+              ),
+              SizedBox(height: 4.h),
+              Text(
+                context.tr(defaultContentType),
+                textAlign: TextAlign.center,
+                style: theme(context).textTheme.bodyMedium,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 4.h),
+              Text(
+                context.tr(defaultContentMax, namedArgs: {"index": "$limit"}),
+                textAlign: TextAlign.center,
+                style: theme(context).textTheme.bodySmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -130,7 +136,11 @@ class CustomAttachMedia extends StatelessWidget {
         physics: listImages.isEmpty
             ? const NeverScrollableScrollPhysics()
             : const ScrollPhysics(),
-        itemCount: listImages.isEmpty ? 1 : listImages.length + 1,
+        itemCount: listImages.isEmpty
+            ? 1
+            : listImages.length == limit
+                ? limit
+                : listImages.length + 1,
         itemBuilder: (context, index) {
           //TODO add waiting, empty, error state in future (maybe?)
           if (listImages.isEmpty) return const SizedBox();

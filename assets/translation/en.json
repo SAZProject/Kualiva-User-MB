@@ -26,7 +26,7 @@
 
         "attach_media_content": "Upload (pdf, jpeg, jpg, png)",
         "attach_media_image": "Upload (jpeg, jpg, png)",
-        "max_media": "Max 5 Picture",
+        "max_media": "Max {index} Picture",
         "gallery": "Gallery",
         "camera": "Camera",
         "select_image_media": "Choose Media",
@@ -126,6 +126,7 @@
         "sign_in_with_google": "Sign In with Google",
         "phone_number_or_user_name": "Phone Number or UserName",
         "password": "password",
+        "or": "or",
         "sign_in_btn": "Sign In"
     },
     "sign_up": {

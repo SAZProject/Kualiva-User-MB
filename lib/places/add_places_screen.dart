@@ -259,7 +259,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             defaultContentType: "common.attach_media_content",
             onPressedGallery: () {
               ImageUtility()
-                  .getMediaFromGallery(context, placePermitImages)
+                  .getMultipleMediaFromGallery(context, placePermitImages)
                   .then((value) => setState(() => placePermitImages = value));
               Navigator.pop(context);
             },
@@ -318,7 +318,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             ruleContent: "add_place.place_picture_rule",
             onPressedGallery: () {
               ImageUtility()
-                  .getMediaFromGallery(context, placeImages)
+                  .getMultipleMediaFromGallery(context, placeImages)
                   .then((value) => setState(() => placeImages = value));
               Navigator.pop(context);
             },
@@ -343,7 +343,7 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
             ruleContent: "add_place.place_menu_rule",
             onPressedGallery: () {
               ImageUtility()
-                  .getMediaFromGallery(context, placeMenuImages)
+                  .getMultipleMediaFromGallery(context, placeMenuImages)
                   .then((value) => setState(() => placeMenuImages = value));
               Navigator.pop(context);
             },

@@ -25,10 +25,35 @@ enum ImageType { svg, png, network, file, unknown }
 class ImageUtility {
   final ImagePicker picker = ImagePicker();
 
-  Future<List<String>> getMediaFromGallery(
+  Future<List<String>> getSingleMediaFromGallery(
       BuildContext context, List<String> listImage) async {
     try {
-      List<XFile>? getRawMedia = await picker.pickMultiImage();
+      XFile? getRawMedia = await picker.pickImage(source: ImageSource.gallery);
+      List<String> temp = [];
+      if (getRawMedia != null) {
+        XFile? newCompressImg = await _compressImage(getRawMedia);
+        if (newCompressImg != null) {
+          temp.add(newCompressImg.path);
+        } else {
+          temp.add(getRawMedia.path);
+        }
+      } else {
+        temp = [];
+      }
+      return temp;
+    } catch (e) {
+      if (!context.mounted) return Future<List<String>>.value([]);
+      showSnackBar(context, Icons.error_outline, Colors.red,
+          "${"common.error".tr()} $e", Colors.red);
+      return Future<List<String>>.value([]);
+    }
+  }
+
+  Future<List<String>> getMultipleMediaFromGallery(
+      BuildContext context, List<String> listImage,
+      {int? limit}) async {
+    try {
+      List<XFile>? getRawMedia = await picker.pickMultiImage(limit: limit);
       List<String> temp = [];
       if (listImage.isEmpty) {
         if (getRawMedia.isNotEmpty) {

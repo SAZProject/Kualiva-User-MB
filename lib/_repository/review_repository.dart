@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kualiva/_data/model/minio/image_upload_model.dart';
+import 'package:kualiva/_repository/minio_repository.dart';
+
 // import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
+
 // import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 
@@ -10,9 +14,10 @@ import 'package:kualiva/review/model/review_place_model.dart';
 // cm3d0h52q0000qtfl1aoq65b8
 
 class ReviewRepository {
-  ReviewRepository(this._dioClient);
+  ReviewRepository(this._dioClient, this._minioRepository);
 
   final DioClient _dioClient;
+  final MinioRepository _minioRepository;
 
   String? placeUniqueId;
   PlaceCategoryEnum? placeCategory;
@@ -41,28 +46,55 @@ class ReviewRepository {
     required double rating,
     required List<String> photoFiles,
   }) async {
-    Map<String, dynamic> body = Map.from({
-      "placeUniqueId": placeUniqueId,
-      "placeCategory": placeCategory!.name,
-      "invoice": invoice,
-      "description": description,
-      "invoiceFile": invoiceFile,
-      "rating": rating,
-      "photoFiles": photoFiles,
-    });
-    if (isCreated == true) {
-      final _ = await _dioClient.dio().then((dio) {
-        return dio.post('/reviews', data: body);
-      });
-    } else {
-      final _ = await _dioClient.dio().then((dio) {
-        return dio.patch('/reviews/${reviewId!}', data: body);
-      });
-    }
-    final temp = placeUniqueId ?? '';
-    placeUniqueId = placeCategory = invoice = invoiceFile = null;
+    String minioInvoiceImagePaths = "";
+    final List<String> minioReviewImagePaths = [];
 
-    return temp;
+    try {
+      if (invoiceFile != null) {
+        LeLog.d(this, invoiceFile.toString());
+        final ImageUploadModel invoiceImageUpload =
+            await _minioRepository.uploadImage(imagePath: invoiceFile!);
+
+        minioInvoiceImagePaths = invoiceImageUpload.images[0].pathUrl;
+      }
+
+      final ImageUploadModel reviewImageUpload =
+          await _minioRepository.uploadImages(imagePathList: photoFiles);
+
+      minioReviewImagePaths.addAll(
+          reviewImageUpload.images.map((image) => image.pathUrl).toList());
+
+      Map<String, dynamic> body = Map.from({
+        "placeUniqueId": placeUniqueId,
+        "placeCategory": placeCategory!.name,
+        "invoice": invoice,
+        "description": description,
+        "invoiceFile": minioInvoiceImagePaths,
+        "rating": rating,
+        "photoFiles": minioReviewImagePaths,
+      });
+      if (isCreated == true) {
+        final _ = await _dioClient.dio().then((dio) {
+          return dio.post('/reviews', data: body);
+        });
+      } else {
+        final _ = await _dioClient.dio().then((dio) {
+          return dio.patch('/reviews/${reviewId!}', data: body);
+        });
+      }
+      final temp = placeUniqueId ?? '';
+      placeUniqueId = placeCategory = invoice = invoiceFile = null;
+
+      return temp;
+    } catch (e) {
+      if (minioInvoiceImagePaths.isNotEmpty) {
+        _minioRepository.deleteImage(fileName: minioInvoiceImagePaths);
+      }
+      if (minioReviewImagePaths.isNotEmpty) {
+        _minioRepository.deleteImages(fileNameList: minioReviewImagePaths);
+      }
+      rethrow;
+    }
   }
 
   /// get other Reviews by Place / Merchant

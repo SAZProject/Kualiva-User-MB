@@ -36,7 +36,7 @@ class ReportReviewDetail extends StatelessWidget {
                 .colorScheme
                 .onSecondaryContainer
                 .withValues(alpha: 0.6),
-            inputBorder: TextFormFieldStyleHelper.fillOnSecondaryContainer,
+            inputBorder: TextFormFieldStyleHelper.outlineBlackTL24,
           ),
         ],
       ),

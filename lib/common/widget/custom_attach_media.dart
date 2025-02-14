@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/common/utility/image_utility.dart';
 import 'package:kualiva/common/widget/custom_fullscreen_image.dart';
 import 'package:kualiva/common/widget/custom_image_dialog.dart';
 
@@ -197,23 +196,10 @@ class CustomAttachMedia extends StatelessWidget {
                     },
                     child: Hero(
                       tag: "$mediaFilePath$index",
-                      child: Image(
+                      child: CustomImageView(
                         width: 100.h,
-                        fit: BoxFit.cover,
-                        image: ImageUtility().getImageType(mediaFilePath)!,
-                        loadingBuilder: (context, child, event) {
-                          if (event == null) return child;
-                          return Center(
-                            child: SizedBox(
-                              width: 20.h,
-                              height: 20.h,
-                              child: CircularProgressIndicator(
-                                value: event.cumulativeBytesLoaded /
-                                    (event.expectedTotalBytes ?? 1),
-                              ),
-                            ),
-                          );
-                        },
+                        imagePath: mediaFilePath,
+                        boxFit: BoxFit.cover,
                       ),
                     ),
                   ),

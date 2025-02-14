@@ -85,13 +85,6 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
               Icons.generating_tokens_outlined,
             ),
           );
-          Future.delayed(
-            Duration(seconds: 3),
-            () {
-              if (!context.mounted) return;
-              Navigator.pop(context); // Pop verify modal
-            },
-          );
         }
         if (state is ReviewPlaceCreateLoading) {
           customLoadingDialog(context: context);

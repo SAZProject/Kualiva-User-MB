@@ -37,6 +37,7 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
           invoice: _transactionCtl.text.trim(),
           invoiceFile: _invoiceMedia.value[0],
         ));
+    Navigator.pop(context); // Pop verify modal
     Navigator.pushNamed(context, AppRoutes.reviewFormScreen);
   }
 

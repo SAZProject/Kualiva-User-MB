@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 
 import 'package:kualiva/review/model/author_model.dart';
@@ -103,17 +104,22 @@ class ReviewPlaceModel {
   }
 
   factory ReviewPlaceModel.fromMap(Map<String, dynamic> map) {
+    final String baseUrlMinio =
+        dotenv.get("BASE_URL_MINIO_API", fallback: null);
+
     return ReviewPlaceModel(
       id: map['id'] as int,
       invoice: map['invoice'] != null ? map['invoice'] as String : null,
       invoiceFile:
-          map['invoiceFile'] != null ? map['invoiceFile'] as String : null,
+          map['invoiceFile'] != null ? baseUrlMinio + map['invoiceFile'] : null,
       count: map['count'] != null ? map['count'] as int : null,
       isLikedByMe:
           map['isLikedByMe'] != null ? map['isLikedByMe'] as bool : null,
       description: map['description'] as String,
       rating: (map['rating']).toDouble(),
-      photoFiles: List<String>.from((map['photoFiles'] as List<dynamic>)),
+      photoFiles: (map['photoFiles'] as List<dynamic>)
+          .map((e) => baseUrlMinio + e)
+          .toList(),
       createdAt: DateTime.parse(map['createdAt']),
       updatedAt: DateTime.parse(map['updatedAt']),
       author: AuthorModel.fromMap(map['author'] as Map<String, dynamic>),

@@ -5,9 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.01
-- Image utility add limit and single picker
-- Review fix some bug and connect verification file
+Ver 0.1.02
+- Review core & minio service integration
 ```
 
 ## Getting Started

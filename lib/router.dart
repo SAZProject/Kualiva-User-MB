@@ -20,6 +20,7 @@ import 'package:kualiva/places/fnb/fnb_detail_menu_screen.dart';
 import 'package:kualiva/layout/main_layout.dart';
 import 'package:kualiva/places/fnb/fnb_filters_screen.dart';
 import 'package:kualiva/places/hostelry/hostelry_screen.dart';
+import 'package:kualiva/prime_celestial.dart';
 import 'package:kualiva/profile/account_setting_screen.dart';
 import 'package:kualiva/profile/language_screen.dart';
 import 'package:kualiva/profile/my_profile_screen.dart';
@@ -40,6 +41,8 @@ import 'package:kualiva/splash/splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AppRoutes {
+  static const String primeCelestial = "/prime_celestia";
+
   static const String splashScreen = "/splash_screen";
 
   static const String onBoardingScreen = "/onboarding";
@@ -111,6 +114,13 @@ class AppRoutes {
 
 Route<dynamic> generateRoute(RouteSettings routeSetting) {
   switch (routeSetting.name) {
+    case AppRoutes.primeCelestial:
+      return PageTransition(
+          child: const PrimeCelestial(),
+          type: PageTransitionType.scale,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 300));
+
     case AppRoutes.splashScreen:
       return PageTransition(
           child: const SplashScreen(),

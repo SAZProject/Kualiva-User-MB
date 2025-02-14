@@ -7,6 +7,7 @@ import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_attach_media.dart';
 import 'package:kualiva/common/widget/custom_error_dialog.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_loading_dialog.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:kualiva/report/feature/report_place_reason_feature.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,14 +71,33 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ReportPlaceBloc, ReportPlaceState>(
+      listenWhen: (previous, current) {
+        if (previous is ReportPlaceFetchSuccess &&
+            current is ReportPlaceLoading) {
+          return true;
+        }
+        if (current is ReportPlaceCreatedSuccess) {
+          return true;
+        }
+        if (current is ReportPlaceCreatedFailure) {
+          return true;
+        }
+        return false;
+      },
       listener: (context, state) {
         LeLog.sd(this, build, state.toString());
         if (state is ReportPlaceCreatedSuccess) {
+          Navigator.pop(context);
           Navigator.pop(context);
         }
         if (state is ReportPlaceCreatedFailure) {
           Navigator.pop(context); // pop loading dialog
           customErrorDialog(context: context);
+        }
+        if (state is ReportPlaceLoading) {
+          // TODO create global bloc for loading dialog etc
+          // TODO first time page open get called
+          customLoadingDialog(context: context);
         }
       },
       child: SafeArea(

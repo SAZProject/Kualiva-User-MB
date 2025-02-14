@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
               title: 'Kualiva',
               theme: light,
               darkTheme: dark,
-              initialRoute: AppRoutes.splashScreen,
+              initialRoute: AppRoutes.primeCelestial,
               onGenerateRoute: (settings) => generateRoute(settings),
             ),
           );

@@ -26,6 +26,19 @@ class ReportPlaceReasonFeature extends StatelessWidget {
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 10.h),
       child: BlocBuilder<ReportPlaceBloc, ReportPlaceState>(
+        buildWhen: (previous, current) {
+          if (current is ReportPlaceFetchSuccess ||
+              current is ReportPlaceFetchFailure) {
+            return true;
+          }
+          if ((previous is ReportPlaceLoading &&
+                  current is ReportPlaceFetchSuccess) ||
+              (previous is ReportPlaceLoading &&
+                  current is ReportPlaceFetchFailure)) {
+            return true;
+          }
+          return false;
+        },
         builder: (context, state) {
           if (state is ReportPlaceFetchFailure) {
             return CustomErrorState(

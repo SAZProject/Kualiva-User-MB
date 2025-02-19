@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/loading_enum.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:flutter/foundation.dart';
@@ -22,7 +23,7 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
     ReportPlaceFetched event,
     Emitter<ReportPlaceState> emit,
   ) async {
-    emit(ReportPlaceLoading());
+    emit(ReportPlaceLoading(loading: LoadingEnum.fetch));
     try {
       final ParameterModel parameter =
           await _reportRepository.getPlaceReasons();
@@ -38,7 +39,7 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
     ReportPlaceCreated event,
     Emitter<ReportPlaceState> emit,
   ) async {
-    emit(ReportPlaceLoading());
+    emit(ReportPlaceLoading(loading: LoadingEnum.create));
     try {
       final _ = await _reportRepository.createPlaceReport(
         placeId: event.placeId,

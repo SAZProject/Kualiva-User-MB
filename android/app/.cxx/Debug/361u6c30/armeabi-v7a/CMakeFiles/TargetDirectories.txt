@@ -1,0 +1,2 @@
+C:/Prelion/kua/Kualiva-User-MB/android/app/.cxx/Debug/361u6c30/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Prelion/kua/Kualiva-User-MB/android/app/.cxx/Debug/361u6c30/armeabi-v7a/CMakeFiles/rebuild_cache.dir

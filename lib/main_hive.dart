@@ -14,7 +14,6 @@ import 'package:kualiva/review/model/review_place_model.dart';
 class MainHive {
   static Future<void> registerAdapter() async {
     await Hive.initFlutter();
-    Hive.registerAdapter(FnbNearestLocationAdapter());
     Hive.registerAdapter(FnbNearestModelAdapter());
     Hive.registerAdapter(CurrentLocationModelAdapter());
     Hive.registerAdapter(AuthorModelAdapter());
@@ -47,7 +46,6 @@ class MainHive {
 }
 
 enum MyHive {
-  fnbNearestLocation(0, 'fnbNearestLocation'),
   fnbNearest(1, 'fnb_nearest'),
   currentLocation(2, 'current_location'),
   author(3, 'author'),

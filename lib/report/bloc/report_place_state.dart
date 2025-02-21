@@ -5,7 +5,11 @@ sealed class ReportPlaceState {}
 
 final class ReportPlaceInitial extends ReportPlaceState {}
 
-final class ReportPlaceLoading extends ReportPlaceState {}
+final class ReportPlaceLoading extends ReportPlaceState {
+  final LoadingEnum loading;
+
+  ReportPlaceLoading({required this.loading});
+}
 
 final class ReportPlaceFetchSuccess extends ReportPlaceState {
   final ParameterModel parameter;

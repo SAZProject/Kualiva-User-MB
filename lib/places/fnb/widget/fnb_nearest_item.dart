@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 
-class FnbPlaceItemNearby extends StatelessWidget {
-  const FnbPlaceItemNearby({
+class FnbNearestItem extends StatelessWidget {
+  const FnbNearestItem({
     super.key,
     required this.merchant,
     required this.onPressed,

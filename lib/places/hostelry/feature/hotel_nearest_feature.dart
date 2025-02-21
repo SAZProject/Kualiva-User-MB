@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/places/fnb/widget/fnb_place_item_nearby.dart';
+import 'package:kualiva/places/fnb/widget/fnb_nearest_item.dart';
 import 'package:kualiva/places/hostelry/bloc/hotel_nearest_bloc.dart';
 
 class HotelNearestFeature extends StatelessWidget {
@@ -80,16 +80,13 @@ class HotelNearestFeature extends StatelessWidget {
           scrollDirection: Axis.vertical,
           itemCount: state.nearest.length,
           itemBuilder: (context, index) {
-            return FnbPlaceItemNearby(
+            return FnbNearestItem(
               merchant: state.nearest[index],
               onPressed: () {
-                // context.read<FnbDetailBloc>().add(FnbDetailFetched(
-                //       placeId: state.nearest[index].placeId,
-                //     ));
                 Navigator.pushNamed(
                   context,
                   AppRoutes.fnbDetailScreen,
-                  arguments: state.nearest[index].placeId,
+                  arguments: state.nearest[index].id,
                 );
               },
             );

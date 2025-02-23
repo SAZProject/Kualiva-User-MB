@@ -35,6 +35,12 @@ class MainHive {
     ]);
   }
 
+  static Future<void> deleteAllBox() async {
+    await Hive.close();
+    await Hive.deleteFromDisk();
+    await openBox();
+  }
+
   static bool checkOpenBox() {
     // for (var e in MyHive.values) {
     //   if (!Hive.isAdapterRegistered(e.typeId)) {

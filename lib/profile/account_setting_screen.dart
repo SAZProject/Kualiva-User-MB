@@ -11,6 +11,7 @@ import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_phone_number.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
+import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 
 class AccountSettingScreen extends StatefulWidget {
@@ -454,6 +455,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                           logoutLoading = true;
                         });
                         if (!context.mounted) return;
+                        MainHive.deleteAllBox();
                         Navigator.pushNamedAndRemoveUntil(
                             context, AppRoutes.signInScreen, (route) => false);
                       },

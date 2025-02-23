@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/t_o_s_dataset.dart';
+import 'package:kualiva/common/utility/save_pref.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 
@@ -11,6 +12,7 @@ class TermOfServiceScreen extends StatelessWidget {
   final tos = TOSDataset().tos;
 
   void _confirmBtnFunc(BuildContext context) {
+    SavePref().saveTosData();
     Navigator.pop(context, true);
   }
 

@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/_data/model/ui_model/onboarding_verifying_model.dart';
 import 'package:kualiva/_data/model/ui_model/profile_menu_model.dart';
+import 'package:kualiva/onboarding/bloc/onboarding_bloc.dart';
 import 'package:kualiva/onboarding/widget/onboarding_pick_birthdate.dart';
 import 'package:kualiva/onboarding/widget/onboarding_pick_notification.dart';
 
@@ -23,10 +25,6 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
       icon: Icons.calendar_month,
       pageTitle: "onboard.onboard_pick_birthdate",
     ),
-    // const OnboardingModel(
-    //   icon: Icons.star,
-    //   pageTitle: "onboard.onboard_pick_cuisine",
-    // ),
     const OnboardingVerifyingModel(
       icon: Icons.notifications,
       pageTitle: "onboard.onboard_pick_notif",
@@ -37,11 +35,8 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   int _activePage = 0;
 
-  final _fullnameCtl = TextEditingController();
+  final _fullNameCtl = TextEditingController();
   DateTime? _selectedDate;
-
-  // final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
-  // Set<int> dummySelectedCuisine = {};
 
   final List<ProfileMenuModel> _listBtnItem = [
     ProfileMenuModel(
@@ -68,7 +63,12 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   void _confirmBtnFunc(BuildContext context) {
     if (_activePage == 1) {
-      Navigator.of(context).pushNamed(AppRoutes.devicePermissionScreen);
+      context.read<OnboardingBloc>().add(
+            OnboardingUserVerified(
+              fullName: _fullNameCtl.text.trim(),
+              birthDate: _selectedDate!,
+            ),
+          );
     } else {
       _pageController.nextPage(
           duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
@@ -77,15 +77,11 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   bool _fieldValidation(int page) {
     switch (page) {
-      // TODO dimatikan untuk v1
-      // case 1:
-      //   if (dummySelectedCuisine.isEmpty) return false;
-      //   return true;
       case 1:
         if (selectedNotifChoice.isEmpty) return false;
         return true;
       default:
-        if (_selectedDate == null || _fullnameCtl.text.trim().isEmpty) {
+        if (_selectedDate == null || _fullNameCtl.text.trim().isEmpty) {
           return false;
         }
         return true;
@@ -95,23 +91,34 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
   @override
   void dispose() {
     _pageController.dispose();
-    _fullnameCtl.dispose();
+    _fullNameCtl.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          extendBody: true,
-          extendBodyBehindAppBar: true,
-          body: SizedBox(
-            width: double.maxFinite,
-            height: double.maxFinite,
-            child: _body(context),
+    return BlocListener<OnboardingBloc, OnboardingState>(
+      listener: (context, state) {
+        if (state is OnboardingSuccess) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRoutes.mainNavigationLayout, (route) => false);
+        }
+        if (state is OnboardingFailure) {
+          // TODO Error hit from API, Show popup
+        }
+      },
+      child: PopScope(
+        canPop: false,
+        child: SafeArea(
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            extendBody: true,
+            extendBodyBehindAppBar: true,
+            body: SizedBox(
+              width: double.maxFinite,
+              height: double.maxFinite,
+              child: _body(context),
+            ),
           ),
         ),
       ),
@@ -172,24 +179,6 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
 
   Widget _buildPage(BuildContext context) {
     switch (_activePage) {
-      // TODO dimatikan untuk V1
-      // case 1:
-      //   return OnboardingPickCuisine(
-      //     cuisineData: _dummyCuisineData,
-      //     selectedIndexes: dummySelectedCuisine,
-      //     hintText: context.tr("onboard.onboard_pick_cuisine_hint"),
-      //     onHintPressed: () {},
-      //     onSelected: (index) {
-      //       setState(() {
-      //         if (dummySelectedCuisine.contains(index)) {
-      //           dummySelectedCuisine.remove(index);
-      //         } else {
-      //           if (dummySelectedCuisine.length == 5) return;
-      //           dummySelectedCuisine.add(index);
-      //         }
-      //       });
-      //     },
-      //   );
       case 1:
         return OnboardingPickNotification(
           listBtnItem: _listBtnItem,
@@ -219,7 +208,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
         );
       default:
         return OnboardingPickBirthdate(
-          fullNameCtl: _fullnameCtl,
+          fullNameCtl: _fullNameCtl,
           fullNameHint: context.tr("onboard.onboard_fullname"),
           leftIcon: _selectedDate != null ? null : Icons.calendar_month,
           label: _selectedDate != null
@@ -233,20 +222,24 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
   }
 
   Widget _buildConfirm(BuildContext context) {
-    return CustomElevatedButton(
-      initialText: context.tr("onboard.onboard_confirm_btn"),
-      secondText:
-          _activePage == 1 ? context.tr("onboard.onboard_save_btn") : null,
-      margin: EdgeInsets.all(10.h),
-      buttonStyle: CustomButtonStyles.none,
-      decoration: !_fieldValidation(_activePage)
-          ? CustomDecoration(context).outline
-          : CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
-      buttonTextStyle: Theme.of(context).textTheme.titleLarge,
-      onPressed: !_fieldValidation(_activePage)
-          ? null
-          : () => _confirmBtnFunc(context),
-    );
+    return BlocBuilder<OnboardingBloc, OnboardingState>(
+        builder: (context, state) {
+      return CustomElevatedButton(
+        isLoading: state is OnboardingLoading,
+        initialText: context.tr("onboard.onboard_confirm_btn"),
+        secondText:
+            _activePage == 1 ? context.tr("onboard.onboard_save_btn") : null,
+        margin: EdgeInsets.all(10.h),
+        buttonStyle: CustomButtonStyles.none,
+        decoration: !_fieldValidation(_activePage)
+            ? CustomDecoration(context).outline
+            : CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
+        buttonTextStyle: Theme.of(context).textTheme.titleLarge,
+        onPressed: !_fieldValidation(_activePage)
+            ? null
+            : () => _confirmBtnFunc(context),
+      );
+    });
   }
 
   _selectDate(BuildContext context) async {

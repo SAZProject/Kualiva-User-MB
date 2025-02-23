@@ -212,8 +212,9 @@ class _HomeScreenState extends State<HomeScreen> {
             CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder10,
                 ),
-        foregroundDecoration:
-            gridMenu.isActive ? null : CustomDecoration(context).foregroundBlur,
+        foregroundDecoration: gridMenu.isActive
+            ? null
+            : CustomDecoration(context).foregroundBlurRndBdr,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -241,131 +242,131 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Widget _eventList(BuildContext context) {
-  //   return SizedBox(
-  //     width: double.maxFinite,
-  //     child: Container(
-  //       width: double.maxFinite,
-  //       margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-  //       padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 14.h),
-  //       child: Column(
-  //         mainAxisSize: MainAxisSize.min,
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         children: [
-  //           CustomSectionHeader(
-  //             label: context.tr("home_screen.event", args: ["Jakarta"]),
-  //             onPressed: () {
-  //               Navigator.pushNamed(context, AppRoutes.homeEventScreen);
-  //             },
-  //           ),
-  //           SizedBox(height: 4.h),
-  //           SizedBox(
-  //             width: double.maxFinite,
-  //             child: NotificationListener(
-  //               onNotification: (ScrollNotification notification) {
-  //                 if (notification is ScrollUpdateNotification) {
-  //                   if (notification.metrics.pixels ==
-  //                       notification.metrics.maxScrollExtent) {
-  //                     _parentScrollController.animateTo(
-  //                         _parentScrollController.position.maxScrollExtent,
-  //                         duration: const Duration(seconds: 1),
-  //                         curve: Curves.easeIn);
-  //                   } else if (notification.metrics.pixels ==
-  //                       notification.metrics.minScrollExtent) {
-  //                     _parentScrollController.animateTo(
-  //                         _parentScrollController.position.minScrollExtent,
-  //                         duration: const Duration(seconds: 1),
-  //                         curve: Curves.easeIn);
-  //                   }
-  //                 }
-  //                 return true;
-  //               },
-  //               child: _homeEventList.isEmpty
-  //                   ? const Center(child: CircularProgressIndicator())
-  //                   : ListView.builder(
-  //                       controller: _childScrollController,
-  //                       itemCount: _homeEventList.length,
-  //                       shrinkWrap: true,
-  //                       itemBuilder: (context, index) {
-  //                         if (_homeEventList.isNotEmpty) {
-  //                           return _eventListItems(
-  //                               context, index, _homeEventList[index]);
-  //                         }
-  //                         return const CustomEmptyState();
-  //                       },
-  //                     ),
-  //             ),
-  //           ),
-  //           SizedBox(height: 4.h),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+// Widget _eventList(BuildContext context) {
+//   return SizedBox(
+//     width: double.maxFinite,
+//     child: Container(
+//       width: double.maxFinite,
+//       margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
+//       padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 14.h),
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           CustomSectionHeader(
+//             label: context.tr("home_screen.event", args: ["Jakarta"]),
+//             onPressed: () {
+//               Navigator.pushNamed(context, AppRoutes.homeEventScreen);
+//             },
+//           ),
+//           SizedBox(height: 4.h),
+//           SizedBox(
+//             width: double.maxFinite,
+//             child: NotificationListener(
+//               onNotification: (ScrollNotification notification) {
+//                 if (notification is ScrollUpdateNotification) {
+//                   if (notification.metrics.pixels ==
+//                       notification.metrics.maxScrollExtent) {
+//                     _parentScrollController.animateTo(
+//                         _parentScrollController.position.maxScrollExtent,
+//                         duration: const Duration(seconds: 1),
+//                         curve: Curves.easeIn);
+//                   } else if (notification.metrics.pixels ==
+//                       notification.metrics.minScrollExtent) {
+//                     _parentScrollController.animateTo(
+//                         _parentScrollController.position.minScrollExtent,
+//                         duration: const Duration(seconds: 1),
+//                         curve: Curves.easeIn);
+//                   }
+//                 }
+//                 return true;
+//               },
+//               child: _homeEventList.isEmpty
+//                   ? const Center(child: CircularProgressIndicator())
+//                   : ListView.builder(
+//                       controller: _childScrollController,
+//                       itemCount: _homeEventList.length,
+//                       shrinkWrap: true,
+//                       itemBuilder: (context, index) {
+//                         if (_homeEventList.isNotEmpty) {
+//                           return _eventListItems(
+//                               context, index, _homeEventList[index]);
+//                         }
+//                         return const CustomEmptyState();
+//                       },
+//                     ),
+//             ),
+//           ),
+//           SizedBox(height: 4.h),
+//         ],
+//       ),
+//     ),
+//   );
+// }
 
-  // Widget _eventListItems(
-  //     BuildContext context, int index, HomeEventModel homeEventModel) {
-  //   return Container(
-  //     height: 120.h,
-  //     margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 4.h),
-  //     padding: EdgeInsets.symmetric(horizontal: 4.h, vertical: 4.h),
-  //     decoration:
-  //         CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-  //               borderRadius: BorderRadiusStyle.roundedBorder10,
-  //             ),
-  //     clipBehavior: Clip.antiAlias,
-  //     child: InkWell(
-  //       borderRadius: BorderRadiusStyle.roundedBorder10,
-  //       onTap: () {
-  //         Navigator.pushNamed(context, AppRoutes.homeEventDetailScreen,
-  //             arguments: homeEventModel);
-  //       },
-  //       child: BackdropFilter(
-  //         filter: ImageFilter.blur(sigmaX: 3.h, sigmaY: 3.h),
-  //         child: Row(
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             Expanded(
-  //               child: Align(
-  //                 alignment: Alignment.centerLeft,
-  //                 child: Column(
-  //                   crossAxisAlignment: CrossAxisAlignment.start,
-  //                   children: [
-  //                     Text(
-  //                       homeEventModel.eventDate,
-  //                       style: CustomTextStyles(context).bodySmall10,
-  //                       maxLines: 1,
-  //                       overflow: TextOverflow.ellipsis,
-  //                     ),
-  //                     SizedBox(height: 4.h),
-  //                     Text(
-  //                       homeEventModel.eventTitle,
-  //                       style: theme(context).textTheme.titleMedium,
-  //                       maxLines: 1,
-  //                       overflow: TextOverflow.ellipsis,
-  //                     ),
-  //                     SizedBox(height: 4.h),
-  //                     Text(
-  //                       homeEventModel.eventDesc,
-  //                       style: CustomTextStyles(context).bodySmall12,
-  //                       maxLines: 3,
-  //                       overflow: TextOverflow.ellipsis,
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ),
-  //             ),
-  //             SizedBox(width: 10.h),
-  //             CustomImageView(
-  //               imagePath: homeEventModel.imagePath,
-  //               height: double.maxFinite,
-  //               width: 100.h,
-  //               radius: BorderRadiusStyle.roundedBorder10,
-  //             )
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+// Widget _eventListItems(
+//     BuildContext context, int index, HomeEventModel homeEventModel) {
+//   return Container(
+//     height: 120.h,
+//     margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 4.h),
+//     padding: EdgeInsets.symmetric(horizontal: 4.h, vertical: 4.h),
+//     decoration:
+//         CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
+//               borderRadius: BorderRadiusStyle.roundedBorder10,
+//             ),
+//     clipBehavior: Clip.antiAlias,
+//     child: InkWell(
+//       borderRadius: BorderRadiusStyle.roundedBorder10,
+//       onTap: () {
+//         Navigator.pushNamed(context, AppRoutes.homeEventDetailScreen,
+//             arguments: homeEventModel);
+//       },
+//       child: BackdropFilter(
+//         filter: ImageFilter.blur(sigmaX: 3.h, sigmaY: 3.h),
+//         child: Row(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Expanded(
+//               child: Align(
+//                 alignment: Alignment.centerLeft,
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Text(
+//                       homeEventModel.eventDate,
+//                       style: CustomTextStyles(context).bodySmall10,
+//                       maxLines: 1,
+//                       overflow: TextOverflow.ellipsis,
+//                     ),
+//                     SizedBox(height: 4.h),
+//                     Text(
+//                       homeEventModel.eventTitle,
+//                       style: theme(context).textTheme.titleMedium,
+//                       maxLines: 1,
+//                       overflow: TextOverflow.ellipsis,
+//                     ),
+//                     SizedBox(height: 4.h),
+//                     Text(
+//                       homeEventModel.eventDesc,
+//                       style: CustomTextStyles(context).bodySmall12,
+//                       maxLines: 3,
+//                       overflow: TextOverflow.ellipsis,
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//             SizedBox(width: 10.h),
+//             CustomImageView(
+//               imagePath: homeEventModel.imagePath,
+//               height: double.maxFinite,
+//               width: 100.h,
+//               radius: BorderRadiusStyle.roundedBorder10,
+//             )
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }
 }

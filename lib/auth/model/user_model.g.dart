@@ -26,7 +26,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       isPhoneVerified: fields[6] as bool,
       isGoogle: fields[7] as bool,
       createdAt: fields[8] as DateTime,
-      profile: fields[9] as UserProfileModel,
+      profile: fields[9] as UserProfileModel?,
     );
   }
 

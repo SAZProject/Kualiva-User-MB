@@ -39,7 +39,7 @@ class UserModel {
   final DateTime createdAt;
 
   @HiveField(9)
-  final UserProfileModel profile;
+  final UserProfileModel? profile;
 
   const UserModel({
     required this.id,
@@ -51,7 +51,7 @@ class UserModel {
     required this.isPhoneVerified,
     required this.isGoogle,
     required this.createdAt,
-    required this.profile,
+    this.profile,
   });
 
   UserModel copyWith({
@@ -91,7 +91,7 @@ class UserModel {
       'isPhoneVerified': isPhoneVerified,
       'isGoogle': isGoogle,
       'createdAt': createdAt.millisecondsSinceEpoch,
-      'profile': profile.toMap(),
+      'profile': profile?.toMap(),
     };
   }
 
@@ -106,7 +106,9 @@ class UserModel {
       isPhoneVerified: map['isPhoneVerified'] as bool,
       isGoogle: map['isGoogle'] as bool,
       createdAt: DateTime.parse(map['createdAt']),
-      profile: UserProfileModel.fromMap(map['profile'] as Map<String, dynamic>),
+      profile: map['profile'] == null
+          ? null
+          : UserProfileModel.fromMap(map['profile'] as Map<String, dynamic>),
     );
   }
 

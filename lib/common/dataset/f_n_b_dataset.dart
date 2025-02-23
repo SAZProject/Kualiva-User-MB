@@ -14,14 +14,6 @@ class FNBDataset {
         "https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg",
   );
 
-  static FNBAssetModel get cuisineDataset => FNBAssetModel(
-        totalItem: 20,
-        listTitle: FNBFilterDataset.fnbSubCategFoods,
-        listAssetLight: ImageConstant.listCuisineLight,
-        listAssetDark: ImageConstant.listCuisinedark,
-        listAssetBg: ImageConstant.listCuisineBg,
-      );
-
   static FNBAssetModel get bvgFilterDataset => FNBAssetModel(
         totalItem: 7,
         listTitle: FNBFilterDataset.fnbSubCategBvg,

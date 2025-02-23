@@ -36,7 +36,7 @@ class OnboardingModel {
       'imageUri': imageUri,
       'pageTitle': pageTitle,
       'content': content,
-      'pageColor': pageColor.value,
+      'pageColor': pageColor.toARGB32(),
     };
   }
 

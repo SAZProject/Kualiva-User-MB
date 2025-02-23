@@ -1,6 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
@@ -13,41 +11,65 @@ class UserProfileModel {
   final String id;
 
   @HiveField(1)
-  final String firstname;
+  final String? fullName;
 
   @HiveField(2)
-  final String lastname;
+  final String? gender;
 
   @HiveField(3)
-  final String gender;
+  final DateTime? birthDate;
 
   @HiveField(4)
-  final DateTime birthDate;
-
-  @HiveField(5)
   final String? photoFile;
 
   const UserProfileModel({
     required this.id,
-    required this.firstname,
-    required this.lastname,
-    required this.gender,
-    required this.birthDate,
+    this.fullName,
+    this.gender,
+    this.birthDate,
     this.photoFile,
   });
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UserProfileModel &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          fullName == other.fullName &&
+          gender == other.gender &&
+          birthDate == other.birthDate &&
+          photoFile == other.photoFile);
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      fullName.hashCode ^
+      gender.hashCode ^
+      birthDate.hashCode ^
+      photoFile.hashCode;
+
+  @override
+  String toString() {
+    return 'UserProfileModel{' +
+        ' id: $id,' +
+        ' fullName: $fullName,' +
+        ' gender: $gender,' +
+        ' birthDate: $birthDate,' +
+        ' photoFile: $photoFile,' +
+        '}';
+  }
+
   UserProfileModel copyWith({
     String? id,
-    String? firstname,
-    String? lastname,
+    String? fullName,
     String? gender,
     DateTime? birthDate,
     String? photoFile,
   }) {
     return UserProfileModel(
       id: id ?? this.id,
-      firstname: firstname ?? this.firstname,
-      lastname: lastname ?? this.lastname,
+      fullName: fullName ?? this.fullName,
       gender: gender ?? this.gender,
       birthDate: birthDate ?? this.birthDate,
       photoFile: photoFile ?? this.photoFile,
@@ -55,56 +77,22 @@ class UserProfileModel {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'firstname': firstname,
-      'lastname': lastname,
-      'gender': gender,
-      'birthDate': birthDate.millisecondsSinceEpoch,
-      'photoFile': photoFile,
+    return {
+      'id': this.id,
+      'fullName': this.fullName,
+      'gender': this.gender,
+      'birthDate': this.birthDate,
+      'photoFile': this.photoFile,
     };
   }
 
   factory UserProfileModel.fromMap(Map<String, dynamic> map) {
     return UserProfileModel(
       id: map['id'] as String,
-      firstname: map['firstname'] as String,
-      lastname: map['lastname'] as String,
-      gender: map['gender'] as String,
-      birthDate: DateTime.parse(map['birthDate']),
-      photoFile: map['photoFile'] != null ? map['photoFile'] as String : null,
+      fullName: map['fullName'] as String?,
+      gender: map['gender'] as String?,
+      birthDate: map['birthDate'] as DateTime?,
+      photoFile: map['photoFile'] as String?,
     );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserProfileModel.fromJson(String source) =>
-      UserProfileModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'UserProfileModel(id: $id, firstname: $firstname, lastname: $lastname, gender: $gender, birthDate: $birthDate, photoFile: $photoFile)';
-  }
-
-  @override
-  bool operator ==(covariant UserProfileModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.firstname == firstname &&
-        other.lastname == lastname &&
-        other.gender == gender &&
-        other.birthDate == birthDate &&
-        other.photoFile == photoFile;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        firstname.hashCode ^
-        lastname.hashCode ^
-        gender.hashCode ^
-        birthDate.hashCode ^
-        photoFile.hashCode;
   }
 }

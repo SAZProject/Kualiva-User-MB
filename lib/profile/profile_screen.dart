@@ -278,7 +278,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Flexible(
             child: Container(
               foregroundDecoration: _profileMenuModel[1].isCommingSoon
-                  ? CustomDecoration(context).foregroundBlur
+                  ? CustomDecoration(context).foregroundBlurRndBdr
                   : null,
               child: CustomOutlinedButton(
                 height: 40.h,
@@ -437,7 +437,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(vertical: 2.5.h),
       foregroundDecoration:
-          isCommingSoon ? CustomDecoration(context).foregroundBlur : null,
+          isCommingSoon ? CustomDecoration(context).foregroundBlurSqrBdr : null,
       child: ListTile(
         dense: true,
         visualDensity: VisualDensity.compact,

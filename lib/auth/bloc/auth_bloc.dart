@@ -1,13 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kualiva/_repository/auth_repository.dart';
+import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 
 part 'auth_event.dart';
+
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
+
   AuthBloc(this._authRepository) : super(AuthInitial()) {
     on<AuthEvent>((event, emit) => emit(AuthLoading()));
 
@@ -37,13 +40,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     try {
-      final _ = await _authRepository.login(
+      final res = await _authRepository.login(
         username: event.username,
         phoneNumber: event.phoneNumber,
         password: event.password,
       );
       LeLog.bd(this, _onLoggedIn, 'Login Success');
-      emit(AuthLoginSuccess());
+      emit(AuthLoginSuccess(userModel: res));
     } catch (e) {
       LeLog.bd(this, _onLoggedIn, e.toString());
       emit(AuthLoginFailure());
@@ -55,13 +58,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     try {
-      final _ = await _authRepository.register(
+      final res = await _authRepository.register(
         username: event.username,
         phoneNumber: event.phoneNumber,
+        email: event.email,
         password: event.password,
       );
       LeLog.bd(this, _onRegistered, 'Register Success');
-      emit(AuthRegisterSuccess());
+      emit(AuthRegisterSuccess(userModel: res));
     } catch (e) {
       LeLog.bd(this, _onRegistered, e.toString());
       emit(AuthRegisterFailure());

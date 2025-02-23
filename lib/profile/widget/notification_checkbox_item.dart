@@ -29,46 +29,43 @@ class NotificationCheckboxItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(5.h),
-      child: InkWell(
-        onTap: () {},
-        child: SizedBox(
-          width: Sizeutils.width,
-          height: 30.h,
-          child: Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15.h),
-                child: Text(
-                  context.tr(label),
-                  style: CustomTextStyles(context).bodyMedium_13,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+      child: SizedBox(
+        width: Sizeutils.width,
+        height: 30.h,
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 15.h),
+              child: Text(
+                context.tr(label),
+                style: CustomTextStyles(context).bodyMedium_13,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              Spacer(),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 5.h),
-                child: CustomCheckboxButton(
-                  value: kualivaNotifVal,
-                  onChange: kualivaNotifOnChange,
-                ),
+            ),
+            Spacer(),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5.h),
+              child: CustomCheckboxButton(
+                value: kualivaNotifVal,
+                onChange: kualivaNotifOnChange,
               ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 5.h),
-                child: CustomCheckboxButton(
-                  value: emailNotifVal,
-                  onChange: emailNotifOnChange,
-                ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5.h),
+              child: CustomCheckboxButton(
+                value: emailNotifVal,
+                onChange: emailNotifOnChange,
               ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 5.h),
-                child: CustomCheckboxButton(
-                  value: whatsappNotifVal,
-                  onChange: whatsappNotifOnChange,
-                ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5.h),
+              child: CustomCheckboxButton(
+                value: whatsappNotifVal,
+                onChange: whatsappNotifOnChange,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

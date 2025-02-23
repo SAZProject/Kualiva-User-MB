@@ -26,7 +26,8 @@ class ComingSoon extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                foregroundDecoration: CustomDecoration(context).foregroundBlur,
+                foregroundDecoration:
+                    CustomDecoration(context).foregroundBlurRndBdr,
               ),
             ),
             SizedBox(

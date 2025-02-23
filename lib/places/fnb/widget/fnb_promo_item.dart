@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
@@ -93,7 +95,8 @@ class FnbPromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            context.tr("f_n_b.promo_value", args: ["60"]),
+                            context.tr("f_n_b.promo_value",
+                                args: [(Random().nextInt(50) + 20).toString()]),
                             style: theme(context).textTheme.labelLarge,
                           ),
                         ],

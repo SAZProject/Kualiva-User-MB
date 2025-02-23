@@ -7,6 +7,7 @@ import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/form_validation_util.dart';
+import 'package:kualiva/common/utility/save_pref.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_phone_number.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
@@ -22,6 +23,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _userNameCtl = TextEditingController();
   final _phoneNumberCtl = TextEditingController();
+  final _emailCtl = TextEditingController();
   final _passwordCtl = TextEditingController();
   final _confirmPassCtl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -35,9 +37,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool tosAgreement = false;
 
   @override
+  void initState() {
+    super.initState();
+    tosAgreement = SavePref().readTosData();
+  }
+
+  @override
   void dispose() {
     _userNameCtl.dispose();
     _phoneNumberCtl.dispose();
+    _emailCtl.dispose();
     _passwordCtl.dispose();
     _confirmPassCtl.dispose();
     _passwordObscure.dispose();
@@ -47,27 +56,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void _onPressedSignUp(BuildContext context) {
     if (_formKey.currentState!.validate() == false) return;
 
-    context.read<AuthBloc>().add(
-          AuthRegistered(
-            username: _userNameCtl.text.trim(),
-            phoneNumber:
-                '${selectedCountry.phoneCode}${_phoneNumberCtl.text.trim()}',
-            password: _passwordCtl.text.trim(),
-            confirmPassword: _confirmPassCtl.text.trim(),
-          ),
-        );
+    if (!tosAgreement) {
+      Navigator.pushNamed(context, AppRoutes.tosScreen).then(
+        (value) {
+          if (value == null) return;
+          setState(() {
+            tosAgreement = value as bool;
+          });
+          if (!context.mounted) return;
+
+          context.read<AuthBloc>().add(
+                AuthRegistered(
+                  username: _userNameCtl.text.trim(),
+                  phoneNumber:
+                      '${selectedCountry.phoneCode}${_phoneNumberCtl.text.trim()}',
+                  email: _emailCtl.text.trim(),
+                  password: _passwordCtl.text.trim(),
+                  confirmPassword: _confirmPassCtl.text.trim(),
+                ),
+              );
+        },
+      );
+    } else {
+      context.read<AuthBloc>().add(
+            AuthRegistered(
+              username: _userNameCtl.text.trim(),
+              phoneNumber:
+                  '${selectedCountry.phoneCode}${_phoneNumberCtl.text.trim()}',
+              email: _emailCtl.text.trim(),
+              password: _passwordCtl.text.trim(),
+              confirmPassword: _confirmPassCtl.text.trim(),
+            ),
+          );
+    }
   }
 
-  void _alreadyhaveAccount(BuildContext context) => Navigator.pop(context);
+  void _alreadyHaveAccount(BuildContext context) => Navigator.pop(context);
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthRegisterSuccess) {
-          /// TODO Habis register harusnya ke OTP screen, tapi bypass langsung ke Birthday screen dan firstname lastname screen
-          /// Tunggu API Update profile sudah ready
-          Navigator.pop(context);
+          Navigator.pushNamed(context, AppRoutes.otpScreen);
         }
         if (state is AuthRegisterFailure) {
           // TODO Error hit from API, Show popup
@@ -90,7 +121,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         height: Sizeutils.height,
         child: Form(
           key: _formKey,
-          // autovalidateMode: AutovalidateMode.always,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 6.h),
             child: SizedBox(
@@ -137,6 +167,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           SizedBox(
               width: double.maxFinite, child: _textFieldPhoneNumber(context)),
           SizedBox(height: 10.h),
+          _textFieldEmail(context),
+          SizedBox(height: 10.h),
           _textFieldPassword(context),
           SizedBox(height: 2.h),
           Container(
@@ -170,7 +202,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         decoration: TextDecoration.underline,
                       ),
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => _alreadyhaveAccount(context),
+                    ..onTap = () => _alreadyHaveAccount(context),
                 ),
                 TextSpan(
                   text: context.tr("sign_up.here"),
@@ -200,6 +232,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if (!FormValidationUtil.username(value)) {
           return "Tidak sesuai ketentuan";
         }
+        return null;
+      },
+    );
+  }
+
+  Widget _textFieldEmail(BuildContext context) {
+    return CustomTextFormField(
+      controller: _emailCtl,
+      hintText: context.tr("sign_up.email"),
+      textInputType: TextInputType.emailAddress,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: 10.h,
+        vertical: 16.h,
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) return "Please enter some text";
+
         return null;
       },
     );

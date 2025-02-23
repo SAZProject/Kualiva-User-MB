@@ -36,9 +36,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Country selectedCountry = CountryPickerUtils.getCountryByPhoneCode("62");
   final FocusNode _phoneFocus = FocusNode();
   final FocusNode _passFocus = FocusNode();
-  final FocusNode _pinFocus = FocusNode();
+
+  // final FocusNode _pinFocus = FocusNode();
 
   final List<String> _listGender = [
+    "my_profile.unspecified",
     "my_profile.male",
     "my_profile.female",
   ];
@@ -47,9 +49,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   bool _phoneReadOnly = true;
   bool _passReadOnly = true;
-  bool _pinReadOnly = true;
+
+  // bool _pinReadOnly = true;
   bool _passObscure = true;
-  bool _pinObscure = true;
+
+  // bool _pinObscure = true;
   bool logoutLoading = false;
   bool firstOpen = false;
 
@@ -81,11 +85,24 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           final user = state.user;
 
           _usernameCtl.text = user.username;
-          _fullnameCtl.text = user.profile.firstname;
+          _fullnameCtl.text =
+              user.profile == null ? "" : user.profile!.fullName ?? "";
           _phoneNumberCtl.text = user.phone;
           _emailCtl.text = user.email;
-          _genderValue = user.profile.gender.trim();
-          _dateOfBirthCtl.text = DatetimeUtils.dmy(user.profile.birthDate);
+          if (user.profile != null && user.profile!.gender != null) {
+            if (user.profile!.gender == "MALE") {
+              _genderValue = "my_profile.male";
+            } else {
+              _genderValue = "my_profile.female";
+            }
+          } else {
+            _genderValue = "my_profile.unspecified";
+          }
+          _dateOfBirthCtl.text = user.profile == null
+              ? ""
+              : user.profile!.birthDate == null
+                  ? ""
+                  : DatetimeUtils.dmy(user.profile!.birthDate!);
         }
       },
       child: SafeArea(
@@ -155,7 +172,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   context,
                   headerLabel: context.tr("my_profile.gender"),
                   //TODO need to be checked still error
-                  selectedGender: _genderValue ?? "MALE",
+                  selectedGender:
+                      _genderValue ?? context.tr("my_profile.unspecified"),
                   items: List.generate(
                     _listGender.length,
                     (index) => context.tr(_listGender[index]),
@@ -196,29 +214,30 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     });
                   },
                 ),
-                SizedBox(height: 5.h),
-                _textFieldPinPass(
-                  context,
-                  headerLabel: context.tr("my_profile.pin"),
-                  controller: _pinCtl,
-                  hintText: context.tr("my_profile.pin"),
-                  isObscure: _pinObscure,
-                  onPressed: () {
-                    setState(() {
-                      _pinObscure = !_pinObscure;
-                    });
-                  },
-                  isReadOnly: _pinReadOnly,
-                  focusNode: _pinFocus,
-                  onEditPressed: () {
-                    setState(() {
-                      _pinReadOnly = !_pinReadOnly;
-                      if (_pinReadOnly == false) {
-                        _pinFocus.requestFocus();
-                      }
-                    });
-                  },
-                ),
+                //TODO dimatikan untuk prototype testing
+                // SizedBox(height: 5.h),
+                // _textFieldPinPass(
+                //   context,
+                //   headerLabel: context.tr("my_profile.pin"),
+                //   controller: _pinCtl,
+                //   hintText: context.tr("my_profile.pin"),
+                //   isObscure: _pinObscure,
+                //   onPressed: () {
+                //     setState(() {
+                //       _pinObscure = !_pinObscure;
+                //     });
+                //   },
+                //   isReadOnly: _pinReadOnly,
+                //   focusNode: _pinFocus,
+                //   onEditPressed: () {
+                //     setState(() {
+                //       _pinReadOnly = !_pinReadOnly;
+                //       if (_pinReadOnly == false) {
+                //         _pinFocus.requestFocus();
+                //       }
+                //     });
+                //   },
+                // ),
                 SizedBox(height: 100.h),
                 _saveBtn(context),
                 SizedBox(height: 5.h),
@@ -565,7 +584,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             Column(
               children: [
                 CustomElevatedButton(
-                  onPressed: () => Navigator.pop(context), // pop logout dialog
+                  onPressed: () => Navigator.pop(context),
+                  // pop logout dialog
                   initialText: context.tr("common.cancel"),
                   buttonStyle: CustomButtonStyles.none,
                   decoration:

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kualiva/_repository/location_repository.dart';
 import 'package:kualiva/_repository/minio_repository.dart';
+import 'package:kualiva/_repository/onboarding_repository.dart';
 import 'package:kualiva/_repository/parameter_repository.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/_repository/auth_repository.dart';
@@ -17,6 +18,7 @@ import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
 import 'package:kualiva/home/bloc/home_featured_bloc.dart';
 import 'package:kualiva/home/cubit/home_search_bar_cubit.dart';
 import 'package:kualiva/_repository/promotion_repository.dart';
+import 'package:kualiva/onboarding/bloc/onboarding_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
@@ -118,6 +120,11 @@ class MainProvider extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) {
+            return OnboardingRepository(context.read<DioClient>());
+          },
+        ),
+        RepositoryProvider(
+          create: (context) {
             return LocationRepository();
           },
         )
@@ -131,6 +138,9 @@ class MainProvider extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) {
           return AuthBloc(context.read<AuthRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return OnboardingBloc(context.read<OnboardingRepository>());
         }),
         BlocProvider(create: (context) {
           return FnbNearestBloc(context.read<FnbRepository>());

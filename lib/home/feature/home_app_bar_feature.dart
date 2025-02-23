@@ -66,14 +66,14 @@ class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
             color: theme(context).colorScheme.onPrimaryContainer,
           ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.notifications,
-            size: 25.h,
-            color: theme(context).colorScheme.onPrimaryContainer,
-          ),
-        ),
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(
+        //     Icons.notifications,
+        //     size: 25.h,
+        //     color: theme(context).colorScheme.onPrimaryContainer,
+        //   ),
+        // ),
       ],
     );
   }

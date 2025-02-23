@@ -18,29 +18,26 @@ class UserProfileModelAdapter extends TypeAdapter<UserProfileModel> {
     };
     return UserProfileModel(
       id: fields[0] as String,
-      firstname: fields[1] as String,
-      lastname: fields[2] as String,
-      gender: fields[3] as String,
-      birthDate: fields[4] as DateTime,
-      photoFile: fields[5] as String?,
+      fullName: fields[1] as String?,
+      gender: fields[2] as String?,
+      birthDate: fields[3] as DateTime?,
+      photoFile: fields[4] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserProfileModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.firstname)
+      ..write(obj.fullName)
       ..writeByte(2)
-      ..write(obj.lastname)
-      ..writeByte(3)
       ..write(obj.gender)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.birthDate)
-      ..writeByte(5)
+      ..writeByte(4)
       ..write(obj.photoFile);
   }
 

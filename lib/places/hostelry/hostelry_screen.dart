@@ -5,10 +5,8 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
 import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/common/widget/custom_selectable_staggered_grid.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/_data/model/f_n_b_model.dart';
-import 'package:kualiva/_data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_search_bar_feature.dart';
@@ -36,7 +34,6 @@ class _HostelryScreenState extends State<HostelryScreen> {
   ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
   FiltersModel? filtersModel;
 
-  final FNBAssetModel _dummyCuisineData = FNBDataset.cuisineDataset;
   Set<int> dummySelectedCuisine = {};
 
   @override
@@ -120,8 +117,6 @@ class _HostelryScreenState extends State<HostelryScreen> {
               ),
               SizedBox(height: 5.h),
               _promoList(context),
-              SizedBox(height: 5.h),
-              _cuisine(context),
               SizedBox(height: 5.h),
             ],
           ),
@@ -231,67 +226,6 @@ class _HostelryScreenState extends State<HostelryScreen> {
                       );
                     },
                   );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _cuisine(BuildContext context) {
-    var brightness = Theme.of(context).brightness;
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 5.h),
-      decoration:
-          CustomDecoration(context).fillOnSecondaryContainer_03.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder10,
-              ),
-      child: Column(
-        children: [
-          CustomSectionHeader(
-            label: context.tr("f_n_b.cuisine"),
-            useIcon: false,
-          ),
-          Container(
-            height: 350.h,
-            margin: EdgeInsets.symmetric(horizontal: 5.h),
-            width: double.maxFinite,
-            child: NotificationListener(
-              onNotification: (ScrollNotification notification) {
-                if (notification is ScrollUpdateNotification) {
-                  if (notification.metrics.pixels ==
-                      notification.metrics.maxScrollExtent) {
-                    if (_parentScrollController.position.atEdge) return true;
-                    _parentScrollController.animateTo(
-                        _parentScrollController.position.minScrollExtent,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeIn);
-                  } else if (notification.metrics.pixels ==
-                      notification.metrics.minScrollExtent) {
-                    _parentScrollController.animateTo(
-                        _parentScrollController.position.minScrollExtent,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeIn);
-                  }
-                }
-                return true;
-              },
-              // Navigator.pushNamed(context, AppRoutes.fnbCuisineScreen);
-              child: CustomSelectableStaggeredGrid(
-                controller: _childScrollController2,
-                totalItem: _dummyCuisineData.totalItem,
-                bgImages: _dummyCuisineData.listAssetBg ?? [],
-                iconImages: brightness == Brightness.light
-                    ? _dummyCuisineData.listAssetLight
-                    : _dummyCuisineData.listAssetDark,
-                labels: _dummyCuisineData.listTitle,
-                isEmpty: _dummyCuisineData.listTitle.isEmpty,
-                onSelected: (index) {
-                  Navigator.pushNamed(context, AppRoutes.fnbCuisineScreen,
-                      arguments: _dummyCuisineData.listTitle[index]);
                 },
               ),
             ),

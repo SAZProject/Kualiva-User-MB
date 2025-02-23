@@ -3,16 +3,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
-import 'package:kualiva/common/style/custom_decoration.dart';
 import 'package:kualiva/common/style/custom_text_style.dart';
 import 'package:kualiva/common/style/theme_helper.dart';
 import 'package:kualiva/common/utility/form_validation_util.dart';
 import 'package:kualiva/common/utility/image_constant.dart';
+import 'package:kualiva/common/utility/save_pref.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_image_view.dart';
-import 'package:kualiva/common/widget/custom_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
 import 'package:kualiva/router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +31,12 @@ class SignInScreenState extends State<SignInScreen> {
   final _passwordObscure = ValueNotifier<bool>(true);
 
   bool tosAgreement = false;
+
+  @override
+  void initState() {
+    super.initState();
+    tosAgreement = SavePref().readTosData();
+  }
 
   @override
   void dispose() {
@@ -73,6 +78,8 @@ class SignInScreenState extends State<SignInScreen> {
           context.read<AuthBloc>().add(authEvent);
         },
       );
+    } else {
+      context.read<AuthBloc>().add(authEvent);
     }
   }
 
@@ -85,7 +92,16 @@ class SignInScreenState extends State<SignInScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthLoginSuccess) {
-          Navigator.of(context).pushNamed(AppRoutes.mainNavigationLayout);
+          // TODO di non aktifkan untuk prototype testing
+          // if (state.userModel.isPhoneVerified == false) {
+          //   Navigator.pushNamed(context, AppRoutes.otpScreen);
+          // }
+
+          if (state.userModel.profile == null) {
+            Navigator.pushNamed(context, AppRoutes.onBoardingVerifyUserScreen);
+          } else {
+            Navigator.of(context).pushNamed(AppRoutes.mainNavigationLayout);
+          }
         }
       },
       child: SafeArea(
@@ -101,7 +117,7 @@ class SignInScreenState extends State<SignInScreen> {
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SizedBox(
-        height: Sizeutils.height,
+        height: Sizeutils.height - 45.h,
         child: Form(
           key: _formKey,
           child: Padding(
@@ -138,7 +154,7 @@ class SignInScreenState extends State<SignInScreen> {
             context.tr("sign_in.welcome"),
             style: theme(context).textTheme.titleLarge,
           ),
-          // TODO di non aktifkan untuk V1
+          // TODO di non aktifkan untuk prototype testing
           // SizedBox(height: 20.h),
           // Text(
           //   context.tr("sign_in.sign_in_with"),
@@ -147,7 +163,7 @@ class SignInScreenState extends State<SignInScreen> {
           // SizedBox(height: 10.h),
           // _signInWithSAZ(context),
           // SizedBox(height: 10.h),
-          _signInWithGoogle(context),
+          // _signInWithGoogle(context),
           SizedBox(height: 10.h),
           Text(
             context.tr("sign_in.kualiva_acc"),
@@ -187,21 +203,21 @@ class SignInScreenState extends State<SignInScreen> {
   //   );
   // }
 
-  Widget _signInWithGoogle(BuildContext context) {
-    return CustomOutlinedButton(
-      text: context.tr("sign_in.sign_in_with_google"),
-      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
-      buttonStyle: CustomButtonStyles.outlineTranparent,
-      decoration: CustomDecoration(context).backgroundBlur.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder10,
-          ),
-      leftIcon: CustomImageView(
-        imagePath: ImageConstant.googleIcon,
-        height: 40.h,
-        width: 40.h,
-      ),
-    );
-  }
+  // Widget _signInWithGoogle(BuildContext context) {
+  //   return CustomOutlinedButton(
+  //     text: context.tr("sign_in.sign_in_with_google"),
+  //     buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+  //     buttonStyle: CustomButtonStyles.outlineTranparent,
+  //     decoration: CustomDecoration(context).backgroundBlur.copyWith(
+  //           borderRadius: BorderRadiusStyle.roundedBorder10,
+  //         ),
+  //     leftIcon: CustomImageView(
+  //       imagePath: ImageConstant.googleIcon,
+  //       height: 40.h,
+  //       width: 40.h,
+  //     ),
+  //   );
+  // }
 
   Widget _textFieldPhoneNumberOrUserName(BuildContext context) {
     return SizedBox(

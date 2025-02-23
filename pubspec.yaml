@@ -50,7 +50,6 @@ dependencies:
     http_parser: ^4.0.2
     mime: ^2.0.0
     skeletonizer: ^1.4.3
-    collection: ^1.19.1
 
 dev_dependencies:
     flutter_test:
@@ -72,9 +71,6 @@ flutter:
         - .env.dev
         - assets/videos/
         - assets/images/
-        - assets/images/cuisine_bg/
-        - assets/images/cuisine_logo_dark/
-        - assets/images/cuisine_logo_light/
         - assets/images/f_n_b/1/A/
         - assets/images/f_n_b/1/B/
         - assets/images/f_n_b/2/A/

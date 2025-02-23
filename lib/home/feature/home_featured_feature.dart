@@ -5,7 +5,6 @@ import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/home/bloc/home_featured_bloc.dart';
 import 'package:kualiva/home/widget/home_featured_item.dart';
-import 'package:kualiva/router.dart';
 
 class HomeFeaturedFeature extends StatelessWidget {
   const HomeFeaturedFeature({super.key});
@@ -55,15 +54,8 @@ class HomeFeaturedFeature extends StatelessWidget {
           itemBuilder: (context, index) {
             return HomeFeaturedItem(
               homeFeatured: state.homeFeatured[index],
-              onPressed: () {
-                // context.read<FnbDetailBloc>().add(FnbDetailFetched(
-                //       placeId: state.homeFeatured[index].placeId,
-                //     ));
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.fnbDetailScreen,
-                );
-              },
+              //TODO dimatikan untuk prototype testing
+              onPressed: () {},
             );
           },
         );

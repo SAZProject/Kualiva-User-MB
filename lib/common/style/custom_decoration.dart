@@ -7,6 +7,7 @@ class CustomDecoration {
   final BuildContext context;
 
   CustomDecoration(this.context);
+
   // background Decoration
   BoxDecoration get backgroundBlur {
     return BoxDecoration(
@@ -35,13 +36,22 @@ class CustomDecoration {
     );
   }
 
-  BoxDecoration get foregroundBlur {
+  BoxDecoration get foregroundBlurRndBdr {
     return BoxDecoration(
       color: theme(context)
           .colorScheme
           .onSecondaryContainer
           .withValues(alpha: 0.6),
       borderRadius: BorderRadiusStyle.roundedBorder10,
+    );
+  }
+
+  BoxDecoration get foregroundBlurSqrBdr {
+    return BoxDecoration(
+      color: theme(context)
+          .colorScheme
+          .onSecondaryContainer
+          .withValues(alpha: 0.6),
     );
   }
 
@@ -57,58 +67,72 @@ class CustomDecoration {
           ],
         ),
       );
+
   // Fill Decorations
   static BoxDecoration get fillGray => BoxDecoration(
         color: appTheme.gray800,
       );
+
   static BoxDecoration get fillWhite => BoxDecoration(
         color: appTheme.white,
       );
+
   static BoxDecoration get fillBlack900_06 => BoxDecoration(
         color: appTheme.black900.withValues(alpha: 0.6),
       );
+
   static BoxDecoration get fillBlack900_03 => BoxDecoration(
         color: appTheme.black900.withValues(alpha: 0.3),
       );
+
   static BoxDecoration get fillBlueGray => BoxDecoration(
         color: appTheme.blueGray100,
       );
+
   BoxDecoration get fillPrimary => BoxDecoration(
         color: theme(context).colorScheme.primary,
       );
+
   BoxDecoration get fillPrimary_03 => BoxDecoration(
         color: theme(context).colorScheme.primary.withValues(alpha: 0.3),
       );
+
   BoxDecoration get fillOnPrimaryContainer => BoxDecoration(
         color: theme(context).colorScheme.onPrimaryContainer,
       );
+
   BoxDecoration get fillOnPrimaryContainerOpacity_03 => BoxDecoration(
         color: theme(context)
             .colorScheme
             .onPrimaryContainer
             .withValues(alpha: 0.3),
       );
+
   BoxDecoration get fillOnPrimaryContainerOpacity_06 => BoxDecoration(
         color: theme(context)
             .colorScheme
             .onPrimaryContainer
             .withValues(alpha: 0.6),
       );
+
   BoxDecoration get fillOnSecondaryContainer => BoxDecoration(
         color: theme(context).colorScheme.onSecondaryContainer,
       );
+
   BoxDecoration get fillOnSecondaryContainer_03 => BoxDecoration(
         color: theme(context)
             .colorScheme
             .onSecondaryContainer
             .withValues(alpha: 0.3),
       );
+
   BoxDecoration get fillOnSecondaryContainer_06 => BoxDecoration(
         color: theme(context)
             .colorScheme
             .onSecondaryContainer
             .withValues(alpha: 0.6),
       );
+
   // Gradient Decorations
   BoxDecoration get gradientCyanAToOnPrimaryContainer => BoxDecoration(
         gradient: LinearGradient(
@@ -120,6 +144,7 @@ class CustomDecoration {
           ],
         ),
       );
+
   BoxDecoration get gradientLightgreenAToOnPrimaryContainer => BoxDecoration(
         gradient: LinearGradient(
           begin: const Alignment(0.5, 0),
@@ -130,6 +155,7 @@ class CustomDecoration {
           ],
         ),
       );
+
   BoxDecoration get gradientOnErrorContainerToPink => BoxDecoration(
         gradient: LinearGradient(
           begin: const Alignment(0.5, 0),
@@ -141,6 +167,7 @@ class CustomDecoration {
           ],
         ),
       );
+
   BoxDecoration get gradientPrimaryContainerToRedA => BoxDecoration(
         gradient: LinearGradient(
           begin: const Alignment(0, 0.5),
@@ -151,6 +178,7 @@ class CustomDecoration {
           ],
         ),
       );
+
   BoxDecoration get gradientYellowAContainerToRedA => BoxDecoration(
         gradient: LinearGradient(
           begin: const Alignment(0, 0.5),
@@ -161,6 +189,7 @@ class CustomDecoration {
           ],
         ),
       );
+
   BoxDecoration get gradientYellowA700ToPrimary => BoxDecoration(
         gradient: LinearGradient(
           begin: const Alignment(0.5, 0),
@@ -171,6 +200,7 @@ class CustomDecoration {
           ],
         ),
       );
+
   BoxDecoration get gradientYellowAToOnPrimaryContainer => BoxDecoration(
         gradient: LinearGradient(
           begin: const Alignment(0.5, 0),
@@ -181,6 +211,7 @@ class CustomDecoration {
           ],
         ),
       );
+
   BoxDecoration get gradientYellowAToOnPrimary => BoxDecoration(
         border: Border.all(
           color: theme(context)
@@ -198,10 +229,12 @@ class CustomDecoration {
           ],
         ),
       );
+
   // Green Decorations
   static BoxDecoration get greenColor => BoxDecoration(
         color: appTheme.greenA700.withValues(alpha: 0.3),
       );
+
   // Orange Decorations
   BoxDecoration get orange60Color => BoxDecoration(
         gradient: LinearGradient(
@@ -213,12 +246,14 @@ class CustomDecoration {
           ],
         ),
       );
+
   BoxDecoration get orangeColorBackgroundBlur => BoxDecoration(
         color: theme(context)
             .colorScheme
             .onSecondaryContainer
             .withValues(alpha: 0.3),
       );
+
   // Outline Decorations
   BoxDecoration get outline => BoxDecoration(
         color: theme(context).colorScheme.primary.withValues(alpha: 0.3),
@@ -280,6 +315,7 @@ class CustomDecoration {
         color: appTheme.black900.withValues(alpha: 0.6),
         width: 1.h,
       ));
+
   static BoxDecoration get outlineBlack9001 => BoxDecoration(
         color: appTheme.black900.withValues(alpha: 0.6),
         border: Border.all(
@@ -287,6 +323,7 @@ class CustomDecoration {
           width: 1.h,
         ),
       );
+
   static BoxDecoration get outlineBlack9002 => BoxDecoration(
         color: appTheme.black900.withValues(alpha: 0.3),
         border: Border.all(
@@ -294,6 +331,7 @@ class CustomDecoration {
           width: 1.h,
         ),
       );
+
   static BoxDecoration get outlineBlack9003 => BoxDecoration(
         color: appTheme.black900.withValues(alpha: 0.6),
         border: Border.all(
@@ -307,15 +345,23 @@ class BorderRadiusStyle {
   // Custom Borders
   static BorderRadius get customBorderBL5 =>
       BorderRadius.vertical(bottom: Radius.circular(5.h));
+
   static BorderRadius get customBorderTR6 =>
       BorderRadius.only(topRight: Radius.circular(6.h));
+
   static BorderRadius get customBorderTL6 =>
       BorderRadius.only(topLeft: Radius.circular(5.h));
+
   // Rounded Borders
   static BorderRadius get roundedBorder1 => BorderRadius.circular(1.h);
+
   static BorderRadius get roundedBorder5 => BorderRadius.circular(5.h);
+
   static BorderRadius get roundedBorder10 => BorderRadius.circular(10.h);
+
   static BorderRadius get roundedBorder14 => BorderRadius.circular(14.h);
+
   static BorderRadius get roundedBorder20 => BorderRadius.circular(20.h);
+
   static BorderRadius get roundedBorder44 => BorderRadius.circular(44.h);
 }

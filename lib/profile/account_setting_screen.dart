@@ -450,12 +450,12 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                   onPressed: () async {
                     final tokenManager = context.read<TokenManager>();
                     tokenManager.deleteToken().then(
-                      (value) {
+                      (value) async {
                         setState(() {
                           logoutLoading = true;
                         });
                         if (!context.mounted) return;
-                        MainHive.deleteAllBox();
+                        await MainHive.deleteAllBox();
                         Navigator.pushNamedAndRemoveUntil(
                             context, AppRoutes.signInScreen, (route) => false);
                       },

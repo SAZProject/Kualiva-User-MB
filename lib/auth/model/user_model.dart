@@ -106,7 +106,7 @@ class UserModel {
       isEmailVerified: map['isEmailVerified'] ?? false,
       isPhoneVerified: map['isPhoneVerified'] ?? false,
       isGoogle: map['isGoogle'] ?? false,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
+      createdAt: DateTime.parse(map['createdAt']),
       profile: map['profile'] != null
           ? UserProfileModel.fromMap(map['profile'])
           : null,

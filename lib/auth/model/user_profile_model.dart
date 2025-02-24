@@ -91,7 +91,8 @@ class UserProfileModel {
       id: map['id'] as String,
       fullName: map['fullName'] as String?,
       gender: map['gender'] as String?,
-      birthDate: map['birthDate'] as DateTime?,
+      birthDate:
+          map['birthDate'] == null ? null : DateTime.parse(map['birthDate']),
       photoFile: map['photoFile'] as String?,
     );
   }

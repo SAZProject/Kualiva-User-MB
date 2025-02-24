@@ -16,13 +16,13 @@ class FnbRepository {
     required double latitude,
     required double longitude,
   }) async {
-    final fnbNearestBox = Hive.box<FnbNearestModel>(MyHive.fnbNearest.name);
+    // final fnbNearestBox = Hive.box<FnbNearestModel>(MyHive.fnbNearest.name);
 
-    if (fnbNearestBox.values.toList().isNotEmpty) {
-      final fnbNearestList = fnbNearestBox.values.toList();
-      LeLog.rd(this, getPlacesNearest, fnbNearestList.toString());
-      return fnbNearestList;
-    }
+    // if (fnbNearestBox.values.toList().isNotEmpty) {
+    //   final fnbNearestList = fnbNearestBox.values.toList();
+    //   LeLog.rd(this, getPlacesNearest, fnbNearestList.toString());
+    //   return fnbNearestList;
+    // }
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
@@ -37,7 +37,7 @@ class FnbRepository {
     final data = (res.data as List<dynamic>)
         .map((e) => FnbNearestModel.fromMap(e))
         .toList();
-    fnbNearestBox.addAll(data);
+    // fnbNearestBox.addAll(data);
     LeLog.rd(this, getPlacesNearest, data.toString());
     return data;
   }

@@ -13,11 +13,12 @@ class ProfileRepository {
     final userBox = Hive.box<UserModel>(MyHive.user.name);
     LeLog.d(this, 'LeRucco');
 
-    if (userBox.values.toList().isNotEmpty) {
-      final user = userBox.values.toList().first;
-      LeLog.rd(this, me, user.toString());
-      return user;
-    }
+    //TODO masih kacau kadang data lama masih dipanggil meskipun sudah logout sehingga user profile masih null
+    // if (userBox.values.toList().isNotEmpty) {
+    //   final user = userBox.values.toList().first;
+    //   LeLog.rd(this, me, user.toString());
+    //   return user;
+    // }
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get('/profiles/me');

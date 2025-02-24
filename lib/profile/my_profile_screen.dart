@@ -7,6 +7,7 @@ import 'package:kualiva/_repository/token_manager.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_drop_down.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
@@ -29,7 +30,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   final _passwordCtl = TextEditingController();
   final _pinCtl = TextEditingController();
   final _usernameCtl = TextEditingController();
-  final _fullnameCtl = TextEditingController();
+  final _fullNameCtl = TextEditingController();
   final _emailCtl = TextEditingController();
   final _dateOfBirthCtl = TextEditingController();
 
@@ -39,7 +40,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   // final FocusNode _pinFocus = FocusNode();
 
-  final List<String> _listGender = [
+  List<String> _listGender = [
     "my_profile.unspecified",
     "my_profile.male",
     "my_profile.female",
@@ -55,7 +56,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   // bool _pinObscure = true;
   bool logoutLoading = false;
-  bool firstOpen = false;
+
+  // bool firstOpen = false;
+  bool initLoading = true;
 
   @override
   void initState() {
@@ -70,7 +73,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     _passwordCtl.dispose();
     _pinCtl.dispose();
     _usernameCtl.dispose();
-    _fullnameCtl.dispose();
+    _fullNameCtl.dispose();
     _emailCtl.dispose();
     _dateOfBirthCtl.dispose();
     super.dispose();
@@ -80,29 +83,38 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Widget build(BuildContext context) {
     return BlocListener<UserProfileBloc, UserProfileState>(
       listener: (context, state) {
-        if (state is UserProfileSuccess && firstOpen == false) {
-          firstOpen = true;
+        if (state is UserProfileSuccess) {
+          // firstOpen = true;
           final user = state.user;
 
           _usernameCtl.text = user.username;
-          _fullnameCtl.text =
+          _fullNameCtl.text =
               user.profile == null ? "" : user.profile!.fullName ?? "";
           _phoneNumberCtl.text = user.phone;
           _emailCtl.text = user.email;
           if (user.profile != null && user.profile!.gender != null) {
             if (user.profile!.gender == "MALE") {
-              _genderValue = "my_profile.male";
+              _genderValue = context.tr("my_profile.male");
             } else {
-              _genderValue = "my_profile.female";
+              _genderValue = context.tr("my_profile.female");
             }
           } else {
-            _genderValue = "my_profile.unspecified";
+            _genderValue = context.tr("my_profile.unspecified");
           }
           _dateOfBirthCtl.text = user.profile == null
               ? ""
               : user.profile!.birthDate == null
                   ? ""
                   : DatetimeUtils.dmy(user.profile!.birthDate!);
+
+          setState(() {
+            initLoading = false;
+            _listGender = List.generate(
+              _listGender.length,
+              (index) => context.tr(_listGender[index]),
+              growable: false,
+            );
+          });
         }
       },
       child: SafeArea(
@@ -142,7 +154,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 _buildTextField(
                   context,
                   headerLabel: context.tr("my_profile.fullname"),
-                  controller: _fullnameCtl,
+                  controller: _fullNameCtl,
                 ),
                 SizedBox(height: 5.h),
                 _buildTextField(
@@ -168,23 +180,29 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   },
                 ),
                 SizedBox(height: 5.h),
-                _buildGenderTextfield(
-                  context,
-                  headerLabel: context.tr("my_profile.gender"),
-                  //TODO need to be checked still error
-                  selectedGender:
-                      _genderValue ?? context.tr("my_profile.unspecified"),
-                  items: List.generate(
-                    _listGender.length,
-                    (index) => context.tr(_listGender[index]),
-                  ),
-                  hintText: context.tr("my_profile.gender_hint"),
-                  onChange: (genderVal) {
-                    setState(() {
-                      _genderValue = genderVal;
-                    });
-                  },
-                ),
+                BlocBuilder<UserProfileBloc, UserProfileState>(
+                    builder: (context, state) {
+                  if (state is UserProfileSuccess && !initLoading) {
+                    LeLog.d(this,
+                        "=====================================================================");
+                    LeLog.d(this, _listGender.toString());
+                    return _buildGenderTextField(
+                      context,
+                      headerLabel: context.tr("my_profile.gender"),
+                      //TODO need to be checked still error
+                      selectedGender:
+                          _genderValue ?? context.tr("my_profile.unspecified"),
+                      items: _listGender,
+                      hintText: context.tr("my_profile.gender_hint"),
+                      onChange: (genderVal) {
+                        setState(() {
+                          _genderValue = genderVal;
+                        });
+                      },
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                }),
                 SizedBox(height: 5.h),
                 _buildTextField(
                   context,
@@ -428,7 +446,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
-  Widget _buildGenderTextfield(
+  Widget _buildGenderTextField(
     BuildContext context, {
     required String headerLabel,
     required String selectedGender,

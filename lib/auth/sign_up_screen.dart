@@ -10,6 +10,7 @@ import 'package:kualiva/common/utility/form_validation_util.dart';
 import 'package:kualiva/common/utility/save_pref.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_phone_number.dart';
+import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -101,7 +102,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Navigator.pushNamed(context, AppRoutes.otpScreen);
         }
         if (state is AuthRegisterFailure) {
-          // TODO Error hit from API, Show popup
+          showSnackBar(context, Icons.error_outline, Colors.red,
+              context.tr("common.error_try_again"), Colors.red);
         }
       },
       child: SafeArea(

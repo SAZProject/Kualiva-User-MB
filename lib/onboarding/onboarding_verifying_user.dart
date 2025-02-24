@@ -7,6 +7,7 @@ import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/_data/model/ui_model/onboarding_verifying_model.dart';
 import 'package:kualiva/_data/model/ui_model/profile_menu_model.dart';
+import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/onboarding/bloc/onboarding_bloc.dart';
 import 'package:kualiva/onboarding/widget/onboarding_pick_birthdate.dart';
 import 'package:kualiva/onboarding/widget/onboarding_pick_notification.dart';
@@ -104,7 +105,8 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
               context, AppRoutes.mainNavigationLayout, (route) => false);
         }
         if (state is OnboardingFailure) {
-          // TODO Error hit from API, Show popup
+          showSnackBar(context, Icons.error_outline, Colors.red,
+              context.tr("common.error_try_again"), Colors.red);
         }
       },
       child: PopScope(

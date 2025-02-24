@@ -12,6 +12,7 @@ import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_image_view.dart';
+import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
 import 'package:kualiva/router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -102,6 +103,10 @@ class SignInScreenState extends State<SignInScreen> {
           } else {
             Navigator.of(context).pushNamed(AppRoutes.mainNavigationLayout);
           }
+        }
+        if (state is AuthLoginFailure) {
+          showSnackBar(context, Icons.error_outline, Colors.red,
+              context.tr("common.error_try_again"), Colors.red);
         }
       },
       child: SafeArea(

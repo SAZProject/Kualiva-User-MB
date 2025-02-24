@@ -17,6 +17,7 @@ import 'package:kualiva/common/widget/custom_map_bottom_sheet.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/_data/model/ui_model/promo_model.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
+import 'package:kualiva/common/widget/custom_snack_bar.dart';
 
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
@@ -111,6 +112,11 @@ class FnbDetailScreen extends StatelessWidget {
     return BlocConsumer<FnbDetailBloc, FnbDetailState>(
       listener: (context, state) {
         if (state is FnbDetailSuccess) {}
+        if (state is FnbDetailFailure) {
+          showSnackBar(context, Icons.error_outline, Colors.red,
+              context.tr("common.error_try_again"), Colors.red);
+          Navigator.pop(context);
+        }
       },
       builder: (context, state) {
         if (state is FnbDetailSuccess) {

@@ -1,0 +1,2 @@
+C:/Users/USER/Documents/programming_folder/Like-It-MB/android/app/.cxx/RelWithDebInfo/1v5812x2/x86/CMakeFiles/edit_cache.dir
+C:/Users/USER/Documents/programming_folder/Like-It-MB/android/app/.cxx/RelWithDebInfo/1v5812x2/x86/CMakeFiles/rebuild_cache.dir

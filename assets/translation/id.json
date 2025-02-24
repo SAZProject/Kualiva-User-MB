@@ -101,7 +101,11 @@
     "onboard_start_btn": "Ayo Mulai"
   },
   "tos": {
-    "title": "Syarat & Ketentuan"
+    "title": "Syarat & Ketentuan",
+    "tos_statement": "Dengan mendaftar, Anda menyetujui dengan ",
+    "tos": "Syarat & Ketentuan",
+    "policy_statement": " dan ",
+    "policy": "Kebijakan Privasi"
   },
   "sign_in": {
     "welcome": "Selamat datang di Kualiva",
@@ -111,10 +115,6 @@
     "sign_in_with_google": "Masuk dengan Google",
     "phone_number_or_user_name": "Nomor Telepon atau Nama Pengguna",
     "password": "kata sandi",
-    "tos_statement": "Dengan mendaftar, Anda menyetujui dengan ",
-    "tos": "Syarat & Ketentuan",
-    "policy_statement": " dan bahwa Anda telah membaca ",
-    "policy": "Kebijakan Privasi",
     "or": "atau",
     "sign_in_btn": "Masuk"
   },

@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 
 part 'user_profile_model.g.dart';
@@ -30,70 +33,72 @@ class UserProfileModel {
     this.photoFile,
   });
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is UserProfileModel &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          fullName == other.fullName &&
-          gender == other.gender &&
-          birthDate == other.birthDate &&
-          photoFile == other.photoFile);
-
-  @override
-  int get hashCode =>
-      id.hashCode ^
-      fullName.hashCode ^
-      gender.hashCode ^
-      birthDate.hashCode ^
-      photoFile.hashCode;
-
-  @override
-  String toString() {
-    return 'UserProfileModel{' +
-        ' id: $id,' +
-        ' fullName: $fullName,' +
-        ' gender: $gender,' +
-        ' birthDate: $birthDate,' +
-        ' photoFile: $photoFile,' +
-        '}';
-  }
-
   UserProfileModel copyWith({
     String? id,
-    String? fullName,
-    String? gender,
-    DateTime? birthDate,
-    String? photoFile,
+    ValueGetter<String?>? fullName,
+    ValueGetter<String?>? gender,
+    ValueGetter<DateTime?>? birthDate,
+    ValueGetter<String?>? photoFile,
   }) {
     return UserProfileModel(
       id: id ?? this.id,
-      fullName: fullName ?? this.fullName,
-      gender: gender ?? this.gender,
-      birthDate: birthDate ?? this.birthDate,
-      photoFile: photoFile ?? this.photoFile,
+      fullName: fullName != null ? fullName() : this.fullName,
+      gender: gender != null ? gender() : this.gender,
+      birthDate: birthDate != null ? birthDate() : this.birthDate,
+      photoFile: photoFile != null ? photoFile() : this.photoFile,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this.id,
-      'fullName': this.fullName,
-      'gender': this.gender,
-      'birthDate': this.birthDate,
-      'photoFile': this.photoFile,
+      'id': id,
+      'fullName': fullName,
+      'gender': gender,
+      'birthDate': birthDate?.millisecondsSinceEpoch,
+      'photoFile': photoFile,
     };
   }
 
   factory UserProfileModel.fromMap(Map<String, dynamic> map) {
     return UserProfileModel(
-      id: map['id'] as String,
-      fullName: map['fullName'] as String?,
-      gender: map['gender'] as String?,
-      birthDate:
-          map['birthDate'] == null ? null : DateTime.parse(map['birthDate']),
-      photoFile: map['photoFile'] as String?,
+      id: map['id'] ?? '',
+      fullName: map['fullName'],
+      gender: map['gender'],
+      birthDate: map['birthDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['birthDate'])
+          : null,
+      photoFile: map['photoFile'],
     );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserProfileModel.fromJson(String source) =>
+      UserProfileModel.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'UserProfileModel(id: $id, fullName: $fullName, gender: $gender, birthDate: $birthDate, photoFile: $photoFile)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is UserProfileModel &&
+        other.id == id &&
+        other.fullName == fullName &&
+        other.gender == gender &&
+        other.birthDate == birthDate &&
+        other.photoFile == photoFile;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        fullName.hashCode ^
+        gender.hashCode ^
+        birthDate.hashCode ^
+        photoFile.hashCode;
   }
 }

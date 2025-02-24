@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 
 import 'package:kualiva/auth/model/user_profile_model.dart';
@@ -64,7 +65,7 @@ class UserModel {
     bool? isPhoneVerified,
     bool? isGoogle,
     DateTime? createdAt,
-    UserProfileModel? profile,
+    ValueGetter<UserProfileModel?>? profile,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -76,12 +77,12 @@ class UserModel {
       isPhoneVerified: isPhoneVerified ?? this.isPhoneVerified,
       isGoogle: isGoogle ?? this.isGoogle,
       createdAt: createdAt ?? this.createdAt,
-      profile: profile ?? this.profile,
+      profile: profile != null ? profile() : this.profile,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'id': id,
       'username': username,
       'email': email,
@@ -97,25 +98,25 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'] as String,
-      username: map['username'] as String,
-      email: map['email'] as String,
-      phone: map['phone'] as String,
-      isAdult: map['isAdult'] as bool,
-      isEmailVerified: map['isEmailVerified'] as bool,
-      isPhoneVerified: map['isPhoneVerified'] as bool,
-      isGoogle: map['isGoogle'] as bool,
-      createdAt: DateTime.parse(map['createdAt']),
-      profile: map['profile'] == null
-          ? null
-          : UserProfileModel.fromMap(map['profile'] as Map<String, dynamic>),
+      id: map['id'] ?? '',
+      username: map['username'] ?? '',
+      email: map['email'] ?? '',
+      phone: map['phone'] ?? '',
+      isAdult: map['isAdult'] ?? false,
+      isEmailVerified: map['isEmailVerified'] ?? false,
+      isPhoneVerified: map['isPhoneVerified'] ?? false,
+      isGoogle: map['isGoogle'] ?? false,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
+      profile: map['profile'] != null
+          ? UserProfileModel.fromMap(map['profile'])
+          : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+      UserModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -123,10 +124,11 @@ class UserModel {
   }
 
   @override
-  bool operator ==(covariant UserModel other) {
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
+    return other is UserModel &&
+        other.id == id &&
         other.username == username &&
         other.email == email &&
         other.phone == phone &&

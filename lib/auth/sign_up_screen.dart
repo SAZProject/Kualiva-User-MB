@@ -117,28 +117,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return SingleChildScrollView(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: SizedBox(
-        height: Sizeutils.height,
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 6.h),
-            child: SizedBox(
-              width: double.maxFinite,
-              child: Column(
-                children: [
-                  SizedBox(height: 26.h),
-                  CustomImageView(
-                    imagePath: ImageConstant.appLogo2,
-                    height: 100.h,
-                    width: 100.h,
-                  ),
-                  SizedBox(height: 34.h),
-                  _signUpMenu(context),
-                  const Spacer(),
-                  _buildTos(context),
-                ],
-              ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 6.h),
+        child: SizedBox(
+          height: Sizeutils.height,
+          width: double.maxFinite,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                CustomImageView(
+                  imagePath: ImageConstant.appLogo2,
+                  height: 100.h,
+                  width: 100.h,
+                ),
+                SizedBox(height: 20.h),
+                _signUpMenu(context),
+                const Spacer(),
+                _buildTos(context),
+              ],
             ),
           ),
         ),

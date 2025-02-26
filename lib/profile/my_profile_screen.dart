@@ -38,6 +38,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   // final _pinCtl = TextEditingController();
 
   Country selectedCountry = CountryPickerUtils.getCountryByPhoneCode("62");
+  final FocusNode _userNameFocus = FocusNode();
+  final FocusNode _fullNameFocus = FocusNode();
+  final FocusNode _emailFocus = FocusNode();
+  final FocusNode _birthDateFocus = FocusNode();
   // final FocusNode _phoneFocus = FocusNode();
   // final FocusNode _passFocus = FocusNode();
   // final FocusNode _pinFocus = FocusNode();
@@ -54,9 +58,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   String? _genderValue;
 
+  bool userNameReadOnly = true;
+  bool fullNameReadOnly = true;
+  bool emailReadOnly = true;
+  bool birthDateReadOnly = true;
   // bool _phoneReadOnly = true;
   // bool _passReadOnly = true;
-
   // bool _pinReadOnly = true;
   // bool _passObscure = true;
 
@@ -143,7 +150,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             context, AppRoutes.signInScreen, (route) => false);
                       },
                     );
-                    //TODO loading masih perlu dibenerin mungkin pas pake BLoc
                   },
                   initialText: context.tr("common.yes"),
                   buttonStyle: CustomButtonStyles.none,
@@ -162,14 +168,29 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _pickedBirthDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != _pickedBirthDate) {
+      _dateOfBirthCtl.text = DatetimeUtils.dmy(picked);
+      setState(() {
+        _pickedBirthDate = picked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<UserProfileBloc, UserProfileState>(
       listener: (context, state) {
-        final profileUpdateLoadingState =
-            UserProfileLoading(loadingState: LoadingEnum.update);
-        if (state == profileUpdateLoadingState) {
-          customLoadingDialog(context: context);
+        if (state is UserProfileLoading) {
+          if (state.loadingState == LoadingEnum.update) {
+            customLoadingDialog(context: context);
+          }
         }
         if (state is UserProfileUpdateSuccess) {
           Navigator.pop(context);
@@ -240,23 +261,49 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 MyProfileUserImage(userProfileImg: _userProfileImg),
                 SizedBox(height: 5.h),
                 MyProfileTextfield(
+                  focusNode: _userNameFocus,
+                  isReadOnly: userNameReadOnly,
                   headerLabel: context.tr("my_profile.username"),
                   controller: _usernameCtl,
                 ),
                 SizedBox(height: 5.h),
                 MyProfileTextfield(
+                  focusNode: _fullNameFocus,
+                  isReadOnly: fullNameReadOnly,
                   headerLabel: context.tr("my_profile.fullname"),
                   controller: _fullNameCtl,
                   useSuffix: true,
-                  suffix: context.tr("my_profile.edit"),
+                  suffix: fullNameReadOnly
+                      ? context.tr("my_profile.edit")
+                      : context.tr("common.cancel"),
+                  suffixOnTap: () {
+                    setState(() {
+                      fullNameReadOnly = !fullNameReadOnly;
+                      if (fullNameReadOnly == false) {
+                        _fullNameFocus.requestFocus();
+                      }
+                    });
+                  },
                 ),
                 SizedBox(height: 5.h),
                 MyProfileTextfield(
+                  focusNode: _emailFocus,
+                  isReadOnly: emailReadOnly,
                   headerLabel: context.tr("my_profile.email"),
                   controller: _emailCtl,
                   useSuffix: true,
-                  suffix: context.tr("my_profile.edit"),
+                  suffix: emailReadOnly
+                      ? context.tr("my_profile.edit")
+                      : context.tr("common.cancel"),
                   useVerifyWidget: true,
+                  suffixOnTap: () {
+                    setState(() {
+                      emailReadOnly = !emailReadOnly;
+                      if (emailReadOnly == false) {
+                        _emailFocus.requestFocus();
+                      }
+                    });
+                  },
                 ),
                 SizedBox(height: 5.h),
                 _buildTextFieldPhoneNumber(
@@ -296,11 +343,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 }),
                 SizedBox(height: 10.h),
                 MyProfileTextfield(
+                  focusNode: _birthDateFocus,
+                  isReadOnly: birthDateReadOnly,
                   headerLabel: context.tr("my_profile.date_of_birth"),
                   controller: _dateOfBirthCtl,
                   useSuffix: true,
                   isDateTimeField: true,
-                  dateTimeFieldOnTap: () {},
+                  dateTimeFieldOnTap: () => _selectDate(context),
                 ),
                 SizedBox(height: 5.h),
                 // TODO dimatikan untuk prototype testing
@@ -355,8 +404,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   children: [
                     BlocBuilder<UserProfileBloc, UserProfileState>(
                         builder: (context, state) {
-                      UserProfileLoading loadingState =
-                          UserProfileLoading(loadingState: LoadingEnum.update);
                       return _myProfileBtn(
                         context,
                         btnLabel: context.tr("my_profile.save_btn"),
@@ -365,7 +412,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           theme(context).colorScheme.primary,
                         ],
                         strokeWidth: 2.h,
-                        onPressed: state == loadingState
+                        onPressed: state is UserProfileLoading &&
+                                state.loadingState == LoadingEnum.update
                             ? null
                             : () => _updateProfileFunc(),
                       );

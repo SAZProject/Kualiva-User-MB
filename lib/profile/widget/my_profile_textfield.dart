@@ -10,6 +10,8 @@ class MyProfileTextfield extends StatelessWidget {
     super.key,
     required this.headerLabel,
     required this.controller,
+    this.isReadOnly = true,
+    required this.focusNode,
     this.hintText,
     this.useSuffix = false,
     this.suffixOnTap,
@@ -22,6 +24,8 @@ class MyProfileTextfield extends StatelessWidget {
 
   final String headerLabel;
   final TextEditingController controller;
+  final bool isReadOnly;
+  final FocusNode focusNode;
   final String? hintText;
   final bool useSuffix;
   final String? suffix;
@@ -35,9 +39,10 @@ class MyProfileTextfield extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> listVerifiedTextField = [
       CustomTextFormField(
+        focusNode: focusNode,
         width: useVerifyWidget ? 250.h : null,
         controller: controller,
-        readOnly: true,
+        readOnly: isReadOnly,
         suffix: useSuffix
             ? Row(
                 mainAxisSize: MainAxisSize.min,

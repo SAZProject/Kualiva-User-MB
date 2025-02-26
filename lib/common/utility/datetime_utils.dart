@@ -27,7 +27,7 @@ class DatetimeUtils {
   }
 
   static String dmy(DateTime getTime) {
-    String getFormatTime = DateFormat.yMMMd().format(getTime);
+    String getFormatTime = DateFormat("d MMM y").format(getTime);
     return getFormatTime;
   }
 

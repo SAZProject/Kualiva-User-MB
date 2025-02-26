@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/base_button.dart';
 import 'package:kualiva/common/widget/custom_outlined_button.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
@@ -13,7 +14,7 @@ class CustomGradientOutlinedButton extends BaseButton {
     super.buttonTextStyle,
     super.isDisabled,
     super.height,
-    super.width,
+    super.width = double.maxFinite,
     super.margin,
     super.alignment,
     required this.outerPadding,
@@ -57,8 +58,12 @@ class CustomGradientOutlinedButton extends BaseButton {
           ),
           child: CustomOutlinedButton(
             text: text,
+            height: height ?? 50.h,
+            width: width,
+            isDisabled: isDisabled,
+            margin: margin,
             buttonStyle: buttonStyle ?? CustomButtonStyles.outlineTranparent,
-            buttonTextStyle: textStyle,
+            buttonTextStyle: buttonTextStyle,
             onPressed: onPressed,
           ),
         ),

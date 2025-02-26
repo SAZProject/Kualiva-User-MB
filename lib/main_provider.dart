@@ -115,7 +115,10 @@ class MainProvider extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) {
-            return ProfileRepository(context.read<DioClient>());
+            return ProfileRepository(
+              context.read<DioClient>(),
+              context.read<MinioRepository>(),
+            );
           },
         ),
         RepositoryProvider(

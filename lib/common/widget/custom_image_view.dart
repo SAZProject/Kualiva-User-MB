@@ -96,6 +96,14 @@ class CustomImageView extends StatelessWidget {
                     BlendMode.srcIn,
                   )
                 : null,
+            errorBuilder: (context, error, stackTrace) => SizedBox(
+              height: height,
+              width: width,
+              child: FittedBox(
+                fit: boxFit ?? BoxFit.cover,
+                child: Icon(placeHolder),
+              ),
+            ),
           ),
         );
       case ImageType.file:
@@ -105,6 +113,14 @@ class CustomImageView extends StatelessWidget {
           width: width,
           fit: boxFit ?? BoxFit.cover,
           color: color,
+          errorBuilder: (context, error, stackTrace) => SizedBox(
+            height: height,
+            width: width,
+            child: FittedBox(
+              fit: boxFit ?? BoxFit.cover,
+              child: Icon(placeHolder),
+            ),
+          ),
         );
       case ImageType.network:
         return CachedNetworkImage(
@@ -138,6 +154,14 @@ class CustomImageView extends StatelessWidget {
           width: width,
           fit: boxFit ?? BoxFit.cover,
           color: color,
+          errorBuilder: (context, error, stackTrace) => SizedBox(
+            height: height,
+            width: width,
+            child: FittedBox(
+              fit: boxFit ?? BoxFit.cover,
+              child: Icon(placeHolder),
+            ),
+          ),
         );
     }
   }

@@ -21,7 +21,6 @@ import 'package:kualiva/layout/main_layout.dart';
 import 'package:kualiva/places/fnb/fnb_filters_screen.dart';
 import 'package:kualiva/places/hostelry/hostelry_screen.dart';
 import 'package:kualiva/prime_celestial.dart';
-import 'package:kualiva/profile/account_setting_screen.dart';
 import 'package:kualiva/profile/language_screen.dart';
 import 'package:kualiva/profile/my_profile_screen.dart';
 import 'package:kualiva/profile/my_review_screen.dart';
@@ -309,12 +308,6 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.languageScreen:
       return PageTransition(
           child: const LanguageScreen(),
-          type: PageTransitionType.leftToRight,
-          duration: const Duration(milliseconds: 300));
-
-    case AppRoutes.accSettingScreen:
-      return PageTransition(
-          child: const AccountSettingScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

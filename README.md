@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.03
-- Report place integration loading state etc (unfinished)
+Ver 0.1.10
+- Update profile (unfinished)
 ```
 
 ## Getting Started

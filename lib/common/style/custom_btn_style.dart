@@ -159,6 +159,24 @@ class CustomButtonStyles {
     );
   }
 
+  static ButtonStyle outlineOnSecondaryContainer(BuildContext context) {
+    return OutlinedButton.styleFrom(
+      backgroundColor:
+          theme(context).colorScheme.primary.withValues(alpha: 0.5),
+      side: BorderSide(
+        color: theme(context)
+            .colorScheme
+            .onPrimaryContainer
+            .withValues(alpha: 0.7),
+        width: 1.h,
+      ),
+      visualDensity: VisualDensity.compact,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.h),
+      ),
+    );
+  }
+
   //text button style
   static ButtonStyle get none => const ButtonStyle(
       backgroundColor: WidgetStatePropertyAll(Colors.transparent),

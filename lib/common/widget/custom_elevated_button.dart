@@ -12,7 +12,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.buttonTextStyle,
     this.isDisabled,
     this.height,
-    this.width,
+    this.width = double.maxFinite,
     this.margin,
     this.alignment,
     this.decoration,
@@ -48,7 +48,7 @@ class CustomElevatedButton extends StatelessWidget {
 
   Widget buildBtnWidget(BuildContext context) => Container(
         height: height ?? 50.h,
-        width: width ?? double.maxFinite,
+        width: width,
         margin: margin,
         decoration: decoration ??
             CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),

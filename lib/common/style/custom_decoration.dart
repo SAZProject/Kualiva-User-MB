@@ -247,6 +247,14 @@ class CustomDecoration {
         ),
       );
 
+  BoxDecoration get primaryTRBdr => BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(50.0),
+          bottomLeft: Radius.circular(50.0),
+        ),
+        color: theme(context).colorScheme.primary,
+      );
+
   BoxDecoration get orangeColorBackgroundBlur => BoxDecoration(
         color: theme(context)
             .colorScheme

@@ -5,12 +5,20 @@ sealed class UserProfileState {}
 
 final class UserProfileInitial extends UserProfileState {}
 
-final class UserProfileLoading extends UserProfileState {}
+final class UserProfileLoading extends UserProfileState {
+  final LoadingEnum loadingState;
 
-final class UserProfileSuccess extends UserProfileState {
-  final UserModel user;
-
-  UserProfileSuccess({required this.user});
+  UserProfileLoading({required this.loadingState});
 }
 
-final class UserProfileFailure extends UserProfileState {}
+final class UserProfileFetchSuccess extends UserProfileState {
+  final UserModel user;
+
+  UserProfileFetchSuccess({required this.user});
+}
+
+final class UserProfileFetchFailure extends UserProfileState {}
+
+final class UserProfileUpdateSuccess extends UserProfileState {}
+
+final class UserProfileUpdateFailure extends UserProfileState {}

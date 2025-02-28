@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:kualiva/_data/error_handler.dart';
 import 'package:kualiva/_repository/token_manager.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
@@ -33,6 +35,7 @@ class AuthRepository {
     });
     final accessToken = res.data['accessToken'].toString();
     final refreshToken = res.data['refreshToken'].toString();
+    LeLog.rd(this, login, res.data.toString());
 
     await Future.wait([
       _tokenManager.writeAccessToken(accessToken),
@@ -50,25 +53,31 @@ class AuthRepository {
     required String email,
     required String password,
   }) async {
-    final res = await _dioClient.dio().then((dio) {
-      return dio.post('/auth/register', data: {
-        'username': username,
-        'phone': phoneNumber,
-        'email': email,
-        'password': password,
+    try {
+      final res = await _dioClient.dio().then((dio) {
+        return dio.post('/auth/register', data: {
+          'username': username,
+          'phone': phoneNumber,
+          'email': email,
+          'password': password,
+        });
       });
-    });
 
-    final accessToken = res.data['accessToken'].toString();
-    final refreshToken = res.data['refreshToken'].toString();
+      final accessToken = res.data['accessToken'].toString();
+      final refreshToken = res.data['refreshToken'].toString();
 
-    await Future.wait([
-      _tokenManager.writeAccessToken(accessToken),
-      _tokenManager.writeRefreshToken(refreshToken),
-    ], eagerError: true);
+      await Future.wait([
+        _tokenManager.writeAccessToken(accessToken),
+        _tokenManager.writeRefreshToken(refreshToken),
+      ], eagerError: true);
 
-    LeLog.rd(this, register, 'Register Success');
+      LeLog.rd(this, register, 'Register Success');
 
-    return UserModel.fromMap(res.data['user'] as Map<String, dynamic>);
+      return UserModel.fromMap(res.data['user'] as Map<String, dynamic>);
+    } on DioException catch (e) {
+      final failure = ErrorHandler.handle(e).failure;
+      LeLog.re(this, register, failure.toString());
+      throw failure;
+    }
   }
 }

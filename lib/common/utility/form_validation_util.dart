@@ -33,7 +33,8 @@ class FormValidationUtil {
   static bool username(String inputString) {
     if (inputString.length < 6 && inputString.length > 255) return false;
 
-    const pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d_]+$';
+    // const pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d_]+$';
+    const pattern = r'^[a-zA-Z0-9._-]+$';
     final regExp = RegExp(pattern);
     return regExp.hasMatch(inputString);
   }

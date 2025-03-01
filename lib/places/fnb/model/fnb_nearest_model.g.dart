@@ -23,13 +23,14 @@ class FnbNearestModelAdapter extends TypeAdapter<FnbNearestModel> {
       fullAddress: fields[3] as String,
       categories: (fields[4] as List).cast<String>(),
       featuredImage: fields[5] as String?,
+      isMerchant: fields[6] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, FnbNearestModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class FnbNearestModelAdapter extends TypeAdapter<FnbNearestModel> {
       ..writeByte(4)
       ..write(obj.categories)
       ..writeByte(5)
-      ..write(obj.featuredImage);
+      ..write(obj.featuredImage)
+      ..writeByte(6)
+      ..write(obj.isMerchant);
   }
 
   @override

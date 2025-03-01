@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
-import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/_data/model/f_n_b_model.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
@@ -23,7 +23,7 @@ class _FNBCuisineState extends State<FnbCuisineScreen> {
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
-  final List<String> _listTagsFilter = FNBFilterDataset.fnbFoodFilter;
+  final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
   ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
 
   late FiltersModel filtersModel;

@@ -1,36 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
 
-part 'fnb_nearest_model.g.dart';
-
-@immutable
-@HiveType(typeId: 1)
-class FnbNearestModel {
-  @HiveField(0)
-  final String id; // PlaceUniqueId
-
-  @HiveField(1)
+class NightlifeNearestModel {
+  final String id;
   final String name;
-
-  @HiveField(2)
   final double averageRating;
-
-  @HiveField(3)
   final String fullAddress;
-
-  @HiveField(4)
   final List<String> categories;
-
-  @HiveField(5)
   final String? featuredImage;
-
-  @HiveField(6)
   final bool isMerchant;
 
-  const FnbNearestModel({
+  NightlifeNearestModel({
     required this.id,
     required this.name,
     required this.averageRating,
@@ -40,7 +21,7 @@ class FnbNearestModel {
     required this.isMerchant,
   });
 
-  FnbNearestModel copyWith({
+  NightlifeNearestModel copyWith({
     String? id,
     String? name,
     double? averageRating,
@@ -49,7 +30,7 @@ class FnbNearestModel {
     ValueGetter<String?>? featuredImage,
     bool? isMerchant,
   }) {
-    return FnbNearestModel(
+    return NightlifeNearestModel(
       id: id ?? this.id,
       name: name ?? this.name,
       averageRating: averageRating ?? this.averageRating,
@@ -73,8 +54,8 @@ class FnbNearestModel {
     };
   }
 
-  factory FnbNearestModel.fromMap(Map<String, dynamic> map) {
-    return FnbNearestModel(
+  factory NightlifeNearestModel.fromMap(Map<String, dynamic> map) {
+    return NightlifeNearestModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       averageRating: map['averageRating']?.toDouble() ?? 0.0,
@@ -87,19 +68,19 @@ class FnbNearestModel {
 
   String toJson() => json.encode(toMap());
 
-  factory FnbNearestModel.fromJson(String source) =>
-      FnbNearestModel.fromMap(json.decode(source));
+  factory NightlifeNearestModel.fromJson(String source) =>
+      NightlifeNearestModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'FnbNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant)';
+    return 'NightlifeNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is FnbNearestModel &&
+    return other is NightlifeNearestModel &&
         other.id == id &&
         other.name == name &&
         other.averageRating == averageRating &&

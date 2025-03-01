@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
-import 'package:kualiva/places/fnb/model/fnb_filter_toggle_model.dart';
+import 'package:kualiva/_data/model/util_model/filter_toggle_model.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_grid_facilities.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_price_range.dart';
@@ -21,10 +21,8 @@ class FnbFiltersScreen extends StatefulWidget {
 }
 
 class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
-  List<FnbFilterToggleModel> facilitesDataset =
-      FNBFilterDataset.facilitiesDataset;
-  List<FnbFilterToggleModel> categoriesDataset =
-      FNBFilterDataset.categoriesDataset;
+  List<FilterToggleModel> facilitesDataset = FilterDataset.facilitiesDataset;
+  List<FilterToggleModel> categoriesDataset = FilterDataset.categoriesDataset;
 
   FiltersModel filterModel = FiltersModel(
     rating: 0.0,
@@ -196,7 +194,7 @@ class _FNBFiltersScreenState extends State<FnbFiltersScreen> {
   Widget _buildSubCateg(
       BuildContext context,
       String label,
-      List<FnbFilterToggleModel> listFilter,
+      List<FilterToggleModel> listFilter,
       ValueNotifier<Set<String>> selectedCateg) {
     return Container(
       width: double.maxFinite,

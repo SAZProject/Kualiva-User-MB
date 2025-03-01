@@ -1,11 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-// Define the main model class for the FnbDetailModel
 @immutable
-class FnbDetailModel {
+class NightlifeDetailModel {
   final List<AddressComponent>? addressComponents;
   final String? formattedAddress;
   final String? formattedPhoneNumber;
@@ -30,7 +28,7 @@ class FnbDetailModel {
   final Geometry? geometry;
   final CurrentOpeningHours? currentOpeningHours;
 
-  const FnbDetailModel({
+  const NightlifeDetailModel({
     this.addressComponents,
     this.formattedAddress,
     this.formattedPhoneNumber,
@@ -56,7 +54,7 @@ class FnbDetailModel {
     this.currentOpeningHours,
   });
 
-  FnbDetailModel copyWith({
+  NightlifeDetailModel copyWith({
     ValueGetter<List<AddressComponent>?>? addressComponents,
     ValueGetter<String?>? formattedAddress,
     ValueGetter<String?>? formattedPhoneNumber,
@@ -81,7 +79,7 @@ class FnbDetailModel {
     ValueGetter<Geometry?>? geometry,
     ValueGetter<CurrentOpeningHours?>? currentOpeningHours,
   }) {
-    return FnbDetailModel(
+    return NightlifeDetailModel(
       addressComponents: addressComponents != null
           ? addressComponents()
           : this.addressComponents,
@@ -121,8 +119,8 @@ class FnbDetailModel {
     );
   }
 
-  factory FnbDetailModel.fromMap(Map<String, dynamic> map) {
-    return FnbDetailModel(
+  factory NightlifeDetailModel.fromMap(Map<String, dynamic> map) {
+    return NightlifeDetailModel(
       addressComponents: map['addressComponents'] != null
           ? List<AddressComponent>.from(
               map['addressComponents']?.map((x) => AddressComponent.fromMap(x)))
@@ -161,14 +159,14 @@ class FnbDetailModel {
 
   @override
   String toString() {
-    return 'FnbDetailModel(addressComponents: $addressComponents, formattedAddress: $formattedAddress, formattedPhoneNumber: $formattedPhoneNumber, icon: $icon, iconBackgroundColor: $iconBackgroundColor, iconMaskBaseUri: $iconMaskBaseUri, internationalPhoneNumber: $internationalPhoneNumber, name: $name, photos: $photos, placeId: $placeId, priceLevel: $priceLevel, reference: $reference, businessStatus: $businessStatus, openNow: $openNow, delivery: $delivery, dineIn: $dineIn, rating: $rating, website: $website, url: $url, reviews: $reviews, types: $types, geometry: $geometry, currentOpeningHours: $currentOpeningHours)';
+    return 'NightlifeDetailModel(addressComponents: $addressComponents, formattedAddress: $formattedAddress, formattedPhoneNumber: $formattedPhoneNumber, icon: $icon, iconBackgroundColor: $iconBackgroundColor, iconMaskBaseUri: $iconMaskBaseUri, internationalPhoneNumber: $internationalPhoneNumber, name: $name, photos: $photos, placeId: $placeId, priceLevel: $priceLevel, reference: $reference, businessStatus: $businessStatus, openNow: $openNow, delivery: $delivery, dineIn: $dineIn, rating: $rating, website: $website, url: $url, reviews: $reviews, types: $types, geometry: $geometry, currentOpeningHours: $currentOpeningHours)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is FnbDetailModel &&
+    return other is NightlifeDetailModel &&
         listEquals(other.addressComponents, addressComponents) &&
         other.formattedAddress == formattedAddress &&
         other.formattedPhoneNumber == formattedPhoneNumber &&
@@ -352,7 +350,7 @@ class Review {
 // Define the Geometry model class
 @immutable
 class Geometry {
-  final FnbDetailLocation location;
+  final NightLifeDetailLocation location;
 
   // Constructor
   const Geometry({required this.location});
@@ -360,23 +358,23 @@ class Geometry {
   // Factory constructor to create an instance from a Map
   factory Geometry.fromMap(Map<String, dynamic> map) {
     return Geometry(
-      location: FnbDetailLocation.fromMap(map['location']),
+      location: NightLifeDetailLocation.fromMap(map['location']),
     );
   }
 }
 
-// Define the FnbDetailLocation model class
+// Define the NightLifeDetailLocation model class
 @immutable
-class FnbDetailLocation {
+class NightLifeDetailLocation {
   final double lat;
   final double lng;
 
   // Constructor
-  const FnbDetailLocation({required this.lat, required this.lng});
+  const NightLifeDetailLocation({required this.lat, required this.lng});
 
   // Factory constructor to create an instance from a Map
-  factory FnbDetailLocation.fromMap(Map<String, dynamic> map) {
-    return FnbDetailLocation(
+  factory NightLifeDetailLocation.fromMap(Map<String, dynamic> map) {
+    return NightLifeDetailLocation(
       lat: (map['lat'] as num).toDouble(),
       lng: (map['lng'] as num).toDouble(),
     );

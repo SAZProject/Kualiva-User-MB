@@ -5,35 +5,32 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
+import 'package:kualiva/_data/model/ui_model/promo_model.dart';
+import 'package:kualiva/_data/model/util_model/filter_toggle_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_float_modal.dart';
 import 'package:kualiva/common/widget/custom_map_bottom_sheet.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/_data/model/ui_model/promo_model.dart';
-import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
-
-import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
-import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
-import 'package:kualiva/_data/model/util_model/filter_toggle_model.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_detail_bloc.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_detail_model.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
-class FnbDetailScreen extends StatelessWidget {
-  FnbDetailScreen({
-    super.key,
-    required this.placeArgument,
-  });
+class NightlifeDetailScreen extends StatelessWidget {
+  NightlifeDetailScreen({super.key, required this.placeArgument});
 
-  static const PlaceCategoryEnum placeCategory = PlaceCategoryEnum.fnb;
+  static const PlaceCategoryEnum placeCategory = PlaceCategoryEnum.nightLife;
 
   // final GlobalKey _toolTipKey = GlobalKey();
   late OverlayEntry _overlayEntry;
@@ -110,19 +107,19 @@ class FnbDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context
-        .read<FnbDetailBloc>()
-        .add(FnbDetailFetched(placeId: placeArgument.placeId));
-    return BlocConsumer<FnbDetailBloc, FnbDetailState>(
+        .read<NightlifeDetailBloc>()
+        .add(NightlifeDetailFetched(placeId: placeArgument.placeId));
+    return BlocConsumer<NightlifeDetailBloc, NightlifeDetailState>(
       listener: (context, state) {
-        if (state is FnbDetailSuccess) {}
-        if (state is FnbDetailFailure) {
+        if (state is NightlifeDetailSuccess) {}
+        if (state is NightlifeDetailFailure) {
           showSnackBar(context, Icons.error_outline, Colors.red,
               context.tr("common.error_try_again"), Colors.red);
           Navigator.pop(context);
         }
       },
       builder: (context, state) {
-        if (state is FnbDetailSuccess) {
+        if (state is NightlifeDetailSuccess) {
           bool hasCallSupport = true;
           // showAndCloseTooltip();
           canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
@@ -145,7 +142,7 @@ class FnbDetailScreen extends StatelessWidget {
               body: SizedBox(
                 width: double.maxFinite,
                 height: Sizeutils.height,
-                child: _body(context, state.fnbDetail, hasCallSupport),
+                child: _body(context, state.nightlifeDetail, hasCallSupport),
               ),
             ),
           );
@@ -161,7 +158,7 @@ class FnbDetailScreen extends StatelessWidget {
 
   Widget _body(
     BuildContext context,
-    FnbDetailModel fnbDetail,
+    NightlifeDetailModel nightlifeDetail,
     bool hasCallSupport,
   ) {
     return SizedBox(
@@ -201,16 +198,14 @@ class FnbDetailScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 SizedBox(height: 5.h),
-                                _fnbPlaceName(context, fnbDetail),
+                                _fnbPlaceName(context, nightlifeDetail),
                                 SizedBox(height: 5.h),
                                 _fnbPlaceAbout(
-                                    context, fnbDetail, hasCallSupport),
+                                    context, nightlifeDetail, hasCallSupport),
                                 SizedBox(height: 5.h),
-                                _fnbPromo(context, fnbDetail),
+                                _fnbPromo(context, nightlifeDetail),
                                 SizedBox(height: 5.h),
-                                _fnbPlaceMenu(context, fnbDetail),
-                                SizedBox(height: 5.h),
-                                _fnbPlaceReviews(context, fnbDetail),
+                                _fnbPlaceReviews(context, nightlifeDetail),
                                 SizedBox(height: 10.h),
                               ],
                             ),
@@ -320,7 +315,8 @@ class FnbDetailScreen extends StatelessWidget {
     }
   }
 
-  Widget _fnbPlaceName(BuildContext context, FnbDetailModel fnbDetail) {
+  Widget _fnbPlaceName(
+      BuildContext context, NightlifeDetailModel nightlifeDetail) {
     // var brightness = Theme.of(context).brightness;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.h),
@@ -337,7 +333,7 @@ class FnbDetailScreen extends StatelessWidget {
               SizedBox(
                 height: 30.h,
                 child: Text(
-                  fnbDetail.name ?? "",
+                  nightlifeDetail.name ?? "",
                   textAlign: TextAlign.center,
                   style: theme(context).textTheme.headlineSmall,
                   maxLines: 1,
@@ -347,7 +343,7 @@ class FnbDetailScreen extends StatelessWidget {
               Visibility(
                 visible: !placeArgument.isMerchant,
                 child: CustomElevatedButton(
-                  initialText: context.tr("f_n_b_detail.claim_btn"),
+                  initialText: context.tr("nightlife_detail.claim_btn"),
                   height: 30.0,
                   margin:
                       EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
@@ -369,8 +365,8 @@ class FnbDetailScreen extends StatelessWidget {
         //     key: _toolTipKey,
         //     triggerMode: TooltipTriggerMode.manual,
         //     message: placeArgument.isMerchant
-        //         ? context.tr("f_n_b_detail.place_claimed")
-        //         : context.tr("f_n_b_detail.place_not_claimed"),
+        //         ? context.tr("nightlife_detail.place_claimed")
+        //         : context.tr("nightlife_detail.place_not_claimed"),
         //     child: CustomImageView(
         //       width: 20.h,
         //       height: 20.h,
@@ -388,8 +384,8 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbPlaceAbout(
-      BuildContext context, FnbDetailModel fnbDetail, bool hasCallSupport) {
+  Widget _fnbPlaceAbout(BuildContext context,
+      NightlifeDetailModel nightlifeDetail, bool hasCallSupport) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 10.h),
@@ -400,7 +396,7 @@ class FnbDetailScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 5.h),
             child: Text(
-              context.tr("f_n_b_detail.about"),
+              context.tr("nightlife_detail.about"),
               style: theme(context).textTheme.titleMedium,
             ),
           ),
@@ -414,48 +410,49 @@ class FnbDetailScreen extends StatelessWidget {
                 context,
                 icon: Icons.tag,
                 label: "",
-                trailingWidget: _aboutTag(context, fnbDetail),
+                trailingWidget: _aboutTag(context, nightlifeDetail),
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
                 context,
                 icon: Icons.timer,
                 label: "",
-                trailingWidget: _aboutOperationalTime(context, fnbDetail),
+                trailingWidget: _aboutOperationalTime(context, nightlifeDetail),
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
                 context,
                 icon: Icons.table_bar_outlined,
                 label: "",
-                trailingWidget: _aboutFacilities(context, fnbDetail),
+                trailingWidget: _aboutFacilities(context, nightlifeDetail),
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
                 context,
                 icon: Icons.phone,
-                label: fnbDetail.formattedPhoneNumber ?? "",
+                label: nightlifeDetail.formattedPhoneNumber ?? "",
                 onPressed: hasCallSupport
-                    ? () => _launchContact(fnbDetail.formattedPhoneNumber ??
-                        "".replaceAll("-", ""))
+                    ? () => _launchContact(
+                        nightlifeDetail.formattedPhoneNumber ??
+                            "".replaceAll("-", ""))
                     : null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
                 context,
                 icon: Icons.place,
-                label: fnbDetail.formattedAddress ?? "",
+                label: nightlifeDetail.formattedAddress ?? "",
                 maxLines: 4,
                 onPressed: () {
                   customMapBottomSheet(
                     context,
-                    fnbDetail.geometry == null
+                    nightlifeDetail.geometry == null
                         ? 0.0
-                        : fnbDetail.geometry!.location.lat,
-                    fnbDetail.geometry == null
+                        : nightlifeDetail.geometry!.location.lat,
+                    nightlifeDetail.geometry == null
                         ? 0.0
-                        : fnbDetail.geometry!.location.lng,
-                    fnbDetail.name ?? "",
+                        : nightlifeDetail.geometry!.location.lng,
+                    nightlifeDetail.name ?? "",
                   );
                 },
               ),
@@ -464,7 +461,7 @@ class FnbDetailScreen extends StatelessWidget {
                 context,
                 icon: Icons.attach_money,
                 label: "",
-                trailingWidget: _aboutPrice(context, fnbDetail),
+                trailingWidget: _aboutPrice(context, nightlifeDetail),
               ),
             ],
           ),
@@ -512,17 +509,17 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _aboutTag(BuildContext context, FnbDetailModel fnbDetail) {
+  Widget _aboutTag(BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return Visibility(
-      visible: fnbDetail.types == null,
+      visible: nightlifeDetail.types == null,
       child: SizedBox(
         width: double.maxFinite,
         child: Wrap(
           children: List<Widget>.generate(
-            fnbDetail.types == null ? 1 : fnbDetail.types!.length,
+            nightlifeDetail.types == null ? 1 : nightlifeDetail.types!.length,
             (index) => _tagView(
               context,
-              label: fnbDetail.types![index],
+              label: nightlifeDetail.types![index],
               businessStatus: placeArgument.isMerchant,
             ),
           ),
@@ -559,7 +556,8 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _aboutOperationalTime(BuildContext context, FnbDetailModel fnbDetail) {
+  Widget _aboutOperationalTime(
+      BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return SizedBox(
       width: double.maxFinite,
       child: ExpansionTile(
@@ -571,24 +569,25 @@ class FnbDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Text(
-            //   context.tr("f_n_b_detail.about_open"),
+            //   context.tr("nightlife_detail.about_open"),
             //   style: CustomTextStyles(context).bodyMedium_13,
             // ),
             _operationalDayHourView(context,
-                DatetimeUtils.getTodayOperationalTime(), true, fnbDetail),
+                DatetimeUtils.getTodayOperationalTime(), true, nightlifeDetail),
           ],
         ),
         children: [0, 1, 2, 3, 4, 5, 6].map(
           (index) {
-            return _operationalDayHourView(context, index, false, fnbDetail);
+            return _operationalDayHourView(
+                context, index, false, nightlifeDetail);
           },
         ).toList(),
       ),
     );
   }
 
-  Widget _operationalDayHourView(
-      BuildContext context, int index, bool isTitle, FnbDetailModel fnbDetail) {
+  Widget _operationalDayHourView(BuildContext context, int index, bool isTitle,
+      NightlifeDetailModel nightlifeDetail) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -658,17 +657,18 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _aboutFacilities(BuildContext context, FnbDetailModel fnbDetail) {
+  Widget _aboutFacilities(
+      BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return SizedBox(
       width: double.maxFinite,
       child: ExpansionTile(
         childrenPadding: EdgeInsets.only(bottom: 10.h),
         dense: true,
         tilePadding: const EdgeInsets.symmetric(horizontal: 0.0),
-        title: _facilitiesView(context, null, true, fnbDetail),
+        title: _facilitiesView(context, null, true, nightlifeDetail),
         children: FilterDataset.facilitiesDataset.map(
           (filterData) {
-            return _facilitiesView(context, filterData, false, fnbDetail);
+            return _facilitiesView(context, filterData, false, nightlifeDetail);
           },
         ).toList(),
       ),
@@ -676,7 +676,7 @@ class FnbDetailScreen extends StatelessWidget {
   }
 
   Widget _facilitiesView(BuildContext context, FilterToggleModel? filterData,
-      bool isTitle, FnbDetailModel fnbDetail) {
+      bool isTitle, NightlifeDetailModel nightlifeDetail) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -695,7 +695,7 @@ class FnbDetailScreen extends StatelessWidget {
             width: isTitle ? 80.h : 120.h,
             child: Text(
               isTitle
-                  ? context.tr("f_n_b_detail.facilities")
+                  ? context.tr("nightlife_detail.facilities")
                   : filterData!.label,
               style: CustomTextStyles(context).bodySmall12,
             ),
@@ -705,7 +705,8 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _aboutPrice(BuildContext context, FnbDetailModel fnbDetail) {
+  Widget _aboutPrice(
+      BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return SizedBox(
       width: double.maxFinite,
       child: ExpansionTile(
@@ -714,7 +715,7 @@ class FnbDetailScreen extends StatelessWidget {
         tilePadding: const EdgeInsets.symmetric(horizontal: 0.0),
         title: Text(
           context.tr(
-            "f_n_b_detail.about_price",
+            "nightlife_detail.about_price",
             namedArgs: {"price": "30.000"},
           ),
           style: CustomTextStyles(context).bodyMedium_13,
@@ -742,7 +743,7 @@ class FnbDetailScreen extends StatelessWidget {
           ),
           SizedBox(width: 10.h),
           Text(
-            context.tr("f_n_b_detail.about_price_f_n_b", namedArgs: {
+            context.tr("nightlife_detail.about_price_f_n_b", namedArgs: {
               "price": price,
             }),
             style: CustomTextStyles(context).bodySmall12,
@@ -753,7 +754,7 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbPromo(BuildContext context, FnbDetailModel fnbDetail) {
+  Widget _fnbPromo(BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return Visibility(
       visible: placeArgument.isMerchant,
       replacement: const SizedBox(),
@@ -763,7 +764,7 @@ class FnbDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             CustomSectionHeader(
-              label: context.tr("f_n_b_detail.promo"),
+              label: context.tr("nightlife_detail.promo"),
               onPressed: () {
                 Navigator.pushNamed(context, AppRoutes.promoPlaceScreen,
                     arguments: listPromo);
@@ -854,7 +855,7 @@ class FnbDetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 5.h),
             Text(
-              context.tr("f_n_b_detail.promo_date",
+              context.tr("nightlife_detail.promo_date",
                   namedArgs: {"date": DatetimeUtils.dmy(promo.date)}),
               style: CustomTextStyles(context).bodySmall12,
               maxLines: 1,
@@ -866,88 +867,15 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbPlaceMenu(BuildContext context, FnbDetailModel fnbDetail) {
-    return Visibility(
-      visible: placeArgument.isMerchant,
-      replacement: const SizedBox(),
-      child: Container(
-        width: double.maxFinite,
-        margin: EdgeInsets.symmetric(horizontal: 5.h),
-        child: Column(
-          children: [
-            CustomSectionHeader(
-              label: context.tr("f_n_b_detail.menu"),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.fnbDetailMenuScreen,
-                    arguments: [
-                      "${ImageConstant.fnb3Path}/B/1.jpg",
-                      "${ImageConstant.fnb3Path}/B/2.jpg",
-                      "${ImageConstant.fnb3Path}/B/3.jpg",
-                      "${ImageConstant.fnb3Path}/B/4.jpg",
-                    ]);
-              },
-            ),
-            Container(
-              height: 150.h,
-              margin: EdgeInsets.symmetric(horizontal: 5.h),
-              width: double.maxFinite,
-              child: [
-                "${ImageConstant.fnb3Path}/B/1.jpg",
-                "${ImageConstant.fnb3Path}/B/2.jpg",
-                "${ImageConstant.fnb3Path}/B/3.jpg",
-                "${ImageConstant.fnb3Path}/B/4.jpg",
-              ].isEmpty
-                  ? const Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      itemCount: [
-                        "${ImageConstant.fnb3Path}/B/1.jpg",
-                        "${ImageConstant.fnb3Path}/B/2.jpg",
-                        "${ImageConstant.fnb3Path}/B/3.jpg",
-                        "${ImageConstant.fnb3Path}/B/4.jpg",
-                      ].length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        if ([
-                          "${ImageConstant.fnb3Path}/B/1.jpg",
-                          "${ImageConstant.fnb3Path}/B/2.jpg",
-                          "${ImageConstant.fnb3Path}/B/3.jpg",
-                          "${ImageConstant.fnb3Path}/B/4.jpg",
-                        ].isNotEmpty) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 5.h, vertical: 8.h),
-                            child: CustomImageView(
-                              imagePath: [
-                                "${ImageConstant.fnb3Path}/B/1.jpg",
-                                "${ImageConstant.fnb3Path}/B/2.jpg",
-                                "${ImageConstant.fnb3Path}/B/3.jpg",
-                                "${ImageConstant.fnb3Path}/B/4.jpg",
-                              ][index],
-                              height: 130.h,
-                              width: 200.h,
-                              radius: BorderRadius.circular(10.h),
-                            ),
-                          );
-                        }
-                        return const CustomEmptyState();
-                      },
-                    ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _fnbPlaceReviews(BuildContext context, FnbDetailModel fnbDetail) {
+  Widget _fnbPlaceReviews(
+      BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 5.h),
       child: Column(
         children: [
           CustomSectionHeader(
-            label: context.tr("f_n_b_detail.review"),
+            label: context.tr("nightlife_detail.review"),
             onPressed: () {
               Navigator.pushNamed(
                 context,
@@ -978,10 +906,10 @@ class FnbDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    context.tr("f_n_b_detail.total_review", namedArgs: {
-                      "total": fnbDetail.reviews == null
+                    context.tr("nightlife_detail.total_review", namedArgs: {
+                      "total": nightlifeDetail.reviews == null
                           ? "0"
-                          : fnbDetail.reviews!.length.toString(),
+                          : nightlifeDetail.reviews!.length.toString(),
                     }),
                     style: CustomTextStyles(context).bodySmall12,
                     textAlign: TextAlign.center,
@@ -996,12 +924,12 @@ class FnbDetailScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              fnbDetail.rating.toString(),
+                              nightlifeDetail.rating.toString(),
                               style: CustomTextStyles(context).titleLarge_22,
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              context.tr("f_n_b_detail.avg_rating"),
+                              context.tr("nightlife_detail.avg_rating"),
                               style: CustomTextStyles(context)
                                   .bodySmall12
                                   .copyWith(
@@ -1020,7 +948,7 @@ class FnbDetailScreen extends StatelessWidget {
                           reverse: true,
                           itemBuilder: (context, index) {
                             return _reviewIndicator(context, index,
-                                [0, 0, 0, 0, 1][index], fnbDetail);
+                                [0, 0, 0, 0, 1][index], nightlifeDetail);
                           },
                         ),
                       )
@@ -1036,7 +964,7 @@ class FnbDetailScreen extends StatelessWidget {
   }
 
   Widget _reviewIndicator(BuildContext context, int index, int totalRate,
-      FnbDetailModel fnbDetail) {
+      NightlifeDetailModel nightlifeDetail) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [

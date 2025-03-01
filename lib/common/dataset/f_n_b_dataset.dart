@@ -1,7 +1,7 @@
 import 'package:kualiva/_data/model/f_n_b_model.dart';
 import 'package:kualiva/_data/model/review_model.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/_data/model/ui_model/f_n_b_asset_model.dart';
 import 'package:kualiva/_data/model/ui_model/image_model.dart';
 
@@ -16,14 +16,14 @@ class FNBDataset {
 
   static FNBAssetModel get bvgFilterDataset => FNBAssetModel(
         totalItem: 7,
-        listTitle: FNBFilterDataset.fnbSubCategBvg,
+        listTitle: FilterDataset.fnbSubCategBvg,
         listAssetLight: ImageConstant.listBvgFilterLight,
         listAssetDark: ImageConstant.listBvgFilterDark,
       );
 
   static FNBAssetModel get foodFilterDataset => FNBAssetModel(
         totalItem: 9,
-        listTitle: FNBFilterDataset.fnbFilter,
+        listTitle: FilterDataset.fnbFilter,
         listAssetLight: ImageConstant.listFoodFilterLight,
         listAssetDark: ImageConstant.listFoodFilterDark,
       );

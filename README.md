@@ -5,8 +5,10 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.11
-- Update profile (half finished)
+Ver 0.1.14 (Untested)
+- Add nightlife screen
+- Add nightlife detail screen
+- Fix some bug
 ```
 
 ## Getting Started

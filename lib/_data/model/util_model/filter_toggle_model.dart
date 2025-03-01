@@ -2,36 +2,37 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class FnbFilterToggleModel {
+class FilterToggleModel {
   final int id;
   final bool useIcon;
   final IconData? icon;
   final String label;
 
-  FnbFilterToggleModel({
+  FilterToggleModel({
     required this.id,
     required this.useIcon,
     this.icon,
     required this.label,
   });
 
-  FnbFilterToggleModel copyWith({
+  FilterToggleModel copyWith({
     int? id,
     bool? useIcon,
-    IconData? icon,
+    ValueGetter<IconData?>? icon,
     String? label,
   }) {
-    return FnbFilterToggleModel(
+    return FilterToggleModel(
       id: id ?? this.id,
       useIcon: useIcon ?? this.useIcon,
-      icon: icon ?? this.icon,
+      icon: icon != null ? icon() : this.icon,
       label: label ?? this.label,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'id': id,
       'useIcon': useIcon,
       'icon': icon?.codePoint,
@@ -39,32 +40,33 @@ class FnbFilterToggleModel {
     };
   }
 
-  factory FnbFilterToggleModel.fromMap(Map<String, dynamic> map) {
-    return FnbFilterToggleModel(
-      id: map['id'] as int,
-      useIcon: map['useIcon'] as bool,
+  factory FilterToggleModel.fromMap(Map<String, dynamic> map) {
+    return FilterToggleModel(
+      id: map['id']?.toInt() ?? 0,
+      useIcon: map['useIcon'] ?? false,
       icon: map['icon'] != null
-          ? IconData(map['icon'] as int, fontFamily: 'MaterialIcons')
+          ? IconData(map['icon'], fontFamily: 'MaterialIcons')
           : null,
-      label: map['label'] as String,
+      label: map['label'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory FnbFilterToggleModel.fromJson(String source) =>
-      FnbFilterToggleModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory FilterToggleModel.fromJson(String source) =>
+      FilterToggleModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'FnbFilterToggleModel(id: $id, useIcon: $useIcon, icon: $icon, label: $label)';
+    return 'FilterToggleModel(id: $id, useIcon: $useIcon, icon: $icon, label: $label)';
   }
 
   @override
-  bool operator ==(covariant FnbFilterToggleModel other) {
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
+    return other is FilterToggleModel &&
+        other.id == id &&
         other.useIcon == useIcon &&
         other.icon == icon &&
         other.label == label;

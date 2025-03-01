@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kualiva/places/fnb/model/fnb_filter_toggle_model.dart';
+import 'package:kualiva/_data/model/util_model/filter_toggle_model.dart';
 
-class FNBFilterDataset {
+class FilterDataset {
   static List<String> get fnbFoodFilter => ["Executive Merchant", ...fnbFilter];
   static List<String> get fnbBVGFilter =>
       ["Executive Merchant", ...fnbSubCategBvg];
@@ -52,71 +52,71 @@ class FNBFilterDataset {
         "Blend",
       ];
 
-  static List<FnbFilterToggleModel> get facilitiesDataset => [
-        FnbFilterToggleModel(
+  static List<FilterToggleModel> get facilitiesDataset => [
+        FilterToggleModel(
             id: 0,
             useIcon: true,
             icon: Icons.local_convenience_store_outlined,
             label: "24 Hour\nOpen"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 1,
             useIcon: true,
             icon: Icons.sensor_door_outlined,
             label: "Open Now"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 2,
             useIcon: true,
             icon: Icons.brightness_4_outlined,
             label: "Any"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 3, useIcon: true, icon: Icons.ac_unit, label: "Indoor"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 4, useIcon: true, icon: Icons.smoking_rooms, label: "Outdoor"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 5,
             useIcon: true,
             icon: Icons.sports_esports_outlined,
             label: "Kids\nPlayground"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 6, useIcon: true, icon: Icons.wifi, label: "Wi-Fi"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 7,
             useIcon: true,
             icon: Icons.electrical_services_sharp,
             label: "Electric\nOutlet"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 8, useIcon: true, icon: Icons.wc, label: "Toilet"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 9,
             useIcon: true,
             icon: Icons.dining_outlined,
             label: "Dine In"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 10,
             useIcon: true,
             icon: Icons.directions_car,
             label: "Drive Thru"),
-        FnbFilterToggleModel(
+        FilterToggleModel(
             id: 11,
             useIcon: true,
             icon: Icons.fastfood_outlined,
             label: "Both"),
       ];
 
-  static List<FnbFilterToggleModel> get categoriesDataset => [
-        FnbFilterToggleModel(id: 0, useIcon: false, label: "Halal"),
-        FnbFilterToggleModel(id: 1, useIcon: false, label: "Non-Halal"),
-        FnbFilterToggleModel(id: 2, useIcon: false, label: "All"),
-        FnbFilterToggleModel(id: 3, useIcon: false, label: "Vegan"),
-        FnbFilterToggleModel(id: 4, useIcon: false, label: "Vegetarian"),
-        FnbFilterToggleModel(id: 5, useIcon: false, label: "Western"),
-        FnbFilterToggleModel(id: 6, useIcon: false, label: "Eastern"),
-        FnbFilterToggleModel(id: 7, useIcon: false, label: "Middle East"),
-        FnbFilterToggleModel(id: 8, useIcon: false, label: "Traditional"),
-        FnbFilterToggleModel(id: 9, useIcon: false, label: "Fast Food"),
-        FnbFilterToggleModel(id: 10, useIcon: false, label: "Beverage"),
-        FnbFilterToggleModel(id: 11, useIcon: false, label: "Snack"),
-        FnbFilterToggleModel(id: 12, useIcon: false, label: "Dessert"),
-        FnbFilterToggleModel(id: 13, useIcon: false, label: "Bakery & Pastry"),
+  static List<FilterToggleModel> get categoriesDataset => [
+        FilterToggleModel(id: 0, useIcon: false, label: "Halal"),
+        FilterToggleModel(id: 1, useIcon: false, label: "Non-Halal"),
+        FilterToggleModel(id: 2, useIcon: false, label: "All"),
+        FilterToggleModel(id: 3, useIcon: false, label: "Vegan"),
+        FilterToggleModel(id: 4, useIcon: false, label: "Vegetarian"),
+        FilterToggleModel(id: 5, useIcon: false, label: "Western"),
+        FilterToggleModel(id: 6, useIcon: false, label: "Eastern"),
+        FilterToggleModel(id: 7, useIcon: false, label: "Middle East"),
+        FilterToggleModel(id: 8, useIcon: false, label: "Traditional"),
+        FilterToggleModel(id: 9, useIcon: false, label: "Fast Food"),
+        FilterToggleModel(id: 10, useIcon: false, label: "Beverage"),
+        FilterToggleModel(id: 11, useIcon: false, label: "Snack"),
+        FilterToggleModel(id: 12, useIcon: false, label: "Dessert"),
+        FilterToggleModel(id: 13, useIcon: false, label: "Bakery & Pastry"),
       ];
 }

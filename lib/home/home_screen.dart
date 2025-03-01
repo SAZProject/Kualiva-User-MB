@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Navigator.pushNamed(context, AppRoutes.fnbScreen);
         break;
       case 1:
-        Navigator.pushNamed(context, AppRoutes.hostelryScreen);
+        Navigator.pushNamed(context, AppRoutes.nightLifeScreen);
         break;
       default:
         break;

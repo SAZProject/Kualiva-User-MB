@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
-import 'package:kualiva/common/dataset/f_n_b_filter_dataset.dart';
+import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/_data/model/f_n_b_model.dart';
@@ -29,7 +29,7 @@ class _HostelryScreenState extends State<HostelryScreen> {
 
   final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
-  final List<String> _listTagsFilter = FNBFilterDataset.fnbFoodFilter;
+  final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
 
   ValueNotifier<Set<String>> selectedFilters = ValueNotifier<Set<String>>({});
   FiltersModel? filtersModel;

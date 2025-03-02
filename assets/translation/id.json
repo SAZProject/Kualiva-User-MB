@@ -247,28 +247,28 @@
     "avg_rating": "Peringkat Rata-Rata\nyang terkumpul"
   },
   "nightlife": {
-    "nearest": "Nearest From You",
+    "nearest": "Terdekat Dari Anda",
     "promo": "Promo",
     "promo_value": "{}% OFF",
-    "best_rated": "Best Rated",
-    "tags_more": "+{} More"
+    "best_rated": "Nilai Terbaik",
+    "tags_more": "+{} Lainnya"
   },
   "nightlife_detail": {
-    "about": "About",
-    "claim_btn": "Claim Business",
+    "about": "Tentang",
+    "claim_btn": "Klaim Bisnis",
     "place_not_claimed": "This business is\nnot yet claimed",
-    "place_claimed": "This business is\nclaimed",
-    "about_open": "Operational day & hour (click to expand!)",
+    "place_claimed": "Bisnis ini telah\ndi Klaim",
+    "about_open": "Hari & jam operasional (klik untuk memperluas!)",
     "about_open_detail": "{day}, {time_open}-{time_close}",
-    "about_price": "Avg. Start From Rp{price}",
-    "facilities": "Facilities",
+    "about_price": "Rata-rata mulai dari Rp{price}",
+    "facilities": "Fasilitas",
     "promo": "Promo",
-    "promo_title": "Title",
-    "promo_publisher": "Publisher",
-    "promo_date": "Available until {date}",
-    "review": "Reviews",
-    "total_review": "Total Reviews: {total}",
-    "avg_rating": "Average Rating\nAccumulated"
+    "promo_title": "Judul",
+    "promo_publisher": "Penerbit",
+    "promo_date": "Tersedia hingga tanggal {date}",
+    "review": "Ulasan",
+    "total_review": "Total Ulasan: {total}",
+    "avg_rating": "Peringkat Rata-Rata\nyang terkumpul"
   },
   "promo": {
     "title": "Promo",

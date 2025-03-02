@@ -110,12 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             final msg = errors.values.fold(
                 '', (previousValue, element) => '$previousValue$element\n');
             showSnackBar(
-              context,
-              Icons.error_outline,
-              Colors.red,
-              msg,
-              Colors.red,
-            );
+                context, Icons.error_outline, Colors.red, msg, Colors.red);
             return;
           }
           showSnackBar(context, Icons.error_outline, Colors.red,

@@ -36,13 +36,9 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
       if (await Permission.camera.isPermanentlyDenied) {
         Permission.camera.request();
       }
-      if (await Permission.microphone.isPermanentlyDenied) {
-        Permission.microphone.request();
-      }
       List<Permission> defaultPerm = [
         Permission.location,
         Permission.camera,
-        Permission.microphone,
       ];
       if (await CheckDevice.isAndroid13plus()) {
         if (await Permission.photos.isPermanentlyDenied) {
@@ -65,6 +61,30 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
         havePermission = request.values
             .every((status) => status == PermissionStatus.granted);
       }
+    } else {
+      if (await Permission.location.isPermanentlyDenied ||
+          await Permission.location.isDenied) {
+        Permission.location.request();
+      }
+      if (await Permission.camera.isPermanentlyDenied ||
+          await Permission.camera.isDenied) {
+        Permission.camera.request();
+      }
+      if (await Permission.photos.isPermanentlyDenied ||
+          await Permission.photos.isDenied) {
+        Permission.photos.request();
+      }
+      List<Permission> defaultPerm = [
+        Permission.location,
+        Permission.camera,
+        Permission.photos,
+      ];
+      final request = await [
+        ...defaultPerm,
+        Permission.photos,
+      ].request();
+      havePermission =
+          request.values.every((status) => status == PermissionStatus.granted);
     }
     if (!havePermission) return await openAppSettings();
     return havePermission;

@@ -5,9 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.14+01 (Untested)
-- Fix nightlife id localization
-- Fix loading and failure state on my profile screen
+Ver 0.1.15
+- Add package setting on podfile
+- Add permission handler for ios
 ```
 
 ## Getting Started

@@ -12,10 +12,6 @@ class CheckPermission {
           await Permission.camera.isDenied) {
         return false;
       }
-      if (await Permission.microphone.isPermanentlyDenied ||
-          await Permission.microphone.isDenied) {
-        return false;
-      }
       if (await CheckDevice.isAndroid13plus()) {
         if (await Permission.photos.isPermanentlyDenied ||
             await Permission.photos.isDenied) {
@@ -26,6 +22,19 @@ class CheckPermission {
             await Permission.storage.isDenied) {
           return false;
         }
+      }
+    } else {
+      if (await Permission.location.isPermanentlyDenied ||
+          await Permission.location.isDenied) {
+        return false;
+      }
+      if (await Permission.camera.isPermanentlyDenied ||
+          await Permission.camera.isDenied) {
+        return false;
+      }
+      if (await Permission.photos.isPermanentlyDenied ||
+          await Permission.photos.isDenied) {
+        return false;
       }
     }
     return true;

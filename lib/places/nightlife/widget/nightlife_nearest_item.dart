@@ -1,16 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
 
-class FnbNearestItem extends StatelessWidget {
-  const FnbNearestItem({
+class NightlifeNearestItem extends StatelessWidget {
+  const NightlifeNearestItem({
     super.key,
     required this.merchant,
     required this.onPressed,
   });
 
-  final FnbNearestModel merchant;
+  final NightlifeNearestModel merchant;
   final VoidCallback onPressed;
 
   @override
@@ -34,8 +35,6 @@ class FnbNearestItem extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  // https://lh5.googleusercontent.com/p/AF1QipNNTuC6HYtW4TGRybf5cfUi_Twx8cUyKhF08czq=w408-h408-k-no
-                  // https://lh5.googleusercontent.com/p/ChIJB9Y8liH0aS4RemVuMOm5PFA=w408-h408-k-no
                   CustomImageView(
                     imagePath: merchant.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
@@ -87,15 +86,11 @@ class FnbNearestItem extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 4.h),
-                    child: Row(
-                      children: [
-                        Text(
-                          merchant.name,
-                          style: theme(context).textTheme.titleSmall,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                    child: Text(
+                      merchant.name,
+                      style: theme(context).textTheme.titleSmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Padding(
@@ -153,7 +148,7 @@ class FnbNearestItem extends StatelessWidget {
               return _tagView(context, merchant.categories[index]);
             }
           }
-          return _tagView(context, merchant.categories[index]);
+          return _tagView(context, Faker().food.cuisine());
         },
       ),
     );

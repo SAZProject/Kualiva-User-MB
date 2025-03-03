@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:kualiva/_data/error_handler.dart';
 import 'package:kualiva/_repository/auth_repository.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
@@ -66,9 +67,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       LeLog.bd(this, _onRegistered, 'Register Success');
       emit(AuthRegisterSuccess(userModel: res));
-    } catch (e) {
+    } on Failure catch (e) {
       LeLog.bd(this, _onRegistered, e.toString());
-      emit(AuthRegisterFailure());
+      emit(AuthRegisterFailure(failure: e));
     }
   }
 }

@@ -13,6 +13,7 @@ import 'package:kualiva/onboarding/onboarding_verifying_user.dart';
 import 'package:kualiva/home/home_event_detail_screen.dart';
 import 'package:kualiva/home/home_event_screen.dart';
 import 'package:kualiva/places/add_places_screen.dart';
+import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/fnb/fnb_detail_screen.dart';
 import 'package:kualiva/places/fnb/fnb_screen.dart';
 import 'package:kualiva/places/fnb/fnb_cuisine_screen.dart';
@@ -20,6 +21,8 @@ import 'package:kualiva/places/fnb/fnb_detail_menu_screen.dart';
 import 'package:kualiva/layout/main_layout.dart';
 import 'package:kualiva/places/fnb/fnb_filters_screen.dart';
 import 'package:kualiva/places/hostelry/hostelry_screen.dart';
+import 'package:kualiva/places/nightlife/nightlife_detail_screen.dart';
+import 'package:kualiva/places/nightlife/nightlife_screen.dart';
 import 'package:kualiva/prime_celestial.dart';
 import 'package:kualiva/profile/language_screen.dart';
 import 'package:kualiva/profile/my_profile_screen.dart';
@@ -72,11 +75,15 @@ class AppRoutes {
 
   static const String hostelryScreen = "/hostel_screen";
 
+  static const String nightLifeScreen = "/nightlife_screen";
+
   static const String fnbCuisineScreen = "/f_n_b_cuisine_screen";
 
   static const String fnbFilterScreen = "/f_n_b_filter_screen";
 
   static const String fnbDetailScreen = "/f_n_b_detail_screen";
+
+  static const String nightLifeDetailScreen = "/nightlife_detail_screen";
 
   static const String promoPlaceScreen = "/promo_place_screen";
 
@@ -200,6 +207,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 
+    case AppRoutes.nightLifeScreen:
+      return PageTransition(
+          child: const NightlifeScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
     case AppRoutes.hostelryScreen:
       return PageTransition(
           child: const HostelryScreen(),
@@ -221,9 +234,16 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.fnbDetailScreen:
-      final placeId = routeSetting.arguments as String;
+      final placeArgument = routeSetting.arguments as PlaceArgument;
       return PageTransition(
-          child: FnbDetailScreen(placeId: placeId),
+          child: FnbDetailScreen(placeArgument: placeArgument),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.nightLifeDetailScreen:
+      final placeArgument = routeSetting.arguments as PlaceArgument;
+      return PageTransition(
+          child: NightlifeDetailScreen(placeArgument: placeArgument),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

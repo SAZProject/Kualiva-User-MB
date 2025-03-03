@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/places/fnb/model/fnb_filter_toggle_model.dart';
+import 'package:kualiva/_data/model/util_model/filter_toggle_model.dart';
 
 class FnbFiltersGridFacilities extends StatefulWidget {
   const FnbFiltersGridFacilities({
@@ -12,7 +12,7 @@ class FnbFiltersGridFacilities extends StatefulWidget {
   });
 
   final String label;
-  final List<FnbFilterToggleModel> facilitiesDataset;
+  final List<FilterToggleModel> facilitiesDataset;
   final ValueNotifier<Set<String>> selectedFacilities;
 
   @override
@@ -148,7 +148,7 @@ class _FnbFiltersGridFacilitiesState extends State<FnbFiltersGridFacilities> {
   }
 
   IconData iconLogic(
-      int index, String labelValue, FnbFilterToggleModel facilitiesData) {
+      int index, String labelValue, FilterToggleModel facilitiesData) {
     if (index == 0) {
       if (labelValue == widget.facilitiesDataset[0].label) {
         return widget.facilitiesDataset[0].icon!;
@@ -169,7 +169,7 @@ class _FnbFiltersGridFacilitiesState extends State<FnbFiltersGridFacilities> {
 
   Widget _gridMenuItem(
     BuildContext context,
-    FnbFilterToggleModel facilitiesData,
+    FilterToggleModel facilitiesData,
     int index,
   ) {
     return InkWell(

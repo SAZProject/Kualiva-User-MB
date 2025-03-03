@@ -5,8 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.11
-- Update profile (half finished)
+Ver 0.1.14+01 (Untested)
+- Fix nightlife id localization
+- Fix loading and failure state on my profile screen
 ```
 
 ## Getting Started

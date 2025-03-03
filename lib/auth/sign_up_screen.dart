@@ -3,10 +3,12 @@ import 'package:country_pickers/country_pickers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:kualiva/_data/error_handler.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/form_validation_util.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/utility/save_pref.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_phone_number.dart';
@@ -102,6 +104,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Navigator.pushNamed(context, AppRoutes.otpScreen);
         }
         if (state is AuthRegisterFailure) {
+          if (state.failure.source == DataSourceEnum.unprocessableEntity) {
+            Map<String, String> errors = state.failure.errors ?? {};
+            LeLog.sd(this, build, errors.toString());
+            final msg = errors.values.fold(
+                '', (previousValue, element) => '$previousValue$element\n');
+            showSnackBar(
+                context, Icons.error_outline, Colors.red, msg, Colors.red);
+            return;
+          }
           showSnackBar(context, Icons.error_outline, Colors.red,
               context.tr("common.error_try_again"), Colors.red);
         }

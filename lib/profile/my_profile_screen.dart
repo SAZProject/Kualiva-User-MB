@@ -14,6 +14,7 @@ import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_loading_dialog.dart';
 import 'package:kualiva/common/widget/custom_phone_number.dart';
+import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
@@ -196,7 +197,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           Navigator.pop(context);
         }
         if (state is UserProfileUpdateFailure) {
+          showSnackBar(context, Icons.error_outline, Colors.red,
+              context.tr("common.error_try_again"), Colors.red);
+        }
+        if (state is UserProfileFetchFailure) {
           Navigator.pop(context);
+          showSnackBar(context, Icons.error_outline, Colors.red,
+              context.tr("common.error_try_again"), Colors.red);
         }
         if (state is UserProfileFetchSuccess) {
           // firstOpen = true;
@@ -324,7 +331,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 SizedBox(height: 5.h),
                 BlocBuilder<UserProfileBloc, UserProfileState>(
                     builder: (context, state) {
-                  if (state is UserProfileFetchSuccess && !initLoading) {
+                  if ((state is UserProfileFetchSuccess ||
+                          state is UserProfileUpdateSuccess ||
+                          state is UserProfileUpdateFailure) &&
+                      !initLoading) {
                     return _buildGenderTextField(
                       context,
                       headerLabel: context.tr("my_profile.gender"),

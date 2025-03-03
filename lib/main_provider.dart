@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kualiva/_repository/location_repository.dart';
 import 'package:kualiva/_repository/minio_repository.dart';
+import 'package:kualiva/_repository/nightlife_repository.dart';
 import 'package:kualiva/_repository/onboarding_repository.dart';
 import 'package:kualiva/_repository/parameter_repository.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
@@ -24,6 +25,8 @@ import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
 import 'package:kualiva/_repository/fnb_repository.dart';
 import 'package:kualiva/places/hostelry/bloc/hotel_nearest_bloc.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_detail_bloc.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 import 'package:kualiva/_repository/profile_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
@@ -71,6 +74,9 @@ class MainProvider extends StatelessWidget {
         ),
         RepositoryProvider(create: (context) {
           return FnbRepository(context.read<DioClient>());
+        }),
+        RepositoryProvider(create: (context) {
+          return NightlifeRepository(context.read<DioClient>());
         }),
         RepositoryProvider(create: (context) {
           return AuthRepository(
@@ -149,6 +155,9 @@ class MainProvider extends StatelessWidget {
           return FnbNearestBloc(context.read<FnbRepository>());
         }),
         BlocProvider(create: (context) {
+          return NightlifeNearestBloc(context.read<NightlifeRepository>());
+        }),
+        BlocProvider(create: (context) {
           return HotelNearestBloc(context.read<FnbRepository>());
         }),
         BlocProvider(create: (context) {
@@ -156,6 +165,9 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return FnbDetailBloc(context.read<FnbRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return NightlifeDetailBloc(context.read<NightlifeRepository>());
         }),
         BlocProvider(create: (context) {
           return HomeAdBannerBloc(context.read<PromotionRepository>());

@@ -5,11 +5,11 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
-import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
-import 'package:kualiva/places/fnb/widget/fnb_nearest_item.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
+import 'package:kualiva/places/nightlife/widget/nightlife_nearest_item.dart';
 
-class FnbNearestFeature extends StatelessWidget {
-  const FnbNearestFeature({
+class NightlifeNearestFeature extends StatelessWidget {
+  const NightlifeNearestFeature({
     super.key,
     required this.parentContext,
     required this.parentScrollController,
@@ -28,7 +28,7 @@ class FnbNearestFeature extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            label: context.tr("f_n_b.nearest"),
+            label: context.tr("nightlife.nearest"),
             // onPressed: () {},
             useIcon: false,
           ),
@@ -67,15 +67,15 @@ class FnbNearestFeature extends StatelessWidget {
   }
 
   Widget _list() {
-    return BlocBuilder<FnbNearestBloc, FnbNearestState>(
+    return BlocBuilder<NightlifeNearestBloc, NightlifeNearestState>(
       builder: (context, state) {
-        if (state is FnbNearestFailure) {
+        if (state is NightlifeNearestFailure) {
           return CustomErrorState(
             errorMessage: context.tr("common.error_try_again"),
             onRetry: () {},
           );
         }
-        if (state is! FnbNearestSuccess) {
+        if (state is! NightlifeNearestSuccess) {
           return Center(child: CircularProgressIndicator());
         }
 
@@ -85,12 +85,12 @@ class FnbNearestFeature extends StatelessWidget {
           scrollDirection: Axis.vertical,
           itemCount: state.nearest.length,
           itemBuilder: (context, index) {
-            return FnbNearestItem(
+            return NightlifeNearestItem(
               merchant: state.nearest[index],
               onPressed: () {
                 Navigator.pushNamed(
                   context,
-                  AppRoutes.fnbDetailScreen,
+                  AppRoutes.nightLifeDetailScreen,
                   arguments: PlaceArgument(
                     placeId: state.nearest[index].id,
                     isMerchant: state.nearest[index].isMerchant,

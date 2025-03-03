@@ -64,9 +64,8 @@ class UserProfileModel {
       id: map['id'] ?? '',
       fullName: map['fullName'],
       gender: map['gender'],
-      birthDate: map['birthDate'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['birthDate'])
-          : null,
+      birthDate:
+          map['birthDate'] != null ? DateTime.parse(map['birthDate']) : null,
       photoFile: map['photoFile'],
     );
   }

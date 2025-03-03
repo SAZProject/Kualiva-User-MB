@@ -35,4 +35,9 @@ final class AuthRegisterSuccess extends AuthState {
   AuthRegisterSuccess({required this.userModel});
 }
 
-final class AuthRegisterFailure extends AuthState {}
+final class AuthRegisterFailure extends AuthState {
+  final Failure failure;
+  AuthRegisterFailure({
+    required this.failure,
+  });
+}

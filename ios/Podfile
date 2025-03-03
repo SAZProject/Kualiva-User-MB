@@ -1,0 +1,35 @@
+flutter_root = `/usr/local/Caskroom/flutter/3.29.0/flutter`
+flutter_ios_podfile = File.expand_path("#{flutter_root}/packages/flutter_tools/bin/xcode_backend.rb", __dir__)
+
+if File.exist?(flutter_ios_podfile)
+  require flutter_ios_podfile
+else
+  puts "⚠️  xcode_backend.rb not found! Make sure Flutter is installed correctly."
+end
+
+platform :ios, '12.0'
+
+target 'Runner' do
+  use_frameworks!
+  use_modular_headers!
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+end
+
+
+# target 'Runner' do
+#   # Comment the next line if you don't want to use dynamic frameworks
+#   use_frameworks!
+
+#   # Pods for Runner
+#   use_frameworks!
+#   use_modular_headers!
+
+#   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+#   target 'RunnerTests' do
+#     # inherit! :search_paths
+#     Pods for testing
+#   end
+
+# end

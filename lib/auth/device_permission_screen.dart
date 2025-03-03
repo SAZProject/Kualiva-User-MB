@@ -79,12 +79,15 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
         Permission.camera,
         Permission.photos,
       ];
-      final request = await [
-        ...defaultPerm,
-        Permission.photos,
-      ].request();
+      final List<PermissionStatus> request = [];
+      for (final perm in defaultPerm) {
+        if (!await perm.isGranted) {
+          await perm.request();
+          request.add(await perm.status);
+        }
+      }
       havePermission =
-          request.values.every((status) => status == PermissionStatus.granted);
+          request.every((status) => status == PermissionStatus.granted);
     }
     if (!havePermission) return await openAppSettings();
     return havePermission;

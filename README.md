@@ -5,9 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.15
-- Add package setting on podfile
-- Add permission handler for ios
+Ver 0.1.15+01
+- Fix Request Permissions Sequentially
 ```
 
 ## Getting Started

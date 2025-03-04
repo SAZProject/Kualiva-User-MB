@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.15+01
-- Fix Request Permissions Sequentially
+Ver 0.1.15+02
+- Fix Nightlife category + change lounge to nightlife
 ```
 
 ## Getting Started

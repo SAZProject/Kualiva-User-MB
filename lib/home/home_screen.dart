@@ -35,9 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
     //     label: "home_screen.grid_3",
     //     isActive: false),
     HomeGridMenuModel(
-        imageUrl: ImageConstant.homeLounge,
+        imageUrl: ImageConstant.homeNightLife,
         label: "home_screen.grid_4",
-        isActive: false),
+        isActive: true),
     HomeGridMenuModel(
         imageUrl: ImageConstant.homeSpa,
         label: "home_screen.grid_5",

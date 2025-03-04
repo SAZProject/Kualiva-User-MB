@@ -75,7 +75,7 @@ class ImageConstant {
   static String homeFood = "$imagePath/home_food.png";
   static String homeHotel = "$imagePath/home_hotel.png";
   static String homeGroceries = "$imagePath/home_groceries.png";
-  static String homeLounge = "$imagePath/home_lounge.png";
+  static String homeNightLife = "$imagePath/home_night_life.png";
   static String homeBar = "$imagePath/home_bar.png";
   static String homeSpa = "$imagePath/home_spa.png";
   static String homeMall = "$imagePath/home_mall.png";

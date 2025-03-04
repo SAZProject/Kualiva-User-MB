@@ -5,8 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.17
-- Fix Place repository (fnb + nightlife) type and activation
+Ver 0.1.18
+- Fix Fnb & nighlife detail screen
+- Add merchant tag for place item
 ```
 
 ## Getting Started

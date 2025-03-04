@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/model/util_model/get_time_g_api_util_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
@@ -415,6 +416,7 @@ class FnbDetailScreen extends StatelessWidget {
                 icon: Icons.tag,
                 label: "",
                 trailingWidget: _aboutTag(context, fnbDetail),
+                visible: fnbDetail.types != null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -422,6 +424,7 @@ class FnbDetailScreen extends StatelessWidget {
                 icon: Icons.timer,
                 label: "",
                 trailingWidget: _aboutOperationalTime(context, fnbDetail),
+                visible: fnbDetail.currentOpeningHours != null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -429,6 +432,7 @@ class FnbDetailScreen extends StatelessWidget {
                 icon: Icons.table_bar_outlined,
                 label: "",
                 trailingWidget: _aboutFacilities(context, fnbDetail),
+                visible: placeArgument.isMerchant,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -439,6 +443,7 @@ class FnbDetailScreen extends StatelessWidget {
                     ? () => _launchContact(fnbDetail.formattedPhoneNumber ??
                         "".replaceAll("-", ""))
                     : null,
+                visible: fnbDetail.formattedPhoneNumber != null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -458,6 +463,7 @@ class FnbDetailScreen extends StatelessWidget {
                     fnbDetail.name ?? "",
                   );
                 },
+                visible: fnbDetail.formattedAddress != null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -465,6 +471,7 @@ class FnbDetailScreen extends StatelessWidget {
                 icon: Icons.attach_money,
                 label: "",
                 trailingWidget: _aboutPrice(context, fnbDetail),
+                visible: placeArgument.isMerchant,
               ),
             ],
           ),
@@ -481,40 +488,44 @@ class FnbDetailScreen extends StatelessWidget {
     required String label,
     int maxLines = 1,
     void Function()? onPressed,
+    bool visible = false,
   }) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          leadingWidget ?? Icon(icon, size: 25.h),
-          Flexible(
-            child: Padding(
-              padding: EdgeInsets.only(left: 10.h),
-              child: trailingWidget ??
-                  InkWell(
-                    onTap: onPressed,
-                    child: Text(
-                      label,
-                      style: onPressed != null
-                          ? CustomTextStyles(context).bodySmall12.copyWith(
-                                color: theme(context).colorScheme.onPrimary,
-                              )
-                          : CustomTextStyles(context).bodySmall12,
-                      maxLines: maxLines,
-                      overflow: TextOverflow.ellipsis,
+    return Visibility(
+      visible: visible,
+      child: SizedBox(
+        width: double.maxFinite,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            leadingWidget ?? Icon(icon, size: 25.h),
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.only(left: 10.h),
+                child: trailingWidget ??
+                    InkWell(
+                      onTap: onPressed,
+                      child: Text(
+                        label,
+                        style: onPressed != null
+                            ? CustomTextStyles(context).bodySmall12.copyWith(
+                                  color: theme(context).colorScheme.onPrimary,
+                                )
+                            : CustomTextStyles(context).bodySmall12,
+                        maxLines: maxLines,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _aboutTag(BuildContext context, FnbDetailModel fnbDetail) {
     return Visibility(
-      visible: fnbDetail.types == null,
+      visible: fnbDetail.types != null,
       child: SizedBox(
         width: double.maxFinite,
         child: Wrap(
@@ -578,17 +589,43 @@ class FnbDetailScreen extends StatelessWidget {
                 DatetimeUtils.getTodayOperationalTime(), true, fnbDetail),
           ],
         ),
-        children: [0, 1, 2, 3, 4, 5, 6].map(
-          (index) {
-            return _operationalDayHourView(context, index, false, fnbDetail);
-          },
-        ).toList(),
+        children: fnbDetail.currentOpeningHours != null
+            ? fnbDetail.currentOpeningHours!.weekdayText.map((openingDay) {
+                return _operationalDayHourView(
+                    context,
+                    fnbDetail.currentOpeningHours!.weekdayText
+                        .indexOf(openingDay),
+                    false,
+                    fnbDetail);
+              }).toList()
+            : [0, 1, 2, 3, 4, 5, 6].map(
+                (index) {
+                  return _operationalDayHourView(
+                      context, index, false, fnbDetail);
+                },
+              ).toList(),
       ),
     );
   }
 
   Widget _operationalDayHourView(
       BuildContext context, int index, bool isTitle, FnbDetailModel fnbDetail) {
+    late DateTime openTime;
+    late DateTime closeTime;
+    if (fnbDetail.currentOpeningHours != null) {
+      String placeOpenCloseTime =
+          fnbDetail.currentOpeningHours!.weekdayText[index];
+
+      GetTimeGApiUtilModel getOpenTime =
+          DatetimeUtils.getOpenHourGAPIFormat(placeOpenCloseTime);
+      openTime =
+          DateTime(0, 0, 0, getOpenTime.hour ?? 0, getOpenTime.minute ?? 0);
+
+      GetTimeGApiUtilModel getCloseTime =
+          DatetimeUtils.getCloseHourGAPIFormat(placeOpenCloseTime);
+      closeTime =
+          DateTime(0, 0, 0, getCloseTime.hour ?? 0, getCloseTime.minute ?? 0);
+    }
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -598,7 +635,18 @@ class FnbDetailScreen extends StatelessWidget {
           SizedBox(
             width: isTitle ? 80.h : 120.h,
             child: Text(
-              "${DatetimeUtils.getDays(index)},",
+              fnbDetail.currentOpeningHours != null
+                  ? "${DatetimeUtils.getDays(index)},"
+                  : "${DatetimeUtils.getDays([
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7
+                    ][index])},",
               style: CustomTextStyles(context).bodySmall12,
             ),
           ),
@@ -611,15 +659,17 @@ class FnbDetailScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 width: 50.h,
                 child: Text(
-                  DatetimeUtils.getHour([
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                  ][index]),
+                  fnbDetail.currentOpeningHours != null
+                      ? DatetimeUtils.getHour(openTime)
+                      : DatetimeUtils.getHour([
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                        ][index]),
                   style: CustomTextStyles(context).bodySmall12,
                   textAlign: TextAlign.center,
                 ),
@@ -637,15 +687,17 @@ class FnbDetailScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 width: 50.h,
                 child: Text(
-                  DatetimeUtils.getHour([
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                  ][index]),
+                  fnbDetail.currentOpeningHours != null
+                      ? DatetimeUtils.getHour(closeTime)
+                      : DatetimeUtils.getHour([
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                        ][index]),
                   style: CustomTextStyles(context).bodySmall12,
                   textAlign: TextAlign.center,
                 ),

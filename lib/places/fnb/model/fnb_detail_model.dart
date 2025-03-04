@@ -123,27 +123,27 @@ class FnbDetailModel {
 
   factory FnbDetailModel.fromMap(Map<String, dynamic> map) {
     return FnbDetailModel(
-      addressComponents: map['addressComponents'] != null
-          ? List<AddressComponent>.from(
-              map['addressComponents']?.map((x) => AddressComponent.fromMap(x)))
+      addressComponents: map['address_components'] != null
+          ? List<AddressComponent>.from(map['address_components']
+              ?.map((x) => AddressComponent.fromMap(x)))
           : null,
-      formattedAddress: map['formattedAddress'],
-      formattedPhoneNumber: map['formattedPhoneNumber'],
+      formattedAddress: map['formatted_address'],
+      formattedPhoneNumber: map['formatted_phone_number'],
       icon: map['icon'],
-      iconBackgroundColor: map['iconBackgroundColor'],
-      iconMaskBaseUri: map['iconMaskBaseUri'],
-      internationalPhoneNumber: map['internationalPhoneNumber'],
+      iconBackgroundColor: map['icon_background_color'],
+      iconMaskBaseUri: map['icon_mask_base_uri'],
+      internationalPhoneNumber: map['international_phone_number'],
       name: map['name'],
       photos: map['photos'] != null
           ? List<Photo>.from(map['photos']?.map((x) => Photo.fromMap(x)))
           : null,
-      placeId: map['placeId'],
-      priceLevel: map['priceLevel']?.toInt(),
+      placeId: map['place_id'],
+      priceLevel: map['price_level']?.toInt(),
       reference: map['reference'],
-      businessStatus: map['businessStatus'],
-      openNow: map['openNow'],
+      businessStatus: map['business_status'] != null ? true : false,
+      openNow: map['open_now'],
       delivery: map['delivery'],
-      dineIn: map['dineIn'],
+      dineIn: map['dine_in'],
       rating: map['rating']?.toDouble(),
       website: map['website'],
       url: map['url'],
@@ -153,8 +153,8 @@ class FnbDetailModel {
       types: List<String>.from(map['types']),
       geometry:
           map['geometry'] != null ? Geometry.fromMap(map['geometry']) : null,
-      currentOpeningHours: map['currentOpeningHours'] != null
-          ? CurrentOpeningHours.fromMap(map['currentOpeningHours'])
+      currentOpeningHours: map['current_opening_hours'] != null
+          ? CurrentOpeningHours.fromMap(map['current_opening_hours'])
           : null,
     );
   }
@@ -388,15 +388,40 @@ class FnbDetailLocation {
 class CurrentOpeningHours {
   final bool openNow;
   final List<String> weekdayText;
+  final List<Periods> periods;
 
   // Constructor
-  const CurrentOpeningHours({required this.openNow, required this.weekdayText});
+  const CurrentOpeningHours(
+      {required this.openNow,
+      required this.weekdayText,
+      required this.periods});
 
   // Factory constructor to create an instance from a Map
   factory CurrentOpeningHours.fromMap(Map<String, dynamic> map) {
     return CurrentOpeningHours(
-      openNow: map['open_now'],
-      weekdayText: List<String>.from(map['weekday_text']),
+        openNow: map['open_now'],
+        weekdayText: List<String>.from(map['weekday_text']),
+        periods: List<Periods>.generate((map['periods'] as List).length,
+            (index) => Periods.fromMap(map['periods'][index])));
+  }
+
+  @override
+  String toString() =>
+      'CurrentOpeningHours(openNow: $openNow, weekdayText: $weekdayText, periods: $periods)';
+}
+
+class Periods {
+  final String open;
+  final String close;
+
+  // Constructor
+  const Periods({required this.open, required this.close});
+
+  // Factory constructor to create an instance from a Map
+  factory Periods.fromMap(Map<String, dynamic> map) {
+    return Periods(
+      open: map['open']['time'],
+      close: map['close']['time'],
     );
   }
 }

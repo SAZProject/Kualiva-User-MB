@@ -8,12 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/_data/model/ui_model/promo_model.dart';
 import 'package:kualiva/_data/model/util_model/filter_toggle_model.dart';
+import 'package:kualiva/_data/model/util_model/get_time_g_api_util_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_float_modal.dart';
@@ -171,12 +171,12 @@ class NightlifeDetailScreen extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.topCenter,
-                child: _fnbPlaceImages(context),
+                child: _nightLifePlaceImages(context),
               ),
               Column(
                 children: [
                   SizedBox(height: 5.h),
-                  _fnbAppBar(context),
+                  _nightLifeAppBar(context),
                   SizedBox(height: 100.h),
                   Padding(
                     padding:
@@ -198,14 +198,15 @@ class NightlifeDetailScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 SizedBox(height: 5.h),
-                                _fnbPlaceName(context, nightlifeDetail),
+                                _nightLifePlaceName(context, nightlifeDetail),
                                 SizedBox(height: 5.h),
-                                _fnbPlaceAbout(
+                                _nightLifePlaceAbout(
                                     context, nightlifeDetail, hasCallSupport),
                                 SizedBox(height: 5.h),
-                                _fnbPromo(context, nightlifeDetail),
+                                _nightPromo(context, nightlifeDetail),
                                 SizedBox(height: 5.h),
-                                _fnbPlaceReviews(context, nightlifeDetail),
+                                _nightLifePlaceReviews(
+                                    context, nightlifeDetail),
                                 SizedBox(height: 10.h),
                               ],
                             ),
@@ -223,7 +224,7 @@ class NightlifeDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbPlaceImages(BuildContext context) {
+  Widget _nightLifePlaceImages(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       child: CarouselSlider(
@@ -237,7 +238,7 @@ class NightlifeDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbAppBar(BuildContext context) {
+  Widget _nightLifeAppBar(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -315,7 +316,7 @@ class NightlifeDetailScreen extends StatelessWidget {
     }
   }
 
-  Widget _fnbPlaceName(
+  Widget _nightLifePlaceName(
       BuildContext context, NightlifeDetailModel nightlifeDetail) {
     // var brightness = Theme.of(context).brightness;
     return Padding(
@@ -384,7 +385,7 @@ class NightlifeDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbPlaceAbout(BuildContext context,
+  Widget _nightLifePlaceAbout(BuildContext context,
       NightlifeDetailModel nightlifeDetail, bool hasCallSupport) {
     return Container(
       width: double.maxFinite,
@@ -411,6 +412,7 @@ class NightlifeDetailScreen extends StatelessWidget {
                 icon: Icons.tag,
                 label: "",
                 trailingWidget: _aboutTag(context, nightlifeDetail),
+                visible: nightlifeDetail.types != null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -418,6 +420,7 @@ class NightlifeDetailScreen extends StatelessWidget {
                 icon: Icons.timer,
                 label: "",
                 trailingWidget: _aboutOperationalTime(context, nightlifeDetail),
+                visible: nightlifeDetail.currentOpeningHours != null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -425,6 +428,7 @@ class NightlifeDetailScreen extends StatelessWidget {
                 icon: Icons.table_bar_outlined,
                 label: "",
                 trailingWidget: _aboutFacilities(context, nightlifeDetail),
+                visible: placeArgument.isMerchant,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -436,6 +440,7 @@ class NightlifeDetailScreen extends StatelessWidget {
                         nightlifeDetail.formattedPhoneNumber ??
                             "".replaceAll("-", ""))
                     : null,
+                visible: nightlifeDetail.formattedPhoneNumber != null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -455,6 +460,7 @@ class NightlifeDetailScreen extends StatelessWidget {
                     nightlifeDetail.name ?? "",
                   );
                 },
+                visible: nightlifeDetail.formattedAddress != null,
               ),
               SizedBox(height: 8.h),
               _buildAboutContent(
@@ -462,6 +468,7 @@ class NightlifeDetailScreen extends StatelessWidget {
                 icon: Icons.attach_money,
                 label: "",
                 trailingWidget: _aboutPrice(context, nightlifeDetail),
+                visible: placeArgument.isMerchant,
               ),
             ],
           ),
@@ -478,40 +485,44 @@ class NightlifeDetailScreen extends StatelessWidget {
     required String label,
     int maxLines = 1,
     void Function()? onPressed,
+    bool visible = false,
   }) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          leadingWidget ?? Icon(icon, size: 25.h),
-          Flexible(
-            child: Padding(
-              padding: EdgeInsets.only(left: 10.h),
-              child: trailingWidget ??
-                  InkWell(
-                    onTap: onPressed,
-                    child: Text(
-                      label,
-                      style: onPressed != null
-                          ? CustomTextStyles(context).bodySmall12.copyWith(
-                                color: theme(context).colorScheme.onPrimary,
-                              )
-                          : CustomTextStyles(context).bodySmall12,
-                      maxLines: maxLines,
-                      overflow: TextOverflow.ellipsis,
+    return Visibility(
+      visible: visible,
+      child: SizedBox(
+        width: double.maxFinite,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            leadingWidget ?? Icon(icon, size: 25.h),
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.only(left: 10.h),
+                child: trailingWidget ??
+                    InkWell(
+                      onTap: onPressed,
+                      child: Text(
+                        label,
+                        style: onPressed != null
+                            ? CustomTextStyles(context).bodySmall12.copyWith(
+                                  color: theme(context).colorScheme.onPrimary,
+                                )
+                            : CustomTextStyles(context).bodySmall12,
+                        maxLines: maxLines,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _aboutTag(BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return Visibility(
-      visible: nightlifeDetail.types == null,
+      visible: nightlifeDetail.types != null,
       child: SizedBox(
         width: double.maxFinite,
         child: Wrap(
@@ -576,18 +587,44 @@ class NightlifeDetailScreen extends StatelessWidget {
                 DatetimeUtils.getTodayOperationalTime(), true, nightlifeDetail),
           ],
         ),
-        children: [0, 1, 2, 3, 4, 5, 6].map(
-          (index) {
-            return _operationalDayHourView(
-                context, index, false, nightlifeDetail);
-          },
-        ).toList(),
+        children: nightlifeDetail.currentOpeningHours != null
+            ? nightlifeDetail.currentOpeningHours!.weekdayText
+                .map((openingDay) {
+                return _operationalDayHourView(
+                    context,
+                    nightlifeDetail.currentOpeningHours!.weekdayText
+                        .indexOf(openingDay),
+                    false,
+                    nightlifeDetail);
+              }).toList()
+            : [0, 1, 2, 3, 4, 5, 6].map(
+                (index) {
+                  return _operationalDayHourView(
+                      context, index, false, nightlifeDetail);
+                },
+              ).toList(),
       ),
     );
   }
 
   Widget _operationalDayHourView(BuildContext context, int index, bool isTitle,
       NightlifeDetailModel nightlifeDetail) {
+    late DateTime openTime;
+    late DateTime closeTime;
+    if (nightlifeDetail.currentOpeningHours != null) {
+      String placeOpenCloseTime =
+          nightlifeDetail.currentOpeningHours!.weekdayText[index];
+
+      GetTimeGApiUtilModel getOpenTime =
+          DatetimeUtils.getOpenHourGAPIFormat(placeOpenCloseTime);
+      openTime =
+          DateTime(0, 0, 0, getOpenTime.hour ?? 0, getOpenTime.minute ?? 0);
+
+      GetTimeGApiUtilModel getCloseTime =
+          DatetimeUtils.getCloseHourGAPIFormat(placeOpenCloseTime);
+      closeTime =
+          DateTime(0, 0, 0, getCloseTime.hour ?? 0, getCloseTime.minute ?? 0);
+    }
     return SizedBox(
       width: double.maxFinite,
       child: Row(
@@ -597,7 +634,18 @@ class NightlifeDetailScreen extends StatelessWidget {
           SizedBox(
             width: isTitle ? 80.h : 120.h,
             child: Text(
-              "${DatetimeUtils.getDays(index)},",
+              nightlifeDetail.currentOpeningHours != null
+                  ? "${DatetimeUtils.getDays(index)},"
+                  : "${DatetimeUtils.getDays([
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7
+                    ][index])},",
               style: CustomTextStyles(context).bodySmall12,
             ),
           ),
@@ -610,15 +658,17 @@ class NightlifeDetailScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 width: 50.h,
                 child: Text(
-                  DatetimeUtils.getHour([
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                    DateTime(0, 0, 0, 10, 0),
-                  ][index]),
+                  nightlifeDetail.currentOpeningHours != null
+                      ? DatetimeUtils.getHour(openTime)
+                      : DatetimeUtils.getHour([
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                          DateTime(0, 0, 0, 10, 0),
+                        ][index]),
                   style: CustomTextStyles(context).bodySmall12,
                   textAlign: TextAlign.center,
                 ),
@@ -636,15 +686,17 @@ class NightlifeDetailScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 width: 50.h,
                 child: Text(
-                  DatetimeUtils.getHour([
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                    DateTime(0, 0, 0, 22, 0),
-                  ][index]),
+                  nightlifeDetail.currentOpeningHours != null
+                      ? DatetimeUtils.getHour(closeTime)
+                      : DatetimeUtils.getHour([
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                          DateTime(0, 0, 0, 22, 0),
+                        ][index]),
                   style: CustomTextStyles(context).bodySmall12,
                   textAlign: TextAlign.center,
                 ),
@@ -709,10 +761,9 @@ class NightlifeDetailScreen extends StatelessWidget {
       BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return SizedBox(
       width: double.maxFinite,
-      child: ExpansionTile(
-        childrenPadding: EdgeInsets.only(bottom: 5.h),
+      child: ListTile(
         dense: true,
-        tilePadding: const EdgeInsets.symmetric(horizontal: 0.0),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 0.0),
         title: Text(
           context.tr(
             "nightlife_detail.about_price",
@@ -720,41 +771,12 @@ class NightlifeDetailScreen extends StatelessWidget {
           ),
           style: CustomTextStyles(context).bodyMedium_13,
         ),
-        children: ["35.000", "25.000"].map(
-          (price) {
-            return _priceStartFromFnB(
-                context, price, ["35.000", "25.000"].indexOf(price));
-          },
-        ).toList(),
       ),
     );
   }
 
-  Widget _priceStartFromFnB(BuildContext context, String price, int index) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(width: 5.h),
-          Icon(
-            index == 0 ? Icons.restaurant : Icons.local_drink,
-            size: 16.h,
-          ),
-          SizedBox(width: 10.h),
-          Text(
-            context.tr("nightlife_detail.about_price_f_n_b", namedArgs: {
-              "price": price,
-            }),
-            style: CustomTextStyles(context).bodySmall12,
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _fnbPromo(BuildContext context, NightlifeDetailModel nightlifeDetail) {
+  Widget _nightPromo(
+      BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return Visibility(
       visible: placeArgument.isMerchant,
       replacement: const SizedBox(),
@@ -867,7 +889,7 @@ class NightlifeDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbPlaceReviews(
+  Widget _nightLifePlaceReviews(
       BuildContext context, NightlifeDetailModel nightlifeDetail) {
     return Container(
       width: double.maxFinite,

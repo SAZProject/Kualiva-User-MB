@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:kualiva/_data/model/util_model/get_time_g_api_util_model.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 
 /*
 Based on dart default
@@ -24,6 +26,62 @@ class DatetimeUtils {
   static String getHour(DateTime getTime) {
     String getFormatTime = DateFormat.Hm().format(getTime);
     return getFormatTime;
+  }
+
+  static GetTimeGApiUtilModel getOpenHourGAPIFormat(String input) {
+    // Regular expression to extract hours and minutes
+    RegExp regex = RegExp(r'(\d{1,2}):(\d{2})\s*(AM|PM)');
+    // Find all matches
+    Iterable<RegExpMatch> matches = regex.allMatches(input);
+
+    if (matches.length >= 2) {
+      // Extract first time (opening time)
+      var firstMatch = matches.elementAt(0);
+      int openHour = int.parse(firstMatch.group(1)!);
+      int openMinute = int.parse(firstMatch.group(2)!);
+      String timePeriod = firstMatch.group(3)!;
+
+      // Convert to 24-hour format if needed
+      if (timePeriod == "PM" && openHour != 12) {
+        openHour += 12;
+      } else if (timePeriod == "AM" && openHour == 12) {
+        openHour = 0;
+      }
+
+      LeLog.d(getOpenHourGAPIFormat, "Opening Time: $openHour:$openMinute");
+      return GetTimeGApiUtilModel(hour: openHour, minute: openMinute);
+    }
+
+    LeLog.e(getOpenHourGAPIFormat, "No valid time found in the input string.");
+    return GetTimeGApiUtilModel(hour: null, minute: null);
+  }
+
+  static GetTimeGApiUtilModel getCloseHourGAPIFormat(String input) {
+    // Regular expression to extract hours and minutes
+    RegExp regex = RegExp(r'(\d{1,2}):(\d{2})\s*(AM|PM)');
+    // Find all matches
+    Iterable<RegExpMatch> matches = regex.allMatches(input);
+
+    if (matches.length >= 2) {
+      // Extract second time (closing time)
+      var secondMatch = matches.elementAt(1);
+      int closeHour = int.parse(secondMatch.group(1)!);
+      int closeMinute = int.parse(secondMatch.group(2)!);
+      String timePeriod = secondMatch.group(3)!;
+
+      // Convert to 24-hour format if needed
+      if (timePeriod == "PM" && closeHour != 12) {
+        closeHour += 12;
+      } else if (timePeriod == "AM" && closeHour == 12) {
+        closeHour = 0;
+      }
+
+      LeLog.d(getCloseHourGAPIFormat, "Closing Time: $closeHour:$closeMinute");
+      return GetTimeGApiUtilModel(hour: closeHour, minute: closeMinute);
+    }
+
+    LeLog.e(getCloseHourGAPIFormat, "No valid time found in the input string.");
+    return GetTimeGApiUtilModel(hour: null, minute: null);
   }
 
   static String dmy(DateTime getTime) {

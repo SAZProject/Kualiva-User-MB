@@ -22,8 +22,15 @@ class CurrentLocationBloc
     Emitter<CurrentLocationState> emit,
   ) async {
     try {
-      final oldLocation = _locationRepository.oldLocation();
       final newLocation = await _locationRepository.newLocation();
+      emit(CurrentLocationSuccess(
+        currentLocationModel: newLocation,
+        isDistanceTooFarOrFirstTime: false,
+        distance: 0.0,
+      ));
+      return;
+
+      final oldLocation = _locationRepository.oldLocation();
 
       final (isTriggerEmit, distance) =
           await _locationRepository.isDistanceTooFarOrFirstTime(

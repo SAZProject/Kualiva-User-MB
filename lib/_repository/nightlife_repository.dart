@@ -1,4 +1,5 @@
 import 'package:kualiva/_data/dio_client.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_detail_model.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
@@ -18,7 +19,7 @@ class NightlifeRepository {
         queryParameters: {
           'latitude': latitude,
           'longitude': longitude,
-          'type': 'ALL',
+          'type': PlaceCategoryEnum.nightLife.name,
         },
       );
     });

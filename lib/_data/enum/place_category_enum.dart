@@ -1,7 +1,7 @@
 enum PlaceCategoryEnum {
   fnb("FNB"),
   hotel("HOTEL"),
-  nightLife("NIGHT LIFE"),
+  nightLife("NIGHT_LIFE"),
   spa("SPA"),
   mall("MALL"),
   recreation("RECREATION"),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_app_bar_feature.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_nearest_feature.dart';
 
@@ -23,9 +26,22 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: _body(context),
+    return BlocListener<CurrentLocationBloc, CurrentLocationState>(
+      listener: (context, state) {
+        context
+            .read<NightlifeNearestBloc>()
+            .add(NightlifeNearestFetched(latitude: 0.0, longitude: 0.0));
+        if (state is! CurrentLocationSuccess) return;
+
+        context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
+              latitude: state.currentLocationModel.latitude,
+              longitude: state.currentLocationModel.longitude,
+            ));
+      },
+      child: SafeArea(
+        child: Scaffold(
+          body: _body(context),
+        ),
       ),
     );
   }

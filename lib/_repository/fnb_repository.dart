@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 import 'package:kualiva/main_hive.dart';
@@ -30,7 +31,7 @@ class FnbRepository {
         queryParameters: {
           'latitude': latitude,
           'longitude': longitude,
-          'type': 'ALL',
+          'type': PlaceCategoryEnum.fnb.name,
         },
       );
     });

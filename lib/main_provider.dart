@@ -28,6 +28,7 @@ import 'package:kualiva/_repository/fnb_repository.dart';
 import 'package:kualiva/places/hostelry/bloc/hotel_nearest_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_detail_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 import 'package:kualiva/_repository/profile_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
@@ -215,6 +216,11 @@ class MainProvider extends StatelessWidget {
         BlocProvider(
           create: (context) {
             return FnbPromoBloc(context.read<FnbRepository>());
+          },
+        ),
+        BlocProvider(
+          create: (context) {
+            return NightlifePromoBloc(context.read<NightlifeRepository>());
           },
         )
       ],

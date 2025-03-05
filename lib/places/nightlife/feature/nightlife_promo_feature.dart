@@ -1,17 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder;
-import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/common/widget/custom_error_state.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:kualiva/common/widget/custom_error_state.dart'
+    show CustomErrorState;
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
-import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
-import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
+import 'package:kualiva/places/nightlife/widget/nightlife_promo_item.dart';
+import 'package:kualiva/router.dart' show AppRoutes;
 
-class FnbPromoFeature extends StatelessWidget {
-  const FnbPromoFeature({super.key});
-
-  // final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
+class NightlifePromoFeature extends StatelessWidget {
+  const NightlifePromoFeature({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +39,14 @@ class FnbPromoFeature extends StatelessWidget {
   }
 
   Widget _list() {
-    return BlocBuilder<FnbPromoBloc, FnbPromoState>(
+    return BlocBuilder<NightlifePromoBloc, NightlifePromoState>(
       builder: (context, state) {
-        if (state is FnbPromoFailure) {
+        if (state is NightlifePromoFailure) {
           return CustomErrorState(
               errorMessage: context.tr("common.error_try_again"),
               onRetry: () {});
         }
-        if (state is! FnbPromoSuccess) {
+        if (state is! NightlifePromoSuccess) {
           return Center(child: CircularProgressIndicator());
         }
 
@@ -55,14 +55,14 @@ class FnbPromoFeature extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: 6,
           itemBuilder: (context, index) {
-            return FnbPromoItem(
-              fnbPromoModel: state.fnbPromoModels[index],
+            return NightlifePromoItem(
+              nightlifePromoModel: state.nightlifePromoModels[index],
               onPressed: () {
                 Navigator.pushNamed(
                   context,
                   AppRoutes.fnbDetailScreen,
                   arguments: PlaceArgument(
-                    placeId: state.fnbPromoModels[index].id,
+                    placeId: state.nightlifePromoModels[index].id,
                     isMerchant: true,
                   ),
                 );

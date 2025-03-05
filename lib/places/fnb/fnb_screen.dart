@@ -22,7 +22,7 @@ class FnbScreen extends StatefulWidget {
 }
 
 class _FnbScreenState extends State<FnbScreen> {
-  static const PlaceCategoryEnum placeCategoryEnum = PlaceCategoryEnum.fnb;
+  static const placeCategoryEnum = PlaceCategoryEnum.fnb;
 
   final _parentScrollController = ScrollController();
   final _childScrollController = ScrollController();

@@ -54,20 +54,20 @@ class TokenManager {
 
   Future<void> writeAccessToken(String accessToken) async {
     // _accessToken = accessToken;
-    LeLog.rd(this, readRefreshToken, accessToken.toString());
+    LeLog.rd(this, writeAccessToken, accessToken.toString());
     await _storage.write(key: _getAccessKey(), value: accessToken);
   }
 
   Future<void> writeRefreshToken(String refreshToken) async {
     // _refreshToken = refreshToken;
-    LeLog.rd(this, readRefreshToken, refreshToken.toString());
+    LeLog.rd(this, writeRefreshToken, refreshToken.toString());
     await _storage.write(key: _getRefreshKey(), value: refreshToken);
   }
 
   Future<String> deleteAccessToken() async {
     if (await readAccessToken() == null) return 'Access Token not exist';
     await _storage.delete(key: _getAccessKey());
-    LeLog.rd(this, readRefreshToken, 'Delete Access Token');
+    LeLog.rd(this, deleteAccessToken, 'Delete Access Token');
     return '';
   }
 

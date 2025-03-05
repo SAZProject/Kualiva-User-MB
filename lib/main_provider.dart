@@ -22,6 +22,7 @@ import 'package:kualiva/_repository/promotion_repository.dart';
 import 'package:kualiva/onboarding/bloc/onboarding_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
 import 'package:kualiva/_repository/fnb_repository.dart';
 import 'package:kualiva/places/hostelry/bloc/hotel_nearest_bloc.dart';
@@ -210,7 +211,12 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return ReportReviewCreateBloc(context.read<ReportRepository>());
-        })
+        }),
+        BlocProvider(
+          create: (context) {
+            return FnbPromoBloc(context.read<FnbRepository>());
+          },
+        )
       ],
       child: child,
     );

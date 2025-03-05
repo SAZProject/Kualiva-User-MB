@@ -28,9 +28,6 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
-        context
-            .read<NightlifeNearestBloc>()
-            .add(NightlifeNearestFetched(latitude: 0.0, longitude: 0.0));
         if (state is! CurrentLocationSuccess) return;
 
         context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(

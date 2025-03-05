@@ -215,17 +215,17 @@ class _HostelryScreenState extends State<HostelryScreen> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 6,
                 itemBuilder: (context, index) {
-                  //TODO add waiting, empty, error state in future
-                  return FnbPromoItem(
-                    fnbModel: featuredListItems[index],
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        AppRoutes.fnbDetailScreen,
-                        arguments: "placeId", // TODO
-                      );
-                    },
-                  );
+                  // TODO: Not yet
+                  // return FnbPromoItem(
+                  //   fnbModel: featuredListItems[index],
+                  //   onPressed: () {
+                  //     Navigator.pushNamed(
+                  //       context,
+                  //       AppRoutes.fnbDetailScreen,
+                  //       arguments: "placeId", // TODO
+                  //     );
+                  //   },
+                  // );
                 },
               ),
             ),

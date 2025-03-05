@@ -3,16 +3,16 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/_data/model/f_n_b_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
 
 class FnbPromoItem extends StatelessWidget {
   const FnbPromoItem({
     super.key,
-    required this.fnbModel,
+    required this.fnbPromoModel,
     required this.onPressed,
   });
 
-  final FNBModel fnbModel;
+  final FnbPromoModel fnbPromoModel;
   final VoidCallback onPressed;
 
   @override
@@ -39,7 +39,8 @@ class FnbPromoItem extends StatelessWidget {
                 children: [
                   CustomImageView(
                     alignment: Alignment.center,
-                    imagePath: fnbModel.placePicture[0],
+                    imagePath: fnbPromoModel.featuredImage ??
+                        "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
                     radius: BorderRadius.vertical(
@@ -70,7 +71,7 @@ class FnbPromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            fnbModel.overallRating.toString(),
+                            '${fnbPromoModel.averageRating}',
                             style: theme(context).textTheme.labelMedium,
                           ),
                         ],
@@ -95,8 +96,9 @@ class FnbPromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            context.tr("f_n_b.promo_value",
-                                args: [(Random().nextInt(50) + 20).toString()]),
+                            context.tr("f_n_b.promo_value", args: [
+                              (Random().nextInt(50) + 20).toString()
+                            ]), // TODO: Percentage promo
                             style: theme(context).textTheme.labelLarge,
                           ),
                         ],
@@ -109,7 +111,7 @@ class FnbPromoItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 4.h),
               child: Text(
-                fnbModel.placeName,
+                fnbPromoModel.name,
                 style: theme(context).textTheme.titleSmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -118,7 +120,7 @@ class FnbPromoItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 4.h),
               child: Text(
-                fnbModel.city,
+                fnbPromoModel.cityOrVillage,
                 style: theme(context).textTheme.bodySmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -131,7 +133,7 @@ class FnbPromoItem extends StatelessWidget {
               children: [
                 _firstTagRow(context),
                 SizedBox(height: 4.h),
-                fnbModel.tags.length > 2
+                fnbPromoModel.categories.length > 2
                     ? _secondTagRow(context)
                     : const SizedBox(),
               ],
@@ -147,11 +149,13 @@ class FnbPromoItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: fnbModel.tags.length >= 2 ? 2 : fnbModel.tags.length,
+        itemCount: fnbPromoModel.categories.length >= 2
+            ? 2
+            : fnbPromoModel.categories.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return _tagView(context, fnbModel.tags[index]);
+          return _tagView(context, fnbPromoModel.categories[index]);
         },
       ),
     );
@@ -162,24 +166,24 @@ class FnbPromoItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: fnbModel.tags.length > 4 ? 2 : 1,
+        itemCount: fnbPromoModel.categories.length > 4 ? 2 : 1,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index == 1) {
-            if (fnbModel.tags.length > 4) {
+            if (fnbPromoModel.categories.length > 4) {
               return _tagView(
                 context,
                 context.tr(
                   "home_screen.tags_more",
-                  args: [(fnbModel.tags.length - 3).toString()],
+                  args: [(fnbPromoModel.categories.length - 3).toString()],
                 ),
               );
             } else {
-              return _tagView(context, fnbModel.tags[index + 2]);
+              return _tagView(context, fnbPromoModel.categories[index + 2]);
             }
           }
-          return _tagView(context, fnbModel.tags[index + 2]);
+          return _tagView(context, fnbPromoModel.categories[index + 2]);
         },
       ),
     );

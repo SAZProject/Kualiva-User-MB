@@ -1,10 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
+import 'package:kualiva/_data/error_handler.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
 
 class FnbRepository {
   FnbRepository(this._dioClient);
@@ -76,5 +79,25 @@ class FnbRepository {
     final data = FnbDetailModel.fromMap(res.data);
     LeLog.rd(this, getPlaceDetail, data.toString());
     return data;
+  }
+
+  Future<List<FnbPromoModel>> getPromos({
+    required PlaceCategoryEnum placeCategoryEnum,
+  }) async {
+    try {
+      final res = await _dioClient.dio().then((dio) {
+        return dio.get('/places/promo',
+            queryParameters: {'type': placeCategoryEnum.name});
+      });
+      final data = (res.data as List<dynamic>)
+          .map((e) => FnbPromoModel.fromMap(e))
+          .toList();
+      LeLog.rd(this, getPromos, data.toString());
+      return data;
+    } on DioException catch (e) {
+      final failure = ErrorHandler.handle(e).failure;
+      LeLog.re(this, getPromos, failure.toString());
+      throw failure;
+    }
   }
 }

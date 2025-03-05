@@ -21,6 +21,7 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
     try {
       final List<FnbNearestModel> nearest =
           await _fnbRepository.getPlacesNearest(
+        isRefreshed: event.isRefreshed,
         latitude: event.latitude,
         longitude: event.longitude,
       );

@@ -1,19 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LeLog {
   static String _now() => DateFormat('HH:mm:ss').format(DateTime.now());
   // DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
+  static final _lelog = dotenv.get("LE_LOG", fallback: "").split(",");
+
   /// Debug Log
   static void d(dynamic source, String msg) {
-    if (!kDebugMode) return;
+    if (!kDebugMode || !_lelog.contains('d')) return;
     debugPrint('LeLog d [${_now()}] [${source.toString()}] $msg');
   }
 
   /// Error Log
   static void e(dynamic source, String msg) {
-    if (!kDebugMode) return;
+    if (!kDebugMode || !_lelog.contains('e')) return;
     debugPrint('LeLog e [${_now()}] [${source.toString()}] $msg');
   }
 
@@ -28,14 +31,14 @@ class LeLog {
 
   /// BLoC Debug Log
   static void bd(dynamic source, Function fn, String msg) {
-    if (!kDebugMode) return;
+    if (!kDebugMode || !_lelog.contains('bd')) return;
     debugPrint(
         'LeLog d b [${_now()}] [${_blocClassToStr(source)}] [${_blocFnToStr(fn)}] $msg');
   }
 
   /// BLoC Error Log
   static void be(dynamic source, Function fn, String msg) {
-    if (!kDebugMode) return;
+    if (!kDebugMode || !_lelog.contains('be')) return;
     debugPrint(
         'LeLog e b [${_now()}] [${_blocClassToStr(source)}] [${_blocFnToStr(fn)}] $msg');
   }
@@ -48,13 +51,13 @@ class LeLog {
       fn.toString().split('\'')[1].trim();
 
   static void rd(dynamic source, Function fn, String msg) {
-    if (!kDebugMode) return;
+    if (!kDebugMode || !_lelog.contains('rd')) return;
     debugPrint(
         'LeLog d r [${_now()}] [${_repositoryClassToStr1(source)}] [${_repositoryFnToStr1(fn)}] $msg');
   }
 
   static void re(dynamic source, Function fn, String msg) {
-    if (!kDebugMode) return;
+    if (!kDebugMode || !_lelog.contains('re')) return;
     debugPrint(
         'LeLog e r [${_now()}] [${_repositoryClassToStr1(source)}] [${_repositoryFnToStr1(fn)}] $msg');
   }
@@ -68,14 +71,14 @@ class LeLog {
 
   /// Screen Debug Log
   static void sd(dynamic source, Function fn, String msg) {
-    if (!kDebugMode) return;
+    if (!kDebugMode || !_lelog.contains('sd')) return;
     debugPrint(
         'LeLog d s [${_now()}] [${_screenClassToStr(source)}] [${_screenFnToStr2(fn)}] $msg');
   }
 
   /// Screen Error Log
   static void se(dynamic source, Function fn, String msg) {
-    if (!kDebugMode) return;
+    if (!kDebugMode || !_lelog.contains('se')) return;
     debugPrint(
         'LeLog e s [${_now()}] [${_screenClassToStr(source)}] [${_screenFnToStr2(fn)}] $msg');
   }

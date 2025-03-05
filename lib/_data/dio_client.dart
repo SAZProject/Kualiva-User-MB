@@ -52,15 +52,18 @@ class DioClient {
       },
     ));
 
-    _dio!.interceptors.add(PrettyDioLogger(
-      compact: true,
-      requestHeader: true,
-      requestBody: true,
-      responseHeader: true,
-      responseBody: true,
-      maxWidth: 100,
-      enabled: kDebugMode,
-    ));
+    final lelog = dotenv.get("LE_LOG", fallback: "").split(",");
+    if (lelog.contains('dio')) {
+      _dio!.interceptors.add(PrettyDioLogger(
+        compact: true,
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+        maxWidth: 100,
+        enabled: kDebugMode,
+      ));
+    }
     return _dio!;
   }
 

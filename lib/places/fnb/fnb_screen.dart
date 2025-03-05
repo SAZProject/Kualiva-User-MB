@@ -47,12 +47,17 @@ class _FnbScreenState extends State<FnbScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
-        context
-            .read<FnbPromoBloc>()
-            .add(FnbPromoFetched(placeCategoryEnum: placeCategoryEnum));
+        debugPrint("LeRucco");
+
         if (state is! CurrentLocationSuccess) return;
 
+        context.read<FnbPromoBloc>().add(FnbPromoFetched(
+              isRefreshed: state.isDistanceTooFarOrFirstTime,
+              placeCategoryEnum: placeCategoryEnum,
+            ));
+
         context.read<FnbNearestBloc>().add(FnbNearestFetched(
+              isRefreshed: state.isDistanceTooFarOrFirstTime,
               latitude: state.currentLocationModel.latitude,
               longitude: state.currentLocationModel.longitude,
             ));

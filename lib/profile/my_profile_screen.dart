@@ -17,6 +17,7 @@ import 'package:kualiva/common/widget/custom_phone_number.dart';
 import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 import 'package:kualiva/profile/feature/my_profile_user_image.dart';
 import 'package:kualiva/profile/widget/my_profile_textfield.dart';
@@ -147,6 +148,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           logoutLoading = true;
                         });
                         if (!context.mounted) return;
+                        MainHive.deleteAllBox();
                         Navigator.pushNamedAndRemoveUntil(
                             context, AppRoutes.signInScreen, (route) => false);
                       },

@@ -134,8 +134,6 @@ class ReviewRepository {
     //   LeLog.rd(this, getByPlace, reviewPlaceList.toString());
     //   return reviewPlaceList;
     // }
-    debugPrint('LeRucco');
-    debugPrint(placeId); // ChIJb59oH_P1aS4RePRpX6xEoP0
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get('/reviews/$placeId/place/me');

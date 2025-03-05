@@ -78,11 +78,6 @@ class ReportRepository {
     required int reasonId,
     required String description,
   }) async {
-    LeLog.rd(this, createReviewReport, "LeRucco");
-    LeLog.rd(this, createReviewReport, reviewId.toString());
-    LeLog.rd(this, createReviewReport, reasonId.toString());
-    LeLog.rd(this, createReviewReport, description.toString());
-
     final _ = _dioClient.dio().then((dio) {
       return dio.post(
         '/reviews/report',

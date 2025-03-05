@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/screen/coming_soon.dart';
-import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/home/home_screen.dart';
 import 'package:kualiva/profile/profile_screen.dart';
 import 'package:kualiva/_repository/profile_repository.dart';

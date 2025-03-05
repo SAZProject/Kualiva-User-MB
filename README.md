@@ -5,9 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.19
-- Fix Fnb & NightLife screen
-- Add promo feature for Fnb & nightlife
+Ver 0.1.19+01
+- Code Cleanup
 ```
 
 ## Getting Started

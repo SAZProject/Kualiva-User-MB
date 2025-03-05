@@ -42,7 +42,6 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
               latitude: state.currentLocationModel.latitude,
               longitude: state.currentLocationModel.longitude,
             ));
-        context.read<NightlifePromoBloc>().add(NightlifePromoFetched());
       },
       child: SafeArea(
         child: Scaffold(

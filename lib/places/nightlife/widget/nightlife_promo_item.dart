@@ -46,6 +46,7 @@ class NightlifePromoItem extends StatelessWidget {
                     radius: BorderRadius.vertical(
                       top: Radius.circular(10.h),
                     ),
+                    boxFit: BoxFit.cover,
                   ),
                   Align(
                     alignment: Alignment.topLeft,

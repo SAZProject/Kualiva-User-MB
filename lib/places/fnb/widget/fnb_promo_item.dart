@@ -8,11 +8,11 @@ import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
 class FnbPromoItem extends StatelessWidget {
   const FnbPromoItem({
     super.key,
-    required this.merchant,
+    required this.fnbPromoModel,
     required this.onPressed,
   });
 
-  final FnbPromoModel merchant;
+  final FnbPromoModel fnbPromoModel;
   final VoidCallback onPressed;
 
   @override
@@ -39,7 +39,7 @@ class FnbPromoItem extends StatelessWidget {
                 children: [
                   CustomImageView(
                     alignment: Alignment.center,
-                    imagePath: merchant.featuredImage ??
+                    imagePath: fnbPromoModel.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
@@ -72,7 +72,7 @@ class FnbPromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            '${merchant.averageRating}',
+                            '${fnbPromoModel.averageRating}',
                             style: theme(context).textTheme.labelMedium,
                           ),
                         ],
@@ -97,8 +97,9 @@ class FnbPromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            context.tr("f_n_b.promo_value",
-                                args: [(Random().nextInt(50) + 20).toString()]),
+                            context.tr("f_n_b.promo_value", args: [
+                              (Random().nextInt(50) + 20).toString()
+                            ]), // TODO: Percentage promo
                             style: theme(context).textTheme.labelLarge,
                           ),
                         ],
@@ -110,32 +111,17 @@ class FnbPromoItem extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 4.h),
-              child: Row(
-                children: [
-                  Visibility(
-                    visible: merchant.isMerchant,
-                    child: CustomImageView(
-                      imagePath: ImageConstant.appLogo2,
-                      height: 20.h,
-                      width: 20.h,
-                      boxFit: BoxFit.cover,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      merchant.name,
-                      style: theme(context).textTheme.titleSmall,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+              child: Text(
+                fnbPromoModel.name,
+                style: theme(context).textTheme.titleSmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 4.h),
               child: Text(
-                merchant.fullAddress,
+                fnbPromoModel.cityOrVillage,
                 style: theme(context).textTheme.bodySmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -148,7 +134,7 @@ class FnbPromoItem extends StatelessWidget {
               children: [
                 _firstTagRow(context),
                 SizedBox(height: 4.h),
-                merchant.categories.length > 2
+                fnbPromoModel.categories.length > 2
                     ? _secondTagRow(context)
                     : const SizedBox(),
               ],
@@ -164,12 +150,13 @@ class FnbPromoItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount:
-            merchant.categories.length >= 2 ? 2 : merchant.categories.length,
+        itemCount: fnbPromoModel.categories.length >= 2
+            ? 2
+            : fnbPromoModel.categories.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return _tagView(context, merchant.categories[index]);
+          return _tagView(context, fnbPromoModel.categories[index]);
         },
       ),
     );
@@ -180,24 +167,24 @@ class FnbPromoItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: merchant.categories.length > 4 ? 2 : 1,
+        itemCount: fnbPromoModel.categories.length > 4 ? 2 : 1,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index == 1) {
-            if (merchant.categories.length > 4) {
+            if (fnbPromoModel.categories.length > 4) {
               return _tagView(
                 context,
                 context.tr(
-                  "f_n_b.tags_more",
-                  args: [(merchant.categories.length - 3).toString()],
+                  "home_screen.tags_more",
+                  args: [(fnbPromoModel.categories.length - 3).toString()],
                 ),
               );
             } else {
-              return _tagView(context, merchant.categories[index + 2]);
+              return _tagView(context, fnbPromoModel.categories[index + 2]);
             }
           }
-          return _tagView(context, merchant.categories[index + 2]);
+          return _tagView(context, fnbPromoModel.categories[index + 2]);
         },
       ),
     );

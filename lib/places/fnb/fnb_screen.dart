@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
@@ -19,6 +20,8 @@ class FnbScreen extends StatefulWidget {
 }
 
 class _FnbScreenState extends State<FnbScreen> {
+  static const placeCategoryEnum = PlaceCategoryEnum.fnb;
+
   final _parentScrollController = ScrollController();
   final _childScrollController = ScrollController();
 
@@ -40,12 +43,17 @@ class _FnbScreenState extends State<FnbScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
-        context
-            .read<FnbNearestBloc>()
-            .add(FnbNearestFetched(latitude: 0.0, longitude: 0.0));
+        debugPrint("LeRucco");
+
         if (state is! CurrentLocationSuccess) return;
 
+        context.read<FnbPromoBloc>().add(FnbPromoFetched(
+              isRefreshed: state.isDistanceTooFarOrFirstTime,
+              placeCategoryEnum: placeCategoryEnum,
+            ));
+
         context.read<FnbNearestBloc>().add(FnbNearestFetched(
+              isRefreshed: state.isDistanceTooFarOrFirstTime,
               latitude: state.currentLocationModel.latitude,
               longitude: state.currentLocationModel.longitude,
             ));

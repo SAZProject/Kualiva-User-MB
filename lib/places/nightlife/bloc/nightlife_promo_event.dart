@@ -3,6 +3,12 @@ part of 'nightlife_promo_bloc.dart';
 @immutable
 sealed class NightlifePromoEvent {}
 
-final class NightlifePromoFetched extends NightlifePromoEvent {}
+final class NightlifePromoFetched extends NightlifePromoEvent {
+  final bool isRefresh;
+  final PlaceCategoryEnum placeCategoryEnum;
 
-final class NightlifePromoRefreshed extends NightlifePromoEvent {}
+  NightlifePromoFetched({
+    this.isRefresh = false,
+    required this.placeCategoryEnum,
+  });
+}

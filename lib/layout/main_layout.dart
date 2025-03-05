@@ -23,7 +23,6 @@ class _MainNavigationState extends State<MainLayout> {
   void initState() {
     super.initState();
 
-    LeLog.d(this, 'LeRucco');
     context.read<ProfileRepository>().me(); // TODO Gak bisa untuk Guest Login
   }
 

@@ -2,43 +2,50 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+@immutable
 class NightlifePromoModel {
-  final String id;
-  final String name;
-  final double averageRating;
-  final String fullAddress;
-  final List<String> categories;
-  final String? featuredImage;
-  final bool isMerchant;
+  final String id; // placeUniqueId
 
-  NightlifePromoModel({
+  final String name;
+
+  final int promoPercentage;
+
+  final double averageRating;
+
+  final String cityOrVillage;
+
+  final List<String> categories;
+
+  final String? featuredImage;
+
+  const NightlifePromoModel({
     required this.id,
     required this.name,
+    required this.promoPercentage,
     required this.averageRating,
-    required this.fullAddress,
+    required this.cityOrVillage,
     required this.categories,
     this.featuredImage,
-    required this.isMerchant,
   });
 
   NightlifePromoModel copyWith({
     String? id,
     String? name,
+    int? promoPercentage,
     double? averageRating,
-    String? fullAddress,
+    String? cityOrVillage,
     List<String>? categories,
     ValueGetter<String?>? featuredImage,
-    bool? isMerchant,
   }) {
     return NightlifePromoModel(
       id: id ?? this.id,
       name: name ?? this.name,
+      promoPercentage: promoPercentage ?? this.promoPercentage,
       averageRating: averageRating ?? this.averageRating,
-      fullAddress: fullAddress ?? this.fullAddress,
+      cityOrVillage: cityOrVillage ?? this.cityOrVillage,
       categories: categories ?? this.categories,
       featuredImage:
           featuredImage != null ? featuredImage() : this.featuredImage,
-      isMerchant: isMerchant ?? this.isMerchant,
     );
   }
 
@@ -46,11 +53,11 @@ class NightlifePromoModel {
     return {
       'id': id,
       'name': name,
+      'promoPercentage': promoPercentage,
       'averageRating': averageRating,
-      'fullAddress': fullAddress,
+      'cityOrVillage': cityOrVillage,
       'categories': categories,
       'featuredImage': featuredImage,
-      'isMerchant': isMerchant,
     };
   }
 
@@ -58,11 +65,11 @@ class NightlifePromoModel {
     return NightlifePromoModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
+      promoPercentage: map['promoPercentage']?.toInt() ?? 0,
       averageRating: map['averageRating']?.toDouble() ?? 0.0,
-      fullAddress: map['fullAddress'] ?? '',
+      cityOrVillage: map['cityOrVillage'] ?? '',
       categories: List<String>.from(map['categories']),
       featuredImage: map['featuredImage'],
-      isMerchant: map['isMerchant'] ?? false,
     );
   }
 
@@ -73,7 +80,7 @@ class NightlifePromoModel {
 
   @override
   String toString() {
-    return 'NightlifePromoModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant)';
+    return 'NightlifePromoModel(id: $id, name: $name, promoPercentage: $promoPercentage, averageRating: $averageRating, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage)';
   }
 
   @override
@@ -83,21 +90,21 @@ class NightlifePromoModel {
     return other is NightlifePromoModel &&
         other.id == id &&
         other.name == name &&
+        other.promoPercentage == promoPercentage &&
         other.averageRating == averageRating &&
-        other.fullAddress == fullAddress &&
+        other.cityOrVillage == cityOrVillage &&
         listEquals(other.categories, categories) &&
-        other.featuredImage == featuredImage &&
-        other.isMerchant == isMerchant;
+        other.featuredImage == featuredImage;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
         name.hashCode ^
+        promoPercentage.hashCode ^
         averageRating.hashCode ^
-        fullAddress.hashCode ^
+        cityOrVillage.hashCode ^
         categories.hashCode ^
-        featuredImage.hashCode ^
-        isMerchant.hashCode;
+        featuredImage.hashCode;
   }
 }

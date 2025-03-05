@@ -14,7 +14,6 @@ class ProfileRepository {
 
   Future<UserModel> me() async {
     final userBox = Hive.box<UserModel>(MyHive.user.name);
-    LeLog.d(this, 'LeRucco');
 
     // TODO masih kacau kadang data lama masih dipanggil meskipun sudah logout sehingga user profile masih null
     // if (userBox.values.toList().isNotEmpty) {

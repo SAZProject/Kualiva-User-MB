@@ -8,11 +8,15 @@ final class NightlifePromoInitial extends NightlifePromoState {}
 final class NightlifePromoLoading extends NightlifePromoState {}
 
 final class NightlifePromoSuccess extends NightlifePromoState {
-  final List<NightlifePromoModel> promo;
+  final List<NightlifePromoModel> nightlifePromoModels;
 
-  NightlifePromoSuccess({required this.promo});
+  NightlifePromoSuccess({
+    required this.nightlifePromoModels,
+  });
 }
 
-final class NightlifePromoFailure extends NightlifePromoState {}
+final class NightlifePromoFailure extends NightlifePromoState {
+  final Failure failure;
 
-final class NightlifePromoRefresh extends NightlifePromoState {}
+  NightlifePromoFailure({required this.failure});
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
@@ -16,6 +17,8 @@ class NightlifeScreen extends StatefulWidget {
 }
 
 class _NightlifeScreenState extends State<NightlifeScreen> {
+  static const placeCategoryEnum = PlaceCategoryEnum.nightLife;
+
   final _parentScrollController = ScrollController();
   final _childScrollController = ScrollController();
 
@@ -31,8 +34,8 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
         context
-            .read<NightlifeNearestBloc>()
-            .add(NightlifeNearestFetched(latitude: 0.0, longitude: 0.0));
+            .read<NightlifePromoBloc>()
+            .add(NightlifePromoFetched(placeCategoryEnum: placeCategoryEnum));
         if (state is! CurrentLocationSuccess) return;
 
         context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(

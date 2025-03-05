@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/foundation.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
+import 'package:kualiva/_data/error_handler.dart';
 import 'package:kualiva/_repository/nightlife_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_promo_model.dart';
+import 'package:flutter/foundation.dart';
 
 part 'nightlife_promo_event.dart';
 part 'nightlife_promo_state.dart';
@@ -21,13 +23,14 @@ class NightlifePromoBloc
     Emitter<NightlifePromoState> emit,
   ) async {
     try {
-      final List<NightlifePromoModel> promo =
-          await _nightlifeRepository.getPlacesPromo();
-      LeLog.bd(this, _onFetched, promo.toString());
-      emit(NightlifePromoSuccess(promo: promo));
-    } catch (e) {
+      final nightlifePromoModels = await _nightlifeRepository.getPromos(
+        placeCategoryEnum: event.placeCategoryEnum,
+      );
+      LeLog.bd(this, _onFetched, nightlifePromoModels.toString());
+      emit(NightlifePromoSuccess(nightlifePromoModels: nightlifePromoModels));
+    } on Failure catch (e) {
       LeLog.be(this, _onFetched, e.toString());
-      emit(NightlifePromoFailure());
+      emit(NightlifePromoFailure(failure: e));
     }
   }
 }

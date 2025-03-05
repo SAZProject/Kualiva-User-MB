@@ -1,16 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/common/utility/sized_utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder;
+import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
-import 'package:kualiva/router.dart';
 
 class FnbPromoFeature extends StatelessWidget {
   const FnbPromoFeature({super.key});
+
+  // final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class FnbPromoFeature extends StatelessWidget {
             child: SizedBox(
               height: 225.h,
               width: double.maxFinite,
-              child: _promoList(),
+              child: _list(),
             ),
           ),
         ],
@@ -37,14 +38,13 @@ class FnbPromoFeature extends StatelessWidget {
     );
   }
 
-  Widget _promoList() {
+  Widget _list() {
     return BlocBuilder<FnbPromoBloc, FnbPromoState>(
       builder: (context, state) {
         if (state is FnbPromoFailure) {
           return CustomErrorState(
-            errorMessage: context.tr("common.error_try_again"),
-            onRetry: () {},
-          );
+              errorMessage: context.tr("common.error_try_again"),
+              onRetry: () {});
         }
         if (state is! FnbPromoSuccess) {
           return Center(child: CircularProgressIndicator());
@@ -56,14 +56,14 @@ class FnbPromoFeature extends StatelessWidget {
           itemCount: 6,
           itemBuilder: (context, index) {
             return FnbPromoItem(
-              merchant: state.promo[index],
+              fnbPromoModel: state.fnbPromoModels[index],
               onPressed: () {
                 Navigator.pushNamed(
                   context,
                   AppRoutes.fnbDetailScreen,
                   arguments: PlaceArgument(
-                    placeId: state.promo[index].id,
-                    isMerchant: state.promo[index].isMerchant,
+                    placeId: state.fnbPromoModels[index].id,
+                    isMerchant: true,
                   ),
                 );
               },

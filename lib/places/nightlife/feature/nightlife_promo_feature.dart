@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder;
 import 'package:kualiva/common/utility/sized_utils.dart';
-import 'package:kualiva/common/widget/custom_error_state.dart';
+import 'package:kualiva/common/widget/custom_error_state.dart'
+    show CustomErrorState;
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
 import 'package:kualiva/places/nightlife/widget/nightlife_promo_item.dart';
-import 'package:kualiva/router.dart';
+import 'package:kualiva/router.dart' show AppRoutes;
 
 class NightlifePromoFeature extends StatelessWidget {
   const NightlifePromoFeature({super.key});
@@ -20,7 +21,7 @@ class NightlifePromoFeature extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            label: context.tr("nightlife.promo"),
+            label: context.tr("f_n_b.promo"),
             useIcon: false,
           ),
           SizedBox(height: 4.h),
@@ -29,7 +30,7 @@ class NightlifePromoFeature extends StatelessWidget {
             child: SizedBox(
               height: 225.h,
               width: double.maxFinite,
-              child: _promoList(),
+              child: _list(),
             ),
           ),
         ],
@@ -37,14 +38,13 @@ class NightlifePromoFeature extends StatelessWidget {
     );
   }
 
-  Widget _promoList() {
+  Widget _list() {
     return BlocBuilder<NightlifePromoBloc, NightlifePromoState>(
       builder: (context, state) {
         if (state is NightlifePromoFailure) {
           return CustomErrorState(
-            errorMessage: context.tr("common.error_try_again"),
-            onRetry: () {},
-          );
+              errorMessage: context.tr("common.error_try_again"),
+              onRetry: () {});
         }
         if (state is! NightlifePromoSuccess) {
           return Center(child: CircularProgressIndicator());
@@ -56,14 +56,14 @@ class NightlifePromoFeature extends StatelessWidget {
           itemCount: 6,
           itemBuilder: (context, index) {
             return NightlifePromoItem(
-              merchant: state.promo[index],
+              nightlifePromoModel: state.nightlifePromoModels[index],
               onPressed: () {
                 Navigator.pushNamed(
                   context,
-                  AppRoutes.nightLifeDetailScreen,
+                  AppRoutes.fnbDetailScreen,
                   arguments: PlaceArgument(
-                    placeId: state.promo[index].id,
-                    isMerchant: state.promo[index].isMerchant,
+                    placeId: state.nightlifePromoModels[index].id,
+                    isMerchant: true,
                   ),
                 );
               },

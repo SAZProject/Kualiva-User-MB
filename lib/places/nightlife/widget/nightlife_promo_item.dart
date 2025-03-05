@@ -8,11 +8,11 @@ import 'package:kualiva/places/nightlife/model/nightlife_promo_model.dart';
 class NightlifePromoItem extends StatelessWidget {
   const NightlifePromoItem({
     super.key,
-    required this.merchant,
+    required this.nightlifePromoModel,
     required this.onPressed,
   });
 
-  final NightlifePromoModel merchant;
+  final NightlifePromoModel nightlifePromoModel;
   final VoidCallback onPressed;
 
   @override
@@ -39,14 +39,13 @@ class NightlifePromoItem extends StatelessWidget {
                 children: [
                   CustomImageView(
                     alignment: Alignment.center,
-                    imagePath: merchant.featuredImage ??
+                    imagePath: nightlifePromoModel.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
                     radius: BorderRadius.vertical(
                       top: Radius.circular(10.h),
                     ),
-                    boxFit: BoxFit.cover,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
@@ -72,7 +71,7 @@ class NightlifePromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            '${merchant.averageRating}',
+                            '${nightlifePromoModel.averageRating}',
                             style: theme(context).textTheme.labelMedium,
                           ),
                         ],
@@ -97,8 +96,9 @@ class NightlifePromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            context.tr("nightlife.promo_value",
-                                args: [(Random().nextInt(50) + 20).toString()]),
+                            context.tr("f_n_b.promo_value", args: [
+                              (Random().nextInt(50) + 20).toString()
+                            ]), // TODO: Percentage promo
                             style: theme(context).textTheme.labelLarge,
                           ),
                         ],
@@ -110,32 +110,17 @@ class NightlifePromoItem extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 4.h),
-              child: Row(
-                children: [
-                  Visibility(
-                    visible: merchant.isMerchant,
-                    child: CustomImageView(
-                      imagePath: ImageConstant.appLogo2,
-                      height: 20.h,
-                      width: 20.h,
-                      boxFit: BoxFit.cover,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      merchant.name,
-                      style: theme(context).textTheme.titleSmall,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+              child: Text(
+                nightlifePromoModel.name,
+                style: theme(context).textTheme.titleSmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 4.h),
               child: Text(
-                merchant.fullAddress,
+                nightlifePromoModel.cityOrVillage,
                 style: theme(context).textTheme.bodySmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -148,7 +133,7 @@ class NightlifePromoItem extends StatelessWidget {
               children: [
                 _firstTagRow(context),
                 SizedBox(height: 4.h),
-                merchant.categories.length > 2
+                nightlifePromoModel.categories.length > 2
                     ? _secondTagRow(context)
                     : const SizedBox(),
               ],
@@ -164,12 +149,13 @@ class NightlifePromoItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount:
-            merchant.categories.length >= 2 ? 2 : merchant.categories.length,
+        itemCount: nightlifePromoModel.categories.length >= 2
+            ? 2
+            : nightlifePromoModel.categories.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return _tagView(context, merchant.categories[index]);
+          return _tagView(context, nightlifePromoModel.categories[index]);
         },
       ),
     );
@@ -180,24 +166,27 @@ class NightlifePromoItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: merchant.categories.length > 4 ? 2 : 1,
+        itemCount: nightlifePromoModel.categories.length > 4 ? 2 : 1,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index == 1) {
-            if (merchant.categories.length > 4) {
+            if (nightlifePromoModel.categories.length > 4) {
               return _tagView(
                 context,
                 context.tr(
-                  "nightlife.tags_more",
-                  args: [(merchant.categories.length - 3).toString()],
+                  "home_screen.tags_more",
+                  args: [
+                    (nightlifePromoModel.categories.length - 3).toString()
+                  ],
                 ),
               );
             } else {
-              return _tagView(context, merchant.categories[index + 2]);
+              return _tagView(
+                  context, nightlifePromoModel.categories[index + 2]);
             }
           }
-          return _tagView(context, merchant.categories[index + 2]);
+          return _tagView(context, nightlifePromoModel.categories[index + 2]);
         },
       ),
     );

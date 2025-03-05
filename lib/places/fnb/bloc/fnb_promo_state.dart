@@ -8,11 +8,15 @@ final class FnbPromoInitial extends FnbPromoState {}
 final class FnbPromoLoading extends FnbPromoState {}
 
 final class FnbPromoSuccess extends FnbPromoState {
-  final List<FnbPromoModel> promo;
+  final List<FnbPromoModel> fnbPromoModels;
 
-  FnbPromoSuccess({required this.promo});
+  FnbPromoSuccess({
+    required this.fnbPromoModels,
+  });
 }
 
-final class FnbPromoFailure extends FnbPromoState {}
+final class FnbPromoFailure extends FnbPromoState {
+  final Failure failure;
 
-final class FnbPromoRefresh extends FnbPromoState {}
+  FnbPromoFailure({required this.failure});
+}

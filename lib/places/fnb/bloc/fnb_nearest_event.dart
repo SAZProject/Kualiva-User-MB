@@ -4,10 +4,12 @@ part of 'fnb_nearest_bloc.dart';
 sealed class FnbNearestEvent {}
 
 final class FnbNearestFetched extends FnbNearestEvent {
+  final bool isRefreshed;
   final double latitude;
   final double longitude;
 
   FnbNearestFetched({
+    this.isRefreshed = false,
     required this.latitude,
     required this.longitude,
   });

@@ -214,6 +214,12 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return ReportReviewCreateBloc(context.read<ReportRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return FnbPromoBloc(context.read<FnbRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return NightlifePromoBloc(context.read<NightlifeRepository>());
         })
       ],
       child: child,

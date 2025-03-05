@@ -1,10 +1,11 @@
-import 'package:hive/hive.dart';
+// import 'package:hive/hive.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
-import 'package:kualiva/main_hive.dart';
+// import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
 
 class FnbRepository {
   FnbRepository(this._dioClient);
@@ -43,24 +44,19 @@ class FnbRepository {
     return data;
   }
 
-  Future<List<FnbNearestModel>> getPlacesNearestHotel({
-    required double latitude,
-    required double longitude,
-  }) async {
+  Future<List<FnbPromoModel>> getPlacesPromo() async {
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
-        '/places/nearest-hotel',
+        '/places/promo',
         queryParameters: {
-          'latitude': latitude,
-          'longitude': longitude,
-          'type': 'ALL',
+          'type': PlaceCategoryEnum.fnb.name,
         },
       );
     });
     final data = (res.data as List<dynamic>)
-        .map((e) => FnbNearestModel.fromMap(e))
+        .map((e) => FnbPromoModel.fromMap(e))
         .toList();
-    LeLog.rd(this, getPlacesNearest, data.toString());
+    LeLog.rd(this, getPlacesPromo, data.toString());
     return data;
   }
 

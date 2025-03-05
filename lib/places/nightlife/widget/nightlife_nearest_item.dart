@@ -44,6 +44,7 @@ class NightlifeNearestItem extends StatelessWidget {
                     radius: BorderRadius.horizontal(
                       left: Radius.circular(10.h),
                     ),
+                    boxFit: BoxFit.cover,
                   ),
                   Align(
                     alignment: Alignment.topLeft,

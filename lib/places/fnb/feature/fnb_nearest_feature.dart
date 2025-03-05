@@ -57,7 +57,7 @@ class FnbNearestFeature extends StatelessWidget {
                   }
                   return true;
                 },
-                child: _list(),
+                child: _nearestList(),
               ),
             ),
           ),
@@ -66,7 +66,7 @@ class FnbNearestFeature extends StatelessWidget {
     );
   }
 
-  Widget _list() {
+  Widget _nearestList() {
     return BlocBuilder<FnbNearestBloc, FnbNearestState>(
       builder: (context, state) {
         if (state is FnbNearestFailure) {

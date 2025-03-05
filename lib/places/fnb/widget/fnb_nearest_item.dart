@@ -39,12 +39,12 @@ class FnbNearestItem extends StatelessWidget {
                   CustomImageView(
                     imagePath: merchant.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
-                    // imagePath: "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
                     radius: BorderRadius.horizontal(
                       left: Radius.circular(10.h),
                     ),
+                    boxFit: BoxFit.cover,
                   ),
                   Align(
                     alignment: Alignment.topLeft,

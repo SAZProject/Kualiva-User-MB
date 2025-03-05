@@ -1,18 +1,15 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/common/dataset/f_n_b_dataset.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
-import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
-import 'package:kualiva/_data/model/f_n_b_model.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_nearest_feature.dart';
+import 'package:kualiva/places/fnb/feature/fnb_promo_feature.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
-import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
 
 class FnbScreen extends StatefulWidget {
   const FnbScreen({super.key});
@@ -24,8 +21,6 @@ class FnbScreen extends StatefulWidget {
 class _FnbScreenState extends State<FnbScreen> {
   final _parentScrollController = ScrollController();
   final _childScrollController = ScrollController();
-
-  final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
 
   final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
 
@@ -54,28 +49,11 @@ class _FnbScreenState extends State<FnbScreen> {
               latitude: state.currentLocationModel.latitude,
               longitude: state.currentLocationModel.longitude,
             ));
+        context.read<FnbPromoBloc>().add(FnbPromoFetched());
       },
       child: SafeArea(
-        child: Stack(
-          children: [
-            // Align(
-            //   alignment: Alignment.topCenter,
-            //   child: Container(
-            //     width: double.maxFinite,
-            //     decoration: BoxDecoration(
-            //       color: theme(context).scaffoldBackgroundColor,
-            //       image: DecorationImage(
-            //         image: AssetImage(ImageConstant.background2),
-            //         fit: BoxFit.cover,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            Scaffold(
-              // backgroundColor: Colors.transparent,
-              body: _body(context),
-            ),
-          ],
+        child: Scaffold(
+          body: _body(context),
         ),
       ),
     );
@@ -98,14 +76,13 @@ class _FnbScreenState extends State<FnbScreen> {
               SizedBox(height: 5.h),
               _tagsFilter(context),
               SizedBox(height: 5.h),
-              // _nearestList(context),
               FnbNearestFeature(
                 parentContext: context,
                 parentScrollController: _parentScrollController,
                 childScrollController: _childScrollController,
               ),
               SizedBox(height: 5.h),
-              _promoList(context),
+              FnbPromoFeature(),
               SizedBox(height: 5.h),
             ],
           ),
@@ -176,48 +153,6 @@ class _FnbScreenState extends State<FnbScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _promoList(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomSectionHeader(
-            label: context.tr("f_n_b.promo"),
-            useIcon: false,
-          ),
-          SizedBox(height: 4.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.h),
-            child: SizedBox(
-              height: 225.h,
-              width: double.maxFinite,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  //TODO add waiting, empty, error state in future
-                  return FnbPromoItem(
-                    fnbModel: featuredListItems[index],
-                    onPressed: () {
-                      // TODO Dimatikan untuk prototype test
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   AppRoutes.fnbDetailScreen,
-                      //   arguments: "placeId", // TODO
-                      // );
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

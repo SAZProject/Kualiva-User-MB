@@ -3,6 +3,7 @@ import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_detail_model.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_promo_model.dart';
 
 class NightlifeRepository {
   NightlifeRepository(this._dioClient);
@@ -28,6 +29,22 @@ class NightlifeRepository {
         .toList();
 
     LeLog.rd(this, getPlacesNearest, data.toString());
+    return data;
+  }
+
+  Future<List<NightlifePromoModel>> getPlacesPromo() async {
+    final res = await _dioClient.dio().then((dio) {
+      return dio.get(
+        '/places/promo',
+        queryParameters: {
+          'type': PlaceCategoryEnum.nightLife.name,
+        },
+      );
+    });
+    final data = (res.data as List<dynamic>)
+        .map((e) => NightlifePromoModel.fromMap(e))
+        .toList();
+    LeLog.rd(this, getPlacesPromo, data.toString());
     return data;
   }
 

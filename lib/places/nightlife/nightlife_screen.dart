@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_app_bar_feature.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_nearest_feature.dart';
+import 'package:kualiva/places/nightlife/feature/nightlife_promo_feature.dart';
 
 class NightlifeScreen extends StatefulWidget {
   const NightlifeScreen({super.key});
@@ -37,6 +39,7 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
               latitude: state.currentLocationModel.latitude,
               longitude: state.currentLocationModel.longitude,
             ));
+        context.read<NightlifePromoBloc>().add(NightlifePromoFetched());
       },
       child: SafeArea(
         child: Scaffold(
@@ -61,12 +64,13 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
           child: Column(
             children: [
               SizedBox(height: 5.h),
-              // _nearestList(context),
               NightlifeNearestFeature(
                 parentContext: context,
                 parentScrollController: _parentScrollController,
                 childScrollController: _childScrollController,
               ),
+              SizedBox(height: 5.h),
+              NightlifePromoFeature(),
               SizedBox(height: 5.h),
             ],
           ),

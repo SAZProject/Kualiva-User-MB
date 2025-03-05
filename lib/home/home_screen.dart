@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeGridMenuModel(
         imageUrl: ImageConstant.homeSpa,
         label: "home_screen.grid_5",
-        isActive: false),
+        isActive: true),
     // HomeGridMenuModel(
     //     imageUrl: ImageConstant.homeMall,
     //     label: "home_screen.grid_6",
@@ -100,6 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       case 1:
         Navigator.pushNamed(context, AppRoutes.nightLifeScreen);
+        break;
+      case 2:
+        Navigator.pushNamed(context, AppRoutes.spaScreen);
         break;
       default:
         break;

@@ -38,7 +38,6 @@ class NightlifeNearestItem extends StatelessWidget {
                   CustomImageView(
                     imagePath: merchant.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
-                    // imagePath: "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
                     radius: BorderRadius.horizontal(
@@ -156,7 +155,7 @@ class NightlifeNearestItem extends StatelessWidget {
               return _tagView(
                 context,
                 context.tr(
-                  "f_n_b.tags_more",
+                  "nightlife.tags_more",
                   args: [(merchant.categories.length - 3).toString()],
                 ),
               );

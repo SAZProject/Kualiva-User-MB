@@ -270,6 +270,30 @@
     "total_review": "Total Reviews: {total}",
     "avg_rating": "Average Rating\nAccumulated"
   },
+  "spa": {
+    "nearest": "Nearest From You",
+    "promo": "Promo",
+    "promo_value": "{}% OFF",
+    "best_rated": "Best Rated",
+    "tags_more": "+{} More"
+  },
+  "spa_detail": {
+    "about": "About",
+    "claim_btn": "Claim Business",
+    "place_not_claimed": "This business is\nnot yet claimed",
+    "place_claimed": "This business is\nclaimed",
+    "about_open": "Operational day & hour (click to expand!)",
+    "about_open_detail": "{day}, {time_open}-{time_close}",
+    "about_price": "Avg. Start From Rp{price}",
+    "facilities": "Facilities",
+    "promo": "Promo",
+    "promo_title": "Title",
+    "promo_publisher": "Publisher",
+    "promo_date": "Available until {date}",
+    "review": "Reviews",
+    "total_review": "Total Reviews: {total}",
+    "avg_rating": "Average Rating\nAccumulated"
+  },
   "promo": {
     "title": "Promo",
     "promo_date": "Available until {date}",

@@ -1,50 +1,47 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
+import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
 
-class FnbPromoItem extends StatelessWidget {
-  const FnbPromoItem({
+class SpaNearestItem extends StatelessWidget {
+  const SpaNearestItem({
     super.key,
     required this.merchant,
     required this.onPressed,
   });
 
-  final FnbPromoModel merchant;
+  final SpaNearestModel merchant;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150.h,
-      margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 5.h),
+      height: 100.h,
+      width: double.maxFinite,
+      margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 6.h),
       decoration: CustomDecoration(context)
           .outlineOnSecondaryContainer
           .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
         onTap: onPressed,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 100.h,
-              width: double.maxFinite,
+              width: 85.h,
               child: Stack(
-                alignment: Alignment.center,
+                alignment: Alignment.bottomRight,
                 children: [
                   CustomImageView(
-                    alignment: Alignment.center,
                     imagePath: merchant.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
-                    radius: BorderRadius.vertical(
-                      top: Radius.circular(10.h),
+                    radius: BorderRadius.horizontal(
+                      left: Radius.circular(10.h),
                     ),
                     boxFit: BoxFit.cover,
                   ),
@@ -78,124 +75,95 @@ class FnbPromoItem extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      width: double.maxFinite,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.h,
-                      ),
-                      decoration: CustomDecoration(context)
-                          .gradientPrimaryContainerToRedA,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.discount,
-                            size: 15.h,
-                          ),
-                          SizedBox(width: 4.h),
-                          Text(
-                            context.tr("f_n_b.promo_value", args: [
-                              (Random().nextInt(50) + 20).toString()
-                            ]), // TODO: Percentage promo
-                            style: theme(context).textTheme.labelLarge,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 4.h),
-              child: Row(
+            SizedBox(width: 5.h),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.appLogo2,
-                    height: 20.h,
-                    width: 20.h,
-                    boxFit: BoxFit.cover,
+                  Padding(
+                    padding: EdgeInsets.only(left: 4.h),
+                    child: Row(
+                      children: [
+                        Visibility(
+                          visible: merchant.isMerchant,
+                          child: CustomImageView(
+                            imagePath: ImageConstant.appLogo2,
+                            height: 20.h,
+                            width: 20.h,
+                            boxFit: BoxFit.cover,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            merchant.name,
+                            style: theme(context).textTheme.titleSmall,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  Expanded(
+                  Padding(
+                    padding: EdgeInsets.only(left: 4.h),
                     child: Text(
-                      merchant.name,
-                      style: theme(context).textTheme.titleSmall,
+                      merchant.fullAddress,
+                      style: theme(context).textTheme.bodySmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  SizedBox(height: 5.h),
+                  SizedBox(
+                    height: 20.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children:
+                          List.generate(merchant.averageRating.floor(), (_) {
+                        return Icon(Icons.attach_money, size: 15.h);
+                      }),
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  _tagList(context),
+                  SizedBox(height: 5.h),
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 4.h),
-              child: Text(
-                merchant.cityOrVillage,
-                style: theme(context).textTheme.bodySmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            SizedBox(height: 5.h),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _firstTagRow(context),
-                SizedBox(height: 4.h),
-                merchant.categories.length > 2
-                    ? _secondTagRow(context)
-                    : const SizedBox(),
-              ],
-            )
           ],
         ),
       ),
     );
   }
 
-  Widget _firstTagRow(BuildContext context) {
+  Widget _tagList(BuildContext context) {
     return SizedBox(
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
         itemCount:
-            merchant.categories.length >= 2 ? 2 : merchant.categories.length,
+            merchant.categories.length > 4 ? 4 : merchant.categories.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return _tagView(context, merchant.categories[index]);
-        },
-      ),
-    );
-  }
-
-  Widget _secondTagRow(BuildContext context) {
-    return SizedBox(
-      height: 20.h,
-      width: double.maxFinite,
-      child: ListView.builder(
-        itemCount: merchant.categories.length > 4 ? 2 : 1,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          if (index == 1) {
+          if (index == 3) {
             if (merchant.categories.length > 4) {
               return _tagView(
                 context,
                 context.tr(
-                  "home_screen.tags_more",
+                  "spa.tags_more",
                   args: [(merchant.categories.length - 3).toString()],
                 ),
               );
             } else {
-              return _tagView(context, merchant.categories[index + 2]);
+              return _tagView(context, merchant.categories[index]);
             }
           }
-          return _tagView(context, merchant.categories[index + 2]);
+          return _tagView(context, Faker().food.cuisine());
         },
       ),
     );

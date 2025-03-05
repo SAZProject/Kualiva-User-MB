@@ -34,22 +34,6 @@ class NightlifeRepository {
     return data;
   }
 
-  Future<List<NightlifePromoModel>> getPlacesPromo() async {
-    final res = await _dioClient.dio().then((dio) {
-      return dio.get(
-        '/places/promo',
-        queryParameters: {
-          'type': PlaceCategoryEnum.nightLife.name,
-        },
-      );
-    });
-    final data = (res.data as List<dynamic>)
-        .map((e) => NightlifePromoModel.fromMap(e))
-        .toList();
-    LeLog.rd(this, getPlacesPromo, data.toString());
-    return data;
-  }
-
   Future<NightlifeDetailModel> getPlaceDetail({
     required String placeId,
   }) async {

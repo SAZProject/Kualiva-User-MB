@@ -8,11 +8,11 @@ import 'package:kualiva/places/nightlife/model/nightlife_promo_model.dart';
 class NightlifePromoItem extends StatelessWidget {
   const NightlifePromoItem({
     super.key,
-    required this.nightlifePromoModel,
+    required this.merchant,
     required this.onPressed,
   });
 
-  final NightlifePromoModel nightlifePromoModel;
+  final NightlifePromoModel merchant;
   final VoidCallback onPressed;
 
   @override
@@ -39,7 +39,7 @@ class NightlifePromoItem extends StatelessWidget {
                 children: [
                   CustomImageView(
                     alignment: Alignment.center,
-                    imagePath: nightlifePromoModel.featuredImage ??
+                    imagePath: merchant.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 100.h,
                     width: double.maxFinite,
@@ -71,7 +71,7 @@ class NightlifePromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            '${nightlifePromoModel.averageRating}',
+                            '${merchant.averageRating}',
                             style: theme(context).textTheme.labelMedium,
                           ),
                         ],
@@ -96,7 +96,7 @@ class NightlifePromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            context.tr("f_n_b.promo_value", args: [
+                            context.tr("nightlife.promo_value", args: [
                               (Random().nextInt(50) + 20).toString()
                             ]), // TODO: Percentage promo
                             style: theme(context).textTheme.labelLarge,
@@ -120,7 +120,7 @@ class NightlifePromoItem extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      nightlifePromoModel.name,
+                      merchant.name,
                       style: theme(context).textTheme.titleSmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -132,7 +132,7 @@ class NightlifePromoItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 4.h),
               child: Text(
-                nightlifePromoModel.cityOrVillage,
+                merchant.cityOrVillage,
                 style: theme(context).textTheme.bodySmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -145,7 +145,7 @@ class NightlifePromoItem extends StatelessWidget {
               children: [
                 _firstTagRow(context),
                 SizedBox(height: 4.h),
-                nightlifePromoModel.categories.length > 2
+                merchant.categories.length > 2
                     ? _secondTagRow(context)
                     : const SizedBox(),
               ],
@@ -161,13 +161,12 @@ class NightlifePromoItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: nightlifePromoModel.categories.length >= 2
-            ? 2
-            : nightlifePromoModel.categories.length,
+        itemCount:
+            merchant.categories.length >= 2 ? 2 : merchant.categories.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return _tagView(context, nightlifePromoModel.categories[index]);
+          return _tagView(context, merchant.categories[index]);
         },
       ),
     );
@@ -178,27 +177,24 @@ class NightlifePromoItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: nightlifePromoModel.categories.length > 4 ? 2 : 1,
+        itemCount: merchant.categories.length > 4 ? 2 : 1,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index == 1) {
-            if (nightlifePromoModel.categories.length > 4) {
+            if (merchant.categories.length > 4) {
               return _tagView(
                 context,
                 context.tr(
-                  "home_screen.tags_more",
-                  args: [
-                    (nightlifePromoModel.categories.length - 3).toString()
-                  ],
+                  "nightlife.tags_more",
+                  args: [(merchant.categories.length - 3).toString()],
                 ),
               );
             } else {
-              return _tagView(
-                  context, nightlifePromoModel.categories[index + 2]);
+              return _tagView(context, merchant.categories[index + 2]);
             }
           }
-          return _tagView(context, nightlifePromoModel.categories[index + 2]);
+          return _tagView(context, merchant.categories[index + 2]);
         },
       ),
     );

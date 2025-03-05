@@ -3,16 +3,16 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
+import 'package:kualiva/places/spa/model/spa_promo_model.dart';
 
-class FnbPromoItem extends StatelessWidget {
-  const FnbPromoItem({
+class SpaPromoItem extends StatelessWidget {
+  const SpaPromoItem({
     super.key,
     required this.merchant,
     required this.onPressed,
   });
 
-  final FnbPromoModel merchant;
+  final SpaPromoModel merchant;
   final VoidCallback onPressed;
 
   @override
@@ -46,7 +46,6 @@ class FnbPromoItem extends StatelessWidget {
                     radius: BorderRadius.vertical(
                       top: Radius.circular(10.h),
                     ),
-                    boxFit: BoxFit.cover,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
@@ -97,7 +96,7 @@ class FnbPromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            context.tr("f_n_b.promo_value", args: [
+                            context.tr("spa.promo_value", args: [
                               (Random().nextInt(50) + 20).toString()
                             ]), // TODO: Percentage promo
                             style: theme(context).textTheme.labelLarge,
@@ -187,7 +186,7 @@ class FnbPromoItem extends StatelessWidget {
               return _tagView(
                 context,
                 context.tr(
-                  "home_screen.tags_more",
+                  "spa.tags_more",
                   args: [(merchant.categories.length - 3).toString()],
                 ),
               );

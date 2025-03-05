@@ -5,8 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.19+03
-- Fix some merge failed code
+Ver 0.1.20
+- Fix minor changes in fnb & nightlife screen
+- Add Spa detail, promo, and main screen
 ```
 
 ## Getting Started

@@ -1,14 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
-import 'package:kualiva/common/widget/custom_error_state.dart'
-    show CustomErrorState;
+import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
 import 'package:kualiva/places/nightlife/widget/nightlife_promo_item.dart';
-import 'package:kualiva/router.dart' show AppRoutes;
+import 'package:kualiva/router.dart';
 
 class NightlifePromoFeature extends StatelessWidget {
   const NightlifePromoFeature({super.key});
@@ -21,7 +20,7 @@ class NightlifePromoFeature extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            label: context.tr("f_n_b.promo"),
+            label: context.tr("nightlife.promo"),
             useIcon: false,
           ),
           SizedBox(height: 4.h),
@@ -56,11 +55,11 @@ class NightlifePromoFeature extends StatelessWidget {
           itemCount: 6,
           itemBuilder: (context, index) {
             return NightlifePromoItem(
-              nightlifePromoModel: state.nightlifePromoModels[index],
+              merchant: state.nightlifePromoModels[index],
               onPressed: () {
                 Navigator.pushNamed(
                   context,
-                  AppRoutes.fnbDetailScreen,
+                  AppRoutes.nightLifeDetailScreen,
                   arguments: PlaceArgument(
                     placeId: state.nightlifePromoModels[index].id,
                     isMerchant: true,

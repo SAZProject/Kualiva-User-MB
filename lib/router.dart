@@ -22,6 +22,8 @@ import 'package:kualiva/layout/main_layout.dart';
 import 'package:kualiva/places/fnb/fnb_filters_screen.dart';
 import 'package:kualiva/places/nightlife/nightlife_detail_screen.dart';
 import 'package:kualiva/places/nightlife/nightlife_screen.dart';
+import 'package:kualiva/places/spa/spa_detail_screen.dart';
+import 'package:kualiva/places/spa/spa_screen.dart';
 import 'package:kualiva/prime_celestial.dart';
 import 'package:kualiva/profile/language_screen.dart';
 import 'package:kualiva/profile/my_profile_screen.dart';
@@ -74,6 +76,8 @@ class AppRoutes {
 
   static const String nightLifeScreen = "/nightlife_screen";
 
+  static const String spaScreen = "/spa_screen";
+
   static const String fnbCuisineScreen = "/f_n_b_cuisine_screen";
 
   static const String fnbFilterScreen = "/f_n_b_filter_screen";
@@ -81,6 +85,8 @@ class AppRoutes {
   static const String fnbDetailScreen = "/f_n_b_detail_screen";
 
   static const String nightLifeDetailScreen = "/nightlife_detail_screen";
+
+  static const String spaDetailScreen = "/spa_detail_screen";
 
   static const String promoPlaceScreen = "/promo_place_screen";
 
@@ -210,6 +216,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 
+    case AppRoutes.spaScreen:
+      return PageTransition(
+          child: const SpaScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
     case AppRoutes.fnbCuisineScreen:
       final cuisineTitle = routeSetting.arguments as String;
       return PageTransition(
@@ -235,6 +247,13 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
       final placeArgument = routeSetting.arguments as PlaceArgument;
       return PageTransition(
           child: NightlifeDetailScreen(placeArgument: placeArgument),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.spaDetailScreen:
+      final placeArgument = routeSetting.arguments as PlaceArgument;
+      return PageTransition(
+          child: SpaDetailScreen(placeArgument: placeArgument),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

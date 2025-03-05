@@ -270,6 +270,30 @@
     "total_review": "Total Ulasan: {total}",
     "avg_rating": "Peringkat Rata-Rata\nyang terkumpul"
   },
+  "spa": {
+    "nearest": "Terdekat Dari Anda",
+    "promo": "Promo",
+    "promo_value": "{}% OFF",
+    "best_rated": "Nilai Terbaik",
+    "tags_more": "+{} Lainnya"
+  },
+  "spa_detail": {
+    "about": "Tentang",
+    "claim_btn": "Klaim Bisnis",
+    "place_not_claimed": "This business is\nnot yet claimed",
+    "place_claimed": "Bisnis ini telah\ndi Klaim",
+    "about_open": "Hari & jam operasional (klik untuk memperluas!)",
+    "about_open_detail": "{day}, {time_open}-{time_close}",
+    "about_price": "Rata-rata mulai dari Rp{price}",
+    "facilities": "Fasilitas",
+    "promo": "Promo",
+    "promo_title": "Judul",
+    "promo_publisher": "Penerbit",
+    "promo_date": "Tersedia hingga tanggal {date}",
+    "review": "Ulasan",
+    "total_review": "Total Ulasan: {total}",
+    "avg_rating": "Peringkat Rata-Rata\nyang terkumpul"
+  },
   "promo": {
     "title": "Promo",
     "promo_date": "Tersedia hingga tanggal {date}",

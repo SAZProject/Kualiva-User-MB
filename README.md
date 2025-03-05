@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.19+02
-- Code Cleanup remove hostelry
+Ver 0.1.19+03
+- Fix some merge failed code
 ```
 
 ## Getting Started

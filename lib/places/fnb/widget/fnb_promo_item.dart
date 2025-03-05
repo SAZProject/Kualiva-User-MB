@@ -111,11 +111,23 @@ class FnbPromoItem extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(left: 4.h),
-              child: Text(
-                fnbPromoModel.name,
-                style: theme(context).textTheme.titleSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              child: Row(
+                children: [
+                  CustomImageView(
+                    imagePath: ImageConstant.appLogo2,
+                    height: 20.h,
+                    width: 20.h,
+                    boxFit: BoxFit.cover,
+                  ),
+                  Expanded(
+                    child: Text(
+                      fnbPromoModel.name,
+                      style: theme(context).textTheme.titleSmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(

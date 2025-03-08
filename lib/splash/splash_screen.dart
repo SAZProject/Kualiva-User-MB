@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/check_permission.dart';
+import 'package:kualiva/main_hive.dart';
 // import 'package:kualiva/common/utility/video_constant.dart';
 // import 'package:video_player/video_player.dart';
 
@@ -26,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _checkPermission();
     _startBounceAnimation();
+    MainHive.deleteSplashBox();
     // _videoPlayerController =
     //     VideoPlayerController.asset(VideoConstant.splashVideo);
     // _videoPlayerInitialized = _videoPlayerController.initialize().then(

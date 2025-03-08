@@ -9,6 +9,8 @@ import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
+import 'package:kualiva/review/enum/review_order_num.dart';
+import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/review/feature/review_filter_feature.dart';
 import 'package:kualiva/review/feature/review_my_review_feature.dart';
 import 'package:kualiva/review/feature/review_other_review_feature.dart';
@@ -29,18 +31,20 @@ class _ReviewScreenState extends State<ReviewScreen> {
   String get placeId => widget.reviewArgument.placeUniqueId;
   PlaceCategoryEnum get placeCategory => widget.reviewArgument.placeCategory;
 
-  List<String> filterByCategory = [
-    "review.filter_user",
-    "review.filter_kualiva",
-  ];
+  final selectedUser = ValueNotifier<ReviewSelectedUserEnum?>(null);
+  final withMedia = ValueNotifier<bool?>(null);
+  final rating = ValueNotifier<int?>(null);
+  final order = ValueNotifier<ReviewOrderEnum?>(null);
 
-  ValueNotifier<Set<String>> selectedCategory = ValueNotifier<Set<String>>({});
-
-  ValueNotifier<List<String>> menuFilter = ValueNotifier<List<String>>([
-    "review.filter_time",
-    "review.filter_media",
-    "review.filter_rating",
-  ]);
+  void filterRequest() {
+    context.read<ReviewPlaceOtherReadBloc>().add(ReviewPlaceOtherReadFetched(
+          placeId: placeId,
+          withMedia: withMedia.value,
+          rating: rating.value,
+          selectedUser: selectedUser.value,
+          order: order.value,
+        ));
+  }
 
   @override
   void initState() {
@@ -51,12 +55,23 @@ class _ReviewScreenState extends State<ReviewScreen> {
     context
         .read<ReviewPlaceOtherReadBloc>()
         .add(ReviewPlaceOtherReadFetched(placeId: placeId));
+    selectedUser.addListener(filterRequest);
+    withMedia.addListener(filterRequest);
+    rating.addListener(filterRequest);
+    order.addListener(filterRequest);
   }
 
   @override
   void dispose() {
-    selectedCategory.dispose();
     super.dispose();
+    selectedUser.removeListener(filterRequest);
+    withMedia.removeListener(filterRequest);
+    rating.removeListener(filterRequest);
+    order.removeListener(filterRequest);
+    selectedUser.dispose();
+    withMedia.dispose();
+    rating.dispose();
+    order.dispose();
   }
 
   @override
@@ -102,9 +117,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ReviewSearchBarFeature(),
                   SizedBox(height: 5.h),
                   ReviewFilterFeature(
-                    filterByCategory: filterByCategory,
-                    menuFilter: menuFilter,
-                    selectedCategory: selectedCategory,
+                    selectedUser: selectedUser,
+                    withMedia: withMedia,
+                    rating: rating,
+                    order: order,
                   ),
                   SizedBox(height: 5.h),
                   ReviewMyReviewFeature(),

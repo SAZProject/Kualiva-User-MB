@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/review/enum/review_order_num.dart';
+import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 import 'package:kualiva/_repository/review_repository.dart';
@@ -22,7 +24,14 @@ class ReviewPlaceOtherReadBloc
   ) async {
     try {
       final List<ReviewPlaceModel> reviewsPlace =
-          await _reviewRepository.otherReviewGetByPlace(placeId: event.placeId);
+          await _reviewRepository.otherReviewGetByPlace(
+        isRefreshed: event.isRefreshed,
+        placeId: event.placeId,
+        withMedia: event.withMedia,
+        rating: event.rating,
+        selectedUser: event.selectedUser,
+        order: event.order,
+      );
       LeLog.bd(this, _onOtherReviewFetched, reviewsPlace.toString());
       emit(ReviewPlaceOtherReadSuccess(reviewsPlace: reviewsPlace));
     } catch (e) {

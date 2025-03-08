@@ -3,24 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_radio_button.dart';
+import 'package:kualiva/review/enum/review_order_num.dart';
 
 class ReviewFiltersModal extends StatefulWidget {
   const ReviewFiltersModal({
     super.key,
     required this.menuFilter,
+    required this.withMedia,
+    required this.rating,
+    required this.order,
   });
 
   final ValueNotifier<List<String>> menuFilter;
+  final ValueNotifier<bool?> withMedia;
+  final ValueNotifier<int?> rating;
+  final ValueNotifier<ReviewOrderEnum?> order;
 
   @override
   State<ReviewFiltersModal> createState() => _ReviewFiltersModalState();
 }
 
 class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
-  List<String> listFilterTime = [
-    "review.filter_time_1",
-    "review.filter_time_2",
-  ];
+  ValueNotifier<List<String>> get menuFilter => widget.menuFilter;
+  ValueNotifier<bool?> get withMedia => widget.withMedia;
+  ValueNotifier<int?> get rating => widget.rating;
+  ValueNotifier<ReviewOrderEnum?> get order => widget.order;
+
+  final Map<String, ReviewOrderEnum> filterTimeMap = Map.from({
+    'review.filter_time_1': ReviewOrderEnum.mostLikes,
+    'review.filter_time_2': ReviewOrderEnum.recent,
+  });
+
   String? selectedFilterTime;
 
   List<String> listFilterMedia = [
@@ -28,15 +41,15 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
   ];
   String? selectedFilterMedia;
 
-  List<String> listFilterRating = [
-    "review.filter_rating_1",
-    "review.filter_rating_2",
-    "review.filter_rating_3",
-    "review.filter_rating_4",
-    "review.filter_rating_5",
-    "review.filter_rating_6",
-    "review.filter_rating_7",
-  ];
+  final Map<String, int> filterRatingMap = Map.from({
+    "review.filter_rating_1": 5,
+    "review.filter_rating_2": 1,
+    "review.filter_rating_3": 5,
+    "review.filter_rating_4": 4,
+    "review.filter_rating_5": 3,
+    "review.filter_rating_6": 2,
+    "review.filter_rating_7": 1
+  });
   String? selectedFilterRating;
 
   void _resetValue() {
@@ -46,8 +59,8 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
       "review.filter_rating",
     ];
 
-    widget.menuFilter.value.clear();
-    widget.menuFilter.value = filterResult;
+    menuFilter.value.clear();
+    menuFilter.value = filterResult;
   }
 
   void _saveButton() {
@@ -57,8 +70,17 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
       selectedFilterRating ?? "review.filter_rating",
     ];
 
-    widget.menuFilter.value.clear();
-    widget.menuFilter.value = filterResult;
+    debugPrint("ANJING");
+    debugPrint(selectedFilterMedia);
+    debugPrint(selectedFilterRating);
+    debugPrint(selectedFilterTime);
+
+    withMedia.value = (selectedFilterMedia == null) ? null : true;
+    rating.value = filterRatingMap[selectedFilterRating ?? ''];
+    order.value = filterTimeMap[selectedFilterTime ?? ''];
+
+    menuFilter.value.clear();
+    menuFilter.value = filterResult;
     Navigator.pop(context);
   }
 
@@ -146,12 +168,13 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
                       SizedBox(height: 10.h),
                       ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: listFilterTime.length,
+                        itemCount: filterTimeMap.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return _buildSectionChoices(
                             context,
-                            context.tr(listFilterTime[index]),
+                            context.tr(filterTimeMap.keys.elementAt(index)),
+                            filterTimeMap.keys.elementAt(index),
                             selectedFilterTime,
                             (value) {
                               setState(() {
@@ -184,6 +207,7 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
                           return _buildSectionChoices(
                             context,
                             context.tr(listFilterMedia[index]),
+                            listFilterMedia[index],
                             selectedFilterMedia,
                             (value) {
                               setState(() {
@@ -210,12 +234,13 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
                       SizedBox(height: 10.h),
                       ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: listFilterRating.length,
+                        itemCount: filterRatingMap.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return _buildSectionChoices(
                             context,
-                            context.tr(listFilterRating[index]),
+                            context.tr(filterRatingMap.keys.elementAt(index)),
+                            filterRatingMap.keys.elementAt(index),
                             selectedFilterRating,
                             (value) {
                               setState(() {
@@ -254,12 +279,13 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
 
   Widget _buildSectionChoices(
     BuildContext context,
+    String? text,
     String? value,
     String? groupVal,
     Function(String) onChange,
   ) {
     return CustomRadioButton(
-      text: value,
+      text: text,
       value: value,
       groupValue: groupVal,
       iconSize: 10.h,

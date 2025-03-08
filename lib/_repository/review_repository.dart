@@ -1,16 +1,15 @@
 import 'package:kualiva/_data/model/minio/image_upload_model.dart';
 import 'package:kualiva/_repository/minio_repository.dart';
 
-// import 'package:hive/hive.dart';
+import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
+import 'package:kualiva/review/enum/review_order_num.dart';
+import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 
-// import 'package:kualiva/main_hive.dart';
+import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
-
-// AuthorId
-// cm3d0h52q0000qtfl1aoq65b8
 
 class ReviewRepository {
   ReviewRepository(this._dioClient, this._minioRepository);
@@ -98,19 +97,32 @@ class ReviewRepository {
 
   /// get other Reviews by Place / Merchant
   Future<List<ReviewPlaceModel>> otherReviewGetByPlace({
+    required bool isRefreshed,
     required String placeId,
+    bool? withMedia,
+    int? rating,
+    ReviewSelectedUserEnum? selectedUser,
+    ReviewOrderEnum? order,
   }) async {
-    // final reviewPlaceBox =
-    //     Hive.box<ReviewPlaceModel>(MyHive.reviewPlaceModel.name);
+    // final reviewPlaceBox = Hive.box<ReviewPlaceModel>(MyHive.reviewPlace.name);
 
     // if (reviewPlaceBox.values.toList().isNotEmpty) {
     //   final reviewPlaceList = reviewPlaceBox.values.toList();
-    //   LeLog.rd(this, getByPlace, reviewPlaceList.toString());
+    //   LeLog.rd(this, otherReviewGetByPlace, reviewPlaceList.toString());
     //   return reviewPlaceList;
     // }
 
+    final query = Map<String, dynamic>.from({});
+    if (withMedia != null) query['withMedia'] = withMedia;
+    if (rating != null) query['rating'] = rating;
+    if (selectedUser != null) query['selectedUser'] = selectedUser.value;
+    if (order != null) query['order'] = order.value;
+
     final res = await _dioClient.dio().then((dio) {
-      return dio.get('/reviews/$placeId/place');
+      return dio.get(
+        '/reviews/$placeId/place',
+        queryParameters: query,
+      );
     });
 
     final data = (res.data as List<dynamic>)

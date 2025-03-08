@@ -41,6 +41,12 @@ class MainHive {
     await openBox();
   }
 
+  static Future<void> deleteSplashBox() async {
+    await Hive.box<CurrentLocationModel>(MyHive.currentLocation.name)
+        .deleteFromDisk();
+    await Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name);
+  }
+
   static bool checkOpenBox() {
     // for (var e in MyHive.values) {
     //   if (!Hive.isAdapterRegistered(e.typeId)) {

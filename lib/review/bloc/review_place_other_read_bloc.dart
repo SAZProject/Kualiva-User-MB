@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/review/enum/review_order_num.dart';
+import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/model/review_place_model.dart';

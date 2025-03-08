@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/review/enum/review_order_num.dart';
+import 'package:kualiva/review/cubit/review_filter_cubit.dart';
+import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/review/widget/review_filters_item.dart';
 import 'package:kualiva/review/widget/review_filters_modal.dart';
@@ -45,14 +47,20 @@ class _ReviewFilterFeatureState extends State<ReviewFilterFeature> {
   final selectedUserSet = ValueNotifier<Set<String>>({});
 
   void selectedUserChange() {
-    selectedUser.value =
-        selectedUserMap[selectedUserSet.value.firstOrNull ?? ''];
+    context.read<ReviewFilterCubit>().filter(
+        selectedUser: selectedUserMap[selectedUserSet.value.firstOrNull ?? '']);
+  }
+
+  Future<void> initData() async {
+    final reviewFilterOld = await context.read<ReviewFilterCubit>().getOld();
+    selectedUserSet.value = Set.from({reviewFilterOld?.selectedUser});
   }
 
   @override
   void initState() {
     super.initState();
     selectedUserSet.addListener(selectedUserChange);
+    initData();
   }
 
   @override
@@ -70,100 +78,103 @@ class _ReviewFilterFeatureState extends State<ReviewFilterFeature> {
       margin: EdgeInsets.symmetric(horizontal: 2.h),
       child: Column(
         children: [
-          Wrap(
-            alignment: WrapAlignment.center,
-            runSpacing: 10.h,
-            spacing: 10.h,
-            children: List<Widget>.generate(
-              selectedUserMap.length,
-              (index) {
-                return ReviewFiltersItem(
-                  label: context.tr(selectedUserMap.keys.elementAt(index)),
-                  multiSelectedChoices: selectedUserSet,
-                );
-              },
-            ),
-          ),
-          ValueListenableBuilder(
-            valueListenable: menuFilter,
-            builder: (context, value, child) {
-              return Wrap(
-                direction: Axis.horizontal,
-                alignment: WrapAlignment.center,
-                runSpacing: 10.h,
-                spacing: 10.h,
-                children: List<Widget>.generate(
-                  value.length,
-                  (index) {
-                    return InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return ReviewFiltersModal(
-                              menuFilter: menuFilter,
-                              withMedia: withMedia,
-                              rating: rating,
-                              order: order,
-                            );
-                          },
-                        );
-                      },
-                      child: FittedBox(
-                        child: Card(
-                          color:
-                              theme(context).colorScheme.onSecondaryContainer,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusStyle.roundedBorder20,
-                            side: BorderSide(
-                                color: theme(context)
-                                    .colorScheme
-                                    .onPrimaryContainer),
-                          ),
-                          clipBehavior: Clip.hardEdge,
-                          elevation: 5.h,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 5.h, vertical: 5.h),
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  index == 2
-                                      ? Icon(
-                                          Icons.star,
-                                          size: 20.h,
-                                          color: theme(context)
-                                              .colorScheme
-                                              .primary,
-                                        )
-                                      : const SizedBox(),
-                                  Text(
-                                    value[index].contains(".")
-                                        ? context.tr(value[index])
-                                        : value[index],
-                                    textAlign: TextAlign.center,
-                                    style: theme(context).textTheme.bodyMedium,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Icon(
-                                    Icons.arrow_drop_down_outlined,
+          selectedUserWidget(),
+          filteringWidget(),
+        ],
+      ),
+    );
+  }
+
+  Widget selectedUserWidget() {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      runSpacing: 10.h,
+      spacing: 10.h,
+      children: List<Widget>.generate(
+        selectedUserMap.length,
+        (index) {
+          return ReviewFiltersItem(
+            label: context.tr(selectedUserMap.keys.elementAt(index)),
+            multiSelectedChoices: selectedUserSet,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget filteringWidget() {
+    return ValueListenableBuilder(
+      valueListenable: menuFilter,
+      builder: (context, value, child) {
+        return Wrap(
+          direction: Axis.horizontal,
+          alignment: WrapAlignment.center,
+          runSpacing: 10.h,
+          spacing: 10.h,
+          children: List<Widget>.generate(
+            value.length,
+            (index) {
+              return InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ReviewFiltersModal(
+                        menuFilter: menuFilter,
+                        withMedia: withMedia,
+                        rating: rating,
+                        order: order,
+                      );
+                    },
+                  );
+                },
+                child: FittedBox(
+                  child: Card(
+                    color: theme(context).colorScheme.onSecondaryContainer,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusStyle.roundedBorder20,
+                      side: BorderSide(
+                          color: theme(context).colorScheme.onPrimaryContainer),
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    elevation: 5.h,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+                      child: Center(
+                        child: Row(
+                          children: [
+                            index == 2
+                                ? Icon(
+                                    Icons.star,
                                     size: 20.h,
-                                  ),
-                                ],
-                              ),
+                                    color: theme(context).colorScheme.primary,
+                                  )
+                                : const SizedBox(),
+                            Text(
+                              value[index].contains(".")
+                                  ? context.tr(value[index])
+                                  : value[index],
+                              textAlign: TextAlign.center,
+                              style: theme(context).textTheme.bodyMedium,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
+                            Icon(
+                              Icons.arrow_drop_down_outlined,
+                              size: 20.h,
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               );
             },
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

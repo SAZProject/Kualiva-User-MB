@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_radio_button.dart';
-import 'package:kualiva/review/enum/review_order_num.dart';
+import 'package:kualiva/review/cubit/review_filter_cubit.dart';
+import 'package:kualiva/review/enum/review_order_enum.dart';
 
 class ReviewFiltersModal extends StatefulWidget {
   const ReviewFiltersModal({
@@ -42,13 +44,13 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
   String? selectedFilterMedia;
 
   final Map<String, int> filterRatingMap = Map.from({
-    "review.filter_rating_1": 5,
-    "review.filter_rating_2": 1,
-    "review.filter_rating_3": 5,
+    "review.filter_rating_1": 1,
+    "review.filter_rating_2": 2,
+    "review.filter_rating_3": 3,
     "review.filter_rating_4": 4,
-    "review.filter_rating_5": 3,
-    "review.filter_rating_6": 2,
-    "review.filter_rating_7": 1
+    "review.filter_rating_5": 5,
+    // "review.filter_rating_6": 1,
+    // "review.filter_rating_7": 5,
   });
   String? selectedFilterRating;
 
@@ -58,6 +60,8 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
       "review.filter_media",
       "review.filter_rating",
     ];
+
+    context.read<ReviewFilterCubit>().reset();
 
     menuFilter.value.clear();
     menuFilter.value = filterResult;
@@ -70,18 +74,50 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
       selectedFilterRating ?? "review.filter_rating",
     ];
 
-    debugPrint("ANJING");
-    debugPrint(selectedFilterMedia);
-    debugPrint(selectedFilterRating);
-    debugPrint(selectedFilterTime);
-
     withMedia.value = (selectedFilterMedia == null) ? null : true;
     rating.value = filterRatingMap[selectedFilterRating ?? ''];
     order.value = filterTimeMap[selectedFilterTime ?? ''];
 
+    context.read<ReviewFilterCubit>().filter(
+        withMedia: (selectedFilterMedia == null) ? null : true,
+        rating: filterRatingMap[selectedFilterRating ?? ''],
+        order: filterTimeMap[selectedFilterTime ?? '']);
+
     menuFilter.value.clear();
     menuFilter.value = filterResult;
     Navigator.pop(context);
+  }
+
+  Future<void> initData() async {
+    final reviewFilter = await context.read<ReviewFilterCubit>().getOld();
+
+    final filterTime = filterTimeMap.entries.singleWhere((element) {
+      return element.value == reviewFilter?.order;
+    }, orElse: () => MapEntry("review.filter_time", ReviewOrderEnum.recent));
+
+    final filterMedia =
+        (reviewFilter?.withMedia == null || reviewFilter?.withMedia == false)
+            ? "review.filter_time"
+            : "review.filter_media_1";
+
+    final filterRating = filterRatingMap.entries.singleWhere((element) {
+      return element.value == reviewFilter?.rating;
+    }, orElse: () => MapEntry("review.filter_rating", 0));
+
+    List<String> filterResult = [
+      filterTime.key,
+      filterMedia,
+      filterRating.key,
+    ];
+
+    menuFilter.value.clear();
+    menuFilter.value = filterResult;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
   }
 
   @override

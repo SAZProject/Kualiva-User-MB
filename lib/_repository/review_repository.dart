@@ -5,10 +5,11 @@ import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
-import 'package:kualiva/review/enum/review_order_num.dart';
+import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 
 import 'package:kualiva/main_hive.dart';
+import 'package:kualiva/review/model/review_filter_model.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 
 class ReviewRepository {
@@ -182,5 +183,46 @@ class ReviewRepository {
       return dio.delete('/reviews/$reviewId/like/remove');
     });
     return;
+  }
+
+  Future<ReviewFilterModel?> getFilter() async {
+    final reviewFilterBox =
+        Hive.box<ReviewFilterModel>(MyHive.reviewFilter.name);
+
+    if (reviewFilterBox.values.toList().isNotEmpty) {
+      final reviewFilter = reviewFilterBox.values.first;
+      LeLog.rd(this, getFilter, reviewFilter.toString());
+      return reviewFilter;
+    }
+
+    return null;
+  }
+
+  Future<int> deleteFilter() async {
+    final reviewFilterBox =
+        Hive.box<ReviewFilterModel>(MyHive.reviewFilter.name);
+    return reviewFilterBox.clear();
+  }
+
+  Future<ReviewFilterModel> addFilter({
+    ReviewSelectedUserEnum? selectedUser,
+    bool? withMedia,
+    int? rating,
+    ReviewOrderEnum? order,
+  }) async {
+    final reviewFilterBox =
+        Hive.box<ReviewFilterModel>(MyHive.reviewFilter.name);
+
+    final reviewFilter = ReviewFilterModel(
+      selectedUser: selectedUser,
+      withMedia: withMedia,
+      rating: rating,
+      order: order,
+    );
+
+    await deleteFilter();
+
+    await reviewFilterBox.add(reviewFilter);
+    return reviewFilterBox.values.first;
   }
 }

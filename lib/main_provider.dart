@@ -42,6 +42,7 @@ import 'package:kualiva/review/bloc/review_like_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
+import 'package:kualiva/review/cubit/review_filter_cubit.dart';
 import 'package:kualiva/review/cubit/review_search_bar_cubit.dart';
 import 'package:kualiva/_repository/review_repository.dart';
 
@@ -236,7 +237,10 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return NightlifePromoBloc(context.read<NightlifeRepository>());
-        })
+        }),
+        BlocProvider(create: (context) {
+          return ReviewFilterCubit(context.read<ReviewRepository>());
+        }),
       ],
       child: child,
     );

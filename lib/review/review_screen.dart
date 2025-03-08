@@ -9,7 +9,8 @@ import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
-import 'package:kualiva/review/enum/review_order_num.dart';
+import 'package:kualiva/review/cubit/review_filter_cubit.dart';
+import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/review/feature/review_filter_feature.dart';
 import 'package:kualiva/review/feature/review_my_review_feature.dart';
@@ -76,13 +77,29 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _reviewAppBar(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          height: Sizeutils.height,
-          child: _body(context),
+    return BlocListener<ReviewFilterCubit, ReviewFilterState>(
+      listener: (context, state) {
+        if (state is! ReviewFilterSuccess) return;
+        final reviewFilter = state.reviewFilter;
+        context
+            .read<ReviewPlaceOtherReadBloc>()
+            .add(ReviewPlaceOtherReadFetched(
+              isRefreshed: true,
+              placeId: placeId,
+              selectedUser: reviewFilter.selectedUser,
+              withMedia: reviewFilter.withMedia,
+              rating: reviewFilter.rating,
+              order: reviewFilter.order,
+            ));
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: _reviewAppBar(context),
+          body: SizedBox(
+            width: double.maxFinite,
+            height: Sizeutils.height,
+            child: _body(context),
+          ),
         ),
       ),
     );

@@ -9,30 +9,13 @@ import 'package:kualiva/review/widget/review_filters_item.dart';
 import 'package:kualiva/review/widget/review_filters_modal.dart';
 
 class ReviewFilterFeature extends StatefulWidget {
-  const ReviewFilterFeature({
-    super.key,
-    required this.selectedUser,
-    required this.withMedia,
-    required this.rating,
-    required this.order,
-  });
-
-  final ValueNotifier<ReviewSelectedUserEnum?> selectedUser;
-  final ValueNotifier<bool?> withMedia;
-  final ValueNotifier<int?> rating;
-  final ValueNotifier<ReviewOrderEnum?> order;
+  const ReviewFilterFeature({super.key});
 
   @override
   State<ReviewFilterFeature> createState() => _ReviewFilterFeatureState();
 }
 
 class _ReviewFilterFeatureState extends State<ReviewFilterFeature> {
-  ValueNotifier<ReviewSelectedUserEnum?> get selectedUser =>
-      widget.selectedUser;
-  ValueNotifier<bool?> get withMedia => widget.withMedia;
-  ValueNotifier<int?> get rating => widget.rating;
-  ValueNotifier<ReviewOrderEnum?> get order => widget.order;
-
   final Map<String, ReviewSelectedUserEnum> selectedUserMap = Map.from({
     'review.filter_user': ReviewSelectedUserEnum.user,
     'review.filter_kualiva': ReviewSelectedUserEnum.kualiva,
@@ -119,12 +102,7 @@ class _ReviewFilterFeatureState extends State<ReviewFilterFeature> {
                   showModalBottomSheet(
                     context: context,
                     builder: (BuildContext context) {
-                      return ReviewFiltersModal(
-                        menuFilter: menuFilter,
-                        withMedia: withMedia,
-                        rating: rating,
-                        order: order,
-                      );
+                      return ReviewFiltersModal(menuFilter: menuFilter);
                     },
                   );
                 },

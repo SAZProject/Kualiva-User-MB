@@ -11,15 +11,9 @@ class ReviewFiltersModal extends StatefulWidget {
   const ReviewFiltersModal({
     super.key,
     required this.menuFilter,
-    required this.withMedia,
-    required this.rating,
-    required this.order,
   });
 
   final ValueNotifier<List<String>> menuFilter;
-  final ValueNotifier<bool?> withMedia;
-  final ValueNotifier<int?> rating;
-  final ValueNotifier<ReviewOrderEnum?> order;
 
   @override
   State<ReviewFiltersModal> createState() => _ReviewFiltersModalState();
@@ -27,9 +21,6 @@ class ReviewFiltersModal extends StatefulWidget {
 
 class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
   ValueNotifier<List<String>> get menuFilter => widget.menuFilter;
-  ValueNotifier<bool?> get withMedia => widget.withMedia;
-  ValueNotifier<int?> get rating => widget.rating;
-  ValueNotifier<ReviewOrderEnum?> get order => widget.order;
 
   final Map<String, ReviewOrderEnum> filterTimeMap = Map.from({
     'review.filter_time_1': ReviewOrderEnum.mostLikes,
@@ -74,10 +65,6 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
       selectedFilterRating ?? "review.filter_rating",
     ];
 
-    withMedia.value = (selectedFilterMedia == null) ? null : true;
-    rating.value = filterRatingMap[selectedFilterRating ?? ''];
-    order.value = filterTimeMap[selectedFilterTime ?? ''];
-
     context.read<ReviewFilterCubit>().filter(
         withMedia: (selectedFilterMedia == null) ? null : true,
         rating: filterRatingMap[selectedFilterRating ?? ''],
@@ -94,15 +81,19 @@ class _ReviewFiltersModalState extends State<ReviewFiltersModal> {
     final filterTime = filterTimeMap.entries.singleWhere((element) {
       return element.value == reviewFilter?.order;
     }, orElse: () => MapEntry("review.filter_time", ReviewOrderEnum.recent));
-
     final filterMedia =
         (reviewFilter?.withMedia == null || reviewFilter?.withMedia == false)
-            ? "review.filter_time"
+            ? "review.filter_media"
             : "review.filter_media_1";
-
     final filterRating = filterRatingMap.entries.singleWhere((element) {
       return element.value == reviewFilter?.rating;
     }, orElse: () => MapEntry("review.filter_rating", 0));
+
+    setState(() {
+      selectedFilterTime = filterTime.key;
+      selectedFilterMedia = filterMedia;
+      selectedFilterRating = filterRating.key;
+    });
 
     List<String> filterResult = [
       filterTime.key,

@@ -39,6 +39,7 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
 
     final data = ReviewFilterSuccess(reviewFilter: reviewFilter);
     LeLog.bd(this, filter, data.toString());
+    debugPrint(data.toString());
     emit(data);
   }
 }

@@ -133,12 +133,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   SizedBox(height: 5.h),
                   ReviewSearchBarFeature(),
                   SizedBox(height: 5.h),
-                  ReviewFilterFeature(
-                    selectedUser: selectedUser,
-                    withMedia: withMedia,
-                    rating: rating,
-                    order: order,
-                  ),
+                  ReviewFilterFeature(),
                   SizedBox(height: 5.h),
                   ReviewMyReviewFeature(),
                   SizedBox(height: 5.h),

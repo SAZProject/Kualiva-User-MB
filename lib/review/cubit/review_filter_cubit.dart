@@ -38,6 +38,7 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
     final reviewFilterOld = await getOld();
 
     final reviewFilter = await _reviewRepository.addFilter(
+      description: description ?? reviewFilterOld?.description,
       selectedUser: selectedUser ?? reviewFilterOld?.selectedUser,
       withMedia: withMedia ?? reviewFilterOld?.withMedia,
       rating: rating ?? reviewFilterOld?.rating,
@@ -45,7 +46,7 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
     );
 
     if (reviewFilter.description != null) {
-      _suggestionRepository.add(
+      await _suggestionRepository.add(
         SuggestionEnum.review,
         reviewFilter.description!,
       );

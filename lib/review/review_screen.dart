@@ -10,6 +10,7 @@ import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
 import 'package:kualiva/review/cubit/review_filter_cubit.dart';
+import 'package:kualiva/review/cubit/review_search_bar_cubit.dart';
 import 'package:kualiva/review/feature/review_filter_feature.dart';
 import 'package:kualiva/review/feature/review_my_review_feature.dart';
 import 'package:kualiva/review/feature/review_other_review_feature.dart';
@@ -39,6 +40,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     context
         .read<ReviewPlaceOtherReadBloc>()
         .add(ReviewPlaceOtherReadFetched(placeId: placeId));
+    context.read<ReviewSearchBarCubit>().load();
   }
 
   @override

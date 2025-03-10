@@ -19,66 +19,23 @@ class SuggestionRepository {
     SuggestionEnum suggestionEnum,
     String suggestion,
   ) async {
+    if (suggestion.isEmpty) return get(suggestionEnum);
+
     final suggestionList = await get(suggestionEnum);
     suggestionList.add(suggestion);
-    await suggestionBox.put(suggestionEnum.name, suggestionList);
-    LeLog.rd(this, add, "${suggestionEnum.name} - $suggestionList");
+    final suggestionListUnique = suggestionList.toSet().toList();
+    await suggestionBox.put(suggestionEnum.name, suggestionListUnique);
+    LeLog.rd(this, add, "${suggestionEnum.name} - $suggestionListUnique");
     return get(suggestionEnum);
   }
 
   Future<void> delete(SuggestionEnum suggestionEnum) async {
-    LeLog.re(this, delete, suggestionEnum.name);
+    LeLog.rd(this, delete, suggestionEnum.name);
     return suggestionBox.delete(suggestionEnum.name);
   }
 
   Future<int> deleteAll() async {
-    LeLog.re(this, deleteAll, 'Delete All');
+    LeLog.rd(this, deleteAll, 'Delete All');
     return suggestionBox.clear();
   }
 }
-
-// final List<String> _homeSuggestionDummy = [
-//   "Hari Kemerdekaan",
-//   'Table 8',
-//   'Starkbuck',
-//   "Kopi Kenangan",
-//   "Letto 12",
-// ];
-
-// final List<String> _fnbSuggestionDummy = [
-//   "Makan Nasi",
-//   "KFC",
-//   "Lemper",
-//   "Mie",
-//   "Jus buah",
-// ];
-
-// final List<String> _reviewSuggestionDummy = [
-//   "Service",
-//   "place",
-//   "clean",
-//   "food",
-// ];
-
-// Future<List<String>> getHomeSuggestion() async {
-//   final data = _homeSuggestionDummy;
-
-//   LeLog.rd(this, getHomeSuggestion, data.toString());
-//   return data;
-// }
-
-// Future<List<String>> getFnbSuggestion() async {
-//   final data = _fnbSuggestionDummy;
-
-//   LeLog.rd(this, getFnbSuggestion, data.toString());
-//   return data;
-// }
-
-// Future<List<String>> getReviewSuggestion() async {
-//   final suggestionBox = Hive.box<String>(MyHive.suggestion.name);
-//   suggestionBox.get("review");
-//   final data = _reviewSuggestionDummy;
-
-//   LeLog.rd(this, getReviewSuggestion, data.toString());
-//   return data;
-// }

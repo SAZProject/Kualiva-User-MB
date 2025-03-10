@@ -12,10 +12,19 @@ class ReviewSearchBarCubit extends Cubit<ReviewSearchBarState> {
   ReviewSearchBarCubit(this._suggestionRepository)
       : super(ReviewSearchBarInitial());
 
-  void loadSuggestion() async {
+  void load() async {
     final reviewSuggestion =
         await _suggestionRepository.get(SuggestionEnum.review);
-    LeLog.bd(this, loadSuggestion, reviewSuggestion.toString());
+    LeLog.bd(this, load, reviewSuggestion.toString());
+    emit(ReviewSearchBarSuccess(reviewSuggestion: reviewSuggestion));
+  }
+
+  void add({
+    required String suggestion,
+  }) async {
+    final reviewSuggestion =
+        await _suggestionRepository.add(SuggestionEnum.review, suggestion);
+    LeLog.bd(this, add, reviewSuggestion.toString());
     emit(ReviewSearchBarSuccess(reviewSuggestion: reviewSuggestion));
   }
 }

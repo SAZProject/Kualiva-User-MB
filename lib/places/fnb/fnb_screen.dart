@@ -43,8 +43,6 @@ class _FnbScreenState extends State<FnbScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
-        debugPrint("LeRucco");
-
         if (state is! CurrentLocationSuccess) return;
 
         context.read<FnbPromoBloc>().add(FnbPromoFetched(

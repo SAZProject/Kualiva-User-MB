@@ -6,6 +6,7 @@ sealed class ReviewPlaceOtherReadEvent {}
 final class ReviewPlaceOtherReadFetched extends ReviewPlaceOtherReadEvent {
   final bool isRefreshed;
   final String placeId;
+  final String? description;
   final bool? withMedia;
   final int? rating;
   final ReviewSelectedUserEnum? selectedUser;
@@ -14,6 +15,7 @@ final class ReviewPlaceOtherReadFetched extends ReviewPlaceOtherReadEvent {
   ReviewPlaceOtherReadFetched({
     this.isRefreshed = false,
     required this.placeId,
+    this.description,
     this.withMedia,
     this.rating,
     this.selectedUser,

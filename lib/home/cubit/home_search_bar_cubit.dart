@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:kualiva/_data/enum/suggestion_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_repository/suggestion_repository.dart';
 
@@ -12,7 +13,7 @@ class HomeSearchBarCubit extends Cubit<HomeSearchBarState> {
       : super(HomeSearchBarInitial());
 
   void loadSuggestion() async {
-    final homeSuggestion = await _suggestionRepository.getHomeSuggestion();
+    final homeSuggestion = await _suggestionRepository.get(SuggestionEnum.home);
     LeLog.bd(this, loadSuggestion, homeSuggestion.toString());
     emit(HomeSearchBarSuccess(homeSuggestion: homeSuggestion));
   }

@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:kualiva/_data/enum/suggestion_enum.dart';
 import 'package:kualiva/_repository/review_repository.dart';
+import 'package:kualiva/_repository/suggestion_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
@@ -10,7 +12,11 @@ part 'review_filter_state.dart';
 
 class ReviewFilterCubit extends Cubit<ReviewFilterState> {
   final ReviewRepository _reviewRepository;
-  ReviewFilterCubit(this._reviewRepository) : super(ReviewFilterInitial());
+  final SuggestionRepository _suggestionRepository;
+  ReviewFilterCubit(
+    this._reviewRepository,
+    this._suggestionRepository,
+  ) : super(ReviewFilterInitial());
 
   Future<ReviewFilterModel?> getOld() async {
     final reviewFilter = await _reviewRepository.getFilter();
@@ -23,6 +29,7 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
   }
 
   void filter({
+    String? description,
     ReviewSelectedUserEnum? selectedUser,
     bool? withMedia,
     int? rating,
@@ -36,6 +43,13 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
       rating: rating ?? reviewFilterOld?.rating,
       order: order ?? reviewFilterOld?.order,
     );
+
+    if (reviewFilter.description != null) {
+      _suggestionRepository.add(
+        SuggestionEnum.review,
+        reviewFilter.description!,
+      );
+    }
 
     final data = ReviewFilterSuccess(reviewFilter: reviewFilter);
     LeLog.bd(this, filter, data.toString());

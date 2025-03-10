@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
+
 import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 
@@ -10,18 +11,22 @@ part 'review_filter_model.g.dart';
 @HiveType(typeId: 13)
 class ReviewFilterModel {
   @HiveField(0)
-  final ReviewSelectedUserEnum? selectedUser;
+  final String? description;
 
   @HiveField(1)
-  final bool? withMedia;
+  final ReviewSelectedUserEnum? selectedUser;
 
   @HiveField(2)
-  final int? rating;
+  final bool? withMedia;
 
   @HiveField(3)
+  final int? rating;
+
+  @HiveField(4)
   final ReviewOrderEnum? order;
 
   const ReviewFilterModel({
+    this.description,
     this.selectedUser,
     this.withMedia,
     this.rating,
@@ -29,12 +34,14 @@ class ReviewFilterModel {
   });
 
   ReviewFilterModel copyWith({
+    ValueGetter<String?>? description,
     ValueGetter<ReviewSelectedUserEnum?>? selectedUser,
     ValueGetter<bool?>? withMedia,
     ValueGetter<int?>? rating,
     ValueGetter<ReviewOrderEnum?>? order,
   }) {
     return ReviewFilterModel(
+      description: description != null ? description() : this.description,
       selectedUser: selectedUser != null ? selectedUser() : this.selectedUser,
       withMedia: withMedia != null ? withMedia() : this.withMedia,
       rating: rating != null ? rating() : this.rating,
@@ -42,18 +49,9 @@ class ReviewFilterModel {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'selectedUser': selectedUser?.value,
-      'withMedia': withMedia,
-      'rating': rating,
-      'order': order?.value,
-    };
-  }
-
   @override
   String toString() {
-    return 'ReviewFilterModel(selectedUser: $selectedUser, withMedia: $withMedia, rating: $rating, order: $order)';
+    return 'ReviewFilterModel(description: $description, selectedUser: $selectedUser, withMedia: $withMedia, rating: $rating, order: $order)';
   }
 
   @override
@@ -61,6 +59,7 @@ class ReviewFilterModel {
     if (identical(this, other)) return true;
 
     return other is ReviewFilterModel &&
+        other.description == description &&
         other.selectedUser == selectedUser &&
         other.withMedia == withMedia &&
         other.rating == rating &&
@@ -69,7 +68,8 @@ class ReviewFilterModel {
 
   @override
   int get hashCode {
-    return selectedUser.hashCode ^
+    return description.hashCode ^
+        selectedUser.hashCode ^
         withMedia.hashCode ^
         rating.hashCode ^
         order.hashCode;

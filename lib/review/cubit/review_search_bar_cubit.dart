@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/suggestion_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_repository/suggestion_repository.dart';
 
@@ -12,7 +13,8 @@ class ReviewSearchBarCubit extends Cubit<ReviewSearchBarState> {
       : super(ReviewSearchBarInitial());
 
   void loadSuggestion() async {
-    final reviewSuggestion = await _suggestionRepository.getReviewSuggestion();
+    final reviewSuggestion =
+        await _suggestionRepository.get(SuggestionEnum.review);
     LeLog.bd(this, loadSuggestion, reviewSuggestion.toString());
     emit(ReviewSearchBarSuccess(reviewSuggestion: reviewSuggestion));
   }

@@ -17,24 +17,27 @@ class ReviewFilterModelAdapter extends TypeAdapter<ReviewFilterModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ReviewFilterModel(
-      selectedUser: fields[0] as ReviewSelectedUserEnum?,
-      withMedia: fields[1] as bool?,
-      rating: fields[2] as int?,
-      order: fields[3] as ReviewOrderEnum?,
+      description: fields[0] as String?,
+      selectedUser: fields[1] as ReviewSelectedUserEnum?,
+      withMedia: fields[2] as bool?,
+      rating: fields[3] as int?,
+      order: fields[4] as ReviewOrderEnum?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ReviewFilterModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.selectedUser)
+      ..write(obj.description)
       ..writeByte(1)
-      ..write(obj.withMedia)
+      ..write(obj.selectedUser)
       ..writeByte(2)
-      ..write(obj.rating)
+      ..write(obj.withMedia)
       ..writeByte(3)
+      ..write(obj.rating)
+      ..writeByte(4)
       ..write(obj.order);
   }
 

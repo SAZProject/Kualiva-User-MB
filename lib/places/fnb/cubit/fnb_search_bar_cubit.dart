@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:kualiva/_data/enum/suggestion_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_repository/suggestion_repository.dart';
 
@@ -11,7 +12,7 @@ class FnbSearchBarCubit extends Cubit<FnbSearchBarState> {
   FnbSearchBarCubit(this._suggestionRepository) : super(FnbSearchBarInitial());
 
   void loadSuggestion() async {
-    final fnbSuggestion = await _suggestionRepository.getFnbSuggestion();
+    final fnbSuggestion = await _suggestionRepository.get(SuggestionEnum.fnb);
     LeLog.bd(this, loadSuggestion, fnbSuggestion.toString());
     emit(FnbSearchBarSuccess(fnbSuggestion: fnbSuggestion));
   }

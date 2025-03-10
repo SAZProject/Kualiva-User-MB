@@ -39,6 +39,7 @@ class MainHive {
       Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name),
       Hive.openBox<ParameterModel>(MyHive.parameter.name),
       Hive.openBox<ReviewFilterModel>(MyHive.reviewFilter.name),
+      Hive.openBox<List<String>>(MyHive.suggestion.name),
     ]);
   }
 
@@ -77,7 +78,8 @@ enum MyHive {
   parameter(10, 'parameter'),
   selectedUser(11, 'selected_user'),
   reviewOrder(12, 'review_order'),
-  reviewFilter(13, 'review_filter');
+  reviewFilter(13, 'review_filter'),
+  suggestion(14, 'suggestion');
 
   final int typeId;
   final String name;

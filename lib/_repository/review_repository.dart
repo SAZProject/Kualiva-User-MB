@@ -100,6 +100,7 @@ class ReviewRepository {
   Future<List<ReviewPlaceModel>> otherReviewGetByPlace({
     required bool isRefreshed,
     required String placeId,
+    String? description,
     bool? withMedia,
     int? rating,
     ReviewSelectedUserEnum? selectedUser,
@@ -114,6 +115,7 @@ class ReviewRepository {
     // }
 
     final query = Map<String, dynamic>.from({});
+    if (description != null) query['description'] = description;
     if (withMedia != null) query['withMedia'] = withMedia;
     if (rating != null) query['rating'] = rating;
     if (selectedUser != null) query['selectedUser'] = selectedUser.value;
@@ -205,6 +207,7 @@ class ReviewRepository {
   }
 
   Future<ReviewFilterModel> addFilter({
+    String? description,
     ReviewSelectedUserEnum? selectedUser,
     bool? withMedia,
     int? rating,
@@ -214,6 +217,7 @@ class ReviewRepository {
         Hive.box<ReviewFilterModel>(MyHive.reviewFilter.name);
 
     final reviewFilter = ReviewFilterModel(
+      description: description,
       selectedUser: selectedUser,
       withMedia: withMedia,
       rating: rating,

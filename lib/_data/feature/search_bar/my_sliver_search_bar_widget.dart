@@ -32,11 +32,15 @@ class MySliverSearchBarWidget extends StatelessWidget {
                 onTap: () {
                   controller.openView();
                 },
-                onChanged: (_) {
+                onChanged: (value) {
                   controller.openView();
+                  debugPrint("onChanged");
+                  debugPrint(value);
                 },
                 onSubmitted: (value) {
                   controller.closeView(value);
+                  debugPrint("onSubmitted");
+                  debugPrint(value);
                 },
                 onTapOutside: (event) {
                   FocusScopeNode focusNode = FocusScope.of(context);

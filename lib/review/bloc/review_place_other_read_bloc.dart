@@ -27,6 +27,7 @@ class ReviewPlaceOtherReadBloc
           await _reviewRepository.otherReviewGetByPlace(
         isRefreshed: event.isRefreshed,
         placeId: event.placeId,
+        description: event.description,
         withMedia: event.withMedia,
         rating: event.rating,
         selectedUser: event.selectedUser,

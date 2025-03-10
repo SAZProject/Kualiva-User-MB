@@ -13,7 +13,7 @@ class ReviewSearchBarFeature extends StatelessWidget {
     print("ReviewSearchBarFeature.onSubmitted");
     print(value);
     // TODO: ini perihal Flutter doang ini,
-    // context.read<ReviewFilterCubit>().filter(description: value);
+    context.read<ReviewFilterCubit>().filter(description: value);
   }
 
   @override

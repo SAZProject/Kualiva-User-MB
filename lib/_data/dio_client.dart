@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kualiva/_repository/token_manager.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioClient {
-  DioClient(this._tokenManager);
+  DioClient(this._tokenManager, this._scaffoldMessagerKey);
 
   Dio? _dio;
   final TokenManager _tokenManager;
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessagerKey;
 
   Future<Dio> dio() async {
     if (_dio != null) return _dio!;

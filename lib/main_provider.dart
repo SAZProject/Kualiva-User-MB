@@ -51,6 +51,9 @@ class MainProvider extends StatelessWidget {
 
   final Widget mainChild;
 
+  // final GlobalKey<ScaffoldMessengerState> scaffoldMessagerKey =
+  //     GlobalKey<ScaffoldMessengerState>();
+
   @override
   Widget build(BuildContext context) {
     return _multiRepository(_multiBloc(mainChild));
@@ -68,7 +71,10 @@ class MainProvider extends StatelessWidget {
           return tokenManager;
         }),
         RepositoryProvider(create: (context) {
-          return DioClient(context.read<TokenManager>());
+          return DioClient(
+            context.read<TokenManager>(),
+            GlobalKey<ScaffoldMessengerState>(),
+          );
         }),
         RepositoryProvider(create: (context) {
           return DioClientMinio(context.read<TokenManager>());

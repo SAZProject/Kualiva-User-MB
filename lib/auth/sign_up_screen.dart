@@ -113,8 +113,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 context, Icons.error_outline, Colors.red, msg, Colors.red);
             return;
           }
-          showSnackBar(context, Icons.error_outline, Colors.red,
-              context.tr("common.error_try_again"), Colors.red);
+          showSnackBar(
+              context,
+              Icons.error_outline,
+              Colors.red,
+              "${state.failure.source.code} ${state.failure.source.message}",
+              Colors.red);
         }
       },
       child: SafeArea(
@@ -144,7 +148,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 100.h,
                   width: 100.h,
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 10.h),
                 _signUpMenu(context),
                 const Spacer(),
                 _buildTos(context),
@@ -173,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               canBeEdited: context.tr("sign_up.username_hint_3"),
             ),
           ),
-          SizedBox(height: 6.h),
+          SizedBox(height: 5.h),
           SizedBox(
               width: double.maxFinite, child: _textFieldPhoneNumber(context)),
           SizedBox(height: 10.h),
@@ -191,11 +195,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               canBeEdited: context.tr("sign_up.password_hint_3"),
             ),
           ),
-          SizedBox(height: 6.h),
+          SizedBox(height: 5.h),
           _textFieldConfirmPassword(context),
           SizedBox(height: 10.h),
           _signUpButton(context),
-          SizedBox(height: 8.h),
+          SizedBox(height: 5.h),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(

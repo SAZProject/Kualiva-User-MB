@@ -4,9 +4,8 @@ import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/main_hive.dart';
 
 class SuggestionRepository {
-  final suggestionBox = Hive.box<List<String>>(MyHive.suggestion.name);
-
   Future<List<String>> get(SuggestionEnum suggestionEnum) async {
+    final suggestionBox = Hive.box<List<String>>(MyHive.suggestion.name);
     final List<String>? suggestionList = suggestionBox.get(
       suggestionEnum.name,
       defaultValue: [],
@@ -19,6 +18,7 @@ class SuggestionRepository {
     SuggestionEnum suggestionEnum,
     String suggestion,
   ) async {
+    final suggestionBox = Hive.box<List<String>>(MyHive.suggestion.name);
     if (suggestion.isEmpty) return get(suggestionEnum);
 
     final suggestionList = await get(suggestionEnum);
@@ -30,12 +30,14 @@ class SuggestionRepository {
   }
 
   Future<void> delete(SuggestionEnum suggestionEnum) async {
+    final suggestionBox = Hive.box<List<String>>(MyHive.suggestion.name);
     LeLog.rd(this, delete, suggestionEnum.name);
     return suggestionBox.delete(suggestionEnum.name);
   }
 
   Future<int> deleteAll() async {
     LeLog.rd(this, deleteAll, 'Delete All');
+    final suggestionBox = Hive.box<List<String>>(MyHive.suggestion.name);
     return suggestionBox.clear();
   }
 }

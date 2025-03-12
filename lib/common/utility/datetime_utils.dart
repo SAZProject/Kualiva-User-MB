@@ -52,7 +52,6 @@ class DatetimeUtils {
       return GetTimeGApiUtilModel(hour: openHour, minute: openMinute);
     }
 
-    LeLog.e(getOpenHourGAPIFormat, "No valid time found in the input string.");
     return GetTimeGApiUtilModel(hour: null, minute: null);
   }
 
@@ -80,7 +79,6 @@ class DatetimeUtils {
       return GetTimeGApiUtilModel(hour: closeHour, minute: closeMinute);
     }
 
-    LeLog.e(getCloseHourGAPIFormat, "No valid time found in the input string.");
     return GetTimeGApiUtilModel(hour: null, minute: null);
   }
 

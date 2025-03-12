@@ -45,6 +45,9 @@ class ReviewRepository {
     required double rating,
     required List<String> photoFiles,
   }) async {
+    /// TODO Schema ini tidak detect ketika melakukan delete secara local dan kirim ke Minio.
+    /// Model harusnya menyimpan cth: photoFiles sudah di masukin base url minio dan photoFilesOriginal hanya path nya saja
+
     final List<String> photoFilesFromMobile = [];
     final List<String> photoFilesFromServer = [];
 
@@ -54,19 +57,18 @@ class ReviewRepository {
     LeLog.rd(this, createOrUpdate, photoFiles.toString());
 
     for (String photo in photoFiles) {
-      if (photo.contains('http') || photo.contains('http')) {
+      if (photo.contains('http') || photo.contains('https')) {
         final minioPathList = photo.split('/').reversed.toList();
-        final minioPath = '/${minioPathList[0]}/${minioPathList[1]}';
+        final minioPath = '/${minioPathList[1]}/${minioPathList[0]}';
         photoFilesFromServer.add(minioPath);
       } else {
         photoFilesFromMobile.add(photo);
       }
     }
-
+    LeLog.rd(this, createOrUpdate, invoiceFile.toString());
     try {
       if (invoiceFile != null &&
-          invoiceFile!.contains('http') &&
-          invoiceFile!.contains('https')) {
+          (!invoiceFile!.contains('http') || !invoiceFile!.contains('https'))) {
         LeLog.d(this, invoiceFile.toString());
         final ImageUploadModel invoiceImageUpload =
             await _minioRepository.uploadImage(imagePath: invoiceFile!);
@@ -74,11 +76,14 @@ class ReviewRepository {
         minioInvoiceImagePaths = invoiceImageUpload.images[0].pathUrl;
       }
 
-      final ImageUploadModel reviewImageUpload = await _minioRepository
-          .uploadImages(imagePathList: photoFilesFromMobile);
+      if (photoFilesFromMobile.isNotEmpty) {
+        final ImageUploadModel reviewImageUpload = await _minioRepository
+            .uploadImages(imagePathList: photoFilesFromMobile);
 
-      minioReviewImagePaths.addAll(
-          reviewImageUpload.images.map((image) => image.pathUrl).toList());
+        minioReviewImagePaths.addAll(
+            reviewImageUpload.images.map((image) => image.pathUrl).toList());
+      }
+
       minioReviewImagePaths.addAll(photoFilesFromServer);
 
       Map<String, dynamic> body = Map.from({

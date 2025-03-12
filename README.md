@@ -5,9 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.21
-- Change kualiva into like it
-- Fix place detail places image
+Ver 0.1.21+01
+- change app name
 ```
 
 ## Getting Started

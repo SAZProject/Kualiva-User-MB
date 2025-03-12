@@ -94,6 +94,7 @@ class NightlifeNearestFeature extends StatelessWidget {
                   arguments: PlaceArgument(
                     placeId: state.nearest[index].id,
                     isMerchant: state.nearest[index].isMerchant,
+                    featuredImage: state.nearest[index].featuredImage,
                   ),
                 );
               },

@@ -110,14 +110,16 @@ class _DevicePermissionScreenState extends State<DevicePermissionScreen> {
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: SizedBox(
         width: double.maxFinite,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _imageTitleContentView(context),
-            SizedBox(height: 4.h),
-            _allowButton(context),
-            SizedBox(height: 4.h),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _imageTitleContentView(context),
+              SizedBox(height: 4.h),
+              _allowButton(context),
+              SizedBox(height: 4.h),
+            ],
+          ),
         ),
       ),
     );

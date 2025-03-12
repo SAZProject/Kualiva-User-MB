@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
             light: ThemeHelper().themeData(ColorSchemes.lightModeScheme),
             dark: ThemeHelper().themeData(ColorSchemes.darkModeScheme),
             initial: widget.savedThemeMode ?? AdaptiveThemeMode.light,
-            debugShowFloatingThemeButton: true,
+            debugShowFloatingThemeButton: kDebugMode,
             builder: (light, dark) => MaterialApp(
               debugShowCheckedModeBanner: false,
               localizationsDelegates: context.localizationDelegates,

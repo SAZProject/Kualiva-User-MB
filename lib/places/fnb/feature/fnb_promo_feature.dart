@@ -63,6 +63,7 @@ class FnbPromoFeature extends StatelessWidget {
                   AppRoutes.fnbDetailScreen,
                   arguments: PlaceArgument(
                     placeId: state.fnbPromoModels[index].id,
+                    featuredImage: state.fnbPromoModels[index].featuredImage,
                     isMerchant: true,
                   ),
                 );

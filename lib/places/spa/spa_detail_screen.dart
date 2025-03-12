@@ -126,10 +126,11 @@ class SpaDetailScreen extends StatelessWidget {
             hasCallSupport = result;
           });
           imageSliders.addAll(List.generate(
-            3,
+            1,
             (index) {
               return CustomImageView(
-                imagePath: Faker().image.loremPicsum(),
+                imagePath:
+                    placeArgument.featuredImage ?? Faker().image.loremPicsum(),
                 boxFit: BoxFit.cover,
                 height: 360.h,
                 width: double.maxFinite,
@@ -230,7 +231,7 @@ class SpaDetailScreen extends StatelessWidget {
         items: imageSliders,
         options: CarouselOptions(
           viewportFraction: 1,
-          autoPlay: true,
+          autoPlay: false,
           // enlargeCenterPage: true,
         ),
       ),

@@ -63,6 +63,8 @@ class NightlifePromoFeature extends StatelessWidget {
                   arguments: PlaceArgument(
                     placeId: state.nightlifePromoModels[index].id,
                     isMerchant: true,
+                    featuredImage:
+                        state.nightlifePromoModels[index].featuredImage,
                   ),
                 );
               },

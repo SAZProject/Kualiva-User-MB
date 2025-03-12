@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.21+01
-- change app name
+Ver 0.1.21+02
+- change navigator at login and box fit at places promo
 ```
 
 ## Getting Started

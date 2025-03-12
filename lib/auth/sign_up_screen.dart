@@ -227,8 +227,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _textFieldUserName(BuildContext context) {
-    /// TODO Winky, saran dari mas Zaki, maksimal input username itu 255 karakter
-    /// Update "6 - 10 Characters" nya
     return CustomTextFormField(
       controller: _userNameCtl,
       hintText: context.tr("sign_up.username"),
@@ -292,8 +290,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _textFieldPassword(BuildContext context) {
-    /// TODO Winky, saran dari mas Zaki, maksimal input username itu 255 karakter
-    /// Update "6 - 10 Characters" nya
     return SizedBox(
       width: double.maxFinite,
       child: ValueListenableBuilder(

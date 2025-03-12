@@ -101,7 +101,8 @@ class SignInScreenState extends State<SignInScreen> {
           if (state.userModel.profile == null) {
             Navigator.pushNamed(context, AppRoutes.onBoardingVerifyUserScreen);
           } else {
-            Navigator.of(context).pushNamed(AppRoutes.mainNavigationLayout);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                AppRoutes.mainNavigationLayout, (route) => false);
           }
         }
         if (state is AuthLoginFailure) {

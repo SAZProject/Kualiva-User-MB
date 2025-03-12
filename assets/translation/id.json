@@ -75,7 +75,7 @@
     "phone_number": "Nomor telepon"
   },
   "splash": {
-    "app_title": "KUALIVA"
+    "app_title": "Like It"
   },
   "onboard": {
     "onboard_1_title": "Mulai Perjalanan\nMilikmu",
@@ -91,7 +91,7 @@
     "onboard_pick_cuisine": "Pilih tipe\nmakanan favoritmu",
     "onboard_pick_cuisine_hint": "Anda dapat memilih hingga 5 masakan",
     "onboard_pick_notif": "Bagaimana kamu ingin\nmendapatkan notifikasi",
-    "onboard_pick_notif_item_1": "Kualiva",
+    "onboard_pick_notif_item_1": "Like It",
     "onboard_pick_notif_item_2": "WhatsApp",
     "onboard_pick_notif_item_3": "E-mail",
     "onboard_pick_notif_btn_select": "Pilih Semua",
@@ -108,9 +108,9 @@
     "policy": "Kebijakan Privasi"
   },
   "sign_in": {
-    "welcome": "Selamat datang di Kualiva",
+    "welcome": "Selamat datang di Like It",
     "sign_in_with": "Masuk dengan",
-    "kualiva_acc": "Akun Kualiva",
+    "kualiva_acc": "Akun Like It",
     "sign_in_with_saz": "Masuk dengan SAZ",
     "sign_in_with_google": "Masuk dengan Google",
     "phone_number_or_user_name": "Nomor Telepon atau Nama Pengguna",
@@ -120,14 +120,14 @@
   },
   "sign_up": {
     "username": "Nama Pengguna",
-    "username_hint_1": "6-10 Karakter",
-    "username_hint_2": "Huruf, angka, titik atau garis bawah. tidak ada spasi atau karakter spesial yang lain.",
+    "username_hint_1": "6-255 Karakter",
+    "username_hint_2": "Huruf, bisa pakai angka, bisa pakai titik(.) atau garis bawah(_) atau strip(-). tidak ada spasi atau karakter spesial yang lain.",
     "username_hint_3": "Nama pengguna tidak dapat diubah di masa mendatang",
     "phone_number": "Nomor telepon",
     "email": "Email",
     "password": "kata sandi",
-    "password_hint_1": "6-10 Karakter",
-    "password_hint_2": "Huruf, angka, titik atau garis bawah. tidak ada spasi atau karakter spesial yang lain.",
+    "password_hint_1": "6-255 Karakter",
+    "password_hint_2": "Huruf, bisa pakai angka, bisa pakai titik(.) atau garis bawah(_) atau strip(-). tidak ada spasi atau karakter spesial yang lain.",
     "password_hint_3": "Anda dapat mengubah kata sandi Anda kapan saja nanti",
     "re_enter_password": "Masukkan kembali Kata Sandi",
     "already_had_acc": "Sudah punya akun? ",
@@ -149,13 +149,13 @@
   },
   "permission": {
     "permission_title": "Pengalaman Lebih\nBaik Untukmu",
-    "permission_content": "Mohon berikan beberapa izin pada perangkat Anda untuk mendapatkan pengalaman terbaik di Kualiva",
+    "permission_content": "Mohon berikan beberapa izin pada perangkat Anda untuk mendapatkan pengalaman terbaik di Like It",
     "allow_btn": "Mengizinkan"
   },
   "home_nav_bar": {
     "nav_1": "Home",
     "nav_2": "HiChef",
-    "nav_3": "Kualiva",
+    "nav_3": "Like It",
     "nav_4": "Peringkat",
     "nav_5": "Profil"
   },
@@ -304,7 +304,7 @@
     "title": "Ulasan",
     "filter": "Filter Ulasan",
     "filter_user": "User",
-    "filter_kualiva": "Kualiva",
+    "filter_kualiva": "Like It",
     "filter_google": "Google",
     "filter_time": "Waktu",
     "filter_time_1": "Terbaru",
@@ -420,7 +420,7 @@
   },
   "notif": {
     "title": "Notifikasi",
-    "kualiva": "Kualiva",
+    "kualiva": "Like It",
     "kualiva_1": "Pembaharuan",
     "kualiva_2": "Berita",
     "kualiva_3": "Acara",

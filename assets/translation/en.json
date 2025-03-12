@@ -75,7 +75,7 @@
     "phone_number": "Phone Number"
   },
   "splash": {
-    "app_title": "KUALIVA"
+    "app_title": "Like It"
   },
   "onboard": {
     "onboard_1_title": "Start your\nJourney",
@@ -91,7 +91,7 @@
     "onboard_pick_cuisine": "Pick your\nfavorite cuisines",
     "onboard_pick_cuisine_hint": "You can select up to 5 cuisines",
     "onboard_pick_notif": "How would you\nlike to recieve our\nnotifications?",
-    "onboard_pick_notif_item_1": "Kualiva",
+    "onboard_pick_notif_item_1": "Like It",
     "onboard_pick_notif_item_2": "WhatsApp",
     "onboard_pick_notif_item_3": "Email",
     "onboard_pick_notif_btn_select": "Select All",
@@ -108,9 +108,9 @@
     "policy": "Privacy Policy"
   },
   "sign_in": {
-    "welcome": "Welcome to Kualiva",
+    "welcome": "Welcome to Like It",
     "sign_in_with": "Sign In with",
-    "kualiva_acc": "Kualiva Account",
+    "kualiva_acc": "Like It Account",
     "sign_in_with_saz": "Sign In with SAZ",
     "sign_in_with_google": "Sign In with Google",
     "phone_number_or_user_name": "Phone Number or UserName",
@@ -120,14 +120,14 @@
   },
   "sign_up": {
     "username": "Username",
-    "username_hint_1": "6-10 Characters",
-    "username_hint_2": "Letters, numbers, dots or underscore. No space or other special characters.",
+    "username_hint_1": "6-255 Characters",
+    "username_hint_2": "Letters, can include numbers, can include dots(.) or underscore(_) or hyphens(-). No space or other special characters.",
     "username_hint_3": "Username can\u0027t be changed in the future",
     "phone_number": "Phone Number",
     "email": "Email",
     "password": "password",
-    "password_hint_1": "6-10 Characters",
-    "password_hint_2": "Letters, numbers, dots or underscore. No space or other special characters.",
+    "password_hint_1": "6-255 Characters",
+    "password_hint_2": "Letters, can include numbers, can include dots(.) or underscore(_) or hyphens(-). No space or other special characters.",
     "password_hint_3": "You can change your password anytime later",
     "re_enter_password": "Re-enter Password",
     "already_had_acc": "Already have account? ",
@@ -155,7 +155,7 @@
   "home_nav_bar": {
     "nav_1": "Home",
     "nav_2": "HiChef",
-    "nav_3": "Kualiva",
+    "nav_3": "Like It",
     "nav_4": "Ranking",
     "nav_5": "Profile"
   },
@@ -304,7 +304,7 @@
     "title": "Review",
     "filter": "Review Filter",
     "filter_user": "User",
-    "filter_kualiva": "Kualiva",
+    "filter_kualiva": "Like It",
     "filter_google": "Google",
     "filter_time": "Time",
     "filter_time_1": "Latest",
@@ -420,7 +420,7 @@
   },
   "notif": {
     "title": "Notification",
-    "kualiva": "Kualiva",
+    "kualiva": "Like It",
     "kualiva_1": "Updates",
     "kualiva_2": "News",
     "kualiva_3": "Events",

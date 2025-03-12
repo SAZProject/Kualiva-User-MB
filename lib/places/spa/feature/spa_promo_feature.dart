@@ -63,6 +63,7 @@ class SpaPromoFeature extends StatelessWidget {
                   arguments: PlaceArgument(
                     placeId: state.spaPromoModels[index].id,
                     isMerchant: true,
+                    featuredImage: state.spaPromoModels[index].featuredImage,
                   ),
                 );
               },

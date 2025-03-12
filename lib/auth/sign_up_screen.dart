@@ -105,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
         if (state is AuthRegisterFailure) {
           if (state.failure.source == DataSourceEnum.unprocessableEntity) {
-            Map<String, String> errors = state.failure.errors ?? {};
+            Map<String, String> errors = state.failure.error ?? {};
             LeLog.sd(this, build, errors.toString());
             final msg = errors.values.fold(
                 '', (previousValue, element) => '$previousValue$element\n');

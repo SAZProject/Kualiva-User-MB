@@ -18,11 +18,11 @@ class ErrorHandler {
 class Failure {
   String? originalMessage;
   DataSourceEnum source;
-  Map<String, String>? errors;
+  Map<String, String>? error;
 
   Failure({
     this.originalMessage,
-    this.errors,
+    this.error,
     required this.source,
   });
 
@@ -32,7 +32,7 @@ class Failure {
 
   @override
   String toString() {
-    return 'Failure(source: ${source.name}, source.code: ${source.code}, source.message: ${source.message}, originalMessage: $originalMessage, errors: ${errors.toString()})';
+    return 'Failure(source: ${source.name}, source.code: ${source.code}, source.message: ${source.message}, originalMessage: $originalMessage, errors: ${error.toString()})';
   }
 }
 
@@ -118,7 +118,7 @@ Failure _handlerError(DioException error) {
       return Failure(
         source: DataSourceEnum.unprocessableEntity,
         originalMessage: error.response?.data['message'] ?? error.message,
-        errors: Map.from(error.response?.data['errors']),
+        error: Map.from(error.response?.data['error']),
       );
     case 500:
       return Failure(

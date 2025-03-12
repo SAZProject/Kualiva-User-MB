@@ -45,11 +45,28 @@ class ReviewRepository {
     required double rating,
     required List<String> photoFiles,
   }) async {
-    String minioInvoiceImagePaths = "";
+    final List<String> photoFilesFromMobile = [];
+    final List<String> photoFilesFromServer = [];
+
+    String? minioInvoiceImagePaths = invoiceFile;
     final List<String> minioReviewImagePaths = [];
 
+    LeLog.rd(this, createOrUpdate, photoFiles.toString());
+
+    for (String photo in photoFiles) {
+      if (photo.contains('http') || photo.contains('http')) {
+        final minioPathList = photo.split('/').reversed.toList();
+        final minioPath = '/${minioPathList[0]}/${minioPathList[1]}';
+        photoFilesFromServer.add(minioPath);
+      } else {
+        photoFilesFromMobile.add(photo);
+      }
+    }
+
     try {
-      if (invoiceFile != null) {
+      if (invoiceFile != null &&
+          invoiceFile!.contains('http') &&
+          invoiceFile!.contains('https')) {
         LeLog.d(this, invoiceFile.toString());
         final ImageUploadModel invoiceImageUpload =
             await _minioRepository.uploadImage(imagePath: invoiceFile!);
@@ -57,11 +74,12 @@ class ReviewRepository {
         minioInvoiceImagePaths = invoiceImageUpload.images[0].pathUrl;
       }
 
-      final ImageUploadModel reviewImageUpload =
-          await _minioRepository.uploadImages(imagePathList: photoFiles);
+      final ImageUploadModel reviewImageUpload = await _minioRepository
+          .uploadImages(imagePathList: photoFilesFromMobile);
 
       minioReviewImagePaths.addAll(
           reviewImageUpload.images.map((image) => image.pathUrl).toList());
+      minioReviewImagePaths.addAll(photoFilesFromServer);
 
       Map<String, dynamic> body = Map.from({
         "placeUniqueId": placeUniqueId,
@@ -86,7 +104,7 @@ class ReviewRepository {
 
       return temp;
     } catch (e) {
-      if (minioInvoiceImagePaths.isNotEmpty) {
+      if (minioInvoiceImagePaths != null && minioInvoiceImagePaths.isNotEmpty) {
         _minioRepository.deleteImage(fileName: minioInvoiceImagePaths);
       }
       if (minioReviewImagePaths.isNotEmpty) {

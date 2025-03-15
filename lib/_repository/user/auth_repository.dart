@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:kualiva/_data/error_handler.dart';
-import 'package:kualiva/_repository/token_manager.dart';
+import 'package:kualiva/_repository/common/token_manager.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';

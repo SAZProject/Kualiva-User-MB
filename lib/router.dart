@@ -33,6 +33,7 @@ import 'package:kualiva/profile/profile_screen.dart';
 import 'package:kualiva/profile/user_level_screen.dart';
 import 'package:kualiva/promo/promo_place_detail.dart';
 import 'package:kualiva/promo/promo_place_screen.dart';
+import 'package:kualiva/report/argument/report_place_argument.dart';
 import 'package:kualiva/report/argument/report_review_argument.dart';
 import 'package:kualiva/report/report_place_screen.dart';
 import 'package:kualiva/report/report_review_screen.dart';
@@ -292,9 +293,9 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reportPlaceScreen:
-      final String placeId = routeSetting.arguments as String;
+      final argument = routeSetting.arguments as ReportPlaceArgument;
       return PageTransition(
-          child: ReportPlaceScreen(placeId: placeId),
+          child: ReportPlaceScreen(reportPlaceArgument: argument),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

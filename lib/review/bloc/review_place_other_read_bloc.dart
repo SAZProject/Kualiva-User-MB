@@ -4,7 +4,7 @@ import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
-import 'package:kualiva/_repository/review_repository.dart';
+import 'package:kualiva/_repository/review/review_repository.dart';
 part 'review_place_other_read_event.dart';
 part 'review_place_other_read_state.dart';
 

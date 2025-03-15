@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/_repository/onboarding_repository.dart';
+import 'package:kualiva/_repository/user/onboarding_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 
 part 'onboarding_event.dart';

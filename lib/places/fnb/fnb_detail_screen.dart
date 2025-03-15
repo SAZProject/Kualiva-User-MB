@@ -24,6 +24,7 @@ import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
 import 'package:kualiva/_data/model/util_model/filter_toggle_model.dart';
+import 'package:kualiva/report/argument/report_place_argument.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -300,11 +301,11 @@ class FnbDetailScreen extends StatelessWidget {
     switch (index) {
       case 1:
         LeLog.sd(this, _popUpMenuAction, '');
-        Navigator.pushNamed(
-          context,
-          AppRoutes.reportPlaceScreen,
-          arguments: placeArgument.placeId,
-        );
+        Navigator.pushNamed(context, AppRoutes.reportPlaceScreen,
+            arguments: ReportPlaceArgument(
+              placeCategoryEnum: PlaceCategoryEnum.fnb,
+              placeId: placeArgument.placeId,
+            ));
         break;
       case 2:
         break;

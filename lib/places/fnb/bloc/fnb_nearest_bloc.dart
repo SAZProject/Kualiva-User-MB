@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
-import 'package:kualiva/_repository/fnb_repository.dart';
+import 'package:kualiva/_repository/place/fnb_repository.dart';
 
 part 'fnb_nearest_event.dart';
 part 'fnb_nearest_state.dart';

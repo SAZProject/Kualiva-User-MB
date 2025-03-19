@@ -1,13 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/_data/model/pagination/pagination.dart';
-import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
-import 'package:kualiva/review/cubit/review_filter_cubit.dart';
 import 'package:kualiva/review/widget/review_view.dart';
 
 class ReviewOtherReviewFeature extends StatefulWidget {
@@ -19,47 +16,6 @@ class ReviewOtherReviewFeature extends StatefulWidget {
 }
 
 class _ReviewOtherReviewFeatureState extends State<ReviewOtherReviewFeature> {
-  final _scrollController =
-      ScrollController(); // TODO: Moshi Moshi Winky, Gak kepanggil ScrollController Listener nya.
-
-  final _paging = ValueNotifier(Paging());
-
-  void _onScroll() {
-    debugPrint("LeRucco");
-    debugPrint("_onScroll");
-    if (_scrollController.position.pixels !=
-        _scrollController.position.maxScrollExtent) {
-      return;
-    }
-    final state = context.read<ReviewPlaceOtherReadBloc>().state;
-    if (state is! ReviewPlaceOtherReadSuccess) return;
-    final pagination = state.reviewPlacePage.pagination;
-    _nextPaging(pagination);
-  }
-
-  void _nextPaging(Pagination pagination) {
-    debugPrint("_nextPaging");
-    if (_paging.value.page == pagination.totalPage) return;
-    _paging.value = Paging(
-      page: pagination.nextPage ?? pagination.totalPage,
-      size: pagination.size,
-    );
-    context.read<ReviewFilterCubit>().pagination(paging: _paging.value);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -97,8 +53,7 @@ class _ReviewOtherReviewFeatureState extends State<ReviewOtherReviewFeature> {
         }
 
         return ListView.builder(
-          controller: _scrollController,
-          // physics: const NeverScrollableScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           itemCount: state.reviewPlacePage.data.length,
           shrinkWrap: true,
           scrollDirection: Axis.vertical,

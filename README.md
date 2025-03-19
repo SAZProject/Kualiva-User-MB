@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.21+03
-- change app label & sign up screen contraint & error msg
+Ver 0.1.22
+- Add loading on max scroll in review
 ```
 
 ## Getting Started

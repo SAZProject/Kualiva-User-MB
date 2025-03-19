@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:kualiva/_data/model/pagination/pagination.dart';
+import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/lelog.dart';
@@ -31,9 +33,34 @@ class _ReviewScreenState extends State<ReviewScreen> {
   String get placeId => widget.reviewArgument.placeUniqueId;
   PlaceCategoryEnum get placeCategory => widget.reviewArgument.placeCategory;
 
+  final _scrollController = ScrollController();
+  final _paging = ValueNotifier(Paging());
+
+  void _onScrollListener() {
+    if (_scrollController.position.pixels !=
+        _scrollController.position.maxScrollExtent) {
+      return;
+    }
+    final state = context.read<ReviewPlaceOtherReadBloc>().state;
+    if (state is! ReviewPlaceOtherReadSuccess) return;
+    final pagination = state.reviewPlacePage.pagination;
+    _nextPaging(pagination);
+  }
+
+  void _nextPaging(Pagination pagination) {
+    debugPrint("_nextPaging");
+    if (_paging.value.page == pagination.totalPage) return;
+    _paging.value = Paging(
+      page: pagination.nextPage ?? pagination.totalPage,
+      size: pagination.size,
+    );
+    context.read<ReviewFilterCubit>().pagination(paging: _paging.value);
+  }
+
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_onScrollListener);
     context
         .read<ReviewPlaceMyReadBloc>()
         .add(ReviewPlaceMyReadFetched(placeId: placeId));
@@ -41,6 +68,12 @@ class _ReviewScreenState extends State<ReviewScreen> {
         .read<ReviewPlaceOtherReadBloc>()
         .add(ReviewPlaceOtherReadFetched(placeId: placeId));
     context.read<ReviewSearchBarCubit>().load();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 
   @override
@@ -98,6 +131,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
           SizedBox(
             width: double.maxFinite,
             child: SingleChildScrollView(
+              controller: _scrollController,
               child: Column(
                 children: [
                   SizedBox(height: 5.h),
@@ -108,7 +142,17 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ReviewMyReviewFeature(),
                   SizedBox(height: 5.h),
                   ReviewOtherReviewFeature(),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 50.h),
+                  BlocBuilder<ReviewPlaceOtherReadBloc,
+                      ReviewPlaceOtherReadState>(
+                    builder: (context, state) {
+                      if (state is! ReviewPlaceOtherReadSuccess) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      return SizedBox();
+                    },
+                  ),
+                  SizedBox(height: 50.h),
                 ],
               ),
             ),

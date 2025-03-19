@@ -348,7 +348,7 @@ class SpaDetailScreen extends StatelessWidget {
                 visible: !placeArgument.isMerchant,
                 child: CustomElevatedButton(
                   initialText: context.tr("spa_detail.claim_btn"),
-                  height: 30.0,
+                  height: 30.h,
                   margin:
                       EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
                   buttonStyle: CustomButtonStyles.none,

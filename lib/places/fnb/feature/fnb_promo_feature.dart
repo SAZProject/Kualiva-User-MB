@@ -11,8 +11,6 @@ import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
 class FnbPromoFeature extends StatelessWidget {
   const FnbPromoFeature({super.key});
 
-  // final List<FNBModel> featuredListItems = FNBDataset().featuredItemsDataset;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

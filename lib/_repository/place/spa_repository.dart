@@ -26,7 +26,7 @@ class SpaRepository {
         },
       );
     });
-    final data = (res.data as List<dynamic>)
+    final data = (res.data['data'] as List<dynamic>)
         .map((e) => SpaNearestModel.fromMap(e))
         .toList();
 
@@ -43,7 +43,7 @@ class SpaRepository {
         queryParameters: {'placeUniqueId': placeId},
       );
     });
-    final data = SpaDetailModel.fromMap(res.data);
+    final data = SpaDetailModel.fromMap(res.data['data']);
     LeLog.rd(this, getPlaceDetail, data.toString());
     return data;
   }
@@ -59,7 +59,7 @@ class SpaRepository {
         );
       });
 
-      final data = (res.data as List<dynamic>)
+      final data = (res.data['data'] as List<dynamic>)
           .map((e) => SpaPromoModel.fromMap(e))
           .toList();
       LeLog.rd(this, getPromos, data.toString());

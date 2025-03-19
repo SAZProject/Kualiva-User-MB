@@ -26,7 +26,7 @@ class NightlifeRepository {
         },
       );
     });
-    final data = (res.data as List<dynamic>)
+    final data = (res.data['data'] as List<dynamic>)
         .map((e) => NightlifeNearestModel.fromMap(e))
         .toList();
 
@@ -43,7 +43,7 @@ class NightlifeRepository {
         queryParameters: {'placeUniqueId': placeId},
       );
     });
-    final data = NightlifeDetailModel.fromMap(res.data);
+    final data = NightlifeDetailModel.fromMap(res.data['data']);
     LeLog.rd(this, getPlaceDetail, data.toString());
     return data;
   }
@@ -59,7 +59,7 @@ class NightlifeRepository {
         );
       });
 
-      final data = (res.data as List<dynamic>)
+      final data = (res.data['data'] as List<dynamic>)
           .map((e) => NightlifePromoModel.fromMap(e))
           .toList();
       LeLog.rd(this, getPromos, data.toString());

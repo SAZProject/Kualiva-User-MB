@@ -26,7 +26,7 @@ class ProfileRepository {
       return dio.get('/profiles/me');
     });
 
-    final data = UserModel.fromMap(res.data);
+    final data = UserModel.fromMap(res.data['data']);
     await userBox.clear();
     await userBox.add(data);
     LeLog.rd(this, me, data.toString());

@@ -6,9 +6,11 @@ sealed class ReviewFilterState {}
 final class ReviewFilterInitial extends ReviewFilterState {}
 
 final class ReviewFilterSuccess extends ReviewFilterState {
+  final Paging paging;
   final ReviewFilterModel reviewFilter;
 
   ReviewFilterSuccess({
+    required this.paging,
     required this.reviewFilter,
   });
   // final ReviewSelectedUserEnum? selectedUser;

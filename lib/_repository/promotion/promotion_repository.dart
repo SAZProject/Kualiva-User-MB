@@ -72,7 +72,7 @@ class PromotionRepository {
     //     ),
     //   );
     // });
-    // final _ = (res.data as List<dynamic>)
+    // final _ = (res.data['data'] as List<dynamic>)
     //     .map((e) => HomeAdBannerModel.fromMap(e))
     //     .toList();
 
@@ -99,7 +99,7 @@ class PromotionRepository {
     //   );
     // });
 
-    // final _ = (res.data as List<dynamic>)
+    // final _ = (res.data['data'] as List<dynamic>)
     //     .map((e) => HomeFeaturedModel.fromMap(e))
     //     .toList();
 

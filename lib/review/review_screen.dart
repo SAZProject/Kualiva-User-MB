@@ -52,6 +52,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
         context
             .read<ReviewPlaceOtherReadBloc>()
             .add(ReviewPlaceOtherReadFetched(
+              paging: state.paging,
               isRefreshed: true,
               placeId: placeId,
               description: reviewFilter.description,

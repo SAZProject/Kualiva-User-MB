@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/model/pagination/my_page.dart';
+import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
@@ -23,8 +25,9 @@ class ReviewPlaceOtherReadBloc
     Emitter<ReviewPlaceOtherReadState> emit,
   ) async {
     try {
-      final List<ReviewPlaceModel> reviewsPlace =
+      final MyPage<ReviewPlaceModel> reviewPlacePage =
           await _reviewRepository.otherReviewGetByPlace(
+        paging: event.paging,
         isRefreshed: event.isRefreshed,
         placeId: event.placeId,
         description: event.description,
@@ -33,8 +36,8 @@ class ReviewPlaceOtherReadBloc
         selectedUser: event.selectedUser,
         order: event.order,
       );
-      LeLog.bd(this, _onOtherReviewFetched, reviewsPlace.toString());
-      emit(ReviewPlaceOtherReadSuccess(reviewsPlace: reviewsPlace));
+      LeLog.bd(this, _onOtherReviewFetched, reviewPlacePage.toString());
+      emit(ReviewPlaceOtherReadSuccess(reviewPlacePage: reviewPlacePage));
     } catch (e) {
       LeLog.be(this, _onOtherReviewFetched, e.toString());
       emit(ReviewPlaceOtherReadFailure());

@@ -8,9 +8,9 @@ final class ReviewPlaceOtherReadInitial extends ReviewPlaceOtherReadState {}
 final class ReviewPlaceOtherReadLoading extends ReviewPlaceOtherReadState {}
 
 final class ReviewPlaceOtherReadSuccess extends ReviewPlaceOtherReadState {
-  final List<ReviewPlaceModel> reviewsPlace;
+  final MyPage<ReviewPlaceModel> reviewPlacePage;
 
-  ReviewPlaceOtherReadSuccess({required this.reviewsPlace});
+  ReviewPlaceOtherReadSuccess({required this.reviewPlacePage});
 }
 
 final class ReviewPlaceOtherReadFailure extends ReviewPlaceOtherReadState {}

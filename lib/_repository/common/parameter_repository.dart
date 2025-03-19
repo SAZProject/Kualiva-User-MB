@@ -23,7 +23,7 @@ class ParameterRepository {
       );
     });
 
-    final data = ParameterModel.fromMap(res.data);
+    final data = ParameterModel.fromMap(res.data['data']);
     parameterBox.put(parameterEnum.toHiveKey(), data);
 
     return data;

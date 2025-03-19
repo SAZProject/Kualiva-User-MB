@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:kualiva/_data/model/minio/image_upload_model.dart';
-import 'package:kualiva/_repository/minio_repository.dart';
+import 'package:kualiva/_repository/common/minio_repository.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
@@ -26,7 +26,7 @@ class ProfileRepository {
       return dio.get('/profiles/me');
     });
 
-    final data = UserModel.fromMap(res.data);
+    final data = UserModel.fromMap(res.data['data']);
     await userBox.clear();
     await userBox.add(data);
     LeLog.rd(this, me, data.toString());

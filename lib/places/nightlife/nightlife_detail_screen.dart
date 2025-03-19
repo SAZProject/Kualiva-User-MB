@@ -23,6 +23,7 @@ import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_detail_bloc.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_detail_model.dart';
+import 'package:kualiva/report/argument/report_place_argument.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -298,7 +299,10 @@ class NightlifeDetailScreen extends StatelessWidget {
         Navigator.pushNamed(
           context,
           AppRoutes.reportPlaceScreen,
-          arguments: placeArgument.placeId,
+          arguments: ReportPlaceArgument(
+            placeCategoryEnum: PlaceCategoryEnum.nightLife,
+            placeId: placeArgument.placeId,
+          ),
         );
         break;
       case 2:

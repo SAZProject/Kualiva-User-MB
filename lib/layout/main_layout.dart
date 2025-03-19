@@ -6,7 +6,7 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/screen/coming_soon.dart';
 import 'package:kualiva/home/home_screen.dart';
 import 'package:kualiva/profile/profile_screen.dart';
-import 'package:kualiva/_repository/profile_repository.dart';
+import 'package:kualiva/_repository/user/profile_repository.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});

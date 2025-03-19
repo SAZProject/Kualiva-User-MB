@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:kualiva/_data/error_handler.dart';
-import 'package:kualiva/_repository/token_manager.dart';
+import 'package:kualiva/_repository/common/token_manager.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
@@ -33,9 +33,9 @@ class AuthRepository {
     final res = await _dioClient.dio().then((dio) {
       return dio.post('/auth/login', data: body);
     });
-    final accessToken = res.data['accessToken'].toString();
-    final refreshToken = res.data['refreshToken'].toString();
-    LeLog.rd(this, login, res.data.toString());
+    final accessToken = res.data['data']['accessToken'].toString();
+    final refreshToken = res.data['data']['refreshToken'].toString();
+    LeLog.rd(this, login, res.data['data'].toString());
 
     await Future.wait([
       _tokenManager.writeAccessToken(accessToken),
@@ -44,7 +44,7 @@ class AuthRepository {
 
     LeLog.rd(this, login, 'Login Success');
 
-    return UserModel.fromMap(res.data['user'] as Map<String, dynamic>);
+    return UserModel.fromMap(res.data['data']['user'] as Map<String, dynamic>);
   }
 
   Future<UserModel> register({
@@ -63,8 +63,8 @@ class AuthRepository {
         });
       });
 
-      final accessToken = res.data['accessToken'].toString();
-      final refreshToken = res.data['refreshToken'].toString();
+      final accessToken = res.data['data']['accessToken'].toString();
+      final refreshToken = res.data['data']['refreshToken'].toString();
 
       await Future.wait([
         _tokenManager.writeAccessToken(accessToken),
@@ -73,7 +73,8 @@ class AuthRepository {
 
       LeLog.rd(this, register, 'Register Success');
 
-      return UserModel.fromMap(res.data['user'] as Map<String, dynamic>);
+      return UserModel.fromMap(
+          res.data['data']['user'] as Map<String, dynamic>);
     } on DioException catch (e) {
       final failure = ErrorHandler.handle(e).failure;
       LeLog.re(this, register, failure.toString());

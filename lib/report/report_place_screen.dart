@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/image_utility.dart';
 import 'package:kualiva/common/utility/lelog.dart';
@@ -8,6 +9,7 @@ import 'package:kualiva/common/widget/custom_attach_media.dart';
 import 'package:kualiva/common/widget/custom_error_dialog.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_loading_dialog.dart';
+import 'package:kualiva/report/argument/report_place_argument.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
 import 'package:kualiva/report/feature/report_place_reason_feature.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,19 +17,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ReportPlaceScreen extends StatefulWidget {
   const ReportPlaceScreen({
     super.key,
-    required this.placeId,
+    required this.reportPlaceArgument,
   });
 
-  final String placeId;
+  final ReportPlaceArgument reportPlaceArgument;
 
   @override
   State<ReportPlaceScreen> createState() => _ReportPlaceScreenState();
 }
 
 class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
-  final _reasonCtl = TextEditingController();
+  PlaceCategoryEnum get placeCategoryEnum =>
+      widget.reportPlaceArgument.placeCategoryEnum;
+  String get placeId => widget.reportPlaceArgument.placeId;
 
-  String get placeId => widget.placeId;
+  final _reasonCtl = TextEditingController();
 
   final _selectedReasonId = ValueNotifier<String>('');
 
@@ -62,6 +66,7 @@ class _ReportPlaceScreenState extends State<ReportPlaceScreen> {
   void _submit() {
     context.read<ReportPlaceBloc>().add(
           ReportPlaceCreated(
+            placeCategoryEnum: placeCategoryEnum,
             placeId: placeId,
             reasonId: int.parse(_selectedReasonId.value),
           ),

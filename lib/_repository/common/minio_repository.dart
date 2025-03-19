@@ -34,7 +34,7 @@ class MinioRepository {
         options: Options(contentType: Headers.multipartFormDataContentType),
       );
     });
-    final data = ImageUploadModel.fromMap(res.data);
+    final data = ImageUploadModel.fromMap(res.data['data']);
 
     LeLog.rd(this, uploadImage, data.toString());
     return data;
@@ -75,7 +75,7 @@ class MinioRepository {
         options: Options(contentType: Headers.multipartFormDataContentType),
       );
     });
-    final data = ImageUploadModel.fromMap(res.data);
+    final data = ImageUploadModel.fromMap(res.data['data']);
 
     LeLog.rd(this, uploadImages, data.toString());
     return data;

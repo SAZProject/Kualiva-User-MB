@@ -1,9 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/loading_enum.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kualiva/_repository/report_repository.dart';
+import 'package:kualiva/_repository/common/report_repository.dart';
 
 part 'report_place_event.dart';
 part 'report_place_state.dart';
@@ -42,6 +43,7 @@ class ReportPlaceBloc extends Bloc<ReportPlaceEvent, ReportPlaceState> {
     emit(ReportPlaceLoading(loading: LoadingEnum.create));
     try {
       final _ = await _reportRepository.createPlaceReport(
+        placeCategoryEnum: event.placeCategoryEnum,
         placeId: event.placeId,
         reasonId: event.reasonId,
       );

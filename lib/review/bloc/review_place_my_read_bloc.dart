@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
-import 'package:kualiva/_repository/review_repository.dart';
+import 'package:kualiva/_repository/review/review_repository.dart';
 part 'review_place_my_read_event.dart';
 part 'review_place_my_read_state.dart';
 

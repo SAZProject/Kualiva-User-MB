@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kualiva/_repository/report_repository.dart';
+import 'package:kualiva/_repository/common/report_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 
 part 'report_review_create_event.dart';

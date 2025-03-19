@@ -4,6 +4,7 @@ part of 'review_place_other_read_bloc.dart';
 sealed class ReviewPlaceOtherReadEvent {}
 
 final class ReviewPlaceOtherReadFetched extends ReviewPlaceOtherReadEvent {
+  final Paging paging;
   final bool isRefreshed;
   final String placeId;
   final String? description;
@@ -13,6 +14,7 @@ final class ReviewPlaceOtherReadFetched extends ReviewPlaceOtherReadEvent {
   final ReviewOrderEnum? order;
 
   ReviewPlaceOtherReadFetched({
+    this.paging = const Paging(),
     this.isRefreshed = false,
     required this.placeId,
     this.description,

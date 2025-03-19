@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:kualiva/_repository/location_repository.dart';
-import 'package:kualiva/_repository/minio_repository.dart';
-import 'package:kualiva/_repository/nightlife_repository.dart';
-import 'package:kualiva/_repository/onboarding_repository.dart';
-import 'package:kualiva/_repository/parameter_repository.dart';
-import 'package:kualiva/_repository/spa_repository.dart';
+import 'package:kualiva/_repository/common/location_repository.dart';
+import 'package:kualiva/_repository/common/minio_repository.dart';
+import 'package:kualiva/_repository/place/nightlife_repository.dart';
+import 'package:kualiva/_repository/user/onboarding_repository.dart';
+import 'package:kualiva/_repository/common/parameter_repository.dart';
+import 'package:kualiva/_repository/place/spa_repository.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
-import 'package:kualiva/_repository/auth_repository.dart';
-import 'package:kualiva/_repository/token_manager.dart';
+import 'package:kualiva/_repository/user/auth_repository.dart';
+import 'package:kualiva/_repository/common/token_manager.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/_data/dio_client.dart';
 import 'package:kualiva/_data/dio_client_minio.dart';
-import 'package:kualiva/_repository/suggestion_repository.dart';
-import 'package:kualiva/_data/feature/upload_file/upload_file_bloc.dart';
-import 'package:kualiva/_repository/upload_file_repository.dart';
+import 'package:kualiva/_repository/common/suggestion_repository.dart';
 import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
 import 'package:kualiva/home/bloc/home_featured_bloc.dart';
 import 'package:kualiva/home/cubit/home_search_bar_cubit.dart';
-import 'package:kualiva/_repository/promotion_repository.dart';
+import 'package:kualiva/_repository/promotion/promotion_repository.dart';
 import 'package:kualiva/onboarding/bloc/onboarding_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
-import 'package:kualiva/_repository/fnb_repository.dart';
+import 'package:kualiva/_repository/place/fnb_repository.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_detail_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
@@ -33,9 +31,9 @@ import 'package:kualiva/places/spa/bloc/spa_detail_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_promo_bloc.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
-import 'package:kualiva/_repository/profile_repository.dart';
+import 'package:kualiva/_repository/user/profile_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
-import 'package:kualiva/_repository/report_repository.dart';
+import 'package:kualiva/_repository/common/report_repository.dart';
 import 'package:kualiva/report/bloc/report_review_create_bloc.dart';
 import 'package:kualiva/report/bloc/report_review_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_like_bloc.dart';
@@ -44,7 +42,7 @@ import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
 import 'package:kualiva/review/cubit/review_filter_cubit.dart';
 import 'package:kualiva/review/cubit/review_search_bar_cubit.dart';
-import 'package:kualiva/_repository/review_repository.dart';
+import 'package:kualiva/_repository/review/review_repository.dart';
 
 class MainProvider extends StatelessWidget {
   const MainProvider({super.key, required this.mainChild});
@@ -119,11 +117,6 @@ class MainProvider extends StatelessWidget {
               context.read<ParameterRepository>(),
               context.read<MinioRepository>(),
             );
-          },
-        ),
-        RepositoryProvider(
-          create: (context) {
-            return UploadFileRepository(context.read<DioClient>());
           },
         ),
         RepositoryProvider(
@@ -213,9 +206,6 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return ReviewSearchBarCubit(context.read<SuggestionRepository>());
-        }),
-        BlocProvider(create: (context) {
-          return UploadFileBloc(context.read<UploadFileRepository>());
         }),
         BlocProvider(create: (context) {
           return ReviewPlaceOtherReadBloc(context.read<ReviewRepository>());

@@ -1,5 +1,8 @@
 import 'package:kualiva/_data/model/minio/image_upload_model.dart';
-import 'package:kualiva/_repository/minio_repository.dart';
+import 'package:kualiva/_data/model/pagination/my_page.dart';
+import 'package:kualiva/_data/model/pagination/pagination.dart';
+import 'package:kualiva/_data/model/pagination/paging.dart';
+import 'package:kualiva/_repository/common/minio_repository.dart';
 
 import 'package:hive/hive.dart';
 import 'package:kualiva/common/utility/lelog.dart';
@@ -120,7 +123,8 @@ class ReviewRepository {
   }
 
   /// get other Reviews by Place / Merchant
-  Future<List<ReviewPlaceModel>> otherReviewGetByPlace({
+  Future<MyPage<ReviewPlaceModel>> otherReviewGetByPlace({
+    required Paging paging,
     required bool isRefreshed,
     required String placeId,
     String? description,
@@ -138,6 +142,7 @@ class ReviewRepository {
     // }
 
     final query = Map<String, dynamic>.from({});
+    query.addAll(paging.toMap());
     if (description != null) query['description'] = description;
     if (withMedia != null) query['withMedia'] = withMedia;
     if (rating != null) query['rating'] = rating;
@@ -151,12 +156,16 @@ class ReviewRepository {
       );
     });
 
-    final data = (res.data as List<dynamic>)
-        .map((e) => ReviewPlaceModel.fromMap(e))
-        .toList();
-    // reviewPlaceBox.addAll(data);
-    LeLog.rd(this, otherReviewGetByPlace, data.toString());
-    return data;
+    final page = MyPage<ReviewPlaceModel>(
+      data: (res.data['data'] as List<dynamic>)
+          .map((e) => ReviewPlaceModel.fromMap(e))
+          .toList(),
+      pagination: Pagination.fromMap(res.data['pagination']),
+    );
+
+    LeLog.rd(this, otherReviewGetByPlace, page.toString());
+
+    return page;
   }
 
   /// get my Reviews by Place / Merchant
@@ -176,7 +185,7 @@ class ReviewRepository {
       return dio.get('/reviews/$placeId/place/me');
     });
 
-    final data = ReviewPlaceModel.fromMap(res.data);
+    final data = ReviewPlaceModel.fromMap(res.data['data']);
     LeLog.rd(this, myReviewGetByPlace, data.toString());
     return data;
   }

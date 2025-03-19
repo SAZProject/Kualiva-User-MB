@@ -39,7 +39,7 @@ class FnbRepository {
         },
       );
     });
-    final data = (res.data as List<dynamic>)
+    final data = (res.data['data'] as List<dynamic>)
         .map((e) => FnbNearestModel.fromMap(e))
         .toList();
     fnbNearestBox.addAll(data);
@@ -56,7 +56,7 @@ class FnbRepository {
         queryParameters: {'placeUniqueId': placeId},
       );
     });
-    final data = FnbDetailModel.fromMap(res.data);
+    final data = FnbDetailModel.fromMap(res.data['data']);
     LeLog.rd(this, getPlaceDetail, data.toString());
     return data;
   }
@@ -69,7 +69,7 @@ class FnbRepository {
         return dio.get('/places/promo',
             queryParameters: {'type': placeCategoryEnum.name});
       });
-      final data = (res.data as List<dynamic>)
+      final data = (res.data['data'] as List<dynamic>)
           .map((e) => FnbPromoModel.fromMap(e))
           .toList();
       LeLog.rd(this, getPromos, data.toString());

@@ -4,7 +4,7 @@ import 'package:country_pickers/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/_data/enum/loading_enum.dart';
-import 'package:kualiva/_repository/token_manager.dart';
+import 'package:kualiva/_repository/common/token_manager.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';

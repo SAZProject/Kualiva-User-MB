@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kualiva/_repository/spa_repository.dart';
+import 'package:kualiva/_repository/place/spa_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/_repository/nightlife_repository.dart';
+import 'package:kualiva/_repository/place/nightlife_repository.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
 
 part 'nightlife_nearest_event.dart';

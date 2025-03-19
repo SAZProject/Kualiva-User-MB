@@ -1,8 +1,9 @@
 import 'package:kualiva/_data/enum/parameter_enum.dart';
+import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/_data/model/minio/image_upload_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';
-import 'package:kualiva/_repository/minio_repository.dart';
-import 'package:kualiva/_repository/parameter_repository.dart';
+import 'package:kualiva/_repository/common/minio_repository.dart';
+import 'package:kualiva/_repository/common/parameter_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 
@@ -35,6 +36,7 @@ class ReportRepository {
   }
 
   Future<void> createPlaceReport({
+    required PlaceCategoryEnum placeCategoryEnum,
     required String placeId,
     required int reasonId,
   }) async {

@@ -125,6 +125,7 @@ class ReviewRepository {
   /// get other Reviews by Place / Merchant
   Future<MyPage<ReviewPlaceModel>> otherReviewGetByPlace({
     required Paging paging,
+    required bool isNextPaging,
     required bool isRefreshed,
     required String placeId,
     String? description,
@@ -133,13 +134,14 @@ class ReviewRepository {
     ReviewSelectedUserEnum? selectedUser,
     ReviewOrderEnum? order,
   }) async {
-    // final reviewPlaceBox = Hive.box<ReviewPlaceModel>(MyHive.reviewPlace.name);
+    final reviewPlaceBox =
+        Hive.box<MyPage<ReviewPlaceModel>>(MyHive.reviewPlace.name);
 
-    // if (reviewPlaceBox.values.toList().isNotEmpty) {
-    //   final reviewPlaceList = reviewPlaceBox.values.toList();
-    //   LeLog.rd(this, otherReviewGetByPlace, reviewPlaceList.toString());
-    //   return reviewPlaceList;
-    // }
+    MyPage<ReviewPlaceModel>? oldReviewPlaceList = reviewPlaceBox.get(placeId);
+
+    if (!isRefreshed && oldReviewPlaceList != null) {
+      return oldReviewPlaceList;
+    }
 
     final query = Map<String, dynamic>.from({});
     query.addAll(paging.toMap());
@@ -162,6 +164,15 @@ class ReviewRepository {
           .toList(),
       pagination: Pagination.fromMap(res.data['pagination']),
     );
+
+    if (isNextPaging) {
+      final temp = [...(oldReviewPlaceList?.data ?? []), ...page.data];
+      page.data.clear();
+      page.data.addAll(temp);
+    }
+
+    reviewPlaceBox.clear();
+    reviewPlaceBox.put(placeId, page);
 
     LeLog.rd(this, otherReviewGetByPlace, page.toString());
 

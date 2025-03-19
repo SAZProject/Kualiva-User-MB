@@ -28,6 +28,7 @@ class ReviewPlaceOtherReadBloc
       final MyPage<ReviewPlaceModel> reviewPlacePage =
           await _reviewRepository.otherReviewGetByPlace(
         paging: event.paging,
+        isNextPaging: event.isNextPaging,
         isRefreshed: event.isRefreshed,
         placeId: event.placeId,
         description: event.description,

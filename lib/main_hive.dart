@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
+import 'package:kualiva/_data/model/pagination/my_page.dart';
 import 'package:kualiva/_data/model/parameter/language_explain_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_detail_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';
@@ -38,7 +39,7 @@ class MainHive {
       Hive.openBox<UserModel>(MyHive.user.name),
       Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name),
       Hive.openBox<ParameterModel>(MyHive.parameter.name),
-      Hive.openBox<ReviewFilterModel>(MyHive.reviewFilter.name),
+      Hive.openBox<MyPage<ReviewFilterModel>>(MyHive.reviewFilter.name),
       Hive.openBox<List<String>>(MyHive.suggestion.name),
     ]);
   }

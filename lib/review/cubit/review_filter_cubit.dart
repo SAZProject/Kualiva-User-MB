@@ -55,6 +55,8 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
     final data = ReviewFilterSuccess(
       paging: Paging(),
       reviewFilter: reviewFilter,
+      isRefreshed: true,
+      isNextPaging: false,
     );
     LeLog.bd(this, filter, data.toString());
     emit(data);
@@ -65,6 +67,8 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
     final data = ReviewFilterSuccess(
       paging: paging,
       reviewFilter: reviewFilter ?? ReviewFilterModel(),
+      isRefreshed: false,
+      isNextPaging: true,
     );
     LeLog.bd(this, pagination, data.toString());
     emit(data);

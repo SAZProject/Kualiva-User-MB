@@ -64,15 +64,18 @@ class _ReviewScreenState extends State<ReviewScreen> {
     context
         .read<ReviewPlaceMyReadBloc>()
         .add(ReviewPlaceMyReadFetched(placeId: placeId));
-    context
-        .read<ReviewPlaceOtherReadBloc>()
-        .add(ReviewPlaceOtherReadFetched(placeId: placeId));
+    context.read<ReviewPlaceOtherReadBloc>().add(ReviewPlaceOtherReadFetched(
+          placeId: placeId,
+          isRefreshed: true,
+          isNextPaging: false,
+        ));
     context.read<ReviewSearchBarCubit>().load();
   }
 
   @override
   void dispose() {
     super.dispose();
+    _scrollController.removeListener(_onScrollListener);
     _scrollController.dispose();
   }
 
@@ -86,7 +89,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
             .read<ReviewPlaceOtherReadBloc>()
             .add(ReviewPlaceOtherReadFetched(
               paging: state.paging,
-              isRefreshed: true,
+              isNextPaging: state.isNextPaging,
+              isRefreshed: state.isRefreshed,
               placeId: placeId,
               description: reviewFilter.description,
               selectedUser: reviewFilter.selectedUser,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:kualiva/_data/model/pagination/paging.dart';
 
 @immutable
 class Pagination {

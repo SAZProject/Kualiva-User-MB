@@ -39,8 +39,9 @@ class MainHive {
       Hive.openBox<UserModel>(MyHive.user.name),
       Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name),
       Hive.openBox<ParameterModel>(MyHive.parameter.name),
-      Hive.openBox<MyPage<ReviewFilterModel>>(MyHive.reviewFilter.name),
+      Hive.openBox<ReviewFilterModel>(MyHive.reviewFilter.name),
       Hive.openBox<List<String>>(MyHive.suggestion.name),
+      Hive.openBox<MyPage<ReviewPlaceModel>>(MyHive.reviewPlace.name),
     ]);
   }
 

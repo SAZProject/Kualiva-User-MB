@@ -166,7 +166,10 @@ class ReviewRepository {
     );
 
     if (isNextPaging) {
-      final temp = [...(oldReviewPlaceList?.data ?? []), ...page.data];
+      final List<ReviewPlaceModel> temp = [
+        ...(oldReviewPlaceList?.data ?? []),
+        ...page.data
+      ];
       page.data.clear();
       page.data.addAll(temp);
     }

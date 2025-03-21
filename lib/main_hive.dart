@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kualiva/common/feature/current_location/current_location_placemark_model.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
+import 'package:kualiva/common/feature/current_location/current_location_placemark_model.dart';
 import 'package:kualiva/_data/model/parameter/language_explain_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_detail_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';

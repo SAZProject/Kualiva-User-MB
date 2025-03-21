@@ -1,13 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/_data/model/pagination/my_page.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
-import 'package:kualiva/review/model/review_place_model.dart';
 import 'package:kualiva/_repository/review/review_repository.dart';
 import 'package:kualiva/_data/enum/paging_enum.dart';
+import 'package:kualiva/review/model/review_place_page.dart';
 part 'review_place_other_read_event.dart';
 part 'review_place_other_read_state.dart';
 
@@ -16,8 +15,7 @@ class ReviewPlaceOtherReadBloc
   final ReviewRepository _reviewRepository;
   ReviewPlaceOtherReadBloc(this._reviewRepository)
       : super(ReviewPlaceOtherReadInitial()) {
-    on<ReviewPlaceOtherReadEvent>(
-        (event, emit) => emit(ReviewPlaceOtherReadLoading()));
+    on<ReviewPlaceOtherReadEvent>((event, emit) => {});
     on<ReviewPlaceOtherReadFetched>(_onOtherReviewFetched);
   }
 
@@ -26,7 +24,11 @@ class ReviewPlaceOtherReadBloc
     Emitter<ReviewPlaceOtherReadState> emit,
   ) async {
     try {
-      final MyPage<ReviewPlaceModel> reviewPlacePage =
+      final reviewPlacePageOld = _reviewRepository.otherReviewGetByPlaceOld(
+        placeId: event.placeId,
+      );
+      emit(ReviewPlaceOtherReadLoading(reviewPlacePage: reviewPlacePageOld));
+      final ReviewPlacePage reviewPlacePage =
           await _reviewRepository.otherReviewGetByPlace(
         paging: event.paging,
         pagingEnum: event.pagingEnum,

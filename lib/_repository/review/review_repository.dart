@@ -124,8 +124,16 @@ class ReviewRepository {
     }
   }
 
+  ReviewPlacePage? otherReviewGetByPlaceOld({
+    required String placeId,
+  }) {
+    final reviewPlaceBox = Hive.box<ReviewPlacePage>(MyHive.reviewPlace.name);
+
+    return reviewPlaceBox.get(placeId);
+  }
+
   /// get other Reviews by Place / Merchant
-  Future<MyPage<ReviewPlaceModel>> otherReviewGetByPlace({
+  Future<ReviewPlacePage> otherReviewGetByPlace({
     required Paging paging,
     required PagingEnum pagingEnum,
     required String placeId,
@@ -137,9 +145,9 @@ class ReviewRepository {
   }) async {
     final reviewPlaceBox = Hive.box<ReviewPlacePage>(MyHive.reviewPlace.name);
 
-    MyPage<ReviewPlaceModel>? oldReviewPlaceList = reviewPlaceBox.get(placeId);
+    ReviewPlacePage? oldReviewPlaceList = reviewPlaceBox.get(placeId);
 
-    final pagingEnum = PagingEnum.started;
+    LeLog.rd(this, otherReviewGetByPlace, oldReviewPlaceList.toString());
 
     if ((pagingEnum == PagingEnum.before || pagingEnum == PagingEnum.started) &&
         oldReviewPlaceList != null) {

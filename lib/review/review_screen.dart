@@ -67,7 +67,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
         .add(ReviewPlaceMyReadFetched(placeId: placeId));
     context.read<ReviewPlaceOtherReadBloc>().add(ReviewPlaceOtherReadFetched(
           placeId: placeId,
-          pagingEnum: PagingEnum.started,
+          pagingEnum: PagingEnum.refreshed,
         ));
     context.read<ReviewSearchBarCubit>().load();
   }
@@ -141,20 +141,20 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ReviewSearchBarFeature(),
                   SizedBox(height: 5.h),
                   ReviewFilterFeature(),
-                  SizedBox(height: 5.h),
-                  ReviewMyReviewFeature(),
+                  // SizedBox(height: 5.h),
+                  // ReviewMyReviewFeature(),
                   SizedBox(height: 5.h),
                   ReviewOtherReviewFeature(),
                   SizedBox(height: 50.h),
-                  BlocBuilder<ReviewPlaceOtherReadBloc,
-                      ReviewPlaceOtherReadState>(
-                    builder: (context, state) {
-                      if (state is! ReviewPlaceOtherReadSuccess) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      return SizedBox();
-                    },
-                  ),
+                  // BlocBuilder<ReviewPlaceOtherReadBloc,
+                  //     ReviewPlaceOtherReadState>(
+                  //   builder: (context, state) {
+                  //     if (state is! ReviewPlaceOtherReadSuccess) {
+                  //       return Center(child: CircularProgressIndicator());
+                  //     }
+                  //     return SizedBox();
+                  //   },
+                  // ),
                   SizedBox(height: 50.h),
                 ],
               ),

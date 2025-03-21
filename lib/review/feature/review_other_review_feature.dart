@@ -44,6 +44,23 @@ class _ReviewOtherReviewFeatureState extends State<ReviewOtherReviewFeature> {
   Widget _list(BuildContext context) {
     return BlocBuilder<ReviewPlaceOtherReadBloc, ReviewPlaceOtherReadState>(
       builder: (context, state) {
+        if (state is ReviewPlaceOtherReadLoading &&
+            state.reviewPlacePage != null) {
+          return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: state.reviewPlacePage!.data.length,
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.symmetric(vertical: 5.h),
+                child:
+                    ReviewView(reviewData: state.reviewPlacePage!.data[index]),
+              );
+            },
+          );
+        }
+
         if (state is! ReviewPlaceOtherReadSuccess) {
           return Center(child: CircularProgressIndicator());
         }

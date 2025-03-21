@@ -64,6 +64,15 @@ class Pagination {
     };
   }
 
+  factory Pagination.init() {
+    return Pagination(
+      size: 0,
+      totalCount: 0,
+      currentPage: 1,
+      totalPage: 0,
+    );
+  }
+
   factory Pagination.fromMap(Map<String, dynamic> map) {
     return Pagination(
       size: map['size']?.toInt() ?? 0,

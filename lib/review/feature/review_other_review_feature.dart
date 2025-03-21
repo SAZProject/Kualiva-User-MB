@@ -5,6 +5,7 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
+import 'package:kualiva/review/model/review_place_page.dart';
 import 'package:kualiva/review/widget/review_view.dart';
 
 class ReviewOtherReviewFeature extends StatefulWidget {
@@ -46,19 +47,7 @@ class _ReviewOtherReviewFeatureState extends State<ReviewOtherReviewFeature> {
       builder: (context, state) {
         if (state is ReviewPlaceOtherReadLoading &&
             state.reviewPlacePage != null) {
-          return ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: state.reviewPlacePage!.data.length,
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.symmetric(vertical: 5.h),
-                child:
-                    ReviewView(reviewData: state.reviewPlacePage!.data[index]),
-              );
-            },
-          );
+          return _listBuilder(state.reviewPlacePage!);
         }
 
         if (state is! ReviewPlaceOtherReadSuccess) {
@@ -69,17 +58,23 @@ class _ReviewOtherReviewFeatureState extends State<ReviewOtherReviewFeature> {
           return CustomEmptyState();
         }
 
-        return ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: state.reviewPlacePage.data.length,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.symmetric(vertical: 5.h),
-              child: ReviewView(reviewData: state.reviewPlacePage.data[index]),
-            );
-          },
+        return _listBuilder(state.reviewPlacePage);
+      },
+    );
+  }
+
+  Widget _listBuilder(ReviewPlacePage reviewPlacePage) {
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: reviewPlacePage.data.length,
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) {
+        return Container(
+          margin: EdgeInsets.symmetric(vertical: 5.h),
+          child: ReviewView(
+            reviewData: reviewPlacePage.data[index],
+          ),
         );
       },
     );

@@ -1,6 +1,5 @@
 import 'package:kualiva/_data/enum/paging_enum.dart';
 import 'package:kualiva/_data/model/minio/image_upload_model.dart';
-import 'package:kualiva/_data/model/pagination/my_page.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/_repository/common/minio_repository.dart';
@@ -147,8 +146,6 @@ class ReviewRepository {
 
     ReviewPlacePage? oldReviewPlaceList = reviewPlaceBox.get(placeId);
 
-    LeLog.rd(this, otherReviewGetByPlace, oldReviewPlaceList.toString());
-
     if ((pagingEnum == PagingEnum.before || pagingEnum == PagingEnum.started) &&
         oldReviewPlaceList != null) {
       return oldReviewPlaceList;
@@ -185,11 +182,10 @@ class ReviewRepository {
       page.data.addAll(temp);
     }
 
-    reviewPlaceBox.clear();
-    reviewPlaceBox.put(placeId, page);
+    await reviewPlaceBox.delete(placeId);
+    await reviewPlaceBox.put(placeId, page);
 
     LeLog.rd(this, otherReviewGetByPlace, page.toString());
-
     return page;
   }
 

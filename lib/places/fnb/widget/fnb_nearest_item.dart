@@ -129,6 +129,11 @@ class FnbNearestItem extends StatelessWidget {
                       }),
                     ),
                   ),
+                  SizedBox(
+                    // TODO: Winky help me this UI
+                    height: 5.h,
+                    child: Text(merchant.distanceFromUser),
+                  ),
                   SizedBox(height: 5.h),
                   _tagList(context),
                   SizedBox(height: 5.h),

@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 
 part 'fnb_nearest_model.g.dart';
@@ -30,6 +31,9 @@ class FnbNearestModel {
   @HiveField(6)
   final bool isMerchant;
 
+  @HiveField(7)
+  final String distanceFromUser;
+
   const FnbNearestModel({
     required this.id,
     required this.name,
@@ -38,6 +42,7 @@ class FnbNearestModel {
     required this.categories,
     this.featuredImage,
     required this.isMerchant,
+    required this.distanceFromUser,
   });
 
   FnbNearestModel copyWith({
@@ -48,6 +53,7 @@ class FnbNearestModel {
     List<String>? categories,
     ValueGetter<String?>? featuredImage,
     bool? isMerchant,
+    String? distanceFromUser,
   }) {
     return FnbNearestModel(
       id: id ?? this.id,
@@ -58,6 +64,7 @@ class FnbNearestModel {
       featuredImage:
           featuredImage != null ? featuredImage() : this.featuredImage,
       isMerchant: isMerchant ?? this.isMerchant,
+      distanceFromUser: distanceFromUser ?? this.distanceFromUser,
     );
   }
 
@@ -70,6 +77,7 @@ class FnbNearestModel {
       'categories': categories,
       'featuredImage': featuredImage,
       'isMerchant': isMerchant,
+      'distanceFromUser': distanceFromUser,
     };
   }
 
@@ -82,6 +90,7 @@ class FnbNearestModel {
       categories: List<String>.from(map['categories']),
       featuredImage: map['featuredImage'],
       isMerchant: map['isMerchant'] ?? false,
+      distanceFromUser: map['distanceFromUser'] ?? '',
     );
   }
 
@@ -92,7 +101,7 @@ class FnbNearestModel {
 
   @override
   String toString() {
-    return 'FnbNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant)';
+    return 'FnbNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
   }
 
   @override
@@ -106,7 +115,8 @@ class FnbNearestModel {
         other.fullAddress == fullAddress &&
         listEquals(other.categories, categories) &&
         other.featuredImage == featuredImage &&
-        other.isMerchant == isMerchant;
+        other.isMerchant == isMerchant &&
+        other.distanceFromUser == distanceFromUser;
   }
 
   @override
@@ -117,6 +127,7 @@ class FnbNearestModel {
         fullAddress.hashCode ^
         categories.hashCode ^
         featuredImage.hashCode ^
-        isMerchant.hashCode;
+        isMerchant.hashCode ^
+        distanceFromUser.hashCode;
   }
 }

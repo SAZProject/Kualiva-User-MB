@@ -44,16 +44,25 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
   @override
   void initState() {
     super.initState();
+    debugPrint('ReviewFormScreen.initstate');
     final reviewPlaceMyReadBloc = context.read<ReviewPlaceMyReadBloc>();
+    print(reviewPlaceMyReadBloc.state);
     if (reviewPlaceMyReadBloc.state is ReviewPlaceMyReadSuccess) {
       final reviewPlace =
           (reviewPlaceMyReadBloc.state as ReviewPlaceMyReadSuccess).reviewPlace;
       _reviewMsgCtl.text = reviewPlace.description;
       _reviewMedias.value = reviewPlace.photoFiles;
+      print(reviewPlace.photoFiles);
       _ratingStar = reviewPlace.rating;
       _isCreated = false; // It means for update review
       _reviewId = reviewPlace.id;
     }
+    _reviewMedias.addListener(() {
+      print("LeRucco");
+      for (int i = 0; i < _reviewMedias.value.length; i++) {
+        print(_reviewMedias.value[i]);
+      }
+    });
   }
 
   @override
@@ -76,7 +85,7 @@ class _ReviewFormScreenState extends State<ReviewFormScreen> {
             context: context,
             dismissable: true,
             title: Text(
-              "Conratulation!",
+              "Congratulation!",
             ),
             content: Text(
               "You get 10 points",

@@ -1,5 +1,5 @@
+import 'package:kualiva/_data/enum/paging_enum.dart';
 import 'package:kualiva/_data/model/minio/image_upload_model.dart';
-import 'package:kualiva/_data/model/pagination/my_page.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/_repository/common/minio_repository.dart';
@@ -14,6 +14,7 @@ import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/review/model/review_filter_model.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
+import 'package:kualiva/review/model/review_place_page.dart';
 
 class ReviewRepository {
   ReviewRepository(this._dioClient, this._minioRepository);
@@ -76,7 +77,7 @@ class ReviewRepository {
         final ImageUploadModel invoiceImageUpload =
             await _minioRepository.uploadImage(imagePath: invoiceFile!);
 
-        minioInvoiceImagePaths = invoiceImageUpload.images[0].pathUrl;
+        minioInvoiceImagePaths = invoiceImageUpload.images[0].fileName;
       }
 
       if (photoFilesFromMobile.isNotEmpty) {
@@ -84,7 +85,7 @@ class ReviewRepository {
             .uploadImages(imagePathList: photoFilesFromMobile);
 
         minioReviewImagePaths.addAll(
-            reviewImageUpload.images.map((image) => image.pathUrl).toList());
+            reviewImageUpload.images.map((image) => image.fileName).toList());
       }
 
       minioReviewImagePaths.addAll(photoFilesFromServer);
@@ -122,11 +123,18 @@ class ReviewRepository {
     }
   }
 
+  ReviewPlacePage? otherReviewGetByPlaceOld({
+    required String placeId,
+  }) {
+    final reviewPlaceBox = Hive.box<ReviewPlacePage>(MyHive.reviewPlace.name);
+
+    return reviewPlaceBox.get(placeId);
+  }
+
   /// get other Reviews by Place / Merchant
-  Future<MyPage<ReviewPlaceModel>> otherReviewGetByPlace({
+  Future<ReviewPlacePage> otherReviewGetByPlace({
     required Paging paging,
-    required bool isNextPaging,
-    required bool isRefreshed,
+    required PagingEnum pagingEnum,
     required String placeId,
     String? description,
     bool? withMedia,
@@ -134,12 +142,12 @@ class ReviewRepository {
     ReviewSelectedUserEnum? selectedUser,
     ReviewOrderEnum? order,
   }) async {
-    final reviewPlaceBox =
-        Hive.box<MyPage<ReviewPlaceModel>>(MyHive.reviewPlace.name);
+    final reviewPlaceBox = Hive.box<ReviewPlacePage>(MyHive.reviewPlace.name);
 
-    MyPage<ReviewPlaceModel>? oldReviewPlaceList = reviewPlaceBox.get(placeId);
+    ReviewPlacePage? oldReviewPlaceList = reviewPlaceBox.get(placeId);
 
-    if (!isRefreshed && oldReviewPlaceList != null) {
+    if ((pagingEnum == PagingEnum.before || pagingEnum == PagingEnum.started) &&
+        oldReviewPlaceList != null) {
       return oldReviewPlaceList;
     }
 
@@ -158,14 +166,14 @@ class ReviewRepository {
       );
     });
 
-    final page = MyPage<ReviewPlaceModel>(
+    final page = ReviewPlacePage(
       data: (res.data['data'] as List<dynamic>)
           .map((e) => ReviewPlaceModel.fromMap(e))
           .toList(),
       pagination: Pagination.fromMap(res.data['pagination']),
     );
 
-    if (isNextPaging) {
+    if (pagingEnum == PagingEnum.paged) {
       final List<ReviewPlaceModel> temp = [
         ...(oldReviewPlaceList?.data ?? []),
         ...page.data
@@ -174,11 +182,10 @@ class ReviewRepository {
       page.data.addAll(temp);
     }
 
-    reviewPlaceBox.clear();
-    reviewPlaceBox.put(placeId, page);
+    await reviewPlaceBox.delete(placeId);
+    await reviewPlaceBox.put(placeId, page);
 
     LeLog.rd(this, otherReviewGetByPlace, page.toString());
-
     return page;
   }
 

@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 
 import 'package:kualiva/review/model/author_model.dart';
@@ -61,10 +61,10 @@ class ReviewPlaceModel {
 
   ReviewPlaceModel copyWith({
     int? id,
-    String? invoice,
-    String? invoiceFile,
-    int? count,
-    bool? isLikedByMe,
+    ValueGetter<String?>? invoice,
+    ValueGetter<String?>? invoiceFile,
+    ValueGetter<int?>? count,
+    ValueGetter<bool?>? isLikedByMe,
     String? description,
     double? rating,
     List<String>? photoFiles,
@@ -74,10 +74,10 @@ class ReviewPlaceModel {
   }) {
     return ReviewPlaceModel(
       id: id ?? this.id,
-      invoice: invoice ?? this.invoice,
-      invoiceFile: invoiceFile ?? this.invoiceFile,
-      count: count ?? this.count,
-      isLikedByMe: isLikedByMe ?? this.isLikedByMe,
+      invoice: invoice != null ? invoice() : this.invoice,
+      invoiceFile: invoiceFile != null ? invoiceFile() : this.invoiceFile,
+      count: count != null ? count() : this.count,
+      isLikedByMe: isLikedByMe != null ? isLikedByMe() : this.isLikedByMe,
       description: description ?? this.description,
       rating: rating ?? this.rating,
       photoFiles: photoFiles ?? this.photoFiles,
@@ -88,7 +88,7 @@ class ReviewPlaceModel {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'id': id,
       'invoice': invoice,
       'invoiceFile': invoiceFile,
@@ -104,32 +104,25 @@ class ReviewPlaceModel {
   }
 
   factory ReviewPlaceModel.fromMap(Map<String, dynamic> map) {
-    final String baseUrlMinio =
-        dotenv.get("BASE_URL_MINIO_API", fallback: null);
-
     return ReviewPlaceModel(
-      id: map['id'] as int,
-      invoice: map['invoice'] != null ? map['invoice'] as String : null,
-      invoiceFile:
-          map['invoiceFile'] != null ? baseUrlMinio + map['invoiceFile'] : null,
-      count: map['count'] != null ? map['count'] as int : null,
-      isLikedByMe:
-          map['isLikedByMe'] != null ? map['isLikedByMe'] as bool : null,
-      description: map['description'] as String,
-      rating: (map['rating']).toDouble(),
-      photoFiles: (map['photoFiles'] as List<dynamic>)
-          .map((e) => baseUrlMinio + e)
-          .toList(),
+      id: map['id']?.toInt() ?? 0,
+      invoice: map['invoice'],
+      invoiceFile: map['invoiceFile'],
+      count: map['count']?.toInt(),
+      isLikedByMe: map['isLikedByMe'],
+      description: map['description'] ?? '',
+      rating: map['rating']?.toDouble() ?? 0.0,
+      photoFiles: List<String>.from(map['photoFiles']),
       createdAt: DateTime.parse(map['createdAt']),
       updatedAt: DateTime.parse(map['updatedAt']),
-      author: AuthorModel.fromMap(map['author'] as Map<String, dynamic>),
+      author: AuthorModel.fromMap(map['author']),
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory ReviewPlaceModel.fromJson(String source) =>
-      ReviewPlaceModel.fromMap(json.decode(source) as Map<String, dynamic>);
+      ReviewPlaceModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -137,10 +130,11 @@ class ReviewPlaceModel {
   }
 
   @override
-  bool operator ==(covariant ReviewPlaceModel other) {
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
+    return other is ReviewPlaceModel &&
+        other.id == id &&
         other.invoice == invoice &&
         other.invoiceFile == invoiceFile &&
         other.count == count &&

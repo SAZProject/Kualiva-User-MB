@@ -9,6 +9,7 @@ import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/review/argument/review_argument.dart';
+import 'package:kualiva/review/bloc/review_place_create_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_my_read_bloc.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
 import 'package:kualiva/review/cubit/review_filter_cubit.dart';
@@ -19,6 +20,7 @@ import 'package:kualiva/review/feature/review_other_review_feature.dart';
 import 'package:kualiva/review/feature/review_search_bar_feature.dart';
 import 'package:kualiva/review/widget/review_verify_modal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/paging_enum.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key, required this.reviewArgument});
@@ -66,8 +68,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
         .add(ReviewPlaceMyReadFetched(placeId: placeId));
     context.read<ReviewPlaceOtherReadBloc>().add(ReviewPlaceOtherReadFetched(
           placeId: placeId,
-          isRefreshed: true,
-          isNextPaging: false,
+          pagingEnum: PagingEnum.refreshed,
         ));
     context.read<ReviewSearchBarCubit>().load();
   }
@@ -89,8 +90,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             .read<ReviewPlaceOtherReadBloc>()
             .add(ReviewPlaceOtherReadFetched(
               paging: state.paging,
-              isNextPaging: state.isNextPaging,
-              isRefreshed: state.isRefreshed,
+              pagingEnum: state.pagingEnum,
               placeId: placeId,
               description: reviewFilter.description,
               selectedUser: reviewFilter.selectedUser,

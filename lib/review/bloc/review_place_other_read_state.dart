@@ -5,10 +5,14 @@ sealed class ReviewPlaceOtherReadState {}
 
 final class ReviewPlaceOtherReadInitial extends ReviewPlaceOtherReadState {}
 
-final class ReviewPlaceOtherReadLoading extends ReviewPlaceOtherReadState {}
+final class ReviewPlaceOtherReadLoading extends ReviewPlaceOtherReadState {
+  final ReviewPlacePage? reviewPlacePage;
+
+  ReviewPlaceOtherReadLoading({required this.reviewPlacePage});
+}
 
 final class ReviewPlaceOtherReadSuccess extends ReviewPlaceOtherReadState {
-  final MyPage<ReviewPlaceModel> reviewPlacePage;
+  final ReviewPlacePage reviewPlacePage;
 
   ReviewPlaceOtherReadSuccess({required this.reviewPlacePage});
 }

@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kualiva/common/feature/current_location/current_location_placemark_model.dart';
-import 'package:kualiva/_data/model/pagination/my_page.dart';
+import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/parameter/language_explain_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_detail_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';
@@ -14,6 +14,7 @@ import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/review/model/author_model.dart';
 import 'package:kualiva/review/model/review_filter_model.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
+import 'package:kualiva/review/model/review_place_page.dart';
 
 class MainHive {
   static Future<void> registerAdapter() async {
@@ -31,17 +32,28 @@ class MainHive {
     Hive.registerAdapter(ReviewSelectedUserEnumAdapter());
     Hive.registerAdapter(ReviewOrderEnumAdapter());
     Hive.registerAdapter(ReviewFilterModelAdapter());
+    Hive.registerAdapter(PaginationAdapter());
+    Hive.registerAdapter(ReviewPlacePageAdapter());
+  }
+
+  static Future<void> openLeSafeBox<T>(MyHive box) async {
+    try {
+      await Hive.openBox<T>(box.name);
+    } catch (e) {
+      await Hive.deleteBoxFromDisk(box.name);
+      await Hive.openBox<T>(box.name);
+    }
   }
 
   static Future<void> openBox() async {
     await Future.wait([
-      Hive.openBox<FnbNearestModel>(MyHive.fnbNearest.name),
-      Hive.openBox<UserModel>(MyHive.user.name),
-      Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name),
-      Hive.openBox<ParameterModel>(MyHive.parameter.name),
-      Hive.openBox<ReviewFilterModel>(MyHive.reviewFilter.name),
-      Hive.openBox<List<String>>(MyHive.recentSuggestion.name),
-      Hive.openBox<MyPage<ReviewPlaceModel>>(MyHive.reviewPlace.name),
+      openLeSafeBox<FnbNearestModel>(MyHive.fnbNearest),
+      openLeSafeBox<UserModel>(MyHive.user),
+      openLeSafeBox<CurrentLocationModel>(MyHive.currentLocation),
+      openLeSafeBox<ParameterModel>(MyHive.parameter),
+      openLeSafeBox<ReviewFilterModel>(MyHive.reviewFilter),
+      openLeSafeBox<List<String>>(MyHive.recentSuggestion),
+      openLeSafeBox<ReviewPlacePage>(MyHive.reviewPlace),
     ]);
   }
 
@@ -81,7 +93,9 @@ enum MyHive {
   selectedUser(11, 'selected_user'),
   reviewOrder(12, 'review_order'),
   reviewFilter(13, 'review_filter'),
-  recentSuggestion(14, 'recent_suggestion');
+  recentSuggestion(14, 'recent_suggestion'),
+  pagination(15, 'pagination'),
+  reviewPlacePage(16, 'review_place_page');
 
   final int typeId;
   final String name;

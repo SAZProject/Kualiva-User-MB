@@ -1,15 +1,29 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
-import 'package:kualiva/_data/model/pagination/paging.dart';
+import 'package:hive/hive.dart';
+
+part 'pagination.g.dart';
 
 @immutable
+@HiveType(typeId: 15)
 class Pagination {
+  @HiveField(0)
   final int size;
+
+  @HiveField(1)
   final int totalCount;
+
+  @HiveField(2)
   final int currentPage;
+
+  @HiveField(3)
   final int? previousPage;
+
+  @HiveField(4)
   final int? nextPage;
+
+  @HiveField(5)
   final int totalPage;
 
   const Pagination({
@@ -48,6 +62,15 @@ class Pagination {
       'nextPage': nextPage,
       'totalPage': totalPage,
     };
+  }
+
+  factory Pagination.init() {
+    return Pagination(
+      size: 0,
+      totalCount: 0,
+      currentPage: 1,
+      totalPage: 0,
+    );
   }
 
   factory Pagination.fromMap(Map<String, dynamic> map) {

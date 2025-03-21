@@ -37,15 +37,24 @@ class MainHive {
     Hive.registerAdapter(ReviewPlacePageAdapter());
   }
 
+  static Future<void> openLeSafeBox<T>(MyHive box) async {
+    try {
+      await Hive.openBox<T>(box.name);
+    } catch (e) {
+      print(e.toString());
+      await Hive.deleteBoxFromDisk(box.name);
+    }
+  }
+
   static Future<void> openBox() async {
     await Future.wait([
-      Hive.openBox<FnbNearestModel>(MyHive.fnbNearest.name),
-      Hive.openBox<UserModel>(MyHive.user.name),
-      Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name),
-      Hive.openBox<ParameterModel>(MyHive.parameter.name),
-      Hive.openBox<ReviewFilterModel>(MyHive.reviewFilter.name),
-      Hive.openBox<List<String>>(MyHive.suggestion.name),
-      Hive.openBox<ReviewPlacePage>(MyHive.reviewPlace.name),
+      openLeSafeBox<FnbNearestModel>(MyHive.fnbNearest),
+      openLeSafeBox<UserModel>(MyHive.user),
+      openLeSafeBox<CurrentLocationModel>(MyHive.currentLocation),
+      openLeSafeBox<ParameterModel>(MyHive.parameter),
+      openLeSafeBox<ReviewFilterModel>(MyHive.reviewFilter),
+      openLeSafeBox<List<String>>(MyHive.suggestion),
+      openLeSafeBox<ReviewPlacePage>(MyHive.reviewPlace),
     ]);
   }
 

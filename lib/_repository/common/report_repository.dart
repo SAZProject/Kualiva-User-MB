@@ -40,14 +40,14 @@ class ReportRepository {
     required String placeId,
     required int reasonId,
   }) async {
-    final List<String> minioImagePaths = [];
+    final List<String> minioImageFileNames = [];
 
     try {
       final ImageUploadModel imageUpload =
           await _minioRepository.uploadImages(imagePathList: _localImagePaths);
 
-      minioImagePaths
-          .addAll(imageUpload.images.map((image) => image.pathUrl).toList());
+      minioImageFileNames
+          .addAll(imageUpload.images.map((image) => image.fileName).toList());
 
       final _ = await _dioClient.dio().then((dio) {
         return dio.post(
@@ -55,13 +55,13 @@ class ReportRepository {
           data: {
             'placeUniqueId': placeId,
             'reasonId': reasonId,
-            'photoFiles': minioImagePaths,
+            'photoFiles': minioImageFileNames,
           },
         );
       });
     } catch (e) {
-      if (minioImagePaths.isNotEmpty) {
-        _minioRepository.deleteImages(fileNameList: minioImagePaths);
+      if (minioImageFileNames.isNotEmpty) {
+        _minioRepository.deleteImages(fileNameList: minioImageFileNames);
       }
       rethrow;
     } finally {

@@ -77,7 +77,7 @@ class ReviewRepository {
         final ImageUploadModel invoiceImageUpload =
             await _minioRepository.uploadImage(imagePath: invoiceFile!);
 
-        minioInvoiceImagePaths = invoiceImageUpload.images[0].pathUrl;
+        minioInvoiceImagePaths = invoiceImageUpload.images[0].fileName;
       }
 
       if (photoFilesFromMobile.isNotEmpty) {
@@ -85,7 +85,7 @@ class ReviewRepository {
             .uploadImages(imagePathList: photoFilesFromMobile);
 
         minioReviewImagePaths.addAll(
-            reviewImageUpload.images.map((image) => image.pathUrl).toList());
+            reviewImageUpload.images.map((image) => image.fileName).toList());
       }
 
       minioReviewImagePaths.addAll(photoFilesFromServer);

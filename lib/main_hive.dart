@@ -1,6 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
-import 'package:kualiva/_data/model/pagination/my_page.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/parameter/language_explain_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_detail_model.dart';
@@ -43,6 +42,7 @@ class MainHive {
     } catch (e) {
       print(e.toString());
       await Hive.deleteBoxFromDisk(box.name);
+      await Hive.openBox<T>(box.name);
     }
   }
 

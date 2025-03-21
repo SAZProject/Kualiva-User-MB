@@ -35,7 +35,8 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
           placeUniqueId: widget.placeUniqueId,
           placeCategory: widget.placeCategory,
           invoice: _transactionCtl.text.trim(),
-          invoiceFile: _invoiceMedia.value[0],
+          invoiceFile: _invoiceMedia
+              .value[0], // TODO: validasi ketika belum input image sama sekali
         ));
     Navigator.pop(context); // Pop verify modal
     Navigator.pushNamed(context, AppRoutes.reviewFormScreen);
@@ -44,12 +45,14 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
   @override
   void initState() {
     super.initState();
+    debugPrint('ReviewVerifyModal.initstate');
     final reviewPlaceMyReadBloc = context.read<ReviewPlaceMyReadBloc>();
     if (reviewPlaceMyReadBloc.state is ReviewPlaceMyReadSuccess) {
       final reviewPlace =
           (reviewPlaceMyReadBloc.state as ReviewPlaceMyReadSuccess).reviewPlace;
       _transactionCtl.text = reviewPlace.invoice ?? '';
       if (reviewPlace.invoiceFile != null) {
+        print(reviewPlace.invoiceFile);
         _invoiceMedia.value = [reviewPlace.invoiceFile!];
       }
     }

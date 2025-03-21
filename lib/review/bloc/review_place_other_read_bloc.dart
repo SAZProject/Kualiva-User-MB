@@ -7,6 +7,7 @@ import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 import 'package:kualiva/_repository/review/review_repository.dart';
+import 'package:kualiva/_data/enum/paging_enum.dart';
 part 'review_place_other_read_event.dart';
 part 'review_place_other_read_state.dart';
 
@@ -28,8 +29,7 @@ class ReviewPlaceOtherReadBloc
       final MyPage<ReviewPlaceModel> reviewPlacePage =
           await _reviewRepository.otherReviewGetByPlace(
         paging: event.paging,
-        isNextPaging: event.isNextPaging,
-        isRefreshed: event.isRefreshed,
+        pagingEnum: event.pagingEnum,
         placeId: event.placeId,
         description: event.description,
         withMedia: event.withMedia,

@@ -1,6 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
 import 'package:kualiva/_data/model/pagination/my_page.dart';
+import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/parameter/language_explain_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_detail_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';
@@ -14,6 +15,7 @@ import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/review/model/author_model.dart';
 import 'package:kualiva/review/model/review_filter_model.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
+import 'package:kualiva/review/model/review_place_page.dart';
 
 class MainHive {
   static Future<void> registerAdapter() async {
@@ -31,6 +33,8 @@ class MainHive {
     Hive.registerAdapter(ReviewSelectedUserEnumAdapter());
     Hive.registerAdapter(ReviewOrderEnumAdapter());
     Hive.registerAdapter(ReviewFilterModelAdapter());
+    Hive.registerAdapter(PaginationAdapter());
+    Hive.registerAdapter(ReviewPlacePageAdapter());
   }
 
   static Future<void> openBox() async {
@@ -41,7 +45,7 @@ class MainHive {
       Hive.openBox<ParameterModel>(MyHive.parameter.name),
       Hive.openBox<ReviewFilterModel>(MyHive.reviewFilter.name),
       Hive.openBox<List<String>>(MyHive.suggestion.name),
-      Hive.openBox<MyPage<ReviewPlaceModel>>(MyHive.reviewPlace.name),
+      Hive.openBox<ReviewPlacePage>(MyHive.reviewPlace.name),
     ]);
   }
 
@@ -81,7 +85,9 @@ enum MyHive {
   selectedUser(11, 'selected_user'),
   reviewOrder(12, 'review_order'),
   reviewFilter(13, 'review_filter'),
-  suggestion(14, 'suggestion');
+  suggestion(14, 'suggestion'),
+  pagination(15, 'pagination'),
+  reviewPlacePage(16, 'review_place_page');
 
   final int typeId;
   final String name;

@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
 
 @immutable
-class MyPage<T> {
+abstract class MyPage<T> {
   final List<T> data;
+
   final Pagination pagination;
 
   const MyPage({

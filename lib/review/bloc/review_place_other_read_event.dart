@@ -5,8 +5,7 @@ sealed class ReviewPlaceOtherReadEvent {}
 
 final class ReviewPlaceOtherReadFetched extends ReviewPlaceOtherReadEvent {
   final Paging paging;
-  final bool isNextPaging;
-  final bool isRefreshed;
+  final PagingEnum pagingEnum;
   final String placeId;
   final String? description;
   final bool? withMedia;
@@ -16,8 +15,7 @@ final class ReviewPlaceOtherReadFetched extends ReviewPlaceOtherReadEvent {
 
   ReviewPlaceOtherReadFetched({
     this.paging = const Paging(),
-    required this.isNextPaging,
-    required this.isRefreshed,
+    required this.pagingEnum,
     required this.placeId,
     this.description,
     this.withMedia,

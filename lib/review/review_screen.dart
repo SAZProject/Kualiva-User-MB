@@ -19,6 +19,7 @@ import 'package:kualiva/review/feature/review_other_review_feature.dart';
 import 'package:kualiva/review/feature/review_search_bar_feature.dart';
 import 'package:kualiva/review/widget/review_verify_modal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/paging_enum.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key, required this.reviewArgument});
@@ -66,8 +67,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
         .add(ReviewPlaceMyReadFetched(placeId: placeId));
     context.read<ReviewPlaceOtherReadBloc>().add(ReviewPlaceOtherReadFetched(
           placeId: placeId,
-          isRefreshed: true,
-          isNextPaging: false,
+          pagingEnum: PagingEnum.started,
         ));
     context.read<ReviewSearchBarCubit>().load();
   }
@@ -89,8 +89,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             .read<ReviewPlaceOtherReadBloc>()
             .add(ReviewPlaceOtherReadFetched(
               paging: state.paging,
-              isNextPaging: state.isNextPaging,
-              isRefreshed: state.isRefreshed,
+              pagingEnum: state.pagingEnum,
               placeId: placeId,
               description: reviewFilter.description,
               selectedUser: reviewFilter.selectedUser,

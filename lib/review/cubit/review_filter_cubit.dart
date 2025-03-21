@@ -8,6 +8,7 @@ import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/review/model/review_filter_model.dart';
+import 'package:kualiva/_data/enum/paging_enum.dart';
 
 part 'review_filter_state.dart';
 
@@ -54,9 +55,8 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
     }
     final data = ReviewFilterSuccess(
       paging: Paging(),
+      pagingEnum: PagingEnum.refreshed,
       reviewFilter: reviewFilter,
-      isRefreshed: true,
-      isNextPaging: false,
     );
     LeLog.bd(this, filter, data.toString());
     emit(data);
@@ -66,9 +66,8 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
     final reviewFilter = await getOld();
     final data = ReviewFilterSuccess(
       paging: paging,
+      pagingEnum: PagingEnum.paged,
       reviewFilter: reviewFilter ?? ReviewFilterModel(),
-      isRefreshed: false,
-      isNextPaging: true,
     );
     LeLog.bd(this, pagination, data.toString());
     emit(data);

@@ -1,12 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
+import 'package:kualiva/common/feature/current_location/current_location_placemark_model.dart';
 import 'package:kualiva/_data/model/pagination/my_page.dart';
 import 'package:kualiva/_data/model/parameter/language_explain_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_detail_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/auth/model/user_profile_model.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
+import 'package:kualiva/common/feature/current_location/current_location_model.dart';
 
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
@@ -40,7 +40,7 @@ class MainHive {
       Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name),
       Hive.openBox<ParameterModel>(MyHive.parameter.name),
       Hive.openBox<ReviewFilterModel>(MyHive.reviewFilter.name),
-      Hive.openBox<List<String>>(MyHive.suggestion.name),
+      Hive.openBox<List<String>>(MyHive.recentSuggestion.name),
       Hive.openBox<MyPage<ReviewPlaceModel>>(MyHive.reviewPlace.name),
     ]);
   }
@@ -81,7 +81,7 @@ enum MyHive {
   selectedUser(11, 'selected_user'),
   reviewOrder(12, 'review_order'),
   reviewFilter(13, 'review_filter'),
-  suggestion(14, 'suggestion');
+  recentSuggestion(14, 'recent_suggestion');
 
   final int typeId;
   final String name;

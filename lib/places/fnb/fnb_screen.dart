@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
+import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
+import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
+import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
@@ -73,6 +75,7 @@ class _FnbScreenState extends State<FnbScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             FnbAppBarFeature(),
+            SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
           ];
         },
         body: SingleChildScrollView(

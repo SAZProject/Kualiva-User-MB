@@ -55,19 +55,6 @@ class CustomDecoration {
     );
   }
 
-  // Blue Decoration
-  BoxDecoration get blueColor => BoxDecoration(
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(0.5, 1),
-          colors: [
-            appTheme.cyanA200,
-            theme(context).colorScheme.onPrimary,
-            appTheme.purpleA700,
-          ],
-        ),
-      );
-
   // Fill Decorations
   static BoxDecoration get fillGray => BoxDecoration(
         color: appTheme.gray800,
@@ -134,40 +121,6 @@ class CustomDecoration {
       );
 
   // Gradient Decorations
-  BoxDecoration get gradientCyanAToOnPrimaryContainer => BoxDecoration(
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(1, 1),
-          colors: [
-            appTheme.cyanA400,
-            theme(context).colorScheme.onPrimaryContainer.withValues(alpha: 1),
-          ],
-        ),
-      );
-
-  BoxDecoration get gradientLightgreenAToOnPrimaryContainer => BoxDecoration(
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(0.5, 1),
-          colors: [
-            appTheme.lightGreenA400,
-            theme(context).colorScheme.onPrimaryContainer.withValues(alpha: 1),
-          ],
-        ),
-      );
-
-  BoxDecoration get gradientOnErrorContainerToPink => BoxDecoration(
-        gradient: LinearGradient(
-          begin: const Alignment(0.5, 0),
-          end: const Alignment(0.5, 1),
-          colors: [
-            theme(context).colorScheme.onErrorContainer,
-            appTheme.gray80001,
-            appTheme.pink900,
-          ],
-        ),
-      );
-
   BoxDecoration get gradientPrimaryContainerToRedA => BoxDecoration(
         gradient: LinearGradient(
           begin: const Alignment(0, 0.5),
@@ -228,11 +181,6 @@ class CustomDecoration {
             theme(context).colorScheme.primary.withValues(alpha: 0.7),
           ],
         ),
-      );
-
-  // Green Decorations
-  static BoxDecoration get greenColor => BoxDecoration(
-        color: appTheme.greenA700.withValues(alpha: 0.3),
       );
 
   // Orange Decorations

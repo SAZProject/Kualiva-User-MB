@@ -6,8 +6,8 @@ import 'package:kualiva/common/style/theme_helper.dart';
 import 'package:kualiva/common/utility/image_utility.dart';
 import 'package:kualiva/common/utility/location_util.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_feature.dart';
+import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
+import 'package:kualiva/common/feature/current_location/current_location_feature.dart';
 
 class HomeAppBarFeature extends StatefulWidget {
   const HomeAppBarFeature({

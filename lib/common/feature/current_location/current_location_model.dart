@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
-import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
+import 'package:kualiva/common/feature/current_location/current_location_placemark_model.dart';
 
 part 'current_location_model.g.dart';
 

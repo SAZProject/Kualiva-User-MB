@@ -5,8 +5,10 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.22
-- Add loading on max scroll in review
+Ver 0.1.23
+- Make Search bar into common widget
+- Cleaning widget
+- Change theme primary
 ```
 
 ## Getting Started

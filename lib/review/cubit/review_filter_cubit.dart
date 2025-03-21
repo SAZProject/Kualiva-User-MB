@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:kualiva/_data/enum/suggestion_enum.dart';
+import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/_repository/review/review_repository.dart';
-import 'package:kualiva/_repository/common/suggestion_repository.dart';
+import 'package:kualiva/_repository/common/recent_suggestion_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
@@ -13,10 +13,10 @@ part 'review_filter_state.dart';
 
 class ReviewFilterCubit extends Cubit<ReviewFilterState> {
   final ReviewRepository _reviewRepository;
-  final SuggestionRepository _suggestionRepository;
+  final RecentSuggestionRepository _recentSuggestionRepository;
   ReviewFilterCubit(
     this._reviewRepository,
-    this._suggestionRepository,
+    this._recentSuggestionRepository,
   ) : super(ReviewFilterInitial());
 
   Future<ReviewFilterModel?> getOld() async {
@@ -47,8 +47,8 @@ class ReviewFilterCubit extends Cubit<ReviewFilterState> {
     );
 
     if (reviewFilter.description != null) {
-      await _suggestionRepository.add(
-        SuggestionEnum.review,
+      await _recentSuggestionRepository.add(
+        RecentSuggestionEnum.review,
         reviewFilter.description!,
       );
     }

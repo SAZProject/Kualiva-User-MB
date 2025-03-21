@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
+import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_promo_bloc.dart';

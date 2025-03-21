@@ -20,8 +20,8 @@ class CustomSectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-      padding: padding ?? EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
+      margin: margin ?? EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
       width: double.maxFinite,
       child: InkWell(
         onTap: onPressed,

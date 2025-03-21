@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_feature.dart';
+import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
+import 'package:kualiva/common/feature/current_location/current_location_feature.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/location_util.dart';
 

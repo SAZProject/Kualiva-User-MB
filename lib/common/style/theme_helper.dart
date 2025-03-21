@@ -145,24 +145,16 @@ class TextThemes {
 
 class ColorSchemes {
   static const lightModeScheme = ColorScheme.light(
-    primary: Color(0XFFFFAE00),
+    primary: Color(0XFFFF8800),
     primaryContainer: Color(0XFFFD0002),
-    secondaryContainer: Color(0XFFBFBABA),
-    errorContainer: Color(0XFFED4C5C),
-    onError: Color(0XFF5BC0F8),
-    onErrorContainer: Color(0XFF000D3C),
     onPrimary: Color(0XFF000FFF),
     onPrimaryContainer: Color.fromRGBO(0, 0, 0, 1),
     onSecondaryContainer: Color.fromRGBO(255, 255, 255, 1),
   );
 
   static const darkModeScheme = ColorScheme.dark(
-    primary: Color(0XFFFFAE00),
+    primary: Color(0XFFFF8800),
     primaryContainer: Color(0XFFFD0002),
-    secondaryContainer: Color(0XFFBFBABA),
-    errorContainer: Color(0XFFED4C5C),
-    onError: Color(0XFF5BC0F8),
-    onErrorContainer: Color(0XFF000D3C),
     onPrimary: Color(0XFF000FFF),
     onPrimaryContainer: Color.fromRGBO(255, 255, 255, 1),
     onSecondaryContainer: Color.fromRGBO(0, 0, 0, 1),
@@ -173,53 +165,20 @@ class GlobalCodeColors {
   //white
   Color get white => Colors.white;
   //Amber
-  Color get amber100 => const Color(0XFFFFEBBF);
-  Color get amber300 => const Color(0XFFFFC957);
-  Color get amber700 => const Color(0XFFE1A303);
-  Color get amberA200 => const Color(0XFFFFC93C);
+  Color get amber700 => const Color(0XFFFFAE00);
   //Black
   Color get black900 => const Color(0XFF000000);
-  //Blue
-  Color get blue500 => const Color(0XFF2A94F4);
   //Bluegray
   Color get blueGray100 => const Color(0XFFCCCCCC);
-  //Cyan
-  Color get cyan900 => const Color(0XFF0B4870);
-  Color get cyanA200 => const Color(0XFF00FFFF);
-  Color get cyanA400 => const Color(0XFF04CCFF);
-  //deepOrange
-  Color get deep0rangeA100 => const Color(0XFFDBA17B);
   //Gray
   Color get gray200 => const Color(0XFFEEEEEE);
-  Color get gray300 => const Color(0XFFE6E6E6);
   Color get gray500 => const Color(0XFF999999);
-  Color get gray600 => const Color(0XFF6B6B6B);
-  Color get gray60001 => const Color(0XFF8A8282);
   Color get gray800 => const Color(0XFF444444);
-  Color get gray80001 => const Color(0XFF4A1E59);
-  //Green
-  Color get greenA700 => const Color(0XFF03CE00);
-  //Indigo
-  Color get indigo400 => const Color(0XFF4289C1);
-  //LightBlue
-  Color get lightBlue700 => const Color(0XFF0081C9);
-  Color get lightBlue900 => const Color(0XFF0E538C);
-  Color get lightBlueA100 => const Color(0XFF86E5FF);
-  //LightGreen
-  Color get lightGreenA400 => const Color(0XFF73FF2D);
-  Color get lightGreenA40001 => const Color(0XFF54FF00);
   //Orange
   Color get orange300 => const Color(0XFFFFBE55);
-  Color get orangeA180 => const Color(0XFFFFD781);
-  //Pink
-  Color get pink900 => const Color(0XFF772730);
-  //Purple
-  Color get purpleA700 => const Color(0XFF8800FF);
   // Red
-  Color get red300 => const Color(0XFFCC9271);
   Color get redA700 => const Color(0XFFB80000);
   Color get redA70001 => const Color(0XFFFF0000);
   //yellow
-  Color get yellow900 => const Color(0XFFF07B0F);
   Color get yellowA700 => const Color(0XFFFFDD00);
 }

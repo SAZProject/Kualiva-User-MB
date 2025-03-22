@@ -8,9 +8,9 @@ final class FnbNearestInitial extends FnbNearestState {}
 final class FnbNearestLoading extends FnbNearestState {}
 
 final class FnbNearestSuccess extends FnbNearestState {
-  final List<FnbNearestModel> nearest;
+  final FnbNearestPage fnbNearestPage;
 
-  FnbNearestSuccess({required this.nearest});
+  FnbNearestSuccess({required this.fnbNearestPage});
 }
 
 final class FnbNearestFailure extends FnbNearestState {}

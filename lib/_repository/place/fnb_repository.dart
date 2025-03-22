@@ -1,12 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
+import 'package:kualiva/_data/enum/paging_enum.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/_data/error_handler.dart';
+import 'package:kualiva/_data/model/pagination/pagination.dart';
+import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/_data/dio_client.dart';
 import 'package:kualiva/main_hive.dart';
 import 'package:kualiva/places/fnb/model/fnb_detail_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
 import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
 
 class FnbRepository {
@@ -16,17 +20,20 @@ class FnbRepository {
 
   void invalidate() {}
 
-  Future<List<FnbNearestModel>> getPlacesNearest({
-    required bool isRefreshed,
+  Future<FnbNearestPage> getPlacesNearest({
+    required Paging paging,
+    required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
   }) async {
-    final fnbNearestBox = Hive.box<FnbNearestModel>(MyHive.fnbNearest.name);
+    final boxName = MyBox.fnbNearestPage.name;
+    final fnbNearestBox = Hive.box<FnbNearestPage>(boxName);
 
-    if (!isRefreshed && fnbNearestBox.values.toList().isNotEmpty) {
-      final fnbNearestList = fnbNearestBox.values.toList();
-      LeLog.rd(this, getPlacesNearest, fnbNearestList.toString());
-      return fnbNearestList;
+    final oldPage = fnbNearestBox.get(boxName);
+
+    if ((pagingEnum == PagingEnum.before || pagingEnum == PagingEnum.started) &&
+        oldPage != null) {
+      return oldPage;
     }
 
     final res = await _dioClient.dio().then((dio) {
@@ -39,12 +46,27 @@ class FnbRepository {
         },
       );
     });
-    final data = (res.data['data'] as List<dynamic>)
-        .map((e) => FnbNearestModel.fromMap(e))
-        .toList();
-    fnbNearestBox.addAll(data);
-    LeLog.rd(this, getPlacesNearest, data.toString());
-    return data;
+    final page = FnbNearestPage(
+      data: (res.data['data'] as List<dynamic>)
+          .map((e) => FnbNearestModel.fromMap(e))
+          .toList(),
+      pagination: Pagination.fromMap(res.data['pagination']),
+    );
+
+    if (pagingEnum == PagingEnum.paged) {
+      final List<FnbNearestModel> temp = [
+        ...(oldPage?.data ?? []),
+        ...page.data
+      ];
+      page.data.clear();
+      page.data.addAll(temp);
+    }
+
+    await fnbNearestBox.delete(boxName);
+    await fnbNearestBox.put(boxName, page);
+
+    LeLog.rd(this, getPlacesNearest, page.toString());
+    return page;
   }
 
   Future<FnbDetailModel> getPlaceDetail({

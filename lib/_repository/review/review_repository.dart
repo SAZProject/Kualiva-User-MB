@@ -126,7 +126,8 @@ class ReviewRepository {
   ReviewPlacePage? otherReviewGetByPlaceOld({
     required String placeId,
   }) {
-    final reviewPlaceBox = Hive.box<ReviewPlacePage>(MyHive.reviewPlace.name);
+    final reviewPlaceBox =
+        Hive.box<ReviewPlacePage>(MyBox.reviewPlacePage.name);
 
     return reviewPlaceBox.get(placeId);
   }
@@ -142,13 +143,14 @@ class ReviewRepository {
     ReviewSelectedUserEnum? selectedUser,
     ReviewOrderEnum? order,
   }) async {
-    final reviewPlaceBox = Hive.box<ReviewPlacePage>(MyHive.reviewPlace.name);
+    final reviewPlaceBox =
+        Hive.box<ReviewPlacePage>(MyBox.reviewPlacePage.name);
 
-    ReviewPlacePage? oldReviewPlaceList = reviewPlaceBox.get(placeId);
+    final oldPage = reviewPlaceBox.get(placeId);
 
     if ((pagingEnum == PagingEnum.before || pagingEnum == PagingEnum.started) &&
-        oldReviewPlaceList != null) {
-      return oldReviewPlaceList;
+        oldPage != null) {
+      return oldPage;
     }
 
     final query = Map<String, dynamic>.from({});
@@ -175,7 +177,7 @@ class ReviewRepository {
 
     if (pagingEnum == PagingEnum.paged) {
       final List<ReviewPlaceModel> temp = [
-        ...(oldReviewPlaceList?.data ?? []),
+        ...(oldPage?.data ?? []),
         ...page.data
       ];
       page.data.clear();
@@ -194,7 +196,7 @@ class ReviewRepository {
     required String placeId,
   }) async {
     // final reviewPlaceBox =
-    //     Hive.box<ReviewPlaceModel>(MyHive.reviewPlaceModel.name);
+    //     Hive.box<ReviewPlaceModel>(MyBox.reviewPlaceModel.name);
 
     // if (reviewPlaceBox.values.toList().isNotEmpty) {
     //   final reviewPlaceList = reviewPlaceBox.values.toList();
@@ -242,7 +244,7 @@ class ReviewRepository {
 
   Future<ReviewFilterModel?> getFilter() async {
     final reviewFilterBox =
-        Hive.box<ReviewFilterModel>(MyHive.reviewFilter.name);
+        Hive.box<ReviewFilterModel>(MyBox.reviewFilter.name);
 
     if (reviewFilterBox.values.toList().isNotEmpty) {
       final reviewFilter = reviewFilterBox.values.first;
@@ -255,7 +257,7 @@ class ReviewRepository {
 
   Future<int> deleteFilter() async {
     final reviewFilterBox =
-        Hive.box<ReviewFilterModel>(MyHive.reviewFilter.name);
+        Hive.box<ReviewFilterModel>(MyBox.reviewFilter.name);
     return reviewFilterBox.clear();
   }
 
@@ -267,7 +269,7 @@ class ReviewRepository {
     ReviewOrderEnum? order,
   }) async {
     final reviewFilterBox =
-        Hive.box<ReviewFilterModel>(MyHive.reviewFilter.name);
+        Hive.box<ReviewFilterModel>(MyBox.reviewFilter.name);
 
     final reviewFilter = ReviewFilterModel(
       description: description,

@@ -11,12 +11,10 @@ import 'package:kualiva/places/fnb/widget/fnb_nearest_item.dart';
 class FnbNearestFeature extends StatelessWidget {
   const FnbNearestFeature({
     super.key,
-    required this.parentContext,
     required this.parentScrollController,
     required this.childScrollController,
   });
 
-  final BuildContext parentContext;
   final ScrollController parentScrollController;
   final ScrollController childScrollController;
 
@@ -79,22 +77,24 @@ class FnbNearestFeature extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
 
+        final fnbNearesList = state.fnbNearestPage.data;
+
         return ListView.builder(
           controller: childScrollController,
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
-          itemCount: state.nearest.length,
+          itemCount: fnbNearesList.length,
           itemBuilder: (context, index) {
             return FnbNearestItem(
-              merchant: state.nearest[index],
+              merchant: fnbNearesList[index],
               onPressed: () {
                 Navigator.pushNamed(
                   context,
                   AppRoutes.fnbDetailScreen,
                   arguments: PlaceArgument(
-                    placeId: state.nearest[index].id,
-                    isMerchant: state.nearest[index].isMerchant,
-                    featuredImage: state.nearest[index].featuredImage,
+                    placeId: fnbNearesList[index].id,
+                    isMerchant: fnbNearesList[index].isMerchant,
+                    featuredImage: fnbNearesList[index].featuredImage,
                   ),
                 );
               },

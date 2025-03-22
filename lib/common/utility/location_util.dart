@@ -4,12 +4,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
+import 'package:kualiva/common/feature/current_location/current_location_placemark_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_alert_dialog.dart';
 import 'package:kualiva/_data/model/ui_model/loc_dropdown_model.dart';
 import 'package:kualiva/_data/model/util_model/distance_checking_result_model.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
+import 'package:kualiva/common/feature/current_location/current_location_model.dart';
 
 void showAlertDialog({
   required BuildContext context,

@@ -1,14 +1,14 @@
 // ignore_for_file: unused_field
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_placemark_model.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
+import 'package:kualiva/common/feature/current_location/current_location_placemark_model.dart';
 import 'package:kualiva/_data/model/parameter/language_explain_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_detail_model.dart';
 import 'package:kualiva/_data/model/parameter/parameter_model.dart';
 import 'package:kualiva/auth/model/user_model.dart';
 import 'package:kualiva/auth/model/user_profile_model.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
+import 'package:kualiva/common/feature/current_location/current_location_model.dart';
 
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
@@ -43,7 +43,6 @@ class MainHive {
     try {
       return await Hive.openBox<T>(box.name);
     } catch (e) {
-      print(e.toString());
       await Hive.deleteBoxFromDisk(box.name);
       return Hive.openBox<T>(box.name);
     }
@@ -55,6 +54,7 @@ class MainHive {
       openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation),
       openLeSafeBox<ParameterModel>(MyBox.parameter),
       openLeSafeBox<ReviewFilterModel>(MyBox.reviewFilter),
+      openLeSafeBox<List<String>>(MyBox.recentSuggestion),
       openLeSafeBox<List<String>>(MyBox.suggestion),
       openLeSafeBox<ReviewPlacePage>(MyBox.reviewPlacePage),
       openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage)
@@ -88,6 +88,7 @@ enum MyBox {
   currentLocation('current_location'),
   parameter('parameter'),
   reviewFilter('review_filter'),
+  recentSuggestion('recent_suggestion'),
   suggestion('suggestion'),
   reviewPlacePage('review_place_page'),
   fnbNearestPage('fnb_nearest_page');

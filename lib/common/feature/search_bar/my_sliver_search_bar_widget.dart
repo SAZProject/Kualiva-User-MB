@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
-import 'package:kualiva/_data/feature/search_bar/my_sliver_app_bar_delegate.dart';
+import 'package:kualiva/common/feature/search_bar/my_sliver_app_bar_delegate.dart';
 
 class MySliverSearchBarWidget extends StatelessWidget {
   const MySliverSearchBarWidget({
     super.key,
+    this.viewOnSubmitted,
     required this.suggestionsBuilder,
   });
+
+  final Function(String)? viewOnSubmitted;
 
   final Future<List<Widget>> Function(
     BuildContext context,
@@ -23,6 +26,7 @@ class MySliverSearchBarWidget extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(8.h),
           child: SearchAnchor(
+            viewOnSubmitted: viewOnSubmitted,
             builder: (BuildContext context, SearchController controller) {
               return SearchBar(
                 controller: controller,

@@ -86,8 +86,8 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
                 Text(
                   context.tr("otp.resend"),
                   style: CustomTextStyles(context).labelMedium_10.copyWith(
-                        color: appTheme.yellowA700,
-                        decorationColor: appTheme.yellowA700,
+                        color: theme(context).colorScheme.primary,
+                        decorationColor: theme(context).colorScheme.primary,
                         decoration: TextDecoration.underline,
                       ),
                 ),

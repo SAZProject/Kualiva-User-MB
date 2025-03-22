@@ -10,19 +10,18 @@ import 'package:kualiva/_repository/place/spa_repository.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
 import 'package:kualiva/_repository/user/auth_repository.dart';
 import 'package:kualiva/_repository/common/token_manager.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_bloc.dart';
+import 'package:kualiva/common/cubit/search_bar_cubit.dart';
+import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/_data/dio_client.dart';
 import 'package:kualiva/_data/dio_client_minio.dart';
-import 'package:kualiva/_repository/common/suggestion_repository.dart';
+import 'package:kualiva/_repository/common/recent_suggestion_repository.dart';
 import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
 import 'package:kualiva/home/bloc/home_featured_bloc.dart';
-import 'package:kualiva/home/cubit/home_search_bar_cubit.dart';
 import 'package:kualiva/_repository/promotion/promotion_repository.dart';
 import 'package:kualiva/onboarding/bloc/onboarding_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
-import 'package:kualiva/places/fnb/cubit/fnb_search_bar_cubit.dart';
 import 'package:kualiva/_repository/place/fnb_repository.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_detail_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
@@ -107,7 +106,7 @@ class MainProvider extends StatelessWidget {
         }),
         RepositoryProvider(
           create: (context) {
-            return SuggestionRepository();
+            return RecentSuggestionRepository();
           },
         ),
         RepositoryProvider(
@@ -193,19 +192,17 @@ class MainProvider extends StatelessWidget {
           return HomeAdBannerBloc(context.read<PromotionRepository>());
         }),
         BlocProvider(create: (context) {
-          return HomeSearchBarCubit(context.read<SuggestionRepository>());
-        }),
-        BlocProvider(create: (context) {
-          return FnbSearchBarCubit(context.read<SuggestionRepository>());
-        }),
-        BlocProvider(create: (context) {
           return HomeFeaturedBloc(context.read<PromotionRepository>());
+        }),
+        BlocProvider(create: (context) {
+          return SearchBarCubit(context.read<RecentSuggestionRepository>());
         }),
         BlocProvider(create: (context) {
           return ReportPlaceBloc(context.read<ReportRepository>());
         }),
         BlocProvider(create: (context) {
-          return ReviewSearchBarCubit(context.read<SuggestionRepository>());
+          return ReviewSearchBarCubit(
+              context.read<RecentSuggestionRepository>());
         }),
         BlocProvider(create: (context) {
           return ReviewPlaceOtherReadBloc(context.read<ReviewRepository>());
@@ -237,7 +234,7 @@ class MainProvider extends StatelessWidget {
         BlocProvider(create: (context) {
           return ReviewFilterCubit(
             context.read<ReviewRepository>(),
-            context.read<SuggestionRepository>(),
+            context.read<RecentSuggestionRepository>(),
           );
         }),
       ],

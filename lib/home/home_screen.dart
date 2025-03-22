@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
 import 'package:kualiva/home/bloc/home_featured_bloc.dart';
 import 'package:kualiva/home/feature/home_ad_banner_feature.dart';
 import 'package:kualiva/home/feature/home_app_bar_feature.dart';
 import 'package:kualiva/home/feature/home_featured_feature.dart';
-import 'package:kualiva/home/feature/home_search_bar_feature.dart';
 import 'package:kualiva/home/model/home_grid_menu_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -142,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             HomeAppBarFeature(),
-            HomeSearchBarFeature(),
+            SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.home),
           ];
         },
         body: SingleChildScrollView(

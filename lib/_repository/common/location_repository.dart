@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:kualiva/_data/feature/current_location/current_location_model.dart';
+import 'package:kualiva/common/feature/current_location/current_location_model.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/utility/location_util.dart';
 import 'package:kualiva/main_hive.dart';

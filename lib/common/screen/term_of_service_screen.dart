@@ -2,9 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/t_o_s_dataset.dart';
+import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/save_pref.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
-import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
+import 'package:kualiva/common/widget/custom_outlined_button.dart';
 
 class TermOfServiceScreen extends StatelessWidget {
   TermOfServiceScreen({super.key});
@@ -36,14 +37,19 @@ class TermOfServiceScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: Sizeutils.width,
-              child: Text(
-                tos,
-                style: CustomTextStyles(context).bodyMedium_13,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
+              child: SizedBox(
+                width: Sizeutils.width,
+                child: Text(
+                  tos,
+                  style: CustomTextStyles(context).bodyMedium_13,
+                ),
               ),
             ),
+            SizedBox(height: 25.h),
             _buildAgree(context),
+            SizedBox(height: 25.h),
           ],
         ),
       ),
@@ -51,16 +57,12 @@ class TermOfServiceScreen extends StatelessWidget {
   }
 
   Widget _buildAgree(BuildContext context) {
-    return CustomGradientOutlinedButton(
+    return CustomOutlinedButton(
       text: context.tr("common.agree"),
-      outerPadding: EdgeInsets.all(10.h),
-      innerPadding: EdgeInsets.all(5.h),
-      strokeWidth: 2.h,
-      colors: [
-        appTheme.yellowA700,
-        theme(context).colorScheme.primary,
-      ],
-      textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+      margin: EdgeInsets.all(5.h),
+      buttonStyle: CustomButtonStyles.none,
+      decoration: CustomDecoration(context).outlinePrimary,
+      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
       onPressed: () => _confirmBtnFunc(context),
     );
   }

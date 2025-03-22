@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kualiva/common/style/custom_text_style.dart';
+import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/base_button.dart';
 
 class CustomOutlinedButton extends BaseButton {
@@ -35,7 +35,7 @@ class CustomOutlinedButton extends BaseButton {
   }
 
   Widget buildOutlinedButton(BuildContext context) => Container(
-        height: height,
+        height: height ?? 50.h,
         width: width,
         margin: margin,
         decoration: decoration,

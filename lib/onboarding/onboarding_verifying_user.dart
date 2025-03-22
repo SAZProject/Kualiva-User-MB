@@ -173,6 +173,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
           Icon(
             onboardingModel.icon,
             size: 40.h,
+            color: theme(context).colorScheme.primary,
           ),
         ],
       ),
@@ -235,8 +236,8 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
         buttonStyle: CustomButtonStyles.none,
         decoration: !_fieldValidation(_activePage)
             ? CustomDecoration(context).outline
-            : CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
-        buttonTextStyle: Theme.of(context).textTheme.titleLarge,
+            : CustomDecoration(context).outlinePrimary,
+        buttonTextStyle: CustomTextStyles(context).titleMediumPrimary,
         onPressed: !_fieldValidation(_activePage)
             ? null
             : () => _confirmBtnFunc(context),

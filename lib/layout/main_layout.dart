@@ -74,8 +74,8 @@ class _MainNavigationState extends State<MainLayout> {
     return CurvedNavigationBar(
       index: _selectedPage,
       backgroundColor: Colors.transparent,
-      color: theme(context).colorScheme.primary.withValues(alpha: 0.6),
-      buttonBackgroundColor: appTheme.amber700,
+      color: theme(context).colorScheme.onSecondaryContainer,
+      buttonBackgroundColor: theme(context).colorScheme.primary,
       items: [
         // Icon(
         //   _selectedPage == 0 ? Icons.home : Icons.home_outlined,
@@ -174,16 +174,16 @@ class _MainNavigationState extends State<MainLayout> {
           child: Icon(
             _selectedPage == index ? selectedIcon : unselectedIcon,
             size: 30.h,
-            color: _selectedPage == index
-                ? appTheme.black900
-                : theme(context).iconTheme.color,
+            color: theme(context).iconTheme.color,
           ),
         ),
         Visibility(
           visible: unselectedImage != null,
           child: Image.asset(
             _selectedPage == index
-                ? selectedImage ?? "-"
+                ? theme(context).brightness == Brightness.dark
+                    ? imageDark ?? "-"
+                    : selectedImage ?? "-"
                 : theme(context).brightness == Brightness.dark
                     ? imageDark ?? "-"
                     : unselectedImage ?? "-",

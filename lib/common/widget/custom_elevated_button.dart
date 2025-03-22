@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -50,8 +49,7 @@ class CustomElevatedButton extends StatelessWidget {
         height: height ?? 50.h,
         width: width,
         margin: margin,
-        decoration: decoration ??
-            CustomButtonStyles.gradientYellowAToPrimaryDecoration(context),
+        decoration: decoration,
         child: ElevatedButton(
           style: buttonStyle,
           onPressed: isDisabled ?? false ? null : onPressed ?? () {},

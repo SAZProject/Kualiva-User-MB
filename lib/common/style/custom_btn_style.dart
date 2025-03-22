@@ -41,8 +41,7 @@ class CustomButtonStyles {
 
   static ButtonStyle fillprimary(BuildContext context) {
     return ElevatedButton.styleFrom(
-      backgroundColor:
-          theme(context).colorScheme.primary.withValues(alpha: 0.3),
+      backgroundColor: theme(context).colorScheme.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.h),
       ),

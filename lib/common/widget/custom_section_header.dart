@@ -9,6 +9,7 @@ class CustomSectionHeader extends StatelessWidget {
     this.useIcon = true,
     this.margin,
     this.padding,
+    this.textStyle,
   });
 
   final String label;
@@ -16,12 +17,13 @@ class CustomSectionHeader extends StatelessWidget {
   final bool useIcon;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? EdgeInsets.symmetric(horizontal: 10.h, vertical: 2.h),
-      padding: padding ?? EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.h),
+      margin: margin ?? EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
       width: double.maxFinite,
       child: InkWell(
         onTap: onPressed,
@@ -32,8 +34,9 @@ class CustomSectionHeader extends StatelessWidget {
           children: [
             Text(
               label,
-              style: theme(context).textTheme.titleLarge!.copyWith(
-                  color: theme(context).colorScheme.onPrimaryContainer),
+              style: textStyle ??
+                  theme(context).textTheme.titleLarge!.copyWith(
+                      color: theme(context).colorScheme.onPrimaryContainer),
             ),
             useIcon
                 ? Icon(Icons.arrow_forward_ios, size: 20.h)

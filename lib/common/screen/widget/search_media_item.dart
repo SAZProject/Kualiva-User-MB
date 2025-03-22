@@ -24,6 +24,7 @@ class SearchMediaItem extends StatelessWidget {
               height: 80.h,
               width: 80.h,
               radius: BorderRadius.circular(50.h),
+              boxFit: BoxFit.cover,
             ),
             Padding(
               padding: EdgeInsets.only(left: 4.h),

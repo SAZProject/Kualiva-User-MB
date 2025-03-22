@@ -12,6 +12,8 @@ import 'package:kualiva/common/feature/current_location/current_location_model.d
 
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_nearest_page.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_page.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
@@ -42,6 +44,8 @@ class MainHive {
     Hive.registerAdapter(FnbNearestPageAdapter());
     Hive.registerAdapter(SpaNearestModelAdapter());
     Hive.registerAdapter(SpaNearestPageAdapter());
+    Hive.registerAdapter(NightlifeNearestModelAdapter());
+    Hive.registerAdapter(NightlifeNearestPageAdapter());
   }
 
   static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
@@ -69,6 +73,7 @@ class MainHive {
       openLeSafeBox<ReviewPlacePage>(MyBox.reviewPlacePage),
       openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage),
       openLeSafeBox<SpaNearestPage>(MyBox.spaNearestPage),
+      openLeSafeBox<NightlifeNearestPage>(MyBox.nightlifeNearestPage),
     ]);
   }
 
@@ -106,7 +111,8 @@ enum MyBox {
   recentSuggestion('recent_suggestion'),
   reviewPlacePage('review_place_page'),
   fnbNearestPage('fnb_nearest_page'),
-  spaNearestPage('spa_nearest_page');
+  spaNearestPage('spa_nearest_page'),
+  nightlifeNearestPage('nightlife_nearest_page');
 
   final String name;
 
@@ -132,7 +138,9 @@ enum _MyHive {
   reviewPlacePage(16),
   fnbNearestPage(17),
   spaNearest(18),
-  spaNearestPage(19);
+  spaNearestPage(19),
+  nightlifeNearest(20),
+  nightlifeNearestPage(21);
 
   final int typeId;
 

@@ -90,7 +90,7 @@ class _FnbScreenState extends State<FnbScreen> {
         final bool isRefresh = state.isDistanceTooFarOrFirstTime;
 
         context.read<FnbPromoBloc>().add(FnbPromoFetched(
-              isRefreshed: state.isDistanceTooFarOrFirstTime,
+              isRefresh: state.isDistanceTooFarOrFirstTime,
               placeCategoryEnum: placeCategoryEnum,
             ));
 

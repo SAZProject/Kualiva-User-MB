@@ -5,10 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.23
-- Make Search bar into common widget
-- Cleaning widget
-- Change theme primary
+Ver 0.1.24
+- New UI V2 sign in, sign up, otp, device permission
 ```
 
 ## Getting Started

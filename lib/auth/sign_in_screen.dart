@@ -2,19 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
+import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
-import 'package:kualiva/common/style/custom_text_style.dart';
-import 'package:kualiva/common/style/theme_helper.dart';
 import 'package:kualiva/common/utility/form_validation_util.dart';
-import 'package:kualiva/common/utility/image_constant.dart';
 import 'package:kualiva/common/utility/save_pref.dart';
-import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
-import 'package:kualiva/common/widget/custom_gradient_outlined_button.dart';
-import 'package:kualiva/common/widget/custom_image_view.dart';
+import 'package:kualiva/common/widget/custom_outlined_button.dart';
 import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
-import 'package:kualiva/router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -75,6 +70,7 @@ class SignInScreenState extends State<SignInScreen> {
           setState(() {
             tosAgreement = value as bool;
           });
+          SavePref().saveTosData();
           if (!context.mounted) return;
           context.read<AuthBloc>().add(authEvent);
         },
@@ -127,7 +123,7 @@ class SignInScreenState extends State<SignInScreen> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 6.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
             child: SizedBox(
               width: double.maxFinite,
               child: Column(
@@ -138,9 +134,8 @@ class SignInScreenState extends State<SignInScreen> {
                     height: 100.h,
                     width: 100.h,
                   ),
-                  SizedBox(height: 25.h),
                   _signInMenu(context),
-                  const Spacer(),
+                  SizedBox(height: 10.h),
                   _buildTos(context),
                 ],
               ),
@@ -170,7 +165,7 @@ class SignInScreenState extends State<SignInScreen> {
           // _signInWithSAZ(context),
           // SizedBox(height: 10.h),
           // _signInWithGoogle(context),
-          SizedBox(height: 10.h),
+          SizedBox(height: 25.h),
           Text(
             context.tr("sign_in.kualiva_acc"),
             style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
@@ -284,11 +279,10 @@ class SignInScreenState extends State<SignInScreen> {
         return CustomElevatedButton(
           isLoading: state is AuthLoading,
           initialText: context.tr("sign_in.sign_in_btn"),
-          buttonStyle: CustomButtonStyles.none,
-          decoration:
-              CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
+          buttonStyle: CustomButtonStyles.fillprimary(context),
+          decoration: null,
           buttonTextStyle:
-              CustomTextStyles(context).titleMediumOnPrimaryContainer,
+              CustomTextStyles(context).titleMediumOnSecondaryContainer,
           onPressed: () => _onPressedSignIn(context),
         );
       },
@@ -296,16 +290,12 @@ class SignInScreenState extends State<SignInScreen> {
   }
 
   Widget _signUpButton(BuildContext context) {
-    return CustomGradientOutlinedButton(
+    return CustomOutlinedButton(
       text: context.tr("sign_up.sign_up_btn"),
-      outerPadding: EdgeInsets.zero,
-      innerPadding: EdgeInsets.all(2.h),
-      strokeWidth: 2.h,
-      colors: [
-        appTheme.yellowA700,
-        theme(context).colorScheme.primary,
-      ],
-      textStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+      margin: EdgeInsets.all(5.h),
+      buttonStyle: CustomButtonStyles.none,
+      decoration: CustomDecoration(context).outlinePrimary,
+      buttonTextStyle: CustomTextStyles(context).titleMediumPrimary,
       onPressed: () => _onPressedSignUp(context),
     );
   }
@@ -314,6 +304,7 @@ class SignInScreenState extends State<SignInScreen> {
     return SizedBox(
       width: Sizeutils.width,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Checkbox(
             value: tosAgreement,
@@ -324,6 +315,7 @@ class SignInScreenState extends State<SignInScreen> {
                   setState(() {
                     tosAgreement = value as bool;
                   });
+                  SavePref().saveTosData();
                 },
               );
             },
@@ -341,8 +333,8 @@ class SignInScreenState extends State<SignInScreen> {
                   TextSpan(
                     text: context.tr("tos.tos"),
                     style: theme(context).textTheme.labelMedium!.copyWith(
-                          color: appTheme.yellowA700,
-                          decorationColor: appTheme.yellowA700,
+                          color: theme(context).colorScheme.primary,
+                          decorationColor: theme(context).colorScheme.primary,
                           decoration: TextDecoration.underline,
                         ),
                     recognizer: TapGestureRecognizer()
@@ -353,6 +345,7 @@ class SignInScreenState extends State<SignInScreen> {
                             setState(() {
                               tosAgreement = value as bool;
                             });
+                            SavePref().saveTosData();
                           },
                         );
                       },
@@ -367,8 +360,8 @@ class SignInScreenState extends State<SignInScreen> {
                   TextSpan(
                     text: context.tr("tos.policy"),
                     style: theme(context).textTheme.labelMedium!.copyWith(
-                          color: appTheme.yellowA700,
-                          decorationColor: appTheme.yellowA700,
+                          color: theme(context).colorScheme.primary,
+                          decorationColor: theme(context).colorScheme.primary,
                           decoration: TextDecoration.underline,
                         ),
                     recognizer: TapGestureRecognizer()
@@ -379,6 +372,7 @@ class SignInScreenState extends State<SignInScreen> {
                             setState(() {
                               tosAgreement = value as bool;
                             });
+                            SavePref().saveTosData();
                           },
                         );
                       },

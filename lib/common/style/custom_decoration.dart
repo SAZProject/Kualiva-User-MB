@@ -215,6 +215,14 @@ class CustomDecoration {
         color: theme(context).colorScheme.primary.withValues(alpha: 0.3),
       );
 
+  BoxDecoration get outlinePrimary => BoxDecoration(
+        border: Border.all(
+          color: theme(context).colorScheme.primary,
+          width: 2.h,
+        ),
+        borderRadius: BorderRadiusStyle.roundedBorder10,
+      );
+
   BoxDecoration get outlinePrimary_06 => BoxDecoration(
         color: theme(context).colorScheme.primary.withValues(alpha: 0.8),
         border: Border.all(

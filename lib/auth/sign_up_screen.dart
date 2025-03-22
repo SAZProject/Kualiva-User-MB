@@ -10,8 +10,10 @@ import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/form_validation_util.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/utility/save_pref.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_phone_number.dart';
+import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/common/widget/custom_text_form_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,6 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           setState(() {
             tosAgreement = value as bool;
           });
+          SavePref().saveTosData();
           if (!context.mounted) return;
 
           context.read<AuthBloc>().add(
@@ -124,9 +127,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
+          appBar: _signUpAppBar(context),
           body: _body(context),
         ),
       ),
+    );
+  }
+
+  PreferredSizeWidget _signUpAppBar(BuildContext context) {
+    return CustomAppBar(
+      title: context.tr("sign_up.title"),
+      useLeading: true,
+      onBackPressed: () => Navigator.pop(context),
     );
   }
 
@@ -135,25 +147,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 6.h),
+        padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
         child: SizedBox(
-          height: Sizeutils.height,
           width: double.maxFinite,
           child: Form(
             key: _formKey,
-            child: Column(
-              children: [
-                CustomImageView(
-                  imagePath: ImageConstant.appLogo2,
-                  height: 100.h,
-                  width: 100.h,
-                ),
-                SizedBox(height: 10.h),
-                _signUpMenu(context),
-                const Spacer(),
-                _buildTos(context),
-              ],
-            ),
+            child: _signUpMenu(context),
           ),
         ),
       ),
@@ -167,37 +166,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
         children: [
           _textFieldUserName(context),
           SizedBox(height: 2.h),
-          Container(
-            width: double.maxFinite,
-            margin: EdgeInsets.symmetric(horizontal: 4.h),
-            child: _fieldInputRequirement(
-              context,
-              totalChar: context.tr("sign_up.username_hint_1"),
-              lettersNumbers: context.tr("sign_up.username_hint_2"),
-              canBeEdited: context.tr("sign_up.username_hint_3"),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: SizedBox(
+              width: double.maxFinite,
+              child: _fieldInputRequirement(
+                context,
+                canBeEdited: context.tr("sign_up.username_hint_1"),
+                totalChar: context.tr("sign_up.username_hint_2"),
+                lettersNumbers: context.tr("sign_up.username_hint_3"),
+                specialChar: context.tr("sign_up.username_hint_4"),
+              ),
             ),
           ),
           SizedBox(height: 5.h),
-          SizedBox(
-              width: double.maxFinite, child: _textFieldPhoneNumber(context)),
+          _textFieldPhoneNumber(context),
           SizedBox(height: 10.h),
           _textFieldEmail(context),
           SizedBox(height: 10.h),
           _textFieldPassword(context),
           SizedBox(height: 2.h),
-          Container(
-            width: double.maxFinite,
-            margin: EdgeInsets.symmetric(horizontal: 4.h),
-            child: _fieldInputRequirement(
-              context,
-              totalChar: context.tr("sign_up.password_hint_1"),
-              lettersNumbers: context.tr("sign_up.password_hint_2"),
-              canBeEdited: context.tr("sign_up.password_hint_3"),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: SizedBox(
+              width: double.maxFinite,
+              child: _fieldInputRequirement(
+                context,
+                canBeEdited: context.tr("sign_up.password_hint_1"),
+                totalChar: context.tr("sign_up.password_hint_2"),
+                lettersNumbers: context.tr("sign_up.password_hint_3"),
+                specialChar: context.tr("sign_up.username_hint_4"),
+              ),
             ),
           ),
           SizedBox(height: 5.h),
           _textFieldConfirmPassword(context),
-          SizedBox(height: 10.h),
+          SizedBox(height: 5.h),
+          _buildTos(context),
+          SizedBox(height: 20.h),
           _signUpButton(context),
           SizedBox(height: 5.h),
           RichText(
@@ -211,8 +217,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextSpan(
                   text: context.tr("sign_up.sign_in_link"),
                   style: theme(context).textTheme.labelMedium!.copyWith(
-                        color: appTheme.yellowA700,
-                        decorationColor: appTheme.yellowA700,
+                        color: theme(context).colorScheme.primary,
+                        decorationColor: theme(context).colorScheme.primary,
                         decoration: TextDecoration.underline,
                       ),
                   recognizer: TapGestureRecognizer()
@@ -225,70 +231,137 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ],
             ),
           ),
+          SizedBox(height: 25.h),
         ],
       ),
     );
   }
 
   Widget _textFieldUserName(BuildContext context) {
-    return CustomTextFormField(
-      controller: _userNameCtl,
-      hintText: context.tr("sign_up.username"),
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 10.h,
-        vertical: 16.h,
-      ),
-      validator: (value) {
-        if (value == null || value.isEmpty) return "Please enter some text";
+    return SizedBox(
+      width: double.maxFinite,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomSectionHeader(
+            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            padding: EdgeInsets.symmetric(vertical: 5.h),
+            label: context.tr("sign_up.username"),
+            useIcon: false,
+            textStyle: theme(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: theme(context).colorScheme.primary),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: CustomTextFormField(
+              controller: _userNameCtl,
+              hintText: context.tr("sign_up.username"),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 10.h,
+                vertical: 15.h,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please enter some text";
+                }
 
-        if (!FormValidationUtil.username(value)) {
-          return "Tidak sesuai ketentuan";
-        }
-        return null;
-      },
+                if (!FormValidationUtil.username(value)) {
+                  return "Tidak sesuai ketentuan";
+                }
+                return null;
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _textFieldEmail(BuildContext context) {
-    return CustomTextFormField(
-      controller: _emailCtl,
-      hintText: context.tr("sign_up.email"),
-      textInputType: TextInputType.emailAddress,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 10.h,
-        vertical: 16.h,
-      ),
-      validator: (value) {
-        if (value == null || value.isEmpty) return "Please enter some text";
+    return SizedBox(
+      width: double.maxFinite,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomSectionHeader(
+            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            padding: EdgeInsets.symmetric(vertical: 5.h),
+            label: context.tr("sign_up.email"),
+            useIcon: false,
+            textStyle: theme(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: theme(context).colorScheme.primary),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: CustomTextFormField(
+              controller: _emailCtl,
+              hintText: context.tr("sign_up.email"),
+              textInputType: TextInputType.emailAddress,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 10.h,
+                vertical: 16.h,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please enter some text";
+                }
 
-        return null;
-      },
+                return null;
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _textFieldPhoneNumber(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: CustomPhoneNumber(
-        country: selectedCountry,
-        onPressed: (Country country) {
-          selectedCountry = country;
-        },
-        textFormField: CustomTextFormField(
-          controller: _phoneNumberCtl,
-          textInputType: TextInputType.phone,
-          validator: (value) {
-            if (value == null || value.isEmpty) return 'Please enter some text';
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomSectionHeader(
+            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            padding: EdgeInsets.symmetric(vertical: 5.h),
+            label: context.tr("sign_up.phone_number"),
+            useIcon: false,
+            textStyle: theme(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: theme(context).colorScheme.primary),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: CustomPhoneNumber(
+              country: selectedCountry,
+              onPressed: (Country country) {
+                selectedCountry = country;
+              },
+              textFormField: CustomTextFormField(
+                controller: _phoneNumberCtl,
+                textInputType: TextInputType.phone,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
 
-            if (value[0] == '0') return 'Cannot input 0 at the start';
+                  if (value[0] == '0') return 'Cannot input 0 at the start';
 
-            if (!FormValidationUtil.phoneNumber(value)) {
-              return "Tidak sesuai ketentuan";
-            }
+                  if (!FormValidationUtil.phoneNumber(value)) {
+                    return "Tidak sesuai ketentuan";
+                  }
 
-            return null;
-          },
-        ),
+                  return null;
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -296,37 +369,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _textFieldPassword(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: ValueListenableBuilder(
-        valueListenable: _passwordObscure,
-        builder: (context, value, child) {
-          return CustomTextFormField(
-            controller: _passwordCtl,
-            hintText: context.tr("sign_up.password"),
-            textInputType: TextInputType.text,
-            obscureText: value,
-            suffix: IconButton(
-              onPressed: () {
-                _passwordObscure.value = !_passwordObscure.value;
-              },
-              icon: Icon(
-                value ? Icons.visibility : Icons.visibility_off,
-              ),
-            ),
-            onChange: (value) {
-              _password.value = value;
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter some text";
-              }
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomSectionHeader(
+            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            padding: EdgeInsets.symmetric(vertical: 5.h),
+            label: context.tr("sign_up.password"),
+            useIcon: false,
+            textStyle: theme(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: theme(context).colorScheme.primary),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: ValueListenableBuilder(
+              valueListenable: _passwordObscure,
+              builder: (context, value, child) {
+                return CustomTextFormField(
+                  controller: _passwordCtl,
+                  hintText: context.tr("sign_up.password"),
+                  textInputType: TextInputType.text,
+                  obscureText: value,
+                  suffix: IconButton(
+                    onPressed: () {
+                      _passwordObscure.value = !_passwordObscure.value;
+                    },
+                    icon: Icon(
+                      value ? Icons.visibility : Icons.visibility_off,
+                    ),
+                  ),
+                  onChange: (value) {
+                    _password.value = value;
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter some text";
+                    }
 
-              if (!FormValidationUtil.password(value)) {
-                return "Tidak sesuai ketentuan";
-              }
-              return null;
-            },
-          );
-        },
+                    if (!FormValidationUtil.password(value)) {
+                      return "Tidak sesuai ketentuan";
+                    }
+                    return null;
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -334,35 +425,54 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _textFieldConfirmPassword(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: ValueListenableBuilder(
-        valueListenable: _confirmPasswordObscure,
-        builder: (context, value, child) {
-          return CustomTextFormField(
-            controller: _confirmPassCtl,
-            hintText: context.tr("sign_up.re_enter_password"),
-            textInputType: TextInputType.text,
-            obscureText: value,
-            suffix: IconButton(
-              onPressed: () {
-                _confirmPasswordObscure.value = !_confirmPasswordObscure.value;
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomSectionHeader(
+            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            padding: EdgeInsets.symmetric(vertical: 5.h),
+            label: context.tr("sign_up.re_enter_password"),
+            useIcon: false,
+            textStyle: theme(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: theme(context).colorScheme.primary),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: ValueListenableBuilder(
+              valueListenable: _confirmPasswordObscure,
+              builder: (context, value, child) {
+                return CustomTextFormField(
+                  controller: _confirmPassCtl,
+                  hintText: context.tr("sign_up.re_enter_password"),
+                  textInputType: TextInputType.text,
+                  obscureText: value,
+                  suffix: IconButton(
+                    onPressed: () {
+                      _confirmPasswordObscure.value =
+                          !_confirmPasswordObscure.value;
+                    },
+                    icon: Icon(
+                      value ? Icons.visibility : Icons.visibility_off,
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter some text";
+                    }
+
+                    if (value != _password.value) {
+                      return "Confirm Password do not match";
+                    }
+
+                    return null;
+                  },
+                );
               },
-              icon: Icon(
-                value ? Icons.visibility : Icons.visibility_off,
-              ),
             ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter some text";
-              }
-
-              if (value != _password.value) {
-                return "Confirm Password do not match";
-              }
-
-              return null;
-            },
-          );
-        },
+          ),
+        ],
       ),
     );
   }
@@ -373,11 +483,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         return CustomElevatedButton(
           isLoading: state is AuthLoading,
           initialText: context.tr("sign_up.sign_up_btn"),
-          buttonStyle: CustomButtonStyles.none,
-          decoration:
-              CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(context),
+          buttonStyle: CustomButtonStyles.fillprimary(context),
+          decoration: null,
           buttonTextStyle:
-              CustomTextStyles(context).titleMediumOnPrimaryContainer,
+              CustomTextStyles(context).titleMediumOnSecondaryContainer,
           onPressed: () => _onPressedSignUp(context),
         );
       },
@@ -386,13 +495,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _fieldInputRequirement(
     BuildContext context, {
+    required String canBeEdited,
     required String totalChar,
     required String lettersNumbers,
-    required String canBeEdited,
+    required String specialChar,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          canBeEdited,
+          style: CustomTextStyles(context).bodySmallBlack900.copyWith(
+                color: theme(context)
+                    .colorScheme
+                    .onPrimaryContainer
+                    .withValues(alpha: 0.6),
+              ),
+        ),
+        SizedBox(height: 2.h),
         Text(
           "\u2022 $totalChar",
           style: CustomTextStyles(context).bodySmallBlack900.copyWith(
@@ -417,7 +537,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         SizedBox(height: 2.h),
         Text(
-          "\u2022 $canBeEdited",
+          "\u2022 $specialChar",
           style: CustomTextStyles(context).bodySmallBlack900.copyWith(
                 color: theme(context)
                     .colorScheme
@@ -443,6 +563,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   setState(() {
                     tosAgreement = value as bool;
                   });
+                  SavePref().saveTosData();
                 },
               );
             },
@@ -460,8 +581,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   TextSpan(
                     text: context.tr("tos.tos"),
                     style: theme(context).textTheme.labelMedium!.copyWith(
-                          color: appTheme.yellowA700,
-                          decorationColor: appTheme.yellowA700,
+                          color: theme(context).colorScheme.primary,
+                          decorationColor: theme(context).colorScheme.primary,
                           decoration: TextDecoration.underline,
                         ),
                     recognizer: TapGestureRecognizer()
@@ -472,6 +593,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             setState(() {
                               tosAgreement = value as bool;
                             });
+                            SavePref().saveTosData();
                           },
                         );
                       },
@@ -486,8 +608,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   TextSpan(
                     text: context.tr("tos.policy"),
                     style: theme(context).textTheme.labelMedium!.copyWith(
-                          color: appTheme.yellowA700,
-                          decorationColor: appTheme.yellowA700,
+                          color: theme(context).colorScheme.primary,
+                          decorationColor: theme(context).colorScheme.primary,
                           decoration: TextDecoration.underline,
                         ),
                     recognizer: TapGestureRecognizer()
@@ -498,6 +620,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             setState(() {
                               tosAgreement = value as bool;
                             });
+                            SavePref().saveTosData();
                           },
                         );
                       },

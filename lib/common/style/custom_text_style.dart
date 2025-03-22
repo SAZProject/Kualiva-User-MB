@@ -228,6 +228,10 @@ class CustomTextStyles {
       theme(context).textTheme.titleMedium!.copyWith(
             color: appTheme.yellowA700,
           );
+  TextStyle get titleMediumPrimary =>
+      theme(context).textTheme.titleMedium!.copyWith(
+            color: theme(context).colorScheme.primary,
+          );
   TextStyle get titleMediumOnSecondaryContainer =>
       theme(context).textTheme.titleMedium!.copyWith(
             color: theme(context).colorScheme.onSecondaryContainer,

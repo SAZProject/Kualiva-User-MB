@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
+import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/review/bloc/review_place_other_read_bloc.dart';
 import 'package:kualiva/review/model/review_place_page.dart';
@@ -45,6 +46,13 @@ class _ReviewOtherReviewFeatureState extends State<ReviewOtherReviewFeature> {
   Widget _list(BuildContext context) {
     return BlocBuilder<ReviewPlaceOtherReadBloc, ReviewPlaceOtherReadState>(
       builder: (context, state) {
+        if (state is ReviewPlaceOtherReadFailure) {
+          return CustomErrorState(
+            errorMessage: context.tr('common.error_try_again'),
+            onRetry: () {},
+          );
+        }
+
         if (state is ReviewPlaceOtherReadLoading &&
             state.reviewPlacePage != null) {
           return _listBuilder(state.reviewPlacePage!);

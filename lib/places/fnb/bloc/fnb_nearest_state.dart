@@ -5,7 +5,11 @@ sealed class FnbNearestState {}
 
 final class FnbNearestInitial extends FnbNearestState {}
 
-final class FnbNearestLoading extends FnbNearestState {}
+final class FnbNearestLoading extends FnbNearestState {
+  final FnbNearestPage? fnbNearestPage;
+
+  FnbNearestLoading({required this.fnbNearestPage});
+}
 
 final class FnbNearestSuccess extends FnbNearestState {
   final FnbNearestPage fnbNearestPage;

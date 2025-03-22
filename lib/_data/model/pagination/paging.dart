@@ -9,7 +9,7 @@ class Paging {
 
   const Paging({
     this.page = 1,
-    this.size = 3,
+    this.size = 10,
   });
 
   Paging copyWith({

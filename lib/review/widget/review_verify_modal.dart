@@ -52,7 +52,6 @@ class _ReviewVerifyModalState extends State<ReviewVerifyModal> {
           (reviewPlaceMyReadBloc.state as ReviewPlaceMyReadSuccess).reviewPlace;
       _transactionCtl.text = reviewPlace.invoice ?? '';
       if (reviewPlace.invoiceFile != null) {
-        print(reviewPlace.invoiceFile);
         _invoiceMedia.value = [reviewPlace.invoiceFile!];
       }
     }

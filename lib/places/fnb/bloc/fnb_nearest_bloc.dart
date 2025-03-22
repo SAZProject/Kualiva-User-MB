@@ -12,7 +12,7 @@ part 'fnb_nearest_state.dart';
 class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
   final FnbRepository _fnbRepository;
   FnbNearestBloc(this._fnbRepository) : super(FnbNearestInitial()) {
-    on<FnbNearestEvent>((event, emit) => emit(FnbNearestLoading()));
+    on<FnbNearestEvent>((event, emit) => {});
     on<FnbNearestFetched>(_onFetched);
   }
 
@@ -20,6 +20,8 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
     FnbNearestFetched event,
     Emitter<FnbNearestState> emit,
   ) async {
+    final fnbNearestPageOld = _fnbRepository.getPlacesNearestOld();
+    emit(FnbNearestLoading(fnbNearestPage: fnbNearestPageOld));
     try {
       final fnbNearestPage = await _fnbRepository.getPlacesNearest(
         paging: event.paging,

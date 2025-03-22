@@ -42,7 +42,9 @@ class FnbPromoFeature extends StatelessWidget {
         if (state is FnbPromoFailure) {
           return CustomErrorState(
               errorMessage: context.tr("common.error_try_again"),
-              onRetry: () {});
+              onRetry: () {
+                print("LeRucco KEPENCET OI");
+              });
         }
         if (state is! FnbPromoSuccess) {
           return Center(child: CircularProgressIndicator());

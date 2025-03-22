@@ -18,7 +18,11 @@ class FnbRepository {
 
   final DioClient _dioClient;
 
-  void invalidate() {}
+  FnbNearestPage? getPlacesNearestOld() {
+    final boxName = MyBox.fnbNearestPage.name;
+    final fnbNearestBox = Hive.box<FnbNearestPage>(boxName);
+    return fnbNearestBox.get(boxName);
+  }
 
   Future<FnbNearestPage> getPlacesNearest({
     required Paging paging,
@@ -40,6 +44,7 @@ class FnbRepository {
       return dio.get(
         '/places/nearest',
         queryParameters: {
+          ...paging.toMap(),
           'latitude': latitude,
           'longitude': longitude,
           'type': PlaceCategoryEnum.fnb.name,

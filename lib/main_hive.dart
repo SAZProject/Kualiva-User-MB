@@ -37,15 +37,22 @@ class MainHive {
     Hive.registerAdapter(ReviewFilterModelAdapter());
     Hive.registerAdapter(PaginationAdapter());
     Hive.registerAdapter(ReviewPlacePageAdapter());
+    Hive.registerAdapter(FnbNearestPageAdapter());
   }
 
-  static Future<Box<T>> openLeSafeBox<T>(MyBox box) async {
+  static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
     try {
-      return await Hive.openBox<T>(box.name);
+      return await Hive.openBox<T>(myBox.name);
     } catch (e) {
-      await Hive.deleteBoxFromDisk(box.name);
-      return Hive.openBox<T>(box.name);
+      await Hive.deleteBoxFromDisk(myBox.name);
+      return Hive.openBox<T>(myBox.name);
     }
+  }
+
+  static Future<Box<T>> deleteBoxAndOpenLeSafe<T>(MyBox myBox) async {
+    final box = await openLeSafeBox<T>(myBox);
+    await box.deleteFromDisk();
+    return await openLeSafeBox(myBox);
   }
 
   static Future<void> openBox() async {
@@ -55,7 +62,6 @@ class MainHive {
       openLeSafeBox<ParameterModel>(MyBox.parameter),
       openLeSafeBox<ReviewFilterModel>(MyBox.reviewFilter),
       openLeSafeBox<List<String>>(MyBox.recentSuggestion),
-      openLeSafeBox<List<String>>(MyBox.suggestion),
       openLeSafeBox<ReviewPlacePage>(MyBox.reviewPlacePage),
       openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage)
     ]);
@@ -68,9 +74,13 @@ class MainHive {
   }
 
   static Future<void> deleteSplashBox() async {
-    (await openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation))
-        .deleteFromDisk();
-    await openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation);
+    Future.wait([
+      deleteBoxAndOpenLeSafe<CurrentLocationModel>(MyBox.currentLocation),
+    ]);
+    // final currentLocationBox =
+    //     await openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation);
+    // await currentLocationBox.deleteFromDisk();
+    // await openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation);
   }
 
   static bool checkOpenBox() {
@@ -85,11 +95,10 @@ class MainHive {
 
 enum MyBox {
   user('user'),
-  currentLocation('current_location'),
+  currentLocation('my_current_location'),
   parameter('parameter'),
   reviewFilter('review_filter'),
   recentSuggestion('recent_suggestion'),
-  suggestion('suggestion'),
   reviewPlacePage('review_place_page'),
   fnbNearestPage('fnb_nearest_page');
 

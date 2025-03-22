@@ -10,6 +10,7 @@ import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
@@ -38,7 +39,6 @@ class _FnbScreenState extends State<FnbScreen> {
   FiltersModel? filtersModel;
 
   void _onScrollPagination() {
-    debugPrint("_nextPaging");
     if (_childScrollController.position.pixels !=
         _childScrollController.position.maxScrollExtent) {
       return;
@@ -50,7 +50,6 @@ class _FnbScreenState extends State<FnbScreen> {
   }
 
   void _nextPaging(Pagination pagination) {
-    debugPrint("_nextPaging");
     if (_paging.value.page == pagination.totalPage) return;
     _paging.value = Paging(
       page: pagination.nextPage ?? pagination.totalPage,
@@ -58,7 +57,7 @@ class _FnbScreenState extends State<FnbScreen> {
     );
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
-
+    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
     context.read<FnbNearestBloc>().add(FnbNearestFetched(
           paging: _paging.value,
           pagingEnum: PagingEnum.paged,

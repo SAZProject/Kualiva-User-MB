@@ -1,17 +1,38 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
 
+part 'spa_nearest_model.g.dart';
+
+@immutable
+@HiveType(typeId: 18)
 class SpaNearestModel {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final double averageRating;
+
+  @HiveField(3)
   final String fullAddress;
+
+  @HiveField(4)
   final List<String> categories;
+
+  @HiveField(5)
   final String? featuredImage;
+
+  @HiveField(6)
   final bool isMerchant;
 
-  SpaNearestModel({
+  @HiveField(7)
+  final String distanceFromUser;
+
+  const SpaNearestModel({
     required this.id,
     required this.name,
     required this.averageRating,
@@ -19,6 +40,7 @@ class SpaNearestModel {
     required this.categories,
     this.featuredImage,
     required this.isMerchant,
+    required this.distanceFromUser,
   });
 
   SpaNearestModel copyWith({
@@ -29,6 +51,7 @@ class SpaNearestModel {
     List<String>? categories,
     ValueGetter<String?>? featuredImage,
     bool? isMerchant,
+    String? distanceFromUser,
   }) {
     return SpaNearestModel(
       id: id ?? this.id,
@@ -39,6 +62,7 @@ class SpaNearestModel {
       featuredImage:
           featuredImage != null ? featuredImage() : this.featuredImage,
       isMerchant: isMerchant ?? this.isMerchant,
+      distanceFromUser: distanceFromUser ?? this.distanceFromUser,
     );
   }
 
@@ -51,6 +75,7 @@ class SpaNearestModel {
       'categories': categories,
       'featuredImage': featuredImage,
       'isMerchant': isMerchant,
+      'distanceFromUser': distanceFromUser,
     };
   }
 
@@ -63,6 +88,7 @@ class SpaNearestModel {
       categories: List<String>.from(map['categories']),
       featuredImage: map['featuredImage'],
       isMerchant: map['isMerchant'] ?? false,
+      distanceFromUser: map['distanceFromUser'] ?? '',
     );
   }
 
@@ -73,7 +99,7 @@ class SpaNearestModel {
 
   @override
   String toString() {
-    return 'SpaNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant)';
+    return 'SpaNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
   }
 
   @override
@@ -87,7 +113,8 @@ class SpaNearestModel {
         other.fullAddress == fullAddress &&
         listEquals(other.categories, categories) &&
         other.featuredImage == featuredImage &&
-        other.isMerchant == isMerchant;
+        other.isMerchant == isMerchant &&
+        other.distanceFromUser == distanceFromUser;
   }
 
   @override
@@ -98,6 +125,7 @@ class SpaNearestModel {
         fullAddress.hashCode ^
         categories.hashCode ^
         featuredImage.hashCode ^
-        isMerchant.hashCode;
+        isMerchant.hashCode ^
+        distanceFromUser.hashCode;
   }
 }

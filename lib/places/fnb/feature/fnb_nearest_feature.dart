@@ -102,7 +102,7 @@ class FnbNearestFeature extends StatelessWidget {
       itemCount: fnbNearestList.length,
       itemBuilder: (context, index) {
         return FnbNearestItem(
-          merchant: fnbNearesPage.data[index],
+          merchant: fnbNearestList[index],
           onPressed: () {
             Navigator.pushNamed(
               context,

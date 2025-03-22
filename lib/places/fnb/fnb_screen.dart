@@ -87,14 +87,20 @@ class _FnbScreenState extends State<FnbScreen> {
       listener: (context, state) {
         if (state is! CurrentLocationSuccess) return;
 
+        final bool isRefresh = state.isDistanceTooFarOrFirstTime;
+
         context.read<FnbPromoBloc>().add(FnbPromoFetched(
               isRefreshed: state.isDistanceTooFarOrFirstTime,
               placeCategoryEnum: placeCategoryEnum,
             ));
 
+        final (paging, pagingEnum) = ((isRefresh == true)
+            ? (Paging(), PagingEnum.refreshed)
+            : (_paging.value, PagingEnum.before));
+
         context.read<FnbNearestBloc>().add(FnbNearestFetched(
-              paging: Paging(),
-              pagingEnum: PagingEnum.refreshed,
+              paging: paging,
+              pagingEnum: pagingEnum,
               latitude: state.currentLocationModel.latitude,
               longitude: state.currentLocationModel.longitude,
             ));

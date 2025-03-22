@@ -59,12 +59,12 @@ class FnbRepository {
     );
 
     if (pagingEnum == PagingEnum.paged) {
-      final List<FnbNearestModel> temp = [
+      final List<FnbNearestModel> tempList = [
         ...(oldPage?.data ?? []),
         ...page.data
       ];
       page.data.clear();
-      page.data.addAll(temp);
+      page.data.addAll(tempList);
     }
 
     await fnbNearestBox.delete(boxName);

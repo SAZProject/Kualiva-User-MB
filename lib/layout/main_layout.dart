@@ -194,17 +194,17 @@ class _MainNavigationState extends State<MainLayout> {
             height: 30.h,
           ),
         ),
-        Visibility(
-          visible: _selectedPage == index,
-          child: Center(
-            child: Text(
-              label,
-              style: theme(context).textTheme.bodySmall,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ),
+        // Visibility(
+        //   visible: _selectedPage == index,
+        //   child: Center(
+        //     child: Text(
+        //       label,
+        //       style: theme(context).textTheme.bodySmall,
+        //       maxLines: 1,
+        //       overflow: TextOverflow.ellipsis,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

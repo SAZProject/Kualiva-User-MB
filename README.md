@@ -5,7 +5,7 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.26
+Ver 0.1.26+01
 - New UI v2 Home Screen featured & main layout bottom navbar
 ```
 

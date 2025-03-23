@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/style/theme_helper.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
 
 class CurrentLocationFeature extends StatelessWidget {
   const CurrentLocationFeature({super.key});
@@ -19,7 +20,10 @@ class CurrentLocationFeature extends StatelessWidget {
               "${state.currentLocationModel.subLocality}, ${state.currentLocationModel.locality}");
         }
         // CurrentLocationLoading
-        return const Center(child: CircularProgressIndicator());
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 5.h),
+          child: const Center(child: LinearProgressIndicator()),
+        );
       },
     );
   }

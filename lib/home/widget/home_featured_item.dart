@@ -35,7 +35,7 @@ class HomeFeaturedItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: 100.h,
+              height: 130.h,
               width: double.maxFinite,
               child: Stack(
                 alignment: Alignment.center,
@@ -43,7 +43,7 @@ class HomeFeaturedItem extends StatelessWidget {
                   CustomImageView(
                     imagePath: homeFeatured.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
-                    height: 100.h,
+                    height: 130.h,
                     width: double.maxFinite,
                     radius: BorderRadius.vertical(
                       top: Radius.circular(10.h),
@@ -86,7 +86,7 @@ class HomeFeaturedItem extends StatelessWidget {
                       homeFeatured.name,
                       style: theme(context)
                           .textTheme
-                          .titleSmall!
+                          .labelLarge!
                           .copyWith(color: theme(context).colorScheme.primary),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -96,7 +96,7 @@ class HomeFeaturedItem extends StatelessWidget {
                     homeFeatured.averageRating.toString(),
                     style: theme(context)
                         .textTheme
-                        .titleSmall!
+                        .labelMedium!
                         .copyWith(color: theme(context).colorScheme.primary),
                   ),
                 ],
@@ -124,18 +124,7 @@ class HomeFeaturedItem extends StatelessWidget {
               ),
             ),
             SizedBox(height: 5.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.h),
-              child: Column(
-                children: [
-                  _firstTagRow(context),
-                  SizedBox(height: 5.h),
-                  homeFeatured.categories.length > 2
-                      ? _secondTagRow(context)
-                      : const SizedBox(),
-                ],
-              ),
-            )
+            _firstTagRow(context)
           ],
         ),
       ),
@@ -143,46 +132,30 @@ class HomeFeaturedItem extends StatelessWidget {
   }
 
   Widget _firstTagRow(BuildContext context) {
-    return SizedBox(
-      height: 20.h,
-      width: double.maxFinite,
-      child: ListView.builder(
-        itemCount: homeFeatured.categories.length >= 2
-            ? 2
-            : homeFeatured.categories.length,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return _tagView(context, homeFeatured.categories[index]);
-        },
-      ),
-    );
-  }
-
-  Widget _secondTagRow(BuildContext context) {
-    return SizedBox(
-      height: 20.h,
-      width: double.maxFinite,
-      child: ListView.builder(
-        itemCount: homeFeatured.categories.length > 4 ? 2 : 1,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          if (index == 1) {
-            if (homeFeatured.categories.length > 4) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5.h),
+      child: SizedBox(
+        height: 20.h,
+        width: double.maxFinite,
+        child: ListView.builder(
+          itemCount: homeFeatured.categories.length >= 2
+              ? 2
+              : homeFeatured.categories.length,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            if (index == 1) {
               return _tagView(
                 context,
                 context.tr(
                   "home_screen.tags_more",
-                  args: [(homeFeatured.categories.length - 3).toString()],
+                  args: [(homeFeatured.categories.length - 1).toString()],
                 ),
               );
-            } else {
-              return _tagView(context, homeFeatured.categories[index + 2]);
             }
-          }
-          return _tagView(context, homeFeatured.categories[index + 2]);
-        },
+            return _tagView(context, homeFeatured.categories[index]);
+          },
+        ),
       ),
     );
   }

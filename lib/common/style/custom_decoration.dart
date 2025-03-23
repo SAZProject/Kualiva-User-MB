@@ -245,7 +245,7 @@ class CustomDecoration {
         color: appTheme.amber700.withValues(alpha: 1),
         border: Border.all(
           color: theme(context).colorScheme.primary,
-          width: 1.h,
+          width: 2.h,
         ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(10.h),
@@ -260,7 +260,7 @@ class CustomDecoration {
             .withValues(alpha: 0.6),
         border: Border.all(
           color: theme(context).colorScheme.primary,
-          width: 1.h,
+          width: 2.h,
         ),
         borderRadius: BorderRadiusStyle.roundedBorder10,
       );

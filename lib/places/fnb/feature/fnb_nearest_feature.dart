@@ -15,10 +15,14 @@ class FnbNearestFeature extends StatelessWidget {
     super.key,
     required this.parentScrollController,
     required this.childScrollController,
+    this.height,
+    this.scrollDirection,
   });
 
   final ScrollController parentScrollController;
   final ScrollController childScrollController;
+  final double? height;
+  final Axis? scrollDirection;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class FnbNearestFeature extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
             child: SizedBox(
-              height: 450.h,
+              height: height ?? 450.h,
               width: double.maxFinite,
               child: NotificationListener(
                 onNotification: (ScrollNotification notification) {

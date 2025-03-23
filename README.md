@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.24
-- New UI V2 sign in, sign up, otp, device permission
+Ver 0.1.25
+- New UI Fnb action Screen
 ```
 
 ## Getting Started

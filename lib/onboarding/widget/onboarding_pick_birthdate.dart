@@ -38,14 +38,13 @@ class OnboardingPickBirthdate extends StatelessWidget {
             leftIcon: Icon(
               leftIcon,
               size: 20.h,
-              color: theme(context).colorScheme.onPrimaryContainer,
+              color: theme(context).colorScheme.primary,
             ),
             initialText: label,
             onPressed: onPressed,
             buttonStyle: CustomButtonStyles.none,
-            decoration: CustomDecoration(context).outline,
-            buttonTextStyle:
-                CustomTextStyles(context).titleMediumOnPrimaryContainer,
+            decoration: CustomDecoration(context).outlinePrimary,
+            buttonTextStyle: CustomTextStyles(context).titleMediumPrimary,
           ),
           SizedBox(height: 10.h),
           InkWell(

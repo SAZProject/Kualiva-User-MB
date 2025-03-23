@@ -34,7 +34,9 @@ class SearchBarFeature extends StatelessWidget {
     ];
 
     return MySliverSearchBarWidget(
-      viewOnSubmitted: (value) {},
+      viewOnSubmitted: (value) {
+        Navigator.pushNamed(context, AppRoutes.fnbActionScreen);
+      },
       suggestionsBuilder: (context, searchController) async {
         return listSearchSuggest;
       },

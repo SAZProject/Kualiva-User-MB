@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kualiva/common/style/theme_helper.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -54,7 +55,8 @@ class CustomElevatedButton extends StatelessWidget {
           style: buttonStyle,
           onPressed: isDisabled ?? false ? null : onPressed ?? () {},
           child: isLoading
-              ? const CircularProgressIndicator()
+              ? CircularProgressIndicator(
+                  color: theme(context).colorScheme.onSecondaryContainer)
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

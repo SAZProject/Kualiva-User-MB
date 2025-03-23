@@ -14,6 +14,7 @@ import 'package:kualiva/home/home_event_detail_screen.dart';
 import 'package:kualiva/home/home_event_screen.dart';
 import 'package:kualiva/places/add_places_screen.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
+import 'package:kualiva/places/fnb/fnb_action_screen.dart';
 import 'package:kualiva/places/fnb/fnb_detail_screen.dart';
 import 'package:kualiva/places/fnb/fnb_screen.dart';
 import 'package:kualiva/places/fnb/fnb_detail_menu_screen.dart';
@@ -77,6 +78,8 @@ class AppRoutes {
   static const String nightLifeScreen = "/nightlife_screen";
 
   static const String spaScreen = "/spa_screen";
+
+  static const String fnbActionScreen = "/f_n_b_action_screen";
 
   static const String fnbFilterScreen = "/f_n_b_filter_screen";
 
@@ -217,6 +220,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.spaScreen:
       return PageTransition(
           child: const SpaScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.fnbActionScreen:
+      return PageTransition(
+          child: FnbActionScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

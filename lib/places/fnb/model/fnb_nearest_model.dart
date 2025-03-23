@@ -22,15 +22,18 @@ class FnbNearestModel {
   final String fullAddress;
 
   @HiveField(4)
-  final List<String> categories;
+  final String cityOrVillage;
 
   @HiveField(5)
-  final String? featuredImage;
+  final List<String> categories;
 
   @HiveField(6)
-  final bool isMerchant;
+  final String? featuredImage;
 
   @HiveField(7)
+  final bool isMerchant;
+
+  @HiveField(8)
   final String distanceFromUser;
 
   const FnbNearestModel({
@@ -38,6 +41,7 @@ class FnbNearestModel {
     required this.name,
     required this.averageRating,
     required this.fullAddress,
+    required this.cityOrVillage,
     required this.categories,
     this.featuredImage,
     required this.isMerchant,
@@ -49,6 +53,7 @@ class FnbNearestModel {
     String? name,
     double? averageRating,
     String? fullAddress,
+    String? cityOrVillage,
     List<String>? categories,
     ValueGetter<String?>? featuredImage,
     bool? isMerchant,
@@ -59,6 +64,7 @@ class FnbNearestModel {
       name: name ?? this.name,
       averageRating: averageRating ?? this.averageRating,
       fullAddress: fullAddress ?? this.fullAddress,
+      cityOrVillage: cityOrVillage ?? this.cityOrVillage,
       categories: categories ?? this.categories,
       featuredImage:
           featuredImage != null ? featuredImage() : this.featuredImage,
@@ -73,6 +79,7 @@ class FnbNearestModel {
       'name': name,
       'averageRating': averageRating,
       'fullAddress': fullAddress,
+      'cityOrVillage': cityOrVillage,
       'categories': categories,
       'featuredImage': featuredImage,
       'isMerchant': isMerchant,
@@ -86,6 +93,7 @@ class FnbNearestModel {
       name: map['name'] ?? '',
       averageRating: map['averageRating']?.toDouble() ?? 0.0,
       fullAddress: map['fullAddress'] ?? '',
+      cityOrVillage: map['cityOrVillage'] ?? '',
       categories: List<String>.from(map['categories']),
       featuredImage: map['featuredImage'],
       isMerchant: map['isMerchant'] ?? false,
@@ -100,7 +108,7 @@ class FnbNearestModel {
 
   @override
   String toString() {
-    return 'FnbNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
+    return 'FnbNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
   }
 
   @override
@@ -112,6 +120,7 @@ class FnbNearestModel {
         other.name == name &&
         other.averageRating == averageRating &&
         other.fullAddress == fullAddress &&
+        other.cityOrVillage == cityOrVillage &&
         listEquals(other.categories, categories) &&
         other.featuredImage == featuredImage &&
         other.isMerchant == isMerchant &&
@@ -124,6 +133,7 @@ class FnbNearestModel {
         name.hashCode ^
         averageRating.hashCode ^
         fullAddress.hashCode ^
+        cityOrVillage.hashCode ^
         categories.hashCode ^
         featuredImage.hashCode ^
         isMerchant.hashCode ^

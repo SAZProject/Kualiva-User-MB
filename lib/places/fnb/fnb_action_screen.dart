@@ -1,25 +1,41 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/fnb_action_enum.dart';
+import 'package:kualiva/_data/enum/paging_enum.dart';
 import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
+import 'package:kualiva/_data/model/pagination/pagination.dart';
+import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
+import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
+import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_action_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_action_feature.dart';
-import 'package:kualiva/places/fnb/model/fnb_action_model.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 
 class FnbActionScreen extends StatefulWidget {
-  const FnbActionScreen({super.key});
+  const FnbActionScreen({
+    super.key,
+    required this.fnbActionArgument,
+  });
+
+  final FnbActionArgument fnbActionArgument;
 
   @override
   State<FnbActionScreen> createState() => _FnbActionScreenState();
 }
 
 class _FnbActionScreenState extends State<FnbActionScreen> {
+  FnbActionEnum get fnbActionEnum => widget.fnbActionArgument.fnbActionEnum;
+
   final _pageScrollController = ScrollController();
+  final _paging = ValueNotifier(Paging());
 
   final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
 
@@ -27,39 +43,75 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
 
   FiltersModel? filtersModel;
 
-  final List<FnbActionModel> _listPlace = [
-    const FnbActionModel(
-      id: "0",
-      name: "place 1",
-      averageRating: 2.5,
-      fullAddress: "Full Address",
-      cityOrVillage: "City Or Village",
-      categories: ["Categories 1", "Categories 2"],
-      isMerchant: false,
-      distanceFromUser: "5",
-    ),
-    const FnbActionModel(
-      id: "1",
-      name: "place 2",
-      averageRating: 3.0,
-      fullAddress: "Full Address",
-      cityOrVillage: "City Or Village",
-      categories: ["Categories 1", "Categories 2"],
-      isMerchant: true,
-      distanceFromUser: "10",
-    ),
-  ];
+  void _onScrollPagination() {
+    if (_pageScrollController.position.pixels !=
+        _pageScrollController.position.maxScrollExtent) {
+      return;
+    }
+    final state = context.read<FnbActionBloc>().state;
+    if (state is FnbActionSuccessNearest) {
+      final pagination = state.fnbNearestPage.pagination;
+      _nextPaging(pagination);
+      return;
+    }
+    if (state is FnbActionSuccessPromo) {
+      final pagination = state.fnbPromoPage.pagination;
+      _nextPaging(pagination);
+      return;
+    }
+  }
+
+  void _nextPaging(Pagination pagination) {
+    if (_paging.value.page == pagination.totalPage) return;
+    _paging.value = Paging(
+      page: pagination.nextPage ?? pagination.totalPage,
+      size: pagination.size,
+    );
+    final state = context.read<CurrentLocationBloc>().state;
+    if (state is! CurrentLocationSuccess) return;
+    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
+
+    context.read<FnbActionBloc>().add(FnbActionFetched(
+          paging: _paging.value,
+          pagingEnum: PagingEnum.paged,
+          fnbActionEnum: fnbActionEnum,
+          latitude: state.currentLocationModel.latitude,
+          longitude: state.currentLocationModel.longitude,
+        ));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageScrollController.addListener(_onScrollPagination);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageScrollController.removeListener(_onScrollPagination);
+    _pageScrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
         if (state is! CurrentLocationSuccess) return;
-        // context.read<FnbNearestBloc>().add(FnbNearestFetched(
-        //       isRefreshed: state.isDistanceTooFarOrFirstTime,
-        //       latitude: state.currentLocationModel.latitude,
-        //       longitude: state.currentLocationModel.longitude,
-        //     ));
+
+        final bool isRefresh = state.isDistanceTooFarOrFirstTime;
+
+        final (paging, pagingEnum) = ((isRefresh == true)
+            ? (Paging(), PagingEnum.refreshed)
+            : (_paging.value, PagingEnum.before));
+
+        context.read<FnbActionBloc>().add(FnbActionFetched(
+              paging: paging,
+              pagingEnum: pagingEnum,
+              fnbActionEnum: fnbActionEnum,
+              latitude: state.currentLocationModel.latitude,
+              longitude: state.currentLocationModel.longitude,
+            ));
       },
       child: SafeArea(
         child: Scaffold(
@@ -73,37 +125,65 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     return SizedBox(
       width: double.maxFinite,
       height: MediaQuery.of(context).size.height,
-      child: NestedScrollView(
+      child: SingleChildScrollView(
         controller: _pageScrollController,
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            _fnbActionAppBar(context),
-          ];
-        },
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 5.h),
-              SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
-              SizedBox(height: 5.h),
-              _tagsFilter(context),
-              SizedBox(height: 5.h),
-              FnbActionFeature(
-                listPlace: _listPlace,
-              ),
-              SizedBox(height: 5.h),
-            ],
-          ),
+        child: Column(
+          children: [
+            SizedBox(height: 5.h),
+            // SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
+            SizedBox(height: 5.h),
+            _tagsFilter(context),
+            SizedBox(height: 5.h),
+            FnbActionFeature(),
+            SizedBox(height: 5.h),
+          ],
         ),
       ),
     );
   }
 
-  PreferredSizeWidget _fnbActionAppBar(BuildContext context) {
-    return CustomAppBar(
-      title: "Kasih title ci",
-      useLeading: true,
-      onBackPressed: () => Navigator.pop(context),
+  // Widget _body(BuildContext context) {
+  //   return SizedBox(
+  //     width: double.maxFinite,
+  //     height: MediaQuery.of(context).size.height,
+  //     child: NestedScrollView(
+  //       controller: _pageScrollController,
+  //       headerSliverBuilder: (context, innerBoxIsScrolled) {
+  //         return [
+  //           _fnbActionAppBar(context),
+  //         ];
+  //       },
+  //       body: SingleChildScrollView(
+  //         child: Column(
+  //           children: [
+  //             SizedBox(height: 5.h),
+  //             SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
+  //             SizedBox(height: 5.h),
+  //             _tagsFilter(context),
+  //             SizedBox(height: 5.h),
+  //             FnbActionFeature(),
+  //             SizedBox(height: 5.h),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  Widget _fnbActionAppBar(BuildContext context) {
+    return SliverAppBar(
+      backgroundColor: Colors.transparent,
+      automaticallyImplyLeading: true,
+      centerTitle: true,
+      title: Text(
+        "Kasih title ci",
+        style: CustomTextStyles(context).titleMediumPrimary,
+      ),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios_new),
+        onPressed: () => Navigator.pop(context),
+      ),
+      toolbarHeight: 100.h,
     );
   }
 

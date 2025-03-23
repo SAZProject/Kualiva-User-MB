@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
 
 @immutable
 class FnbActionModel {
@@ -51,19 +53,33 @@ class FnbActionModel {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'averageRating': averageRating,
-      'fullAddress': fullAddress,
-      'cityOrVillage': cityOrVillage,
-      'categories': categories,
-      'featuredImage': featuredImage,
-      'isMerchant': isMerchant,
-      'distanceFromUser': distanceFromUser,
-    };
+  factory FnbActionModel.fromNearestModel(FnbNearestModel data) {
+    return FnbActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: data.fullAddress,
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: data.isMerchant,
+      distanceFromUser: data.distanceFromUser,
+    );
   }
+
+  factory FnbActionModel.fromPromoModel(FnbPromoModel data) {
+    return FnbActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: '',
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: true,
+      distanceFromUser: data.distanceFromUser,
+    );
+  }
+
+  // TODO: FnbActionModel.fromRecommendedModel
 
   factory FnbActionModel.fromMap(Map<String, dynamic> map) {
     return FnbActionModel(
@@ -78,11 +94,6 @@ class FnbActionModel {
       distanceFromUser: map['distanceFromUser'] ?? '',
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory FnbActionModel.fromJson(String source) =>
-      FnbActionModel.fromMap(json.decode(source));
 
   @override
   String toString() {

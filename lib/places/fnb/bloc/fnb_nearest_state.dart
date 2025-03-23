@@ -18,5 +18,3 @@ final class FnbNearestSuccess extends FnbNearestState {
 }
 
 final class FnbNearestFailure extends FnbNearestState {}
-
-final class FnbNearestRefresh extends FnbNearestState {}

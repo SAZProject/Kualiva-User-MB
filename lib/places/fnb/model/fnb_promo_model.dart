@@ -1,23 +1,36 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+
+part 'fnb_promo_model.g.dart';
 
 @immutable
-// TODO: hive
+@HiveType(typeId: 22)
 class FnbPromoModel {
+  @HiveField(0)
   final String id; // placeUniqueId
 
+  @HiveField(1)
   final String name;
 
+  @HiveField(2)
   final int promoPercentage;
 
+  @HiveField(3)
   final double averageRating;
 
+  @HiveField(4)
   final String cityOrVillage;
 
+  @HiveField(5)
   final List<String> categories;
 
+  @HiveField(6)
   final String? featuredImage;
+
+  @HiveField(7)
+  final String distanceFromUser;
 
   const FnbPromoModel({
     required this.id,
@@ -27,6 +40,7 @@ class FnbPromoModel {
     required this.cityOrVillage,
     required this.categories,
     this.featuredImage,
+    required this.distanceFromUser,
   });
 
   FnbPromoModel copyWith({
@@ -37,6 +51,7 @@ class FnbPromoModel {
     String? cityOrVillage,
     List<String>? categories,
     ValueGetter<String?>? featuredImage,
+    String? distanceFromUser,
   }) {
     return FnbPromoModel(
       id: id ?? this.id,
@@ -47,6 +62,7 @@ class FnbPromoModel {
       categories: categories ?? this.categories,
       featuredImage:
           featuredImage != null ? featuredImage() : this.featuredImage,
+      distanceFromUser: distanceFromUser ?? this.distanceFromUser,
     );
   }
 
@@ -59,6 +75,7 @@ class FnbPromoModel {
       'cityOrVillage': cityOrVillage,
       'categories': categories,
       'featuredImage': featuredImage,
+      'distanceFromUser': distanceFromUser,
     };
   }
 
@@ -71,6 +88,7 @@ class FnbPromoModel {
       cityOrVillage: map['cityOrVillage'] ?? '',
       categories: List<String>.from(map['categories']),
       featuredImage: map['featuredImage'],
+      distanceFromUser: map['distanceFromUser'] ?? '',
     );
   }
 
@@ -81,7 +99,7 @@ class FnbPromoModel {
 
   @override
   String toString() {
-    return 'FnbPromoModel(id: $id, name: $name, promoPercentage: $promoPercentage, averageRating: $averageRating, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage)';
+    return 'FnbPromoModel(id: $id, name: $name, promoPercentage: $promoPercentage, averageRating: $averageRating, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, distanceFromUser: $distanceFromUser)';
   }
 
   @override
@@ -95,7 +113,8 @@ class FnbPromoModel {
         other.averageRating == averageRating &&
         other.cityOrVillage == cityOrVillage &&
         listEquals(other.categories, categories) &&
-        other.featuredImage == featuredImage;
+        other.featuredImage == featuredImage &&
+        other.distanceFromUser == distanceFromUser;
   }
 
   @override
@@ -106,6 +125,7 @@ class FnbPromoModel {
         averageRating.hashCode ^
         cityOrVillage.hashCode ^
         categories.hashCode ^
-        featuredImage.hashCode;
+        featuredImage.hashCode ^
+        distanceFromUser.hashCode;
   }
 }

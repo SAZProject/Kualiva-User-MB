@@ -12,6 +12,8 @@ import 'package:kualiva/common/feature/current_location/current_location_model.d
 
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
+import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_promo_page.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_page.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
@@ -46,6 +48,8 @@ class MainHive {
     Hive.registerAdapter(SpaNearestPageAdapter());
     Hive.registerAdapter(NightlifeNearestModelAdapter());
     Hive.registerAdapter(NightlifeNearestPageAdapter());
+    Hive.registerAdapter(FnbPromoModelAdapter());
+    Hive.registerAdapter(FnbPromoPageAdapter());
   }
 
   static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
@@ -74,6 +78,7 @@ class MainHive {
       openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage),
       openLeSafeBox<SpaNearestPage>(MyBox.spaNearestPage),
       openLeSafeBox<NightlifeNearestPage>(MyBox.nightlifeNearestPage),
+      openLeSafeBox<FnbPromoPage>(MyBox.fnbPromoPage),
     ]);
   }
 
@@ -87,10 +92,6 @@ class MainHive {
     Future.wait([
       deleteBoxAndOpenLeSafe<CurrentLocationModel>(MyBox.currentLocation),
     ]);
-    // final currentLocationBox =
-    //     await openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation);
-    // await currentLocationBox.deleteFromDisk();
-    // await openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation);
   }
 
   static bool checkOpenBox() {
@@ -112,7 +113,8 @@ enum MyBox {
   reviewPlacePage('review_place_page'),
   fnbNearestPage('fnb_nearest_page'),
   spaNearestPage('spa_nearest_page'),
-  nightlifeNearestPage('nightlife_nearest_page');
+  nightlifeNearestPage('nightlife_nearest_page'),
+  fnbPromoPage('fnb_promo_page');
 
   final String name;
 
@@ -140,7 +142,9 @@ enum _MyHive {
   spaNearest(18),
   spaNearestPage(19),
   nightlifeNearest(20),
-  nightlifeNearestPage(21);
+  nightlifeNearestPage(21),
+  fnbPromo(22),
+  fnbPromoPage(23);
 
   final int typeId;
 

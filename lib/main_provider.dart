@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kualiva/_repository/common/location_repository.dart';
 import 'package:kualiva/_repository/common/minio_repository.dart';
+import 'package:kualiva/_repository/place/fnb/fnb_nearest_repository.dart';
+import 'package:kualiva/_repository/place/fnb/fnb_promo_repository.dart';
 import 'package:kualiva/_repository/place/nightlife_repository.dart';
 import 'package:kualiva/_repository/user/onboarding_repository.dart';
 import 'package:kualiva/_repository/common/parameter_repository.dart';
@@ -19,6 +21,7 @@ import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
 import 'package:kualiva/home/bloc/home_featured_bloc.dart';
 import 'package:kualiva/_repository/promotion/promotion_repository.dart';
 import 'package:kualiva/onboarding/bloc/onboarding_bloc.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_action_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
@@ -143,6 +146,16 @@ class MainProvider extends StatelessWidget {
           create: (context) {
             return LocationRepository();
           },
+        ),
+        RepositoryProvider(
+          create: (context) {
+            return FnbNearestRepository(context.read<DioClient>());
+          },
+        ),
+        RepositoryProvider(
+          create: (context) {
+            return FnbPromoRepository(context.read<DioClient>());
+          },
         )
       ],
       child: child,
@@ -162,7 +175,7 @@ class MainProvider extends StatelessWidget {
           return CurrentLocationBloc(context.read<LocationRepository>());
         }),
         BlocProvider(create: (context) {
-          return FnbNearestBloc(context.read<FnbRepository>());
+          return FnbNearestBloc(context.read<FnbNearestRepository>());
         }),
         BlocProvider(create: (context) {
           return NightlifeNearestBloc(context.read<NightlifeRepository>());
@@ -237,6 +250,14 @@ class MainProvider extends StatelessWidget {
             context.read<RecentSuggestionRepository>(),
           );
         }),
+        BlocProvider(
+          create: (context) {
+            return FnbActionBloc(
+              context.read<FnbNearestRepository>(),
+              context.read<FnbPromoRepository>(),
+            );
+          },
+        )
       ],
       child: child,
     );

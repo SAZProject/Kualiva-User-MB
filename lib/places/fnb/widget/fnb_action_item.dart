@@ -4,8 +4,11 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/places/fnb/model/fnb_action_model.dart';
 
 class FnbActionItem extends StatelessWidget {
-  const FnbActionItem(
-      {super.key, required this.place, required this.onPressed});
+  const FnbActionItem({
+    super.key,
+    required this.place,
+    required this.onPressed,
+  });
 
   final FnbActionModel place;
   final VoidCallback onPressed;

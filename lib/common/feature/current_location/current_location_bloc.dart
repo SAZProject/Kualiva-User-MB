@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:kualiva/_repository/common/location_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/feature/current_location/current_location_model.dart';
-import 'package:kualiva/main_hive.dart';
 
 part 'current_location_event.dart';
 part 'current_location_state.dart';
@@ -31,7 +30,7 @@ class CurrentLocationBloc
       newLocation: newLocation,
     );
 
-    LeLog.bd(this, _onFetched, isTriggerEmit.toString());
+    LeLog.bd(this, _onFetched, "isTriggerEmit $isTriggerEmit");
     LeLog.bd(this, _onFetched, newLocation.toString());
 
     emit(CurrentLocationSuccess(

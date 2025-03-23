@@ -14,6 +14,7 @@ import 'package:kualiva/home/home_event_detail_screen.dart';
 import 'package:kualiva/home/home_event_screen.dart';
 import 'package:kualiva/places/add_places_screen.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
+import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
 import 'package:kualiva/places/fnb/fnb_action_screen.dart';
 import 'package:kualiva/places/fnb/fnb_detail_screen.dart';
 import 'package:kualiva/places/fnb/fnb_screen.dart';
@@ -224,8 +225,9 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.fnbActionScreen:
+      final fnbActionArgument = routeSetting.arguments as FnbActionArgument;
       return PageTransition(
-          child: FnbActionScreen(),
+          child: FnbActionScreen(fnbActionArgument: fnbActionArgument),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

@@ -1,17 +1,19 @@
-part of 'fnb_nearest_bloc.dart';
+part of 'fnb_action_bloc.dart';
 
 @immutable
-sealed class FnbNearestEvent {}
+sealed class FnbActionEvent {}
 
-final class FnbNearestFetched extends FnbNearestEvent {
+final class FnbActionFetched extends FnbActionEvent {
   final Paging paging;
   final PagingEnum pagingEnum;
+  final FnbActionEnum fnbActionEnum;
   final double latitude;
   final double longitude;
 
-  FnbNearestFetched({
+  FnbActionFetched({
     required this.paging,
     required this.pagingEnum,
+    required this.fnbActionEnum,
     required this.latitude,
     required this.longitude,
   });

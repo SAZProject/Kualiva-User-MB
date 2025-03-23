@@ -241,6 +241,30 @@ class CustomDecoration {
         borderRadius: BorderRadiusStyle.roundedBorder20,
       );
 
+  BoxDecoration get outlinePrmPromo => BoxDecoration(
+        color: appTheme.amber700.withValues(alpha: 1),
+        border: Border.all(
+          color: theme(context).colorScheme.primary,
+          width: 1.h,
+        ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10.h),
+          topRight: Radius.circular(10.h),
+        ),
+      );
+
+  BoxDecoration get outlinePrmOnScd => BoxDecoration(
+        color: theme(context)
+            .colorScheme
+            .onSecondaryContainer
+            .withValues(alpha: 0.6),
+        border: Border.all(
+          color: theme(context).colorScheme.primary,
+          width: 1.h,
+        ),
+        borderRadius: BorderRadiusStyle.roundedBorder10,
+      );
+
   static BoxDecoration get outlineBlack => const BoxDecoration();
 
   BoxDecoration get outlineOnPrimaryContainer => BoxDecoration(

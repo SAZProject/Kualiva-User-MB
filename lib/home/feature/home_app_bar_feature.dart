@@ -49,7 +49,7 @@ class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
         children: [
           Text(
             context.tr("common.current_location"),
-            style: CustomTextStyles(context).titleLargeOnPrimaryContainer,
+            style: CustomTextStyles(context).titleMediumPrimary,
           ),
           CurrentLocationFeature(),
         ],
@@ -57,11 +57,9 @@ class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
       toolbarHeight: 100.h,
       actions: [
         IconButton(
-          onPressed: () {
-            ImageUtility().getMediaFromCamera(context, []);
-          },
+          onPressed: () {},
           icon: Icon(
-            Icons.qr_code_scanner,
+            Icons.notifications,
             size: 25.h,
             color: theme(context).colorScheme.onPrimaryContainer,
           ),

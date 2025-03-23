@@ -95,7 +95,7 @@ class FnbPromoItem extends StatelessWidget {
                             Icons.discount,
                             size: 15.h,
                           ),
-                          SizedBox(width: 4.h),
+                          SizedBox(width: 5.h),
                           Text(
                             context.tr("f_n_b.promo_value", args: [
                               (Random().nextInt(50) + 20).toString()

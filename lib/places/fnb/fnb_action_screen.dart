@@ -36,11 +36,11 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
         if (state is! CurrentLocationSuccess) return;
-        context.read<FnbNearestBloc>().add(FnbNearestFetched(
-              isRefreshed: state.isDistanceTooFarOrFirstTime,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
-            ));
+        // context.read<FnbNearestBloc>().add(FnbNearestFetched(
+        //       isRefreshed: state.isDistanceTooFarOrFirstTime,
+        //       latitude: state.currentLocationModel.latitude,
+        //       longitude: state.currentLocationModel.longitude,
+        //     ));
       },
       child: SafeArea(
         child: Scaffold(
@@ -69,7 +69,6 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
               _tagsFilter(context),
               SizedBox(height: 5.h),
               FnbNearestFeature(
-                parentContext: context,
                 parentScrollController: _parentScrollController,
                 childScrollController: _childScrollController,
                 height: Sizeutils.height,

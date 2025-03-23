@@ -174,7 +174,9 @@ class _MainNavigationState extends State<MainLayout> {
           child: Icon(
             _selectedPage == index ? selectedIcon : unselectedIcon,
             size: 30.h,
-            color: theme(context).iconTheme.color,
+            color: _selectedPage == index
+                ? theme(context).colorScheme.onSecondaryContainer
+                : theme(context).iconTheme.color,
           ),
         ),
         Visibility(
@@ -182,8 +184,8 @@ class _MainNavigationState extends State<MainLayout> {
           child: Image.asset(
             _selectedPage == index
                 ? theme(context).brightness == Brightness.dark
-                    ? imageDark ?? "-"
-                    : selectedImage ?? "-"
+                    ? selectedImage ?? "-"
+                    : imageDark ?? "-"
                 : theme(context).brightness == Brightness.dark
                     ? imageDark ?? "-"
                     : unselectedImage ?? "-",

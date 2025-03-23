@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/style/custom_decoration.dart';
@@ -23,9 +25,7 @@ class HomeFeaturedItem extends StatelessWidget {
     return Container(
       width: 150.h,
       margin: EdgeInsets.symmetric(horizontal: 6.h),
-      decoration: CustomDecoration(context)
-          .outlineOnSecondaryContainer
-          .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
+      decoration: CustomDecoration(context).outlinePrmOnScd,
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
         onTap: onPressed,
@@ -38,7 +38,7 @@ class HomeFeaturedItem extends StatelessWidget {
               height: 100.h,
               width: double.maxFinite,
               child: Stack(
-                alignment: Alignment.bottomRight,
+                alignment: Alignment.center,
                 children: [
                   CustomImageView(
                     imagePath: homeFeatured.featuredImage ??
@@ -50,33 +50,21 @@ class HomeFeaturedItem extends StatelessWidget {
                     ),
                   ),
                   Align(
-                    alignment: Alignment.topLeft,
+                    alignment: Alignment.topRight,
                     child: Container(
-                      height: 20.h,
-                      width: 50.h,
                       padding: EdgeInsets.symmetric(
-                        horizontal: 8.h,
-                        vertical: 2.h,
+                        horizontal: 10.h,
                       ),
-                      decoration:
-                          CustomDecoration(context).orange60Color.copyWith(
-                                borderRadius: BorderRadiusStyle.roundedBorder10,
-                              ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.star,
-                              size: 12.h,
+                      decoration: CustomDecoration(context).outlinePrmPromo,
+                      child: Text(
+                        context.tr("home_screen.promo_value", args: [
+                          (Random().nextInt(50) + 20).toString()
+                        ]), // TODO: Percentage promo
+                        style: theme(context).textTheme.labelLarge!.copyWith(
+                              color: theme(context)
+                                  .colorScheme
+                                  .onSecondaryContainer,
                             ),
-                          ),
-                          SizedBox(width: 4.h),
-                          Text(
-                            homeFeatured.averageRating.toString(),
-                            style: theme(context).textTheme.labelMedium,
-                          ),
-                        ],
                       ),
                     ),
                   )
@@ -84,32 +72,69 @@ class HomeFeaturedItem extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 4.h),
-              child: Text(
-                homeFeatured.name,
-                style: theme(context).textTheme.titleSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              padding: EdgeInsets.symmetric(horizontal: 5.h),
+              child: Row(
+                children: [
+                  CustomImageView(
+                    imagePath: ImageConstant.appLogo2,
+                    height: 20.h,
+                    width: 20.h,
+                    boxFit: BoxFit.cover,
+                  ),
+                  Expanded(
+                    child: Text(
+                      homeFeatured.name,
+                      style: theme(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(color: theme(context).colorScheme.primary),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    homeFeatured.averageRating.toString(),
+                    style: theme(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(color: theme(context).colorScheme.primary),
+                  ),
+                ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 4.h),
-              child: Text(
-                homeFeatured.fullAddress,
-                style: theme(context).textTheme.bodySmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              padding: EdgeInsets.symmetric(horizontal: 5.h),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      homeFeatured.fullAddress,
+                      style: theme(context).textTheme.bodySmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    "${Random().nextInt(9) + 1} Km",
+                    style: theme(context).textTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 5.h),
-            Column(
-              children: [
-                _firstTagRow(context),
-                SizedBox(height: 4.h),
-                homeFeatured.categories.length > 2
-                    ? _secondTagRow(context)
-                    : const SizedBox(),
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.h),
+              child: Column(
+                children: [
+                  _firstTagRow(context),
+                  SizedBox(height: 5.h),
+                  homeFeatured.categories.length > 2
+                      ? _secondTagRow(context)
+                      : const SizedBox(),
+                ],
+              ),
             )
           ],
         ),

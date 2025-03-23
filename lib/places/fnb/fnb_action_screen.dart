@@ -6,7 +6,6 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
-import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/places/fnb/feature/fnb_action_feature.dart';
 import 'package:kualiva/places/fnb/model/fnb_action_model.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
@@ -99,11 +98,20 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     );
   }
 
-  PreferredSizeWidget _fnbActionAppBar(BuildContext context) {
-    return CustomAppBar(
-      title: "Kasih title ci",
-      useLeading: true,
-      onBackPressed: () => Navigator.pop(context),
+  Widget _fnbActionAppBar(BuildContext context) {
+    return SliverAppBar(
+      backgroundColor: Colors.transparent,
+      automaticallyImplyLeading: true,
+      centerTitle: true,
+      title: Text(
+        "Kasih title ci",
+        style: CustomTextStyles(context).titleMediumPrimary,
+      ),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios_new),
+        onPressed: () => Navigator.pop(context),
+      ),
+      toolbarHeight: 100.h,
     );
   }
 

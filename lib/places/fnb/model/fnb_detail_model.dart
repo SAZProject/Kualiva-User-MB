@@ -150,7 +150,7 @@ class FnbDetailModel {
       reviews: map['reviews'] != null
           ? List<Review>.from(map['reviews']?.map((x) => Review.fromMap(x)))
           : null,
-      types: List<String>.from(map['types']),
+      types: map['types'] != null ? List<String>.from(map['types']) : null,
       geometry:
           map['geometry'] != null ? Geometry.fromMap(map['geometry']) : null,
       currentOpeningHours: map['current_opening_hours'] != null
@@ -158,6 +158,9 @@ class FnbDetailModel {
           : null,
     );
   }
+
+  factory FnbDetailModel.fromJson(String source) =>
+      FnbDetailModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -287,30 +290,65 @@ class Photo {
 
 @immutable
 class AddressComponent {
-  final String longName;
-  final String shortName;
-  final List<String> types;
+  final String? longName;
+  final String? shortName;
+  final List<String>? types;
 
   const AddressComponent({
-    required this.longName,
-    required this.shortName,
-    required this.types,
+    this.longName,
+    this.shortName,
+    this.types,
   });
+
+  AddressComponent copyWith({
+    ValueGetter<String?>? longName,
+    ValueGetter<String?>? shortName,
+    ValueGetter<List<String>?>? types,
+  }) {
+    return AddressComponent(
+      longName: longName != null ? longName() : this.longName,
+      shortName: shortName != null ? shortName() : this.shortName,
+      types: types != null ? types() : this.types,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'longName': longName,
+      'shortName': shortName,
+      'types': types,
+    };
+  }
 
   factory AddressComponent.fromMap(Map<String, dynamic> map) {
     return AddressComponent(
-      longName: map['long_name'] as String,
-      shortName: map['short_name'] as String,
-      types: (map['types'] as List<dynamic>).map((e) => e.toString()).toList(),
-      // (map['result']['address_components'] as List<dynamic>)
-      //     .map((e) => AddressComponent.fromMap(e))
-      //     .toList()
+      longName: map['longName'],
+      shortName: map['shortName'],
+      types: List<String>.from(map['types']),
     );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory AddressComponent.fromJson(String source) =>
+      AddressComponent.fromMap(json.decode(source));
 
   @override
   String toString() =>
       'AddressComponent(longName: $longName, shortName: $shortName, types: $types)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is AddressComponent &&
+        other.longName == longName &&
+        other.shortName == shortName &&
+        listEquals(other.types, types);
+  }
+
+  @override
+  int get hashCode => longName.hashCode ^ shortName.hashCode ^ types.hashCode;
 }
 
 // Define the Review model class

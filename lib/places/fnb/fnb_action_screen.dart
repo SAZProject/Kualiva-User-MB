@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
-import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
-import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
-import 'package:kualiva/places/fnb/feature/fnb_nearest_feature.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
+import 'package:kualiva/places/fnb/feature/fnb_action_feature.dart';
+import 'package:kualiva/places/fnb/model/fnb_action_model.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 
 class FnbActionScreen extends StatefulWidget {
@@ -20,16 +19,36 @@ class FnbActionScreen extends StatefulWidget {
 }
 
 class _FnbActionScreenState extends State<FnbActionScreen> {
-  static const placeCategoryEnum = PlaceCategoryEnum.fnb;
-
-  final _parentScrollController = ScrollController();
-  final _childScrollController = ScrollController();
+  final _pageScrollController = ScrollController();
 
   final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
 
   final selectedFilters = ValueNotifier<Set<String>>({});
 
   FiltersModel? filtersModel;
+
+  final List<FnbActionModel> _listPlace = [
+    const FnbActionModel(
+      id: "0",
+      name: "place 1",
+      averageRating: 2.5,
+      fullAddress: "Full Address",
+      cityOrVillage: "City Or Village",
+      categories: ["Categories 1", "Categories 2"],
+      isMerchant: false,
+      distanceFromUser: "5",
+    ),
+    const FnbActionModel(
+      id: "1",
+      name: "place 2",
+      averageRating: 3.0,
+      fullAddress: "Full Address",
+      cityOrVillage: "City Or Village",
+      categories: ["Categories 1", "Categories 2"],
+      isMerchant: true,
+      distanceFromUser: "10",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,30 +74,36 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
       width: double.maxFinite,
       height: MediaQuery.of(context).size.height,
       child: NestedScrollView(
-        controller: _parentScrollController,
+        controller: _pageScrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            FnbAppBarFeature(),
-            SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
+            _fnbActionAppBar(context),
           ];
         },
         body: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: 5.h),
+              SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
+              SizedBox(height: 5.h),
               _tagsFilter(context),
               SizedBox(height: 5.h),
-              FnbNearestFeature(
-                parentScrollController: _parentScrollController,
-                childScrollController: _childScrollController,
-                height: Sizeutils.height,
-                scrollDirection: Axis.vertical,
+              FnbActionFeature(
+                listPlace: _listPlace,
               ),
               SizedBox(height: 5.h),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  PreferredSizeWidget _fnbActionAppBar(BuildContext context) {
+    return CustomAppBar(
+      title: "Kasih title ci",
+      useLeading: true,
+      onBackPressed: () => Navigator.pop(context),
     );
   }
 

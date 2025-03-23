@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder;
+import 'package:kualiva/_data/enum/fnb_action_enum.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
+import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
 
@@ -20,11 +22,21 @@ class FnbPromoFeature extends StatelessWidget {
         children: [
           CustomSectionHeader(
             label: context.tr("f_n_b.promo"),
-            useIcon: false,
+            useIcon: true,
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                AppRoutes.fnbActionScreen,
+                arguments: FnbActionArgument(
+                  title: context.tr("f_n_b.promo"),
+                  fnbActionEnum: FnbActionEnum.promo,
+                ),
+              );
+            },
           ),
           SizedBox(height: 4.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.h),
+            padding: EdgeInsets.symmetric(horizontal: 5.h),
             child: SizedBox(
               height: 225.h,
               width: double.maxFinite,
@@ -42,9 +54,7 @@ class FnbPromoFeature extends StatelessWidget {
         if (state is FnbPromoFailure) {
           return CustomErrorState(
               errorMessage: context.tr("common.error_try_again"),
-              onRetry: () {
-                print("LeRucco KEPENCET OI");
-              });
+              onRetry: () {});
         }
         if (state is! FnbPromoSuccess) {
           return Center(child: CircularProgressIndicator());

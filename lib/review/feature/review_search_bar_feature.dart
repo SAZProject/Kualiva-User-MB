@@ -7,7 +7,7 @@ import 'package:kualiva/review/cubit/review_search_bar_cubit.dart';
 class ReviewSearchBarFeature extends StatelessWidget {
   const ReviewSearchBarFeature({super.key});
 
-  void onSubmitted(BuildContext context, String value) {
+  void viewOnSubmitted(BuildContext context, String value) {
     context.read<ReviewFilterCubit>().filter(description: value);
     context.read<ReviewSearchBarCubit>().add(suggestion: value);
   }
@@ -30,13 +30,13 @@ class ReviewSearchBarFeature extends StatelessWidget {
           reviewSuggestionList = state.reviewSuggestion;
         }
         return MyFixedSearchBarWidget(
-          onSubmitted: onSubmitted,
+          viewOnSubmitted: viewOnSubmitted,
           suggestionsBuilder: (context, searchController) async {
             return reviewSuggestionList.map((suggest) {
               return ListTile(
                 title: Text(suggest),
                 onTap: () {
-                  onSubmitted(context, suggest);
+                  viewOnSubmitted(context, suggest);
                   searchController.closeView(suggest);
                 },
               );

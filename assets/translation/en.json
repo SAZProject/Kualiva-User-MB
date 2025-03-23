@@ -217,12 +217,15 @@
   },
   "f_n_b": {
     "nearest": "Nearest From You",
-    "promo": "Promo",
+    "promo": "Ongoing Promo",
     "promo_value": "{}% OFF",
+    "recommended" : "Recommended For You",
     "chef_choice": "Chef\u0027s Choices",
     "best_rated": "Best Rated",
     "cuisine": "cuisine",
-    "tags_more": "+{} More"
+    "tags_more": "+{} More",
+    "is_merchant_tag_1": "Exclusive Merchant",
+    "is_merchant_tag_2" : "Promo Available"
   },
   "cuisine": {
     "title_1": "Cuisine",

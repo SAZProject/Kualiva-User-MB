@@ -10,11 +10,11 @@ import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
-import 'package:kualiva/places/fnb/widget/fnb_nearest_item.dart';
+import 'package:kualiva/places/fnb/widget/fnb_recommended_item.dart';
 import 'package:kualiva/router.dart';
 
-class FnbNearestFeature extends StatelessWidget {
-  const FnbNearestFeature({
+class FnbRecommendedFeature extends StatelessWidget {
+  const FnbRecommendedFeature({
     super.key,
     required this.parentScrollController,
     required this.childScrollController,
@@ -31,15 +31,15 @@ class FnbNearestFeature extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            label: context.tr("f_n_b.nearest"),
+            label: context.tr("f_n_b.recommended"),
             useIcon: true,
             onPressed: () {
               Navigator.pushNamed(
                 context,
                 AppRoutes.fnbActionScreen,
                 arguments: FnbActionArgument(
-                  title: context.tr("f_n_b.nearest"),
-                  fnbActionEnum: FnbActionEnum.nearest,
+                  title: context.tr("f_n_b.recommended"),
+                  fnbActionEnum: FnbActionEnum.recommended,
                 ),
               );
             },
@@ -47,9 +47,29 @@ class FnbNearestFeature extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.h),
             child: SizedBox(
-              height: 220.h,
+              height: 450.h,
               width: double.maxFinite,
-              child: _list(),
+              child: NotificationListener(
+                onNotification: (ScrollNotification notification) {
+                  if (notification is ScrollUpdateNotification) {
+                    if (notification.metrics.pixels ==
+                        notification.metrics.maxScrollExtent) {
+                      parentScrollController.animateTo(
+                          parentScrollController.position.maxScrollExtent,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeIn);
+                    } else if (notification.metrics.pixels ==
+                        notification.metrics.minScrollExtent) {
+                      parentScrollController.animateTo(
+                          parentScrollController.position.minScrollExtent,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeIn);
+                    }
+                  }
+                  return true;
+                },
+                child: _list(),
+              ),
             ),
           ),
         ],
@@ -63,7 +83,7 @@ class FnbNearestFeature extends StatelessWidget {
         if (state is FnbNearestFailure) {
           return CustomErrorState(
             errorMessage: context.tr("common.error_try_again"),
-            onRetry: () {}, // TODO: onRetry
+            onRetry: () {},
           );
         }
 
@@ -87,11 +107,12 @@ class FnbNearestFeature extends StatelessWidget {
   Widget _listBuilder(FnbNearestPage fnbNearesPage) {
     final fnbNearestList = fnbNearesPage.data;
     return ListView.builder(
+      controller: childScrollController,
       shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
+      scrollDirection: Axis.vertical,
       itemCount: fnbNearestList.length,
       itemBuilder: (context, index) {
-        return FnbNearestItem(
+        return FnbRecommendedItem(
           merchant: fnbNearestList[index],
           onPressed: () {
             Navigator.pushNamed(

@@ -18,15 +18,13 @@ class HomeFeaturedFeature extends StatelessWidget {
         children: [
           CustomSectionHeader(
             label: context.tr("home_screen.featured"),
-            // TODO dimatikan masih belum jelas mau gimana, apakah akan dibataskan atau tampilkan list banyak
             onPressed: () {},
             useIcon: false,
           ),
-          SizedBox(height: 4.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.h),
+            padding: EdgeInsets.symmetric(horizontal: 5.h),
             child: SizedBox(
-              height: 200.h,
+              height: 225.h,
               width: double.maxFinite,
               child: _list(),
             ),

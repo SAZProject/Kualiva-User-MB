@@ -13,6 +13,7 @@ import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_action_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_action_feature.dart';
@@ -94,6 +95,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO UI no error but no data showed
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
         if (state is! CurrentLocationSuccess) return;
@@ -114,6 +116,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
       },
       child: SafeArea(
         child: Scaffold(
+          appBar: _fnbActionAppBar(context),
           body: _body(context),
         ),
       ),
@@ -129,7 +132,10 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
         child: Column(
           children: [
             SizedBox(height: 5.h),
-            // SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
+            SearchBarFeature(
+              recentSuggestionEnum: RecentSuggestionEnum.fnb,
+              isSliverSearchBar: false,
+            ),
             SizedBox(height: 5.h),
             _tagsFilter(context),
             SizedBox(height: 5.h),
@@ -141,48 +147,11 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     );
   }
 
-  // Widget _body(BuildContext context) {
-  //   return SizedBox(
-  //     width: double.maxFinite,
-  //     height: MediaQuery.of(context).size.height,
-  //     child: NestedScrollView(
-  //       controller: _pageScrollController,
-  //       headerSliverBuilder: (context, innerBoxIsScrolled) {
-  //         return [
-  //           _fnbActionAppBar(context),
-  //         ];
-  //       },
-  //       body: SingleChildScrollView(
-  //         child: Column(
-  //           children: [
-  //             SizedBox(height: 5.h),
-  //             SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
-  //             SizedBox(height: 5.h),
-  //             _tagsFilter(context),
-  //             SizedBox(height: 5.h),
-  //             FnbActionFeature(),
-  //             SizedBox(height: 5.h),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  Widget _fnbActionAppBar(BuildContext context) {
-    return SliverAppBar(
-      backgroundColor: Colors.transparent,
-      automaticallyImplyLeading: true,
-      centerTitle: true,
-      title: Text(
-        "Kasih title ci",
-        style: CustomTextStyles(context).titleMediumPrimary,
-      ),
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new),
-        onPressed: () => Navigator.pop(context),
-      ),
-      toolbarHeight: 100.h,
+  PreferredSizeWidget _fnbActionAppBar(BuildContext context) {
+    return CustomAppBar(
+      title: "Kasih title ci",
+      useLeading: true,
+      onBackPressed: () => Navigator.pop(context),
     );
   }
 

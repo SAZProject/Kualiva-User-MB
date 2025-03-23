@@ -35,7 +35,7 @@ class CustomSectionHeader extends StatelessWidget {
             Text(
               label,
               style: textStyle ??
-                  theme(context).textTheme.titleLarge!.copyWith(
+                  theme(context).textTheme.titleMedium!.copyWith(
                       color: theme(context).colorScheme.onPrimaryContainer),
             ),
             useIcon

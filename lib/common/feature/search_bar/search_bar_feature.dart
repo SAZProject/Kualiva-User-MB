@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/common/cubit/search_bar_cubit.dart';
+import 'package:kualiva/common/feature/search_bar/my_fixed_search_bar_widget.dart';
 import 'package:kualiva/common/feature/search_bar/my_sliver_search_bar_widget.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/screen/widget/search_list_item.dart';
@@ -13,9 +14,14 @@ import 'package:kualiva/common/screen/widget/search_media_item.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 
 class SearchBarFeature extends StatelessWidget {
-  const SearchBarFeature({super.key, required this.recentSuggestionEnum});
+  const SearchBarFeature({
+    super.key,
+    required this.recentSuggestionEnum,
+    this.isSliverSearchBar = true,
+  });
 
   final RecentSuggestionEnum recentSuggestionEnum;
+  final bool isSliverSearchBar;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +39,19 @@ class SearchBarFeature extends StatelessWidget {
       SizedBox(height: 5.h),
     ];
 
-    return MySliverSearchBarWidget(
-      viewOnSubmitted: (value) {
+    if (isSliverSearchBar) {
+      return MySliverSearchBarWidget(
+        viewOnSubmitted: (value) {
+          Navigator.pushNamed(context, AppRoutes.fnbActionScreen);
+        },
+        suggestionsBuilder: (context, searchController) async {
+          return listSearchSuggest;
+        },
+      );
+    }
+
+    return MyFixedSearchBarWidget(
+      viewOnSubmitted: (context, value) {
         Navigator.pushNamed(context, AppRoutes.fnbActionScreen);
       },
       suggestionsBuilder: (context, searchController) async {

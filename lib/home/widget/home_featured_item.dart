@@ -24,7 +24,7 @@ class HomeFeaturedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150.h,
-      margin: EdgeInsets.symmetric(horizontal: 6.h),
+      margin: EdgeInsets.symmetric(horizontal: 5.h),
       decoration: CustomDecoration(context).outlinePrmOnScd,
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
@@ -48,6 +48,7 @@ class HomeFeaturedItem extends StatelessWidget {
                     radius: BorderRadius.vertical(
                       top: Radius.circular(10.h),
                     ),
+                    boxFit: BoxFit.cover,
                   ),
                   Align(
                     alignment: Alignment.topRight,
@@ -124,46 +125,44 @@ class HomeFeaturedItem extends StatelessWidget {
               ),
             ),
             SizedBox(height: 5.h),
-            _firstTagRow(context)
+            _listTag(context),
+            SizedBox(height: 5.h),
           ],
         ),
       ),
     );
   }
 
-  Widget _firstTagRow(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5.h),
-      child: SizedBox(
-        height: 20.h,
-        width: double.maxFinite,
-        child: ListView.builder(
-          itemCount: homeFeatured.categories.length >= 2
-              ? 2
-              : homeFeatured.categories.length,
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            if (index == 1) {
-              return _tagView(
-                context,
-                context.tr(
-                  "home_screen.tags_more",
-                  args: [(homeFeatured.categories.length - 1).toString()],
-                ),
-              );
-            }
-            return _tagView(context, homeFeatured.categories[index]);
-          },
-        ),
+  Widget _listTag(BuildContext context) {
+    return SizedBox(
+      height: 20.h,
+      width: double.maxFinite,
+      child: ListView.builder(
+        itemCount: homeFeatured.categories.length >= 2
+            ? 2
+            : homeFeatured.categories.length,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          if (index == 1) {
+            return _tagView(
+              context,
+              context.tr(
+                "home_screen.tags_more",
+                args: [(homeFeatured.categories.length - 1).toString()],
+              ),
+            );
+          }
+          return _tagView(context, homeFeatured.categories[index]);
+        },
       ),
     );
   }
 
   Widget _tagView(BuildContext context, String label) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2.h),
-      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      margin: EdgeInsets.symmetric(horizontal: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 5.h),
       decoration: CustomDecoration(context).fillPrimary.copyWith(
             borderRadius: BorderRadiusStyle.roundedBorder5,
           ),
@@ -171,7 +170,9 @@ class HomeFeaturedItem extends StatelessWidget {
         child: Text(
           label,
           textAlign: TextAlign.center,
-          style: CustomTextStyles(context).bodySmall10,
+          style: CustomTextStyles(context).bodySmall10.copyWith(
+                color: theme(context).colorScheme.onSecondaryContainer,
+              ),
         ),
       ),
     );

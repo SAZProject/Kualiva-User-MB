@@ -84,6 +84,18 @@ class CustomDecoration {
         color: theme(context).colorScheme.primary.withValues(alpha: 0.3),
       );
 
+  BoxDecoration get fillPrimary_08 => BoxDecoration(
+        color: theme(context).colorScheme.primary.withValues(alpha: 0.8),
+      );
+
+  BoxDecoration get fillOrange300 => BoxDecoration(
+        color: appTheme.orange300,
+      );
+
+  BoxDecoration get fillOrange300_05 => BoxDecoration(
+        color: appTheme.orange300.withValues(alpha: 0.5),
+      );
+
   BoxDecoration get fillOnPrimaryContainer => BoxDecoration(
         color: theme(context).colorScheme.onPrimaryContainer,
       );
@@ -291,7 +303,10 @@ class CustomDecoration {
             .onSecondaryContainer
             .withValues(alpha: 0.6),
         border: Border.all(
-          color: theme(context).colorScheme.onSecondaryContainer,
+          color: theme(context)
+              .colorScheme
+              .onPrimaryContainer
+              .withValues(alpha: 0.2),
           width: 1.h,
         ),
       );

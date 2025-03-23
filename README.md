@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.26+02
-- New UI v2 Fnb Action Screen
+Ver 0.1.27
+- New UI v2 Home Screen, Fnb Screen promo, nearest & recommended screen & item
 ```
 
 ## Getting Started

@@ -217,12 +217,15 @@
   },
   "f_n_b": {
     "nearest": "Terdekat Dari Anda",
-    "promo": "Promo",
+    "promo": "Promo Yang Berlangsung",
     "promo_value": "{}% OFF",
+    "recommended" : "Rekomendasi Untukmu",
     "chef_choice": "Pilihan Chef",
     "best_rated": "Nilai Terbaik",
     "cuisine": "masakan",
-    "tags_more": "+{} Lainnya"
+    "tags_more": "+{} Lainnya",
+    "is_merchant_tag_1": "Eksklusif Merchant",
+    "is_merchant_tag_2" : "Promo Tersedia"
   },
   "cuisine": {
     "title_1": "Masakan",

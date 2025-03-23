@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
+import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_action_bloc.dart';
 import 'package:kualiva/places/fnb/model/fnb_action_model.dart';
 import 'package:kualiva/places/fnb/widget/fnb_action_item.dart';
+import 'package:kualiva/router.dart';
 
 class FnbActionFeature extends StatefulWidget {
   const FnbActionFeature({super.key});
@@ -18,29 +20,14 @@ class FnbActionFeature extends StatefulWidget {
 class _FnbActionFeatureState extends State<FnbActionFeature> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: _body(context),
-      ),
+    return SizedBox(
+      height: 450.h,
+      width: double.maxFinite,
+      child: _listFnbAction(),
     );
   }
 
-  Widget _body(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5.h),
-      child: SizedBox(
-        width: double.maxFinite,
-        height: 500.h, //double.maxFinite,
-        child: Column(
-          children: [
-            _list(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _list() {
+  Widget _listFnbAction() {
     final List<FnbActionModel> placeList = [
       const FnbActionModel(
         id: "0",
@@ -122,16 +109,15 @@ class _FnbActionFeatureState extends State<FnbActionFeature> {
         return FnbActionItem(
           place: placeList[index],
           onPressed: () {
-            // TODO kalo udh pakai data asli dinyalain
-            // Navigator.pushNamed(
-            //   context,
-            //   AppRoutes.fnbDetailScreen,
-            //   arguments: PlaceArgument(
-            //     placeId: fnbNearestList[index].id,
-            //     isMerchant: fnbNearestList[index].isMerchant,
-            //     featuredImage: fnbNearestList[index].featuredImage,
-            //   ),
-            // );
+            Navigator.pushNamed(
+              context,
+              AppRoutes.fnbDetailScreen,
+              arguments: PlaceArgument(
+                placeId: placeList[index].id,
+                isMerchant: placeList[index].isMerchant,
+                featuredImage: placeList[index].featuredImage,
+              ),
+            );
           },
         );
       },

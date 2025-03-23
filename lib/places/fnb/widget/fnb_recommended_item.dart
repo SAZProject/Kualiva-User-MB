@@ -3,16 +3,13 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/places/fnb/model/fnb_action_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 
-class FnbActionItem extends StatelessWidget {
-  const FnbActionItem({
-    super.key,
-    required this.place,
-    required this.onPressed,
-  });
+class FnbRecommendedItem extends StatelessWidget {
+  const FnbRecommendedItem(
+      {super.key, required this.merchant, required this.onPressed});
 
-  final FnbActionModel place;
+  final FnbNearestModel merchant;
   final VoidCallback onPressed;
 
   @override
@@ -21,7 +18,7 @@ class FnbActionItem extends StatelessWidget {
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.h),
       padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.h),
-      decoration: place.isMerchant
+      decoration: merchant.isMerchant
           ? CustomDecoration(context).outlinePrmOnScd
           : CustomDecoration(context)
               .outlineOnSecondaryContainer
@@ -36,9 +33,9 @@ class FnbActionItem extends StatelessWidget {
               width: 100.h,
               height: 100.h,
               imagePath:
-                  place.featuredImage ?? "${ImageConstant.fnb1Path}/A/2.jpg",
-              radius: BorderRadius.horizontal(
-                left: Radius.circular(10.h),
+                  merchant.featuredImage ?? "${ImageConstant.fnb1Path}/A/2.jpg",
+              radius: BorderRadius.all(
+                Radius.circular(10.h),
               ),
               boxFit: BoxFit.cover,
             ),
@@ -51,8 +48,9 @@ class FnbActionItem extends StatelessWidget {
                   Row(
                     children: [
                       Visibility(
-                        visible: place.isMerchant,
+                        visible: merchant.isMerchant,
                         child: CustomImageView(
+                          margin: EdgeInsets.only(right: 5.h),
                           imagePath: ImageConstant.appLogo2,
                           height: 20.h,
                           width: 20.h,
@@ -61,11 +59,19 @@ class FnbActionItem extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          place.name,
+                          merchant.name,
                           style: theme(context).textTheme.labelLarge!.copyWith(
                               color: theme(context).colorScheme.primary),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.h),
+                        child: Text(
+                          merchant.averageRating.toString(),
+                          style: theme(context).textTheme.labelMedium!.copyWith(
+                              color: theme(context).colorScheme.primary),
                         ),
                       ),
                       Padding(
@@ -88,7 +94,7 @@ class FnbActionItem extends StatelessWidget {
                         return Icon(
                           Icons.attach_money,
                           size: 15.h,
-                          color: index <= (place.averageRating.floor() - 1)
+                          color: index <= (merchant.averageRating.floor() - 1)
                               ? theme(context).colorScheme.primary
                               : null,
                         );
@@ -100,14 +106,14 @@ class FnbActionItem extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          place.fullAddress,
+                          merchant.fullAddress,
                           style: theme(context).textTheme.bodySmall,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Text(
-                        place.distanceFromUser,
+                        merchant.distanceFromUser,
                         style: theme(context).textTheme.bodySmall,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -133,24 +139,25 @@ class FnbActionItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount: place.categories.length > 4 ? 4 : place.categories.length,
+        itemCount:
+            merchant.categories.length > 4 ? 4 : merchant.categories.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index == 3) {
-            if (place.categories.length > 4) {
+            if (merchant.categories.length > 4) {
               return _categoryTagView(
                 context,
                 context.tr(
                   "f_n_b.tags_more",
-                  args: [(place.categories.length - 3).toString()],
+                  args: [(merchant.categories.length - 3).toString()],
                 ),
               );
             } else {
-              return _categoryTagView(context, place.categories[index]);
+              return _categoryTagView(context, merchant.categories[index]);
             }
           }
-          return _categoryTagView(context, place.categories[index]);
+          return _categoryTagView(context, merchant.categories[index]);
         },
       ),
     );
@@ -177,7 +184,7 @@ class FnbActionItem extends StatelessWidget {
 
   Widget _isMerchantTagList(BuildContext context) {
     return Visibility(
-      visible: place.isMerchant,
+      visible: merchant.isMerchant,
       child: SizedBox(
         height: 20.h,
         width: double.maxFinite,

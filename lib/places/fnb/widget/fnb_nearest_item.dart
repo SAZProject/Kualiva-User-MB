@@ -16,68 +16,33 @@ class FnbNearestItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.h,
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 6.h),
-      decoration: CustomDecoration(context)
-          .outlineOnSecondaryContainer
-          .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
+      width: 200.h,
+      margin: EdgeInsets.all(5.h),
+      decoration: merchant.isMerchant
+          ? CustomDecoration(context).outlinePrmOnScd
+          : CustomDecoration(context)
+              .outlineOnSecondaryContainer
+              .copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
         onTap: onPressed,
-        child: Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 100.h,
-              width: 85.h,
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  // https://lh5.googleusercontent.com/p/AF1QipNNTuC6HYtW4TGRybf5cfUi_Twx8cUyKhF08czq=w408-h408-k-no
-                  // https://lh5.googleusercontent.com/p/ChIJB9Y8liH0aS4RemVuMOm5PFA=w408-h408-k-no
-                  CustomImageView(
-                    imagePath: merchant.featuredImage ??
-                        "${ImageConstant.fnb1Path}/A/2.jpg",
-                    height: 100.h,
-                    width: double.maxFinite,
-                    radius: BorderRadius.horizontal(
-                      left: Radius.circular(10.h),
-                    ),
-                    boxFit: BoxFit.cover,
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      height: 20.h,
-                      width: 50.h,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 8.h,
-                        vertical: 2.h,
-                      ),
-                      decoration:
-                          CustomDecoration(context).orange60Color.copyWith(
-                                borderRadius: BorderRadiusStyle.roundedBorder10,
-                              ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.star,
-                              size: 12.h,
-                            ),
-                          ),
-                          SizedBox(width: 4.h),
-                          Text(
-                            '${merchant.averageRating}',
-                            style: theme(context).textTheme.labelMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
+              height: 130.h,
+              width: double.maxFinite,
+              child: CustomImageView(
+                imagePath: merchant.featuredImage ??
+                    "${ImageConstant.fnb1Path}/A/2.jpg",
+                height: 130.h,
+                width: double.maxFinite,
+                radius: BorderRadius.vertical(
+                  top: Radius.circular(10.h),
+                ),
+                boxFit: BoxFit.cover,
               ),
             ),
             SizedBox(width: 5.h),
@@ -86,7 +51,7 @@ class FnbNearestItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 4.h),
+                    padding: EdgeInsets.symmetric(horizontal: 5.h),
                     child: Row(
                       children: [
                         Visibility(
@@ -101,38 +66,43 @@ class FnbNearestItem extends StatelessWidget {
                         Expanded(
                           child: Text(
                             merchant.name,
-                            style: theme(context).textTheme.titleSmall,
+                            style: theme(context)
+                                .textTheme
+                                .labelLarge!
+                                .copyWith(
+                                    color: theme(context).colorScheme.primary),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
+                        ),
+                        Text(
+                          merchant.averageRating.toString(),
+                          style: theme(context).textTheme.labelMedium!.copyWith(
+                              color: theme(context).colorScheme.primary),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 4.h),
-                    child: Text(
-                      merchant.fullAddress,
-                      style: theme(context).textTheme.bodySmall,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  SizedBox(height: 5.h),
-                  SizedBox(
-                    height: 20.h,
+                    padding: EdgeInsets.symmetric(horizontal: 5.h),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children:
-                          List.generate(merchant.averageRating.floor(), (_) {
-                        return Icon(Icons.attach_money, size: 15.h);
-                      }),
+                      children: [
+                        Expanded(
+                          child: Text(
+                            merchant.fullAddress,
+                            style: theme(context).textTheme.bodySmall,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Text(
+                          merchant.distanceFromUser,
+                          style: theme(context).textTheme.bodySmall,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(
-                    // TODO: Winky help me this UI
-                    height: 5.h,
-                    child: Text(merchant.distanceFromUser),
                   ),
                   SizedBox(height: 5.h),
                   _tagList(context),
@@ -147,30 +117,29 @@ class FnbNearestItem extends StatelessWidget {
   }
 
   Widget _tagList(BuildContext context) {
-    return SizedBox(
-      height: 20.h,
-      width: double.maxFinite,
-      child: ListView.builder(
-        itemCount:
-            merchant.categories.length > 4 ? 4 : merchant.categories.length,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          if (index == 3) {
-            if (merchant.categories.length > 4) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5.h),
+      child: SizedBox(
+        height: 20.h,
+        width: double.maxFinite,
+        child: ListView.builder(
+          itemCount:
+              merchant.categories.length >= 2 ? 2 : merchant.categories.length,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            if (index == 1) {
               return _tagView(
                 context,
                 context.tr(
                   "f_n_b.tags_more",
-                  args: [(merchant.categories.length - 3).toString()],
+                  args: [(merchant.categories.length - 1).toString()],
                 ),
               );
-            } else {
-              return _tagView(context, merchant.categories[index]);
             }
-          }
-          return _tagView(context, merchant.categories[index]);
-        },
+            return _tagView(context, merchant.categories[index]);
+          },
+        ),
       ),
     );
   }
@@ -186,7 +155,9 @@ class FnbNearestItem extends StatelessWidget {
         child: Text(
           label,
           textAlign: TextAlign.center,
-          style: CustomTextStyles(context).bodySmall10,
+          style: CustomTextStyles(context).bodySmall10.copyWith(
+                color: theme(context).colorScheme.onSecondaryContainer,
+              ),
         ),
       ),
     );

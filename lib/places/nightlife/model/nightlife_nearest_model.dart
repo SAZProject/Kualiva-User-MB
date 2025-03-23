@@ -1,17 +1,38 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
 
+part 'nightlife_nearest_model.g.dart';
+
+@immutable
+@HiveType(typeId: 20)
 class NightlifeNearestModel {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final double averageRating;
+
+  @HiveField(3)
   final String fullAddress;
+
+  @HiveField(4)
   final List<String> categories;
+
+  @HiveField(5)
   final String? featuredImage;
+
+  @HiveField(6)
   final bool isMerchant;
 
-  NightlifeNearestModel({
+  @HiveField(7)
+  final String distanceFromUser;
+
+  const NightlifeNearestModel({
     required this.id,
     required this.name,
     required this.averageRating,
@@ -19,6 +40,7 @@ class NightlifeNearestModel {
     required this.categories,
     this.featuredImage,
     required this.isMerchant,
+    required this.distanceFromUser,
   });
 
   NightlifeNearestModel copyWith({
@@ -29,6 +51,7 @@ class NightlifeNearestModel {
     List<String>? categories,
     ValueGetter<String?>? featuredImage,
     bool? isMerchant,
+    String? distanceFromUser,
   }) {
     return NightlifeNearestModel(
       id: id ?? this.id,
@@ -39,6 +62,7 @@ class NightlifeNearestModel {
       featuredImage:
           featuredImage != null ? featuredImage() : this.featuredImage,
       isMerchant: isMerchant ?? this.isMerchant,
+      distanceFromUser: distanceFromUser ?? this.distanceFromUser,
     );
   }
 
@@ -51,6 +75,7 @@ class NightlifeNearestModel {
       'categories': categories,
       'featuredImage': featuredImage,
       'isMerchant': isMerchant,
+      'distanceFromUser': distanceFromUser,
     };
   }
 
@@ -63,6 +88,7 @@ class NightlifeNearestModel {
       categories: List<String>.from(map['categories']),
       featuredImage: map['featuredImage'],
       isMerchant: map['isMerchant'] ?? false,
+      distanceFromUser: map['distanceFromUser'] ?? '',
     );
   }
 
@@ -73,7 +99,7 @@ class NightlifeNearestModel {
 
   @override
   String toString() {
-    return 'NightlifeNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant)';
+    return 'NightlifeNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
   }
 
   @override
@@ -87,7 +113,8 @@ class NightlifeNearestModel {
         other.fullAddress == fullAddress &&
         listEquals(other.categories, categories) &&
         other.featuredImage == featuredImage &&
-        other.isMerchant == isMerchant;
+        other.isMerchant == isMerchant &&
+        other.distanceFromUser == distanceFromUser;
   }
 
   @override
@@ -98,6 +125,7 @@ class NightlifeNearestModel {
         fullAddress.hashCode ^
         categories.hashCode ^
         featuredImage.hashCode ^
-        isMerchant.hashCode;
+        isMerchant.hashCode ^
+        distanceFromUser.hashCode;
   }
 }

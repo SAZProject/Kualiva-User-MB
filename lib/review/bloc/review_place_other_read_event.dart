@@ -14,7 +14,7 @@ final class ReviewPlaceOtherReadFetched extends ReviewPlaceOtherReadEvent {
   final ReviewOrderEnum? order;
 
   ReviewPlaceOtherReadFetched({
-    this.paging = const Paging(),
+    required this.paging,
     required this.pagingEnum,
     required this.placeId,
     this.description,

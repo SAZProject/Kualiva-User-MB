@@ -2,23 +2,23 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
 import 'package:kualiva/places/fnb/widget/fnb_nearest_item.dart';
 
 class FnbNearestFeature extends StatelessWidget {
   const FnbNearestFeature({
     super.key,
-    required this.parentContext,
     required this.parentScrollController,
     required this.childScrollController,
     this.height,
     this.scrollDirection,
   });
 
-  final BuildContext parentContext;
   final ScrollController parentScrollController;
   final ScrollController childScrollController;
   final double? height;
@@ -61,7 +61,7 @@ class FnbNearestFeature extends StatelessWidget {
                   }
                   return true;
                 },
-                child: _nearestList(),
+                child: _list(),
               ),
             ),
           ),
@@ -70,38 +70,52 @@ class FnbNearestFeature extends StatelessWidget {
     );
   }
 
-  Widget _nearestList() {
+  Widget _list() {
     return BlocBuilder<FnbNearestBloc, FnbNearestState>(
       builder: (context, state) {
         if (state is FnbNearestFailure) {
           return CustomErrorState(
             errorMessage: context.tr("common.error_try_again"),
-            onRetry: () {},
+            onRetry: () {}, // TODO: onRetry
           );
         }
+
+        if (state is FnbNearestLoading && state.fnbNearestPage != null) {
+          return _listBuilder(state.fnbNearestPage!);
+        }
+
         if (state is! FnbNearestSuccess) {
           return Center(child: CircularProgressIndicator());
         }
 
-        return ListView.builder(
-          controller: childScrollController,
-          shrinkWrap: true,
-          scrollDirection: scrollDirection ?? Axis.vertical,
-          itemCount: state.nearest.length,
-          itemBuilder: (context, index) {
-            return FnbNearestItem(
-              merchant: state.nearest[index],
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.fnbDetailScreen,
-                  arguments: PlaceArgument(
-                    placeId: state.nearest[index].id,
-                    isMerchant: state.nearest[index].isMerchant,
-                    featuredImage: state.nearest[index].featuredImage,
-                  ),
-                );
-              },
+        if (state.fnbNearestPage.data.isEmpty) {
+          return CustomEmptyState();
+        }
+
+        return _listBuilder(state.fnbNearestPage);
+      },
+    );
+  }
+
+  Widget _listBuilder(FnbNearestPage fnbNearesPage) {
+    final fnbNearestList = fnbNearesPage.data;
+    return ListView.builder(
+      controller: childScrollController,
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemCount: fnbNearestList.length,
+      itemBuilder: (context, index) {
+        return FnbNearestItem(
+          merchant: fnbNearestList[index],
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.fnbDetailScreen,
+              arguments: PlaceArgument(
+                placeId: fnbNearestList[index].id,
+                isMerchant: fnbNearestList[index].isMerchant,
+                featuredImage: fnbNearestList[index].featuredImage,
+              ),
             );
           },
         );

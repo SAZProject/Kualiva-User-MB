@@ -13,7 +13,7 @@ class ProfileRepository {
   final MinioRepository _minioRepository;
 
   Future<UserModel> me() async {
-    final userBox = Hive.box<UserModel>(MyHive.user.name);
+    final userBox = Hive.box<UserModel>(MyBox.user.name);
 
     // TODO masih kacau kadang data lama masih dipanggil meskipun sudah logout sehingga user profile masih null
     // if (userBox.values.toList().isNotEmpty) {

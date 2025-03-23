@@ -5,7 +5,7 @@ import 'package:kualiva/main_hive.dart';
 
 class RecentSuggestionRepository {
   Future<List<String>> get(RecentSuggestionEnum recentSuggestionEnum) async {
-    final suggestionBox = Hive.box<List<String>>(MyHive.recentSuggestion.name);
+    final suggestionBox = Hive.box<List<String>>(MyBox.recentSuggestion.name);
     final List<String>? suggestionList = suggestionBox.get(
       recentSuggestionEnum.name,
       defaultValue: [],
@@ -18,7 +18,7 @@ class RecentSuggestionRepository {
     RecentSuggestionEnum recentSuggestionEnum,
     String suggestion,
   ) async {
-    final suggestionBox = Hive.box<List<String>>(MyHive.recentSuggestion.name);
+    final suggestionBox = Hive.box<List<String>>(MyBox.recentSuggestion.name);
     if (suggestion.isEmpty) return get(recentSuggestionEnum);
 
     final suggestionList = await get(recentSuggestionEnum);
@@ -30,14 +30,14 @@ class RecentSuggestionRepository {
   }
 
   Future<void> delete(RecentSuggestionEnum recentSuggestionEnum) async {
-    final suggestionBox = Hive.box<List<String>>(MyHive.recentSuggestion.name);
+    final suggestionBox = Hive.box<List<String>>(MyBox.recentSuggestion.name);
     LeLog.rd(this, delete, recentSuggestionEnum.name);
     return suggestionBox.delete(recentSuggestionEnum.name);
   }
 
   Future<int> deleteAll() async {
     LeLog.rd(this, deleteAll, 'Delete All');
-    final suggestionBox = Hive.box<List<String>>(MyHive.recentSuggestion.name);
+    final suggestionBox = Hive.box<List<String>>(MyBox.recentSuggestion.name);
     return suggestionBox.clear();
   }
 }

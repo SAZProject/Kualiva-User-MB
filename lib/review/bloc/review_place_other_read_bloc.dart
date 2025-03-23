@@ -28,8 +28,7 @@ class ReviewPlaceOtherReadBloc
         placeId: event.placeId,
       );
       emit(ReviewPlaceOtherReadLoading(reviewPlacePage: reviewPlacePageOld));
-      final ReviewPlacePage reviewPlacePage =
-          await _reviewRepository.otherReviewGetByPlace(
+      final reviewPlacePage = await _reviewRepository.otherReviewGetByPlace(
         paging: event.paging,
         pagingEnum: event.pagingEnum,
         placeId: event.placeId,

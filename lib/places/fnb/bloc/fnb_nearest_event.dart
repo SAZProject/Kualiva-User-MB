@@ -4,12 +4,14 @@ part of 'fnb_nearest_bloc.dart';
 sealed class FnbNearestEvent {}
 
 final class FnbNearestFetched extends FnbNearestEvent {
-  final bool isRefreshed;
+  final Paging paging;
+  final PagingEnum pagingEnum;
   final double latitude;
   final double longitude;
 
   FnbNearestFetched({
-    this.isRefreshed = false,
+    required this.paging,
+    required this.pagingEnum,
     required this.latitude,
     required this.longitude,
   });

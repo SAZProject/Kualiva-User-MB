@@ -2,21 +2,21 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
+import 'package:kualiva/places/spa/model/spa_nearest_page.dart';
 import 'package:kualiva/places/spa/widget/spa_nearest_item.dart';
 
 class SpaNearestFeature extends StatelessWidget {
   const SpaNearestFeature({
     super.key,
-    required this.parentContext,
     required this.parentScrollController,
     required this.childScrollController,
   });
 
-  final BuildContext parentContext;
   final ScrollController parentScrollController;
   final ScrollController childScrollController;
 
@@ -72,32 +72,46 @@ class SpaNearestFeature extends StatelessWidget {
         if (state is SpaNearestFailure) {
           return CustomErrorState(
             errorMessage: context.tr("common.error_try_again"),
-            onRetry: () {},
+            onRetry: () {}, // TODO: onRetry
           );
         }
+
+        if (state is SpaNearestLoading && state.spaNearestPage != null) {
+          return _listBuilder(state.spaNearestPage!);
+        }
+
         if (state is! SpaNearestSuccess) {
           return Center(child: CircularProgressIndicator());
         }
 
-        return ListView.builder(
-          controller: childScrollController,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: state.nearest.length,
-          itemBuilder: (context, index) {
-            return SpaNearestItem(
-              merchant: state.nearest[index],
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.spaDetailScreen,
-                  arguments: PlaceArgument(
-                    placeId: state.nearest[index].id,
-                    isMerchant: state.nearest[index].isMerchant,
-                    featuredImage: state.nearest[index].featuredImage,
-                  ),
-                );
-              },
+        if (state.spaNearestPage.data.isEmpty) {
+          return CustomEmptyState();
+        }
+
+        return _listBuilder(state.spaNearestPage);
+      },
+    );
+  }
+
+  Widget _listBuilder(SpaNearestPage spaNearestPage) {
+    final spaNearestList = spaNearestPage.data;
+    return ListView.builder(
+      controller: childScrollController,
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemCount: spaNearestList.length,
+      itemBuilder: (context, index) {
+        return SpaNearestItem(
+          merchant: spaNearestList[index],
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.spaDetailScreen,
+              arguments: PlaceArgument(
+                placeId: spaNearestList[index].id,
+                isMerchant: spaNearestList[index].isMerchant,
+                featuredImage: spaNearestList[index].featuredImage,
+              ),
             );
           },
         );

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/common/feature/current_location/current_location_placemark_model.dart';
@@ -9,6 +11,11 @@ import 'package:kualiva/auth/model/user_profile_model.dart';
 import 'package:kualiva/common/feature/current_location/current_location_model.dart';
 
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_nearest_page.dart';
+import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
+import 'package:kualiva/places/spa/model/spa_nearest_page.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/review/model/author_model.dart';
@@ -34,26 +41,39 @@ class MainHive {
     Hive.registerAdapter(ReviewFilterModelAdapter());
     Hive.registerAdapter(PaginationAdapter());
     Hive.registerAdapter(ReviewPlacePageAdapter());
+    Hive.registerAdapter(FnbNearestPageAdapter());
+    Hive.registerAdapter(SpaNearestModelAdapter());
+    Hive.registerAdapter(SpaNearestPageAdapter());
+    Hive.registerAdapter(NightlifeNearestModelAdapter());
+    Hive.registerAdapter(NightlifeNearestPageAdapter());
   }
 
-  static Future<void> openLeSafeBox<T>(MyHive box) async {
+  static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
     try {
-      await Hive.openBox<T>(box.name);
+      return await Hive.openBox<T>(myBox.name);
     } catch (e) {
-      await Hive.deleteBoxFromDisk(box.name);
-      await Hive.openBox<T>(box.name);
+      await Hive.deleteBoxFromDisk(myBox.name);
+      return Hive.openBox<T>(myBox.name);
     }
+  }
+
+  static Future<Box<T>> deleteBoxAndOpenLeSafe<T>(MyBox myBox) async {
+    final box = await openLeSafeBox<T>(myBox);
+    await box.deleteFromDisk();
+    return await openLeSafeBox(myBox);
   }
 
   static Future<void> openBox() async {
     await Future.wait([
-      openLeSafeBox<FnbNearestModel>(MyHive.fnbNearest),
-      openLeSafeBox<UserModel>(MyHive.user),
-      openLeSafeBox<CurrentLocationModel>(MyHive.currentLocation),
-      openLeSafeBox<ParameterModel>(MyHive.parameter),
-      openLeSafeBox<ReviewFilterModel>(MyHive.reviewFilter),
-      openLeSafeBox<List<String>>(MyHive.recentSuggestion),
-      openLeSafeBox<ReviewPlacePage>(MyHive.reviewPlace),
+      openLeSafeBox<UserModel>(MyBox.user),
+      openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation),
+      openLeSafeBox<ParameterModel>(MyBox.parameter),
+      openLeSafeBox<ReviewFilterModel>(MyBox.reviewFilter),
+      openLeSafeBox<List<String>>(MyBox.recentSuggestion),
+      openLeSafeBox<ReviewPlacePage>(MyBox.reviewPlacePage),
+      openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage),
+      openLeSafeBox<SpaNearestPage>(MyBox.spaNearestPage),
+      openLeSafeBox<NightlifeNearestPage>(MyBox.nightlifeNearestPage),
     ]);
   }
 
@@ -64,13 +84,17 @@ class MainHive {
   }
 
   static Future<void> deleteSplashBox() async {
-    await Hive.box<CurrentLocationModel>(MyHive.currentLocation.name)
-        .deleteFromDisk();
-    await Hive.openBox<CurrentLocationModel>(MyHive.currentLocation.name);
+    Future.wait([
+      deleteBoxAndOpenLeSafe<CurrentLocationModel>(MyBox.currentLocation),
+    ]);
+    // final currentLocationBox =
+    //     await openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation);
+    // await currentLocationBox.deleteFromDisk();
+    // await openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation);
   }
 
   static bool checkOpenBox() {
-    // for (var e in MyHive.values) {
+    // for (var e in MyBox.values) {
     //   if (!Hive.isAdapterRegistered(e.typeId)) {
     //     return false;
     //   }
@@ -79,26 +103,46 @@ class MainHive {
   }
 }
 
-enum MyHive {
-  fnbNearest(1, 'fnb_nearest'),
-  currentLocation(2, 'current_location'),
-  author(3, 'author'),
-  reviewPlace(4, 'review_place'),
-  userProfile(5, 'profile'),
-  user(6, 'user'),
-  currentLocationPlacemark(7, 'current_location_placemark'),
-  languageExplain(8, 'language_explain'),
-  parameterDetail(9, 'parameter_detail'),
-  parameter(10, 'parameter'),
-  selectedUser(11, 'selected_user'),
-  reviewOrder(12, 'review_order'),
-  reviewFilter(13, 'review_filter'),
-  recentSuggestion(14, 'recent_suggestion'),
-  pagination(15, 'pagination'),
-  reviewPlacePage(16, 'review_place_page');
+enum MyBox {
+  user('user'),
+  currentLocation('my_current_location'),
+  parameter('parameter'),
+  reviewFilter('review_filter'),
+  recentSuggestion('recent_suggestion'),
+  reviewPlacePage('review_place_page'),
+  fnbNearestPage('fnb_nearest_page'),
+  spaNearestPage('spa_nearest_page'),
+  nightlifeNearestPage('nightlife_nearest_page');
 
-  final int typeId;
   final String name;
 
-  const MyHive(this.typeId, this.name);
+  const MyBox(this.name);
+}
+
+enum _MyHive {
+  fnbNearest(1),
+  currentLocation(2),
+  author(3),
+  reviewPlace(4),
+  userProfile(5),
+  user(6),
+  currentLocationPlacemark(7),
+  languageExplain(8),
+  parameterDetail(9),
+  parameter(10),
+  selectedUser(11),
+  reviewOrder(12),
+  reviewFilter(13),
+  suggestion(14),
+  pagination(15),
+  reviewPlacePage(16),
+  fnbNearestPage(17),
+  spaNearest(18),
+  spaNearestPage(19),
+  nightlifeNearest(20),
+  nightlifeNearestPage(21);
+
+  final int typeId;
+
+  const _MyHive(this.typeId);
 }

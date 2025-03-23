@@ -5,12 +5,16 @@ sealed class SpaNearestState {}
 
 final class SpaNearestInitial extends SpaNearestState {}
 
-final class SpaNearestLoading extends SpaNearestState {}
+final class SpaNearestLoading extends SpaNearestState {
+  final SpaNearestPage? spaNearestPage;
+
+  SpaNearestLoading({required this.spaNearestPage});
+}
 
 final class SpaNearestSuccess extends SpaNearestState {
-  final List<SpaNearestModel> nearest;
+  final SpaNearestPage spaNearestPage;
 
-  SpaNearestSuccess({required this.nearest});
+  SpaNearestSuccess({required this.spaNearestPage});
 }
 
 final class SpaNearestFailure extends SpaNearestState {}

@@ -348,7 +348,7 @@ class Review {
 // Define the Geometry model class
 @immutable
 class Geometry {
-  final NightLifeDetailLocation location;
+  final SpaDetailLocation location;
 
   // Constructor
   const Geometry({required this.location});
@@ -356,23 +356,23 @@ class Geometry {
   // Factory constructor to create an instance from a Map
   factory Geometry.fromMap(Map<String, dynamic> map) {
     return Geometry(
-      location: NightLifeDetailLocation.fromMap(map['location']),
+      location: SpaDetailLocation.fromMap(map['location']),
     );
   }
 }
 
-// Define the NightLifeDetailLocation model class
+// Define the SpaDetailLocation model class
 @immutable
-class NightLifeDetailLocation {
+class SpaDetailLocation {
   final double lat;
   final double lng;
 
   // Constructor
-  const NightLifeDetailLocation({required this.lat, required this.lng});
+  const SpaDetailLocation({required this.lat, required this.lng});
 
   // Factory constructor to create an instance from a Map
-  factory NightLifeDetailLocation.fromMap(Map<String, dynamic> map) {
-    return NightLifeDetailLocation(
+  factory SpaDetailLocation.fromMap(Map<String, dynamic> map) {
+    return SpaDetailLocation(
       lat: (map['lat'] as num).toDouble(),
       lng: (map['lng'] as num).toDouble(),
     );

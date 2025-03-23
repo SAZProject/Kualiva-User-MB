@@ -4,11 +4,11 @@ part of 'fnb_promo_bloc.dart';
 sealed class FnbPromoEvent {}
 
 final class FnbPromoFetched extends FnbPromoEvent {
-  final bool isRefreshed;
+  final bool isRefresh;
   final PlaceCategoryEnum placeCategoryEnum;
 
   FnbPromoFetched({
-    this.isRefreshed = false,
+    this.isRefresh = false,
     required this.placeCategoryEnum,
   });
 }

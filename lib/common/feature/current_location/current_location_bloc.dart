@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:kualiva/_repository/common/location_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/feature/current_location/current_location_model.dart';
+import 'package:kualiva/main_hive.dart';
 
 part 'current_location_event.dart';
 part 'current_location_state.dart';
@@ -21,27 +22,27 @@ class CurrentLocationBloc
     CurrentLocationFetched event,
     Emitter<CurrentLocationState> emit,
   ) async {
-    try {
-      final newLocation = await _locationRepository.newLocation();
-      final oldLocation = _locationRepository.oldLocation();
+    final newLocation = await _locationRepository.newLocation();
+    final oldLocation = _locationRepository.oldLocation();
 
-      final (isTriggerEmit, distance) =
-          await _locationRepository.isDistanceTooFarOrFirstTime(
-        oldLocation: oldLocation,
-        newLocation: newLocation,
-      );
-      LeLog.bd(this, _onFetched, isTriggerEmit.toString());
-      LeLog.bd(this, _onFetched, newLocation.toString());
+    final (isTriggerEmit, distance) =
+        await _locationRepository.isDistanceTooFarOrFirstTime(
+      oldLocation: oldLocation,
+      newLocation: newLocation,
+    );
 
-      emit(CurrentLocationSuccess(
-        currentLocationModel: newLocation,
-        isDistanceTooFarOrFirstTime: isTriggerEmit,
-        distance: distance,
-      ));
-    } catch (e) {
-      LeLog.be(this, _onFetched, e.toString());
-      emit(CurrentLocationFailure(message: e.toString()));
-    }
+    LeLog.bd(this, _onFetched, isTriggerEmit.toString());
+    LeLog.bd(this, _onFetched, newLocation.toString());
+
+    emit(CurrentLocationSuccess(
+      currentLocationModel: newLocation,
+      isDistanceTooFarOrFirstTime: isTriggerEmit,
+      distance: distance,
+    ));
+    // } catch (e) {
+    //   LeLog.be(this, _onFetched, e.toString());
+    //   emit(CurrentLocationFailure(message: e.toString()));
+    // }
   }
 
   void _onNoPermission(

@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_nearest_page.dart';
 import 'package:kualiva/places/nightlife/widget/nightlife_nearest_item.dart';
 
 class NightlifeNearestFeature extends StatelessWidget {
@@ -72,32 +74,47 @@ class NightlifeNearestFeature extends StatelessWidget {
         if (state is NightlifeNearestFailure) {
           return CustomErrorState(
             errorMessage: context.tr("common.error_try_again"),
-            onRetry: () {},
+            onRetry: () {}, // TODO: onRetry
           );
         }
+
+        if (state is NightlifeNearestLoading &&
+            state.nightlifeNearestPage != null) {
+          return _listBuilder(state.nightlifeNearestPage!);
+        }
+
         if (state is! NightlifeNearestSuccess) {
           return Center(child: CircularProgressIndicator());
         }
 
-        return ListView.builder(
-          controller: childScrollController,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: state.nearest.length,
-          itemBuilder: (context, index) {
-            return NightlifeNearestItem(
-              merchant: state.nearest[index],
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.nightLifeDetailScreen,
-                  arguments: PlaceArgument(
-                    placeId: state.nearest[index].id,
-                    isMerchant: state.nearest[index].isMerchant,
-                    featuredImage: state.nearest[index].featuredImage,
-                  ),
-                );
-              },
+        if (state.nightlifeNearestPage.data.isEmpty) {
+          return CustomEmptyState();
+        }
+
+        return _listBuilder(state.nightlifeNearestPage);
+      },
+    );
+  }
+
+  Widget _listBuilder(NightlifeNearestPage nightlifeNearestPage) {
+    final nightlifeNearestList = nightlifeNearestPage.data;
+    return ListView.builder(
+      controller: childScrollController,
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemCount: nightlifeNearestList.length,
+      itemBuilder: (context, index) {
+        return NightlifeNearestItem(
+          merchant: nightlifeNearestList[index],
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.nightLifeDetailScreen,
+              arguments: PlaceArgument(
+                placeId: nightlifeNearestList[index].id,
+                isMerchant: nightlifeNearestList[index].isMerchant,
+                featuredImage: nightlifeNearestList[index].featuredImage,
+              ),
             );
           },
         );

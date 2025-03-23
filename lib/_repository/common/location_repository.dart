@@ -7,7 +7,7 @@ import 'package:kualiva/main_hive.dart';
 class LocationRepository {
   CurrentLocationModel? oldLocation() {
     final currentLocationBox =
-        Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
+        Hive.box<CurrentLocationModel>(MyBox.currentLocation.name);
 
     if (currentLocationBox.values.toList().isNotEmpty) {
       final oldCurrentLocation = currentLocationBox.values.toList().first;
@@ -30,7 +30,7 @@ class LocationRepository {
     required CurrentLocationModel newLocation,
   }) async {
     final currentLocationBox =
-        Hive.box<CurrentLocationModel>(MyHive.currentLocation.name);
+        Hive.box<CurrentLocationModel>(MyBox.currentLocation.name);
 
     /// First time get current location
     if (oldLocation == null) {

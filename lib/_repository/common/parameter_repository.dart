@@ -11,7 +11,7 @@ class ParameterRepository {
   Future<ParameterModel> get(
     ParameterEnum parameterEnum,
   ) async {
-    final parameterBox = Hive.box<ParameterModel>(MyHive.parameter.name);
+    final parameterBox = Hive.box<ParameterModel>(MyBox.parameter.name);
 
     final parameterHive = parameterBox.get(parameterEnum.toHiveKey());
     if (parameterHive != null) return parameterHive;
@@ -32,7 +32,7 @@ class ParameterRepository {
   Future<void> deleteHiveById(
     ParameterEnum parameterEnum,
   ) async {
-    final parameterBox = Hive.box<ParameterModel>(MyHive.parameter.name);
+    final parameterBox = Hive.box<ParameterModel>(MyBox.parameter.name);
 
     return await parameterBox.delete(parameterEnum.toHiveKey());
   }

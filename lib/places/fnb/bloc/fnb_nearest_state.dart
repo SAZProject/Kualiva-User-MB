@@ -5,12 +5,16 @@ sealed class FnbNearestState {}
 
 final class FnbNearestInitial extends FnbNearestState {}
 
-final class FnbNearestLoading extends FnbNearestState {}
+final class FnbNearestLoading extends FnbNearestState {
+  final FnbNearestPage? fnbNearestPage;
+
+  FnbNearestLoading({required this.fnbNearestPage});
+}
 
 final class FnbNearestSuccess extends FnbNearestState {
-  final List<FnbNearestModel> nearest;
+  final FnbNearestPage fnbNearestPage;
 
-  FnbNearestSuccess({required this.nearest});
+  FnbNearestSuccess({required this.fnbNearestPage});
 }
 
 final class FnbNearestFailure extends FnbNearestState {}

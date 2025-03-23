@@ -27,7 +27,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _checkPermission();
     _startBounceAnimation();
-    MainHive.deleteSplashBox();
     // _videoPlayerController =
     //     VideoPlayerController.asset(VideoConstant.splashVideo);
     // _videoPlayerInitialized = _videoPlayerController.initialize().then(
@@ -67,6 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _checkPermission() async {
     if (await CheckPermission.checkDevicePermission()) {
+      await MainHive.deleteSplashBox();
       if (!mounted) return;
       context.read<AuthBloc>().add(AuthStarted());
       return;

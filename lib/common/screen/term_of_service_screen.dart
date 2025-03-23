@@ -62,7 +62,7 @@ class TermOfServiceScreen extends StatelessWidget {
       margin: EdgeInsets.all(5.h),
       buttonStyle: CustomButtonStyles.none,
       decoration: CustomDecoration(context).outlinePrimary,
-      buttonTextStyle: CustomTextStyles(context).titleMediumOnPrimaryContainer,
+      buttonTextStyle: CustomTextStyles(context).titleMediumPrimary,
       onPressed: () => _confirmBtnFunc(context),
     );
   }

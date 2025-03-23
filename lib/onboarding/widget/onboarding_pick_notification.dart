@@ -34,14 +34,14 @@ class OnboardingPickNotification extends StatelessWidget {
             leftIcon: Icon(
               Icons.done,
               size: 20.h,
-              color: theme(context).colorScheme.onPrimaryContainer,
+              color: theme(context).colorScheme.onSecondaryContainer,
             ),
             initialText: context.tr("onboard.onboard_pick_notif_btn_select"),
             onPressed: onSelectAll,
-            buttonStyle: CustomButtonStyles.none,
-            decoration: CustomDecoration(context).outline,
+            buttonStyle: CustomButtonStyles.fillprimary(context),
+            decoration: null,
             buttonTextStyle:
-                CustomTextStyles(context).titleMediumOnPrimaryContainer,
+                CustomTextStyles(context).titleMediumOnSecondaryContainer,
           ),
         ),
       ],
@@ -100,6 +100,7 @@ class OnboardingPickNotification extends StatelessWidget {
                   child: Icon(
                     icon,
                     size: 20.h,
+                    color: theme(context).colorScheme.onPrimaryContainer,
                   ),
                 ),
               )
@@ -116,6 +117,9 @@ class OnboardingPickNotification extends StatelessWidget {
         title: Text(
           context.tr(label),
           style: CustomTextStyles(context).bodyMedium_15,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.h),
         ),
         onTap: () => onSelected(index),
         selected: selectedIndexes.contains(index),

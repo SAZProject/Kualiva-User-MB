@@ -53,6 +53,8 @@ class CustomPinCodeTextField extends StatelessWidget {
           shape: PinCodeFieldShape.box,
           borderRadius: BorderRadius.circular(10.h),
           inactiveFillColor: appTheme.white,
+          activeFillColor: theme(context).colorScheme.primary,
+          selectedFillColor: theme(context).colorScheme.primary,
         ),
         onChanged: (value) => onChange(value),
         onCompleted: (value) => onCompleted(value),

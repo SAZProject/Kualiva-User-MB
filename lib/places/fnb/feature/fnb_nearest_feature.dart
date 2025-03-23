@@ -14,11 +14,15 @@ class FnbNearestFeature extends StatelessWidget {
     required this.parentContext,
     required this.parentScrollController,
     required this.childScrollController,
+    this.height,
+    this.scrollDirection,
   });
 
   final BuildContext parentContext;
   final ScrollController parentScrollController;
   final ScrollController childScrollController;
+  final double? height;
+  final Axis? scrollDirection;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class FnbNearestFeature extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.h),
             child: SizedBox(
-              height: 450.h,
+              height: height ?? 450.h,
               width: double.maxFinite,
               child: NotificationListener(
                 onNotification: (ScrollNotification notification) {
@@ -82,7 +86,7 @@ class FnbNearestFeature extends StatelessWidget {
         return ListView.builder(
           controller: childScrollController,
           shrinkWrap: true,
-          scrollDirection: Axis.vertical,
+          scrollDirection: scrollDirection ?? Axis.vertical,
           itemCount: state.nearest.length,
           itemBuilder: (context, index) {
             return FnbNearestItem(

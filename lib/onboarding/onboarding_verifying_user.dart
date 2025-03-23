@@ -173,7 +173,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
           Icon(
             onboardingModel.icon,
             size: 40.h,
-            color: theme(context).colorScheme.primary,
+            color: theme(context).colorScheme.onPrimaryContainer,
           ),
         ],
       ),
@@ -233,11 +233,12 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
         secondText:
             _activePage == 1 ? context.tr("onboard.onboard_save_btn") : null,
         margin: EdgeInsets.all(10.h),
-        buttonStyle: CustomButtonStyles.none,
-        decoration: !_fieldValidation(_activePage)
-            ? CustomDecoration(context).outline
-            : CustomDecoration(context).outlinePrimary,
-        buttonTextStyle: CustomTextStyles(context).titleMediumPrimary,
+        buttonStyle: !_fieldValidation(_activePage)
+            ? CustomButtonStyles.outlineOnSecondaryContainer(context)
+            : CustomButtonStyles.fillprimary(context),
+        decoration: null,
+        buttonTextStyle:
+            CustomTextStyles(context).titleMediumOnSecondaryContainer,
         onPressed: !_fieldValidation(_activePage)
             ? null
             : () => _confirmBtnFunc(context),
@@ -249,6 +250,7 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate,
+      locale: const Locale("id"),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     );

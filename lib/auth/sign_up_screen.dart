@@ -112,16 +112,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
             LeLog.sd(this, build, errors.toString());
             final msg = errors.values.fold(
                 '', (previousValue, element) => '$previousValue$element\n');
-            showSnackBar(
-                context, Icons.error_outline, Colors.red, msg, Colors.red);
+            LeLog.sd(this, build, msg.toString());
+            showSnackBar(context, Icons.error_outline, Colors.red, msg.trim(),
+                Colors.red);
             return;
           }
           showSnackBar(
-              context,
-              Icons.error_outline,
-              Colors.red,
-              "${state.failure.source.code} ${state.failure.source.message}",
-              Colors.red);
+            context,
+            Icons.error_outline,
+            Colors.red,
+            "${state.failure.source.code} ${state.failure.source.message}",
+            Colors.red,
+          );
         }
       },
       child: SafeArea(

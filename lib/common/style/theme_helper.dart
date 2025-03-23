@@ -28,45 +28,46 @@ class ThemeHelper {
 
   ThemeData _getThemeData(ColorScheme colorScheme) {
     return ThemeData(
-        useMaterial3: true,
-        visualDensity: VisualDensity.standard,
-        colorScheme: colorScheme,
-        brightness: colorScheme.brightness,
-        fontFamily: "K2D",
-        textTheme: TextThemes.textTheme(colorScheme),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0)),
-            elevation: 0,
-            visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
-            padding: EdgeInsets.zero,
-          ),
-        ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            side: BorderSide(
-              color: appTheme.black900.withValues(alpha: 0.6),
-              width: 1,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-            visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
-            padding: EdgeInsets.zero,
-          ),
-        ),
-        radioTheme: RadioThemeData(
-          fillColor: WidgetStateColor.resolveWith((states) {
-            if (states.contains(WidgetState.selected)) {
-              return const Color(0XFFEEEEEE);
-            }
-            return Colors.transparent;
-          }),
+      useMaterial3: true,
+      visualDensity: VisualDensity.standard,
+      colorScheme: colorScheme,
+      brightness: colorScheme.brightness,
+      fontFamily: "K2D",
+      textTheme: TextThemes.textTheme(colorScheme),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+          elevation: 0,
           visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
+          padding: EdgeInsets.zero,
         ),
-        dividerTheme: const DividerThemeData(thickness: 4, space: 4));
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          side: BorderSide(
+            color: appTheme.black900.withValues(alpha: 0.6),
+            width: 1,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
+          padding: EdgeInsets.zero,
+        ),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const Color(0XFFEEEEEE);
+          }
+          return Colors.transparent;
+        }),
+        visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
+      ),
+      dividerTheme: const DividerThemeData(thickness: 4, space: 4),
+    );
   }
 }
 

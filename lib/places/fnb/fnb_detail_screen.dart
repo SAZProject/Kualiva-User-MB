@@ -532,7 +532,7 @@ class FnbDetailScreen extends StatelessWidget {
         width: double.maxFinite,
         child: Wrap(
           children: List<Widget>.generate(
-            fnbDetail.types == null ? 1 : fnbDetail.types!.length,
+            fnbDetail.types == null ? 0 : fnbDetail.types!.length,
             (index) => _tagView(
               context,
               label: fnbDetail.types![index],

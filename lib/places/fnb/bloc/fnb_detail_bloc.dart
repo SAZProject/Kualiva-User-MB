@@ -19,15 +19,15 @@ class FnbDetailBloc extends Bloc<FnbDetailEvent, FnbDetailState> {
     FnbDetailFetched event,
     Emitter<FnbDetailState> emit,
   ) async {
-    try {
-      final FnbDetailModel fnbDetail = await _fnbRepository.getPlaceDetail(
-        placeId: event.placeId,
-      );
-      LeLog.bd(this, _onFetched, fnbDetail.toString());
-      emit(FnbDetailSuccess(fnbDetail: fnbDetail));
-    } catch (e) {
-      LeLog.be(this, _onFetched, e.toString());
-      emit(FnbDetailFailure());
-    }
+    // try {
+    final FnbDetailModel fnbDetail = await _fnbRepository.getPlaceDetail(
+      placeId: event.placeId,
+    );
+    LeLog.bd(this, _onFetched, fnbDetail.toString());
+    emit(FnbDetailSuccess(fnbDetail: fnbDetail));
+    // } catch (e) {
+    //   LeLog.be(this, _onFetched, e.toString());
+    //   emit(FnbDetailFailure());
+    // }
   }
 }

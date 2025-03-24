@@ -35,13 +35,6 @@ class ReviewPlacePage extends MyPage<ReviewPlaceModel> {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'data': data.map((x) => x.toMap()).toList(),
-      'pagination': pagination.toMap(),
-    };
-  }
-
   factory ReviewPlacePage.fromMap(Map<String, dynamic> map) {
     return ReviewPlacePage(
       data: List<ReviewPlaceModel>.from(
@@ -49,24 +42,4 @@ class ReviewPlacePage extends MyPage<ReviewPlaceModel> {
       pagination: Pagination.fromMap(map['pagination']),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory ReviewPlacePage.fromJson(String source) =>
-      ReviewPlacePage.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'ReviewPlacePage(data: $data, pagination: $pagination)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is ReviewPlacePage &&
-        listEquals(other.data, data) &&
-        other.pagination == pagination;
-  }
-
-  @override
-  int get hashCode => data.hashCode ^ pagination.hashCode;
 }

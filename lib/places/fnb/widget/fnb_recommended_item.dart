@@ -3,13 +3,16 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_recommended_model.dart';
 
 class FnbRecommendedItem extends StatelessWidget {
-  const FnbRecommendedItem(
-      {super.key, required this.merchant, required this.onPressed});
+  const FnbRecommendedItem({
+    super.key,
+    required this.place,
+    required this.onPressed,
+  });
 
-  final FnbNearestModel merchant;
+  final FnbRecommendedModel place;
   final VoidCallback onPressed;
 
   @override
@@ -18,7 +21,7 @@ class FnbRecommendedItem extends StatelessWidget {
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.h),
       padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.h),
-      decoration: merchant.isMerchant
+      decoration: place.isMerchant
           ? CustomDecoration(context).outlinePrmOnScd
           : CustomDecoration(context)
               .outlineOnSecondaryContainer
@@ -33,7 +36,7 @@ class FnbRecommendedItem extends StatelessWidget {
               width: 100.h,
               height: 100.h,
               imagePath:
-                  merchant.featuredImage ?? "${ImageConstant.fnb1Path}/A/2.jpg",
+                  place.featuredImage ?? "${ImageConstant.fnb1Path}/A/2.jpg",
               radius: BorderRadius.all(
                 Radius.circular(10.h),
               ),
@@ -48,7 +51,7 @@ class FnbRecommendedItem extends StatelessWidget {
                   Row(
                     children: [
                       Visibility(
-                        visible: merchant.isMerchant,
+                        visible: place.isMerchant,
                         child: CustomImageView(
                           margin: EdgeInsets.only(right: 5.h),
                           imagePath: ImageConstant.appLogo2,
@@ -59,7 +62,7 @@ class FnbRecommendedItem extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          merchant.name,
+                          place.name,
                           style: theme(context).textTheme.labelLarge!.copyWith(
                               color: theme(context).colorScheme.primary),
                           maxLines: 1,
@@ -69,7 +72,7 @@ class FnbRecommendedItem extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 5.h),
                         child: Text(
-                          merchant.averageRating.toString(),
+                          place.averageRating.toString(),
                           style: theme(context).textTheme.labelMedium!.copyWith(
                               color: theme(context).colorScheme.primary),
                         ),
@@ -94,7 +97,7 @@ class FnbRecommendedItem extends StatelessWidget {
                         return Icon(
                           Icons.attach_money,
                           size: 15.h,
-                          color: index <= (merchant.averageRating.floor() - 1)
+                          color: index <= (place.averageRating.floor() - 1)
                               ? theme(context).colorScheme.primary
                               : null,
                         );
@@ -106,14 +109,14 @@ class FnbRecommendedItem extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          merchant.fullAddress,
+                          place.fullAddress,
                           style: theme(context).textTheme.bodySmall,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Text(
-                        merchant.distanceFromUser,
+                        place.distanceFromUser,
                         style: theme(context).textTheme.bodySmall,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -139,25 +142,24 @@ class FnbRecommendedItem extends StatelessWidget {
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount:
-            merchant.categories.length > 4 ? 4 : merchant.categories.length,
+        itemCount: place.categories.length > 4 ? 4 : place.categories.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index == 3) {
-            if (merchant.categories.length > 4) {
+            if (place.categories.length > 4) {
               return _categoryTagView(
                 context,
                 context.tr(
                   "f_n_b.tags_more",
-                  args: [(merchant.categories.length - 3).toString()],
+                  args: [(place.categories.length - 3).toString()],
                 ),
               );
             } else {
-              return _categoryTagView(context, merchant.categories[index]);
+              return _categoryTagView(context, place.categories[index]);
             }
           }
-          return _categoryTagView(context, merchant.categories[index]);
+          return _categoryTagView(context, place.categories[index]);
         },
       ),
     );
@@ -184,7 +186,7 @@ class FnbRecommendedItem extends StatelessWidget {
 
   Widget _isMerchantTagList(BuildContext context) {
     return Visibility(
-      visible: merchant.isMerchant,
+      visible: place.isMerchant,
       child: SizedBox(
         height: 20.h,
         width: double.maxFinite,

@@ -128,12 +128,13 @@ class FnbPromoItem extends StatelessWidget {
   }
 
   Widget _listTag(BuildContext context) {
+    final length =
+        merchant.categories.length >= 2 ? 2 : merchant.categories.length;
     return SizedBox(
       height: 20.h,
       width: double.maxFinite,
       child: ListView.builder(
-        itemCount:
-            merchant.categories.length >= 2 ? 2 : merchant.categories.length,
+        itemCount: length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
@@ -142,11 +143,11 @@ class FnbPromoItem extends StatelessWidget {
               context,
               context.tr(
                 "home_screen.tags_more",
-                args: [(merchant.categories.length - 1).toString()],
+                args: [(length - 1).toString()],
               ),
             );
           }
-          return _tagView(context, merchant.categories[index + 2]);
+          return _tagView(context, merchant.categories[index]);
         },
       ),
     );

@@ -5,18 +5,16 @@ sealed class FnbPromoState {}
 
 final class FnbPromoInitial extends FnbPromoState {}
 
-final class FnbPromoLoading extends FnbPromoState {}
+final class FnbPromoLoading extends FnbPromoState {
+  final FnbPromoPage? fnbPromoPage;
+
+  FnbPromoLoading({required this.fnbPromoPage});
+}
 
 final class FnbPromoSuccess extends FnbPromoState {
-  final List<FnbPromoModel> fnbPromoModels;
+  final FnbPromoPage fnbPromoPage;
 
-  FnbPromoSuccess({
-    required this.fnbPromoModels,
-  });
+  FnbPromoSuccess({required this.fnbPromoPage});
 }
 
-final class FnbPromoFailure extends FnbPromoState {
-  final Failure failure;
-
-  FnbPromoFailure({required this.failure});
-}
+final class FnbPromoFailure extends FnbPromoState {}

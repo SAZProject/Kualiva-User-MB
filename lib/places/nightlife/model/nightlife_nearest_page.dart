@@ -35,13 +35,6 @@ class NightlifeNearestPage extends MyPage<NightlifeNearestModel> {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'data': data.map((x) => x.toMap()).toList(),
-      'pagination': pagination.toMap(),
-    };
-  }
-
   factory NightlifeNearestPage.fromMap(Map<String, dynamic> map) {
     return NightlifeNearestPage(
       data: List<NightlifeNearestModel>.from(
@@ -49,25 +42,4 @@ class NightlifeNearestPage extends MyPage<NightlifeNearestModel> {
       pagination: Pagination.fromMap(map['pagination']),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory NightlifeNearestPage.fromJson(String source) =>
-      NightlifeNearestPage.fromMap(json.decode(source));
-
-  @override
-  String toString() =>
-      'NightlifeNearestPage(data: $data, pagination: $pagination)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is NightlifeNearestPage &&
-        listEquals(other.data, data) &&
-        other.pagination == pagination;
-  }
-
-  @override
-  int get hashCode => data.hashCode ^ pagination.hashCode;
 }

@@ -14,6 +14,8 @@ import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
 import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_promo_page.dart';
+import 'package:kualiva/places/fnb/model/fnb_recommended_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_recommended_page.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_page.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
@@ -50,6 +52,8 @@ class MainHive {
     Hive.registerAdapter(NightlifeNearestPageAdapter());
     Hive.registerAdapter(FnbPromoModelAdapter());
     Hive.registerAdapter(FnbPromoPageAdapter());
+    Hive.registerAdapter(FnbRecommendedModelAdapter());
+    Hive.registerAdapter(FnbRecommendedPageAdapter());
   }
 
   static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
@@ -79,6 +83,7 @@ class MainHive {
       openLeSafeBox<SpaNearestPage>(MyBox.spaNearestPage),
       openLeSafeBox<NightlifeNearestPage>(MyBox.nightlifeNearestPage),
       openLeSafeBox<FnbPromoPage>(MyBox.fnbPromoPage),
+      openLeSafeBox<FnbRecommendedPage>(MyBox.fnbRecommendedPage)
     ]);
   }
 
@@ -114,7 +119,8 @@ enum MyBox {
   fnbNearestPage('fnb_nearest_page'),
   spaNearestPage('spa_nearest_page'),
   nightlifeNearestPage('nightlife_nearest_page'),
-  fnbPromoPage('fnb_promo_page');
+  fnbPromoPage('fnb_promo_page'),
+  fnbRecommendedPage('fnb_recommended_page');
 
   final String name;
 
@@ -144,7 +150,10 @@ enum _MyHive {
   nightlifeNearest(20),
   nightlifeNearestPage(21),
   fnbPromo(22),
-  fnbPromoPage(23);
+  fnbPromoPage(23),
+  fnbRecommended(24),
+  fnbRecommendedPage(25),
+  ;
 
   final int typeId;
 

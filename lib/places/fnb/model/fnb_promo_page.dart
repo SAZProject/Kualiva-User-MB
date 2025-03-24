@@ -35,13 +35,6 @@ class FnbPromoPage extends MyPage<FnbPromoModel> {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'data': data.map((x) => x.toMap()).toList(),
-      'pagination': pagination.toMap(),
-    };
-  }
-
   factory FnbPromoPage.fromMap(Map<String, dynamic> map) {
     return FnbPromoPage(
       data: List<FnbPromoModel>.from(
@@ -49,24 +42,4 @@ class FnbPromoPage extends MyPage<FnbPromoModel> {
       pagination: Pagination.fromMap(map['pagination']),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory FnbPromoPage.fromJson(String source) =>
-      FnbPromoPage.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'FnbPromoPage(data: $data, pagination: $pagination)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is FnbPromoPage &&
-        listEquals(other.data, data) &&
-        other.pagination == pagination;
-  }
-
-  @override
-  int get hashCode => data.hashCode ^ pagination.hashCode;
 }

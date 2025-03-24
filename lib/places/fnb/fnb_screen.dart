@@ -7,11 +7,11 @@ import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
-import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_recommended_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_nearest_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_promo_feature.dart';
@@ -28,37 +28,97 @@ class _FnbScreenState extends State<FnbScreen> {
   static const placeCategoryEnum = PlaceCategoryEnum.fnb;
 
   final _parentScrollController = ScrollController();
-  final _childScrollController = ScrollController();
-  final _paging = ValueNotifier(Paging());
+  final _promoScrollController = ScrollController();
+  final _nearestScrollController = ScrollController();
+  final _recommendedScrollController = ScrollController();
 
-  // final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
+  final _pagingPromo = ValueNotifier(Paging());
+  final _pagingNearest = ValueNotifier(Paging());
+  final _pagingRecommended = ValueNotifier(Paging());
 
-  final selectedFilters = ValueNotifier<Set<String>>({});
-
-  FiltersModel? filtersModel;
-
-  void _onScrollPagination() {
-    if (_childScrollController.position.pixels !=
-        _childScrollController.position.maxScrollExtent) {
+  void _onPromoScrollPagination() {
+    if (_promoScrollController.position.pixels !=
+        _promoScrollController.position.maxScrollExtent) {
       return;
     }
-    final state = context.read<FnbNearestBloc>().state;
-    if (state is! FnbNearestSuccess) return;
-    final pagination = state.fnbNearestPage.pagination;
-    _nextPaging(pagination);
+    final state = context.read<FnbPromoBloc>().state;
+    if (state is! FnbPromoSuccess) return;
+    final pagination = state.fnbPromoPage.pagination;
+    LeLog.sd(this, _onPromoScrollPagination, 'Trigger Max Scroll Controller');
+    _nextPromoPaging(pagination);
   }
 
-  void _nextPaging(Pagination pagination) {
-    if (_paging.value.page == pagination.totalPage) return;
-    _paging.value = Paging(
+  void _nextPromoPaging(Pagination pagination) {
+    if (_pagingPromo.value.page == pagination.totalPage) return;
+    _pagingPromo.value = Paging(
       page: pagination.nextPage ?? pagination.totalPage,
       size: pagination.size,
     );
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
-    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
+    LeLog.sd(this, _nextPromoPaging, 'Next Paging ${_pagingPromo.value}');
+    context.read<FnbPromoBloc>().add(FnbPromoFetched(
+          paging: _pagingPromo.value,
+          pagingEnum: PagingEnum.paged,
+          latitude: state.currentLocationModel.latitude,
+          longitude: state.currentLocationModel.longitude,
+        ));
+  }
+
+  void _onNearestScrollPagination() {
+    if (_nearestScrollController.position.pixels !=
+        _nearestScrollController.position.maxScrollExtent) {
+      return;
+    }
+    final state = context.read<FnbNearestBloc>().state;
+    if (state is! FnbNearestSuccess) return;
+    final pagination = state.fnbNearestPage.pagination;
+    LeLog.sd(this, _onNearestScrollPagination, 'Trigger Max Scroll Controller');
+    _nextNearestPaging(pagination);
+  }
+
+  void _nextNearestPaging(Pagination pagination) {
+    if (_pagingNearest.value.page == pagination.totalPage) return;
+    _pagingNearest.value = Paging(
+      page: pagination.nextPage ?? pagination.totalPage,
+      size: pagination.size,
+    );
+    final state = context.read<CurrentLocationBloc>().state;
+    if (state is! CurrentLocationSuccess) return;
+    LeLog.sd(this, _nextNearestPaging, 'Next Paging ${_pagingNearest.value}');
     context.read<FnbNearestBloc>().add(FnbNearestFetched(
-          paging: _paging.value,
+          paging: _pagingNearest.value,
+          pagingEnum: PagingEnum.paged,
+          latitude: state.currentLocationModel.latitude,
+          longitude: state.currentLocationModel.longitude,
+        ));
+  }
+
+  void _onRecommendedScrollPagination() {
+    if (_recommendedScrollController.position.pixels !=
+        _recommendedScrollController.position.maxScrollExtent) {
+      return;
+    }
+    final state = context.read<FnbRecommendedBloc>().state;
+    if (state is! FnbRecommendedSuccess) return;
+    final pagination = state.fnbRecommendedPage.pagination;
+    LeLog.sd(
+        this, _onRecommendedScrollPagination, 'Trigger Max Scroll Controller');
+    _nextRecommendedPaging(pagination);
+  }
+
+  void _nextRecommendedPaging(Pagination pagination) {
+    if (_pagingRecommended.value.page == pagination.totalPage) return;
+    _pagingRecommended.value = Paging(
+      page: pagination.nextPage ?? pagination.totalPage,
+      size: pagination.size,
+    );
+    final state = context.read<CurrentLocationBloc>().state;
+    if (state is! CurrentLocationSuccess) return;
+    LeLog.sd(
+        this, _nextNearestPaging, 'Next Paging ${_pagingRecommended.value}');
+    context.read<FnbNearestBloc>().add(FnbNearestFetched(
+          paging: _pagingRecommended.value,
           pagingEnum: PagingEnum.paged,
           latitude: state.currentLocationModel.latitude,
           longitude: state.currentLocationModel.longitude,
@@ -68,16 +128,34 @@ class _FnbScreenState extends State<FnbScreen> {
   @override
   void initState() {
     super.initState();
-    _childScrollController.addListener(_onScrollPagination);
+    _promoScrollController.addListener(_onPromoScrollPagination);
+    _nearestScrollController.addListener(_onNearestScrollPagination);
+    _recommendedScrollController.addListener(_onRecommendedScrollPagination);
   }
 
   @override
   void dispose() {
-    _childScrollController.removeListener(_onScrollPagination);
+    _promoScrollController.removeListener(_onPromoScrollPagination);
+    _nearestScrollController.removeListener(_onNearestScrollPagination);
+    _recommendedScrollController.removeListener(_onRecommendedScrollPagination);
+
     _parentScrollController.dispose();
-    _childScrollController.dispose();
-    selectedFilters.dispose();
+    _promoScrollController.dispose();
+    _nearestScrollController.dispose();
+    _recommendedScrollController.dispose();
     super.dispose();
+  }
+
+  (Paging, Paging, Paging, PagingEnum) preparePaging(bool isRefresh) {
+    if (isRefresh) {
+      return (Paging(), Paging(), Paging(), PagingEnum.refreshed);
+    }
+    return (
+      _pagingPromo.value,
+      _pagingNearest.value,
+      _pagingRecommended.value,
+      PagingEnum.before
+    );
   }
 
   @override
@@ -88,17 +166,29 @@ class _FnbScreenState extends State<FnbScreen> {
 
         final bool isRefresh = state.isDistanceTooFarOrFirstTime;
 
+        final (
+          pagingPromo,
+          pagingNearest,
+          pagingRecommended,
+          pagingEnum,
+        ) = preparePaging(isRefresh);
+
         context.read<FnbPromoBloc>().add(FnbPromoFetched(
-              isRefresh: state.isDistanceTooFarOrFirstTime,
-              placeCategoryEnum: placeCategoryEnum,
+              paging: pagingPromo,
+              pagingEnum: pagingEnum,
+              latitude: state.currentLocationModel.latitude,
+              longitude: state.currentLocationModel.longitude,
             ));
 
-        final (paging, pagingEnum) = ((isRefresh == true)
-            ? (Paging(), PagingEnum.refreshed)
-            : (_paging.value, PagingEnum.before));
-
         context.read<FnbNearestBloc>().add(FnbNearestFetched(
-              paging: paging,
+              paging: pagingNearest,
+              pagingEnum: pagingEnum,
+              latitude: state.currentLocationModel.latitude,
+              longitude: state.currentLocationModel.longitude,
+            ));
+
+        context.read<FnbRecommendedBloc>().add(FnbRecommendedFetched(
+              paging: pagingRecommended,
               pagingEnum: pagingEnum,
               latitude: state.currentLocationModel.latitude,
               longitude: state.currentLocationModel.longitude,
@@ -128,16 +218,17 @@ class _FnbScreenState extends State<FnbScreen> {
           child: Column(
             children: [
               SizedBox(height: 5.h),
-              FnbPromoFeature(),
+              FnbPromoFeature(
+                childScrollController: _promoScrollController,
+              ),
               SizedBox(height: 5.h),
               FnbNearestFeature(
-                parentScrollController: _parentScrollController,
-                childScrollController: _childScrollController,
+                childScrollController: _nearestScrollController,
               ),
               SizedBox(height: 5.h),
               FnbRecommendedFeature(
                 parentScrollController: _parentScrollController,
-                childScrollController: _childScrollController,
+                childScrollController: _recommendedScrollController,
               ),
               SizedBox(height: 25.h),
             ],
@@ -146,70 +237,4 @@ class _FnbScreenState extends State<FnbScreen> {
       ),
     );
   }
-
-  // Widget _tagsFilter(BuildContext context) {
-  //   return Padding(
-  //     padding: EdgeInsets.symmetric(horizontal: 8.h),
-  //     child: SizedBox(
-  //       height: 30.h,
-  //       width: double.maxFinite,
-  //       child: ListView.builder(
-  //         itemCount: _listTagsFilter.length + 1,
-  //         scrollDirection: Axis.horizontal,
-  //         itemBuilder: (context, index) {
-  //           //TODO add waiting, empty, error state in future
-  //           if (index == 0) return _filterScreenBtn(context, index, label: "");
-  //           if ((index - 1) == 0) {
-  //             return FnbFiltersItem(
-  //               label: _listTagsFilter[index - 1],
-  //               isWrap: false,
-  //               multiSelect: true,
-  //               isExecutive: true,
-  //               multiSelectedChoices: selectedFilters,
-  //             );
-  //           }
-  //           return FnbFiltersItem(
-  //             label: _listTagsFilter[index - 1],
-  //             isWrap: false,
-  //             multiSelect: true,
-  //             multiSelectedChoices: selectedFilters,
-  //           );
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget _filterScreenBtn(BuildContext context, int index, {String? label}) {
-  //   return InkWell(
-  //     borderRadius: BorderRadius.circular(50.h),
-  //     onTap: () {
-  //       Navigator.pushNamed(context, AppRoutes.fnbFilterScreen,
-  //               arguments: filtersModel)
-  //           .then(
-  //         (value) {
-  //           if (value == null) return;
-  //           setState(() {
-  //             filtersModel = value as FiltersModel;
-  //           });
-  //         },
-  //       );
-  //     },
-  //     child: Container(
-  //       margin: EdgeInsets.symmetric(horizontal: 5.h),
-  //       padding: EdgeInsets.symmetric(horizontal: 4.h),
-  //       decoration: CustomDecoration(context).fillPrimary.copyWith(
-  //             borderRadius: BorderRadius.circular(50.h),
-  //           ),
-  //       child: Center(
-  //         child: Center(
-  //           child: Icon(
-  //             Icons.filter_alt,
-  //             size: 20.h,
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }

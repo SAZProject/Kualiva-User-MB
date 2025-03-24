@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -35,13 +33,6 @@ class FnbNearestPage extends MyPage<FnbNearestModel> {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'data': data.map((x) => x.toMap()).toList(),
-      'pagination': pagination.toMap(),
-    };
-  }
-
   factory FnbNearestPage.fromMap(Map<String, dynamic> map) {
     return FnbNearestPage(
       data: List<FnbNearestModel>.from(
@@ -49,24 +40,4 @@ class FnbNearestPage extends MyPage<FnbNearestModel> {
       pagination: Pagination.fromMap(map['pagination']),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory FnbNearestPage.fromJson(String source) =>
-      FnbNearestPage.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'FnbNearestPage(data: $data, pagination: $pagination)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is FnbNearestPage &&
-        listEquals(other.data, data) &&
-        other.pagination == pagination;
-  }
-
-  @override
-  int get hashCode => data.hashCode ^ pagination.hashCode;
 }

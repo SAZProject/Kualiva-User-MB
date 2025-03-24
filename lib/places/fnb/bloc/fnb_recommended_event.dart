@@ -1,15 +1,15 @@
-part of 'fnb_promo_bloc.dart';
+part of 'fnb_recommended_bloc.dart';
 
 @immutable
-sealed class FnbPromoEvent {}
+sealed class FnbRecommendedEvent {}
 
-final class FnbPromoFetched extends FnbPromoEvent {
+final class FnbRecommendedFetched extends FnbRecommendedEvent {
   final Paging paging;
   final PagingEnum pagingEnum;
   final double latitude;
   final double longitude;
 
-  FnbPromoFetched({
+  FnbRecommendedFetched({
     required this.paging,
     required this.pagingEnum,
     required this.latitude,

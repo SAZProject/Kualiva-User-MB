@@ -5,6 +5,7 @@ import 'package:kualiva/_repository/common/location_repository.dart';
 import 'package:kualiva/_repository/common/minio_repository.dart';
 import 'package:kualiva/_repository/place/fnb/fnb_nearest_repository.dart';
 import 'package:kualiva/_repository/place/fnb/fnb_promo_repository.dart';
+import 'package:kualiva/_repository/place/fnb/fnb_recommended_repository.dart';
 import 'package:kualiva/_repository/place/nightlife_repository.dart';
 import 'package:kualiva/_repository/user/onboarding_repository.dart';
 import 'package:kualiva/_repository/common/parameter_repository.dart';
@@ -26,6 +27,7 @@ import 'package:kualiva/places/fnb/bloc/fnb_detail_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/_repository/place/fnb_repository.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_recommended_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_detail_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
@@ -156,6 +158,11 @@ class MainProvider extends StatelessWidget {
           create: (context) {
             return FnbPromoRepository(context.read<DioClient>());
           },
+        ),
+        RepositoryProvider(
+          create: (context) {
+            return FnbRecommendedRepository(context.read<DioClient>());
+          },
         )
       ],
       child: child,
@@ -182,9 +189,6 @@ class MainProvider extends StatelessWidget {
         }),
         BlocProvider(create: (context) {
           return SpaNearestBloc(context.read<SpaRepository>());
-        }),
-        BlocProvider(create: (context) {
-          return FnbPromoBloc(context.read<FnbRepository>());
         }),
         BlocProvider(create: (context) {
           return NightlifePromoBloc(context.read<NightlifeRepository>());
@@ -239,7 +243,7 @@ class MainProvider extends StatelessWidget {
           return ReportReviewCreateBloc(context.read<ReportRepository>());
         }),
         BlocProvider(create: (context) {
-          return FnbPromoBloc(context.read<FnbRepository>());
+          return FnbPromoBloc(context.read<FnbPromoRepository>());
         }),
         BlocProvider(create: (context) {
           return NightlifePromoBloc(context.read<NightlifeRepository>());
@@ -257,7 +261,10 @@ class MainProvider extends StatelessWidget {
               context.read<FnbPromoRepository>(),
             );
           },
-        )
+        ),
+        BlocProvider(create: (context) {
+          return FnbRecommendedBloc(context.read<FnbRecommendedRepository>());
+        }),
       ],
       child: child,
     );

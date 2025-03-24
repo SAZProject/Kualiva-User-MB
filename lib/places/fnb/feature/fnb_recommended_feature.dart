@@ -8,8 +8,8 @@ import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
-import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
-import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_recommended_bloc.dart';
+import 'package:kualiva/places/fnb/model/fnb_recommended_page.dart';
 import 'package:kualiva/places/fnb/widget/fnb_recommended_item.dart';
 import 'package:kualiva/router.dart';
 
@@ -78,50 +78,51 @@ class FnbRecommendedFeature extends StatelessWidget {
   }
 
   Widget _list() {
-    return BlocBuilder<FnbNearestBloc, FnbNearestState>(
+    return BlocBuilder<FnbRecommendedBloc, FnbRecommendedState>(
       builder: (context, state) {
-        if (state is FnbNearestFailure) {
+        if (state is FnbRecommendedFailure) {
           return CustomErrorState(
             errorMessage: context.tr("common.error_try_again"),
             onRetry: () {},
           );
         }
 
-        if (state is FnbNearestLoading && state.fnbNearestPage != null) {
-          return _listBuilder(state.fnbNearestPage!);
+        if (state is FnbRecommendedLoading &&
+            state.fnbRecommendedPage != null) {
+          return _listBuilder(state.fnbRecommendedPage!);
         }
 
-        if (state is! FnbNearestSuccess) {
+        if (state is! FnbRecommendedSuccess) {
           return Center(child: CircularProgressIndicator());
         }
 
-        if (state.fnbNearestPage.data.isEmpty) {
+        if (state.fnbRecommendedPage.data.isEmpty) {
           return CustomEmptyState();
         }
 
-        return _listBuilder(state.fnbNearestPage);
+        return _listBuilder(state.fnbRecommendedPage);
       },
     );
   }
 
-  Widget _listBuilder(FnbNearestPage fnbNearesPage) {
-    final fnbNearestList = fnbNearesPage.data;
+  Widget _listBuilder(FnbRecommendedPage fnbRecommendedPage) {
+    final fnbRecommendedList = fnbRecommendedPage.data;
     return ListView.builder(
       controller: childScrollController,
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
-      itemCount: fnbNearestList.length,
+      itemCount: fnbRecommendedList.length,
       itemBuilder: (context, index) {
         return FnbRecommendedItem(
-          merchant: fnbNearestList[index],
+          place: fnbRecommendedList[index],
           onPressed: () {
             Navigator.pushNamed(
               context,
               AppRoutes.fnbDetailScreen,
               arguments: PlaceArgument(
-                placeId: fnbNearestList[index].id,
-                isMerchant: fnbNearestList[index].isMerchant,
-                featuredImage: fnbNearestList[index].featuredImage,
+                placeId: fnbRecommendedList[index].id,
+                isMerchant: fnbRecommendedList[index].isMerchant,
+                featuredImage: fnbRecommendedList[index].featuredImage,
               ),
             );
           },

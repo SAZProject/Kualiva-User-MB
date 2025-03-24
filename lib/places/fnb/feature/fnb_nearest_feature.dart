@@ -16,11 +16,9 @@ import 'package:kualiva/router.dart';
 class FnbNearestFeature extends StatelessWidget {
   const FnbNearestFeature({
     super.key,
-    required this.parentScrollController,
     required this.childScrollController,
   });
 
-  final ScrollController parentScrollController;
   final ScrollController childScrollController;
 
   @override
@@ -87,6 +85,7 @@ class FnbNearestFeature extends StatelessWidget {
   Widget _listBuilder(FnbNearestPage fnbNearesPage) {
     final fnbNearestList = fnbNearesPage.data;
     return ListView.builder(
+      controller: childScrollController,
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
       itemCount: fnbNearestList.length,

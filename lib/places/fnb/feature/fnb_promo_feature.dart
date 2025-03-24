@@ -3,15 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder;
 import 'package:kualiva/_data/enum/fnb_action_enum.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
 import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
+import 'package:kualiva/places/fnb/model/fnb_promo_page.dart';
 import 'package:kualiva/places/fnb/widget/fnb_promo_item.dart';
 
 class FnbPromoFeature extends StatelessWidget {
-  const FnbPromoFeature({super.key});
+  const FnbPromoFeature({
+    super.key,
+    required this.childScrollController,
+  });
+
+  final ScrollController childScrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -53,31 +60,48 @@ class FnbPromoFeature extends StatelessWidget {
       builder: (context, state) {
         if (state is FnbPromoFailure) {
           return CustomErrorState(
-              errorMessage: context.tr("common.error_try_again"),
-              onRetry: () {});
+            errorMessage: context.tr("common.error_try_again"),
+            onRetry: () {}, // TODO: onRetry
+          );
         }
+
+        if (state is FnbPromoLoading && state.fnbPromoPage != null) {
+          return _listBuilder(state.fnbPromoPage!);
+        }
+
         if (state is! FnbPromoSuccess) {
           return Center(child: CircularProgressIndicator());
         }
 
-        return ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: 6,
-          itemBuilder: (context, index) {
-            return FnbPromoItem(
-              merchant: state.fnbPromoModels[index],
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.fnbDetailScreen,
-                  arguments: PlaceArgument(
-                    placeId: state.fnbPromoModels[index].id,
-                    featuredImage: state.fnbPromoModels[index].featuredImage,
-                    isMerchant: true,
-                  ),
-                );
-              },
+        if (state.fnbPromoPage.data.isEmpty) {
+          return CustomEmptyState();
+        }
+
+        return _listBuilder(state.fnbPromoPage);
+      },
+    );
+  }
+
+  Widget _listBuilder(FnbPromoPage fnbPromoPage) {
+    final fnbPromoList = fnbPromoPage.data;
+
+    return ListView.builder(
+      controller: childScrollController,
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      itemCount: fnbPromoList.length,
+      itemBuilder: (context, index) {
+        return FnbPromoItem(
+          merchant: fnbPromoList[index],
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.fnbDetailScreen,
+              arguments: PlaceArgument(
+                placeId: fnbPromoList[index].id,
+                featuredImage: fnbPromoList[index].featuredImage,
+                isMerchant: true,
+              ),
             );
           },
         );

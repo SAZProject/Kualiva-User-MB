@@ -4,17 +4,18 @@ import 'package:kualiva/_data/model/pagination/pagination.dart';
 
 @immutable
 abstract class MyPage<T> {
-  final List<T> data;
-
   final Pagination pagination;
 
+  final List<T> data;
+
   const MyPage({
-    required this.data,
     required this.pagination,
+    required this.data,
   });
 
   @override
-  String toString() => 'Page(data: $data, pagination: $pagination)';
+  String toString() =>
+      'Page(length: ${data.length}, pagination: $pagination, data: $data)';
 
   @override
   bool operator ==(Object other) {

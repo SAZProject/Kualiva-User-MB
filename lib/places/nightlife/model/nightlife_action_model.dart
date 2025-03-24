@@ -1,7 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
-import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
-import 'package:kualiva/places/fnb/model/fnb_recommended_model.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_promo_model.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_recommended_model.dart';

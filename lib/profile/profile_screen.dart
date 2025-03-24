@@ -79,7 +79,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Navigator.pushNamed(context, AppRoutes.myReviewScreen);
         break;
       case 5:
-        Navigator.pushNamed(context, AppRoutes.notificationScreen);
+        Navigator.pushNamed(context, AppRoutes.notificationSettingScreen);
         break;
       case 6:
         final brightness = theme(context).brightness;

@@ -4,8 +4,8 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/profile/widget/notification_checkbox_list.dart';
 
-class NotificationScreen extends StatelessWidget {
-  NotificationScreen({super.key});
+class NotificationSettingScreen extends StatelessWidget {
+  NotificationSettingScreen({super.key});
 
   final List<String> notifKualivaList = [
     "notif.kualiva_1",

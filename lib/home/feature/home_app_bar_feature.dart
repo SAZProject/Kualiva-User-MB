@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/style/custom_text_style.dart';
 import 'package:kualiva/common/style/theme_helper.dart';
 import 'package:kualiva/common/utility/location_util.dart';
@@ -56,7 +57,9 @@ class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
       toolbarHeight: 100.h,
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.notificationScreen);
+          },
           icon: Icon(
             Icons.notifications,
             size: 25.h,

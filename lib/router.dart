@@ -7,6 +7,7 @@ import 'package:kualiva/auth/sign_up_screen.dart';
 import 'package:kualiva/common/screen/location_screen.dart';
 import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/_data/model/ui_model/home_event_model.dart';
+import 'package:kualiva/common/screen/notification_screen.dart';
 import 'package:kualiva/common/screen/search_screen.dart';
 import 'package:kualiva/common/screen/term_of_service_screen.dart';
 import 'package:kualiva/onboarding/onboarding_verifying_user.dart';
@@ -33,7 +34,7 @@ import 'package:kualiva/prime_celestial.dart';
 import 'package:kualiva/profile/language_screen.dart';
 import 'package:kualiva/profile/my_profile_screen.dart';
 import 'package:kualiva/profile/my_review_screen.dart';
-import 'package:kualiva/profile/notification_screen.dart';
+import 'package:kualiva/profile/notification_setting_screen.dart';
 import 'package:kualiva/profile/profile_screen.dart';
 import 'package:kualiva/profile/user_level_screen.dart';
 import 'package:kualiva/promo/promo_place_detail.dart';
@@ -121,6 +122,8 @@ class AppRoutes {
   static const String myReviewScreen = "my_review_screen";
 
   static const String notificationScreen = "notification_screen";
+
+  static const String notificationSettingScreen = "notification_setting_screen";
 
   static const String languageScreen = "language_screen";
 
@@ -361,6 +364,12 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.notificationScreen:
       return PageTransition(
           child: NotificationScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.notificationSettingScreen:
+      return PageTransition(
+          child: NotificationSettingScreen(),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

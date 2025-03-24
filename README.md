@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.29
-- New UI v2 My Profile Page
+Ver 0.1.29+01
+- New Localisation for nightlife & spa
 ```
 
 ## Getting Started

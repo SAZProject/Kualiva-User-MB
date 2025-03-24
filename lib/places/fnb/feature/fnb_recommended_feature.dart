@@ -18,10 +18,12 @@ class FnbRecommendedFeature extends StatelessWidget {
     super.key,
     required this.parentScrollController,
     required this.childScrollController,
+    required this.onFnbActionCallback,
   });
 
   final ScrollController parentScrollController;
   final ScrollController childScrollController;
+  final Function(FnbActionEnum) onFnbActionCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,8 @@ class FnbRecommendedFeature extends StatelessWidget {
           CustomSectionHeader(
             label: context.tr("f_n_b.recommended"),
             useIcon: true,
-            onPressed: () {
-              Navigator.pushNamed(
+            onPressed: () async {
+              await Navigator.pushNamed(
                 context,
                 AppRoutes.fnbActionScreen,
                 arguments: FnbActionArgument(
@@ -42,6 +44,7 @@ class FnbRecommendedFeature extends StatelessWidget {
                   fnbActionEnum: FnbActionEnum.recommended,
                 ),
               );
+              onFnbActionCallback(FnbActionEnum.recommended);
             },
           ),
           Padding(

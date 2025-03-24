@@ -32,7 +32,7 @@ class FnbActionScreen extends StatefulWidget {
 class _FnbActionScreenState extends State<FnbActionScreen> {
   FnbActionEnum get fnbActionEnum => widget.fnbActionArgument.fnbActionEnum;
 
-  final _pageScrollController = ScrollController();
+  final _scrollController = ScrollController();
   final _paging = ValueNotifier(Paging());
 
   final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
@@ -42,8 +42,9 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
   FiltersModel? filtersModel;
 
   void _onScrollPagination() {
-    if (_pageScrollController.position.pixels !=
-        _pageScrollController.position.maxScrollExtent) {
+    print("_onScrollPagination");
+    if (_scrollController.position.pixels !=
+        _scrollController.position.maxScrollExtent) {
       return;
     }
     final state = context.read<FnbActionBloc>().state;
@@ -54,6 +55,11 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     }
     if (state is FnbActionSuccessPromo) {
       final pagination = state.fnbPromoPage.pagination;
+      _nextPaging(pagination);
+      return;
+    }
+    if (state is FnbActionSuccessRecommended) {
+      final pagination = state.fnbRecommendedPage.pagination;
       _nextPaging(pagination);
       return;
     }
@@ -78,17 +84,30 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
         ));
   }
 
+  void initActionBLoC() {
+    final state = context.read<CurrentLocationBloc>().state;
+    if (state is! CurrentLocationSuccess) return;
+    context.read<FnbActionBloc>().add(FnbActionFetched(
+          paging: Paging(),
+          pagingEnum: PagingEnum.before,
+          fnbActionEnum: fnbActionEnum,
+          latitude: state.currentLocationModel.latitude,
+          longitude: state.currentLocationModel.longitude,
+        ));
+  }
+
   @override
   void initState() {
     super.initState();
-    _pageScrollController.addListener(_onScrollPagination);
+    initActionBLoC();
+    _scrollController.addListener(_onScrollPagination);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _pageScrollController.removeListener(_onScrollPagination);
-    _pageScrollController.dispose();
+    _scrollController.removeListener(_onScrollPagination);
+    _scrollController.dispose();
   }
 
   @override
@@ -126,7 +145,6 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
       width: double.maxFinite,
       height: MediaQuery.of(context).size.height,
       child: SingleChildScrollView(
-        controller: _pageScrollController,
         child: Column(
           children: [
             SizedBox(height: 5.h),
@@ -137,7 +155,9 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
             SizedBox(height: 5.h),
             _tagsFilter(context),
             SizedBox(height: 5.h),
-            FnbActionFeature(),
+            FnbActionFeature(
+              scrollController: _scrollController,
+            ),
             SizedBox(height: 5.h),
           ],
         ),

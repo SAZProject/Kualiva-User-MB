@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/fnb_action_enum.dart';
 import 'package:kualiva/_data/enum/paging_enum.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
@@ -9,6 +10,7 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_action_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_recommended_bloc.dart';
@@ -36,6 +38,7 @@ class _FnbScreenState extends State<FnbScreen> {
   final _pagingNearest = ValueNotifier(Paging());
   final _pagingRecommended = ValueNotifier(Paging());
 
+  /// Promo
   void _onPromoScrollPagination() {
     if (_promoScrollController.position.pixels !=
         _promoScrollController.position.maxScrollExtent) {
@@ -65,6 +68,7 @@ class _FnbScreenState extends State<FnbScreen> {
         ));
   }
 
+  /// Nearest
   void _onNearestScrollPagination() {
     if (_nearestScrollController.position.pixels !=
         _nearestScrollController.position.maxScrollExtent) {
@@ -94,6 +98,7 @@ class _FnbScreenState extends State<FnbScreen> {
         ));
   }
 
+  /// Recommended
   void _onRecommendedScrollPagination() {
     if (_recommendedScrollController.position.pixels !=
         _recommendedScrollController.position.maxScrollExtent) {
@@ -123,6 +128,59 @@ class _FnbScreenState extends State<FnbScreen> {
           latitude: state.currentLocationModel.latitude,
           longitude: state.currentLocationModel.longitude,
         ));
+  }
+
+  void _onFnbActionCallback(FnbActionEnum fnbActionEnum) {
+    final fnbActionBloc = context.read<FnbActionBloc>().state;
+    if (fnbActionBloc is FnbActionSuccessPromo) {
+      final pagination = fnbActionBloc.fnbPromoPage.pagination;
+      _pagingPromo.value = Paging(
+        page: pagination.nextPage ?? pagination.totalPage,
+        size: pagination.size,
+      );
+    }
+    if (fnbActionBloc is FnbActionSuccessNearest) {
+      final pagination = fnbActionBloc.fnbNearestPage.pagination;
+      _pagingNearest.value = Paging(
+        page: pagination.nextPage ?? pagination.totalPage,
+        size: pagination.size,
+      );
+    }
+    if (fnbActionBloc is FnbActionSuccessRecommended) {
+      final pagination = fnbActionBloc.fnbRecommendedPage.pagination;
+      _pagingRecommended.value = Paging(
+        page: pagination.nextPage ?? pagination.totalPage,
+        size: pagination.size,
+      );
+    }
+    final state = context.read<CurrentLocationBloc>().state;
+    if (state is! CurrentLocationSuccess) return;
+    switch (fnbActionEnum) {
+      case FnbActionEnum.promo:
+        context.read<FnbPromoBloc>().add(FnbPromoFetched(
+              paging: _pagingPromo.value,
+              pagingEnum: PagingEnum.before,
+              latitude: state.currentLocationModel.latitude,
+              longitude: state.currentLocationModel.longitude,
+            ));
+        break;
+      case FnbActionEnum.nearest:
+        context.read<FnbNearestBloc>().add(FnbNearestFetched(
+              paging: _pagingNearest.value,
+              pagingEnum: PagingEnum.before,
+              latitude: state.currentLocationModel.latitude,
+              longitude: state.currentLocationModel.longitude,
+            ));
+        break;
+      case FnbActionEnum.recommended:
+        context.read<FnbNearestBloc>().add(FnbNearestFetched(
+              paging: _pagingRecommended.value,
+              pagingEnum: PagingEnum.before,
+              latitude: state.currentLocationModel.latitude,
+              longitude: state.currentLocationModel.longitude,
+            ));
+        break;
+    }
   }
 
   @override
@@ -220,15 +278,18 @@ class _FnbScreenState extends State<FnbScreen> {
               SizedBox(height: 5.h),
               FnbPromoFeature(
                 childScrollController: _promoScrollController,
+                onFnbActionCallback: _onFnbActionCallback,
               ),
               SizedBox(height: 5.h),
               FnbNearestFeature(
                 childScrollController: _nearestScrollController,
+                onFnbActionCallback: _onFnbActionCallback,
               ),
               SizedBox(height: 5.h),
               FnbRecommendedFeature(
                 parentScrollController: _parentScrollController,
                 childScrollController: _recommendedScrollController,
+                onFnbActionCallback: _onFnbActionCallback,
               ),
               SizedBox(height: 25.h),
             ],

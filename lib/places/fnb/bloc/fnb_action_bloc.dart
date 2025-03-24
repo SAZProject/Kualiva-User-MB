@@ -5,9 +5,11 @@ import 'package:kualiva/_data/enum/paging_enum.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/_repository/place/fnb/fnb_nearest_repository.dart';
 import 'package:kualiva/_repository/place/fnb/fnb_promo_repository.dart';
+import 'package:kualiva/_repository/place/fnb/fnb_recommended_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
 import 'package:kualiva/places/fnb/model/fnb_promo_page.dart';
+import 'package:kualiva/places/fnb/model/fnb_recommended_page.dart';
 
 part 'fnb_action_event.dart';
 part 'fnb_action_state.dart';
@@ -15,9 +17,11 @@ part 'fnb_action_state.dart';
 class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
   final FnbNearestRepository _fnbNearestRepository;
   final FnbPromoRepository _fnbPromoRepository;
+  final FnbRecommendedRepository _fnbRecommendedRepository;
   FnbActionBloc(
     this._fnbNearestRepository,
     this._fnbPromoRepository,
+    this._fnbRecommendedRepository,
   ) : super(FnbActionInitial()) {
     on<FnbActionEvent>((event, emit) {});
     on<FnbActionFetched>(_onFetched);
@@ -86,5 +90,22 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
   Future<void> _recommended(
     FnbActionFetched event,
     Emitter<FnbActionState> emit,
-  ) async {}
+  ) async {
+    final fnbRecommendedPageOld = _fnbRecommendedRepository.getRecommendedOld();
+    emit(
+        FnbActionLoadingRecommended(fnbRecommendedPage: fnbRecommendedPageOld));
+    try {
+      final fnbRecommendedPage = await _fnbRecommendedRepository.getRecommended(
+        paging: event.paging,
+        pagingEnum: event.pagingEnum,
+        latitude: event.latitude,
+        longitude: event.longitude,
+      );
+      LeLog.bd(this, _recommended, fnbRecommendedPage.toString());
+      emit(FnbActionSuccessRecommended(fnbRecommendedPage: fnbRecommendedPage));
+    } catch (e) {
+      LeLog.be(this, _recommended, e.toString());
+      emit(FnbActionFailure(fnbActionEnum: event.fnbActionEnum));
+    }
+  }
 }

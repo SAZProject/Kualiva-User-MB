@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_recommended_model.dart';
 
 @immutable
 class FnbActionModel {
@@ -60,6 +61,7 @@ class FnbActionModel {
       cityOrVillage: data.cityOrVillage,
       categories: data.categories,
       isMerchant: data.isMerchant,
+      featuredImage: data.featuredImage,
       distanceFromUser: data.distanceFromUser,
     );
   }
@@ -73,11 +75,24 @@ class FnbActionModel {
       cityOrVillage: data.cityOrVillage,
       categories: data.categories,
       isMerchant: true,
+      featuredImage: data.featuredImage,
       distanceFromUser: data.distanceFromUser,
     );
   }
 
-  // TODO: FnbActionModel.fromRecommendedModel
+  factory FnbActionModel.fromRecommendedModel(FnbRecommendedModel data) {
+    return FnbActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: data.fullAddress,
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: data.isMerchant,
+      featuredImage: data.featuredImage,
+      distanceFromUser: data.distanceFromUser,
+    );
+  }
 
   factory FnbActionModel.fromMap(Map<String, dynamic> map) {
     return FnbActionModel(

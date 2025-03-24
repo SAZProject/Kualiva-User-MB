@@ -17,9 +17,11 @@ class FnbNearestFeature extends StatelessWidget {
   const FnbNearestFeature({
     super.key,
     required this.childScrollController,
+    required this.onFnbActionCallback,
   });
 
   final ScrollController childScrollController;
+  final Function(FnbActionEnum) onFnbActionCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +33,8 @@ class FnbNearestFeature extends StatelessWidget {
           CustomSectionHeader(
             label: context.tr("f_n_b.nearest"),
             useIcon: true,
-            onPressed: () {
-              Navigator.pushNamed(
+            onPressed: () async {
+              await Navigator.pushNamed(
                 context,
                 AppRoutes.fnbActionScreen,
                 arguments: FnbActionArgument(
@@ -40,6 +42,7 @@ class FnbNearestFeature extends StatelessWidget {
                   fnbActionEnum: FnbActionEnum.nearest,
                 ),
               );
+              onFnbActionCallback(FnbActionEnum.nearest);
             },
           ),
           Padding(

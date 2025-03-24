@@ -259,6 +259,7 @@ class MainProvider extends StatelessWidget {
             return FnbActionBloc(
               context.read<FnbNearestRepository>(),
               context.read<FnbPromoRepository>(),
+              context.read<FnbRecommendedRepository>(),
             );
           },
         ),

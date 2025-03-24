@@ -11,13 +11,17 @@ import 'package:kualiva/places/fnb/widget/fnb_action_item.dart';
 import 'package:kualiva/router.dart';
 
 class FnbActionFeature extends StatefulWidget {
-  const FnbActionFeature({super.key});
+  const FnbActionFeature({super.key, required this.scrollController});
+
+  final ScrollController scrollController;
 
   @override
   State<FnbActionFeature> createState() => _FnbActionFeatureState();
 }
 
 class _FnbActionFeatureState extends State<FnbActionFeature> {
+  ScrollController get scrollController => widget.scrollController;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,28 +32,6 @@ class _FnbActionFeatureState extends State<FnbActionFeature> {
   }
 
   Widget _listFnbAction() {
-    final List<FnbActionModel> placeList = [
-      const FnbActionModel(
-        id: "0",
-        name: "place 1",
-        averageRating: 2.5,
-        fullAddress: "Full Address",
-        cityOrVillage: "City Or Village",
-        categories: ["Categories 1", "Categories 2"],
-        isMerchant: false,
-        distanceFromUser: "5",
-      ),
-      const FnbActionModel(
-        id: "1",
-        name: "place 2",
-        averageRating: 3.0,
-        fullAddress: "Full Address",
-        cityOrVillage: "City Or Village",
-        categories: ["Categories 1", "Categories 2"],
-        isMerchant: true,
-        distanceFromUser: "10",
-      ),
-    ];
     return BlocBuilder<FnbActionBloc, FnbActionState>(
       builder: (context, state) {
         /// TODO: Clean Code Later, terlalu banyak boilerplate
@@ -63,36 +45,48 @@ class _FnbActionFeatureState extends State<FnbActionFeature> {
 
         if (state is FnbActionLoadingNearest && state.fnbNearestPage != null) {
           final fnbNearestList = state.fnbNearestPage!.data;
-          for (int i = 0; i < fnbNearestList.length; i++) {
-            placeList.add(FnbActionModel.fromNearestModel(fnbNearestList[i]));
-          }
-          return _listBuilder(placeList);
+          return _listBuilder(fnbNearestList.map((e) {
+            return FnbActionModel.fromNearestModel(e);
+          }).toList());
         }
 
         if (state is FnbActionLoadingPromo && state.fnbPromoPage != null) {
           final fnbPromoList = state.fnbPromoPage!.data;
-          for (int i = 0; i < fnbPromoList.length; i++) {
-            placeList.add(FnbActionModel.fromPromoModel(fnbPromoList[i]));
-          }
-          return _listBuilder(placeList);
+          return _listBuilder(fnbPromoList.map((e) {
+            return FnbActionModel.fromPromoModel(e);
+          }).toList());
+        }
+
+        if (state is FnbActionLoadingRecommended &&
+            state.fnbRecommendedPage != null) {
+          final fnbRecommendedList = state.fnbRecommendedPage!.data;
+          return _listBuilder(fnbRecommendedList.map((e) {
+            return FnbActionModel.fromRecommendedModel(e);
+          }).toList());
         }
 
         if (state is FnbActionSuccessNearest) {
           final fnbNearestList = state.fnbNearestPage.data;
           if (fnbNearestList.isEmpty) return CustomEmptyState();
-          for (int i = 0; i < fnbNearestList.length; i++) {
-            placeList.add(FnbActionModel.fromNearestModel(fnbNearestList[i]));
-          }
-          return _listBuilder(placeList);
+          return _listBuilder(fnbNearestList.map((e) {
+            return FnbActionModel.fromNearestModel(e);
+          }).toList());
         }
 
         if (state is FnbActionSuccessPromo) {
           final fnbPromoList = state.fnbPromoPage.data;
           if (fnbPromoList.isEmpty) return CustomEmptyState();
-          for (int i = 0; i < fnbPromoList.length; i++) {
-            placeList.add(FnbActionModel.fromPromoModel(fnbPromoList[i]));
-          }
-          return _listBuilder(placeList);
+          return _listBuilder(fnbPromoList.map((e) {
+            return FnbActionModel.fromPromoModel(e);
+          }).toList());
+        }
+
+        if (state is FnbActionSuccessRecommended) {
+          final fnbRecommendedList = state.fnbRecommendedPage.data;
+          if (fnbRecommendedList.isEmpty) return CustomEmptyState();
+          return _listBuilder(fnbRecommendedList.map((e) {
+            return FnbActionModel.fromRecommendedModel(e);
+          }).toList());
         }
 
         return Center(child: CircularProgressIndicator());
@@ -102,6 +96,7 @@ class _FnbActionFeatureState extends State<FnbActionFeature> {
 
   Widget _listBuilder(List<FnbActionModel> placeList) {
     return ListView.builder(
+      controller: scrollController,
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: placeList.length,

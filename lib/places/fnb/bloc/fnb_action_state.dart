@@ -5,17 +5,17 @@ sealed class FnbActionState {}
 
 final class FnbActionInitial extends FnbActionState {}
 
-final class FnbActionLoading extends FnbActionState {
-  final FnbActionEnum fnbActionEnum;
+// final class FnbActionLoading extends FnbActionState {
+//   final FnbActionEnum fnbActionEnum;
 
-  FnbActionLoading({required this.fnbActionEnum});
-}
+//   FnbActionLoading({required this.fnbActionEnum});
+// }
 
-final class FnbActionSuccess extends FnbActionState {
-  final FnbActionEnum fnbActionEnum;
+// final class FnbActionSuccess extends FnbActionState {
+//   final FnbActionEnum fnbActionEnum;
 
-  FnbActionSuccess({required this.fnbActionEnum});
-}
+//   FnbActionSuccess({required this.fnbActionEnum});
+// }
 
 final class FnbActionFailure extends FnbActionState {
   final FnbActionEnum fnbActionEnum;
@@ -23,6 +23,7 @@ final class FnbActionFailure extends FnbActionState {
   FnbActionFailure({required this.fnbActionEnum});
 }
 
+/// Nearest
 final class FnbActionLoadingNearest extends FnbActionState {
   final FnbNearestPage? fnbNearestPage;
 
@@ -35,6 +36,7 @@ final class FnbActionSuccessNearest extends FnbActionState {
   FnbActionSuccessNearest({required this.fnbNearestPage});
 }
 
+/// Promo
 final class FnbActionLoadingPromo extends FnbActionState {
   final FnbPromoPage? fnbPromoPage;
 
@@ -45,4 +47,17 @@ final class FnbActionSuccessPromo extends FnbActionState {
   final FnbPromoPage fnbPromoPage;
 
   FnbActionSuccessPromo({required this.fnbPromoPage});
+}
+
+/// Recommended
+final class FnbActionLoadingRecommended extends FnbActionState {
+  final FnbRecommendedPage? fnbRecommendedPage;
+
+  FnbActionLoadingRecommended({required this.fnbRecommendedPage});
+}
+
+final class FnbActionSuccessRecommended extends FnbActionState {
+  final FnbRecommendedPage fnbRecommendedPage;
+
+  FnbActionSuccessRecommended({required this.fnbRecommendedPage});
 }

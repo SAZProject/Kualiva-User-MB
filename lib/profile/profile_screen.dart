@@ -172,14 +172,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _userLevel(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
       padding: EdgeInsets.symmetric(
-        horizontal: 8.h,
-        vertical: 6.h,
+        horizontal: 5.h,
+        vertical: 5.h,
       ),
-      decoration: CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder14,
-          ),
+      decoration:
+          CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder14,
+              ),
       width: double.maxFinite,
       child: InkWell(
         onTap: () => Navigator.pushNamed(context, AppRoutes.userLevelScreen),
@@ -222,19 +223,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: theme(context).textTheme.bodySmall,
                       ),
                       Text(
-                        "0/10",
+                        "7/10",
                         style: theme(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
                   LinearProgressIndicator(
-                    value: 0.6,
-                    color: theme(context)
-                        .colorScheme
-                        .onPrimary
-                        .withValues(alpha: 0.8),
+                    value: 0.7,
+                    color: theme(context).colorScheme.primary,
                     backgroundColor:
-                        theme(context).colorScheme.secondaryContainer,
+                        theme(context).colorScheme.onPrimaryContainer,
                     borderRadius: BorderRadius.circular(1.h),
                   ),
                 ],
@@ -261,16 +259,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 margin: EdgeInsets.only(right: 10.h),
                 child: Icon(
                   _profileMenuModel[0].icon,
-                  size: 18.h,
-                  color: theme(context).colorScheme.onPrimaryContainer,
+                  size: 20.h,
+                  color: theme(context).colorScheme.onSecondaryContainer,
                 ),
               ),
-              decoration:
-                  CustomDecoration(context).gradientYellowAToOnPrimary.copyWith(
-                        borderRadius: BorderRadiusStyle.roundedBorder10,
-                      ),
-              buttonStyle: CustomButtonStyles.none,
-              buttonTextStyle: theme(context).textTheme.bodyMedium,
+              decoration: null,
+              buttonStyle: CustomButtonStyles.fillprimary(context),
+              buttonTextStyle: theme(context).textTheme.bodyMedium!.copyWith(
+                  color: theme(context).colorScheme.onSecondaryContainer),
               onPressed: () => _profileMenuNavigate(context, 0),
             ),
           ),
@@ -287,18 +283,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   margin: EdgeInsets.only(right: 10.h),
                   child: Icon(
                     _profileMenuModel[1].icon,
-                    size: 18.h,
-                    color: theme(context).colorScheme.onPrimaryContainer,
+                    size: 20.h,
+                    color: _profileMenuModel[1].isCommingSoon
+                        ? theme(context).colorScheme.onPrimaryContainer
+                        : theme(context).colorScheme.onSecondaryContainer,
                   ),
                 ),
-                decoration: CustomDecoration(context)
-                    .gradientYellowAToOnPrimary
-                    .copyWith(
-                      borderRadius: BorderRadiusStyle.roundedBorder10,
-                    ),
+                decoration: null,
+                buttonStyle: CustomButtonStyles.fillprimary(context),
                 isDisabled: _profileMenuModel[1].isCommingSoon,
-                buttonStyle: CustomButtonStyles.none,
-                buttonTextStyle: theme(context).textTheme.bodyMedium,
+                buttonTextStyle: theme(context).textTheme.bodyMedium!.copyWith(
+                      color: _profileMenuModel[1].isCommingSoon
+                          ? theme(context).colorScheme.onPrimaryContainer
+                          : theme(context).colorScheme.onSecondaryContainer,
+                    ),
                 onPressed: () => _profileMenuNavigate(context, 1),
               ),
             ),

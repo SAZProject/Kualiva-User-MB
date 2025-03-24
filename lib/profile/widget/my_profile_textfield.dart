@@ -38,45 +38,66 @@ class MyProfileTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> listVerifiedTextField = [
-      CustomTextFormField(
-        focusNode: focusNode,
-        width: useVerifyWidget ? 250.h : null,
-        controller: controller,
-        readOnly: isReadOnly,
-        suffix: useSuffix
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding:
-                          EdgeInsets.only(right: isDateTimeField ? 0.0 : 10.h),
-                      child: isDateTimeField
-                          ? IconButton(
-                              icon: Icon(
-                                Icons.calendar_month,
-                                size: 25.h,
-                                color: theme(context).colorScheme.primary,
-                              ),
-                              onPressed: dateTimeFieldOnTap,
-                            )
-                          : InkWell(
-                              onTap: suffixOnTap,
-                              child: Text(
-                                suffix ?? "",
-                                style: CustomTextStyles(context)
-                                    .bodySmall12
-                                    .copyWith(
-                                      color: theme(context).colorScheme.primary,
+      Padding(
+        padding: EdgeInsets.only(left: 10.h),
+        child: CustomTextFormField(
+          focusNode: focusNode,
+          width: useVerifyWidget ? 250.h : null,
+          controller: controller,
+          readOnly: isReadOnly,
+          suffix: useSuffix
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            right: isDateTimeField ? 0.0 : 10.h),
+                        child: isDateTimeField
+                            ? IconButton(
+                                icon: Icon(
+                                  Icons.calendar_month,
+                                  size: 25.h,
+                                  color: theme(context).colorScheme.primary,
+                                ),
+                                onPressed: dateTimeFieldOnTap,
+                              )
+                            : Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 2.5.h,
+                                      right: 7.5.h,
                                     ),
+                                    child: SizedBox(
+                                      height: 20.h,
+                                      child: VerticalDivider(
+                                        thickness: 1.h,
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: suffixOnTap,
+                                    child: Text(
+                                      suffix ?? "",
+                                      style: CustomTextStyles(context)
+                                          .bodySmall12
+                                          .copyWith(
+                                            color: theme(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
+                      ),
                     ),
-                  ),
-                ],
-              )
-            : null,
+                  ],
+                )
+              : null,
+        ),
       ),
     ];
     return Padding(
@@ -104,12 +125,14 @@ class MyProfileTextfield extends StatelessWidget {
                       CustomElevatedButton(
                         margin: EdgeInsets.only(right: 10.h),
                         width: 60.h,
-                        decoration: CustomDecoration(context)
-                            .outlineOnSecondaryContainer,
-                        buttonTextStyle: CustomTextStyles(context).bodySmall12,
-                        buttonStyle:
-                            CustomButtonStyles.outlineOnSecondaryContainer(
-                                context),
+                        buttonTextStyle:
+                            theme(context).textTheme.bodyMedium!.copyWith(
+                                  color: theme(context)
+                                      .colorScheme
+                                      .onSecondaryContainer,
+                                ),
+                        decoration: null,
+                        buttonStyle: CustomButtonStyles.fillprimary(context),
                         initialText: context.tr("my_profile.verify"),
                         onPressed: verifyOnTap,
                       ),

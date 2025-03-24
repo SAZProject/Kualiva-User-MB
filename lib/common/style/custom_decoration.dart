@@ -209,8 +209,8 @@ class CustomDecoration {
 
   BoxDecoration get primaryTRBdr => BoxDecoration(
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(50.0),
-          bottomLeft: Radius.circular(50.0),
+          topRight: Radius.circular(50.h),
+          bottomLeft: Radius.circular(40.h),
         ),
         color: theme(context).colorScheme.primary,
       );

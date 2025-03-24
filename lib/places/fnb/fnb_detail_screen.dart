@@ -243,18 +243,9 @@ class FnbDetailScreen extends StatelessWidget {
   }
 
   Widget _buildPopupMenuItem(BuildContext context, int index, IconData icon) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: theme(context)
-            .colorScheme
-            .onSecondaryContainer
-            .withValues(alpha: 0.6),
-        shape: BoxShape.circle,
-      ),
-      child: IconButton(
-        icon: Center(child: Icon(icon, size: 25.h)),
-        onPressed: () => _popUpMenuAction(context, index),
-      ),
+    return IconButton(
+      icon: Center(child: Icon(icon, size: 25.h)),
+      onPressed: () => _popUpMenuAction(context, index),
     );
   }
 

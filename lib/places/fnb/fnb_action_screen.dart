@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/fnb_action_enum.dart';
@@ -31,6 +32,7 @@ class FnbActionScreen extends StatefulWidget {
 
 class _FnbActionScreenState extends State<FnbActionScreen> {
   FnbActionEnum get fnbActionEnum => widget.fnbActionArgument.fnbActionEnum;
+  String get title => widget.fnbActionArgument.title;
 
   final _scrollController = ScrollController();
   final _paging = ValueNotifier(Paging());
@@ -112,7 +114,6 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO UI no error but no data showed
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
       listener: (context, state) {
         if (state is! CurrentLocationSuccess) return;
@@ -167,7 +168,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
 
   PreferredSizeWidget _fnbActionAppBar(BuildContext context) {
     return CustomAppBar(
-      title: "Kasih title ci",
+      title: context.tr(title),
       useLeading: true,
       onBackPressed: () => Navigator.pop(context),
     );

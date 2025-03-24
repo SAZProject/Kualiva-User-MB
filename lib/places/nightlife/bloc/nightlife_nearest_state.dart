@@ -18,5 +18,3 @@ final class NightlifeNearestSuccess extends NightlifeNearestState {
 }
 
 final class NightlifeNearestFailure extends NightlifeNearestState {}
-
-final class NightlifeNearestRefresh extends NightlifeNearestState {}

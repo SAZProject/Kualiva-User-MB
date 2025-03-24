@@ -1,22 +1,36 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+
+part 'nightlife_promo_model.g.dart';
 
 @immutable
+@HiveType(typeId: 26)
 class NightlifePromoModel {
+  @HiveField(0)
   final String id; // placeUniqueId
 
+  @HiveField(1)
   final String name;
 
+  @HiveField(2)
   final int promoPercentage;
 
+  @HiveField(3)
   final double averageRating;
 
+  @HiveField(4)
   final String cityOrVillage;
 
+  @HiveField(5)
   final List<String> categories;
 
+  @HiveField(6)
   final String? featuredImage;
+
+  @HiveField(7)
+  final String distanceFromUser;
 
   const NightlifePromoModel({
     required this.id,
@@ -26,6 +40,7 @@ class NightlifePromoModel {
     required this.cityOrVillage,
     required this.categories,
     this.featuredImage,
+    required this.distanceFromUser,
   });
 
   NightlifePromoModel copyWith({
@@ -36,6 +51,7 @@ class NightlifePromoModel {
     String? cityOrVillage,
     List<String>? categories,
     ValueGetter<String?>? featuredImage,
+    String? distanceFromUser,
   }) {
     return NightlifePromoModel(
       id: id ?? this.id,
@@ -46,6 +62,7 @@ class NightlifePromoModel {
       categories: categories ?? this.categories,
       featuredImage:
           featuredImage != null ? featuredImage() : this.featuredImage,
+      distanceFromUser: distanceFromUser ?? this.distanceFromUser,
     );
   }
 
@@ -58,6 +75,7 @@ class NightlifePromoModel {
       'cityOrVillage': cityOrVillage,
       'categories': categories,
       'featuredImage': featuredImage,
+      'distanceFromUser': distanceFromUser,
     };
   }
 
@@ -70,6 +88,7 @@ class NightlifePromoModel {
       cityOrVillage: map['cityOrVillage'] ?? '',
       categories: List<String>.from(map['categories']),
       featuredImage: map['featuredImage'],
+      distanceFromUser: map['distanceFromUser'] ?? '',
     );
   }
 
@@ -80,7 +99,7 @@ class NightlifePromoModel {
 
   @override
   String toString() {
-    return 'NightlifePromoModel(id: $id, name: $name, promoPercentage: $promoPercentage, averageRating: $averageRating, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage)';
+    return 'NightlifePromoModel(id: $id, name: $name, promoPercentage: $promoPercentage, averageRating: $averageRating, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, distanceFromUser: $distanceFromUser)';
   }
 
   @override
@@ -94,7 +113,8 @@ class NightlifePromoModel {
         other.averageRating == averageRating &&
         other.cityOrVillage == cityOrVillage &&
         listEquals(other.categories, categories) &&
-        other.featuredImage == featuredImage;
+        other.featuredImage == featuredImage &&
+        other.distanceFromUser == distanceFromUser;
   }
 
   @override
@@ -105,6 +125,7 @@ class NightlifePromoModel {
         averageRating.hashCode ^
         cityOrVillage.hashCode ^
         categories.hashCode ^
-        featuredImage.hashCode;
+        featuredImage.hashCode ^
+        distanceFromUser.hashCode;
   }
 }

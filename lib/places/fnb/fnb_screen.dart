@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/fnb_action_enum.dart';
 import 'package:kualiva/_data/enum/paging_enum.dart';
-import 'package:kualiva/_data/enum/place_category_enum.dart';
 import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
@@ -27,8 +26,6 @@ class FnbScreen extends StatefulWidget {
 }
 
 class _FnbScreenState extends State<FnbScreen> {
-  static const placeCategoryEnum = PlaceCategoryEnum.fnb;
-
   final _parentScrollController = ScrollController();
   final _promoScrollController = ScrollController();
   final _nearestScrollController = ScrollController();
@@ -130,7 +127,7 @@ class _FnbScreenState extends State<FnbScreen> {
         ));
   }
 
-  void _onFnbActionCallback(FnbActionEnum fnbActionEnum) {
+  void _onActionCallback(FnbActionEnum fnbActionEnum) {
     final fnbActionBloc = context.read<FnbActionBloc>().state;
     if (fnbActionBloc is FnbActionSuccessPromo) {
       final pagination = fnbActionBloc.fnbPromoPage.pagination;
@@ -278,18 +275,18 @@ class _FnbScreenState extends State<FnbScreen> {
               SizedBox(height: 5.h),
               FnbPromoFeature(
                 childScrollController: _promoScrollController,
-                onFnbActionCallback: _onFnbActionCallback,
+                onFnbActionCallback: _onActionCallback,
               ),
               SizedBox(height: 5.h),
               FnbNearestFeature(
                 childScrollController: _nearestScrollController,
-                onFnbActionCallback: _onFnbActionCallback,
+                onFnbActionCallback: _onActionCallback,
               ),
               SizedBox(height: 5.h),
               FnbRecommendedFeature(
                 parentScrollController: _parentScrollController,
                 childScrollController: _recommendedScrollController,
-                onFnbActionCallback: _onFnbActionCallback,
+                onFnbActionCallback: _onActionCallback,
               ),
               SizedBox(height: 25.h),
             ],

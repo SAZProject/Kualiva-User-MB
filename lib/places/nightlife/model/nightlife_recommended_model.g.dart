@@ -1,22 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'nightlife_nearest_model.dart';
+part of 'nightlife_recommended_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class NightlifeNearestModelAdapter extends TypeAdapter<NightlifeNearestModel> {
+class NightlifeRecommendedModelAdapter
+    extends TypeAdapter<NightlifeRecommendedModel> {
   @override
-  final int typeId = 20;
+  final int typeId = 28;
 
   @override
-  NightlifeNearestModel read(BinaryReader reader) {
+  NightlifeRecommendedModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return NightlifeNearestModel(
+    return NightlifeRecommendedModel(
       id: fields[0] as String,
       name: fields[1] as String,
       averageRating: fields[2] as double,
@@ -30,7 +31,7 @@ class NightlifeNearestModelAdapter extends TypeAdapter<NightlifeNearestModel> {
   }
 
   @override
-  void write(BinaryWriter writer, NightlifeNearestModel obj) {
+  void write(BinaryWriter writer, NightlifeRecommendedModel obj) {
     writer
       ..writeByte(9)
       ..writeByte(0)
@@ -59,7 +60,7 @@ class NightlifeNearestModelAdapter extends TypeAdapter<NightlifeNearestModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is NightlifeNearestModelAdapter &&
+      other is NightlifeRecommendedModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

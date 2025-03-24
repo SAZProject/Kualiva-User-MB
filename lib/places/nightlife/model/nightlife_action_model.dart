@@ -1,41 +1,24 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
-
-part 'nightlife_nearest_model.g.dart';
+import 'package:kualiva/places/fnb/model/fnb_nearest_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
+import 'package:kualiva/places/fnb/model/fnb_recommended_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_promo_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_recommended_model.dart';
 
 @immutable
-@HiveType(typeId: 20)
-class NightlifeNearestModel {
-  @HiveField(0)
-  final String id; // PlaceUniqueId
-
-  @HiveField(1)
+class NightlifeActionModel {
+  final String id;
   final String name;
-
-  @HiveField(2)
   final double averageRating;
-
-  @HiveField(3)
   final String fullAddress;
-
-  @HiveField(4)
   final String cityOrVillage;
-
-  @HiveField(5)
   final List<String> categories;
-
-  @HiveField(6)
   final String? featuredImage;
-
-  @HiveField(7)
   final bool isMerchant;
-
-  @HiveField(8)
   final String distanceFromUser;
 
-  const NightlifeNearestModel({
+  const NightlifeActionModel({
     required this.id,
     required this.name,
     required this.averageRating,
@@ -47,7 +30,7 @@ class NightlifeNearestModel {
     required this.distanceFromUser,
   });
 
-  NightlifeNearestModel copyWith({
+  NightlifeActionModel copyWith({
     String? id,
     String? name,
     double? averageRating,
@@ -58,7 +41,7 @@ class NightlifeNearestModel {
     bool? isMerchant,
     String? distanceFromUser,
   }) {
-    return NightlifeNearestModel(
+    return NightlifeActionModel(
       id: id ?? this.id,
       name: name ?? this.name,
       averageRating: averageRating ?? this.averageRating,
@@ -72,22 +55,51 @@ class NightlifeNearestModel {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'averageRating': averageRating,
-      'fullAddress': fullAddress,
-      'cityOrVillage': cityOrVillage,
-      'categories': categories,
-      'featuredImage': featuredImage,
-      'isMerchant': isMerchant,
-      'distanceFromUser': distanceFromUser,
-    };
+  factory NightlifeActionModel.fromNearestModel(NightlifeNearestModel data) {
+    return NightlifeActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: data.fullAddress,
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: data.isMerchant,
+      featuredImage: data.featuredImage,
+      distanceFromUser: data.distanceFromUser,
+    );
   }
 
-  factory NightlifeNearestModel.fromMap(Map<String, dynamic> map) {
-    return NightlifeNearestModel(
+  factory NightlifeActionModel.fromPromoModel(NightlifePromoModel data) {
+    return NightlifeActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: '',
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: true,
+      featuredImage: data.featuredImage,
+      distanceFromUser: data.distanceFromUser,
+    );
+  }
+
+  factory NightlifeActionModel.fromRecommendedModel(
+      NightlifeRecommendedModel data) {
+    return NightlifeActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: data.fullAddress,
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: data.isMerchant,
+      featuredImage: data.featuredImage,
+      distanceFromUser: data.distanceFromUser,
+    );
+  }
+
+  factory NightlifeActionModel.fromMap(Map<String, dynamic> map) {
+    return NightlifeActionModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       averageRating: map['averageRating']?.toDouble() ?? 0.0,
@@ -100,21 +112,16 @@ class NightlifeNearestModel {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory NightlifeNearestModel.fromJson(String source) =>
-      NightlifeNearestModel.fromMap(json.decode(source));
-
   @override
   String toString() {
-    return 'NightlifeNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
+    return 'NightlifeActionModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is NightlifeNearestModel &&
+    return other is NightlifeActionModel &&
         other.id == id &&
         other.name == name &&
         other.averageRating == averageRating &&

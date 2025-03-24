@@ -21,6 +21,8 @@ import 'package:kualiva/places/fnb/fnb_screen.dart';
 import 'package:kualiva/places/fnb/fnb_detail_menu_screen.dart';
 import 'package:kualiva/layout/main_layout.dart';
 import 'package:kualiva/places/fnb/fnb_filters_screen.dart';
+import 'package:kualiva/places/nightlife/argument/nightlife_action_argument.dart';
+import 'package:kualiva/places/nightlife/nightlife_action_screen.dart';
 import 'package:kualiva/places/nightlife/nightlife_detail_screen.dart';
 import 'package:kualiva/places/nightlife/nightlife_screen.dart';
 import 'package:kualiva/places/spa/spa_detail_screen.dart';
@@ -77,6 +79,8 @@ class AppRoutes {
   static const String fnbScreen = "/f_n_b_screen";
 
   static const String nightLifeScreen = "/nightlife_screen";
+
+  static const String nightLifeActionScreen = "/nightlife_action_screen";
 
   static const String spaScreen = "/spa_screen";
 
@@ -215,6 +219,16 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.nightLifeScreen:
       return PageTransition(
           child: const NightlifeScreen(),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.nightLifeActionScreen:
+      final nightlifeActionArgument =
+          routeSetting.arguments as NightlifeActionArgument;
+      return PageTransition(
+          child: NightlifeActionScreen(
+            nightlifeActionArgument: nightlifeActionArgument,
+          ),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

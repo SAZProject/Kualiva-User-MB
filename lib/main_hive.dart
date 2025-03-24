@@ -18,6 +18,10 @@ import 'package:kualiva/places/fnb/model/fnb_recommended_model.dart';
 import 'package:kualiva/places/fnb/model/fnb_recommended_page.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_model.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_page.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_promo_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_promo_page.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_recommended_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_recommended_page.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_page.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
@@ -54,6 +58,10 @@ class MainHive {
     Hive.registerAdapter(FnbPromoPageAdapter());
     Hive.registerAdapter(FnbRecommendedModelAdapter());
     Hive.registerAdapter(FnbRecommendedPageAdapter());
+    Hive.registerAdapter(NightlifePromoModelAdapter());
+    Hive.registerAdapter(NightlifePromoPageAdapter());
+    Hive.registerAdapter(NightlifeRecommendedModelAdapter());
+    Hive.registerAdapter(NightlifeRecommendedPageAdapter());
   }
 
   static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
@@ -79,11 +87,19 @@ class MainHive {
       openLeSafeBox<ReviewFilterModel>(MyBox.reviewFilter),
       openLeSafeBox<List<String>>(MyBox.recentSuggestion),
       openLeSafeBox<ReviewPlacePage>(MyBox.reviewPlacePage),
-      openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage),
+
+      /// Spa
       openLeSafeBox<SpaNearestPage>(MyBox.spaNearestPage),
-      openLeSafeBox<NightlifeNearestPage>(MyBox.nightlifeNearestPage),
+
+      /// Fnb
+      openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage),
       openLeSafeBox<FnbPromoPage>(MyBox.fnbPromoPage),
-      openLeSafeBox<FnbRecommendedPage>(MyBox.fnbRecommendedPage)
+      openLeSafeBox<FnbRecommendedPage>(MyBox.fnbRecommendedPage),
+
+      /// Nightlife
+      openLeSafeBox<NightlifeNearestPage>(MyBox.nightlifeNearestPage),
+      openLeSafeBox<NightlifePromoPage>(MyBox.nightlifePromoPage),
+      openLeSafeBox<NightlifeRecommendedPage>(MyBox.nightlifeRecommendedPage),
     ]);
   }
 
@@ -116,11 +132,19 @@ enum MyBox {
   reviewFilter('review_filter'),
   recentSuggestion('recent_suggestion'),
   reviewPlacePage('review_place_page'),
-  fnbNearestPage('fnb_nearest_page'),
+
+  /// Spa
   spaNearestPage('spa_nearest_page'),
-  nightlifeNearestPage('nightlife_nearest_page'),
+
+  /// Fnb
+  fnbNearestPage('fnb_nearest_page'),
   fnbPromoPage('fnb_promo_page'),
-  fnbRecommendedPage('fnb_recommended_page');
+  fnbRecommendedPage('fnb_recommended_page'),
+
+  /// Night Life
+  nightlifeNearestPage('nightlife_nearest_page'),
+  nightlifePromoPage('nightlife_promo_page'),
+  nightlifeRecommendedPage('nightlife_recommended_page');
 
   final String name;
 
@@ -153,6 +177,10 @@ enum _MyHive {
   fnbPromoPage(23),
   fnbRecommended(24),
   fnbRecommendedPage(25),
+  nightlifePromo(26),
+  nightlifePromoPage(27),
+  nightlifeRecommended(28),
+  nightlifeRecommendedPage(29),
   ;
 
   final int typeId;

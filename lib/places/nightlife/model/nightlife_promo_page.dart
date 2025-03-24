@@ -1,42 +1,41 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
 import 'package:kualiva/_data/model/pagination/my_page.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
-import 'package:kualiva/places/fnb/model/fnb_promo_model.dart';
+import 'package:kualiva/places/nightlife/model/nightlife_promo_model.dart';
 
-part 'fnb_promo_page.g.dart';
+part 'nightlife_promo_page.g.dart';
 
 @immutable
-@HiveType(typeId: 23)
-class FnbPromoPage extends MyPage<FnbPromoModel> {
+@HiveType(typeId: 27)
+class NightlifePromoPage extends MyPage<NightlifePromoModel> {
   @HiveField(0)
   @override
-  final List<FnbPromoModel> data;
+  final List<NightlifePromoModel> data;
 
   @HiveField(1)
   @override
   final Pagination pagination;
 
-  const FnbPromoPage({
+  const NightlifePromoPage({
     required this.data,
     required this.pagination,
   }) : super(data: data, pagination: pagination);
 
-  FnbPromoPage copyWith({
-    List<FnbPromoModel>? data,
+  NightlifePromoPage copyWith({
+    List<NightlifePromoModel>? data,
     Pagination? pagination,
   }) {
-    return FnbPromoPage(
+    return NightlifePromoPage(
       data: data ?? this.data,
       pagination: pagination ?? this.pagination,
     );
   }
 
-  factory FnbPromoPage.fromMap(Map<String, dynamic> map) {
-    return FnbPromoPage(
-      data: List<FnbPromoModel>.from(
-          map['data']?.map((x) => FnbPromoModel.fromMap(x))),
+  factory NightlifePromoPage.fromMap(Map<String, dynamic> map) {
+    return NightlifePromoPage(
+      data: List<NightlifePromoModel>.from(
+          map['data']?.map((x) => NightlifePromoModel.fromMap(x))),
       pagination: Pagination.fromMap(map['pagination']),
     );
   }

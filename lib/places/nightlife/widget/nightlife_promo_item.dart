@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
@@ -97,9 +95,8 @@ class NightlifePromoItem extends StatelessWidget {
                           ),
                           SizedBox(width: 4.h),
                           Text(
-                            context.tr("nightlife.promo_value", args: [
-                              (Random().nextInt(50) + 20).toString()
-                            ]), // TODO: Percentage promo
+                            context.tr("nightlife.promo_value",
+                                args: [merchant.promoPercentage.toString()]),
                             style: theme(context).textTheme.labelLarge,
                           ),
                         ],

@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
-part 'nightlife_nearest_model.g.dart';
+part 'nightlife_recommended_model.g.dart';
 
 @immutable
-@HiveType(typeId: 20)
-class NightlifeNearestModel {
+@HiveType(typeId: 28)
+class NightlifeRecommendedModel {
   @HiveField(0)
   final String id; // PlaceUniqueId
 
@@ -35,7 +35,7 @@ class NightlifeNearestModel {
   @HiveField(8)
   final String distanceFromUser;
 
-  const NightlifeNearestModel({
+  const NightlifeRecommendedModel({
     required this.id,
     required this.name,
     required this.averageRating,
@@ -47,7 +47,7 @@ class NightlifeNearestModel {
     required this.distanceFromUser,
   });
 
-  NightlifeNearestModel copyWith({
+  NightlifeRecommendedModel copyWith({
     String? id,
     String? name,
     double? averageRating,
@@ -58,7 +58,7 @@ class NightlifeNearestModel {
     bool? isMerchant,
     String? distanceFromUser,
   }) {
-    return NightlifeNearestModel(
+    return NightlifeRecommendedModel(
       id: id ?? this.id,
       name: name ?? this.name,
       averageRating: averageRating ?? this.averageRating,
@@ -86,8 +86,8 @@ class NightlifeNearestModel {
     };
   }
 
-  factory NightlifeNearestModel.fromMap(Map<String, dynamic> map) {
-    return NightlifeNearestModel(
+  factory NightlifeRecommendedModel.fromMap(Map<String, dynamic> map) {
+    return NightlifeRecommendedModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       averageRating: map['averageRating']?.toDouble() ?? 0.0,
@@ -102,19 +102,19 @@ class NightlifeNearestModel {
 
   String toJson() => json.encode(toMap());
 
-  factory NightlifeNearestModel.fromJson(String source) =>
-      NightlifeNearestModel.fromMap(json.decode(source));
+  factory NightlifeRecommendedModel.fromJson(String source) =>
+      NightlifeRecommendedModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'NightlifeNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
+    return 'NightlifeRecommendedModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is NightlifeNearestModel &&
+    return other is NightlifeRecommendedModel &&
         other.id == id &&
         other.name == name &&
         other.averageRating == averageRating &&

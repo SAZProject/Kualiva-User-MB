@@ -5,18 +5,6 @@ sealed class FnbActionState {}
 
 final class FnbActionInitial extends FnbActionState {}
 
-// final class FnbActionLoading extends FnbActionState {
-//   final FnbActionEnum fnbActionEnum;
-
-//   FnbActionLoading({required this.fnbActionEnum});
-// }
-
-// final class FnbActionSuccess extends FnbActionState {
-//   final FnbActionEnum fnbActionEnum;
-
-//   FnbActionSuccess({required this.fnbActionEnum});
-// }
-
 final class FnbActionFailure extends FnbActionState {
   final FnbActionEnum fnbActionEnum;
 

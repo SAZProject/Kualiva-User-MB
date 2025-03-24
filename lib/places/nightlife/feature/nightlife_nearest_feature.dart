@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/nightlife_action_enum.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
+import 'package:kualiva/places/nightlife/argument/nightlife_action_argument.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
 import 'package:kualiva/places/nightlife/model/nightlife_nearest_page.dart';
 import 'package:kualiva/places/nightlife/widget/nightlife_nearest_item.dart';
@@ -13,14 +15,12 @@ import 'package:kualiva/places/nightlife/widget/nightlife_nearest_item.dart';
 class NightlifeNearestFeature extends StatelessWidget {
   const NightlifeNearestFeature({
     super.key,
-    required this.parentContext,
-    required this.parentScrollController,
     required this.childScrollController,
+    required this.onNightlifeActionCallback,
   });
 
-  final BuildContext parentContext;
-  final ScrollController parentScrollController;
   final ScrollController childScrollController;
+  final Function(NightlifeActionEnum) onNightlifeActionCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -31,36 +31,25 @@ class NightlifeNearestFeature extends StatelessWidget {
         children: [
           CustomSectionHeader(
             label: context.tr("nightlife.nearest"),
-            // onPressed: () {},
-            useIcon: false,
+            useIcon: true,
+            onPressed: () async {
+              await Navigator.pushNamed(
+                context,
+                AppRoutes.nightLifeActionScreen,
+                arguments: NightlifeActionArgument(
+                  title: context.tr("nightlife.nearest"),
+                  nightlifeActionEnum: NightlifeActionEnum.nearest,
+                ),
+              );
+              onNightlifeActionCallback(NightlifeActionEnum.nearest);
+            },
           ),
-          SizedBox(height: 4.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.h),
+            padding: EdgeInsets.symmetric(horizontal: 5.h),
             child: SizedBox(
-              height: 450.h,
+              height: 220.h,
               width: double.maxFinite,
-              child: NotificationListener(
-                onNotification: (ScrollNotification notification) {
-                  if (notification is ScrollUpdateNotification) {
-                    if (notification.metrics.pixels ==
-                        notification.metrics.maxScrollExtent) {
-                      parentScrollController.animateTo(
-                          parentScrollController.position.maxScrollExtent,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeIn);
-                    } else if (notification.metrics.pixels ==
-                        notification.metrics.minScrollExtent) {
-                      parentScrollController.animateTo(
-                          parentScrollController.position.minScrollExtent,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeIn);
-                    }
-                  }
-                  return true;
-                },
-                child: _list(),
-              ),
+              child: _list(),
             ),
           ),
         ],
@@ -101,7 +90,7 @@ class NightlifeNearestFeature extends StatelessWidget {
     return ListView.builder(
       controller: childScrollController,
       shrinkWrap: true,
-      scrollDirection: Axis.vertical,
+      scrollDirection: Axis.horizontal,
       itemCount: nightlifeNearestList.length,
       itemBuilder: (context, index) {
         return NightlifeNearestItem(

@@ -5,18 +5,16 @@ sealed class NightlifePromoState {}
 
 final class NightlifePromoInitial extends NightlifePromoState {}
 
-final class NightlifePromoLoading extends NightlifePromoState {}
+final class NightlifePromoLoading extends NightlifePromoState {
+  final NightlifePromoPage? nightlifePromoPage;
+
+  NightlifePromoLoading({required this.nightlifePromoPage});
+}
 
 final class NightlifePromoSuccess extends NightlifePromoState {
-  final List<NightlifePromoModel> nightlifePromoModels;
+  final NightlifePromoPage nightlifePromoPage;
 
-  NightlifePromoSuccess({
-    required this.nightlifePromoModels,
-  });
+  NightlifePromoSuccess({required this.nightlifePromoPage});
 }
 
-final class NightlifePromoFailure extends NightlifePromoState {
-  final Failure failure;
-
-  NightlifePromoFailure({required this.failure});
-}
+final class NightlifePromoFailure extends NightlifePromoState {}

@@ -1,5 +1,6 @@
 enum RecentSuggestionEnum {
   home,
-  fnb,
   review,
+  fnb,
+  nightlife,
 }

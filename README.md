@@ -5,8 +5,10 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.29+01
-- New Localisation for nightlife & spa
+Ver 0.1.30
+- New UI V2 Fnb, nightlife, spa screen
+- Add infinite scroll
+- Add recommended for you based high avg rating
 ```
 
 ## Getting Started

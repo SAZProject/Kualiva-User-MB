@@ -132,7 +132,7 @@ class NightlifeNearestItem extends StatelessWidget {
               return _tagView(
                 context,
                 context.tr(
-                  "f_n_b.tags_more",
+                  "nightlife.tags_more",
                   args: [(merchant.categories.length - 1).toString()],
                 ),
               );

@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
@@ -25,7 +24,6 @@ class _FnbActionFeatureState extends State<FnbActionFeature> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 450.h,
       width: double.maxFinite,
       child: _listFnbAction(),
     );

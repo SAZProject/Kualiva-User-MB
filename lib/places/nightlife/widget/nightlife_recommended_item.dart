@@ -151,7 +151,7 @@ class NightlifeRecommendedItem extends StatelessWidget {
               return _categoryTagView(
                 context,
                 context.tr(
-                  "f_n_b.tags_more",
+                  "nightlife.tags_more",
                   args: [(place.categories.length - 3).toString()],
                 ),
               );
@@ -198,7 +198,10 @@ class NightlifeRecommendedItem extends StatelessWidget {
             return _isMerchantTagView(
               context,
               index,
-              ["f_n_b.is_merchant_tag_1", "f_n_b.is_merchant_tag_2"][index],
+              [
+                "nightlife.is_merchant_tag_1",
+                "nightlife.is_merchant_tag_2"
+              ][index],
             );
           },
         ),

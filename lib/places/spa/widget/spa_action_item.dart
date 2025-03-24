@@ -3,16 +3,16 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/places/fnb/model/fnb_recommended_model.dart';
+import 'package:kualiva/places/spa/model/spa_action_model.dart';
 
-class FnbRecommendedItem extends StatelessWidget {
-  const FnbRecommendedItem({
+class SpaActionItem extends StatelessWidget {
+  const SpaActionItem({
     super.key,
     required this.place,
     required this.onPressed,
   });
 
-  final FnbRecommendedModel place;
+  final SpaActionModel place;
   final VoidCallback onPressed;
 
   @override
@@ -51,7 +51,6 @@ class FnbRecommendedItem extends StatelessWidget {
                       Visibility(
                         visible: place.isMerchant,
                         child: CustomImageView(
-                          margin: EdgeInsets.only(right: 5.h),
                           imagePath: ImageConstant.appLogo2,
                           height: 20.h,
                           width: 20.h,
@@ -65,14 +64,6 @@ class FnbRecommendedItem extends StatelessWidget {
                               color: theme(context).colorScheme.primary),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 5.h),
-                        child: Text(
-                          place.averageRating.toString(),
-                          style: theme(context).textTheme.labelMedium!.copyWith(
-                              color: theme(context).colorScheme.primary),
                         ),
                       ),
                       Padding(
@@ -149,7 +140,7 @@ class FnbRecommendedItem extends StatelessWidget {
               return _categoryTagView(
                 context,
                 context.tr(
-                  "f_n_b.tags_more",
+                  "spa.tags_more",
                   args: [(place.categories.length - 3).toString()],
                 ),
               );
@@ -196,7 +187,7 @@ class FnbRecommendedItem extends StatelessWidget {
             return _isMerchantTagView(
               context,
               index,
-              ["f_n_b.is_merchant_tag_1", "f_n_b.is_merchant_tag_2"][index],
+              ["spa.is_merchant_tag_1", "spa.is_merchant_tag_2"][index],
             );
           },
         ),

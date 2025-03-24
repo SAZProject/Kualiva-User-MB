@@ -85,8 +85,8 @@ class FnbNearestFeature extends StatelessWidget {
     );
   }
 
-  Widget _listBuilder(FnbNearestPage fnbNearesPage) {
-    final fnbNearestList = fnbNearesPage.data;
+  Widget _listBuilder(FnbNearestPage fnbNearestPage) {
+    final fnbNearestList = fnbNearestPage.data;
     return ListView.builder(
       controller: childScrollController,
       shrinkWrap: true,

@@ -3,16 +3,16 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/places/fnb/model/fnb_recommended_model.dart';
+import 'package:kualiva/places/spa/model/spa_recommended_model.dart';
 
-class FnbRecommendedItem extends StatelessWidget {
-  const FnbRecommendedItem({
+class SpaRecommendedItem extends StatelessWidget {
+  const SpaRecommendedItem({
     super.key,
     required this.place,
     required this.onPressed,
   });
 
-  final FnbRecommendedModel place;
+  final SpaRecommendedModel place;
   final VoidCallback onPressed;
 
   @override
@@ -37,7 +37,9 @@ class FnbRecommendedItem extends StatelessWidget {
               height: 100.h,
               imagePath:
                   place.featuredImage ?? "${ImageConstant.fnb1Path}/A/2.jpg",
-              radius: BorderRadius.all(Radius.circular(10.h)),
+              radius: BorderRadius.all(
+                Radius.circular(10.h),
+              ),
               boxFit: BoxFit.cover,
             ),
             SizedBox(width: 5.h),
@@ -149,7 +151,7 @@ class FnbRecommendedItem extends StatelessWidget {
               return _categoryTagView(
                 context,
                 context.tr(
-                  "f_n_b.tags_more",
+                  "spa.tags_more",
                   args: [(place.categories.length - 3).toString()],
                 ),
               );
@@ -196,7 +198,7 @@ class FnbRecommendedItem extends StatelessWidget {
             return _isMerchantTagView(
               context,
               index,
-              ["f_n_b.is_merchant_tag_1", "f_n_b.is_merchant_tag_2"][index],
+              ["spa.is_merchant_tag_1", "spa.is_merchant_tag_2"][index],
             );
           },
         ),

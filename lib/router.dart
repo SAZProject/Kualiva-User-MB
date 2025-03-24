@@ -25,6 +25,8 @@ import 'package:kualiva/places/nightlife/argument/nightlife_action_argument.dart
 import 'package:kualiva/places/nightlife/nightlife_action_screen.dart';
 import 'package:kualiva/places/nightlife/nightlife_detail_screen.dart';
 import 'package:kualiva/places/nightlife/nightlife_screen.dart';
+import 'package:kualiva/places/spa/argument/spa_action_argument.dart';
+import 'package:kualiva/places/spa/spa_action_screen.dart';
 import 'package:kualiva/places/spa/spa_detail_screen.dart';
 import 'package:kualiva/places/spa/spa_screen.dart';
 import 'package:kualiva/prime_celestial.dart';
@@ -80,11 +82,13 @@ class AppRoutes {
 
   static const String nightLifeScreen = "/nightlife_screen";
 
-  static const String nightLifeActionScreen = "/nightlife_action_screen";
-
   static const String spaScreen = "/spa_screen";
 
   static const String fnbActionScreen = "/f_n_b_action_screen";
+
+  static const String nightLifeActionScreen = "/nightlife_action_screen";
+
+  static const String spaActionScreen = "/spa_action_screen";
 
   static const String fnbFilterScreen = "/f_n_b_filter_screen";
 
@@ -222,16 +226,6 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 
-    case AppRoutes.nightLifeActionScreen:
-      final nightlifeActionArgument =
-          routeSetting.arguments as NightlifeActionArgument;
-      return PageTransition(
-          child: NightlifeActionScreen(
-            nightlifeActionArgument: nightlifeActionArgument,
-          ),
-          type: PageTransitionType.leftToRight,
-          duration: const Duration(milliseconds: 300));
-
     case AppRoutes.spaScreen:
       return PageTransition(
           child: const SpaScreen(),
@@ -242,6 +236,25 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
       final fnbActionArgument = routeSetting.arguments as FnbActionArgument;
       return PageTransition(
           child: FnbActionScreen(fnbActionArgument: fnbActionArgument),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.nightLifeActionScreen:
+      final nightlifeActionArgument =
+          routeSetting.arguments as NightlifeActionArgument;
+      return PageTransition(
+          child: NightlifeActionScreen(
+            nightlifeActionArgument: nightlifeActionArgument,
+          ),
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 300));
+
+    case AppRoutes.spaActionScreen:
+      final spaActionArgument = routeSetting.arguments as SpaActionArgument;
+      return PageTransition(
+          child: SpaActionScreen(
+            spaActionArgument: spaActionArgument,
+          ),
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 300));
 

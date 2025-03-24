@@ -3,4 +3,5 @@ enum RecentSuggestionEnum {
   review,
   fnb,
   nightlife,
+  spa,
 }

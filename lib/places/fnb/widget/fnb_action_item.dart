@@ -37,9 +37,7 @@ class FnbActionItem extends StatelessWidget {
               height: 100.h,
               imagePath:
                   place.featuredImage ?? "${ImageConstant.fnb1Path}/A/2.jpg",
-              radius: BorderRadius.horizontal(
-                left: Radius.circular(10.h),
-              ),
+              radius: BorderRadius.all(Radius.circular(10.h)),
               boxFit: BoxFit.cover,
             ),
             SizedBox(width: 5.h),

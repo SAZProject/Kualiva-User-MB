@@ -52,7 +52,7 @@ class FnbPromoItem extends StatelessWidget {
                       ),
                       decoration: CustomDecoration(context).outlinePrmPromo,
                       child: Text(
-                        context.tr("home_screen.promo_value", args: [
+                        context.tr("f_n_b.promo_value", args: [
                           merchant.promoPercentage.toString()
                         ]), // TODO: Percentage promo
                         style: theme(context).textTheme.labelLarge!.copyWith(
@@ -142,7 +142,7 @@ class FnbPromoItem extends StatelessWidget {
             return _tagView(
               context,
               context.tr(
-                "home_screen.tags_more",
+                "f_n_b.tags_more",
                 args: [(length - 1).toString()],
               ),
             );

@@ -1,24 +1,27 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/_data/enum/spa_action_enum.dart';
+import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_error_state.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
+import 'package:kualiva/places/spa/argument/spa_action_argument.dart';
 import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_page.dart';
 import 'package:kualiva/places/spa/widget/spa_nearest_item.dart';
+import 'package:kualiva/router.dart';
 
 class SpaNearestFeature extends StatelessWidget {
   const SpaNearestFeature({
     super.key,
-    required this.parentScrollController,
     required this.childScrollController,
+    required this.onSpaActionCallback,
   });
 
-  final ScrollController parentScrollController;
   final ScrollController childScrollController;
+  final Function(SpaActionEnum) onSpaActionCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -29,36 +32,25 @@ class SpaNearestFeature extends StatelessWidget {
         children: [
           CustomSectionHeader(
             label: context.tr("spa.nearest"),
-            // onPressed: () {},
-            useIcon: false,
+            useIcon: true,
+            onPressed: () async {
+              await Navigator.pushNamed(
+                context,
+                AppRoutes.spaActionScreen,
+                arguments: SpaActionArgument(
+                  title: context.tr("spa.nearest"),
+                  spaActionEnum: SpaActionEnum.nearest,
+                ),
+              );
+              onSpaActionCallback(SpaActionEnum.nearest);
+            },
           ),
-          SizedBox(height: 4.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.h),
+            padding: EdgeInsets.symmetric(horizontal: 5.h),
             child: SizedBox(
-              height: 450.h,
+              height: 220.h,
               width: double.maxFinite,
-              child: NotificationListener(
-                onNotification: (ScrollNotification notification) {
-                  if (notification is ScrollUpdateNotification) {
-                    if (notification.metrics.pixels ==
-                        notification.metrics.maxScrollExtent) {
-                      parentScrollController.animateTo(
-                          parentScrollController.position.maxScrollExtent,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeIn);
-                    } else if (notification.metrics.pixels ==
-                        notification.metrics.minScrollExtent) {
-                      parentScrollController.animateTo(
-                          parentScrollController.position.minScrollExtent,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeIn);
-                    }
-                  }
-                  return true;
-                },
-                child: _list(),
-              ),
+              child: _list(),
             ),
           ),
         ],
@@ -98,7 +90,7 @@ class SpaNearestFeature extends StatelessWidget {
     return ListView.builder(
       controller: childScrollController,
       shrinkWrap: true,
-      scrollDirection: Axis.vertical,
+      scrollDirection: Axis.horizontal,
       itemCount: spaNearestList.length,
       itemBuilder: (context, index) {
         return SpaNearestItem(

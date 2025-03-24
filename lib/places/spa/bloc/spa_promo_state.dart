@@ -5,18 +5,16 @@ sealed class SpaPromoState {}
 
 final class SpaPromoInitial extends SpaPromoState {}
 
-final class SpaPromoLoading extends SpaPromoState {}
+final class SpaPromoLoading extends SpaPromoState {
+  final SpaPromoPage? spaPromoPage;
+
+  SpaPromoLoading({required this.spaPromoPage});
+}
 
 final class SpaPromoSuccess extends SpaPromoState {
-  final List<SpaPromoModel> spaPromoModels;
+  final SpaPromoPage spaPromoPage;
 
-  SpaPromoSuccess({
-    required this.spaPromoModels,
-  });
+  SpaPromoSuccess({required this.spaPromoPage});
 }
 
-final class SpaPromoFailure extends SpaPromoState {
-  final Failure failure;
-
-  SpaPromoFailure({required this.failure});
-}
+final class SpaPromoFailure extends SpaPromoState {}

@@ -44,7 +44,7 @@ class _SpaAppBarFeatureState extends State<SpaAppBarFeature> {
         children: [
           Text(
             context.tr("common.current_location"),
-            style: CustomTextStyles(context).titleLargeOnPrimaryContainer,
+            style: CustomTextStyles(context).titleMediumPrimary,
           ),
           CurrentLocationFeature(),
         ],

@@ -10,6 +10,9 @@ import 'package:kualiva/_repository/place/nightlife/nightlife_nearest_repository
 import 'package:kualiva/_repository/place/nightlife/nightlife_promo_repository.dart';
 import 'package:kualiva/_repository/place/nightlife/nightlife_recommended_repository.dart';
 import 'package:kualiva/_repository/place/nightlife_repository.dart';
+import 'package:kualiva/_repository/place/spa/spa_nearest_repository.dart';
+import 'package:kualiva/_repository/place/spa/spa_promo_repository.dart';
+import 'package:kualiva/_repository/place/spa/spa_recommended_repository.dart';
 import 'package:kualiva/_repository/user/onboarding_repository.dart';
 import 'package:kualiva/_repository/common/parameter_repository.dart';
 import 'package:kualiva/_repository/place/spa_repository.dart';
@@ -36,9 +39,11 @@ import 'package:kualiva/places/nightlife/bloc/nightlife_detail_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_recommended_bloc.dart';
+import 'package:kualiva/places/spa/bloc/spa_action_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_detail_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_promo_bloc.dart';
+import 'package:kualiva/places/spa/bloc/spa_recommended_bloc.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 import 'package:kualiva/_repository/user/profile_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
@@ -183,6 +188,21 @@ class MainProvider extends StatelessWidget {
           create: (context) {
             return NightlifeRecommendedRepository(context.read<DioClient>());
           },
+        ),
+        RepositoryProvider(
+          create: (context) {
+            return SpaNearestRepository(context.read<DioClient>());
+          },
+        ),
+        RepositoryProvider(
+          create: (context) {
+            return SpaPromoRepository(context.read<DioClient>());
+          },
+        ),
+        RepositoryProvider(
+          create: (context) {
+            return SpaRecommendedRepository(context.read<DioClient>());
+          },
         )
       ],
       child: child,
@@ -209,13 +229,13 @@ class MainProvider extends StatelessWidget {
               context.read<NightlifeNearestRepository>());
         }),
         BlocProvider(create: (context) {
-          return SpaNearestBloc(context.read<SpaRepository>());
+          return SpaNearestBloc(context.read<SpaNearestRepository>());
         }),
         BlocProvider(create: (context) {
           return NightlifePromoBloc(context.read<NightlifePromoRepository>());
         }),
         BlocProvider(create: (context) {
-          return SpaPromoBloc(context.read<SpaRepository>());
+          return SpaPromoBloc(context.read<SpaPromoRepository>());
         }),
         BlocProvider(create: (context) {
           return FnbDetailBloc(context.read<FnbRepository>());
@@ -284,11 +304,6 @@ class MainProvider extends StatelessWidget {
         BlocProvider(create: (context) {
           return FnbRecommendedBloc(context.read<FnbRecommendedRepository>());
         }),
-        BlocProvider(create: (context) {
-          return NightlifeRecommendedBloc(
-            context.read<NightlifeRecommendedRepository>(),
-          );
-        }),
         BlocProvider(
           create: (context) {
             return NightlifeActionBloc(
@@ -297,7 +312,26 @@ class MainProvider extends StatelessWidget {
               context.read<NightlifeRecommendedRepository>(),
             );
           },
-        )
+        ),
+        BlocProvider(create: (context) {
+          return NightlifeRecommendedBloc(
+            context.read<NightlifeRecommendedRepository>(),
+          );
+        }),
+        BlocProvider(
+          create: (context) {
+            return SpaActionBloc(
+              context.read<SpaNearestRepository>(),
+              context.read<SpaPromoRepository>(),
+              context.read<SpaRecommendedRepository>(),
+            );
+          },
+        ),
+        BlocProvider(create: (context) {
+          return SpaRecommendedBloc(
+            context.read<SpaRecommendedRepository>(),
+          );
+        }),
       ],
       child: child,
     );

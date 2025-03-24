@@ -1,40 +1,23 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
-
-part 'spa_nearest_model.g.dart';
+import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
+import 'package:kualiva/places/spa/model/spa_promo_model.dart';
+import 'package:kualiva/places/spa/model/spa_recommended_model.dart';
 
 @immutable
-@HiveType(typeId: 18)
-class SpaNearestModel {
-  @HiveField(0)
+class SpaActionModel {
   final String id;
-
-  @HiveField(1)
   final String name;
-
-  @HiveField(2)
   final double averageRating;
-
-  @HiveField(3)
   final String fullAddress;
-
-  @HiveField(4)
   final String cityOrVillage;
-
-  @HiveField(5)
   final List<String> categories;
-
-  @HiveField(6)
   final String? featuredImage;
-
-  @HiveField(7)
   final bool isMerchant;
-
-  @HiveField(8)
   final String distanceFromUser;
-  const SpaNearestModel({
+
+  const SpaActionModel({
     required this.id,
     required this.name,
     required this.averageRating,
@@ -46,7 +29,7 @@ class SpaNearestModel {
     required this.distanceFromUser,
   });
 
-  SpaNearestModel copyWith({
+  SpaActionModel copyWith({
     String? id,
     String? name,
     double? averageRating,
@@ -57,7 +40,7 @@ class SpaNearestModel {
     bool? isMerchant,
     String? distanceFromUser,
   }) {
-    return SpaNearestModel(
+    return SpaActionModel(
       id: id ?? this.id,
       name: name ?? this.name,
       averageRating: averageRating ?? this.averageRating,
@@ -68,6 +51,48 @@ class SpaNearestModel {
           featuredImage != null ? featuredImage() : this.featuredImage,
       isMerchant: isMerchant ?? this.isMerchant,
       distanceFromUser: distanceFromUser ?? this.distanceFromUser,
+    );
+  }
+
+  factory SpaActionModel.fromNearestModel(SpaNearestModel data) {
+    return SpaActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: data.fullAddress,
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: data.isMerchant,
+      featuredImage: data.featuredImage,
+      distanceFromUser: data.distanceFromUser,
+    );
+  }
+
+  factory SpaActionModel.fromPromoModel(SpaPromoModel data) {
+    return SpaActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: '',
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: true,
+      featuredImage: data.featuredImage,
+      distanceFromUser: data.distanceFromUser,
+    );
+  }
+
+  factory SpaActionModel.fromRecommendedModel(SpaRecommendedModel data) {
+    return SpaActionModel(
+      id: data.id,
+      name: data.name,
+      averageRating: data.averageRating,
+      fullAddress: data.fullAddress,
+      cityOrVillage: data.cityOrVillage,
+      categories: data.categories,
+      isMerchant: data.isMerchant,
+      featuredImage: data.featuredImage,
+      distanceFromUser: data.distanceFromUser,
     );
   }
 
@@ -85,8 +110,8 @@ class SpaNearestModel {
     };
   }
 
-  factory SpaNearestModel.fromMap(Map<String, dynamic> map) {
-    return SpaNearestModel(
+  factory SpaActionModel.fromMap(Map<String, dynamic> map) {
+    return SpaActionModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       averageRating: map['averageRating']?.toDouble() ?? 0.0,
@@ -101,19 +126,19 @@ class SpaNearestModel {
 
   String toJson() => json.encode(toMap());
 
-  factory SpaNearestModel.fromJson(String source) =>
-      SpaNearestModel.fromMap(json.decode(source));
+  factory SpaActionModel.fromJson(String source) =>
+      SpaActionModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'SpaNearestModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
+    return 'SpaActionModel(id: $id, name: $name, averageRating: $averageRating, fullAddress: $fullAddress, cityOrVillage: $cityOrVillage, categories: $categories, featuredImage: $featuredImage, isMerchant: $isMerchant, distanceFromUser: $distanceFromUser)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is SpaNearestModel &&
+    return other is SpaActionModel &&
         other.id == id &&
         other.name == name &&
         other.averageRating == averageRating &&

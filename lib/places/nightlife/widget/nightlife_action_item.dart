@@ -37,9 +37,7 @@ class NightlifeActionItem extends StatelessWidget {
               height: 100.h,
               imagePath:
                   place.featuredImage ?? "${ImageConstant.fnb1Path}/A/2.jpg",
-              radius: BorderRadius.horizontal(
-                left: Radius.circular(10.h),
-              ),
+              radius: BorderRadius.all(Radius.circular(10.h)),
               boxFit: BoxFit.cover,
             ),
             SizedBox(width: 5.h),
@@ -142,7 +140,7 @@ class NightlifeActionItem extends StatelessWidget {
               return _categoryTagView(
                 context,
                 context.tr(
-                  "f_n_b.tags_more",
+                  "nightlife.tags_more",
                   args: [(place.categories.length - 3).toString()],
                 ),
               );
@@ -189,7 +187,10 @@ class NightlifeActionItem extends StatelessWidget {
             return _isMerchantTagView(
               context,
               index,
-              ["f_n_b.is_merchant_tag_1", "f_n_b.is_merchant_tag_2"][index],
+              [
+                "nightlife.is_merchant_tag_1",
+                "nightlife.is_merchant_tag_2"
+              ][index],
             );
           },
         ),

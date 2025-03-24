@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'spa_nearest_model.dart';
+part of 'spa_recommended_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SpaNearestModelAdapter extends TypeAdapter<SpaNearestModel> {
+class SpaRecommendedModelAdapter extends TypeAdapter<SpaRecommendedModel> {
   @override
-  final int typeId = 18;
+  final int typeId = 32;
 
   @override
-  SpaNearestModel read(BinaryReader reader) {
+  SpaRecommendedModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return SpaNearestModel(
+    return SpaRecommendedModel(
       id: fields[0] as String,
       name: fields[1] as String,
       averageRating: fields[2] as double,
@@ -30,7 +30,7 @@ class SpaNearestModelAdapter extends TypeAdapter<SpaNearestModel> {
   }
 
   @override
-  void write(BinaryWriter writer, SpaNearestModel obj) {
+  void write(BinaryWriter writer, SpaRecommendedModel obj) {
     writer
       ..writeByte(9)
       ..writeByte(0)
@@ -59,7 +59,7 @@ class SpaNearestModelAdapter extends TypeAdapter<SpaNearestModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SpaNearestModelAdapter &&
+      other is SpaRecommendedModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

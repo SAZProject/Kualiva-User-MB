@@ -26,6 +26,7 @@ class SpaDetailModel {
   final List<String>? types;
   final Geometry? geometry;
   final CurrentOpeningHours? currentOpeningHours;
+
   SpaDetailModel({
     this.addressComponents,
     this.formattedAddress,

@@ -1,15 +1,15 @@
-part of 'spa_promo_bloc.dart';
+part of 'spa_recommended_bloc.dart';
 
 @immutable
-sealed class SpaPromoEvent {}
+sealed class SpaRecommendedEvent {}
 
-final class SpaPromoFetched extends SpaPromoEvent {
+final class SpaRecommendedFetched extends SpaRecommendedEvent {
   final Paging paging;
   final PagingEnum pagingEnum;
   final double latitude;
   final double longitude;
 
-  SpaPromoFetched({
+  SpaRecommendedFetched({
     required this.paging,
     required this.pagingEnum,
     required this.latitude,

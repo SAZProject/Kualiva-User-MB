@@ -24,6 +24,10 @@ import 'package:kualiva/places/nightlife/model/nightlife_recommended_model.dart'
 import 'package:kualiva/places/nightlife/model/nightlife_recommended_page.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_model.dart';
 import 'package:kualiva/places/spa/model/spa_nearest_page.dart';
+import 'package:kualiva/places/spa/model/spa_promo_model.dart';
+import 'package:kualiva/places/spa/model/spa_promo_page.dart';
+import 'package:kualiva/places/spa/model/spa_recommended_model.dart';
+import 'package:kualiva/places/spa/model/spa_recommended_page.dart';
 import 'package:kualiva/review/enum/review_order_enum.dart';
 import 'package:kualiva/review/enum/review_selected_user_enum.dart';
 import 'package:kualiva/review/model/author_model.dart';
@@ -62,6 +66,10 @@ class MainHive {
     Hive.registerAdapter(NightlifePromoPageAdapter());
     Hive.registerAdapter(NightlifeRecommendedModelAdapter());
     Hive.registerAdapter(NightlifeRecommendedPageAdapter());
+    Hive.registerAdapter(SpaPromoModelAdapter());
+    Hive.registerAdapter(SpaPromoPageAdapter());
+    Hive.registerAdapter(SpaRecommendedModelAdapter());
+    Hive.registerAdapter(SpaRecommendedPageAdapter());
   }
 
   static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
@@ -90,6 +98,8 @@ class MainHive {
 
       /// Spa
       openLeSafeBox<SpaNearestPage>(MyBox.spaNearestPage),
+      openLeSafeBox<SpaPromoPage>(MyBox.spaPromoPage),
+      openLeSafeBox<SpaRecommendedPage>(MyBox.spaRecommendedPage),
 
       /// Fnb
       openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage),
@@ -135,6 +145,8 @@ enum MyBox {
 
   /// Spa
   spaNearestPage('spa_nearest_page'),
+  spaPromoPage('spa_promo_page'),
+  spaRecommendedPage('spa_recommended_page'),
 
   /// Fnb
   fnbNearestPage('fnb_nearest_page'),
@@ -181,6 +193,10 @@ enum _MyHive {
   nightlifePromoPage(27),
   nightlifeRecommended(28),
   nightlifeRecommendedPage(29),
+  spaPromo(30),
+  spaPromoPage(31),
+  spaRecommended(32),
+  spaRecommendedPage(33),
   ;
 
   final int typeId;

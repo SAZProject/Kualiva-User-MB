@@ -11,6 +11,7 @@ import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_float_modal.dart';
@@ -144,7 +145,7 @@ class FnbDetailScreen extends StatelessWidget {
           ));
           return SafeArea(
             child: Scaffold(
-              extendBodyBehindAppBar: true,
+              appBar: _fnbAppBar(context),
               body: SizedBox(
                 width: double.maxFinite,
                 height: Sizeutils.height,
@@ -154,6 +155,7 @@ class FnbDetailScreen extends StatelessWidget {
           );
         }
         return Scaffold(
+          appBar: _fnbAppBar(context),
           body: Center(
             child: CircularProgressIndicator(),
           ),
@@ -173,60 +175,38 @@ class FnbDetailScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: SizedBox(
           width: double.maxFinite,
-          child: Stack(
+          child: Column(
             children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: _fnbPlaceImages(context),
-              ),
-              Column(
-                children: [
-                  SizedBox(height: 5.h),
-                  _fnbAppBar(context),
-                  SizedBox(height: 100.h),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
-                    child: ClipRRect(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                        child: Container(
-                          width: double.maxFinite,
-                          decoration: placeArgument.isMerchant
-                              ? CustomDecoration(context).outlinePrimary_06
-                              : CustomDecoration(context)
-                                  .fillOnSecondaryContainer
-                                  .copyWith(
-                                    borderRadius:
-                                        BorderRadiusStyle.roundedBorder10,
-                                  ),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                SizedBox(height: 5.h),
-                                _fnbPlaceName(context, fnbDetail),
-                                SizedBox(height: 5.h),
-                                _fnbPlaceAbout(
-                                    context, fnbDetail, hasCallSupport),
-                                SizedBox(height: 5.h),
-                                _fnbPromo(context, fnbDetail),
-                                SizedBox(height: 5.h),
-                                _fnbPlaceMenu(context, fnbDetail),
-                                SizedBox(height: 5.h),
-                                _fnbPlaceReviews(context, fnbDetail),
-                                SizedBox(height: 10.h),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              SizedBox(height: 5.h),
+              _fnbPlaceImages(context),
+              SizedBox(height: 5.h),
+              _fnbPlaceName(context, fnbDetail),
+              _sectionDivider(context, true),
+              _fnbPlaceAbout(context, fnbDetail, hasCallSupport),
+              _sectionDivider(context, true),
+              _fnbPromo(context, fnbDetail),
+              _sectionDivider(context, placeArgument.isMerchant),
+              _fnbPlaceMenu(context, fnbDetail),
+              _sectionDivider(context, placeArgument.isMerchant),
+              _fnbPlaceReviews(context, fnbDetail),
+              SizedBox(height: 5.h),
+              _fnbClaimButton(context),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _sectionDivider(BuildContext context, bool isShowed) {
+    return Visibility(
+      visible: isShowed,
+      child: Divider(
+        height: 5.h,
+        thickness: 1.h,
+        color: theme(context).colorScheme.onPrimaryContainer,
+        indent: 10.h,
+        endIndent: 10.h,
       ),
     );
   }
@@ -239,45 +219,26 @@ class FnbDetailScreen extends StatelessWidget {
         options: CarouselOptions(
           viewportFraction: 1,
           autoPlay: false,
+          scrollPhysics: NeverScrollableScrollPhysics(),
           // enlargeCenterPage: true,
         ),
       ),
     );
   }
 
-  Widget _fnbAppBar(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            margin: EdgeInsets.only(left: 5.h),
-            decoration: BoxDecoration(
-              color: theme(context)
-                  .colorScheme
-                  .onSecondaryContainer
-                  .withValues(alpha: 0.6),
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              iconSize: 25.h,
-              icon: const Icon(Icons.arrow_back_ios_new),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-          Row(
-            children: [
-              _buildPopupMenuItem(context, 0, Icons.favorite),
-              SizedBox(width: 5.h),
-              _buildPopupMenuItem(context, 1, Icons.flag),
-              SizedBox(width: 5.h),
-              _buildPopupMenuItem(context, 2, Icons.share),
-              SizedBox(width: 5.h),
-            ],
-          ),
-        ],
-      ),
+  PreferredSizeWidget _fnbAppBar(BuildContext context) {
+    return CustomAppBar(
+      useLeading: true,
+      onBackPressed: () => Navigator.pop(context),
+      actions: [
+        SizedBox(width: 5.h),
+        _buildPopupMenuItem(context, 0, Icons.favorite),
+        SizedBox(width: 5.h),
+        _buildPopupMenuItem(context, 1, Icons.flag),
+        SizedBox(width: 5.h),
+        _buildPopupMenuItem(context, 2, Icons.share),
+        SizedBox(width: 5.h),
+      ],
     );
   }
 
@@ -324,47 +285,41 @@ class FnbDetailScreen extends StatelessWidget {
   }
 
   Widget _fnbPlaceName(BuildContext context, FnbDetailModel fnbDetail) {
-    // var brightness = Theme.of(context).brightness;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.h),
       child: SizedBox(
         width: double.maxFinite,
-        child:
-            // Stack(
-            //   alignment: Alignment.center,
-            //   children: [
-            Align(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 30.h,
-                child: Text(
-                  fnbDetail.name ?? "",
-                  textAlign: TextAlign.center,
-                  style: theme(context).textTheme.headlineSmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+        child: Row(
+          children: [
+            Text(
+              fnbDetail.name ?? "",
+              textAlign: TextAlign.center,
+              style: placeArgument.isMerchant
+                  ? theme(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(color: theme(context).colorScheme.primary)
+                  : theme(context).textTheme.titleLarge,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            SizedBox(width: 5.h),
+            SizedBox(
+              height: 20.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(5, (index) {
+                  return Icon(
+                    Icons.attach_money,
+                    size: 15.h,
+                    color: index <= ((fnbDetail.rating ?? 1.0).floor() - 1)
+                        ? theme(context).colorScheme.primary
+                        : null,
+                  );
+                }),
               ),
-              Visibility(
-                visible: !placeArgument.isMerchant,
-                child: CustomElevatedButton(
-                  initialText: context.tr("f_n_b_detail.claim_btn"),
-                  height: 30.h,
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
-                  buttonStyle: CustomButtonStyles.none,
-                  decoration:
-                      CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(
-                          context),
-                  buttonTextStyle:
-                      CustomTextStyles(context).titleMediumOnPrimaryContainer,
-                  onPressed: () {},
-                ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
         // Align(
         //   alignment: Alignment.centerLeft,
@@ -391,93 +346,108 @@ class FnbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _fnbPlaceAbout(
-      BuildContext context, FnbDetailModel fnbDetail, bool hasCallSupport) {
-    return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.symmetric(horizontal: 10.h),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 5.h),
-            child: Text(
-              context.tr("f_n_b_detail.about"),
-              style: theme(context).textTheme.titleMedium,
+  Widget _fnbClaimButton(BuildContext context) {
+    return Visibility(
+      visible: !placeArgument.isMerchant,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.h),
+        child: SizedBox(
+          width: double.maxFinite,
+          child: Align(
+            alignment: Alignment.center,
+            child: CustomElevatedButton(
+              initialText: context.tr("f_n_b_detail.claim_btn"),
+              height: 30.h,
+              margin: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+              buttonStyle: CustomButtonStyles.none,
+              decoration:
+                  CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(
+                      context),
+              buttonTextStyle:
+                  CustomTextStyles(context).titleMediumOnPrimaryContainer,
+              onPressed: () {},
             ),
           ),
-          SizedBox(height: 5.h),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.tag,
-                label: "",
-                trailingWidget: _aboutTag(context, fnbDetail),
-                visible: fnbDetail.types != null,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.timer,
-                label: "",
-                trailingWidget: _aboutOperationalTime(context, fnbDetail),
-                visible: fnbDetail.currentOpeningHours != null,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.table_bar_outlined,
-                label: "",
-                trailingWidget: _aboutFacilities(context, fnbDetail),
-                visible: placeArgument.isMerchant,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.phone,
-                label: fnbDetail.formattedPhoneNumber ?? "",
-                onPressed: hasCallSupport
-                    ? () => _launchContact(fnbDetail.formattedPhoneNumber ??
-                        "".replaceAll("-", ""))
-                    : null,
-                visible: fnbDetail.formattedPhoneNumber != null,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.place,
-                label: fnbDetail.formattedAddress ?? "",
-                maxLines: 4,
-                onPressed: () {
-                  customMapBottomSheet(
-                    context,
-                    fnbDetail.geometry == null
-                        ? 0.0
-                        : fnbDetail.geometry!.location.lat,
-                    fnbDetail.geometry == null
-                        ? 0.0
-                        : fnbDetail.geometry!.location.lng,
-                    fnbDetail.name ?? "",
-                  );
-                },
-                visible: fnbDetail.formattedAddress != null,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.attach_money,
-                label: "",
-                trailingWidget: _aboutPrice(context, fnbDetail),
-                visible: placeArgument.isMerchant,
-              ),
-            ],
-          ),
-        ],
+        ),
+      ),
+    );
+  }
+
+  Widget _fnbPlaceAbout(
+      BuildContext context, FnbDetailModel fnbDetail, bool hasCallSupport) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.h),
+      child: SizedBox(
+        width: double.maxFinite,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 8.h),
+            _buildAboutContent(
+              context,
+              icon: Icons.tag,
+              label: "",
+              trailingWidget: _aboutTag(context, fnbDetail),
+              visible: fnbDetail.types != null,
+            ),
+            SizedBox(height: 8.h),
+            _buildAboutContent(
+              context,
+              icon: Icons.timer,
+              label: "",
+              trailingWidget: _aboutOperationalTime(context, fnbDetail),
+              visible: fnbDetail.currentOpeningHours != null,
+            ),
+            SizedBox(height: 8.h),
+            _buildAboutContent(
+              context,
+              icon: Icons.table_bar_outlined,
+              label: "",
+              trailingWidget: _aboutFacilities(context, fnbDetail),
+              visible: placeArgument.isMerchant,
+            ),
+            SizedBox(height: 8.h),
+            _buildAboutContent(
+              context,
+              icon: Icons.phone,
+              label: fnbDetail.formattedPhoneNumber ?? "",
+              onPressed: hasCallSupport
+                  ? () => _launchContact(
+                      fnbDetail.formattedPhoneNumber ?? "".replaceAll("-", ""))
+                  : null,
+              visible: fnbDetail.formattedPhoneNumber != null,
+            ),
+            SizedBox(height: 8.h),
+            _buildAboutContent(
+              context,
+              icon: Icons.place,
+              label: fnbDetail.formattedAddress ?? "",
+              maxLines: 4,
+              onPressed: () {
+                customMapBottomSheet(
+                  context,
+                  fnbDetail.geometry == null
+                      ? 0.0
+                      : fnbDetail.geometry!.location.lat,
+                  fnbDetail.geometry == null
+                      ? 0.0
+                      : fnbDetail.geometry!.location.lng,
+                  fnbDetail.name ?? "",
+                );
+              },
+              visible: fnbDetail.formattedAddress != null,
+            ),
+            SizedBox(height: 8.h),
+            _buildAboutContent(
+              context,
+              icon: Icons.attach_money,
+              label: "",
+              trailingWidget: _aboutPrice(context, fnbDetail),
+              visible: placeArgument.isMerchant,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -499,7 +469,12 @@ class FnbDetailScreen extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            leadingWidget ?? Icon(icon, size: 25.h),
+            leadingWidget ??
+                Icon(
+                  icon,
+                  size: 25.h,
+                  color: theme(context).colorScheme.primary,
+                ),
             Flexible(
               child: Padding(
                 padding: EdgeInsets.only(left: 10.h),
@@ -813,6 +788,7 @@ class FnbDetailScreen extends StatelessWidget {
       replacement: const SizedBox(),
       child: Container(
         width: double.maxFinite,
+        padding: EdgeInsets.symmetric(horizontal: 10.h),
         margin: EdgeInsets.symmetric(horizontal: 5.h),
         child: Column(
           children: [
@@ -926,6 +902,7 @@ class FnbDetailScreen extends StatelessWidget {
       replacement: const SizedBox(),
       child: Container(
         width: double.maxFinite,
+        padding: EdgeInsets.symmetric(horizontal: 10.h),
         margin: EdgeInsets.symmetric(horizontal: 5.h),
         child: Column(
           children: [
@@ -997,6 +974,7 @@ class FnbDetailScreen extends StatelessWidget {
   Widget _fnbPlaceReviews(BuildContext context, FnbDetailModel fnbDetail) {
     return Container(
       width: double.maxFinite,
+      padding: EdgeInsets.symmetric(horizontal: 10.h),
       margin: EdgeInsets.symmetric(horizontal: 5.h),
       child: Column(
         children: [

@@ -38,6 +38,7 @@ class MyProfileUserImage extends StatelessWidget {
                     icon: Icon(
                       Icons.edit,
                       size: 20.h,
+                      color: theme(context).colorScheme.onSecondaryContainer,
                     ),
                     onPressed: () async {
                       await customImageDialog(

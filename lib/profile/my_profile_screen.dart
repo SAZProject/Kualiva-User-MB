@@ -44,7 +44,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   final FocusNode _fullNameFocus = FocusNode();
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _birthDateFocus = FocusNode();
-  // final FocusNode _phoneFocus = FocusNode();
+  final FocusNode _phoneFocus = FocusNode();
   // final FocusNode _passFocus = FocusNode();
   // final FocusNode _pinFocus = FocusNode();
 
@@ -64,7 +64,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   bool fullNameReadOnly = true;
   bool emailReadOnly = true;
   bool birthDateReadOnly = true;
-  // bool _phoneReadOnly = true;
+  bool _phoneReadOnly = true;
   // bool _passReadOnly = true;
   // bool _pinReadOnly = true;
   // bool _passObscure = true;
@@ -319,16 +319,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   context,
                   headerLabel: context.tr("my_profile.phone_number"),
                   controller: _phoneNumberCtl,
-                  // focusNode: _phoneFocus,
-                  // isReadOnly: _phoneReadOnly,
-                  // onEditPressed: () {
-                  //   setState(() {
-                  //     _phoneReadOnly = !_phoneReadOnly;
-                  //     if (_phoneReadOnly == false) {
-                  //       _phoneFocus.requestFocus();
-                  //     }
-                  //   });
-                  // },
+                  focusNode: _phoneFocus,
+                  isReadOnly: _phoneReadOnly,
+                  onEditPressed: () {
+                    setState(() {
+                      _phoneReadOnly = !_phoneReadOnly;
+                      if (_phoneReadOnly == false) {
+                        _phoneFocus.requestFocus();
+                      }
+                    });
+                  },
                 ),
                 SizedBox(height: 5.h),
                 BlocBuilder<UserProfileBloc, UserProfileState>(
@@ -437,7 +437,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         appTheme.redA700,
                         theme(context).colorScheme.primaryContainer,
                       ],
-                      strokeWidth: 1.h,
+                      strokeWidth: 2.h,
                       onPressed: _logoutProfileFunc,
                     ),
                   ],
@@ -459,9 +459,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     BuildContext context, {
     required String headerLabel,
     required TextEditingController controller,
-    // required FocusNode focusNode,
-    // required bool isReadOnly,
-    // required Function()? onEditPressed,
+    required FocusNode focusNode,
+    required bool isReadOnly,
+    required Function()? onEditPressed,
   }) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.h),
@@ -480,45 +480,65 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(height: 5.h),
-            CustomPhoneNumber(
-              country: selectedCountry,
-              // controller: controller,
-              // textInputType: TextInputType.phone,
-              onPressed: (Country country) {
-                selectedCountry = country;
-              },
-              textFormField: CustomTextFormField(
-                controller: controller,
-                // focusNode: focusNode,
-                readOnly: true,
-                textInputType: TextInputType.phone,
-                // suffix: Row(
-                //   mainAxisSize: MainAxisSize.min,
-                //   children: [
-                //     Align(
-                //       alignment: Alignment.centerRight,
-                //       child: Padding(
-                //         padding: EdgeInsets.only(right: 10.h),
-                //         child: InkWell(
-                //           onTap: onEditPressed,
-                //           child: Text(
-                //             context.tr(
-                //               isReadOnly ? "my_profile.edit" : "common.cancel",
-                //             ),
-                //             style:
-                //                 CustomTextStyles(context).bodySmall12.copyWith(
-                //                       color: isReadOnly
-                //                           ? theme(context).colorScheme.primary
-                //                           : theme(context)
-                //                               .colorScheme
-                //                               .primaryContainer,
-                //                     ),
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
+            Padding(
+              padding: EdgeInsets.only(left: 10.h),
+              child: CustomPhoneNumber(
+                country: selectedCountry,
+                onPressed: (Country country) {
+                  selectedCountry = country;
+                },
+                textFormField: CustomTextFormField(
+                  controller: controller,
+                  focusNode: focusNode,
+                  readOnly: isReadOnly,
+                  textInputType: TextInputType.phone,
+                  suffix: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 2.5.h,
+                                right: 7.5.h,
+                              ),
+                              child: SizedBox(
+                                height: 20.h,
+                                child: VerticalDivider(
+                                  thickness: 1.h,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 10.h),
+                              child: InkWell(
+                                onTap: onEditPressed,
+                                child: Text(
+                                  context.tr(
+                                    isReadOnly
+                                        ? "my_profile.edit"
+                                        : "common.cancel",
+                                  ),
+                                  style: CustomTextStyles(context)
+                                      .bodySmall12
+                                      .copyWith(
+                                        color: isReadOnly
+                                            ? theme(context).colorScheme.primary
+                                            : theme(context)
+                                                .colorScheme
+                                                .primaryContainer,
+                                      ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
@@ -552,20 +572,23 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(height: 4.h),
-            CustomDropDown(
-              icon: Container(
-                margin: EdgeInsets.only(left: 16.h),
-                child: Icon(
-                  Icons.arrow_drop_down,
-                  size: 25.h,
+            Padding(
+              padding: EdgeInsets.only(left: 10.h),
+              child: CustomDropDown(
+                icon: Container(
+                  margin: EdgeInsets.only(left: 16.h),
+                  child: Icon(
+                    Icons.arrow_drop_down,
+                    size: 25.h,
+                  ),
                 ),
+                iconSize: 25.h,
+                hintText: hintText,
+                value: selectedGender,
+                items: items,
+                contentPadding: EdgeInsets.all(10.h),
+                onChange: onChange,
               ),
-              iconSize: 25.h,
-              hintText: hintText,
-              value: selectedGender,
-              items: items,
-              contentPadding: EdgeInsets.all(10.h),
-              onChange: onChange,
             ),
           ],
         ),

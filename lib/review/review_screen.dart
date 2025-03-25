@@ -50,10 +50,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   void _nextPaging(Pagination pagination) {
     if (_paging.value.page == pagination.totalPage) return;
-    _paging.value = Paging(
-      page: pagination.nextPage ?? pagination.totalPage,
-      size: pagination.size,
-    );
+    _paging.value = Paging.fromPagination(pagination);
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
     context.read<ReviewFilterCubit>().pagination(paging: _paging.value);
   }

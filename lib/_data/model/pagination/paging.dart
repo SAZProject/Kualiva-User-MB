@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:kualiva/_data/model/pagination/pagination.dart';
 
 @immutable
 class Paging {
@@ -34,6 +35,10 @@ class Paging {
       page: map['page']?.toInt() ?? 0,
       size: map['size']?.toInt() ?? 0,
     );
+  }
+
+  factory Paging.fromPagination(Pagination pagination) {
+    return Paging.fromPagination(pagination);
   }
 
   String toJson() => json.encode(toMap());

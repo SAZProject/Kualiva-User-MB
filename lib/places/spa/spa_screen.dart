@@ -48,10 +48,7 @@ class _SpaScreenState extends State<SpaScreen> {
 
   void _nextPromoPaging(Pagination pagination) {
     if (_pagingPromo.value.page == pagination.totalPage) return;
-    _pagingPromo.value = Paging(
-      page: pagination.nextPage ?? pagination.totalPage,
-      size: pagination.size,
-    );
+    _pagingPromo.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPromoPaging, 'Next Paging ${_pagingPromo.value}');
@@ -78,10 +75,7 @@ class _SpaScreenState extends State<SpaScreen> {
 
   void _nextNearestPaging(Pagination pagination) {
     if (_pagingNearest.value.page == pagination.totalPage) return;
-    _pagingNearest.value = Paging(
-      page: pagination.nextPage ?? pagination.totalPage,
-      size: pagination.size,
-    );
+    _pagingNearest.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextNearestPaging, 'Next Paging ${_pagingNearest.value}');
@@ -109,10 +103,7 @@ class _SpaScreenState extends State<SpaScreen> {
 
   void _nextRecommendedPaging(Pagination pagination) {
     if (_pagingRecommended.value.page == pagination.totalPage) return;
-    _pagingRecommended.value = Paging(
-      page: pagination.nextPage ?? pagination.totalPage,
-      size: pagination.size,
-    );
+    _pagingRecommended.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
     LeLog.sd(

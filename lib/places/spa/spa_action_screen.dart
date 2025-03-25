@@ -59,10 +59,7 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
 
   void _nextPaging(Pagination pagination) {
     if (_paging.value.page == pagination.totalPage) return;
-    _paging.value = Paging(
-      page: pagination.nextPage ?? pagination.totalPage,
-      size: pagination.size,
-    );
+    _paging.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');

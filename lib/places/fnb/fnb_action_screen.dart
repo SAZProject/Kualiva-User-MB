@@ -15,6 +15,9 @@ import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_action_bloc.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_recommended_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_action_feature.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 
@@ -68,10 +71,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
 
   void _nextPaging(Pagination pagination) {
     if (_paging.value.page == pagination.totalPage) return;
-    _paging.value = Paging(
-      page: pagination.nextPage ?? pagination.totalPage,
-      size: pagination.size,
-    );
+    _paging.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
@@ -95,7 +95,30 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
           latitude: state.currentLocationModel.latitude,
           longitude: state.currentLocationModel.longitude,
         ));
+    if (fnbActionEnum == FnbActionEnum.nearest) {
+      final state = context.read<FnbNearestBloc>().state;
+      if (state is! FnbNearestSuccess) return;
+      final pagination = state.fnbNearestPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
+    if (fnbActionEnum == FnbActionEnum.promo) {
+      final state = context.read<FnbPromoBloc>().state;
+      if (state is! FnbPromoSuccess) return;
+      final pagination = state.fnbPromoPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
+    if (fnbActionEnum == FnbActionEnum.recommended) {
+      final state = context.read<FnbRecommendedBloc>().state;
+      if (state is! FnbRecommendedSuccess) return;
+      final pagination = state.fnbRecommendedPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
   }
+
+  void initPaging(Pagination pagination) {}
 
   @override
   void initState() {

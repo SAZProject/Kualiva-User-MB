@@ -110,6 +110,11 @@ class FnbRecommendedFeature extends StatelessWidget {
 
   Widget _listBuilder(FnbRecommendedPage fnbRecommendedPage) {
     final fnbRecommendedList = fnbRecommendedPage.data;
+    print("LeRucco");
+    print(fnbRecommendedList.length);
+    for (int i = 0; i < fnbRecommendedList.length; i++) {
+      print(fnbRecommendedList[i]);
+    }
     return ListView.builder(
       controller: childScrollController,
       shrinkWrap: true,

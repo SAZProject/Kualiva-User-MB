@@ -120,9 +120,9 @@ class MainHive {
   }
 
   static Future<void> deleteSplashBox() async {
-    Future.wait([
-      deleteBoxAndOpenLeSafe<CurrentLocationModel>(MyBox.currentLocation),
-    ]);
+    // Future.wait([
+    //   deleteBoxAndOpenLeSafe<CurrentLocationModel>(MyBox.currentLocation),
+    // ]);
   }
 
   static bool checkOpenBox() {

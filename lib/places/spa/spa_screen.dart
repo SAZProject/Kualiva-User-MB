@@ -106,9 +106,9 @@ class _SpaScreenState extends State<SpaScreen> {
     _pagingRecommended.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
-    LeLog.sd(
-        this, _nextNearestPaging, 'Next Paging ${_pagingRecommended.value}');
-    context.read<SpaNearestBloc>().add(SpaNearestFetched(
+    LeLog.sd(this, _nextRecommendedPaging,
+        'Next Paging ${_pagingRecommended.value}');
+    context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
           paging: _pagingRecommended.value,
           pagingEnum: PagingEnum.paged,
           latitude: state.currentLocationModel.latitude,

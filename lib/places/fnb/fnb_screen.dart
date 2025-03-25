@@ -108,8 +108,8 @@ class _FnbScreenState extends State<FnbScreen> {
     _pagingRecommended.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
-    LeLog.sd(
-        this, _nextNearestPaging, 'Next Paging ${_pagingRecommended.value}');
+    LeLog.sd(this, _nextRecommendedPaging,
+        'Next Paging ${_pagingRecommended.value}');
     context.read<FnbRecommendedBloc>().add(FnbRecommendedFetched(
           paging: _pagingRecommended.value,
           pagingEnum: PagingEnum.paged,

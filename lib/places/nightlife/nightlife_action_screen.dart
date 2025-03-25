@@ -13,6 +13,9 @@ import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/places/nightlife/argument/nightlife_action_argument.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_action_bloc.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
+import 'package:kualiva/places/nightlife/bloc/nightlife_recommended_bloc.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_action_feature.dart';
 
 class NightlifeActionScreen extends StatefulWidget {
@@ -84,6 +87,27 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
           latitude: state.currentLocationModel.latitude,
           longitude: state.currentLocationModel.longitude,
         ));
+    if (nightlifeActionEnum == NightlifeActionEnum.nearest) {
+      final state = context.read<NightlifeNearestBloc>().state;
+      if (state is! NightlifeNearestSuccess) return;
+      final pagination = state.nightlifeNearestPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
+    if (nightlifeActionEnum == NightlifeActionEnum.promo) {
+      final state = context.read<NightlifePromoBloc>().state;
+      if (state is! NightlifePromoSuccess) return;
+      final pagination = state.nightlifePromoPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
+    if (nightlifeActionEnum == NightlifeActionEnum.recommended) {
+      final state = context.read<NightlifeRecommendedBloc>().state;
+      if (state is! NightlifeRecommendedSuccess) return;
+      final pagination = state.nightlifeRecommendedPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
   }
 
   @override

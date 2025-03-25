@@ -13,6 +13,9 @@ import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/places/spa/argument/spa_action_argument.dart';
 import 'package:kualiva/places/spa/bloc/spa_action_bloc.dart';
+import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
+import 'package:kualiva/places/spa/bloc/spa_promo_bloc.dart';
+import 'package:kualiva/places/spa/bloc/spa_recommended_bloc.dart';
 import 'package:kualiva/places/spa/feature/spa_action_feature.dart';
 
 class SpaActionScreen extends StatefulWidget {
@@ -83,6 +86,28 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
           latitude: state.currentLocationModel.latitude,
           longitude: state.currentLocationModel.longitude,
         ));
+
+    if (spaActionEnum == SpaActionEnum.nearest) {
+      final state = context.read<SpaNearestBloc>().state;
+      if (state is! SpaNearestSuccess) return;
+      final pagination = state.spaNearestPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
+    if (spaActionEnum == SpaActionEnum.promo) {
+      final state = context.read<SpaPromoBloc>().state;
+      if (state is! SpaPromoSuccess) return;
+      final pagination = state.spaPromoPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
+    if (spaActionEnum == SpaActionEnum.recommended) {
+      final state = context.read<SpaRecommendedBloc>().state;
+      if (state is! SpaRecommendedSuccess) return;
+      final pagination = state.spaRecommendedPage.pagination;
+      _paging.value = Paging.fromPagination(pagination);
+      return;
+    }
   }
 
   @override

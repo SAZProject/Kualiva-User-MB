@@ -38,7 +38,10 @@ class Paging {
   }
 
   factory Paging.fromPagination(Pagination pagination) {
-    return Paging.fromPagination(pagination);
+    return Paging(
+      page: pagination.nextPage ?? pagination.totalPage,
+      size: pagination.size,
+    );
   }
 
   String toJson() => json.encode(toMap());

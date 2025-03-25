@@ -118,8 +118,6 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     }
   }
 
-  void initPaging(Pagination pagination) {}
-
   @override
   void initState() {
     super.initState();

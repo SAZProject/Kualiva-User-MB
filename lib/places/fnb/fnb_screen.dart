@@ -161,7 +161,7 @@ class _FnbScreenState extends State<FnbScreen> {
             ));
         break;
       case FnbActionEnum.recommended:
-        context.read<FnbNearestBloc>().add(FnbNearestFetched(
+        context.read<FnbRecommendedBloc>().add(FnbRecommendedFetched(
               paging: _pagingRecommended.value,
               pagingEnum: PagingEnum.before,
               latitude: state.currentLocationModel.latitude,

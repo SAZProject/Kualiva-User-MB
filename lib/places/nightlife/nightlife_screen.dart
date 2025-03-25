@@ -106,9 +106,9 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
     _pagingRecommended.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
-    LeLog.sd(
-        this, _nextNearestPaging, 'Next Paging ${_pagingRecommended.value}');
-    context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
+    LeLog.sd(this, _nextRecommendedPaging,
+        'Next Paging ${_pagingRecommended.value}');
+    context.read<NightlifeRecommendedBloc>().add(NightlifeRecommendedFetched(
           paging: _pagingRecommended.value,
           pagingEnum: PagingEnum.paged,
           latitude: state.currentLocationModel.latitude,
@@ -160,7 +160,9 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
             ));
         break;
       case NightlifeActionEnum.recommended:
-        context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
+        context
+            .read<NightlifeRecommendedBloc>()
+            .add(NightlifeRecommendedFetched(
               paging: _pagingRecommended.value,
               pagingEnum: PagingEnum.before,
               latitude: state.currentLocationModel.latitude,

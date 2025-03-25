@@ -159,7 +159,7 @@ class _SpaScreenState extends State<SpaScreen> {
             ));
         break;
       case SpaActionEnum.recommended:
-        context.read<SpaNearestBloc>().add(SpaNearestFetched(
+        context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
               paging: _pagingRecommended.value,
               pagingEnum: PagingEnum.before,
               latitude: state.currentLocationModel.latitude,

@@ -98,7 +98,7 @@ class SpaActionItem extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          place.fullAddress,
+                          place.cityOrVillage,
                           style: theme(context).textTheme.bodySmall,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

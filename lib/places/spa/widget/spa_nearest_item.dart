@@ -89,7 +89,7 @@ class SpaNearestItem extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            merchant.fullAddress,
+                            merchant.cityOrVillage,
                             style: theme(context).textTheme.bodySmall,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

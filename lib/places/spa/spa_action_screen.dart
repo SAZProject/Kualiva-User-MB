@@ -158,6 +158,7 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
       width: double.maxFinite,
       height: Sizeutils.height,
       child: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             SizedBox(height: 5.h),
@@ -167,7 +168,7 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
             ),
             SizedBox(height: 5.h),
             SpaActionFeature(
-              scrollController: _scrollController,
+              scrollController: ScrollController(), // TODO: Hapus
             ),
             SizedBox(height: 5.h),
           ],

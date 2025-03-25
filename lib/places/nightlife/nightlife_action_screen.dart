@@ -158,6 +158,7 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
       width: double.maxFinite,
       height: Sizeutils.height,
       child: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             SizedBox(height: 5.h),
@@ -167,7 +168,7 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
             ),
             SizedBox(height: 5.h),
             NightlifeActionFeature(
-              scrollController: _scrollController,
+              scrollController: ScrollController(), // TODO: Hapus
             ),
             SizedBox(height: 5.h),
           ],

@@ -47,11 +47,14 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
   FiltersModel? filtersModel;
 
   void _onScrollPagination() {
+    print("_onScrollPagination");
     if (_scrollController.position.pixels !=
         _scrollController.position.maxScrollExtent) {
       return;
     }
+    print('Max Scroll');
     final state = context.read<FnbActionBloc>().state;
+    print(state.toString());
     if (state is FnbActionSuccessNearest) {
       final pagination = state.fnbNearestPage.pagination;
       _nextPaging(pagination);
@@ -70,6 +73,9 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
   }
 
   void _nextPaging(Pagination pagination) {
+    print('Hesoyam 2');
+    print(_paging.value.toString());
+    print(pagination);
     if (_paging.value.page == pagination.totalPage) return;
     _paging.value = Paging.fromPagination(pagination);
     final state = context.read<CurrentLocationBloc>().state;
@@ -114,6 +120,9 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
       if (state is! FnbRecommendedSuccess) return;
       final pagination = state.fnbRecommendedPage.pagination;
       _paging.value = Paging.fromPagination(pagination);
+      print("Hesoyam");
+      print(pagination);
+      print(_paging.value.toString());
       return;
     }
   }
@@ -166,6 +175,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
       width: double.maxFinite,
       height: Sizeutils.height,
       child: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             SizedBox(height: 5.h),
@@ -177,7 +187,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
             _tagsFilter(context),
             SizedBox(height: 5.h),
             FnbActionFeature(
-              scrollController: _scrollController,
+              scrollController: ScrollController(), // TODO: Hapus
             ),
             SizedBox(height: 5.h),
           ],

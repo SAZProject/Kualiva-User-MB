@@ -37,7 +37,14 @@ class Paging {
     );
   }
 
-  factory Paging.fromPagination(Pagination pagination) {
+  factory Paging.fromPaginationCurrent(Pagination pagination) {
+    return Paging(
+      page: pagination.currentPage,
+      size: pagination.size,
+    );
+  }
+
+  factory Paging.fromPaginationNext(Pagination pagination) {
     return Paging(
       page: pagination.nextPage ?? pagination.totalPage,
       size: pagination.size,

@@ -62,7 +62,7 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
 
   void _nextPaging(Pagination pagination) {
     if (_paging.value.page == pagination.totalPage) return;
-    _paging.value = Paging.fromPagination(pagination);
+    _paging.value = Paging.fromPaginationNext(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
@@ -91,21 +91,21 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
       final state = context.read<SpaNearestBloc>().state;
       if (state is! SpaNearestSuccess) return;
       final pagination = state.spaNearestPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       return;
     }
     if (spaActionEnum == SpaActionEnum.promo) {
       final state = context.read<SpaPromoBloc>().state;
       if (state is! SpaPromoSuccess) return;
       final pagination = state.spaPromoPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       return;
     }
     if (spaActionEnum == SpaActionEnum.recommended) {
       final state = context.read<SpaRecommendedBloc>().state;
       if (state is! SpaRecommendedSuccess) return;
       final pagination = state.spaRecommendedPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       return;
     }
   }

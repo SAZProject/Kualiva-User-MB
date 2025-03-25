@@ -63,7 +63,7 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
 
   void _nextPaging(Pagination pagination) {
     if (_paging.value.page == pagination.totalPage) return;
-    _paging.value = Paging.fromPagination(pagination);
+    _paging.value = Paging.fromPaginationNext(pagination);
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
@@ -91,21 +91,21 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
       final state = context.read<NightlifeNearestBloc>().state;
       if (state is! NightlifeNearestSuccess) return;
       final pagination = state.nightlifeNearestPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       return;
     }
     if (nightlifeActionEnum == NightlifeActionEnum.promo) {
       final state = context.read<NightlifePromoBloc>().state;
       if (state is! NightlifePromoSuccess) return;
       final pagination = state.nightlifePromoPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       return;
     }
     if (nightlifeActionEnum == NightlifeActionEnum.recommended) {
       final state = context.read<NightlifeRecommendedBloc>().state;
       if (state is! NightlifeRecommendedSuccess) return;
       final pagination = state.nightlifeRecommendedPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       return;
     }
   }

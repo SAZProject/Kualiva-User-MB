@@ -77,7 +77,8 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     print(_paging.value.toString());
     print(pagination);
     if (_paging.value.page == pagination.totalPage) return;
-    _paging.value = Paging.fromPagination(pagination);
+    _paging.value = Paging.fromPaginationNext(pagination);
+    print(_paging.value.toString());
     final state = context.read<CurrentLocationBloc>().state;
     if (state is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
@@ -105,21 +106,21 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
       final state = context.read<FnbNearestBloc>().state;
       if (state is! FnbNearestSuccess) return;
       final pagination = state.fnbNearestPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       return;
     }
     if (fnbActionEnum == FnbActionEnum.promo) {
       final state = context.read<FnbPromoBloc>().state;
       if (state is! FnbPromoSuccess) return;
       final pagination = state.fnbPromoPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       return;
     }
     if (fnbActionEnum == FnbActionEnum.recommended) {
       final state = context.read<FnbRecommendedBloc>().state;
       if (state is! FnbRecommendedSuccess) return;
       final pagination = state.fnbRecommendedPage.pagination;
-      _paging.value = Paging.fromPagination(pagination);
+      _paging.value = Paging.fromPaginationCurrent(pagination);
       print("Hesoyam");
       print(pagination);
       print(_paging.value.toString());

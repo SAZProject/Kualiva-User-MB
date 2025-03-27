@@ -89,11 +89,16 @@ class MainHive {
 
   static Future<void> openBox() async {
     await Future.wait([
+      /// Auth
       openLeSafeBox<UserModel>(MyBox.user),
+
+      /// Common
       openLeSafeBox<CurrentLocationModel>(MyBox.currentLocation),
       openLeSafeBox<ParameterModel>(MyBox.parameter),
-      openLeSafeBox<ReviewFilterModel>(MyBox.reviewFilter),
       openLeSafeBox<List<String>>(MyBox.recentSuggestion),
+
+      /// Review
+      openLeSafeBox<ReviewFilterModel>(MyBox.reviewFilter),
       openLeSafeBox<ReviewPlacePage>(MyBox.reviewPlacePage),
 
       /// Spa

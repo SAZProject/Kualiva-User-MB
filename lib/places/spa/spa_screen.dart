@@ -47,16 +47,16 @@ class _SpaScreenState extends State<SpaScreen> {
   }
 
   void _nextPromoPaging(Pagination pagination) {
-    if (_pagingPromo.value.page == pagination.totalPage) return;
+    if (_pagingPromo.value.canNextPage(pagination)) return;
     _pagingPromo.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPromoPaging, 'Next Paging ${_pagingPromo.value}');
     context.read<SpaPromoBloc>().add(SpaPromoFetched(
           paging: _pagingPromo.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -74,16 +74,16 @@ class _SpaScreenState extends State<SpaScreen> {
   }
 
   void _nextNearestPaging(Pagination pagination) {
-    if (_pagingNearest.value.page == pagination.totalPage) return;
+    if (_pagingNearest.value.canNextPage(pagination)) return;
     _pagingNearest.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextNearestPaging, 'Next Paging ${_pagingNearest.value}');
     context.read<SpaNearestBloc>().add(SpaNearestFetched(
           paging: _pagingNearest.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -102,17 +102,17 @@ class _SpaScreenState extends State<SpaScreen> {
   }
 
   void _nextRecommendedPaging(Pagination pagination) {
-    if (_pagingRecommended.value.page == pagination.totalPage) return;
+    if (_pagingRecommended.value.canNextPage(pagination)) return;
     _pagingRecommended.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextRecommendedPaging,
         'Next Paging ${_pagingRecommended.value}');
     context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
           paging: _pagingRecommended.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -139,31 +139,31 @@ class _SpaScreenState extends State<SpaScreen> {
         size: pagination.size,
       );
     }
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     switch (spaActionEnum) {
       case SpaActionEnum.promo:
         context.read<SpaPromoBloc>().add(SpaPromoFetched(
               paging: _pagingPromo.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
       case SpaActionEnum.nearest:
         context.read<SpaNearestBloc>().add(SpaNearestFetched(
               paging: _pagingNearest.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
       case SpaActionEnum.recommended:
         context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
               paging: _pagingRecommended.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
     }
@@ -205,10 +205,10 @@ class _SpaScreenState extends State<SpaScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
-      listener: (context, state) {
-        if (state is! CurrentLocationSuccess) return;
+      listener: (context, location) {
+        if (location is! CurrentLocationSuccess) return;
 
-        final bool isRefresh = state.isDistanceTooFarOrFirstTime;
+        final bool isRefresh = location.isDistanceTooFarOrFirstTime;
 
         final (
           pagingPromo,
@@ -220,22 +220,22 @@ class _SpaScreenState extends State<SpaScreen> {
         context.read<SpaPromoBloc>().add(SpaPromoFetched(
               paging: pagingPromo,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
 
         context.read<SpaNearestBloc>().add(SpaNearestFetched(
               paging: pagingNearest,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
 
         context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
               paging: pagingRecommended,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
       },
       child: SafeArea(

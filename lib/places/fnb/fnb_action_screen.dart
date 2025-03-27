@@ -76,31 +76,31 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     print('Hesoyam 2');
     print(_paging.value.toString());
     print(pagination);
-    if (_paging.value.page == pagination.totalPage) return;
+    if (_paging.value.canNextPage(pagination)) return;
     _paging.value = Paging.fromPaginationNext(pagination);
     print(_paging.value.toString());
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
 
     context.read<FnbActionBloc>().add(FnbActionFetched(
           paging: _paging.value,
           pagingEnum: PagingEnum.paged,
           fnbActionEnum: fnbActionEnum,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
   void initActionBLoC() {
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     context.read<FnbActionBloc>().add(FnbActionFetched(
           paging: Paging(),
           pagingEnum: PagingEnum.before,
           fnbActionEnum: fnbActionEnum,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
     if (fnbActionEnum == FnbActionEnum.nearest) {
       final state = context.read<FnbNearestBloc>().state;
@@ -145,10 +145,10 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
-      listener: (context, state) {
-        if (state is! CurrentLocationSuccess) return;
+      listener: (context, location) {
+        if (location is! CurrentLocationSuccess) return;
 
-        final bool isRefresh = state.isDistanceTooFarOrFirstTime;
+        final bool isRefresh = location.isDistanceTooFarOrFirstTime;
 
         final (paging, pagingEnum) = ((isRefresh == true)
             ? (Paging(), PagingEnum.refreshed)
@@ -158,8 +158,8 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
               paging: paging,
               pagingEnum: pagingEnum,
               fnbActionEnum: fnbActionEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
       },
       child: SafeArea(

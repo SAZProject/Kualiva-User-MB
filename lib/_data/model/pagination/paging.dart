@@ -30,6 +30,10 @@ class Paging {
     };
   }
 
+  bool canNextPage(Pagination pagination) {
+    return page >= pagination.totalPage;
+  }
+
   factory Paging.fromMap(Map<String, dynamic> map) {
     return Paging(
       page: map['page']?.toInt() ?? 0,

@@ -47,16 +47,16 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
   }
 
   void _nextPromoPaging(Pagination pagination) {
-    if (_pagingPromo.value.page == pagination.totalPage) return;
+    if (_pagingPromo.value.canNextPage(pagination)) return;
     _pagingPromo.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPromoPaging, 'Next Paging ${_pagingPromo.value}');
     context.read<NightlifePromoBloc>().add(NightlifePromoFetched(
           paging: _pagingPromo.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -74,16 +74,16 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
   }
 
   void _nextNearestPaging(Pagination pagination) {
-    if (_pagingNearest.value.page == pagination.totalPage) return;
+    if (_pagingNearest.value.canNextPage(pagination)) return;
     _pagingNearest.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextNearestPaging, 'Next Paging ${_pagingNearest.value}');
     context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
           paging: _pagingNearest.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -102,17 +102,17 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
   }
 
   void _nextRecommendedPaging(Pagination pagination) {
-    if (_pagingRecommended.value.page == pagination.totalPage) return;
+    if (_pagingRecommended.value.canNextPage(pagination)) return;
     _pagingRecommended.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextRecommendedPaging,
         'Next Paging ${_pagingRecommended.value}');
     context.read<NightlifeRecommendedBloc>().add(NightlifeRecommendedFetched(
           paging: _pagingRecommended.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -140,23 +140,23 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
         size: pagination.size,
       );
     }
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     switch (nightlifeActionEnum) {
       case NightlifeActionEnum.promo:
         context.read<NightlifePromoBloc>().add(NightlifePromoFetched(
               paging: _pagingPromo.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
       case NightlifeActionEnum.nearest:
         context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
               paging: _pagingNearest.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
       case NightlifeActionEnum.recommended:
@@ -165,8 +165,8 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
             .add(NightlifeRecommendedFetched(
               paging: _pagingRecommended.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
     }
@@ -208,10 +208,10 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
-      listener: (context, state) {
-        if (state is! CurrentLocationSuccess) return;
+      listener: (context, location) {
+        if (location is! CurrentLocationSuccess) return;
 
-        final bool isRefresh = state.isDistanceTooFarOrFirstTime;
+        final bool isRefresh = location.isDistanceTooFarOrFirstTime;
 
         final (
           pagingPromo,
@@ -223,15 +223,15 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
         context.read<NightlifePromoBloc>().add(NightlifePromoFetched(
               paging: pagingPromo,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
 
         context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
               paging: pagingNearest,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
 
         context
@@ -239,8 +239,8 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
             .add(NightlifeRecommendedFetched(
               paging: pagingRecommended,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
       },
       child: SafeArea(

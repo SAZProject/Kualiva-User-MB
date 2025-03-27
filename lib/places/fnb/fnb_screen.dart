@@ -49,16 +49,16 @@ class _FnbScreenState extends State<FnbScreen> {
   }
 
   void _nextPromoPaging(Pagination pagination) {
-    if (_pagingPromo.value.page == pagination.totalPage) return;
+    if (_pagingPromo.value.canNextPage(pagination)) return;
     _pagingPromo.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPromoPaging, 'Next Paging ${_pagingPromo.value}');
     context.read<FnbPromoBloc>().add(FnbPromoFetched(
           paging: _pagingPromo.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -76,16 +76,16 @@ class _FnbScreenState extends State<FnbScreen> {
   }
 
   void _nextNearestPaging(Pagination pagination) {
-    if (_pagingNearest.value.page == pagination.totalPage) return;
+    if (_pagingNearest.value.canNextPage(pagination)) return;
     _pagingNearest.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextNearestPaging, 'Next Paging ${_pagingNearest.value}');
     context.read<FnbNearestBloc>().add(FnbNearestFetched(
           paging: _pagingNearest.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -104,17 +104,17 @@ class _FnbScreenState extends State<FnbScreen> {
   }
 
   void _nextRecommendedPaging(Pagination pagination) {
-    if (_pagingRecommended.value.page == pagination.totalPage) return;
+    if (_pagingRecommended.value.canNextPage(pagination)) return;
     _pagingRecommended.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextRecommendedPaging,
         'Next Paging ${_pagingRecommended.value}');
     context.read<FnbRecommendedBloc>().add(FnbRecommendedFetched(
           paging: _pagingRecommended.value,
           pagingEnum: PagingEnum.paged,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
@@ -122,50 +122,41 @@ class _FnbScreenState extends State<FnbScreen> {
     final fnbActionBloc = context.read<FnbActionBloc>().state;
     if (fnbActionBloc is FnbActionSuccessPromo) {
       final pagination = fnbActionBloc.fnbPromoPage.pagination;
-      _pagingPromo.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingPromo.value = Paging.fromPaginationCurrent(pagination);
     }
     if (fnbActionBloc is FnbActionSuccessNearest) {
       final pagination = fnbActionBloc.fnbNearestPage.pagination;
-      _pagingNearest.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingNearest.value = Paging.fromPaginationCurrent(pagination);
     }
     if (fnbActionBloc is FnbActionSuccessRecommended) {
       final pagination = fnbActionBloc.fnbRecommendedPage.pagination;
-      _pagingRecommended.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingRecommended.value = Paging.fromPaginationCurrent(pagination);
     }
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     switch (fnbActionEnum) {
       case FnbActionEnum.promo:
         context.read<FnbPromoBloc>().add(FnbPromoFetched(
               paging: _pagingPromo.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
       case FnbActionEnum.nearest:
         context.read<FnbNearestBloc>().add(FnbNearestFetched(
               paging: _pagingNearest.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
       case FnbActionEnum.recommended:
         context.read<FnbRecommendedBloc>().add(FnbRecommendedFetched(
               paging: _pagingRecommended.value,
               pagingEnum: PagingEnum.before,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
         break;
     }
@@ -207,10 +198,10 @@ class _FnbScreenState extends State<FnbScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
-      listener: (context, state) {
-        if (state is! CurrentLocationSuccess) return;
+      listener: (context, location) {
+        if (location is! CurrentLocationSuccess) return;
 
-        final bool isRefresh = state.isDistanceTooFarOrFirstTime;
+        final bool isRefresh = location.isDistanceTooFarOrFirstTime;
 
         final (
           pagingPromo,
@@ -222,22 +213,22 @@ class _FnbScreenState extends State<FnbScreen> {
         context.read<FnbPromoBloc>().add(FnbPromoFetched(
               paging: pagingPromo,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
 
         context.read<FnbNearestBloc>().add(FnbNearestFetched(
               paging: pagingNearest,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
 
         context.read<FnbRecommendedBloc>().add(FnbRecommendedFetched(
               paging: pagingRecommended,
               pagingEnum: pagingEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
       },
       child: SafeArea(

@@ -61,30 +61,30 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
   }
 
   void _nextPaging(Pagination pagination) {
-    if (_paging.value.page == pagination.totalPage) return;
+    if (_paging.value.canNextPage(pagination)) return;
     _paging.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
 
     context.read<SpaActionBloc>().add(SpaActionFetched(
           paging: _paging.value,
           pagingEnum: PagingEnum.paged,
           spaActionEnum: spaActionEnum,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
   void initActionBLoC() {
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     context.read<SpaActionBloc>().add(SpaActionFetched(
           paging: Paging(),
           pagingEnum: PagingEnum.before,
           spaActionEnum: spaActionEnum,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
 
     if (spaActionEnum == SpaActionEnum.nearest) {
@@ -127,10 +127,10 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
-      listener: (context, state) {
-        if (state is! CurrentLocationSuccess) return;
+      listener: (context, location) {
+        if (location is! CurrentLocationSuccess) return;
 
-        final bool isRefresh = state.isDistanceTooFarOrFirstTime;
+        final bool isRefresh = location.isDistanceTooFarOrFirstTime;
 
         final (paging, pagingEnum) = ((isRefresh == true)
             ? (Paging(), PagingEnum.refreshed)
@@ -140,8 +140,8 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
               paging: paging,
               pagingEnum: pagingEnum,
               spaActionEnum: spaActionEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
       },
       child: SafeArea(

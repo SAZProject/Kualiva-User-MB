@@ -62,30 +62,30 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
   }
 
   void _nextPaging(Pagination pagination) {
-    if (_paging.value.page == pagination.totalPage) return;
+    if (_paging.value.canNextPage(pagination)) return;
     _paging.value = Paging.fromPaginationNext(pagination);
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
 
     context.read<NightlifeActionBloc>().add(NightlifeActionFetched(
           paging: _paging.value,
           pagingEnum: PagingEnum.paged,
           nightlifeActionEnum: nightlifeActionEnum,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
   }
 
   void initActionBLoC() {
-    final state = context.read<CurrentLocationBloc>().state;
-    if (state is! CurrentLocationSuccess) return;
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
     context.read<NightlifeActionBloc>().add(NightlifeActionFetched(
           paging: Paging(),
           pagingEnum: PagingEnum.before,
           nightlifeActionEnum: nightlifeActionEnum,
-          latitude: state.currentLocationModel.latitude,
-          longitude: state.currentLocationModel.longitude,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
         ));
     if (nightlifeActionEnum == NightlifeActionEnum.nearest) {
       final state = context.read<NightlifeNearestBloc>().state;
@@ -127,10 +127,10 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CurrentLocationBloc, CurrentLocationState>(
-      listener: (context, state) {
-        if (state is! CurrentLocationSuccess) return;
+      listener: (context, location) {
+        if (location is! CurrentLocationSuccess) return;
 
-        final bool isRefresh = state.isDistanceTooFarOrFirstTime;
+        final bool isRefresh = location.isDistanceTooFarOrFirstTime;
 
         final (paging, pagingEnum) = ((isRefresh == true)
             ? (Paging(), PagingEnum.refreshed)
@@ -140,8 +140,8 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
               paging: paging,
               pagingEnum: pagingEnum,
               nightlifeActionEnum: nightlifeActionEnum,
-              latitude: state.currentLocationModel.latitude,
-              longitude: state.currentLocationModel.longitude,
+              latitude: location.currentLocationModel.latitude,
+              longitude: location.currentLocationModel.longitude,
             ));
       },
       child: SafeArea(

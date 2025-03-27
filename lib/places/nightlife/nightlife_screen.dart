@@ -120,25 +120,16 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
     final nightlifeActionBloc = context.read<NightlifeActionBloc>().state;
     if (nightlifeActionBloc is NightlifeActionSuccessPromo) {
       final pagination = nightlifeActionBloc.nightlifePromoPage.pagination;
-      _pagingPromo.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingPromo.value = Paging.fromPaginationCurrent(pagination);
     }
     if (nightlifeActionBloc is NightlifeActionSuccessNearest) {
       final pagination = nightlifeActionBloc.nightlifeNearestPage.pagination;
-      _pagingNearest.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingNearest.value = Paging.fromPaginationCurrent(pagination);
     }
     if (nightlifeActionBloc is NightlifeActionSuccessRecommended) {
       final pagination =
           nightlifeActionBloc.nightlifeRecommendedPage.pagination;
-      _pagingRecommended.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingRecommended.value = Paging.fromPaginationCurrent(pagination);
     }
     final location = context.read<CurrentLocationBloc>().state;
     if (location is! CurrentLocationSuccess) return;

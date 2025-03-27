@@ -120,24 +120,15 @@ class _SpaScreenState extends State<SpaScreen> {
     final spaActionBloc = context.read<SpaActionBloc>().state;
     if (spaActionBloc is SpaActionSuccessPromo) {
       final pagination = spaActionBloc.spaPromoPage.pagination;
-      _pagingPromo.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingPromo.value = Paging.fromPaginationCurrent(pagination);
     }
     if (spaActionBloc is SpaActionSuccessNearest) {
       final pagination = spaActionBloc.spaNearestPage.pagination;
-      _pagingNearest.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingNearest.value = Paging.fromPaginationCurrent(pagination);
     }
     if (spaActionBloc is SpaActionSuccessRecommended) {
       final pagination = spaActionBloc.spaRecommendedPage.pagination;
-      _pagingRecommended.value = Paging(
-        page: pagination.nextPage ?? pagination.totalPage,
-        size: pagination.size,
-      );
+      _pagingRecommended.value = Paging.fromPaginationCurrent(pagination);
     }
     final location = context.read<CurrentLocationBloc>().state;
     if (location is! CurrentLocationSuccess) return;

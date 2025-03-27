@@ -10,17 +10,13 @@ import 'package:kualiva/places/nightlife/widget/nightlife_action_item.dart';
 import 'package:kualiva/router.dart';
 
 class NightlifeActionFeature extends StatefulWidget {
-  const NightlifeActionFeature({super.key, required this.scrollController});
-
-  final ScrollController scrollController;
+  const NightlifeActionFeature({super.key});
 
   @override
   State<NightlifeActionFeature> createState() => _NightlifeActionFeatureState();
 }
 
 class _NightlifeActionFeatureState extends State<NightlifeActionFeature> {
-  ScrollController get scrollController => widget.scrollController;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -41,27 +37,12 @@ class _NightlifeActionFeatureState extends State<NightlifeActionFeature> {
           );
         }
 
+        /// Nearest
         if (state is NightlifeActionLoadingNearest &&
             state.nightlifeNearestPage != null) {
           final nightlifeNearestList = state.nightlifeNearestPage!.data;
           return _listBuilder(nightlifeNearestList.map((e) {
             return NightlifeActionModel.fromNearestModel(e);
-          }).toList());
-        }
-
-        if (state is NightlifeActionLoadingPromo &&
-            state.nightlifePromoPage != null) {
-          final nightlifePromoList = state.nightlifePromoPage!.data;
-          return _listBuilder(nightlifePromoList.map((e) {
-            return NightlifeActionModel.fromPromoModel(e);
-          }).toList());
-        }
-
-        if (state is NightlifeActionLoadingRecommended &&
-            state.nightlifeRecommendedPage != null) {
-          final nightlifeRecommendedList = state.nightlifeRecommendedPage!.data;
-          return _listBuilder(nightlifeRecommendedList.map((e) {
-            return NightlifeActionModel.fromRecommendedModel(e);
           }).toList());
         }
 
@@ -73,11 +54,29 @@ class _NightlifeActionFeatureState extends State<NightlifeActionFeature> {
           }).toList());
         }
 
+        /// Promo
+        if (state is NightlifeActionLoadingPromo &&
+            state.nightlifePromoPage != null) {
+          final nightlifePromoList = state.nightlifePromoPage!.data;
+          return _listBuilder(nightlifePromoList.map((e) {
+            return NightlifeActionModel.fromPromoModel(e);
+          }).toList());
+        }
+
         if (state is NightlifeActionSuccessPromo) {
           final nightlifePromoList = state.nightlifePromoPage.data;
           if (nightlifePromoList.isEmpty) return CustomEmptyState();
           return _listBuilder(nightlifePromoList.map((e) {
             return NightlifeActionModel.fromPromoModel(e);
+          }).toList());
+        }
+
+        /// Recommended
+        if (state is NightlifeActionLoadingRecommended &&
+            state.nightlifeRecommendedPage != null) {
+          final nightlifeRecommendedList = state.nightlifeRecommendedPage!.data;
+          return _listBuilder(nightlifeRecommendedList.map((e) {
+            return NightlifeActionModel.fromRecommendedModel(e);
           }).toList());
         }
 
@@ -96,7 +95,6 @@ class _NightlifeActionFeatureState extends State<NightlifeActionFeature> {
 
   Widget _listBuilder(List<NightlifeActionModel> placeList) {
     return ListView.builder(
-      controller: scrollController,
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: placeList.length,

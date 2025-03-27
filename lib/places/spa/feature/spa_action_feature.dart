@@ -41,25 +41,11 @@ class _SpaActionFeatureState extends State<SpaActionFeature> {
           );
         }
 
+        /// Nearest
         if (state is SpaActionLoadingNearest && state.spaNearestPage != null) {
           final spaNearestList = state.spaNearestPage!.data;
           return _listBuilder(spaNearestList.map((e) {
             return SpaActionModel.fromNearestModel(e);
-          }).toList());
-        }
-
-        if (state is SpaActionLoadingPromo && state.spaPromoPage != null) {
-          final spaPromoList = state.spaPromoPage!.data;
-          return _listBuilder(spaPromoList.map((e) {
-            return SpaActionModel.fromPromoModel(e);
-          }).toList());
-        }
-
-        if (state is SpaActionLoadingRecommended &&
-            state.spaRecommendedPage != null) {
-          final spaRecommendedList = state.spaRecommendedPage!.data;
-          return _listBuilder(spaRecommendedList.map((e) {
-            return SpaActionModel.fromRecommendedModel(e);
           }).toList());
         }
 
@@ -71,11 +57,28 @@ class _SpaActionFeatureState extends State<SpaActionFeature> {
           }).toList());
         }
 
+        /// Promo
+        if (state is SpaActionLoadingPromo && state.spaPromoPage != null) {
+          final spaPromoList = state.spaPromoPage!.data;
+          return _listBuilder(spaPromoList.map((e) {
+            return SpaActionModel.fromPromoModel(e);
+          }).toList());
+        }
+
         if (state is SpaActionSuccessPromo) {
           final spaPromoList = state.spaPromoPage.data;
           if (spaPromoList.isEmpty) return CustomEmptyState();
           return _listBuilder(spaPromoList.map((e) {
             return SpaActionModel.fromPromoModel(e);
+          }).toList());
+        }
+
+        /// Recommended
+        if (state is SpaActionLoadingRecommended &&
+            state.spaRecommendedPage != null) {
+          final spaRecommendedList = state.spaRecommendedPage!.data;
+          return _listBuilder(spaRecommendedList.map((e) {
+            return SpaActionModel.fromRecommendedModel(e);
           }).toList());
         }
 

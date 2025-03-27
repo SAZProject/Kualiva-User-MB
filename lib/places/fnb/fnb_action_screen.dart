@@ -187,9 +187,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
             SizedBox(height: 5.h),
             _tagsFilter(context),
             SizedBox(height: 5.h),
-            FnbActionFeature(
-              scrollController: ScrollController(), // TODO: Hapus
-            ),
+            FnbActionFeature(),
             SizedBox(height: 5.h),
           ],
         ),

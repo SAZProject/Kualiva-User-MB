@@ -167,9 +167,7 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
               isSliverSearchBar: false,
             ),
             SizedBox(height: 5.h),
-            NightlifeActionFeature(
-              scrollController: ScrollController(), // TODO: Hapus
-            ),
+            NightlifeActionFeature(),
             SizedBox(height: 5.h),
           ],
         ),

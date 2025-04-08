@@ -167,9 +167,7 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
               isSliverSearchBar: false,
             ),
             SizedBox(height: 5.h),
-            SpaActionFeature(
-              scrollController: ScrollController(), // TODO: Hapus
-            ),
+            SpaActionFeature(),
             SizedBox(height: 5.h),
           ],
         ),

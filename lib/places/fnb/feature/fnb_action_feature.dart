@@ -9,14 +9,14 @@ import 'package:kualiva/places/fnb/model/fnb_action_model.dart';
 import 'package:kualiva/places/fnb/widget/fnb_action_item.dart';
 import 'package:kualiva/router.dart';
 
-class FnbActionFeature extends StatefulWidget {
-  const FnbActionFeature({super.key});
+class FnbActionFeature extends StatelessWidget {
+  const FnbActionFeature({
+    super.key,
+    required this.onRetry,
+  });
 
-  @override
-  State<FnbActionFeature> createState() => _FnbActionFeatureState();
-}
+  final void Function() onRetry;
 
-class _FnbActionFeatureState extends State<FnbActionFeature> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -33,7 +33,7 @@ class _FnbActionFeatureState extends State<FnbActionFeature> {
         if (state is FnbActionFailure) {
           return CustomErrorState(
             errorMessage: context.tr('common.error_try_again'),
-            onRetry: () {},
+            onRetry: onRetry,
           );
         }
 

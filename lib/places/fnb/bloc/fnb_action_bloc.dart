@@ -18,6 +18,8 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
   final FnbNearestRepository _fnbNearestRepository;
   final FnbPromoRepository _fnbPromoRepository;
   final FnbRecommendedRepository _fnbRecommendedRepository;
+  late FnbActionEnum fnbActionEnum;
+
   FnbActionBloc(
     this._fnbNearestRepository,
     this._fnbPromoRepository,
@@ -27,11 +29,29 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
     on<FnbActionFetched>(_onFetched);
   }
 
+  Future<Paging> currentPaging() async {
+    switch (fnbActionEnum) {
+      case FnbActionEnum.nearest:
+        return Paging.fromPaginationCurrent(
+          _fnbNearestRepository.getNearestOld()!.pagination,
+        );
+      case FnbActionEnum.promo:
+        return Paging.fromPaginationCurrent(
+          _fnbPromoRepository.getPromoOld()!.pagination,
+        );
+      case FnbActionEnum.recommended:
+        return Paging.fromPaginationCurrent(
+          _fnbRecommendedRepository.getRecommendedOld()!.pagination,
+        );
+    }
+  }
+
   void _onFetched(
     FnbActionFetched event,
     Emitter<FnbActionState> emit,
   ) async {
     LeLog.bd(this, _onFetched, 'fnbPlaceEnum ${event.fnbActionEnum.name}');
+    fnbActionEnum = event.fnbActionEnum;
     switch (event.fnbActionEnum) {
       case FnbActionEnum.nearest:
         await _nearest(event, emit);

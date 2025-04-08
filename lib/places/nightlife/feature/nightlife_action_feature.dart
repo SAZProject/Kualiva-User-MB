@@ -9,14 +9,9 @@ import 'package:kualiva/places/nightlife/model/nightlife_action_model.dart';
 import 'package:kualiva/places/nightlife/widget/nightlife_action_item.dart';
 import 'package:kualiva/router.dart';
 
-class NightlifeActionFeature extends StatefulWidget {
+class NightlifeActionFeature extends StatelessWidget {
   const NightlifeActionFeature({super.key});
 
-  @override
-  State<NightlifeActionFeature> createState() => _NightlifeActionFeatureState();
-}
-
-class _NightlifeActionFeatureState extends State<NightlifeActionFeature> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(

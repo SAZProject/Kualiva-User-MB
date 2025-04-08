@@ -39,6 +39,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
 
   final _scrollController = ScrollController();
   final _paging = ValueNotifier(Paging());
+  PagingEnum _pagineEnum = PagingEnum.before;
 
   final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
 
@@ -47,14 +48,13 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
   FiltersModel? filtersModel;
 
   void _onScrollPagination() {
-    print("_onScrollPagination");
     if (_scrollController.position.pixels !=
         _scrollController.position.maxScrollExtent) {
       return;
     }
-    print('Max Scroll');
+
     final state = context.read<FnbActionBloc>().state;
-    print(state.toString());
+
     if (state is FnbActionSuccessNearest) {
       final pagination = state.fnbNearestPage.pagination;
       _nextPaging(pagination);
@@ -73,35 +73,14 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
   }
 
   void _nextPaging(Pagination pagination) {
-    print('Hesoyam 2');
-    print(_paging.value.toString());
-    print(pagination);
     if (_paging.value.canNextPage(pagination)) return;
     _paging.value = Paging.fromPaginationNext(pagination);
-    print(_paging.value.toString());
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
-    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
+    _pagineEnum = PagingEnum.paged;
 
-    context.read<FnbActionBloc>().add(FnbActionFetched(
-          paging: _paging.value,
-          pagingEnum: PagingEnum.paged,
-          fnbActionEnum: fnbActionEnum,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
+    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
   }
 
   void initActionBLoC() {
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
-    context.read<FnbActionBloc>().add(FnbActionFetched(
-          paging: Paging(),
-          pagingEnum: PagingEnum.before,
-          fnbActionEnum: fnbActionEnum,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
     if (fnbActionEnum == FnbActionEnum.nearest) {
       final state = context.read<FnbNearestBloc>().state;
       if (state is! FnbNearestSuccess) return;
@@ -121,11 +100,25 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
       if (state is! FnbRecommendedSuccess) return;
       final pagination = state.fnbRecommendedPage.pagination;
       _paging.value = Paging.fromPaginationCurrent(pagination);
-      print("Hesoyam");
-      print(pagination);
-      print(_paging.value.toString());
       return;
     }
+  }
+
+  void _pagingListener() {
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
+    context.read<FnbActionBloc>().add(FnbActionFetched(
+          paging: _paging.value,
+          pagingEnum: _pagineEnum,
+          fnbActionEnum: fnbActionEnum,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+        ));
+  }
+
+  Future<void> _onRetry() async {
+    _paging.value = await context.read<FnbActionBloc>().currentPaging();
+    _pagineEnum = PagingEnum.refreshed;
   }
 
   @override
@@ -133,11 +126,14 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     super.initState();
     initActionBLoC();
     _scrollController.addListener(_onScrollPagination);
+    _paging.addListener(_pagingListener);
   }
 
   @override
   void dispose() {
     super.dispose();
+    _paging.removeListener(_pagingListener);
+    _paging.dispose();
     _scrollController.removeListener(_onScrollPagination);
     _scrollController.dispose();
   }
@@ -154,13 +150,8 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
             ? (Paging(), PagingEnum.refreshed)
             : (_paging.value, PagingEnum.before));
 
-        context.read<FnbActionBloc>().add(FnbActionFetched(
-              paging: paging,
-              pagingEnum: pagingEnum,
-              fnbActionEnum: fnbActionEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
+        _paging.value = paging;
+        _pagineEnum = pagingEnum;
       },
       child: SafeArea(
         child: Scaffold(
@@ -187,7 +178,9 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
             SizedBox(height: 5.h),
             _tagsFilter(context),
             SizedBox(height: 5.h),
-            FnbActionFeature(),
+            FnbActionFeature(
+              onRetry: _onRetry,
+            ),
             SizedBox(height: 5.h),
           ],
         ),

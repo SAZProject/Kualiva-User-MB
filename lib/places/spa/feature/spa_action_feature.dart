@@ -9,17 +9,8 @@ import 'package:kualiva/places/spa/model/spa_action_model.dart';
 import 'package:kualiva/places/spa/widget/spa_action_item.dart';
 import 'package:kualiva/router.dart';
 
-class SpaActionFeature extends StatefulWidget {
-  const SpaActionFeature({super.key, required this.scrollController});
-
-  final ScrollController scrollController;
-
-  @override
-  State<SpaActionFeature> createState() => _SpaActionFeatureState();
-}
-
-class _SpaActionFeatureState extends State<SpaActionFeature> {
-  ScrollController get scrollController => widget.scrollController;
+class SpaActionFeature extends StatelessWidget {
+  const SpaActionFeature({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +88,6 @@ class _SpaActionFeatureState extends State<SpaActionFeature> {
 
   Widget _listBuilder(List<SpaActionModel> placeList) {
     return ListView.builder(
-      controller: scrollController,
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: placeList.length,

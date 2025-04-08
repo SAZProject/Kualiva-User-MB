@@ -27,6 +27,7 @@ class FnbScreen extends StatefulWidget {
 
 class _FnbScreenState extends State<FnbScreen> {
   final _parentScrollController = ScrollController();
+
   final _promoScrollController = ScrollController();
   final _nearestScrollController = ScrollController();
   final _recommendedScrollController = ScrollController();

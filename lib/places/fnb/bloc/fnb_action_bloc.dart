@@ -51,10 +51,11 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
     FnbActionFetched event,
     Emitter<FnbActionState> emit,
   ) async {
-    LeLog.bd(this, _onFetched, 'fnbPlaceEnum ${event.fnbActionEnum.name}');
     fnbActionEnum = event.fnbActionEnum;
     searchName = event.name;
-    switch (event.fnbActionEnum) {
+    LeLog.bd(this, _onFetched,
+        'fnbActionEnum [${fnbActionEnum.name}], searchName [$searchName]');
+    switch (fnbActionEnum) {
       case FnbActionEnum.nearest:
         await _nearest(event, emit);
         break;
@@ -75,11 +76,11 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
     emit(FnbActionLoadingNearest(fnbNearestPage: fnbNearestPageOld));
     try {
       final fnbNearestPage = await _fnbNearestRepository.getNearest(
-        name: searchName,
         paging: event.paging,
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _nearest, fnbNearestPage.toString());
       emit(FnbActionSuccessNearest(fnbNearestPage: fnbNearestPage));
@@ -97,11 +98,11 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
     emit(FnbActionLoadingPromo(fnbPromoPage: fnbPromoPageOld));
     try {
       final fnbPromoPage = await _fnbPromoRepository.getPromo(
-        name: event.name,
         paging: event.paging,
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _promo, fnbPromoPage.toString());
       emit(FnbActionSuccessPromo(fnbPromoPage: fnbPromoPage));
@@ -121,11 +122,11 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
         FnbActionLoadingRecommended(fnbRecommendedPage: fnbRecommendedPageOld));
     try {
       final fnbRecommendedPage = await _fnbRecommendedRepository.getRecommended(
-        name: event.name,
         paging: event.paging,
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _recommended, fnbRecommendedPage.toString());
       emit(FnbActionSuccessRecommended(fnbRecommendedPage: fnbRecommendedPage));

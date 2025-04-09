@@ -10,7 +10,12 @@ import 'package:kualiva/places/spa/widget/spa_action_item.dart';
 import 'package:kualiva/router.dart';
 
 class SpaActionFeature extends StatelessWidget {
-  const SpaActionFeature({super.key});
+  const SpaActionFeature({
+    super.key,
+    required this.onRetry,
+  });
+
+  final void Function() onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class SpaActionFeature extends StatelessWidget {
         if (state is SpaActionFailure) {
           return CustomErrorState(
             errorMessage: context.tr('common.error_try_again'),
-            onRetry: () {},
+            onRetry: onRetry,
           );
         }
 

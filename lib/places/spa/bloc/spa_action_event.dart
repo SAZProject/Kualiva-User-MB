@@ -9,6 +9,7 @@ final class SpaActionFetched extends SpaActionEvent {
   final SpaActionEnum spaActionEnum;
   final double latitude;
   final double longitude;
+  final String? name;
 
   SpaActionFetched({
     required this.paging,
@@ -16,5 +17,6 @@ final class SpaActionFetched extends SpaActionEvent {
     required this.spaActionEnum,
     required this.latitude,
     required this.longitude,
+    this.name,
   });
 }

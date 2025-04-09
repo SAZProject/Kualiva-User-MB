@@ -34,10 +34,12 @@ import 'package:kualiva/review/model/author_model.dart';
 import 'package:kualiva/review/model/review_filter_model.dart';
 import 'package:kualiva/review/model/review_place_model.dart';
 import 'package:kualiva/review/model/review_place_page.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MainHive {
   static Future<void> registerAdapter() async {
-    await Hive.initFlutter();
+    final appDocDir = await getApplicationDocumentsDirectory();
+    Hive.init(appDocDir.path);
     Hive.registerAdapter(FnbNearestModelAdapter());
     Hive.registerAdapter(CurrentLocationModelAdapter());
     Hive.registerAdapter(AuthorModelAdapter());
@@ -73,10 +75,14 @@ class MainHive {
   }
 
   static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
+    print(myBox.name);
     try {
+      print('openBox');
       return await Hive.openBox<T>(myBox.name);
     } catch (e) {
+      print('openBox Catch ${myBox.name}');
       await Hive.deleteBoxFromDisk(myBox.name);
+      print('deleteBoxFromDisk ${myBox.name}');
       return Hive.openBox<T>(myBox.name);
     }
   }
@@ -103,20 +109,29 @@ class MainHive {
 
       /// Spa
       openLeSafeBox<SpaNearestPage>(MyBox.spaNearestPage),
+      openLeSafeBox<SpaNearestPage>(MyBox.spaNearestSearchPage),
+
       openLeSafeBox<SpaPromoPage>(MyBox.spaPromoPage),
+      openLeSafeBox<SpaPromoPage>(MyBox.spaPromoSearchPage),
+
       openLeSafeBox<SpaRecommendedPage>(MyBox.spaRecommendedPage),
+      openLeSafeBox<SpaRecommendedPage>(MyBox.spaRecommendedSearchPage),
 
       /// Fnb
       openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage),
-      openLeSafeBox<FnbPromoPage>(MyBox.fnbPromoPage),
-      openLeSafeBox<FnbRecommendedPage>(MyBox.fnbRecommendedPage),
       openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestSearchPage),
+
+      openLeSafeBox<FnbPromoPage>(MyBox.fnbPromoPage),
+      openLeSafeBox<FnbPromoPage>(MyBox.fnbPromoSearchPage),
+
+      openLeSafeBox<FnbRecommendedPage>(MyBox.fnbRecommendedPage),
+      openLeSafeBox<FnbRecommendedPage>(MyBox.fnbRecommendedSearchPage),
 
       /// Nightlife
       openLeSafeBox<NightlifeNearestPage>(MyBox.nightlifeNearestPage),
       openLeSafeBox<NightlifePromoPage>(MyBox.nightlifePromoPage),
       openLeSafeBox<NightlifeRecommendedPage>(MyBox.nightlifeRecommendedPage),
-    ]);
+    ], eagerError: true);
   }
 
   static Future<void> deleteAllBox() async {
@@ -153,12 +168,17 @@ enum MyBox {
   spaNearestPage('spa_nearest_page'),
   spaPromoPage('spa_promo_page'),
   spaRecommendedPage('spa_recommended_page'),
+  spaNearestSearchPage('spa_nearest_search_page'),
+  spaPromoSearchPage('spa_promo_search_page'),
+  spaRecommendedSearchPage('spa_recommended_search_page'),
 
   /// Fnb
   fnbNearestPage('fnb_nearest_page'),
   fnbPromoPage('fnb_promo_page'),
   fnbRecommendedPage('fnb_recommended_page'),
   fnbNearestSearchPage('fnb_nearest_search_page'),
+  fnbPromoSearchPage('fnb_promo_search_page'),
+  fnbRecommendedSearchPage('fnb_recommended_search_page'),
 
   /// Night Life
   nightlifeNearestPage('nightlife_nearest_page'),

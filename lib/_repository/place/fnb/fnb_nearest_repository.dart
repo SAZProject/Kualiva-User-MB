@@ -16,20 +16,18 @@ class FnbNearestRepository {
 
   FnbNearestPage? getNearestOld(String? name) {
     String boxName = MyBox.fnbNearestPage.name;
+    if (name != null) boxName = MyBox.fnbNearestSearchPage.name;
 
-    if (name != null) {
-      boxName = MyBox.fnbNearestSearchPage.name;
-    }
     final fnbNearestBox = Hive.box<FnbNearestPage>(boxName);
     return fnbNearestBox.get(boxName);
   }
 
   Future<FnbNearestPage> getNearest({
-    String? name,
     required Paging paging,
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
     String boxName = MyBox.fnbNearestPage.name;
 

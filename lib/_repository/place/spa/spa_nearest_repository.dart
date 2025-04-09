@@ -14,8 +14,10 @@ class SpaNearestRepository {
 
   final DioClient _dioClient;
 
-  SpaNearestPage? getNearestOld() {
-    final boxName = MyBox.spaNearestPage.name;
+  SpaNearestPage? getNearestOld(String? name) {
+    String boxName = MyBox.spaNearestPage.name;
+    if (name != null) boxName = MyBox.spaNearestSearchPage.name;
+
     final spaNearestBox = Hive.box<SpaNearestPage>(boxName);
     return spaNearestBox.get(boxName);
   }
@@ -25,8 +27,11 @@ class SpaNearestRepository {
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
-    final boxName = MyBox.spaNearestPage.name;
+    String boxName = MyBox.spaNearestPage.name;
+    if (name != null) boxName = MyBox.spaNearestSearchPage.name;
+
     final spaNearestBox = Hive.box<SpaNearestPage>(boxName);
 
     final oldPage = spaNearestBox.get(boxName);
@@ -44,6 +49,7 @@ class SpaNearestRepository {
           'latitude': latitude,
           'longitude': longitude,
           'type': PlaceCategoryEnum.spa.name,
+          'name': name
         },
       );
     });

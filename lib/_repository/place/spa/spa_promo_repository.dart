@@ -14,8 +14,10 @@ class SpaPromoRepository {
 
   final DioClient _dioClient;
 
-  SpaPromoPage? getPromoOld() {
-    final boxName = MyBox.spaPromoPage.name;
+  SpaPromoPage? getPromoOld(String? name) {
+    String boxName = MyBox.spaPromoPage.name;
+    if (name != null) boxName = MyBox.spaPromoSearchPage.name;
+
     final spaPromoBox = Hive.box<SpaPromoPage>(boxName);
     return spaPromoBox.get(boxName);
   }
@@ -25,8 +27,11 @@ class SpaPromoRepository {
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
-    final boxName = MyBox.spaPromoPage.name;
+    String boxName = MyBox.spaPromoPage.name;
+    if (name != null) boxName = MyBox.spaPromoSearchPage.name;
+
     final spaPromoBox = Hive.box<SpaPromoPage>(boxName);
 
     final oldPage = spaPromoBox.get(boxName);
@@ -44,6 +49,7 @@ class SpaPromoRepository {
           'latitude': latitude,
           'longitude': longitude,
           'type': PlaceCategoryEnum.spa.name,
+          'name': name,
         },
       );
     });

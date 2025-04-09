@@ -18,6 +18,9 @@ class SpaActionBloc extends Bloc<SpaActionEvent, SpaActionState> {
   final SpaNearestRepository _spaNearestRepository;
   final SpaPromoRepository _spaPromoRepository;
   final SpaRecommendedRepository _spaRecommendedRepository;
+  late SpaActionEnum spaActionEnum;
+  String? searchName;
+
   SpaActionBloc(
     this._spaNearestRepository,
     this._spaPromoRepository,
@@ -27,12 +30,32 @@ class SpaActionBloc extends Bloc<SpaActionEvent, SpaActionState> {
     on<SpaActionFetched>(_onFetched);
   }
 
+  Future<Paging> currentPaging() async {
+    switch (spaActionEnum) {
+      case SpaActionEnum.nearest:
+        return Paging.fromPaginationCurrent(
+          _spaNearestRepository.getNearestOld(searchName)!.pagination,
+        );
+      case SpaActionEnum.promo:
+        return Paging.fromPaginationCurrent(
+          _spaPromoRepository.getPromoOld(searchName)!.pagination,
+        );
+      case SpaActionEnum.recommended:
+        return Paging.fromPaginationCurrent(
+          _spaRecommendedRepository.getRecommendedOld(searchName)!.pagination,
+        );
+    }
+  }
+
   void _onFetched(
     SpaActionFetched event,
     Emitter<SpaActionState> emit,
   ) async {
-    LeLog.bd(this, _onFetched, 'spaPlaceEnum ${event.spaActionEnum.name}');
-    switch (event.spaActionEnum) {
+    spaActionEnum = event.spaActionEnum;
+    searchName = event.name;
+    LeLog.bd(this, _onFetched,
+        'spaActionEnum [${spaActionEnum.name}], searchName [$searchName]');
+    switch (spaActionEnum) {
       case SpaActionEnum.nearest:
         await _nearest(event, emit);
         break;
@@ -49,7 +72,7 @@ class SpaActionBloc extends Bloc<SpaActionEvent, SpaActionState> {
     SpaActionFetched event,
     Emitter<SpaActionState> emit,
   ) async {
-    final spaNearestPageOld = _spaNearestRepository.getNearestOld();
+    final spaNearestPageOld = _spaNearestRepository.getNearestOld(searchName);
     emit(SpaActionLoadingNearest(spaNearestPage: spaNearestPageOld));
     try {
       final spaNearestPage = await _spaNearestRepository.getNearest(
@@ -57,6 +80,7 @@ class SpaActionBloc extends Bloc<SpaActionEvent, SpaActionState> {
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _nearest, spaNearestPage.toString());
       emit(SpaActionSuccessNearest(spaNearestPage: spaNearestPage));
@@ -70,7 +94,7 @@ class SpaActionBloc extends Bloc<SpaActionEvent, SpaActionState> {
     SpaActionFetched event,
     Emitter<SpaActionState> emit,
   ) async {
-    final spaPromoPageOld = _spaPromoRepository.getPromoOld();
+    final spaPromoPageOld = _spaPromoRepository.getPromoOld(searchName);
     emit(SpaActionLoadingPromo(spaPromoPage: spaPromoPageOld));
     try {
       final spaPromoPage = await _spaPromoRepository.getPromo(
@@ -78,6 +102,7 @@ class SpaActionBloc extends Bloc<SpaActionEvent, SpaActionState> {
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _promo, spaPromoPage.toString());
       emit(SpaActionSuccessPromo(spaPromoPage: spaPromoPage));
@@ -91,7 +116,8 @@ class SpaActionBloc extends Bloc<SpaActionEvent, SpaActionState> {
     SpaActionFetched event,
     Emitter<SpaActionState> emit,
   ) async {
-    final spaRecommendedPageOld = _spaRecommendedRepository.getRecommendedOld();
+    final spaRecommendedPageOld =
+        _spaRecommendedRepository.getRecommendedOld(searchName);
     emit(
         SpaActionLoadingRecommended(spaRecommendedPage: spaRecommendedPageOld));
     try {
@@ -100,6 +126,7 @@ class SpaActionBloc extends Bloc<SpaActionEvent, SpaActionState> {
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _recommended, spaRecommendedPage.toString());
       emit(SpaActionSuccessRecommended(spaRecommendedPage: spaRecommendedPage));

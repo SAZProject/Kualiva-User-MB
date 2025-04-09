@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/_data/enum/spa_action_enum.dart';
 import 'package:kualiva/_data/enum/paging_enum.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
@@ -12,6 +13,7 @@ import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_promo_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_recommended_bloc.dart';
 import 'package:kualiva/places/spa/feature/spa_app_bar_feature.dart';
+import 'package:kualiva/places/spa/feature/spa_main_search_bar_feature.dart';
 import 'package:kualiva/places/spa/feature/spa_nearest_feature.dart';
 import 'package:kualiva/places/spa/feature/spa_promo_feature.dart';
 import 'package:kualiva/places/spa/feature/spa_recommended_feature.dart';
@@ -246,6 +248,9 @@ class _SpaScreenState extends State<SpaScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SpaAppBarFeature(),
+            SpaMainSearchBarFeature(
+              recentSuggestionEnum: RecentSuggestionEnum.spa,
+            )
           ];
         },
         body: SingleChildScrollView(

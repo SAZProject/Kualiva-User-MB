@@ -14,8 +14,10 @@ class SpaRecommendedRepository {
 
   final DioClient _dioClient;
 
-  SpaRecommendedPage? getRecommendedOld() {
-    final boxName = MyBox.spaRecommendedPage.name;
+  SpaRecommendedPage? getRecommendedOld(String? name) {
+    String boxName = MyBox.spaRecommendedPage.name;
+    if (name != null) boxName = MyBox.spaRecommendedSearchPage.name;
+
     final spaRecommendedBox = Hive.box<SpaRecommendedPage>(boxName);
     return spaRecommendedBox.get(boxName);
   }
@@ -25,6 +27,7 @@ class SpaRecommendedRepository {
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
     final boxName = MyBox.spaRecommendedPage.name;
     final spaRecommendedBox = Hive.box<SpaRecommendedPage>(boxName);
@@ -44,6 +47,7 @@ class SpaRecommendedRepository {
           'latitude': latitude,
           'longitude': longitude,
           'type': PlaceCategoryEnum.spa.name,
+          'name': name
         },
       );
     });

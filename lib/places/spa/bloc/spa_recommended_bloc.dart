@@ -23,7 +23,8 @@ class SpaRecommendedBloc
     SpaRecommendedFetched event,
     Emitter<SpaRecommendedState> emit,
   ) async {
-    final spaRecommendedPageOld = _spaRecommendedRepository.getRecommendedOld();
+    final spaRecommendedPageOld =
+        _spaRecommendedRepository.getRecommendedOld(null);
     emit(SpaRecommendedLoading(spaRecommendedPage: spaRecommendedPageOld));
     try {
       final spaRecommendedPage = await _spaRecommendedRepository.getRecommended(

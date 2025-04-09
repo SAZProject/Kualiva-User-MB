@@ -8,7 +8,6 @@ import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
-import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/places/spa/argument/spa_action_argument.dart';
@@ -17,6 +16,7 @@ import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_promo_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_recommended_bloc.dart';
 import 'package:kualiva/places/spa/feature/spa_action_feature.dart';
+import 'package:kualiva/places/spa/feature/spa_action_search_bar_feature.dart';
 
 class SpaActionScreen extends StatefulWidget {
   const SpaActionScreen({
@@ -32,10 +32,12 @@ class SpaActionScreen extends StatefulWidget {
 
 class _SpaActionScreenState extends State<SpaActionScreen> {
   SpaActionEnum get spaActionEnum => widget.spaActionArgument.spaActionEnum;
-  String get title => widget.spaActionArgument.title;
+  final _title = ValueNotifier<String>("");
+  final _searchName = ValueNotifier<String?>(null);
 
   final _scrollController = ScrollController();
   final _paging = ValueNotifier(Paging());
+  PagingEnum _pagingEnum = PagingEnum.before;
 
   void _onScrollPagination() {
     if (_scrollController.position.pixels !=
@@ -43,6 +45,7 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
       return;
     }
     final state = context.read<SpaActionBloc>().state;
+
     if (state is SpaActionSuccessNearest) {
       final pagination = state.spaNearestPage.pagination;
       _nextPaging(pagination);
@@ -63,30 +66,17 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
   void _nextPaging(Pagination pagination) {
     if (_paging.value.canNextPage(pagination)) return;
     _paging.value = Paging.fromPaginationNext(pagination);
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
-    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
+    _pagingEnum = PagingEnum.paged;
 
-    context.read<SpaActionBloc>().add(SpaActionFetched(
-          paging: _paging.value,
-          pagingEnum: PagingEnum.paged,
-          spaActionEnum: spaActionEnum,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
+    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
   }
 
   void initActionBLoC() {
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
-    context.read<SpaActionBloc>().add(SpaActionFetched(
-          paging: Paging(),
-          pagingEnum: PagingEnum.before,
-          spaActionEnum: spaActionEnum,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
-
+    if (_searchName.value != null) {
+      _pagingEnum = PagingEnum.refreshed;
+      _paging.value = Paging();
+      return;
+    }
     if (spaActionEnum == SpaActionEnum.nearest) {
       final state = context.read<SpaNearestBloc>().state;
       if (state is! SpaNearestSuccess) return;
@@ -110,18 +100,52 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
     }
   }
 
+  void _pagingListener() {
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
+    context.read<SpaActionBloc>().add(SpaActionFetched(
+          paging: _paging.value,
+          pagingEnum: _pagingEnum,
+          spaActionEnum: spaActionEnum,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+          name: _searchName.value,
+        ));
+  }
+
+  Future<void> _onRetry() async {
+    _paging.value = await context.read<SpaActionBloc>().currentPaging();
+    _pagingEnum = PagingEnum.refreshed;
+  }
+
+  void _onSearchBarSubmitted(BuildContext context, String value) {
+    _title.value = value;
+    _searchName.value = value;
+    _pagingEnum = PagingEnum.refreshed;
+    _paging.value = Paging();
+    Navigator.pop(context);
+  }
+
   @override
   void initState() {
     super.initState();
-    initActionBLoC();
+    _title.value = widget.spaActionArgument.title;
+    _searchName.value = widget.spaActionArgument.searchName;
+    _paging.addListener(_pagingListener);
     _scrollController.addListener(_onScrollPagination);
+    initActionBLoC();
   }
 
   @override
   void dispose() {
     super.dispose();
+    _paging.removeListener(_pagingListener);
+    _paging.dispose();
     _scrollController.removeListener(_onScrollPagination);
     _scrollController.dispose();
+
+    _title.dispose();
+    _searchName.dispose();
   }
 
   @override
@@ -136,18 +160,19 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
             ? (Paging(), PagingEnum.refreshed)
             : (_paging.value, PagingEnum.before));
 
-        context.read<SpaActionBloc>().add(SpaActionFetched(
-              paging: paging,
-              pagingEnum: pagingEnum,
-              spaActionEnum: spaActionEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
+        _paging.value = paging;
+        _pagingEnum = pagingEnum;
       },
       child: SafeArea(
-        child: Scaffold(
-          appBar: _spaActionAppBar(context),
-          body: _body(context),
+        child: ValueListenableBuilder(
+          valueListenable: _title,
+          child: _body(context),
+          builder: (context, value, child) {
+            return Scaffold(
+              appBar: _spaActionAppBar(context, value),
+              body: child,
+            );
+          },
         ),
       ),
     );
@@ -162,12 +187,15 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
         child: Column(
           children: [
             SizedBox(height: 5.h),
-            SearchBarFeature(
+            SpaActionSearchBarFeature(
               recentSuggestionEnum: RecentSuggestionEnum.spa,
               isSliverSearchBar: false,
+              viewOnSubmitted: _onSearchBarSubmitted,
             ),
             SizedBox(height: 5.h),
-            SpaActionFeature(),
+            SpaActionFeature(
+              onRetry: _onRetry,
+            ),
             SizedBox(height: 5.h),
           ],
         ),
@@ -175,7 +203,7 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
     );
   }
 
-  PreferredSizeWidget _spaActionAppBar(BuildContext context) {
+  PreferredSizeWidget _spaActionAppBar(BuildContext context, String title) {
     return CustomAppBar(
       title: context.tr(title),
       useLeading: true,

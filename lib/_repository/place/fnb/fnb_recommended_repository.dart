@@ -16,24 +16,21 @@ class FnbRecommendedRepository {
 
   FnbRecommendedPage? getRecommendedOld(String? name) {
     String boxName = MyBox.fnbRecommendedPage.name;
+    if (name != null) boxName = MyBox.fnbRecommendedSearchPage.name;
 
-    if (name != null) {
-      boxName = MyBox.fnbRecommendedPage.name;
-    }
     final fnbRecommendedBox = Hive.box<FnbRecommendedPage>(boxName);
     return fnbRecommendedBox.get(boxName);
   }
 
   Future<FnbRecommendedPage> getRecommended({
-    String? name,
     required Paging paging,
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
     String boxName = MyBox.fnbRecommendedPage.name;
-
-    if (name != null) boxName = MyBox.fnbRecommendedPage.name;
+    if (name != null) boxName = MyBox.fnbRecommendedSearchPage.name;
 
     final fnbRecommendedBox = Hive.box<FnbRecommendedPage>(boxName);
 

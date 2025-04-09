@@ -52,7 +52,6 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
         _scrollController.position.maxScrollExtent) {
       return;
     }
-
     final state = context.read<FnbActionBloc>().state;
 
     if (state is FnbActionSuccessNearest) {
@@ -113,18 +112,26 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     final location = context.read<CurrentLocationBloc>().state;
     if (location is! CurrentLocationSuccess) return;
     context.read<FnbActionBloc>().add(FnbActionFetched(
-          name: _searchName.value,
           paging: _paging.value,
           pagingEnum: _pagingEnum,
           fnbActionEnum: fnbActionEnum,
           latitude: location.currentLocationModel.latitude,
           longitude: location.currentLocationModel.longitude,
+          name: _searchName.value,
         ));
   }
 
   Future<void> _onRetry() async {
     _paging.value = await context.read<FnbActionBloc>().currentPaging();
     _pagingEnum = PagingEnum.refreshed;
+  }
+
+  void _onSearchBarSubmitted(BuildContext context, String value) {
+    _title.value = value;
+    _searchName.value = value;
+    _pagingEnum = PagingEnum.refreshed;
+    _paging.value = Paging();
+    Navigator.pop(context);
   }
 
   @override
@@ -167,13 +174,13 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
       child: SafeArea(
         child: ValueListenableBuilder(
           valueListenable: _title,
+          child: _body(context),
           builder: (context, value, child) {
             return Scaffold(
               appBar: _fnbActionAppBar(context, value),
               body: child,
             );
           },
-          child: _body(context),
         ),
       ),
     );
@@ -191,13 +198,7 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
             FnbActionSearchBarFeature(
               recentSuggestionEnum: RecentSuggestionEnum.fnb,
               isSliverSearchBar: false,
-              viewOnSubmitted: (context, value) {
-                _title.value = value;
-                _searchName.value = value;
-                _pagingEnum = PagingEnum.refreshed;
-                _paging.value = Paging();
-                Navigator.pop(context);
-              },
+              viewOnSubmitted: _onSearchBarSubmitted,
             ),
             SizedBox(height: 5.h),
             _tagsFilter(context),

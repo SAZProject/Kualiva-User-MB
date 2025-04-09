@@ -20,7 +20,7 @@ class SpaPromoBloc extends Bloc<SpaPromoEvent, SpaPromoState> {
     SpaPromoFetched event,
     Emitter<SpaPromoState> emit,
   ) async {
-    final spaPromoPageOld = _spaPromoRepository.getPromoOld();
+    final spaPromoPageOld = _spaPromoRepository.getPromoOld(null);
     emit(SpaPromoLoading(spaPromoPage: spaPromoPageOld));
     try {
       final spaPromoPage = await _spaPromoRepository.getPromo(

@@ -21,7 +21,7 @@ class SpaNearestBloc extends Bloc<SpaNearestEvent, SpaNearestState> {
     Emitter<SpaNearestState> emit,
   ) async {
     try {
-      final spaNearestPageOld = _spaNearestRepository.getNearestOld();
+      final spaNearestPageOld = _spaNearestRepository.getNearestOld(null);
       emit(SpaNearestLoading(spaNearestPage: spaNearestPageOld));
 
       final spaNearestPage = await _spaNearestRepository.getNearest(

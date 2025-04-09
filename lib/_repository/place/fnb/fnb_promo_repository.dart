@@ -16,24 +16,21 @@ class FnbPromoRepository {
 
   FnbPromoPage? getPromoOld(String? name) {
     String boxName = MyBox.fnbPromoPage.name;
+    if (name != null) boxName = MyBox.fnbPromoSearchPage.name;
 
-    if (name != null) {
-      boxName = MyBox.fnbPromoPage.name;
-    }
     final fnbPromoBox = Hive.box<FnbPromoPage>(boxName);
     return fnbPromoBox.get(boxName);
   }
 
   Future<FnbPromoPage> getPromo({
-    String? name,
     required Paging paging,
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
     String boxName = MyBox.fnbPromoPage.name;
-
-    if (name != null) boxName = MyBox.fnbPromoPage.name;
+    if (name != null) boxName = MyBox.fnbPromoSearchPage.name;
 
     final fnbPromoBox = Hive.box<FnbPromoPage>(boxName);
 

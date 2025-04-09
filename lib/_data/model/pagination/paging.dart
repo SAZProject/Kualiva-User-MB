@@ -55,6 +55,13 @@ class Paging {
     );
   }
 
+  factory Paging.fromPaging(Paging paging) {
+    return Paging(
+      page: paging.page,
+      size: paging.size,
+    );
+  }
+
   String toJson() => json.encode(toMap());
 
   factory Paging.fromJson(String source) => Paging.fromMap(json.decode(source));

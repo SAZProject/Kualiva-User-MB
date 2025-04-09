@@ -75,14 +75,10 @@ class MainHive {
   }
 
   static Future<Box<T>> openLeSafeBox<T>(MyBox myBox) async {
-    print(myBox.name);
     try {
-      print('openBox');
       return await Hive.openBox<T>(myBox.name);
     } catch (e) {
-      print('openBox Catch ${myBox.name}');
       await Hive.deleteBoxFromDisk(myBox.name);
-      print('deleteBoxFromDisk ${myBox.name}');
       return Hive.openBox<T>(myBox.name);
     }
   }

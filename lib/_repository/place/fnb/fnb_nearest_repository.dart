@@ -31,19 +31,9 @@ class FnbNearestRepository {
     required double latitude,
     required double longitude,
   }) async {
-    final mapQuery = {
-      ...paging.toMap(),
-      'latitude': latitude,
-      'longitude': longitude,
-      'type': PlaceCategoryEnum.fnb.name,
-    };
-
     String boxName = MyBox.fnbNearestPage.name;
 
-    if (name != null) {
-      boxName = MyBox.fnbNearestSearchPage.name;
-      mapQuery.addAll({"name": name});
-    }
+    if (name != null) boxName = MyBox.fnbNearestSearchPage.name;
 
     final fnbNearestBox = Hive.box<FnbNearestPage>(boxName);
 
@@ -57,7 +47,13 @@ class FnbNearestRepository {
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
         '/places/nearest',
-        queryParameters: mapQuery,
+        queryParameters: {
+          ...paging.toMap(),
+          'latitude': latitude,
+          'longitude': longitude,
+          'type': PlaceCategoryEnum.fnb.name,
+          'name': name
+        },
       );
     });
     final page = FnbNearestPage(

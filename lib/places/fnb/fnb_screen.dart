@@ -12,7 +12,7 @@ import 'package:kualiva/places/fnb/bloc/fnb_action_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_recommended_bloc.dart';
-import 'package:kualiva/places/fnb/feature/fnb__main_search_bar_feature.dart';
+import 'package:kualiva/places/fnb/feature/fnb_main_search_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_nearest_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_promo_feature.dart';

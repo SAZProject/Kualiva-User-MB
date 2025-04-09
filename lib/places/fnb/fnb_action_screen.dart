@@ -144,6 +144,9 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     _paging.dispose();
     _scrollController.removeListener(_onScrollPagination);
     _scrollController.dispose();
+
+    _title.dispose();
+    _searchName.dispose();
   }
 
   @override
@@ -188,12 +191,12 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
             FnbActionSearchBarFeature(
               recentSuggestionEnum: RecentSuggestionEnum.fnb,
               isSliverSearchBar: false,
-              viewOnSubmitted: (ctx, value) {
+              viewOnSubmitted: (context, value) {
                 _title.value = value;
                 _searchName.value = value;
                 _pagingEnum = PagingEnum.refreshed;
                 _paging.value = Paging();
-                Navigator.pop(ctx);
+                Navigator.pop(context);
               },
             ),
             SizedBox(height: 5.h),

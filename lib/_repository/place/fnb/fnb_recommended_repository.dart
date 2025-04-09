@@ -31,19 +31,9 @@ class FnbRecommendedRepository {
     required double latitude,
     required double longitude,
   }) async {
-    final mapQuery = {
-      ...paging.toMap(),
-      'latitude': latitude,
-      'longitude': longitude,
-      'type': PlaceCategoryEnum.fnb.name,
-    };
-
     String boxName = MyBox.fnbRecommendedPage.name;
 
-    if (name != null) {
-      boxName = MyBox.fnbRecommendedPage.name;
-      mapQuery.addAll({"name": name});
-    }
+    if (name != null) boxName = MyBox.fnbRecommendedPage.name;
 
     final fnbRecommendedBox = Hive.box<FnbRecommendedPage>(boxName);
 
@@ -57,7 +47,13 @@ class FnbRecommendedRepository {
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
         '/places/recommended',
-        queryParameters: mapQuery,
+        queryParameters: {
+          ...paging.toMap(),
+          'latitude': latitude,
+          'longitude': longitude,
+          'type': PlaceCategoryEnum.fnb.name,
+          'name': name
+        },
       );
     });
     final page = FnbRecommendedPage(

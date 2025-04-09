@@ -14,19 +14,37 @@ class FnbRecommendedRepository {
 
   final DioClient _dioClient;
 
-  FnbRecommendedPage? getRecommendedOld() {
-    final boxName = MyBox.fnbRecommendedPage.name;
+  FnbRecommendedPage? getRecommendedOld(String? name) {
+    String boxName = MyBox.fnbRecommendedPage.name;
+
+    if (name != null) {
+      boxName = MyBox.fnbRecommendedPage.name;
+    }
     final fnbRecommendedBox = Hive.box<FnbRecommendedPage>(boxName);
     return fnbRecommendedBox.get(boxName);
   }
 
   Future<FnbRecommendedPage> getRecommended({
+    String? name,
     required Paging paging,
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
   }) async {
-    final boxName = MyBox.fnbRecommendedPage.name;
+    final mapQuery = {
+      ...paging.toMap(),
+      'latitude': latitude,
+      'longitude': longitude,
+      'type': PlaceCategoryEnum.fnb.name,
+    };
+
+    String boxName = MyBox.fnbRecommendedPage.name;
+
+    if (name != null) {
+      boxName = MyBox.fnbRecommendedPage.name;
+      mapQuery.addAll({"name": name});
+    }
+
     final fnbRecommendedBox = Hive.box<FnbRecommendedPage>(boxName);
 
     final oldPage = fnbRecommendedBox.get(boxName);
@@ -39,12 +57,7 @@ class FnbRecommendedRepository {
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
         '/places/recommended',
-        queryParameters: {
-          ...paging.toMap(),
-          'latitude': latitude,
-          'longitude': longitude,
-          'type': PlaceCategoryEnum.fnb.name,
-        },
+        queryParameters: mapQuery,
       );
     });
     final page = FnbRecommendedPage(

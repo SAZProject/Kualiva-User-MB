@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/fnb_action_enum.dart';
 import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/common/cubit/search_bar_cubit.dart';
 import 'package:kualiva/common/feature/search_bar/my_fixed_search_bar_widget.dart';
@@ -12,9 +13,10 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/screen/widget/search_list_item.dart';
 import 'package:kualiva/common/screen/widget/search_media_item.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
+import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
 
-class SearchBarFeature extends StatelessWidget {
-  const SearchBarFeature({
+class FnbMainSearchBarFeature extends StatelessWidget {
+  const FnbMainSearchBarFeature({
     super.key,
     required this.recentSuggestionEnum,
     this.isSliverSearchBar = true,
@@ -42,7 +44,12 @@ class SearchBarFeature extends StatelessWidget {
     if (isSliverSearchBar) {
       return MySliverSearchBarWidget(
         viewOnSubmitted: (value) {
-          Navigator.pushNamed(context, AppRoutes.fnbActionScreen);
+          Navigator.pushReplacementNamed(context, AppRoutes.fnbActionScreen,
+              arguments: FnbActionArgument(
+                title: value,
+                fnbActionEnum: FnbActionEnum.nearest,
+                searchName: value,
+              ));
         },
         suggestionsBuilder: (context, searchController) async {
           return listSearchSuggest;
@@ -52,7 +59,12 @@ class SearchBarFeature extends StatelessWidget {
 
     return MyFixedSearchBarWidget(
       viewOnSubmitted: (value) {
-        Navigator.pushNamed(context, AppRoutes.fnbActionScreen);
+        Navigator.pushReplacementNamed(context, AppRoutes.fnbActionScreen,
+            arguments: FnbActionArgument(
+              title: value,
+              fnbActionEnum: FnbActionEnum.nearest,
+              searchName: value,
+            ));
       },
       suggestionsBuilder: (context, searchController) async {
         return listSearchSuggest;
@@ -103,6 +115,7 @@ class SearchBarFeature extends StatelessWidget {
             child: SizedBox(
               width: double.maxFinite,
               child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemCount: 3,
@@ -141,6 +154,7 @@ class SearchBarFeature extends StatelessWidget {
                   return SizedBox();
                 }
                 return ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: state.recentSuggestion.length,

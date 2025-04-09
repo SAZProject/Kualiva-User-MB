@@ -4,6 +4,7 @@ part of 'fnb_action_bloc.dart';
 sealed class FnbActionEvent {}
 
 final class FnbActionFetched extends FnbActionEvent {
+  final String? name;
   final Paging paging;
   final PagingEnum pagingEnum;
   final FnbActionEnum fnbActionEnum;
@@ -11,6 +12,7 @@ final class FnbActionFetched extends FnbActionEvent {
   final double longitude;
 
   FnbActionFetched({
+    this.name,
     required this.paging,
     required this.pagingEnum,
     required this.fnbActionEnum,

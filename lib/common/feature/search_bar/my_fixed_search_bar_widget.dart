@@ -8,7 +8,7 @@ class MyFixedSearchBarWidget extends StatelessWidget {
     required this.suggestionsBuilder,
   });
 
-  final void Function(BuildContext, String) viewOnSubmitted;
+  final void Function(String) viewOnSubmitted;
 
   final Future<List<Widget>> Function(
     BuildContext context,
@@ -27,7 +27,7 @@ class MyFixedSearchBarWidget extends StatelessWidget {
         viewShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        viewOnSubmitted: (value) => viewOnSubmitted(context, value),
+        viewOnSubmitted: viewOnSubmitted,
         builder: (BuildContext context, SearchController controller) {
           return SearchBar(
             controller: controller,

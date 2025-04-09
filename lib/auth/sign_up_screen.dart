@@ -252,7 +252,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             useIcon: false,
             textStyle: theme(context)
                 .textTheme
-                .titleMedium!
+                .bodySmall!
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
@@ -294,7 +294,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             useIcon: false,
             textStyle: theme(context)
                 .textTheme
-                .titleMedium!
+                .bodySmall!
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
@@ -334,7 +334,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             useIcon: false,
             textStyle: theme(context)
                 .textTheme
-                .titleMedium!
+                .bodySmall!
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
@@ -381,7 +381,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             useIcon: false,
             textStyle: theme(context)
                 .textTheme
-                .titleMedium!
+                .bodySmall!
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
@@ -437,7 +437,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             useIcon: false,
             textStyle: theme(context)
                 .textTheme
-                .titleMedium!
+                .bodySmall!
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(

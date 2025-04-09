@@ -23,7 +23,8 @@ class FnbRecommendedBloc
     FnbRecommendedFetched event,
     Emitter<FnbRecommendedState> emit,
   ) async {
-    final fnbRecommendedPageOld = _fnbRecommendedRepository.getRecommendedOld();
+    final fnbRecommendedPageOld =
+        _fnbRecommendedRepository.getRecommendedOld(null);
     emit(FnbRecommendedLoading(fnbRecommendedPage: fnbRecommendedPageOld));
     try {
       final fnbRecommendedPage = await _fnbRecommendedRepository.getRecommended(

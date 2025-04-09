@@ -22,7 +22,7 @@ class FnbPromoBloc extends Bloc<FnbPromoEvent, FnbPromoState> {
     FnbPromoFetched event,
     Emitter<FnbPromoState> emit,
   ) async {
-    final fnbPromoPageOld = _fnbPromoRepository.getPromoOld();
+    final fnbPromoPageOld = _fnbPromoRepository.getPromoOld(null);
     emit(FnbPromoLoading(fnbPromoPage: fnbPromoPageOld));
     try {
       final fnbPromoPage = await _fnbPromoRepository.getPromo(

@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/fnb_action_enum.dart';
@@ -10,7 +9,6 @@ import 'package:kualiva/_data/model/ui_model/filters_model.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
-import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
@@ -19,6 +17,7 @@ import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_recommended_bloc.dart';
 import 'package:kualiva/places/fnb/feature/fnb_action_feature.dart';
+import 'package:kualiva/places/fnb/feature/fnb_action_search_bar_feature.dart';
 import 'package:kualiva/places/fnb/widget/fnb_filters_item.dart';
 
 class FnbActionScreen extends StatefulWidget {
@@ -35,11 +34,12 @@ class FnbActionScreen extends StatefulWidget {
 
 class _FnbActionScreenState extends State<FnbActionScreen> {
   FnbActionEnum get fnbActionEnum => widget.fnbActionArgument.fnbActionEnum;
-  String get title => widget.fnbActionArgument.title;
+  final _title = ValueNotifier<String>("");
+  final _searchName = ValueNotifier<String?>(null);
 
   final _scrollController = ScrollController();
   final _paging = ValueNotifier(Paging());
-  PagingEnum _pagineEnum = PagingEnum.before;
+  PagingEnum _pagingEnum = PagingEnum.before;
 
   final List<String> _listTagsFilter = FilterDataset.fnbFoodFilter;
 
@@ -75,12 +75,17 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
   void _nextPaging(Pagination pagination) {
     if (_paging.value.canNextPage(pagination)) return;
     _paging.value = Paging.fromPaginationNext(pagination);
-    _pagineEnum = PagingEnum.paged;
+    _pagingEnum = PagingEnum.paged;
 
     LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
   }
 
   void initActionBLoC() {
+    if (_searchName.value != null) {
+      _pagingEnum = PagingEnum.refreshed;
+      _paging.value = Paging();
+      return;
+    }
     if (fnbActionEnum == FnbActionEnum.nearest) {
       final state = context.read<FnbNearestBloc>().state;
       if (state is! FnbNearestSuccess) return;
@@ -108,8 +113,9 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     final location = context.read<CurrentLocationBloc>().state;
     if (location is! CurrentLocationSuccess) return;
     context.read<FnbActionBloc>().add(FnbActionFetched(
+          name: _searchName.value,
           paging: _paging.value,
-          pagingEnum: _pagineEnum,
+          pagingEnum: _pagingEnum,
           fnbActionEnum: fnbActionEnum,
           latitude: location.currentLocationModel.latitude,
           longitude: location.currentLocationModel.longitude,
@@ -118,15 +124,17 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
 
   Future<void> _onRetry() async {
     _paging.value = await context.read<FnbActionBloc>().currentPaging();
-    _pagineEnum = PagingEnum.refreshed;
+    _pagingEnum = PagingEnum.refreshed;
   }
 
   @override
   void initState() {
     super.initState();
-    initActionBLoC();
-    _scrollController.addListener(_onScrollPagination);
+    _title.value = widget.fnbActionArgument.title;
+    _searchName.value = widget.fnbActionArgument.searchName;
     _paging.addListener(_pagingListener);
+    _scrollController.addListener(_onScrollPagination);
+    initActionBLoC();
   }
 
   @override
@@ -151,12 +159,18 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
             : (_paging.value, PagingEnum.before));
 
         _paging.value = paging;
-        _pagineEnum = pagingEnum;
+        _pagingEnum = pagingEnum;
       },
       child: SafeArea(
-        child: Scaffold(
-          appBar: _fnbActionAppBar(context),
-          body: _body(context),
+        child: ValueListenableBuilder(
+          valueListenable: _title,
+          builder: (context, value, child) {
+            return Scaffold(
+              appBar: _fnbActionAppBar(context, value),
+              body: child,
+            );
+          },
+          child: _body(context),
         ),
       ),
     );
@@ -171,9 +185,16 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
         child: Column(
           children: [
             SizedBox(height: 5.h),
-            SearchBarFeature(
+            FnbActionSearchBarFeature(
               recentSuggestionEnum: RecentSuggestionEnum.fnb,
               isSliverSearchBar: false,
+              viewOnSubmitted: (ctx, value) {
+                _title.value = value;
+                _searchName.value = value;
+                _pagingEnum = PagingEnum.refreshed;
+                _paging.value = Paging();
+                Navigator.pop(ctx);
+              },
             ),
             SizedBox(height: 5.h),
             _tagsFilter(context),
@@ -188,9 +209,9 @@ class _FnbActionScreenState extends State<FnbActionScreen> {
     );
   }
 
-  PreferredSizeWidget _fnbActionAppBar(BuildContext context) {
+  PreferredSizeWidget _fnbActionAppBar(BuildContext context, String title) {
     return CustomAppBar(
-      title: context.tr(title),
+      title: title,
       useLeading: true,
       onBackPressed: () => Navigator.pop(context),
     );

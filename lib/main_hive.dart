@@ -110,6 +110,7 @@ class MainHive {
       openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestPage),
       openLeSafeBox<FnbPromoPage>(MyBox.fnbPromoPage),
       openLeSafeBox<FnbRecommendedPage>(MyBox.fnbRecommendedPage),
+      openLeSafeBox<FnbNearestPage>(MyBox.fnbNearestSearchPage),
 
       /// Nightlife
       openLeSafeBox<NightlifeNearestPage>(MyBox.nightlifeNearestPage),
@@ -157,6 +158,7 @@ enum MyBox {
   fnbNearestPage('fnb_nearest_page'),
   fnbPromoPage('fnb_promo_page'),
   fnbRecommendedPage('fnb_recommended_page'),
+  fnbNearestSearchPage('fnb_nearest_search_page'),
 
   /// Night Life
   nightlifeNearestPage('nightlife_nearest_page'),

@@ -30,7 +30,7 @@ class ReviewSearchBarFeature extends StatelessWidget {
           reviewSuggestionList = state.reviewSuggestion;
         }
         return MyFixedSearchBarWidget(
-          viewOnSubmitted: viewOnSubmitted,
+          viewOnSubmitted: (value) => viewOnSubmitted(context, value),
           suggestionsBuilder: (context, searchController) async {
             return reviewSuggestionList.map((suggest) {
               return ListTile(

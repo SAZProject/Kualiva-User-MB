@@ -14,19 +14,37 @@ class FnbPromoRepository {
 
   final DioClient _dioClient;
 
-  FnbPromoPage? getPromoOld() {
-    final boxName = MyBox.fnbPromoPage.name;
+  FnbPromoPage? getPromoOld(String? name) {
+    String boxName = MyBox.fnbPromoPage.name;
+
+    if (name != null) {
+      boxName = MyBox.fnbPromoPage.name;
+    }
     final fnbPromoBox = Hive.box<FnbPromoPage>(boxName);
     return fnbPromoBox.get(boxName);
   }
 
   Future<FnbPromoPage> getPromo({
+    String? name,
     required Paging paging,
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
   }) async {
-    final boxName = MyBox.fnbPromoPage.name;
+    final mapQuery = {
+      ...paging.toMap(),
+      'latitude': latitude,
+      'longitude': longitude,
+      'type': PlaceCategoryEnum.fnb.name,
+    };
+
+    String boxName = MyBox.fnbPromoPage.name;
+
+    if (name != null) {
+      boxName = MyBox.fnbPromoPage.name;
+      mapQuery.addAll({"name": name});
+    }
+
     final fnbPromoBox = Hive.box<FnbPromoPage>(boxName);
 
     final oldPage = fnbPromoBox.get(boxName);
@@ -39,12 +57,7 @@ class FnbPromoRepository {
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
         '/places/promo',
-        queryParameters: {
-          ...paging.toMap(),
-          'latitude': latitude,
-          'longitude': longitude,
-          'type': PlaceCategoryEnum.fnb.name,
-        },
+        queryParameters: mapQuery,
       );
     });
 

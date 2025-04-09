@@ -5,8 +5,9 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.31
-- New UI V2 Notification screen but still buggy
+Ver 0.1.43
+- Add Fnb Main & action screen Search bar
+- new Ui V2 on SignUp UI
 ```
 
 ## Getting Started

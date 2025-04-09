@@ -25,6 +25,13 @@ class CustomTextStyles {
       theme(context).textTheme.bodyLarge!.copyWith(
             color: appTheme.gray800,
           );
+  TextStyle get bodySmallOnPrimaryContainer_06 =>
+      theme(context).textTheme.bodySmall!.copyWith(
+            color: theme(context)
+                .colorScheme
+                .onPrimaryContainer
+                .withValues(alpha: 0.6),
+          );
   TextStyle get bodyLargeOnPrimaryContainer_06 =>
       theme(context).textTheme.bodyLarge!.copyWith(
             color: theme(context)

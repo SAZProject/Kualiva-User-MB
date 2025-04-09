@@ -61,14 +61,4 @@ class Paging {
 
   @override
   String toString() => 'Paging(page: $page, size: $size)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Paging && other.page == page && other.size == size;
-  }
-
-  @override
-  int get hashCode => page.hashCode ^ size.hashCode;
 }

@@ -152,7 +152,7 @@ class CustomTextFormField extends StatelessWidget {
     return InputDecoration(
       hintText: hintText ?? "",
       hintStyle:
-          hintStyle ?? CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
+          hintStyle ?? CustomTextStyles(context).bodySmallOnPrimaryContainer_06,
       prefixIcon: prefix,
       prefixIconConstraints: prefixConstraints,
       suffixIcon: suffix,

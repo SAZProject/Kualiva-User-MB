@@ -7,12 +7,12 @@ import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
-import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_action_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_promo_bloc.dart';
 import 'package:kualiva/places/fnb/bloc/fnb_recommended_bloc.dart';
+import 'package:kualiva/places/fnb/feature/fnb__main_search_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_app_bar_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_nearest_feature.dart';
 import 'package:kualiva/places/fnb/feature/fnb_promo_feature.dart';
@@ -249,7 +249,8 @@ class _FnbScreenState extends State<FnbScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             FnbAppBarFeature(),
-            SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.fnb),
+            FnbMainSearchBarFeature(
+                recentSuggestionEnum: RecentSuggestionEnum.fnb),
           ];
         },
         body: SingleChildScrollView(

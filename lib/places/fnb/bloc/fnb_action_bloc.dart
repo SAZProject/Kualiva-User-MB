@@ -19,6 +19,7 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
   final FnbPromoRepository _fnbPromoRepository;
   final FnbRecommendedRepository _fnbRecommendedRepository;
   late FnbActionEnum fnbActionEnum;
+  String? searchName;
 
   FnbActionBloc(
     this._fnbNearestRepository,
@@ -33,15 +34,15 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
     switch (fnbActionEnum) {
       case FnbActionEnum.nearest:
         return Paging.fromPaginationCurrent(
-          _fnbNearestRepository.getNearestOld()!.pagination,
+          _fnbNearestRepository.getNearestOld(searchName)!.pagination,
         );
       case FnbActionEnum.promo:
         return Paging.fromPaginationCurrent(
-          _fnbPromoRepository.getPromoOld()!.pagination,
+          _fnbPromoRepository.getPromoOld(searchName)!.pagination,
         );
       case FnbActionEnum.recommended:
         return Paging.fromPaginationCurrent(
-          _fnbRecommendedRepository.getRecommendedOld()!.pagination,
+          _fnbRecommendedRepository.getRecommendedOld(searchName)!.pagination,
         );
     }
   }
@@ -52,6 +53,7 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
   ) async {
     LeLog.bd(this, _onFetched, 'fnbPlaceEnum ${event.fnbActionEnum.name}');
     fnbActionEnum = event.fnbActionEnum;
+    searchName = event.name;
     switch (event.fnbActionEnum) {
       case FnbActionEnum.nearest:
         await _nearest(event, emit);
@@ -69,10 +71,11 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
     FnbActionFetched event,
     Emitter<FnbActionState> emit,
   ) async {
-    final fnbNearestPageOld = _fnbNearestRepository.getNearestOld();
+    final fnbNearestPageOld = _fnbNearestRepository.getNearestOld(searchName);
     emit(FnbActionLoadingNearest(fnbNearestPage: fnbNearestPageOld));
     try {
       final fnbNearestPage = await _fnbNearestRepository.getNearest(
+        name: searchName,
         paging: event.paging,
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
@@ -90,10 +93,11 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
     FnbActionFetched event,
     Emitter<FnbActionState> emit,
   ) async {
-    final fnbPromoPageOld = _fnbPromoRepository.getPromoOld();
+    final fnbPromoPageOld = _fnbPromoRepository.getPromoOld(searchName);
     emit(FnbActionLoadingPromo(fnbPromoPage: fnbPromoPageOld));
     try {
       final fnbPromoPage = await _fnbPromoRepository.getPromo(
+        name: event.name,
         paging: event.paging,
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
@@ -111,11 +115,13 @@ class FnbActionBloc extends Bloc<FnbActionEvent, FnbActionState> {
     FnbActionFetched event,
     Emitter<FnbActionState> emit,
   ) async {
-    final fnbRecommendedPageOld = _fnbRecommendedRepository.getRecommendedOld();
+    final fnbRecommendedPageOld =
+        _fnbRecommendedRepository.getRecommendedOld(searchName);
     emit(
         FnbActionLoadingRecommended(fnbRecommendedPage: fnbRecommendedPageOld));
     try {
       final fnbRecommendedPage = await _fnbRecommendedRepository.getRecommended(
+        name: event.name,
         paging: event.paging,
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,

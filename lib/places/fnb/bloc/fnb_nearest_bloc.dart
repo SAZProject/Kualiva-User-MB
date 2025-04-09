@@ -20,7 +20,7 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
     FnbNearestFetched event,
     Emitter<FnbNearestState> emit,
   ) async {
-    final fnbNearestPageOld = _fnbNearestRepository.getNearestOld();
+    final fnbNearestPageOld = _fnbNearestRepository.getNearestOld(null);
     emit(FnbNearestLoading(fnbNearestPage: fnbNearestPageOld));
     try {
       final fnbNearestPage = await _fnbNearestRepository.getNearest(

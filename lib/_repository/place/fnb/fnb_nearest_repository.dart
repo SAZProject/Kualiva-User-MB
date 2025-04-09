@@ -14,19 +14,37 @@ class FnbNearestRepository {
 
   final DioClient _dioClient;
 
-  FnbNearestPage? getNearestOld() {
-    final boxName = MyBox.fnbNearestPage.name;
+  FnbNearestPage? getNearestOld(String? name) {
+    String boxName = MyBox.fnbNearestPage.name;
+
+    if (name != null) {
+      boxName = MyBox.fnbNearestSearchPage.name;
+    }
     final fnbNearestBox = Hive.box<FnbNearestPage>(boxName);
     return fnbNearestBox.get(boxName);
   }
 
   Future<FnbNearestPage> getNearest({
+    String? name,
     required Paging paging,
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
   }) async {
-    final boxName = MyBox.fnbNearestPage.name;
+    final mapQuery = {
+      ...paging.toMap(),
+      'latitude': latitude,
+      'longitude': longitude,
+      'type': PlaceCategoryEnum.fnb.name,
+    };
+
+    String boxName = MyBox.fnbNearestPage.name;
+
+    if (name != null) {
+      boxName = MyBox.fnbNearestSearchPage.name;
+      mapQuery.addAll({"name": name});
+    }
+
     final fnbNearestBox = Hive.box<FnbNearestPage>(boxName);
 
     final oldPage = fnbNearestBox.get(boxName);
@@ -39,12 +57,7 @@ class FnbNearestRepository {
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
         '/places/nearest',
-        queryParameters: {
-          ...paging.toMap(),
-          'latitude': latitude,
-          'longitude': longitude,
-          'type': PlaceCategoryEnum.fnb.name,
-        },
+        queryParameters: mapQuery,
       );
     });
     final page = FnbNearestPage(

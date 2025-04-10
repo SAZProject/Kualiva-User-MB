@@ -19,6 +19,8 @@ class NightlifeActionBloc
   final NightlifeNearestRepository _nightlifeNearestRepository;
   final NightlifePromoRepository _nightlifePromoRepository;
   final NightlifeRecommendedRepository _nightlifeRecommendedRepository;
+  late NightlifeActionEnum nightlifeActionEnum;
+  String? searchName;
 
   NightlifeActionBloc(
     this._nightlifeNearestRepository,
@@ -29,12 +31,33 @@ class NightlifeActionBloc
     on<NightlifeActionFetched>(_onFetched);
   }
 
+  Future<Paging> currentPaging() async {
+    switch (nightlifeActionEnum) {
+      case NightlifeActionEnum.nearest:
+        return Paging.fromPaginationCurrent(
+          _nightlifeNearestRepository.getNearestOld(searchName)!.pagination,
+        );
+      case NightlifeActionEnum.promo:
+        return Paging.fromPaginationCurrent(
+          _nightlifePromoRepository.getPromoOld(searchName)!.pagination,
+        );
+      case NightlifeActionEnum.recommended:
+        return Paging.fromPaginationCurrent(
+          _nightlifeRecommendedRepository
+              .getRecommendedOld(searchName)!
+              .pagination,
+        );
+    }
+  }
+
   void _onFetched(
     NightlifeActionFetched event,
     Emitter<NightlifeActionState> emit,
   ) async {
+    nightlifeActionEnum = event.nightlifeActionEnum;
+    searchName = event.name;
     LeLog.bd(this, _onFetched,
-        'nightlifeActionEnum ${event.nightlifeActionEnum.name}');
+        'nightlifeActionEnum [${nightlifeActionEnum.name}], searchName [$searchName]');
     switch (event.nightlifeActionEnum) {
       case NightlifeActionEnum.nearest:
         await _nearest(event, emit);
@@ -52,7 +75,8 @@ class NightlifeActionBloc
     NightlifeActionFetched event,
     Emitter<NightlifeActionState> emit,
   ) async {
-    final nightlifeNearestPageOld = _nightlifeNearestRepository.getNearestOld();
+    final nightlifeNearestPageOld =
+        _nightlifeNearestRepository.getNearestOld(searchName);
     emit(NightlifeActionLoadingNearest(
         nightlifeNearestPage: nightlifeNearestPageOld));
     try {
@@ -61,6 +85,7 @@ class NightlifeActionBloc
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _onFetched, nightlifeNearestPage.toString());
       emit(NightlifeActionSuccessNearest(
@@ -76,7 +101,8 @@ class NightlifeActionBloc
     NightlifeActionFetched event,
     Emitter<NightlifeActionState> emit,
   ) async {
-    final nightlifePromoPageOld = _nightlifePromoRepository.getPromoOld();
+    final nightlifePromoPageOld =
+        _nightlifePromoRepository.getPromoOld(searchName);
     emit(
         NightlifeActionLoadingPromo(nightlifePromoPage: nightlifePromoPageOld));
     try {
@@ -85,6 +111,7 @@ class NightlifeActionBloc
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _promo, nightlifePromoPage.toString());
       emit(NightlifeActionSuccessPromo(nightlifePromoPage: nightlifePromoPage));
@@ -100,7 +127,7 @@ class NightlifeActionBloc
     Emitter<NightlifeActionState> emit,
   ) async {
     final nightlifeRecommendedPageOld =
-        _nightlifeRecommendedRepository.getRecommendedOld();
+        _nightlifeRecommendedRepository.getRecommendedOld(searchName);
     emit(NightlifeActionLoadingRecommended(
         nightlifeRecommendedPage: nightlifeRecommendedPageOld));
     try {
@@ -110,6 +137,7 @@ class NightlifeActionBloc
         pagingEnum: event.pagingEnum,
         latitude: event.latitude,
         longitude: event.longitude,
+        name: searchName,
       );
       LeLog.bd(this, _recommended, nightlifeRecommendedPage.toString());
       emit(NightlifeActionSuccessRecommended(

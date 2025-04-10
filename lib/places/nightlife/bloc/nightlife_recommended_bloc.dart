@@ -23,7 +23,7 @@ class NightlifeRecommendedBloc
     Emitter<NightlifeRecommendedState> emit,
   ) async {
     final nightlifeRecommendedPageOld =
-        _nightlifeRecommendedRepository.getRecommendedOld();
+        _nightlifeRecommendedRepository.getRecommendedOld(null);
     emit(NightlifeRecommendedLoading(
         nightlifeRecommendedPage: nightlifeRecommendedPageOld));
     try {

@@ -14,8 +14,10 @@ class NightlifePromoRepository {
 
   final DioClient _dioClient;
 
-  NightlifePromoPage? getPromoOld() {
-    final boxName = MyBox.nightlifePromoPage.name;
+  NightlifePromoPage? getPromoOld(String? name) {
+    String boxName = MyBox.nightlifePromoPage.name;
+    if (name != null) boxName = MyBox.nightlifePromoPage.name;
+
     final nightlifePromoBox = Hive.box<NightlifePromoPage>(boxName);
     return nightlifePromoBox.get(boxName);
   }
@@ -25,8 +27,11 @@ class NightlifePromoRepository {
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
-    final boxName = MyBox.nightlifePromoPage.name;
+    String boxName = MyBox.nightlifePromoPage.name;
+    if (name != null) boxName = MyBox.nightlifePromoPage.name;
+
     final nightlifePromoBox = Hive.box<NightlifePromoPage>(boxName);
 
     final oldPage = nightlifePromoBox.get(boxName);
@@ -44,6 +49,7 @@ class NightlifePromoRepository {
           'latitude': latitude,
           'longitude': longitude,
           'type': PlaceCategoryEnum.nightLife.name,
+          'name': name
         },
       );
     });

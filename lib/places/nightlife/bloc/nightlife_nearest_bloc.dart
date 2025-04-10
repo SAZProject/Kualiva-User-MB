@@ -22,7 +22,8 @@ class NightlifeNearestBloc
     NightlifeNearestFetched event,
     Emitter<NightlifeNearestState> emit,
   ) async {
-    final nightlifeNearestPageOld = _nightlifeNearestRepository.getNearestOld();
+    final nightlifeNearestPageOld =
+        _nightlifeNearestRepository.getNearestOld(null);
     emit(
         NightlifeNearestLoading(nightlifeNearestPage: nightlifeNearestPageOld));
     try {

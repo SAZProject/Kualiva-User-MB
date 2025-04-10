@@ -44,7 +44,7 @@ class SpaMainSearchBarFeature extends StatelessWidget {
     if (isSliverSearchBar) {
       return MySliverSearchBarWidget(
         viewOnSubmitted: (value) {
-          Navigator.pushReplacementNamed(context, AppRoutes.spaActionScreen,
+          Navigator.popAndPushNamed(context, AppRoutes.spaActionScreen,
               arguments: SpaActionArgument(
                 title: value,
                 spaActionEnum: SpaActionEnum.nearest,
@@ -59,7 +59,7 @@ class SpaMainSearchBarFeature extends StatelessWidget {
 
     return MyFixedSearchBarWidget(
       viewOnSubmitted: (value) {
-        Navigator.pushReplacementNamed(context, AppRoutes.spaActionScreen,
+        Navigator.popAndPushNamed(context, AppRoutes.spaActionScreen,
             arguments: SpaActionArgument(
               title: value,
               spaActionEnum: SpaActionEnum.nearest,

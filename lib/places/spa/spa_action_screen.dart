@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/spa_action_enum.dart';
@@ -205,7 +204,7 @@ class _SpaActionScreenState extends State<SpaActionScreen> {
 
   PreferredSizeWidget _spaActionAppBar(BuildContext context, String title) {
     return CustomAppBar(
-      title: context.tr(title),
+      title: title,
       useLeading: true,
       onBackPressed: () => Navigator.pop(context),
     );

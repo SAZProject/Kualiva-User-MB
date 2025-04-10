@@ -5,9 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.47
-- Add Nightlife Main & action screen Search bar
-- Nightlife screen pagin notifier
+Ver 0.1.48
+- Spa Screen pagination notifier & bug fixed
 ```
 
 ## Getting Started

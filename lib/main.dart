@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
-              title: 'Like It',
+              title: 'Walt',
               theme: light,
               darkTheme: dark,
               initialRoute: AppRoutes.primeCelestial,

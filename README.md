@@ -1,12 +1,12 @@
 # Kualiva APP
 
-This is a LIKE IT App for Prilion corporation.
+This is a Walt App for Prilion corporation.
 
 ## Changelog
 
 ```text
-Ver 0.1.49
-- Fix UI based on v3 version
+Ver 0.1.50
+- Change app name and brand into Walt
 ```
 
 ## Getting Started

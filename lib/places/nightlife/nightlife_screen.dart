@@ -239,13 +239,15 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             NightlifeAppBarFeature(),
-            NightlifeMainSearchBarFeature(
-                recentSuggestionEnum: RecentSuggestionEnum.nightlife),
           ];
         },
         body: SingleChildScrollView(
           child: Column(
             children: [
+              NightlifeMainSearchBarFeature(
+                recentSuggestionEnum: RecentSuggestionEnum.nightlife,
+                isSliverSearchBar: false,
+              ),
               SizedBox(height: 5.h),
               NightlifePromoFeature(
                 childScrollController: _promoScrollController,

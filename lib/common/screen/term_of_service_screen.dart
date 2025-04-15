@@ -13,7 +13,7 @@ class TermOfServiceScreen extends StatelessWidget {
   final tos = TOSDataset().tos;
 
   void _confirmBtnFunc(BuildContext context) {
-    SavePref().saveTosData();
+    SavePref().saveTosData(true);
     Navigator.pop(context, true);
   }
 

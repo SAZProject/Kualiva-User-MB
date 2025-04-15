@@ -85,8 +85,8 @@
     "onboard_3_title": "Bagikan Kenangan\nAnda",
     "onboard_3_content": "Biarkan dunia tahu tentang perjalanan Anda!\nTinggalkan review disetiap perjalananmu",
     "onboard_fullname": "Silahkan masukkan nama lengkap anda",
-    "onboard_pick_birthdate": "Silahkan masukkan\ntanggal lahir anda",
-    "onboard_pick_birthdate_hint": "Mengapa kami menanyakan tanggal lahir Anda?",
+    "onboard_pick_birthdate": "Silahkan masukkan\nData diri anda",
+    "onboard_pick_birthdate_hint": "Mengapa kami menanyakan data diri Anda?",
     "onboard_pick_birthdate_btn_date": "Pilih Tanggal",
     "onboard_pick_cuisine": "Pilih tipe\nmakanan favoritmu",
     "onboard_pick_cuisine_hint": "Anda dapat memilih hingga 5 masakan",
@@ -142,7 +142,7 @@
     "otp_verif": "Verifikasi OTP",
     "otp_check_sms": "Kami mengirimkan kode verifikasi 6 digit ke nomor telepon Anda",
     "no_code_recieve": "Tidak menerima kode apa pun? ",
-    "resend": "kirim ulang Kode",
+    "resend": "kirim Ulang Kode",
     "otp_verified": "Sukses\nTerverifikasi"
   },
   "search": {

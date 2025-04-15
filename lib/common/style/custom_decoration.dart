@@ -257,11 +257,11 @@ class CustomDecoration {
         color: appTheme.amber700.withValues(alpha: 1),
         border: Border.all(
           color: theme(context).colorScheme.primary,
-          width: 2.h,
+          width: 1.h,
         ),
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10.h),
-          topRight: Radius.circular(10.h),
+          bottomLeft: Radius.circular(9.h),
+          topRight: Radius.circular(9.h),
         ),
       );
 
@@ -272,7 +272,7 @@ class CustomDecoration {
             .withValues(alpha: 0.6),
         border: Border.all(
           color: theme(context).colorScheme.primary,
-          width: 2.h,
+          width: 1.h,
         ),
         borderRadius: BorderRadiusStyle.roundedBorder10,
       );
@@ -356,15 +356,15 @@ class BorderRadiusStyle {
       BorderRadius.only(topLeft: Radius.circular(5.h));
 
   // Rounded Borders
-  static BorderRadius get roundedBorder1 => BorderRadius.circular(1.h);
-
   static BorderRadius get roundedBorder5 => BorderRadius.circular(5.h);
+
+  static BorderRadius get roundedBorder9 => BorderRadius.circular(9.h);
 
   static BorderRadius get roundedBorder10 => BorderRadius.circular(10.h);
 
-  static BorderRadius get roundedBorder14 => BorderRadius.circular(14.h);
+  static BorderRadius get roundedBorder15 => BorderRadius.circular(15.h);
 
   static BorderRadius get roundedBorder20 => BorderRadius.circular(20.h);
 
-  static BorderRadius get roundedBorder44 => BorderRadius.circular(44.h);
+  static BorderRadius get roundedBorder50 => BorderRadius.circular(50.h);
 }

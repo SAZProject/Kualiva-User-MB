@@ -85,8 +85,8 @@
     "onboard_3_title": "Share your\nMoments",
     "onboard_3_content": "Let the world know about your journey!\nLeave a review everytime you finish your journey!",
     "onboard_fullname": "Please enter your full name",
-    "onboard_pick_birthdate": "Please enter\nyour birthdate",
-    "onboard_pick_birthdate_hint": "Why we ask for your birthdate?",
+    "onboard_pick_birthdate": "Please enter\nyour Data",
+    "onboard_pick_birthdate_hint": "Why we ask for your data?",
     "onboard_pick_birthdate_btn_date": "Select Date",
     "onboard_pick_cuisine": "Pick your\nfavorite cuisines",
     "onboard_pick_cuisine_hint": "You can select up to 5 cuisines",
@@ -142,7 +142,7 @@
     "otp_verif": "OTP Verification",
     "otp_check_sms": "We send 6-digit verification code to your phone number",
     "no_code_recieve": "Didn\u0027t recieve any code? ",
-    "resend": "resend Code",
+    "resend": "Resend Code",
     "otp_verified": "Verified\nSuccessfully"
   },
   "search": {

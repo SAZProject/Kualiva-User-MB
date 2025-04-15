@@ -5,8 +5,8 @@ This is a LIKE IT App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.48
-- Spa Screen pagination notifier & bug fixed
+Ver 0.1.49
+- Fix UI based on v3 version
 ```
 
 ## Getting Started

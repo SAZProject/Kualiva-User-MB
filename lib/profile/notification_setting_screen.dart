@@ -145,6 +145,7 @@ class NotificationSettingScreen extends StatelessWidget {
                 height: 25.h,
               ),
             ),
+            SizedBox(width: 10.h),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5.h),
               child: Icon(
@@ -152,6 +153,7 @@ class NotificationSettingScreen extends StatelessWidget {
                 size: 25.h,
               ),
             ),
+            SizedBox(width: 10.h),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5.h),
               child: Icon(

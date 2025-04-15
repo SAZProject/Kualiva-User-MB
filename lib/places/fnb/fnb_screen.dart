@@ -239,13 +239,15 @@ class _FnbScreenState extends State<FnbScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             FnbAppBarFeature(),
-            FnbMainSearchBarFeature(
-                recentSuggestionEnum: RecentSuggestionEnum.fnb),
           ];
         },
         body: SingleChildScrollView(
           child: Column(
             children: [
+              FnbMainSearchBarFeature(
+                recentSuggestionEnum: RecentSuggestionEnum.fnb,
+                isSliverSearchBar: false,
+              ),
               SizedBox(height: 5.h),
               FnbPromoFeature(
                 childScrollController: _promoScrollController,

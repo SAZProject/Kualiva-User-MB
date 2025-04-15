@@ -32,7 +32,6 @@ class FnbActionSearchBarFeature extends StatelessWidget {
         .loadSuggestion(recentSuggestEnum: recentSuggestionEnum);
 
     final List<Widget> listSearchSuggest = [
-      SizedBox(height: 5.h),
       _buildMediaList(),
       SizedBox(height: 5.h),
       _buildTrendList(context),

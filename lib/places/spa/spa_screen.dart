@@ -238,14 +238,15 @@ class _SpaScreenState extends State<SpaScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SpaAppBarFeature(),
-            SpaMainSearchBarFeature(
-              recentSuggestionEnum: RecentSuggestionEnum.spa,
-            )
           ];
         },
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SpaMainSearchBarFeature(
+                recentSuggestionEnum: RecentSuggestionEnum.spa,
+                isSliverSearchBar: false,
+              ),
               SizedBox(height: 5.h),
               SpaPromoFeature(
                 childScrollController: _promoScrollController,

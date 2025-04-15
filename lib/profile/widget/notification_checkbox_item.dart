@@ -38,7 +38,7 @@ class NotificationCheckboxItem extends StatelessWidget {
               padding: EdgeInsets.only(left: 15.h),
               child: Text(
                 context.tr(label),
-                style: CustomTextStyles(context).bodyMedium_13,
+                style: CustomTextStyles(context).bodySmall12,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -51,6 +51,7 @@ class NotificationCheckboxItem extends StatelessWidget {
                 onChange: kualivaNotifOnChange,
               ),
             ),
+            SizedBox(width: 10.h),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5.h),
               child: CustomCheckboxButton(
@@ -58,6 +59,7 @@ class NotificationCheckboxItem extends StatelessWidget {
                 onChange: emailNotifOnChange,
               ),
             ),
+            SizedBox(width: 10.h),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5.h),
               child: CustomCheckboxButton(

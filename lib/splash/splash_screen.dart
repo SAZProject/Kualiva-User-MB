@@ -1,5 +1,4 @@
 import 'package:bounce/bounce.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/auth/bloc/auth_bloc.dart';
@@ -25,8 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _checkPermission();
     _startBounceAnimation();
+    _checkPermission();
     // _videoPlayerController =
     //     VideoPlayerController.asset(VideoConstant.splashVideo);
     // _videoPlayerInitialized = _videoPlayerController.initialize().then(
@@ -88,7 +87,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(Duration(milliseconds: 500), () {
       setState(() {
-        _logoHeight = 200.h; // Reset the height after the bounce animation
+        _logoHeight = 300.h; // Reset the height after the bounce animation
+      });
+    });
+
+    Future.delayed(Duration(milliseconds: 1000), () {
+      setState(() {
+        _logoHeight = 150.h; // Reset the height after the bounce animation
       });
     });
   }
@@ -98,13 +103,19 @@ class _SplashScreenState extends State<SplashScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthTokenExist) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, AppRoutes.mainNavigationLayout, (route) => false);
+          Future.delayed(Duration(seconds: 2), () {
+            if (!context.mounted) return;
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.mainNavigationLayout, (route) => false);
+          });
         }
 
         if (state is AuthTokenNotExist) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, AppRoutes.signInScreen, (route) => false);
+          Future.delayed(Duration(seconds: 2), () {
+            if (!context.mounted) return;
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.signInScreen, (route) => false);
+          });
         }
       },
       child: SafeArea(
@@ -131,7 +142,7 @@ class _SplashScreenState extends State<SplashScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AnimatedContainer(
-            duration: Duration(milliseconds: 500),
+            duration: Duration(seconds: 2),
             curve: Curves.bounceOut,
             width: 200.h,
             height: _logoHeight.h,
@@ -143,17 +154,17 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
           ),
-          SizedBox(height: 5.h),
-          Padding(
-            padding: EdgeInsets.all(5.h),
-            child: Text(
-              context.tr("splash.app_title"),
-              style: Theme.of(context)
-                  .textTheme
-                  .displayMedium!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-          )
+          // SizedBox(height: 5.h),
+          // Padding(
+          //   padding: EdgeInsets.all(5.h),
+          //   child: Text(
+          //     context.tr("splash.app_title"),
+          //     style: Theme.of(context)
+          //         .textTheme
+          //         .displayMedium!
+          //         .copyWith(fontWeight: FontWeight.bold),
+          //   ),
+          // )
         ],
       ),
     );

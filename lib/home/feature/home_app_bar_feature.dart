@@ -2,10 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/common/app_export.dart';
-import 'package:kualiva/common/style/custom_text_style.dart';
-import 'package:kualiva/common/style/theme_helper.dart';
 import 'package:kualiva/common/utility/location_util.dart';
-import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/feature/current_location/current_location_feature.dart';
 
@@ -49,7 +46,7 @@ class _HomeAppBarFeatureState extends State<HomeAppBarFeature> {
         children: [
           Text(
             context.tr("common.current_location"),
-            style: CustomTextStyles(context).titleMediumPrimary,
+            style: CustomTextStyles(context).bodySmallPrimary12,
           ),
           CurrentLocationFeature(),
         ],

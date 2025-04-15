@@ -26,28 +26,24 @@ class HomeFeaturedItem extends StatelessWidget {
       width: 150.h,
       margin: EdgeInsets.symmetric(horizontal: 5.h),
       decoration: CustomDecoration(context).outlinePrmOnScd,
+      clipBehavior: Clip.hardEdge,
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
         onTap: onPressed,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 130.h,
-              width: double.maxFinite,
-              child: Stack(
-                alignment: Alignment.center,
+        child: ClipRRect(
+          borderRadius: BorderRadiusStyle.roundedBorder9,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Stack(
                 children: [
                   CustomImageView(
                     imagePath: homeFeatured.featuredImage ??
                         "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 130.h,
                     width: double.maxFinite,
-                    radius: BorderRadius.vertical(
-                      top: Radius.circular(10.h),
-                    ),
                     boxFit: BoxFit.cover,
                   ),
                   Align(
@@ -71,63 +67,61 @@ class HomeFeaturedItem extends StatelessWidget {
                   )
                 ],
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.h),
-              child: Row(
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.appLogo2,
-                    height: 20.h,
-                    width: 20.h,
-                    boxFit: BoxFit.cover,
-                  ),
-                  Expanded(
-                    child: Text(
-                      homeFeatured.name,
-                      style: theme(context)
-                          .textTheme
-                          .labelLarge!
-                          .copyWith(color: theme(context).colorScheme.primary),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.h),
+                child: Row(
+                  children: [
+                    CustomImageView(
+                      imagePath: ImageConstant.appLogo2,
+                      height: 20.h,
+                      width: 20.h,
+                      boxFit: BoxFit.cover,
+                    ),
+                    Expanded(
+                      child: Text(
+                        homeFeatured.name,
+                        style: theme(context).textTheme.bodySmall!.copyWith(
+                            color: theme(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      homeFeatured.averageRating.toString(),
+                      style: theme(context).textTheme.bodySmall!.copyWith(
+                          color: theme(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.h),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        homeFeatured.fullAddress,
+                        style: CustomTextStyles(context).bodySmall10,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      "${Random().nextInt(9) + 1} Km",
+                      style: CustomTextStyles(context).bodySmall10,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  Text(
-                    homeFeatured.averageRating.toString(),
-                    style: theme(context)
-                        .textTheme
-                        .labelMedium!
-                        .copyWith(color: theme(context).colorScheme.primary),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.h),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      homeFeatured.fullAddress,
-                      style: theme(context).textTheme.bodySmall,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Text(
-                    "${Random().nextInt(9) + 1} Km",
-                    style: theme(context).textTheme.bodySmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 5.h),
-            _listTag(context),
-            SizedBox(height: 5.h),
-          ],
+              SizedBox(height: 5.h),
+              _listTag(context),
+              SizedBox(height: 5.h),
+            ],
+          ),
         ),
       ),
     );

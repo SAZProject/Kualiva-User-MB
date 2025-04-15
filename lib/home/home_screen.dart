@@ -173,10 +173,6 @@ class _HomeScreenState extends State<HomeScreen> {
       width: double.maxFinite,
       margin: EdgeInsets.symmetric(horizontal: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 14.h, vertical: 8.h),
-      decoration:
-          CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder14,
-              ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

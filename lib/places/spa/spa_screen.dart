@@ -29,7 +29,6 @@ class _SpaScreenState extends State<SpaScreen> {
   final _parentScrollController = ScrollController();
   final _promoScrollController = ScrollController();
   final _nearestScrollController = ScrollController();
-  final _recommendedScrollController = ScrollController();
 
   final _pagingPromo = ValueNotifier(Paging());
   final _pagingNearest = ValueNotifier(Paging());
@@ -82,8 +81,8 @@ class _SpaScreenState extends State<SpaScreen> {
 
   /// Recommended
   void _onRecommendedScrollPagination() {
-    if (_recommendedScrollController.position.pixels !=
-        _recommendedScrollController.position.maxScrollExtent) {
+    if (_parentScrollController.position.pixels !=
+        _parentScrollController.position.maxScrollExtent) {
       return;
     }
     final state = context.read<SpaRecommendedBloc>().state;
@@ -159,7 +158,7 @@ class _SpaScreenState extends State<SpaScreen> {
     super.initState();
     _promoScrollController.addListener(_onPromoScrollPagination);
     _nearestScrollController.addListener(_onNearestScrollPagination);
-    _recommendedScrollController.addListener(_onRecommendedScrollPagination);
+    _parentScrollController.addListener(_onRecommendedScrollPagination);
 
     _pagingPromo.addListener(_pagingPromoListener);
     _pagingNearest.addListener(_pagingNearestListener);
@@ -170,12 +169,11 @@ class _SpaScreenState extends State<SpaScreen> {
   void dispose() {
     _promoScrollController.removeListener(_onPromoScrollPagination);
     _nearestScrollController.removeListener(_onNearestScrollPagination);
-    _recommendedScrollController.removeListener(_onRecommendedScrollPagination);
+    _parentScrollController.removeListener(_onRecommendedScrollPagination);
 
     _parentScrollController.dispose();
     _promoScrollController.dispose();
     _nearestScrollController.dispose();
-    _recommendedScrollController.dispose();
 
     _pagingPromo.removeListener(_pagingPromoListener);
     _pagingNearest.removeListener(_pagingNearestListener);
@@ -260,7 +258,6 @@ class _SpaScreenState extends State<SpaScreen> {
               SizedBox(height: 5.h),
               SpaRecommendedFeature(
                 parentScrollController: _parentScrollController,
-                childScrollController: _recommendedScrollController,
                 onSpaActionCallback: _onSpaActionCallback,
               ),
               SizedBox(height: 5.h),

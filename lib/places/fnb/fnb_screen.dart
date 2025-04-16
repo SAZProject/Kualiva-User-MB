@@ -30,7 +30,6 @@ class _FnbScreenState extends State<FnbScreen> {
 
   final _promoScrollController = ScrollController();
   final _nearestScrollController = ScrollController();
-  final _recommendedScrollController = ScrollController();
 
   final _pagingPromo = ValueNotifier(Paging());
   final _pagingNearest = ValueNotifier(Paging());
@@ -83,13 +82,14 @@ class _FnbScreenState extends State<FnbScreen> {
 
   /// Recommended
   void _onRecommendedScrollPagination() {
-    if (_recommendedScrollController.position.pixels !=
-        _recommendedScrollController.position.maxScrollExtent) {
+    if (_parentScrollController.position.pixels !=
+        _parentScrollController.position.maxScrollExtent) {
       return;
     }
     final state = context.read<FnbRecommendedBloc>().state;
     if (state is! FnbRecommendedSuccess) return;
     final pagination = state.fnbRecommendedPage.pagination;
+    print('ANJENG');
     LeLog.sd(
         this, _onRecommendedScrollPagination, 'Trigger Max Scroll Controller');
     _nextRecommendedPaging(pagination);
@@ -160,7 +160,7 @@ class _FnbScreenState extends State<FnbScreen> {
     super.initState();
     _promoScrollController.addListener(_onPromoScrollPagination);
     _nearestScrollController.addListener(_onNearestScrollPagination);
-    _recommendedScrollController.addListener(_onRecommendedScrollPagination);
+    _parentScrollController.addListener(_onRecommendedScrollPagination);
 
     _pagingPromo.addListener(_pagingPromoListener);
     _pagingNearest.addListener(_pagingNearestListener);
@@ -171,12 +171,11 @@ class _FnbScreenState extends State<FnbScreen> {
   void dispose() {
     _promoScrollController.removeListener(_onPromoScrollPagination);
     _nearestScrollController.removeListener(_onNearestScrollPagination);
-    _recommendedScrollController.removeListener(_onRecommendedScrollPagination);
+    _parentScrollController.removeListener(_onRecommendedScrollPagination);
 
-    _parentScrollController.dispose();
     _promoScrollController.dispose();
     _nearestScrollController.dispose();
-    _recommendedScrollController.dispose();
+    _parentScrollController.dispose();
 
     _pagingPromo.removeListener(_pagingPromoListener);
     _pagingNearest.removeListener(_pagingNearestListener);
@@ -261,7 +260,6 @@ class _FnbScreenState extends State<FnbScreen> {
               SizedBox(height: 5.h),
               FnbRecommendedFeature(
                 parentScrollController: _parentScrollController,
-                childScrollController: _recommendedScrollController,
                 onFnbActionCallback: _onActionCallback,
               ),
               SizedBox(height: 25.h),

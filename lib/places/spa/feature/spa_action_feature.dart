@@ -93,6 +93,7 @@ class SpaActionFeature extends StatelessWidget {
 
   Widget _listBuilder(List<SpaActionModel> placeList) {
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: placeList.length,

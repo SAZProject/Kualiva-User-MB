@@ -17,12 +17,10 @@ class SpaRecommendedFeature extends StatelessWidget {
   const SpaRecommendedFeature({
     super.key,
     required this.parentScrollController,
-    required this.childScrollController,
     required this.onSpaActionCallback,
   });
 
   final ScrollController parentScrollController;
-  final ScrollController childScrollController;
   final Function(SpaActionEnum) onSpaActionCallback;
 
   @override
@@ -111,7 +109,6 @@ class SpaRecommendedFeature extends StatelessWidget {
   Widget _listBuilder(SpaRecommendedPage spaRecommendedPage) {
     final spaRecommendedList = spaRecommendedPage.data;
     return ListView.builder(
-      controller: childScrollController,
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: spaRecommendedList.length,

@@ -17,12 +17,10 @@ class FnbRecommendedFeature extends StatelessWidget {
   const FnbRecommendedFeature({
     super.key,
     required this.parentScrollController,
-    required this.childScrollController,
     required this.onFnbActionCallback,
   });
 
   final ScrollController parentScrollController;
-  final ScrollController childScrollController;
   final Function(FnbActionEnum) onFnbActionCallback;
 
   @override
@@ -50,7 +48,6 @@ class FnbRecommendedFeature extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.h),
             child: SizedBox(
-              height: 450.h,
               width: double.maxFinite,
               child: NotificationListener(
                 onNotification: (ScrollNotification notification) {
@@ -111,7 +108,7 @@ class FnbRecommendedFeature extends StatelessWidget {
   Widget _listBuilder(FnbRecommendedPage fnbRecommendedPage) {
     final fnbRecommendedList = fnbRecommendedPage.data;
     return ListView.builder(
-      controller: childScrollController,
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: fnbRecommendedList.length,

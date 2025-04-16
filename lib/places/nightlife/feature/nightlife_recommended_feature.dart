@@ -17,12 +17,10 @@ class NightlifeRecommendedFeature extends StatelessWidget {
   const NightlifeRecommendedFeature({
     super.key,
     required this.parentScrollController,
-    required this.childScrollController,
     required this.onNightlifeActionCallback,
   });
 
   final ScrollController parentScrollController;
-  final ScrollController childScrollController;
   final Function(NightlifeActionEnum) onNightlifeActionCallback;
 
   @override
@@ -111,7 +109,6 @@ class NightlifeRecommendedFeature extends StatelessWidget {
   Widget _listBuilder(NightlifeRecommendedPage fnbRecommendedPage) {
     final nightlifebRecommendedList = fnbRecommendedPage.data;
     return ListView.builder(
-      controller: childScrollController,
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: nightlifebRecommendedList.length,

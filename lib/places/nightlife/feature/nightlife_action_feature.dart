@@ -95,6 +95,7 @@ class NightlifeActionFeature extends StatelessWidget {
 
   Widget _listBuilder(List<NightlifeActionModel> placeList) {
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: placeList.length,

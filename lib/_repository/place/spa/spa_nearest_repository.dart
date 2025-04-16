@@ -43,7 +43,7 @@ class SpaNearestRepository {
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
-        '/places/nearest',
+        '/place/nearest',
         queryParameters: {
           ...paging.toMap(),
           'latitude': latitude,

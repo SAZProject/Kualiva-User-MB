@@ -11,7 +11,7 @@ class OnboardingRepository {
     required DateTime birthDate,
   }) async {
     final _ = await _dioClient.dio().then((dio) {
-      return dio.post('/profiles', data: {
+      return dio.post('/profile', data: {
         "fullName": fullName,
         "birthDate": birthDate.toIso8601String(),
       });

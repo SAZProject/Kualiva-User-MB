@@ -12,7 +12,7 @@ class SpaRepository {
   }) async {
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
-        '/places/byPlaceId',
+        '/place/byPlaceId',
         queryParameters: {'placeUniqueId': placeId},
       );
     });

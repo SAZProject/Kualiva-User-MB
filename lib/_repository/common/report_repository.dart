@@ -51,7 +51,7 @@ class ReportRepository {
 
       final _ = await _dioClient.dio().then((dio) {
         return dio.post(
-          '/places/report',
+          '/place/report',
           data: {
             'placeUniqueId': placeId,
             'reasonId': reasonId,
@@ -82,7 +82,7 @@ class ReportRepository {
   }) async {
     final _ = _dioClient.dio().then((dio) {
       return dio.post(
-        '/reviews/report',
+        '/review/report',
         data: {
           'reviewId': reviewId,
           'reasonId': reasonId,

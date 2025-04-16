@@ -23,7 +23,7 @@ class ProfileRepository {
     // }
 
     final res = await _dioClient.dio().then((dio) {
-      return dio.get('/profiles/me');
+      return dio.get('/profile/me');
     });
 
     final data = UserModel.fromMap(res.data['data']);
@@ -55,7 +55,7 @@ class ProfileRepository {
       });
 
       final _ = await _dioClient.dio().then((dio) {
-        return dio.patch('/profiles/me', data: body);
+        return dio.patch('/profile/me', data: body);
       });
     } catch (e) {
       if (minioUserProfileImagePaths.isNotEmpty) {

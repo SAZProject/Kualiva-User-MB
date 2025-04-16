@@ -18,7 +18,7 @@ class ParameterRepository {
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
-        '/parameters/div-and-subdiv',
+        '/parameter/div-and-subdiv',
         queryParameters: parameterEnum.toMap(),
       );
     });

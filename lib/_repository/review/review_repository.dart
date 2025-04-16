@@ -101,11 +101,11 @@ class ReviewRepository {
       });
       if (isCreated == true) {
         final _ = await _dioClient.dio().then((dio) {
-          return dio.post('/reviews', data: body);
+          return dio.post('/review', data: body);
         });
       } else {
         final _ = await _dioClient.dio().then((dio) {
-          return dio.patch('/reviews/${reviewId!}', data: body);
+          return dio.patch('/review/${reviewId!}', data: body);
         });
       }
       final temp = placeUniqueId ?? '';
@@ -163,7 +163,7 @@ class ReviewRepository {
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
-        '/reviews/$placeId/place',
+        '/review/$placeId/place',
         queryParameters: query,
       );
     });
@@ -205,7 +205,7 @@ class ReviewRepository {
     // }
 
     final res = await _dioClient.dio().then((dio) {
-      return dio.get('/reviews/$placeId/place/me');
+      return dio.get('/review/$placeId/place/me');
     });
 
     final data = ReviewPlaceModel.fromMap(res.data['data']);
@@ -213,23 +213,10 @@ class ReviewRepository {
     return data;
   }
 
-  /// Review Place Search Text
-  Future<void> getBySearchText({required String text}) async {
-    final _ = await _dioClient.dio().then((dio) {
-      return dio.get(
-        '/',
-        queryParameters: Map.from(
-          {'text': text},
-        ),
-      );
-    });
-    return;
-  }
-
   /// Review Add Like
   Future<void> addLike({required int reviewId}) async {
     final _ = await _dioClient.dio().then((dio) {
-      return dio.post('/reviews/$reviewId/like/add');
+      return dio.post('/review/$reviewId/like/add');
     });
     return;
   }
@@ -237,7 +224,7 @@ class ReviewRepository {
   /// Review Remove Like
   Future<void> removeLike({required int reviewId}) async {
     final _ = await _dioClient.dio().then((dio) {
-      return dio.delete('/reviews/$reviewId/like/remove');
+      return dio.delete('/review/$reviewId/like/remove');
     });
     return;
   }

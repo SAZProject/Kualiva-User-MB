@@ -38,7 +38,7 @@ class NightlifeRecommendedRepository {
 
     final res = await _dioClient.dio().then((dio) {
       return dio.get(
-        '/places/recommended',
+        '/place/recommended',
         queryParameters: {
           ...paging.toMap(),
           'latitude': latitude,

@@ -75,7 +75,7 @@
     "phone_number": "Phone Number"
   },
   "splash": {
-    "app_title": "Like It"
+    "app_title": "Walt"
   },
   "onboard": {
     "onboard_1_title": "Start your\nJourney",
@@ -85,13 +85,13 @@
     "onboard_3_title": "Share your\nMoments",
     "onboard_3_content": "Let the world know about your journey!\nLeave a review everytime you finish your journey!",
     "onboard_fullname": "Please enter your full name",
-    "onboard_pick_birthdate": "Please enter\nyour birthdate",
-    "onboard_pick_birthdate_hint": "Why we ask for your birthdate?",
+    "onboard_pick_birthdate": "Please enter\nyour Data",
+    "onboard_pick_birthdate_hint": "Why we ask for your data?",
     "onboard_pick_birthdate_btn_date": "Select Date",
     "onboard_pick_cuisine": "Pick your\nfavorite cuisines",
     "onboard_pick_cuisine_hint": "You can select up to 5 cuisines",
     "onboard_pick_notif": "How would you\nlike to recieve our\nnotifications?",
-    "onboard_pick_notif_item_1": "Like It",
+    "onboard_pick_notif_item_1": "Walt",
     "onboard_pick_notif_item_2": "WhatsApp",
     "onboard_pick_notif_item_3": "Email",
     "onboard_pick_notif_btn_select": "Select All",
@@ -108,9 +108,9 @@
     "policy": "Privacy Policy"
   },
   "sign_in": {
-    "welcome": "Welcome to Like It",
+    "welcome": "Welcome to Walt",
     "sign_in_with": "Sign In with",
-    "kualiva_acc": "Like It Account",
+    "kualiva_acc": "Walt Account",
     "sign_in_with_saz": "Sign In with SAZ",
     "sign_in_with_google": "Sign In with Google",
     "phone_number_or_user_name": "Phone Number or Username",
@@ -142,7 +142,7 @@
     "otp_verif": "OTP Verification",
     "otp_check_sms": "We send 6-digit verification code to your phone number",
     "no_code_recieve": "Didn\u0027t recieve any code? ",
-    "resend": "resend Code",
+    "resend": "Resend Code",
     "otp_verified": "Verified\nSuccessfully"
   },
   "search": {
@@ -158,7 +158,7 @@
   "home_nav_bar": {
     "nav_1": "Home",
     "nav_2": "HiChef",
-    "nav_3": "Like It",
+    "nav_3": "Walt",
     "nav_4": "Ranking",
     "nav_5": "Profile"
   },
@@ -317,7 +317,7 @@
     "title": "Review",
     "filter": "Review Filter",
     "filter_user": "User",
-    "filter_kualiva": "Like It",
+    "filter_kualiva": "Walt",
     "filter_google": "Google",
     "filter_time": "Time",
     "filter_time_1": "Latest",
@@ -433,7 +433,7 @@
   },
   "notif": {
     "title": "Notification",
-    "kualiva": "Like It",
+    "kualiva": "Walt",
     "kualiva_1": "Updates",
     "kualiva_2": "News",
     "kualiva_3": "Events",

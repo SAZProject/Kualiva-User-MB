@@ -53,38 +53,49 @@ class NotificationListItem extends StatelessWidget {
           width: double.maxFinite,
           child: ListTile(
             dense: true,
-            shape: Border.all(
-              color: theme(context).colorScheme.primary,
-              width: 2.h,
-            ),
             minVerticalPadding: 0.0,
-            minTileHeight: 80.h,
+            minTileHeight: 75.h,
             minLeadingWidth: 0.0,
-            visualDensity: const VisualDensity(
-              vertical: -4,
-              horizontal: -4,
-            ),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            visualDensity: VisualDensity.compact,
+            title: Row(
               children: [
-                Text(
-                  title,
-                  style: theme(context).textTheme.titleSmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                SizedBox(
+                  height: 50.h,
+                  width: 50.h,
                 ),
-                Text(
-                  content,
-                  style: theme(context).textTheme.bodyMedium,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 5.0),
-                Text(
-                  publishDate,
-                  style: CustomTextStyles(context).bodySmall12,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                SizedBox(width: 5.h),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              title,
+                              style: theme(context).textTheme.titleSmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Text(
+                            publishDate,
+                            style: CustomTextStyles(context).bodySmall10,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        content,
+                        style: CustomTextStyles(context).bodySmall12,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 5.0),
+                    ],
+                  ),
                 ),
               ],
             ),

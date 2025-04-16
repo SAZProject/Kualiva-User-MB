@@ -153,93 +153,93 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
     case AppRoutes.onBoardingScreen:
       return PageTransition(
           child: const OnBoardingScreen(),
-          type: PageTransitionType.fade,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.onBoardingVerifyUserScreen:
       return PageTransition(
           child: const OnboardingVerifyingUser(),
-          type: PageTransitionType.fade,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.signInScreen:
       return PageTransition(
           child: const SignInScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.signUpScreen:
       return PageTransition(
           child: const SignUpScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.tosScreen:
       return PageTransition(
           child: TermOfServiceScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.otpScreen:
       return PageTransition(
           child: const OtpPageScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.devicePermissionScreen:
       return PageTransition(
           child: const DevicePermissionScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.mainNavigationLayout:
       return PageTransition(
           child: const MainLayout(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.searchScreen:
       return PageTransition(
           child: const SearchScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.homeEventScreen:
       return PageTransition(
           child: const WhatGoingOnScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.homeEventDetailScreen:
       final homeEventModel = routeSetting.arguments as HomeEventModel;
       return PageTransition(
           child: HomeEventDetailScreen(eventModel: homeEventModel),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.fnbScreen:
       return PageTransition(
           child: const FnbScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.nightLifeScreen:
       return PageTransition(
           child: const NightlifeScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.spaScreen:
       return PageTransition(
           child: const SpaScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.fnbActionScreen:
       final fnbActionArgument = routeSetting.arguments as FnbActionArgument;
       return PageTransition(
           child: FnbActionScreen(fnbActionArgument: fnbActionArgument),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.nightLifeActionScreen:
@@ -249,7 +249,7 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           child: NightlifeActionScreen(
             nightlifeActionArgument: nightlifeActionArgument,
           ),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.spaActionScreen:
@@ -258,137 +258,137 @@ Route<dynamic> generateRoute(RouteSettings routeSetting) {
           child: SpaActionScreen(
             spaActionArgument: spaActionArgument,
           ),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.fnbFilterScreen:
       final filterModel = routeSetting.arguments as FiltersModel?;
       return PageTransition(
           child: FnbFiltersScreen(getFilterModel: filterModel),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.fnbDetailScreen:
       final placeArgument = routeSetting.arguments as PlaceArgument;
       return PageTransition(
           child: FnbDetailScreen(placeArgument: placeArgument),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.nightLifeDetailScreen:
       final placeArgument = routeSetting.arguments as PlaceArgument;
       return PageTransition(
           child: NightlifeDetailScreen(placeArgument: placeArgument),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.spaDetailScreen:
       final placeArgument = routeSetting.arguments as PlaceArgument;
       return PageTransition(
           child: SpaDetailScreen(placeArgument: placeArgument),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.promoPlaceScreen:
       final listPromo = routeSetting.arguments as List<PromoModel>;
       return PageTransition(
           child: PromoPlaceScreen(listPromo: listPromo),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.promoDetailScreen:
       final promo = routeSetting.arguments as PromoModel;
       return PageTransition(
           child: PromoPlaceDetail(promo: promo),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.fnbDetailMenuScreen:
       final listImageMenu = routeSetting.arguments as List<String>;
       return PageTransition(
           child: FnbDetailMenuScreen(listImageMenu: listImageMenu),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reviewScreen:
       final argument = routeSetting.arguments as ReviewArgument;
       return PageTransition(
           child: ReviewScreen(reviewArgument: argument),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reviewFormScreen:
       return PageTransition(
           child: ReviewFormScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reportPlaceScreen:
       final argument = routeSetting.arguments as ReportPlaceArgument;
       return PageTransition(
           child: ReportPlaceScreen(reportPlaceArgument: argument),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.reportReviewScreen:
       final argument = routeSetting.arguments as ReportReviewArgument;
       return PageTransition(
           child: ReportReviewScreen(reportReviewArgument: argument),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.profileScreen:
       return PageTransition(
           child: const ProfileScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.userLevelScreen:
       return PageTransition(
           child: const UserLevelScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.myProfileScreen:
       return PageTransition(
           child: const MyProfileScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.myReviewScreen:
       return PageTransition(
           child: const MyReviewScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.notificationScreen:
       return PageTransition(
           child: NotificationScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.notificationSettingScreen:
       return PageTransition(
           child: NotificationSettingScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.languageScreen:
       return PageTransition(
           child: const LanguageScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.addPlaceScreen:
       return PageTransition(
           child: const AddPlacesScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     case AppRoutes.locationScreen:
       return PageTransition(
           child: const LocationScreen(),
-          type: PageTransitionType.leftToRight,
+          type: PageTransitionType.rightToLeft,
           duration: const Duration(milliseconds: 300));
 
     default:

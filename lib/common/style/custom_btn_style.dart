@@ -49,6 +49,16 @@ class CustomButtonStyles {
     );
   }
 
+  static ButtonStyle fillprimaryRnd50(BuildContext context) {
+    return ElevatedButton.styleFrom(
+      backgroundColor: theme(context).colorScheme.primary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50.h),
+      ),
+      elevation: 0.0,
+    );
+  }
+
   static ButtonStyle get fillGray {
     return ElevatedButton.styleFrom(
       backgroundColor: appTheme.gray200,
@@ -128,6 +138,19 @@ class CustomButtonStyles {
     );
   }
 
+  static ButtonStyle outlineOnPrimaryRnd50(BuildContext context) {
+    return OutlinedButton.styleFrom(
+      backgroundColor: theme(context).colorScheme.onSecondaryContainer,
+      side: BorderSide(
+        color: theme(context).colorScheme.primary,
+        width: 1.h,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50.h),
+      ),
+    );
+  }
+
   static ButtonStyle outlineOnPrimaryContainer(BuildContext context) {
     return OutlinedButton.styleFrom(
       backgroundColor: theme(context).colorScheme.primary,
@@ -172,6 +195,24 @@ class CustomButtonStyles {
       visualDensity: VisualDensity.compact,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.h),
+      ),
+    );
+  }
+
+  static ButtonStyle outlineOnSecondaryContainerRnd50(BuildContext context) {
+    return OutlinedButton.styleFrom(
+      backgroundColor:
+          theme(context).colorScheme.primary.withValues(alpha: 0.5),
+      side: BorderSide(
+        color: theme(context)
+            .colorScheme
+            .onPrimaryContainer
+            .withValues(alpha: 0.6),
+        width: 1.h,
+      ),
+      visualDensity: VisualDensity.compact,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50.h),
       ),
     );
   }

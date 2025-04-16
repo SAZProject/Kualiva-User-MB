@@ -34,6 +34,9 @@ class ThemeHelper {
       brightness: colorScheme.brightness,
       fontFamily: "K2D",
       textTheme: TextThemes.textTheme(colorScheme),
+      scaffoldBackgroundColor: colorScheme.brightness == Brightness.light
+          ? Color.fromARGB(255, 245, 245, 245)
+          : Color.fromARGB(255, 10, 10, 10),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           shape:

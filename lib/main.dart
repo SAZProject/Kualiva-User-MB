@@ -8,8 +8,6 @@ import 'package:kualiva/main_provider.dart';
 import 'common/app_export.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'common/utility/save_pref.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -31,8 +29,6 @@ void main() async {
   } else {
     dotenvFileName = '.env.dev';
   }
-
-  SavePref().prefInitial();
 
   await Future.wait([
     dotenv.load(fileName: dotenvFileName),
@@ -83,7 +79,7 @@ class _MyAppState extends State<MyApp> {
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
-              title: 'Like It',
+              title: 'Walt',
               theme: light,
               darkTheme: dark,
               initialRoute: AppRoutes.primeCelestial,

@@ -52,12 +52,12 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
       isRightIcon: false,
       isCommingSoon: false,
     ),
-    ProfileMenuModel(
-      icon: Icons.email,
-      label: "onboard.onboard_pick_notif_item_3",
-      isRightIcon: false,
-      isCommingSoon: false,
-    ),
+    // ProfileMenuModel(
+    //   icon: Icons.email,
+    //   label: "onboard.onboard_pick_notif_item_3",
+    //   isRightIcon: false,
+    //   isCommingSoon: false,
+    // ),
   ];
 
   Set<int> selectedNotifChoice = {0};
@@ -234,11 +234,12 @@ class _OnboardingVerifyingUserState extends State<OnboardingVerifyingUser> {
             _activePage == 1 ? context.tr("onboard.onboard_save_btn") : null,
         margin: EdgeInsets.all(10.h),
         buttonStyle: !_fieldValidation(_activePage)
-            ? CustomButtonStyles.outlineOnSecondaryContainer(context)
-            : CustomButtonStyles.fillprimary(context),
+            ? CustomButtonStyles.outlineOnSecondaryContainerRnd50(context)
+            : CustomButtonStyles.outlineOnPrimaryRnd50(context),
         decoration: null,
-        buttonTextStyle:
-            CustomTextStyles(context).titleMediumOnSecondaryContainer,
+        buttonTextStyle: !_fieldValidation(_activePage)
+            ? CustomTextStyles(context).titleMediumOnSecondaryContainer
+            : CustomTextStyles(context).titleMediumPrimary,
         onPressed: !_fieldValidation(_activePage)
             ? null
             : () => _confirmBtnFunc(context),

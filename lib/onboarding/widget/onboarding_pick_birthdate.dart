@@ -43,8 +43,12 @@ class OnboardingPickBirthdate extends StatelessWidget {
             initialText: label,
             onPressed: onPressed,
             buttonStyle: CustomButtonStyles.none,
-            decoration: CustomDecoration(context).outlinePrimary,
-            buttonTextStyle: CustomTextStyles(context).titleMediumPrimary,
+            decoration:
+                CustomDecoration(context).outlineOnPrimaryContainer.copyWith(
+                      borderRadius: BorderRadius.circular(10.h),
+                    ),
+            buttonTextStyle:
+                CustomTextStyles(context).bodySmallOnPrimaryContainer,
           ),
           SizedBox(height: 10.h),
           InkWell(

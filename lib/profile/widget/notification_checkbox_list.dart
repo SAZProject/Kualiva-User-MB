@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/profile/widget/notification_checkbox_item.dart';
@@ -33,6 +34,7 @@ class NotificationCheckboxList extends StatelessWidget {
           CustomSectionHeader(
             label: header,
             useIcon: false,
+            textStyle: CustomTextStyles(context).bodySmall12,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.h),

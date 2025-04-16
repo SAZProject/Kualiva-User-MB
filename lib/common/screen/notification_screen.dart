@@ -76,7 +76,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         : ListView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
-            itemExtent: 80.h,
+            itemExtent: 75.h,
             itemCount: listNotif.length,
             itemBuilder: (context, index) {
               return NotificationListItem(

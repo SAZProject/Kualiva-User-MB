@@ -43,8 +43,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void initState() {
+    _getTos();
     super.initState();
-    tosAgreement = SavePref().readTosData();
+  }
+
+  void _getTos() async {
+    tosAgreement = await SavePref().readTosData();
+    setState(() {});
   }
 
   @override
@@ -68,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           setState(() {
             tosAgreement = value as bool;
           });
-          SavePref().saveTosData();
+          SavePref().saveTosData(value as bool);
           if (!context.mounted) return;
 
           context.read<AuthBloc>().add(
@@ -169,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _textFieldUserName(context),
           SizedBox(height: 2.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: SizedBox(
               width: double.maxFinite,
               child: _fieldInputRequirement(
@@ -189,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _textFieldPassword(context),
           SizedBox(height: 2.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: SizedBox(
               width: double.maxFinite,
               child: _fieldInputRequirement(
@@ -203,11 +208,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           SizedBox(height: 5.h),
           _textFieldConfirmPassword(context),
-          SizedBox(height: 5.h),
-          _buildTos(context),
           SizedBox(height: 20.h),
-          _signUpButton(context),
-          SizedBox(height: 5.h),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -234,6 +235,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
           SizedBox(height: 25.h),
+          _buildTos(context),
+          SizedBox(height: 5.h),
+          _signUpButton(context),
+          SizedBox(height: 25.h),
         ],
       ),
     );
@@ -246,7 +251,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
             padding: EdgeInsets.symmetric(vertical: 5.h),
             label: context.tr("sign_up.username"),
             useIcon: false,
@@ -256,7 +261,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: CustomTextFormField(
               controller: _userNameCtl,
               hintText: context.tr("sign_up.username"),
@@ -288,7 +293,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
             padding: EdgeInsets.symmetric(vertical: 5.h),
             label: context.tr("sign_up.email"),
             useIcon: false,
@@ -298,7 +303,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: CustomTextFormField(
               controller: _emailCtl,
               hintText: context.tr("sign_up.email"),
@@ -328,7 +333,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
             padding: EdgeInsets.symmetric(vertical: 5.h),
             label: context.tr("sign_up.phone_number"),
             useIcon: false,
@@ -338,7 +343,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: CustomPhoneNumber(
               country: selectedCountry,
               onPressed: (Country country) {
@@ -375,7 +380,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
             padding: EdgeInsets.symmetric(vertical: 5.h),
             label: context.tr("sign_up.password"),
             useIcon: false,
@@ -385,7 +390,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: ValueListenableBuilder(
               valueListenable: _passwordObscure,
               builder: (context, value, child) {
@@ -431,7 +436,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomSectionHeader(
-            margin: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+            margin: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.h),
             padding: EdgeInsets.symmetric(vertical: 5.h),
             label: context.tr("sign_up.re_enter_password"),
             useIcon: false,
@@ -441,7 +446,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 .copyWith(color: theme(context).colorScheme.primary),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: ValueListenableBuilder(
               valueListenable: _confirmPasswordObscure,
               builder: (context, value, child) {
@@ -483,6 +488,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return CustomElevatedButton(
+          margin: EdgeInsets.symmetric(horizontal: 20.h),
           isLoading: state is AuthLoading,
           initialText: context.tr("sign_up.sign_up_btn"),
           buttonStyle: CustomButtonStyles.fillprimary(context),
@@ -555,6 +561,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return SizedBox(
       width: Sizeutils.width,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Checkbox(
             value: tosAgreement,
@@ -565,7 +572,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   setState(() {
                     tosAgreement = value as bool;
                   });
-                  SavePref().saveTosData();
+                  SavePref().saveTosData(value as bool);
                 },
               );
             },
@@ -595,7 +602,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             setState(() {
                               tosAgreement = value as bool;
                             });
-                            SavePref().saveTosData();
+                            SavePref().saveTosData(value as bool);
                           },
                         );
                       },
@@ -622,7 +629,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             setState(() {
                               tosAgreement = value as bool;
                             });
-                            SavePref().saveTosData();
+                            SavePref().saveTosData(value as bool);
                           },
                         );
                       },

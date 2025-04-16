@@ -19,19 +19,18 @@ class SpaPromoItem extends StatelessWidget {
       width: 150.h,
       margin: EdgeInsets.all(5.h),
       decoration: CustomDecoration(context).outlinePrmOnScd,
+      clipBehavior: Clip.hardEdge,
       child: InkWell(
         borderRadius: BorderRadiusStyle.roundedBorder10,
         onTap: onPressed,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 130.h,
-              width: double.maxFinite,
-              child: Stack(
-                alignment: Alignment.center,
+        child: ClipRRect(
+          borderRadius: BorderRadiusStyle.roundedBorder9,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
                 children: [
                   CustomImageView(
                     alignment: Alignment.center,
@@ -39,13 +38,10 @@ class SpaPromoItem extends StatelessWidget {
                         "${ImageConstant.fnb1Path}/A/2.jpg",
                     height: 130.h,
                     width: double.maxFinite,
-                    radius: BorderRadius.vertical(
-                      top: Radius.circular(10.h),
-                    ),
                     boxFit: BoxFit.cover,
                   ),
                   Align(
-                    alignment: Alignment.topLeft,
+                    alignment: Alignment.topRight,
                     child: Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 10.h,
@@ -65,63 +61,69 @@ class SpaPromoItem extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.h),
-              child: Row(
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.appLogo2,
-                    height: 20.h,
-                    width: 20.h,
-                    boxFit: BoxFit.cover,
-                  ),
-                  Expanded(
-                    child: Text(
-                      merchant.name,
-                      style: theme(context)
-                          .textTheme
-                          .labelLarge!
-                          .copyWith(color: theme(context).colorScheme.primary),
+              SizedBox(height: 5.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.h),
+                child: Row(
+                  children: [
+                    CustomImageView(
+                      imagePath: ImageConstant.appLogo2,
+                      height: 20.h,
+                      width: 20.h,
+                      boxFit: BoxFit.cover,
+                    ),
+                    Expanded(
+                      child: Text(
+                        merchant.name,
+                        style: theme(context).textTheme.bodySmall!.copyWith(
+                            color: theme(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      merchant.averageRating.toString(),
+                      style: theme(context).textTheme.bodySmall!.copyWith(
+                          color: theme(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.h),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        merchant.cityOrVillage,
+                        style: CustomTextStyles(context).bodySmall10,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      " - ",
+                      style: CustomTextStyles(context).bodySmall10,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  Text(
-                    merchant.averageRating.toString(),
-                    style: theme(context)
-                        .textTheme
-                        .labelMedium!
-                        .copyWith(color: theme(context).colorScheme.primary),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.h),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      merchant.cityOrVillage,
-                      style: theme(context).textTheme.bodySmall,
+                    Text(
+                      merchant.distanceFromUser,
+                      style: CustomTextStyles(context).bodySmall10,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  Text(
-                    merchant.distanceFromUser,
-                    style: theme(context).textTheme.bodySmall,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 5.h),
-            _listTag(context),
-            SizedBox(height: 5.h),
-          ],
+              SizedBox(height: 5.h),
+              _listTag(context),
+              SizedBox(height: 5.h),
+            ],
+          ),
         ),
       ),
     );
@@ -156,16 +158,12 @@ class SpaPromoItem extends StatelessWidget {
   Widget _tagView(BuildContext context, String label) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5.h),
-      padding: EdgeInsets.symmetric(horizontal: 5.h),
-      decoration: CustomDecoration(context).fillPrimary.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder5,
-          ),
       child: Center(
         child: Text(
           label,
           textAlign: TextAlign.center,
           style: CustomTextStyles(context).bodySmall10.copyWith(
-                color: theme(context).colorScheme.onSecondaryContainer,
+                color: theme(context).colorScheme.onPrimaryContainer,
               ),
         ),
       ),

@@ -179,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       decoration:
           CustomDecoration(context).outlineOnSecondaryContainer.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder14,
+                borderRadius: BorderRadiusStyle.roundedBorder15,
               ),
       width: double.maxFinite,
       child: InkWell(

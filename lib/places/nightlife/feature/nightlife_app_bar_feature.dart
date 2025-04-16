@@ -44,12 +44,12 @@ class _NightlifeAppBarFeatureState extends State<NightlifeAppBarFeature> {
         children: [
           Text(
             context.tr("common.current_location"),
-            style: CustomTextStyles(context).titleMediumPrimary,
+            style: CustomTextStyles(context).bodySmallPrimary12,
           ),
           CurrentLocationFeature(),
         ],
       ),
-      toolbarHeight: 100.h,
+      toolbarHeight: 70.h,
     );
   }
 }

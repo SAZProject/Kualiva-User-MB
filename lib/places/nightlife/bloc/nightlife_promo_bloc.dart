@@ -22,7 +22,7 @@ class NightlifePromoBloc
     NightlifePromoFetched event,
     Emitter<NightlifePromoState> emit,
   ) async {
-    final nightlifePromoPageOld = _nightlifePromoRepository.getPromoOld();
+    final nightlifePromoPageOld = _nightlifePromoRepository.getPromoOld(null);
     emit(NightlifePromoLoading(nightlifePromoPage: nightlifePromoPageOld));
     try {
       final nightlifePromoPage = await _nightlifePromoRepository.getPromo(

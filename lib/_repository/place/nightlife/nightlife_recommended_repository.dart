@@ -14,8 +14,10 @@ class NightlifeRecommendedRepository {
 
   final DioClient _dioClient;
 
-  NightlifeRecommendedPage? getRecommendedOld() {
-    final boxName = MyBox.nightlifeRecommendedPage.name;
+  NightlifeRecommendedPage? getRecommendedOld(String? name) {
+    String boxName = MyBox.nightlifeRecommendedPage.name;
+    if (name != null) boxName = MyBox.nightlifeRecommendedPage.name;
+
     final nightlifeRecommendedBox = Hive.box<NightlifeRecommendedPage>(boxName);
     return nightlifeRecommendedBox.get(boxName);
   }
@@ -25,8 +27,11 @@ class NightlifeRecommendedRepository {
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
-    final boxName = MyBox.nightlifeRecommendedPage.name;
+    String boxName = MyBox.nightlifeRecommendedPage.name;
+    if (name != null) boxName = MyBox.nightlifeRecommendedPage.name;
+
     final nightlifeRecommendedBox = Hive.box<NightlifeRecommendedPage>(boxName);
 
     final oldPage = nightlifeRecommendedBox.get(boxName);
@@ -44,6 +49,7 @@ class NightlifeRecommendedRepository {
           'latitude': latitude,
           'longitude': longitude,
           'type': PlaceCategoryEnum.nightLife.name,
+          'name': name
         },
       );
     });

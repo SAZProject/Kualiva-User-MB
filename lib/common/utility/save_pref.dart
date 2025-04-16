@@ -3,16 +3,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SavePref {
   SharedPreferences? sharedPreferences;
 
-  void prefInitial() async {
+  void saveTosData(bool value) async {
     sharedPreferences = await SharedPreferences.getInstance();
-  }
-
-  void saveTosData() async {
     if (sharedPreferences == null) return;
-    await sharedPreferences!.setBool("tos", true);
+    await sharedPreferences!.setBool("tos", value);
   }
 
-  bool readTosData() {
+  Future<bool> readTosData() async {
+    sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences == null) return false;
     return sharedPreferences!.getBool("tos") ?? false;
   }

@@ -31,7 +31,12 @@ class SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
-    tosAgreement = SavePref().readTosData();
+    _getTos();
+  }
+
+  void _getTos() async {
+    tosAgreement = await SavePref().readTosData();
+    setState(() {});
   }
 
   @override
@@ -70,7 +75,7 @@ class SignInScreenState extends State<SignInScreen> {
           setState(() {
             tosAgreement = value as bool;
           });
-          SavePref().saveTosData();
+          SavePref().saveTosData(value as bool);
           if (!context.mounted) return;
           context.read<AuthBloc>().add(authEvent);
         },
@@ -80,7 +85,7 @@ class SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  void _onPressedSignUp(BuildContext context) {
+  void _onPressedSignUp(BuildContext context) async {
     Navigator.of(context).pushNamed(AppRoutes.signUpScreen);
   }
 
@@ -168,7 +173,7 @@ class SignInScreenState extends State<SignInScreen> {
           SizedBox(height: 25.h),
           Text(
             context.tr("sign_in.kualiva_acc"),
-            style: CustomTextStyles(context).bodyLargeOnPrimaryContainer_06,
+            style: CustomTextStyles(context).bodySmallOnPrimaryContainer_06,
           ),
           SizedBox(height: 10.h),
           _textFieldPhoneNumberOrUserName(context),
@@ -221,54 +226,60 @@ class SignInScreenState extends State<SignInScreen> {
   // }
 
   Widget _textFieldPhoneNumberOrUserName(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: CustomTextFormField(
-        controller: _phoneNumberOrUserNameCtl,
-        hintText: context.tr("sign_in.phone_number_or_user_name"),
-        textInputType: TextInputType.text,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return "Please enter some text";
-          }
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.h),
+      child: SizedBox(
+        width: double.maxFinite,
+        child: CustomTextFormField(
+          controller: _phoneNumberOrUserNameCtl,
+          hintText: context.tr("sign_in.phone_number_or_user_name"),
+          textInputType: TextInputType.text,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Please enter some text";
+            }
 
-          return null;
-        },
+            return null;
+          },
+        ),
       ),
     );
   }
 
   Widget _textFieldPassword(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: ValueListenableBuilder(
-        valueListenable: _passwordObscure,
-        builder: (context, value, child) {
-          return CustomTextFormField(
-            controller: _passwordCtl,
-            hintText: context.tr("sign_in.password"),
-            textInputType: TextInputType.text,
-            obscureText: value,
-            suffix: IconButton(
-              onPressed: () {
-                _passwordObscure.value = !_passwordObscure.value;
-              },
-              icon: Icon(
-                value ? Icons.visibility : Icons.visibility_off,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.h),
+      child: SizedBox(
+        width: double.maxFinite,
+        child: ValueListenableBuilder(
+          valueListenable: _passwordObscure,
+          builder: (context, value, child) {
+            return CustomTextFormField(
+              controller: _passwordCtl,
+              hintText: context.tr("sign_in.password"),
+              textInputType: TextInputType.text,
+              obscureText: value,
+              suffix: IconButton(
+                onPressed: () {
+                  _passwordObscure.value = !_passwordObscure.value;
+                },
+                icon: Icon(
+                  value ? Icons.visibility : Icons.visibility_off,
+                ),
               ),
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter some text";
-              }
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please enter some text";
+                }
 
-              // if (!FormValidationUtil.password(value)) {
-              //   return "Baca lagi ketentuan nya yyaakkk wahai customer";
-              // }
-              return null;
-            },
-          );
-        },
+                // if (!FormValidationUtil.password(value)) {
+                //   return "Baca lagi ketentuan nya yyaakkk wahai customer";
+                // }
+                return null;
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -277,6 +288,7 @@ class SignInScreenState extends State<SignInScreen> {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return CustomElevatedButton(
+          margin: EdgeInsets.symmetric(horizontal: 20.h),
           isLoading: state is AuthLoading,
           initialText: context.tr("sign_in.sign_in_btn"),
           buttonStyle: CustomButtonStyles.fillprimary(context),
@@ -292,7 +304,7 @@ class SignInScreenState extends State<SignInScreen> {
   Widget _signUpButton(BuildContext context) {
     return CustomOutlinedButton(
       text: context.tr("sign_up.sign_up_btn"),
-      margin: EdgeInsets.all(5.h),
+      margin: EdgeInsets.symmetric(horizontal: 20.h),
       buttonStyle: CustomButtonStyles.none,
       decoration: CustomDecoration(context).outlinePrimary,
       buttonTextStyle: CustomTextStyles(context).titleMediumPrimary,
@@ -315,7 +327,7 @@ class SignInScreenState extends State<SignInScreen> {
                   setState(() {
                     tosAgreement = value as bool;
                   });
-                  SavePref().saveTosData();
+                  SavePref().saveTosData(value as bool);
                 },
               );
             },
@@ -345,7 +357,7 @@ class SignInScreenState extends State<SignInScreen> {
                             setState(() {
                               tosAgreement = value as bool;
                             });
-                            SavePref().saveTosData();
+                            SavePref().saveTosData(value as bool);
                           },
                         );
                       },
@@ -372,7 +384,7 @@ class SignInScreenState extends State<SignInScreen> {
                             setState(() {
                               tosAgreement = value as bool;
                             });
-                            SavePref().saveTosData();
+                            SavePref().saveTosData(value as bool);
                           },
                         );
                       },

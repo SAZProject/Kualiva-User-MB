@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/widget/custom_alert_dialog.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_pin_code_text_field.dart';
 
 class OtpPageScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: _otpAppBar(context),
         body: _body(context),
       ),
     );
@@ -97,6 +99,12 @@ class _OtpPageScreenState extends State<OtpPageScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  PreferredSizeWidget _otpAppBar(BuildContext context) {
+    return CustomAppBar(
+      onBackPressed: () => Navigator.pop(context),
     );
   }
 }

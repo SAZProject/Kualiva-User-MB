@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/nightlife_action_enum.dart';
@@ -8,7 +7,6 @@ import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
-import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/places/nightlife/argument/nightlife_action_argument.dart';
@@ -17,6 +15,7 @@ import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_recommended_bloc.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_action_feature.dart';
+import 'package:kualiva/places/nightlife/feature/nightlife_action_search_bar_feature.dart';
 
 class NightlifeActionScreen extends StatefulWidget {
   const NightlifeActionScreen({
@@ -33,10 +32,12 @@ class NightlifeActionScreen extends StatefulWidget {
 class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
   NightlifeActionEnum get nightlifeActionEnum =>
       widget.nightlifeActionArgument.nightlifeActionEnum;
-  String get title => widget.nightlifeActionArgument.title;
+  final _title = ValueNotifier<String>("");
+  final _searchName = ValueNotifier<String?>(null);
 
   final _scrollController = ScrollController();
   final _paging = ValueNotifier(Paging());
+  PagingEnum _pagingEnum = PagingEnum.before;
 
   void _onScrollPagination() {
     if (_scrollController.position.pixels !=
@@ -64,29 +65,17 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
   void _nextPaging(Pagination pagination) {
     if (_paging.value.canNextPage(pagination)) return;
     _paging.value = Paging.fromPaginationNext(pagination);
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
-    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
+    _pagingEnum = PagingEnum.paged;
 
-    context.read<NightlifeActionBloc>().add(NightlifeActionFetched(
-          paging: _paging.value,
-          pagingEnum: PagingEnum.paged,
-          nightlifeActionEnum: nightlifeActionEnum,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
+    LeLog.sd(this, _nextPaging, 'Next Paging ${_paging.value}');
   }
 
   void initActionBLoC() {
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
-    context.read<NightlifeActionBloc>().add(NightlifeActionFetched(
-          paging: Paging(),
-          pagingEnum: PagingEnum.before,
-          nightlifeActionEnum: nightlifeActionEnum,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
+    if (_searchName.value != null) {
+      _pagingEnum = PagingEnum.refreshed;
+      _paging.value = Paging();
+      return;
+    }
     if (nightlifeActionEnum == NightlifeActionEnum.nearest) {
       final state = context.read<NightlifeNearestBloc>().state;
       if (state is! NightlifeNearestSuccess) return;
@@ -110,18 +99,52 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
     }
   }
 
+  void _pagingListener() {
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
+    context.read<NightlifeActionBloc>().add(NightlifeActionFetched(
+          paging: _paging.value,
+          pagingEnum: _pagingEnum,
+          nightlifeActionEnum: nightlifeActionEnum,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+          name: _searchName.value,
+        ));
+  }
+
+  Future<void> _onRetry() async {
+    _paging.value = await context.read<NightlifeActionBloc>().currentPaging();
+    _pagingEnum = PagingEnum.refreshed;
+  }
+
+  void _onSearchBarSubmitted(BuildContext context, String value) {
+    _title.value = value;
+    _searchName.value = value;
+    _pagingEnum = PagingEnum.refreshed;
+    _paging.value = Paging();
+    Navigator.pop(context);
+  }
+
   @override
   void initState() {
     super.initState();
-    initActionBLoC();
+    _title.value = widget.nightlifeActionArgument.title;
+    _searchName.value = widget.nightlifeActionArgument.searchName;
+    _paging.addListener(_pagingListener);
     _scrollController.addListener(_onScrollPagination);
+    initActionBLoC();
   }
 
   @override
   void dispose() {
     super.dispose();
+    _paging.removeListener(_pagingListener);
+    _paging.dispose();
     _scrollController.removeListener(_onScrollPagination);
     _scrollController.dispose();
+
+    _title.dispose();
+    _searchName.dispose();
   }
 
   @override
@@ -136,18 +159,19 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
             ? (Paging(), PagingEnum.refreshed)
             : (_paging.value, PagingEnum.before));
 
-        context.read<NightlifeActionBloc>().add(NightlifeActionFetched(
-              paging: paging,
-              pagingEnum: pagingEnum,
-              nightlifeActionEnum: nightlifeActionEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
+        _paging.value = paging;
+        _pagingEnum = pagingEnum;
       },
       child: SafeArea(
-        child: Scaffold(
-          appBar: _nightlifeActionAppBar(context),
-          body: _body(context),
+        child: ValueListenableBuilder(
+          valueListenable: _title,
+          builder: (context, value, child) {
+            return Scaffold(
+              appBar: _nightlifeActionAppBar(context, value),
+              body: child,
+            );
+          },
+          child: _body(context),
         ),
       ),
     );
@@ -162,12 +186,15 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
         child: Column(
           children: [
             SizedBox(height: 5.h),
-            SearchBarFeature(
+            NightlifeActionSearchBarFeature(
               recentSuggestionEnum: RecentSuggestionEnum.nightlife,
               isSliverSearchBar: false,
+              viewOnSubmitted: _onSearchBarSubmitted,
             ),
             SizedBox(height: 5.h),
-            NightlifeActionFeature(),
+            NightlifeActionFeature(
+              onRetry: _onRetry,
+            ),
             SizedBox(height: 5.h),
           ],
         ),
@@ -175,9 +202,10 @@ class _NightlifeActionScreenState extends State<NightlifeActionScreen> {
     );
   }
 
-  PreferredSizeWidget _nightlifeActionAppBar(BuildContext context) {
+  PreferredSizeWidget _nightlifeActionAppBar(
+      BuildContext context, String title) {
     return CustomAppBar(
-      title: context.tr(title),
+      title: title,
       useLeading: true,
       onBackPressed: () => Navigator.pop(context),
     );

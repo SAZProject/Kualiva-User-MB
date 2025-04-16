@@ -10,7 +10,12 @@ import 'package:kualiva/places/nightlife/widget/nightlife_action_item.dart';
 import 'package:kualiva/router.dart';
 
 class NightlifeActionFeature extends StatelessWidget {
-  const NightlifeActionFeature({super.key});
+  const NightlifeActionFeature({
+    super.key,
+    required this.onRetry,
+  });
+
+  final void Function() onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class NightlifeActionFeature extends StatelessWidget {
         if (state is NightlifeActionFailure) {
           return CustomErrorState(
             errorMessage: context.tr('common.error_try_again'),
-            onRetry: () {},
+            onRetry: onRetry,
           );
         }
 

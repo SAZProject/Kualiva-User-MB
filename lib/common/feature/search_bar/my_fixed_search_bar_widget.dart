@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:kualiva/common/utility/sized_utils.dart';
 
 class MyFixedSearchBarWidget extends StatelessWidget {
-  const MyFixedSearchBarWidget({
+  MyFixedSearchBarWidget({
     super.key,
     required this.viewOnSubmitted,
     required this.suggestionsBuilder,
   });
 
   final void Function(String) viewOnSubmitted;
+
+  final _onChanged = ValueNotifier<String>("");
 
   final Future<List<Widget>> Function(
     BuildContext context,
@@ -20,16 +22,18 @@ class MyFixedSearchBarWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(8.h),
       child: SearchAnchor(
-        isFullScreen: false,
-        viewConstraints: BoxConstraints(
-          maxHeight: MediaQuery.sizeOf(context).height * 0.4,
-        ),
-        viewShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        viewTrailing: [
+          IconButton(
+            onPressed: () => viewOnSubmitted(_onChanged.value),
+            icon: Icon(Icons.search),
+          )
+        ],
+        dividerColor: Colors.transparent,
         viewOnSubmitted: viewOnSubmitted,
+        viewOnChanged: (value) => _onChanged.value = value,
         builder: (BuildContext context, SearchController controller) {
           return SearchBar(
+            elevation: WidgetStatePropertyAll<double>(1.0),
             controller: controller,
             focusNode: FocusNode(),
             padding: WidgetStatePropertyAll<EdgeInsets>(
@@ -37,6 +41,12 @@ class MyFixedSearchBarWidget extends StatelessWidget {
             ),
             onTap: () {
               controller.openView();
+            },
+            onTapOutside: (event) {
+              FocusScopeNode focusNode = FocusScope.of(context);
+              if (focusNode.hasPrimaryFocus) {
+                focusNode.unfocus();
+              }
             },
             leading: const Icon(Icons.search),
           );

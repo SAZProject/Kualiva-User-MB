@@ -35,6 +35,10 @@ class _SpaScreenState extends State<SpaScreen> {
   final _pagingNearest = ValueNotifier(Paging());
   final _pagingRecommended = ValueNotifier(Paging());
 
+  PagingEnum _pagingEnumPromo = PagingEnum.before;
+  PagingEnum _pagingEnumNearest = PagingEnum.before;
+  PagingEnum _pagingEnumRecommended = PagingEnum.before;
+
   /// Promo
   void _onPromoScrollPagination() {
     if (_promoScrollController.position.pixels !=
@@ -50,16 +54,10 @@ class _SpaScreenState extends State<SpaScreen> {
 
   void _nextPromoPaging(Pagination pagination) {
     if (_pagingPromo.value.canNextPage(pagination)) return;
+    _pagingEnumPromo = PagingEnum.paged;
     _pagingPromo.value = Paging.fromPaginationNext(pagination);
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
+
     LeLog.sd(this, _nextPromoPaging, 'Next Paging ${_pagingPromo.value}');
-    context.read<SpaPromoBloc>().add(SpaPromoFetched(
-          paging: _pagingPromo.value,
-          pagingEnum: PagingEnum.paged,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
   }
 
   /// Nearest
@@ -78,15 +76,8 @@ class _SpaScreenState extends State<SpaScreen> {
   void _nextNearestPaging(Pagination pagination) {
     if (_pagingNearest.value.canNextPage(pagination)) return;
     _pagingNearest.value = Paging.fromPaginationNext(pagination);
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
+
     LeLog.sd(this, _nextNearestPaging, 'Next Paging ${_pagingNearest.value}');
-    context.read<SpaNearestBloc>().add(SpaNearestFetched(
-          paging: _pagingNearest.value,
-          pagingEnum: PagingEnum.paged,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
   }
 
   /// Recommended
@@ -106,60 +97,61 @@ class _SpaScreenState extends State<SpaScreen> {
   void _nextRecommendedPaging(Pagination pagination) {
     if (_pagingRecommended.value.canNextPage(pagination)) return;
     _pagingRecommended.value = Paging.fromPaginationNext(pagination);
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
+
     LeLog.sd(this, _nextRecommendedPaging,
         'Next Paging ${_pagingRecommended.value}');
-    context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
-          paging: _pagingRecommended.value,
-          pagingEnum: PagingEnum.paged,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
   }
 
   void _onSpaActionCallback(SpaActionEnum spaActionEnum) {
     final spaActionBloc = context.read<SpaActionBloc>().state;
     if (spaActionBloc is SpaActionSuccessPromo) {
       final pagination = spaActionBloc.spaPromoPage.pagination;
+      _pagingEnumPromo = PagingEnum.before;
       _pagingPromo.value = Paging.fromPaginationCurrent(pagination);
     }
     if (spaActionBloc is SpaActionSuccessNearest) {
       final pagination = spaActionBloc.spaNearestPage.pagination;
+      _pagingEnumNearest = PagingEnum.before;
       _pagingNearest.value = Paging.fromPaginationCurrent(pagination);
     }
     if (spaActionBloc is SpaActionSuccessRecommended) {
       final pagination = spaActionBloc.spaRecommendedPage.pagination;
+      _pagingEnumRecommended = PagingEnum.before;
       _pagingRecommended.value = Paging.fromPaginationCurrent(pagination);
     }
+  }
+
+  void _pagingPromoListener() {
     final location = context.read<CurrentLocationBloc>().state;
     if (location is! CurrentLocationSuccess) return;
-    switch (spaActionEnum) {
-      case SpaActionEnum.promo:
-        context.read<SpaPromoBloc>().add(SpaPromoFetched(
-              paging: _pagingPromo.value,
-              pagingEnum: PagingEnum.before,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
-        break;
-      case SpaActionEnum.nearest:
-        context.read<SpaNearestBloc>().add(SpaNearestFetched(
-              paging: _pagingNearest.value,
-              pagingEnum: PagingEnum.before,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
-        break;
-      case SpaActionEnum.recommended:
-        context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
-              paging: _pagingRecommended.value,
-              pagingEnum: PagingEnum.before,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
-        break;
-    }
+    context.read<SpaPromoBloc>().add(SpaPromoFetched(
+          paging: _pagingPromo.value,
+          pagingEnum: _pagingEnumPromo,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+        ));
+  }
+
+  void _pagingNearestListener() {
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
+    context.read<SpaNearestBloc>().add(SpaNearestFetched(
+          paging: _pagingNearest.value,
+          pagingEnum: _pagingEnumNearest,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+        ));
+  }
+
+  void _pagingRecommendedListener() {
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
+    context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
+          paging: _pagingRecommended.value,
+          pagingEnum: _pagingEnumRecommended,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+        ));
   }
 
   @override
@@ -168,6 +160,10 @@ class _SpaScreenState extends State<SpaScreen> {
     _promoScrollController.addListener(_onPromoScrollPagination);
     _nearestScrollController.addListener(_onNearestScrollPagination);
     _recommendedScrollController.addListener(_onRecommendedScrollPagination);
+
+    _pagingPromo.addListener(_pagingPromoListener);
+    _pagingNearest.addListener(_pagingNearestListener);
+    _pagingRecommended.addListener(_pagingRecommendedListener);
   }
 
   @override
@@ -180,6 +176,14 @@ class _SpaScreenState extends State<SpaScreen> {
     _promoScrollController.dispose();
     _nearestScrollController.dispose();
     _recommendedScrollController.dispose();
+
+    _pagingPromo.removeListener(_pagingPromoListener);
+    _pagingNearest.removeListener(_pagingNearestListener);
+    _pagingRecommended.removeListener(_pagingRecommendedListener);
+
+    _pagingPromo.dispose();
+    _pagingNearest.dispose();
+    _pagingRecommended.dispose();
     super.dispose();
   }
 
@@ -188,9 +192,9 @@ class _SpaScreenState extends State<SpaScreen> {
       return (Paging(), Paging(), Paging(), PagingEnum.refreshed);
     }
     return (
-      _pagingPromo.value,
-      _pagingNearest.value,
-      _pagingRecommended.value,
+      Paging.fromPaging(_pagingPromo.value),
+      Paging.fromPaging(_pagingNearest.value),
+      Paging.fromPaging(_pagingRecommended.value),
       PagingEnum.before
     );
   }
@@ -210,26 +214,12 @@ class _SpaScreenState extends State<SpaScreen> {
           pagingEnum,
         ) = preparePaging(isRefresh);
 
-        context.read<SpaPromoBloc>().add(SpaPromoFetched(
-              paging: pagingPromo,
-              pagingEnum: pagingEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
+        _pagingEnumPromo =
+            _pagingEnumNearest = _pagingEnumRecommended = pagingEnum;
 
-        context.read<SpaNearestBloc>().add(SpaNearestFetched(
-              paging: pagingNearest,
-              pagingEnum: pagingEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
-
-        context.read<SpaRecommendedBloc>().add(SpaRecommendedFetched(
-              paging: pagingRecommended,
-              pagingEnum: pagingEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
+        _pagingPromo.value = pagingPromo;
+        _pagingNearest.value = pagingNearest;
+        _pagingRecommended.value = pagingRecommended;
       },
       child: SafeArea(
         child: Scaffold(
@@ -248,14 +238,15 @@ class _SpaScreenState extends State<SpaScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SpaAppBarFeature(),
-            SpaMainSearchBarFeature(
-              recentSuggestionEnum: RecentSuggestionEnum.spa,
-            )
           ];
         },
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SpaMainSearchBarFeature(
+                recentSuggestionEnum: RecentSuggestionEnum.spa,
+                isSliverSearchBar: false,
+              ),
               SizedBox(height: 5.h),
               SpaPromoFeature(
                 childScrollController: _promoScrollController,

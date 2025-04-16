@@ -14,8 +14,10 @@ class NightlifeNearestRepository {
 
   final DioClient _dioClient;
 
-  NightlifeNearestPage? getNearestOld() {
-    final boxName = MyBox.nightlifeNearestPage.name;
+  NightlifeNearestPage? getNearestOld(String? name) {
+    String boxName = MyBox.nightlifeNearestPage.name;
+    if (name != null) boxName = MyBox.nightlifeNearestPage.name;
+
     final nightlifeNearestBox = Hive.box<NightlifeNearestPage>(boxName);
     return nightlifeNearestBox.get(boxName);
   }
@@ -25,8 +27,12 @@ class NightlifeNearestRepository {
     required PagingEnum pagingEnum,
     required double latitude,
     required double longitude,
+    String? name,
   }) async {
-    final boxName = MyBox.nightlifeNearestPage.name;
+    String boxName = MyBox.nightlifeNearestPage.name;
+
+    if (name != null) boxName = MyBox.nightlifeNearestPage.name;
+
     final nightlifeNearestBox = Hive.box<NightlifeNearestPage>(boxName);
 
     final oldPage = nightlifeNearestBox.get(boxName);
@@ -44,6 +50,7 @@ class NightlifeNearestRepository {
           'latitude': latitude,
           'longitude': longitude,
           'type': PlaceCategoryEnum.nightLife.name,
+          'name': name
         },
       );
     });

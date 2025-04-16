@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kualiva/_data/enum/fnb_action_enum.dart';
+import 'package:kualiva/_data/enum/nightlife_action_enum.dart';
 import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/common/cubit/search_bar_cubit.dart';
 import 'package:kualiva/common/feature/search_bar/my_fixed_search_bar_widget.dart';
@@ -13,10 +13,10 @@ import 'package:kualiva/common/app_export.dart';
 import 'package:kualiva/common/screen/widget/search_list_item.dart';
 import 'package:kualiva/common/screen/widget/search_media_item.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
-import 'package:kualiva/places/fnb/argument/fnb_action_argument.dart';
+import 'package:kualiva/places/nightlife/argument/nightlife_action_argument.dart';
 
-class FnbMainSearchBarFeature extends StatelessWidget {
-  const FnbMainSearchBarFeature({
+class NightlifeMainSearchBarFeature extends StatelessWidget {
+  const NightlifeMainSearchBarFeature({
     super.key,
     required this.recentSuggestionEnum,
     this.isSliverSearchBar = true,
@@ -44,10 +44,10 @@ class FnbMainSearchBarFeature extends StatelessWidget {
     if (isSliverSearchBar) {
       return MySliverSearchBarWidget(
         viewOnSubmitted: (value) {
-          Navigator.popAndPushNamed(context, AppRoutes.fnbActionScreen,
-              arguments: FnbActionArgument(
+          Navigator.popAndPushNamed(context, AppRoutes.nightLifeActionScreen,
+              arguments: NightlifeActionArgument(
                 title: value,
-                fnbActionEnum: FnbActionEnum.nearest,
+                nightlifeActionEnum: NightlifeActionEnum.nearest,
                 searchName: value,
               ));
         },
@@ -59,10 +59,10 @@ class FnbMainSearchBarFeature extends StatelessWidget {
 
     return MyFixedSearchBarWidget(
       viewOnSubmitted: (value) {
-        Navigator.popAndPushNamed(context, AppRoutes.fnbActionScreen,
-            arguments: FnbActionArgument(
+        Navigator.popAndPushNamed(context, AppRoutes.nightLifeActionScreen,
+            arguments: NightlifeActionArgument(
               title: value,
-              fnbActionEnum: FnbActionEnum.nearest,
+              nightlifeActionEnum: NightlifeActionEnum.nearest,
               searchName: value,
             ));
       },

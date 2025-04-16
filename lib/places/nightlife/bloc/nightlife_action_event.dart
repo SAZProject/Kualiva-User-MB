@@ -9,6 +9,7 @@ final class NightlifeActionFetched extends NightlifeActionEvent {
   final NightlifeActionEnum nightlifeActionEnum;
   final double latitude;
   final double longitude;
+  final String? name;
 
   NightlifeActionFetched({
     required this.paging,
@@ -16,5 +17,6 @@ final class NightlifeActionFetched extends NightlifeActionEvent {
     required this.nightlifeActionEnum,
     required this.latitude,
     required this.longitude,
+    this.name,
   });
 }

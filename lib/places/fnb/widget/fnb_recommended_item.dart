@@ -30,11 +30,10 @@ class FnbRecommendedItem extends StatelessWidget {
         borderRadius: BorderRadiusStyle.roundedBorder10,
         onTap: onPressed,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomImageView(
-              width: 100.h,
-              height: 100.h,
+              width: 120.h,
+              height: 120.h,
               imagePath:
                   place.featuredImage ?? "${ImageConstant.fnb1Path}/A/2.jpg",
               radius: BorderRadius.all(Radius.circular(10.h)),
@@ -61,8 +60,9 @@ class FnbRecommendedItem extends StatelessWidget {
                       Expanded(
                         child: Text(
                           place.name,
-                          style: theme(context).textTheme.labelLarge!.copyWith(
-                              color: theme(context).colorScheme.primary),
+                          style: theme(context).textTheme.bodySmall!.copyWith(
+                              color: theme(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -71,15 +71,16 @@ class FnbRecommendedItem extends StatelessWidget {
                         padding: EdgeInsets.only(left: 5.h),
                         child: Text(
                           place.averageRating.toString(),
-                          style: theme(context).textTheme.labelMedium!.copyWith(
-                              color: theme(context).colorScheme.primary),
+                          style: theme(context).textTheme.bodySmall!.copyWith(
+                              color: theme(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.h),
                         child: Text(
                           "(${Random().nextInt(999) + 1})",
-                          style: theme(context).textTheme.labelMedium,
+                          style: theme(context).textTheme.bodySmall,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -94,7 +95,7 @@ class FnbRecommendedItem extends StatelessWidget {
                       children: List.generate(5, (index) {
                         return Icon(
                           Icons.attach_money,
-                          size: 15.h,
+                          size: 12.h,
                           color: index <= (place.averageRating.floor() - 1)
                               ? theme(context).colorScheme.primary
                               : null,
@@ -105,17 +106,23 @@ class FnbRecommendedItem extends StatelessWidget {
                   SizedBox(height: 5.h),
                   Row(
                     children: [
-                      Expanded(
+                      Flexible(
                         child: Text(
                           place.cityOrVillage,
-                          style: theme(context).textTheme.bodySmall,
+                          style: CustomTextStyles(context).bodySmall10,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Text(
+                        " - ",
+                        style: CustomTextStyles(context).bodySmall10,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
                         place.distanceFromUser,
-                        style: theme(context).textTheme.bodySmall,
+                        style: CustomTextStyles(context).bodySmall10,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -165,10 +172,10 @@ class FnbRecommendedItem extends StatelessWidget {
 
   Widget _categoryTagView(BuildContext context, String label) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2.h),
-      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      margin: EdgeInsets.only(right: 2.5),
+      padding: EdgeInsets.symmetric(horizontal: 5.h),
       decoration: CustomDecoration(context).fillPrimary.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder5,
+            borderRadius: BorderRadiusStyle.roundedBorder50,
           ),
       child: Center(
         child: Text(
@@ -206,14 +213,14 @@ class FnbRecommendedItem extends StatelessWidget {
 
   Widget _isMerchantTagView(BuildContext context, int index, String label) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2.h),
-      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      margin: EdgeInsets.only(right: 2.5),
+      padding: EdgeInsets.symmetric(horizontal: 5.h),
       decoration: index == 0
           ? CustomDecoration(context).fillOrange300.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder5,
+                borderRadius: BorderRadiusStyle.roundedBorder50,
               )
           : CustomDecoration(context).fillOrange300_05.copyWith(
-                borderRadius: BorderRadiusStyle.roundedBorder5,
+                borderRadius: BorderRadiusStyle.roundedBorder50,
               ),
       child: Center(
         child: Text(

@@ -1,13 +1,12 @@
 # Kualiva APP
 
-This is a LIKE IT App for Prilion corporation.
+This is a Walt App for Prilion corporation.
 
 ## Changelog
 
 ```text
-Ver 0.1.43
-- Add Fnb Main & action screen Search bar
-- new Ui V2 on SignUp UI
+Ver 0.1.50
+- Change app name and brand into Walt
 ```
 
 ## Getting Started

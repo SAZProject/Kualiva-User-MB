@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kualiva/_data/enum/nightlife_action_enum.dart';
 import 'package:kualiva/_data/enum/paging_enum.dart';
+import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
 import 'package:kualiva/_data/model/pagination/pagination.dart';
 import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:kualiva/places/nightlife/bloc/nightlife_nearest_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_promo_bloc.dart';
 import 'package:kualiva/places/nightlife/bloc/nightlife_recommended_bloc.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_app_bar_feature.dart';
+import 'package:kualiva/places/nightlife/feature/nightlife_main_search_bar_feature.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_nearest_feature.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_promo_feature.dart';
 import 'package:kualiva/places/nightlife/feature/nightlife_recommended_feature.dart';
@@ -33,6 +35,10 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
   final _pagingNearest = ValueNotifier(Paging());
   final _pagingRecommended = ValueNotifier(Paging());
 
+  PagingEnum _pagingEnumPromo = PagingEnum.before;
+  PagingEnum _pagingEnumNearest = PagingEnum.before;
+  PagingEnum _pagingEnumRecommended = PagingEnum.before;
+
   /// Promo
   void _onPromoScrollPagination() {
     if (_promoScrollController.position.pixels !=
@@ -48,16 +54,10 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
 
   void _nextPromoPaging(Pagination pagination) {
     if (_pagingPromo.value.canNextPage(pagination)) return;
+    _pagingEnumPromo = PagingEnum.paged;
     _pagingPromo.value = Paging.fromPaginationNext(pagination);
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
+
     LeLog.sd(this, _nextPromoPaging, 'Next Paging ${_pagingPromo.value}');
-    context.read<NightlifePromoBloc>().add(NightlifePromoFetched(
-          paging: _pagingPromo.value,
-          pagingEnum: PagingEnum.paged,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
   }
 
   /// Nearest
@@ -76,15 +76,8 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
   void _nextNearestPaging(Pagination pagination) {
     if (_pagingNearest.value.canNextPage(pagination)) return;
     _pagingNearest.value = Paging.fromPaginationNext(pagination);
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
+
     LeLog.sd(this, _nextNearestPaging, 'Next Paging ${_pagingNearest.value}');
-    context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
-          paging: _pagingNearest.value,
-          pagingEnum: PagingEnum.paged,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
   }
 
   /// Recommended
@@ -104,63 +97,62 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
   void _nextRecommendedPaging(Pagination pagination) {
     if (_pagingRecommended.value.canNextPage(pagination)) return;
     _pagingRecommended.value = Paging.fromPaginationNext(pagination);
-    final location = context.read<CurrentLocationBloc>().state;
-    if (location is! CurrentLocationSuccess) return;
+
     LeLog.sd(this, _nextRecommendedPaging,
         'Next Paging ${_pagingRecommended.value}');
-    context.read<NightlifeRecommendedBloc>().add(NightlifeRecommendedFetched(
-          paging: _pagingRecommended.value,
-          pagingEnum: PagingEnum.paged,
-          latitude: location.currentLocationModel.latitude,
-          longitude: location.currentLocationModel.longitude,
-        ));
   }
 
   void _onNightlifeActionCallback(NightlifeActionEnum nightlifeActionEnum) {
     final nightlifeActionBloc = context.read<NightlifeActionBloc>().state;
     if (nightlifeActionBloc is NightlifeActionSuccessPromo) {
       final pagination = nightlifeActionBloc.nightlifePromoPage.pagination;
+      _pagingEnumPromo = PagingEnum.before;
       _pagingPromo.value = Paging.fromPaginationCurrent(pagination);
     }
     if (nightlifeActionBloc is NightlifeActionSuccessNearest) {
       final pagination = nightlifeActionBloc.nightlifeNearestPage.pagination;
+      _pagingEnumNearest = PagingEnum.before;
       _pagingNearest.value = Paging.fromPaginationCurrent(pagination);
     }
     if (nightlifeActionBloc is NightlifeActionSuccessRecommended) {
       final pagination =
           nightlifeActionBloc.nightlifeRecommendedPage.pagination;
+      _pagingEnumRecommended = PagingEnum.before;
       _pagingRecommended.value = Paging.fromPaginationCurrent(pagination);
     }
+  }
+
+  void _pagingPromoListener() {
     final location = context.read<CurrentLocationBloc>().state;
     if (location is! CurrentLocationSuccess) return;
-    switch (nightlifeActionEnum) {
-      case NightlifeActionEnum.promo:
-        context.read<NightlifePromoBloc>().add(NightlifePromoFetched(
-              paging: _pagingPromo.value,
-              pagingEnum: PagingEnum.before,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
-        break;
-      case NightlifeActionEnum.nearest:
-        context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
-              paging: _pagingNearest.value,
-              pagingEnum: PagingEnum.before,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
-        break;
-      case NightlifeActionEnum.recommended:
-        context
-            .read<NightlifeRecommendedBloc>()
-            .add(NightlifeRecommendedFetched(
-              paging: _pagingRecommended.value,
-              pagingEnum: PagingEnum.before,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
-        break;
-    }
+    context.read<NightlifePromoBloc>().add(NightlifePromoFetched(
+          paging: _pagingPromo.value,
+          pagingEnum: _pagingEnumPromo,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+        ));
+  }
+
+  void _pagingNearestListener() {
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
+    context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
+          paging: _pagingNearest.value,
+          pagingEnum: _pagingEnumNearest,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+        ));
+  }
+
+  void _pagingRecommendedListener() {
+    final location = context.read<CurrentLocationBloc>().state;
+    if (location is! CurrentLocationSuccess) return;
+    context.read<NightlifeRecommendedBloc>().add(NightlifeRecommendedFetched(
+          paging: _pagingRecommended.value,
+          pagingEnum: _pagingEnumRecommended,
+          latitude: location.currentLocationModel.latitude,
+          longitude: location.currentLocationModel.longitude,
+        ));
   }
 
   @override
@@ -169,6 +161,10 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
     _promoScrollController.addListener(_onPromoScrollPagination);
     _nearestScrollController.addListener(_onNearestScrollPagination);
     _recommendedScrollController.addListener(_onRecommendedScrollPagination);
+
+    _pagingPromo.addListener(_pagingPromoListener);
+    _pagingNearest.addListener(_pagingNearestListener);
+    _pagingRecommended.addListener(_pagingRecommendedListener);
   }
 
   @override
@@ -181,6 +177,14 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
     _promoScrollController.dispose();
     _nearestScrollController.dispose();
     _recommendedScrollController.dispose();
+
+    _pagingPromo.removeListener(_pagingPromoListener);
+    _pagingNearest.removeListener(_pagingNearestListener);
+    _pagingRecommended.removeListener(_pagingRecommendedListener);
+
+    _pagingPromo.dispose();
+    _pagingNearest.dispose();
+    _pagingRecommended.dispose();
     super.dispose();
   }
 
@@ -189,9 +193,9 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
       return (Paging(), Paging(), Paging(), PagingEnum.refreshed);
     }
     return (
-      _pagingPromo.value,
-      _pagingNearest.value,
-      _pagingRecommended.value,
+      Paging.fromPaging(_pagingPromo.value),
+      Paging.fromPaging(_pagingNearest.value),
+      Paging.fromPaging(_pagingRecommended.value),
       PagingEnum.before
     );
   }
@@ -211,28 +215,12 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
           pagingEnum,
         ) = preparePaging(isRefresh);
 
-        context.read<NightlifePromoBloc>().add(NightlifePromoFetched(
-              paging: pagingPromo,
-              pagingEnum: pagingEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
+        _pagingEnumPromo =
+            _pagingEnumNearest = _pagingEnumRecommended = pagingEnum;
 
-        context.read<NightlifeNearestBloc>().add(NightlifeNearestFetched(
-              paging: pagingNearest,
-              pagingEnum: pagingEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
-
-        context
-            .read<NightlifeRecommendedBloc>()
-            .add(NightlifeRecommendedFetched(
-              paging: pagingRecommended,
-              pagingEnum: pagingEnum,
-              latitude: location.currentLocationModel.latitude,
-              longitude: location.currentLocationModel.longitude,
-            ));
+        _pagingPromo.value = pagingPromo;
+        _pagingNearest.value = pagingNearest;
+        _pagingRecommended.value = pagingRecommended;
       },
       child: SafeArea(
         child: Scaffold(
@@ -256,6 +244,10 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              NightlifeMainSearchBarFeature(
+                recentSuggestionEnum: RecentSuggestionEnum.nightlife,
+                isSliverSearchBar: false,
+              ),
               SizedBox(height: 5.h),
               NightlifePromoFeature(
                 childScrollController: _promoScrollController,
@@ -272,7 +264,7 @@ class _NightlifeScreenState extends State<NightlifeScreen> {
                 childScrollController: _recommendedScrollController,
                 onNightlifeActionCallback: _onNightlifeActionCallback,
               ),
-              SizedBox(height: 5.h),
+              SizedBox(height: 25.h),
             ],
           ),
         ),

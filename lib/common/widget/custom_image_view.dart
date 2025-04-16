@@ -133,7 +133,7 @@ class CustomImageView extends StatelessWidget {
             height: 30.h,
             width: 30.h,
             child: LinearProgressIndicator(
-              color: Colors.grey.shade200,
+              color: theme(context).colorScheme.primary,
               backgroundColor: Colors.grey.shade100,
             ),
           ),

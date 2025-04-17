@@ -143,29 +143,32 @@ class FnbRecommendedItem extends StatelessWidget {
   }
 
   Widget _categoryTagList(BuildContext context) {
-    return SizedBox(
-      height: 20.h,
-      width: double.maxFinite,
-      child: ListView.builder(
-        itemCount: place.categories.length > 4 ? 4 : place.categories.length,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          if (index == 3) {
-            if (place.categories.length > 4) {
-              return _categoryTagView(
-                context,
-                context.tr(
-                  "f_n_b.tags_more",
-                  args: [(place.categories.length - 3).toString()],
-                ),
-              );
-            } else {
-              return _categoryTagView(context, place.categories[index]);
+    return Visibility(
+      visible: place.categories.first == "" ? false : true,
+      child: SizedBox(
+        height: 20.h,
+        width: double.maxFinite,
+        child: ListView.builder(
+          itemCount: place.categories.length > 4 ? 4 : place.categories.length,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            if (index == 3) {
+              if (place.categories.length > 4) {
+                return _categoryTagView(
+                  context,
+                  context.tr(
+                    "f_n_b.tags_more",
+                    args: [(place.categories.length - 3).toString()],
+                  ),
+                );
+              } else {
+                return _categoryTagView(context, place.categories[index]);
+              }
             }
-          }
-          return _categoryTagView(context, place.categories[index]);
-        },
+            return _categoryTagView(context, place.categories[index]);
+          },
+        ),
       ),
     );
   }

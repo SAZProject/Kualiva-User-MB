@@ -109,6 +109,7 @@ class NightlifeRecommendedFeature extends StatelessWidget {
   Widget _listBuilder(NightlifeRecommendedPage fnbRecommendedPage) {
     final nightlifebRecommendedList = fnbRecommendedPage.data;
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: nightlifebRecommendedList.length,

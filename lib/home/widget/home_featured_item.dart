@@ -156,16 +156,12 @@ class HomeFeaturedItem extends StatelessWidget {
   Widget _tagView(BuildContext context, String label) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5.h),
-      padding: EdgeInsets.symmetric(horizontal: 5.h),
-      decoration: CustomDecoration(context).fillPrimary.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder5,
-          ),
       child: Center(
         child: Text(
           label,
           textAlign: TextAlign.center,
           style: CustomTextStyles(context).bodySmall10.copyWith(
-                color: theme(context).colorScheme.onSecondaryContainer,
+                color: theme(context).colorScheme.onPrimaryContainer,
               ),
         ),
       ),

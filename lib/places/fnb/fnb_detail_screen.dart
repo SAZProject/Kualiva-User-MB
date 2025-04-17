@@ -16,6 +16,7 @@ import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_float_modal.dart';
 import 'package:kualiva/common/widget/custom_map_bottom_sheet.dart';
+import 'package:kualiva/common/widget/custom_scroll_text.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/_data/model/ui_model/promo_model.dart';
 import 'package:kualiva/_data/enum/place_category_enum.dart';
@@ -189,8 +190,9 @@ class FnbDetailScreen extends StatelessWidget {
               _fnbPlaceMenu(context, fnbDetail),
               _sectionDivider(context, placeArgument.isMerchant),
               _fnbPlaceReviews(context, fnbDetail),
-              SizedBox(height: 5.h),
+              SizedBox(height: 10.h),
               _fnbClaimButton(context),
+              SizedBox(height: 10.h),
             ],
           ),
         ),
@@ -282,19 +284,26 @@ class FnbDetailScreen extends StatelessWidget {
         width: double.maxFinite,
         child: Row(
           children: [
-            Text(
-              fnbDetail.name ?? "",
-              textAlign: TextAlign.center,
-              style: placeArgument.isMerchant
-                  ? theme(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(color: theme(context).colorScheme.primary)
-                  : theme(context).textTheme.titleLarge,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            Flexible(
+              child: CustomScrollText(
+                key: ValueKey(fnbDetail.name ?? ""),
+                text: fnbDetail.name ?? "",
+                style: placeArgument.isMerchant
+                    ? theme(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: theme(context).colorScheme.primary)
+                    : theme(context).textTheme.titleLarge,
+                height: 40.h,
+              ),
             ),
-            SizedBox(width: 5.h),
+            SizedBox(
+              height: 10.h,
+              width: 10.h,
+              child: VerticalDivider(
+                thickness: 1.0,
+              ),
+            ),
             SizedBox(
               height: 20.h,
               child: Row(

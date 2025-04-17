@@ -68,6 +68,15 @@ class SpaActionItem extends StatelessWidget {
                         ),
                       ),
                       Padding(
+                        padding: EdgeInsets.only(left: 5.h),
+                        child: Text(
+                          place.averageRating.toString(),
+                          style: theme(context).textTheme.bodySmall!.copyWith(
+                              color: theme(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.h),
                         child: Text(
                           "(${Random().nextInt(999) + 1})",
@@ -134,29 +143,32 @@ class SpaActionItem extends StatelessWidget {
   }
 
   Widget _categoryTagList(BuildContext context) {
-    return SizedBox(
-      height: 20.h,
-      width: double.maxFinite,
-      child: ListView.builder(
-        itemCount: place.categories.length > 4 ? 4 : place.categories.length,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          if (index == 3) {
-            if (place.categories.length > 4) {
-              return _categoryTagView(
-                context,
-                context.tr(
-                  "spa.tags_more",
-                  args: [(place.categories.length - 3).toString()],
-                ),
-              );
-            } else {
-              return _categoryTagView(context, place.categories[index]);
+    return Visibility(
+      visible: place.categories.first == "" ? false : true,
+      child: SizedBox(
+        height: 20.h,
+        width: double.maxFinite,
+        child: ListView.builder(
+          itemCount: place.categories.length > 4 ? 4 : place.categories.length,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            if (index == 3) {
+              if (place.categories.length > 4) {
+                return _categoryTagView(
+                  context,
+                  context.tr(
+                    "spa.tags_more",
+                    args: [(place.categories.length - 3).toString()],
+                  ),
+                );
+              } else {
+                return _categoryTagView(context, place.categories[index]);
+              }
             }
-          }
-          return _categoryTagView(context, place.categories[index]);
-        },
+            return _categoryTagView(context, place.categories[index]);
+          },
+        ),
       ),
     );
   }

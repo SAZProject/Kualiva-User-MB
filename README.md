@@ -5,8 +5,9 @@ This is a Walt App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.50
-- Change app name and brand into Walt
+Ver 0.1.56
+- Fix Some UI changes
+- Fix nightlife & spa detail screen
 ```
 
 ## Getting Started

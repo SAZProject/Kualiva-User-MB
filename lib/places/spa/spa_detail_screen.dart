@@ -14,10 +14,12 @@ import 'package:kualiva/common/dataset/filter_dataset.dart';
 import 'package:kualiva/common/style/custom_btn_style.dart';
 import 'package:kualiva/common/utility/datetime_utils.dart';
 import 'package:kualiva/common/utility/lelog.dart';
+import 'package:kualiva/common/widget/custom_app_bar.dart';
 import 'package:kualiva/common/widget/custom_elevated_button.dart';
 import 'package:kualiva/common/widget/custom_empty_state.dart';
 import 'package:kualiva/common/widget/custom_float_modal.dart';
 import 'package:kualiva/common/widget/custom_map_bottom_sheet.dart';
+import 'package:kualiva/common/widget/custom_scroll_text.dart';
 import 'package:kualiva/common/widget/custom_section_header.dart';
 import 'package:kualiva/common/widget/custom_snack_bar.dart';
 import 'package:kualiva/places/argument/place_argument.dart';
@@ -140,7 +142,7 @@ class SpaDetailScreen extends StatelessWidget {
           ));
           return SafeArea(
             child: Scaffold(
-              extendBodyBehindAppBar: true,
+              appBar: _spaAppBar(context),
               body: SizedBox(
                 width: double.maxFinite,
                 height: Sizeutils.height,
@@ -150,6 +152,7 @@ class SpaDetailScreen extends StatelessWidget {
           );
         }
         return Scaffold(
+          appBar: _spaAppBar(context),
           body: Center(
             child: CircularProgressIndicator(),
           ),
@@ -169,58 +172,37 @@ class SpaDetailScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: SizedBox(
           width: double.maxFinite,
-          child: Stack(
+          child: Column(
             children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: _spaPlaceImages(context),
-              ),
-              Column(
-                children: [
-                  SizedBox(height: 5.h),
-                  _spaAppBar(context),
-                  SizedBox(height: 100.h),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
-                    child: ClipRRect(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                        child: Container(
-                          width: double.maxFinite,
-                          decoration: placeArgument.isMerchant
-                              ? CustomDecoration(context).outlinePrimary_06
-                              : CustomDecoration(context)
-                                  .fillOnSecondaryContainer
-                                  .copyWith(
-                                    borderRadius:
-                                        BorderRadiusStyle.roundedBorder10,
-                                  ),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                SizedBox(height: 5.h),
-                                _spaPlaceName(context, spaDetail),
-                                SizedBox(height: 5.h),
-                                _spaPlaceAbout(
-                                    context, spaDetail, hasCallSupport),
-                                SizedBox(height: 5.h),
-                                _spaPromo(context, spaDetail),
-                                SizedBox(height: 5.h),
-                                _spaPlaceReviews(context, spaDetail),
-                                SizedBox(height: 10.h),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              SizedBox(height: 5.h),
+              _spaPlaceImages(context),
+              SizedBox(height: 5.h),
+              _spaPlaceName(context, spaDetail),
+              _sectionDivider(context, true),
+              _spaPlaceAbout(context, spaDetail, hasCallSupport),
+              _sectionDivider(context, true),
+              _spaPromo(context, spaDetail),
+              _sectionDivider(context, true),
+              _spaPlaceReviews(context, spaDetail),
+              SizedBox(height: 10.h),
+              _spaClaimButton(context),
+              SizedBox(height: 10.h),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _sectionDivider(BuildContext context, bool isShowed) {
+    return Visibility(
+      visible: isShowed,
+      child: Divider(
+        height: 5.h,
+        thickness: 1.h,
+        color: theme(context).colorScheme.onPrimaryContainer,
+        indent: 10.h,
+        endIndent: 10.h,
       ),
     );
   }
@@ -233,61 +215,32 @@ class SpaDetailScreen extends StatelessWidget {
         options: CarouselOptions(
           viewportFraction: 1,
           autoPlay: false,
-          // enlargeCenterPage: true,
+          scrollPhysics: NeverScrollableScrollPhysics(),
         ),
       ),
     );
   }
 
-  Widget _spaAppBar(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            margin: EdgeInsets.only(left: 5.h),
-            decoration: BoxDecoration(
-              color: theme(context)
-                  .colorScheme
-                  .onSecondaryContainer
-                  .withValues(alpha: 0.6),
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              iconSize: 25.h,
-              icon: const Icon(Icons.arrow_back_ios_new),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-          Row(
-            children: [
-              _buildPopupMenuItem(context, 0, Icons.favorite),
-              SizedBox(width: 5.h),
-              _buildPopupMenuItem(context, 1, Icons.flag),
-              SizedBox(width: 5.h),
-              _buildPopupMenuItem(context, 2, Icons.share),
-              SizedBox(width: 5.h),
-            ],
-          ),
-        ],
-      ),
+  PreferredSizeWidget _spaAppBar(BuildContext context) {
+    return CustomAppBar(
+      useLeading: true,
+      onBackPressed: () => Navigator.pop(context),
+      actions: [
+        SizedBox(width: 5.h),
+        _buildPopupMenuItem(context, 0, Icons.favorite),
+        SizedBox(width: 5.h),
+        _buildPopupMenuItem(context, 1, Icons.flag),
+        SizedBox(width: 5.h),
+        _buildPopupMenuItem(context, 2, Icons.share),
+        SizedBox(width: 5.h),
+      ],
     );
   }
 
   Widget _buildPopupMenuItem(BuildContext context, int index, IconData icon) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: theme(context)
-            .colorScheme
-            .onSecondaryContainer
-            .withValues(alpha: 0.6),
-        shape: BoxShape.circle,
-      ),
-      child: IconButton(
-        icon: Center(child: Icon(icon, size: 25.h)),
-        onPressed: () => _popUpMenuAction(context, index),
-      ),
+    return IconButton(
+      icon: Center(child: Icon(icon, size: 25.h)),
+      onPressed: () => _popUpMenuAction(context, index),
     );
   }
 
@@ -326,42 +279,44 @@ class SpaDetailScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.h),
       child: SizedBox(
         width: double.maxFinite,
-        child:
-            // Stack(
-            //   alignment: Alignment.center,
-            //   children: [
-            Align(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 30.h,
-                child: Text(
-                  spaDetail.name ?? "",
-                  textAlign: TextAlign.center,
-                  style: theme(context).textTheme.headlineSmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+        child: Row(
+          children: [
+            Flexible(
+              child: CustomScrollText(
+                key: ValueKey(spaDetail.name ?? ""),
+                text: spaDetail.name ?? "",
+                style: placeArgument.isMerchant
+                    ? theme(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: theme(context).colorScheme.primary)
+                    : theme(context).textTheme.titleLarge,
+                height: 40.h,
               ),
-              Visibility(
-                visible: !placeArgument.isMerchant,
-                child: CustomElevatedButton(
-                  initialText: context.tr("spa_detail.claim_btn"),
-                  height: 30.h,
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
-                  buttonStyle: CustomButtonStyles.none,
-                  decoration:
-                      CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(
-                          context),
-                  buttonTextStyle:
-                      CustomTextStyles(context).titleMediumOnPrimaryContainer,
-                  onPressed: () {},
-                ),
-              )
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 10.h,
+              width: 10.h,
+              child: VerticalDivider(
+                thickness: 1.0,
+              ),
+            ),
+            SizedBox(
+              height: 20.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(5, (index) {
+                  return Icon(
+                    Icons.attach_money,
+                    size: 15.h,
+                    color: index <= ((spaDetail.rating ?? 1.0).floor() - 1)
+                        ? theme(context).colorScheme.primary
+                        : null,
+                  );
+                }),
+              ),
+            ),
+          ],
         ),
         // Align(
         //   alignment: Alignment.centerLeft,
@@ -388,6 +343,33 @@ class SpaDetailScreen extends StatelessWidget {
     );
   }
 
+  Widget _spaClaimButton(BuildContext context) {
+    return Visibility(
+      visible: !placeArgument.isMerchant,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.h),
+        child: SizedBox(
+          width: double.maxFinite,
+          child: Align(
+            alignment: Alignment.center,
+            child: CustomElevatedButton(
+              initialText: context.tr("spa_detail.claim_btn"),
+              height: 30.h,
+              margin: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+              buttonStyle: CustomButtonStyles.none,
+              decoration:
+                  CustomButtonStyles.gradientYellowAToPrimaryL10Decoration(
+                      context),
+              buttonTextStyle:
+                  CustomTextStyles(context).titleMediumOnPrimaryContainer,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _spaPlaceAbout(
       BuildContext context, SpaDetailModel spaDetail, bool hasCallSupport) {
     return Container(
@@ -397,82 +379,68 @@ class SpaDetailScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 5.h),
-            child: Text(
-              context.tr("spa_detail.about"),
-              style: theme(context).textTheme.titleMedium,
-            ),
+          SizedBox(height: 8.h),
+          _buildAboutContent(
+            context,
+            icon: Icons.tag,
+            label: "",
+            trailingWidget: _aboutTag(context, spaDetail),
+            visible: spaDetail.types != null,
           ),
-          SizedBox(height: 5.h),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 8.h),
-              _buildAboutContent(
+          SizedBox(height: 8.h),
+          _buildAboutContent(
+            context,
+            icon: Icons.timer,
+            label: "",
+            trailingWidget: _aboutOperationalTime(context, spaDetail),
+            visible: spaDetail.currentOpeningHours != null,
+          ),
+          SizedBox(height: 8.h),
+          _buildAboutContent(
+            context,
+            icon: Icons.table_bar_outlined,
+            label: "",
+            trailingWidget: _aboutFacilities(context, spaDetail),
+            visible: placeArgument.isMerchant,
+          ),
+          SizedBox(height: 8.h),
+          _buildAboutContent(
+            context,
+            icon: Icons.phone,
+            label: spaDetail.formattedPhoneNumber ?? "",
+            onPressed: hasCallSupport
+                ? () => _launchContact(
+                    spaDetail.formattedPhoneNumber ?? "".replaceAll("-", ""))
+                : null,
+            visible: spaDetail.formattedPhoneNumber != null,
+          ),
+          SizedBox(height: 8.h),
+          _buildAboutContent(
+            context,
+            icon: Icons.place,
+            label: spaDetail.formattedAddress ?? "",
+            maxLines: 4,
+            onPressed: () {
+              customMapBottomSheet(
                 context,
-                icon: Icons.tag,
-                label: "",
-                trailingWidget: _aboutTag(context, spaDetail),
-                visible: spaDetail.types != null,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.timer,
-                label: "",
-                trailingWidget: _aboutOperationalTime(context, spaDetail),
-                visible: spaDetail.currentOpeningHours != null,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.table_bar_outlined,
-                label: "",
-                trailingWidget: _aboutFacilities(context, spaDetail),
-                visible: placeArgument.isMerchant,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.phone,
-                label: spaDetail.formattedPhoneNumber ?? "",
-                onPressed: hasCallSupport
-                    ? () => _launchContact(spaDetail.formattedPhoneNumber ??
-                        "".replaceAll("-", ""))
-                    : null,
-                visible: spaDetail.formattedPhoneNumber != null,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.place,
-                label: spaDetail.formattedAddress ?? "",
-                maxLines: 4,
-                onPressed: () {
-                  customMapBottomSheet(
-                    context,
-                    spaDetail.geometry == null
-                        ? 0.0
-                        : spaDetail.geometry!.location.lat,
-                    spaDetail.geometry == null
-                        ? 0.0
-                        : spaDetail.geometry!.location.lng,
-                    spaDetail.name ?? "",
-                  );
-                },
-                visible: spaDetail.formattedAddress != null,
-              ),
-              SizedBox(height: 8.h),
-              _buildAboutContent(
-                context,
-                icon: Icons.attach_money,
-                label: "",
-                trailingWidget: _aboutPrice(context, spaDetail),
-                visible: placeArgument.isMerchant,
-              ),
-            ],
+                spaDetail.geometry == null
+                    ? 0.0
+                    : spaDetail.geometry!.location.lat,
+                spaDetail.geometry == null
+                    ? 0.0
+                    : spaDetail.geometry!.location.lng,
+                spaDetail.name ?? "",
+              );
+            },
+            visible: spaDetail.formattedAddress != null,
+          ),
+          SizedBox(height: 8.h),
+          _buildAboutContent(
+            context,
+            icon: Icons.attach_money,
+            label: "",
+            trailingWidget: _aboutPrice(context, spaDetail),
+            visible: placeArgument.isMerchant,
           ),
         ],
       ),
@@ -496,7 +464,12 @@ class SpaDetailScreen extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            leadingWidget ?? Icon(icon, size: 25.h),
+            leadingWidget ??
+                Icon(
+                  icon,
+                  size: 25.h,
+                  color: theme(context).colorScheme.primary,
+                ),
             Flexible(
               child: Padding(
                 padding: EdgeInsets.only(left: 10.h),

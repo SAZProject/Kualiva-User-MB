@@ -89,7 +89,6 @@ class _FnbScreenState extends State<FnbScreen> {
     final state = context.read<FnbRecommendedBloc>().state;
     if (state is! FnbRecommendedSuccess) return;
     final pagination = state.fnbRecommendedPage.pagination;
-    print('ANJENG');
     LeLog.sd(
         this, _onRecommendedScrollPagination, 'Trigger Max Scroll Controller');
     _nextRecommendedPaging(pagination);

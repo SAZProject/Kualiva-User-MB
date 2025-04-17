@@ -109,6 +109,7 @@ class SpaRecommendedFeature extends StatelessWidget {
   Widget _listBuilder(SpaRecommendedPage spaRecommendedPage) {
     final spaRecommendedList = spaRecommendedPage.data;
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: spaRecommendedList.length,

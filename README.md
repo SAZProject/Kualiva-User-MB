@@ -5,9 +5,8 @@ This is a Walt App for Prilion corporation.
 ## Changelog
 
 ```text
-Ver 0.1.56
-- Fix Some UI changes
-- Fix nightlife & spa detail screen
+Ver 0.1.57
+- New Home Banner
 ```
 
 ## Getting Started

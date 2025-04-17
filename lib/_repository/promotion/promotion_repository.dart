@@ -7,22 +7,7 @@ import 'package:kualiva/home/model/home_featured_model.dart';
 class PromotionRepository {
   final List<HomeAdBannerModel> _homeAdBannerDummy = [
     HomeAdBannerModel(
-      urlImage: ImageConstant.event1,
-    ),
-    HomeAdBannerModel(
-      urlImage: ImageConstant.event2,
-      placeId: 'ChIJ5Ts2IiHyaS4R67B-PvQGtxY',
-    ),
-    HomeAdBannerModel(
-      urlImage: ImageConstant.foodSugarSpice,
-      urlWeb: 'https://www.youtube.com/@tanboykun',
-    ),
-    HomeAdBannerModel(
-      urlImage: ImageConstant.foodTable8,
-      placeId: "ChIJlUYNUs3xaS4RRs0Mrh_empk",
-    ),
-    HomeAdBannerModel(
-      urlImage: ImageConstant.event3,
+      urlImage: ImageConstant.event_ad,
     ),
   ];
 

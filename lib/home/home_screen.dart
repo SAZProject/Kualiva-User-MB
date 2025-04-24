@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kualiva/_data/enum/paging_enum.dart';
 import 'package:kualiva/_data/enum/recent_suggestion_enum.dart';
+import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/common/app_export.dart';
+import 'package:kualiva/common/feature/current_location/current_location_bloc.dart';
 import 'package:kualiva/common/feature/search_bar/search_bar_feature.dart';
 import 'package:kualiva/home/bloc/home_ad_banner_bloc.dart';
 import 'package:kualiva/home/bloc/home_featured_bloc.dart';
@@ -10,6 +13,8 @@ import 'package:kualiva/home/feature/home_ad_banner_feature.dart';
 import 'package:kualiva/home/feature/home_app_bar_feature.dart';
 import 'package:kualiva/home/feature/home_featured_feature.dart';
 import 'package:kualiva/home/model/home_grid_menu_model.dart';
+import 'package:kualiva/places/fnb/bloc/fnb_nearest_bloc.dart';
+import 'package:kualiva/places/fnb/feature/fnb_main_search_bar_feature.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -126,10 +131,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: _body(context),
+    // TODO Persiapan perang sama Bapak
+    return BlocListener<CurrentLocationBloc, CurrentLocationState>(
+      listener: (context, location) {
+        if (location is! CurrentLocationSuccess) return;
+
+        context.read<FnbNearestBloc>().add(FnbNearestFetched(
+            paging: Paging(),
+            pagingEnum: PagingEnum.refreshed,
+            latitude: location.currentLocationModel.latitude,
+            longitude: location.currentLocationModel.longitude));
+      },
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: _body(context),
+        ),
       ),
     );
   }
@@ -143,7 +160,12 @@ class _HomeScreenState extends State<HomeScreen> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             HomeAppBarFeature(),
-            SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.home),
+            // SearchBarFeature(recentSuggestionEnum: RecentSuggestionEnum.home),
+            // TODO Persiapan perang sama Bapak
+            FnbMainSearchBarFeature(
+              recentSuggestionEnum: RecentSuggestionEnum.fnb,
+              isSliverSearchBar: true,
+            ),
           ];
         },
         body: SingleChildScrollView(

@@ -5,6 +5,7 @@ import 'package:kualiva/_data/model/pagination/paging.dart';
 import 'package:kualiva/_repository/place/fnb/fnb_nearest_repository.dart';
 import 'package:kualiva/common/utility/lelog.dart';
 import 'package:kualiva/places/fnb/model/fnb_nearest_page.dart';
+import 'package:kualiva/prime_celestial.dart';
 
 part 'fnb_nearest_event.dart';
 part 'fnb_nearest_state.dart';
@@ -33,6 +34,7 @@ class FnbNearestBloc extends Bloc<FnbNearestEvent, FnbNearestState> {
       emit(FnbNearestSuccess(fnbNearestPage: fnbNearestPage));
     } catch (e) {
       LeLog.be(this, _onFetched, e.toString());
+      PrimeCelestialHandler.show(e.toString());
       emit(FnbNearestFailure());
     }
   }

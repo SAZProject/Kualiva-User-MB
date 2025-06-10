@@ -44,6 +44,7 @@ import 'package:kualiva/places/spa/bloc/spa_detail_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_nearest_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_promo_bloc.dart';
 import 'package:kualiva/places/spa/bloc/spa_recommended_bloc.dart';
+import 'package:kualiva/prime_celestial.dart';
 import 'package:kualiva/profile/bloc/user_profile_bloc.dart';
 import 'package:kualiva/_repository/user/profile_repository.dart';
 import 'package:kualiva/report/bloc/report_place_bloc.dart';
@@ -210,8 +211,13 @@ class MainProvider extends StatelessWidget {
   }
 
   Widget _multiBloc(Widget child) {
+    final primeCelestialCubit = PrimeCelestialCubit();
+    PrimeCelestialHandler.init(primeCelestialCubit);
     return MultiBlocProvider(
       providers: [
+        BlocProvider.value(
+          value: primeCelestialCubit,
+        ),
         BlocProvider(create: (context) {
           return AuthBloc(context.read<AuthRepository>());
         }),

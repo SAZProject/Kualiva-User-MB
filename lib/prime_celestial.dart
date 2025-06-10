@@ -1,5 +1,30 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:kualiva/splash/splash_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class PrimeCelestialHandler {
+  static late PrimeCelestialCubit _cubit;
+
+  static void init(PrimeCelestialCubit cubit) {
+    _cubit = cubit;
+  }
+
+  static void show(String message) {
+    _cubit.failure(message);
+  }
+}
+
+class PrimeCelestialCubit extends Cubit<String?> {
+  PrimeCelestialCubit() : super(null);
+
+  void failure(String message) {
+    emit(message);
+  }
+
+  void clear() {
+    emit(null);
+  }
+}
 
 class PrimeCelestial extends StatelessWidget {
   const PrimeCelestial({super.key});
@@ -14,6 +39,17 @@ class PrimeCelestial extends StatelessWidget {
         //     return SizedBox();
         //   },
         // ),
+        BlocListener<PrimeCelestialCubit, String?>(
+          listenWhen: (previous, current) {
+            return current != null;
+          },
+          listener: (context, state) {
+            if (state == null) return;
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state)));
+            context.read<PrimeCelestialCubit>().clear();
+          },
+        ),
         SplashScreen(),
       ],
     );
